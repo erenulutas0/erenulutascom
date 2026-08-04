@@ -55,19 +55,33 @@ setx ANTHROPIC_API_KEY "sk-ant-..."
 
 ```bash
 python -m pipeline.cli fetch                 # kaynakları tara, metinleri çıkar
-python -m pipeline.cli daily                 # bugünün sayısını üret
-python -m pipeline.cli daily --date 2026-08-05
-python -m pipeline.cli backfill --days 30    # geçmişi doldur (Batch API, yarı fiyat)
+python -m pipeline.cli candidates            # günün adaylarını puanı ve metniyle bas
 python -m pipeline.cli build                 # docs/ statik sitesini üret
-python -m pipeline.cli serve                 # http://localhost:4173 önizleme
 python -m pipeline.cli check                 # içerik tutarlılık denetimi
+python -m pipeline.cli serve                 # http://localhost:4173 önizleme
 ```
 
-Tipik günlük akış:
+Otomatik özetleme (yalnızca bunlar `ANTHROPIC_API_KEY` ister):
 
 ```bash
-python -m pipeline.cli fetch && python -m pipeline.cli daily && python -m pipeline.cli build
+python -m pipeline.cli daily                 # bugünün sayısını Claude ile üret
+python -m pipeline.cli backfill --days 30    # geçmişi doldur (Batch API, yarı fiyat)
 ```
+
+### Günlük akış (editöryel mod — şu an kullanılan)
+
+```bash
+python -m pipeline.cli fetch                        # 1. yeni yazıları çek
+python -m pipeline.cli candidates                   # 2. adayları oku, kapak/kısa seç
+#    3. editorial/ed_YYYY_MM_DD.py dosyasını yaz
+python -m editorial.apply                           # 4. content/ altına yaz
+python -m pipeline.cli check                        # 5. doğrula
+git add content/ editorial/ && git commit -m "içerik: <tarih> sayısı" && git push
+#    6. push → "Siteyi yayınla" workflow'u devreye girer, site birkaç dakikada güncellenir
+```
+
+`docs/` klasörünü elle commit'lemene gerek yok — GitHub Actions siteyi kendisi
+üretiyor. Yerelde bakmak istersen `build` + `serve`.
 
 ### Model seçimi ve maliyet
 
@@ -136,13 +150,19 @@ Alan adı sağlayıcında şu DNS kayıtlarını gir:
 DNS yayılması 10 dakika–24 saat sürebilir. Sonra Settings → Pages → Custom domain
 alanına `erenulutas.com` yaz ve **Enforce HTTPS**'i işaretle.
 
-### 4. Günlük otomasyonu aç (hazır olduğunda)
+### 4. Günlük otomasyon (şu an kapalı — bilinçli tercih)
 
-`daily.yml` şu an yalnızca elle tetikleniyor. Otomatiğe almak için:
+Sayılar **elle** yazılıyor (yukarıdaki editöryel akış). `daily.yml` otomatik
+üretimi de destekliyor ama cron'u kapalı ve API anahtarı tanımlı değil.
+
+Bir gün otomatiğe almak istersen:
 
 1. **Settings → Secrets and variables → Actions** → `ANTHROPIC_API_KEY` ekle
+   (ya da `gh secret set ANTHROPIC_API_KEY --repo erenulutas0/erenulutascom`)
 2. `.github/workflows/daily.yml` içindeki `schedule` bloğunun `#`'lerini kaldır
 3. Önce elle dene: **Actions → Günlük sayı → Run workflow**
+
+Otomasyon kapalıyken de workflow zararsız duruyor; hiçbir şey çalıştırmıyor.
 
 ---
 

@@ -1,12 +1,15 @@
 """Komut satırı arayüzü.
 
     python -m pipeline.cli fetch              # kaynakları tara, metinleri çıkar
-    python -m pipeline.cli daily              # bugünün sayısını üret
-    python -m pipeline.cli daily --date 2026-08-04
-    python -m pipeline.cli backfill --days 30 # geçmişi doldur (Batch API)
+    python -m pipeline.cli candidates         # günün adaylarını metinleriyle bas
     python -m pipeline.cli build              # docs/ üret
-    python -m pipeline.cli serve              # yerel önizleme
     python -m pipeline.cli check              # içerik tutarlılık denetimi
+    python -m pipeline.cli serve              # yerel önizleme
+
+Otomatik özetleme (ANTHROPIC_API_KEY gerekir):
+
+    python -m pipeline.cli daily              # bugünün sayısını üret
+    python -m pipeline.cli backfill --days 30 # geçmişi doldur (Batch API)
 """
 
 from __future__ import annotations
@@ -115,6 +118,72 @@ def _build_edition(date: str, enriched: list[Article], *, use_batch: bool) -> bo
     return True
 
 
+def _condense(text: str, budget: int) -> str:
+    """Uzun metni kırpar: baş kısmı tam, gerisinden paragraf başları."""
+    if len(text) <= budget:
+        return text
+    paragraphs = [p.strip() for p in text.split("\n") if p.strip()]
+    head, used = [], 0
+    for p in paragraphs:
+        # İlk paragraf bütçeyi aşsa bile alınır — giriş olmadan özet yazılamaz.
+        if head and used + len(p) > budget * 0.62:
+            break
+        head.append(p)
+        used += len(p)
+
+    tail, remaining = [], budget - used
+    for p in paragraphs[len(head):]:
+        chunk = p if len(p) < 110 else p[:260] + " …"
+        if remaining - len(chunk) < 0:
+            break
+        tail.append(chunk)
+        remaining -= len(chunk)
+    return "\n".join(head) + "\n\n[…ARADAN ATLANDI…]\n\n" + "\n".join(tail)
+
+
+def cmd_candidates(args: argparse.Namespace) -> int:
+    """Bir günün adaylarını puanlarıyla ve metinleriyle basar.
+
+    Sayıyı elle yazarken kullanılır: çıktıyı okuyup hangi yazının kapak,
+    hangisinin kısa olacağına karar verirsin.
+    """
+    if not ENRICHED.exists():
+        print("Önce `fetch` çalıştır.", file=sys.stderr)
+        return 1
+
+    enriched = load_index(ENRICHED)
+    date = args.date or _today()
+    todays = [a for a in enriched if a.date == date]
+
+    if not todays:
+        print(f"{date}: bu güne ait yazı yok.\n")
+        print("Arşivden takviye için en iyi adaylar:")
+        pool = [a for a in enriched if a.date < date and a.word_count >= 400]
+        for s in rank(pool)[: args.limit]:
+            print(f"  {s.score:6.1f} [{s.article.source_key:16s}] {s.article.date}  {s.article.title[:66]}")
+        return 0
+
+    chosen, rejected = pick_for_day(todays, limit=args.limit, min_score=0.0)
+
+    print(f"\n{'=' * 100}\n{date} — {len(todays)} yayın, {len(chosen)} aday\n{'=' * 100}")
+    for s in chosen:
+        a = s.article
+        print(f"\n{'─' * 100}")
+        print(f"PUAN   : {s.score}   ({', '.join(s.reasons[:3])})")
+        print(f"KAYNAK : {a.source_name}")
+        print(f"BAŞLIK : {a.title}")
+        print(f"URL    : {a.url}")
+        print(f"BOYUT  : {a.word_count} kelime (~{max(1, round(a.word_count / 220))} dk)")
+        print(f"{'─' * 100}")
+        print(_condense(a.text, args.chars))
+
+    if rejected:
+        print(f"\n{'=' * 100}\nELENENLER ({len(rejected)})\n{'=' * 100}")
+        for r in rejected:
+            print(f"  {r.score:6.1f} [{r.article.source_key:16s}] {r.article.title[:70]}")
+    return 0
+
+
 def cmd_daily(args: argparse.Namespace) -> int:
     date = args.date or _today()
     if not ENRICHED.exists():
@@ -219,7 +288,13 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--days", type=int, default=LOOKBACK_DAYS)
     p.set_defaults(func=cmd_fetch)
 
-    p = sub.add_parser("daily", help="bir günün sayısını üret")
+    p = sub.add_parser("candidates", help="bir günün adaylarını metinleriyle bas (elle yazmak için)")
+    p.add_argument("--date", help="YYYY-MM-DD (varsayılan: bugün)")
+    p.add_argument("--limit", type=int, default=6, help="kaç aday gösterilsin")
+    p.add_argument("--chars", type=int, default=2200, help="makale başına karakter bütçesi")
+    p.set_defaults(func=cmd_candidates)
+
+    p = sub.add_parser("daily", help="bir günün sayısını üret (Claude API ile, otomatik)")
     p.add_argument("--date", help="YYYY-MM-DD (varsayılan: bugün)")
     p.add_argument("--batch", action="store_true", help="Batch API kullan (yarı fiyat, yavaş)")
     p.set_defaults(func=cmd_daily)
