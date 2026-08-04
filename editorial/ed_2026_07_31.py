@@ -1,0 +1,232 @@
+"""31 Temmuz 2026 sayısı."""
+
+from pipeline.compose import save_edition
+
+DATE = "2026-07-31"
+
+INTRO = (
+    "Bugünün ortak sorusu \"aynı veriye iki farklı iş yükü nasıl erişir?\" "
+    "Cloudflare bunu ağ protokolü seviyesinde çözüyor, Databricks veritabanı "
+    "seviyesinde, Netflix ise analitik veri modelleme seviyesinde. Üçünü arka "
+    "arkaya okuyunca aynı problemin farklı katmanlardaki hâli olduğu görülüyor."
+)
+
+DRAFTS = [
+    {
+        "url": "https://blog.cloudflare.com/moq-relays/",
+        "slot": "cover",
+        "title_tr": "MoQ: canlı video, görüntülü arama ve mesajlaşmayı tek protokole indirmek",
+        "difficulty": "orta",
+        "tags": ["ağ", "protokol", "gerçek zamanlı sistemler", "gecikme"],
+        "summary": (
+            "**MoQ** (Media over QUIC), IETF'te geliştirilen açık bir protokol — "
+            "HTTP, TLS ve QUIC'i de standartlaştıran kurum. Cloudflare geçen yıl "
+            "MoQ'yu tüm sunucularında açmıştı; şimdi eksik olan parçayı ekliyor: "
+            "izolasyon ve erişim kontrolü. Yeni sağlama API'siyle uygulamana özel "
+            "bir röle (relay) oluşturup yayıncılar ve aboneler için ayrı kimlik "
+            "bilgileri verebiliyorsun.\n\n"
+            "Protokolün modeli basit ve öğretici: bir **yayınla/abone ol** "
+            "(publish/subscribe) sistemi. Yayıncı isimlendirilmiş veri akışları "
+            "gönderir, aboneler o akışları isimle ister. Aralarında röleler durur "
+            "— bunlar sadece her akışı isteyen herkese kopyalayan CDN sunucuları. "
+            "Kritik nokta: **röle verinin içine hiç bakmaz.**\n\n"
+            "Bu tek tasarım kararı büyük bir sonuç doğuruyor. Röleler içeriği "
+            "umursamadığı için, eskiden her biri ayrı bir sistem gerektiren şeyler "
+            "— canlı video, görüntülü arama, düşük gecikmeli mesajlaşma — aynı "
+            "protokolün üstünde taşınabiliyor. Altta HTTP/3'ün taşıma katmanı olan "
+            "QUIC var; gecikmeyi düşük tutan da o.\n\n"
+            "Pratik sonuç: kendi özel sunucu filonu kurup işletmene gerek kalmıyor. "
+            "Tek bir API üzerinden bir CDN'e yayın yapıyor, hem düşük gecikme hem "
+            "büyük ölçeği çok daha ucuza alıyorsun."
+        ),
+        "key_points": [
+            "Röle içeriğe bakmaz — bu \"aptal ara katman\" kararı, protokolün genel "
+            "amaçlı olmasını sağlayan şey.",
+            "Yayınla/abone ol modeli isimlendirilmiş akışlar üzerinden çalışıyor; "
+            "abone akışı adıyla istiyor.",
+            "QUIC üstünde çalışıyor: TCP'nin baş-hat tıkanması (head-of-line blocking) "
+            "sorunu olmadan düşük gecikme.",
+            "Şu an beta ve ücretsiz; draft-14 ve draft-16 sürümleri destekleniyor — "
+            "yani protokol hâlâ hareket hâlinde.",
+        ],
+        "why_it_matters": (
+            "\"Ara katman veriyi anlamasın\" ilkesi, dayanıklı sistem tasarımının "
+            "en güçlü kurallarından biri. İçeriği anlamayan bir bileşen, içerik "
+            "değiştiğinde bozulmaz; genel amaçlı kalır ve ölçeklemesi kolaylaşır. "
+            "Aynı ilkeyi mesaj kuyruklarında, yük dengeleyicilerde ve proxy'lerde "
+            "de görürsün — MoQ bunun canlı medyaya uygulanmış hâli."
+        ),
+        "for_you": (
+            "Mobit'teki mesajlaşma uygulamasında muhtemelen WebSocket kullandın. "
+            "Bu yazı sana o kararı sorgulatacak bir karşılaştırma veriyor: "
+            "WebSocket TCP üstünde tek bir akıştır, bir paket kaybolduğunda "
+            "arkasındaki her şey bekler (head-of-line blocking). QUIC bunu "
+            "bağımsız akışlarla çözer. Ayrıca yayınla/abone ol modelini kendi "
+            "sistemine taşıyabilirsin: mesajları doğrudan alıcıya itmek yerine "
+            "kanal adına yayınlamak, grup mesajlaşmasını ve çoklu cihaz "
+            "senkronizasyonunu ciddi şekilde basitleştirir — Redis Pub/Sub ile "
+            "aynı deseni bugün deneyebilirsin."
+        ),
+        "terms": [
+            {
+                "en": "publish/subscribe (pub/sub)",
+                "tr": "yayınla/abone ol",
+                "definition": "Göndericinin alıcıyı bilmediği, mesajların isimlendirilmiş kanallara yayınlandığı iletişim modeli.",
+            },
+            {
+                "en": "relay",
+                "tr": "röle",
+                "definition": "Veriyi kaynaktan alıp isteyen herkese kopyalayan ara sunucu; içeriği yorumlamaz.",
+            },
+            {
+                "en": "QUIC",
+                "tr": "QUIC",
+                "definition": "UDP üstünde çalışan, HTTP/3'ün taşıma katmanı olan protokol; bağımsız akışlarla baş-hat tıkanmasını önler.",
+            },
+            {
+                "en": "head-of-line blocking",
+                "tr": "baş-hat tıkanması",
+                "definition": "Sıradaki ilk paket geciktiğinde arkasındaki tüm paketlerin beklemek zorunda kalması.",
+            },
+        ],
+    },
+    {
+        "url": "https://www.databricks.com/blog/backstage-lakebase-part-3",
+        "slot": "brief",
+        "title_tr": "Aynı Postgres'e iki kimlik doğrulama yolu: bedeli olan bir uzlaşma",
+        "difficulty": "orta",
+        "tags": ["veritabanı", "PostgreSQL", "kimlik doğrulama", "veri mühendisliği"],
+        "summary": (
+            "Databricks, geliştirici portalı Backstage'i Lakebase (yönetilen Postgres) "
+            "üzerinde çalıştırma serisinin üçüncü bölümünde işletim verisiyle "
+            "analitik veriyi birleştiriyor. Normal bir kurulumda \"bulut maliyetimizi "
+            "hangi altyapı yaratıyor ve sahibi kim?\" sorusu iki sınır geçiyor: "
+            "sahiplik grafiği Backstage'de, maliyet verisi veri ambarında. "
+            "Cevap için ETL, Jira kaydı ya da Slack mesajı gerekiyor.\n\n"
+            "Asıl öğretici kısım gizlenmemiş bir zorluk: Lakehouse Federation'ın "
+            "Postgres bağlayıcısı yalnızca statik kullanıcı/parola destekliyor, "
+            "oysa Lakebase uygulama kimliklerini OAuth ile doğruluyor. Çözüm, "
+            "ayrı bir SCRAM-SHA-256 Postgres rolü açmak. Sonuç, yazarların kendi "
+            "cümlesiyle: **artık aynı veritabanı için iki ayrı kimlik doğrulama "
+            "yolu yönetiyorsun.**"
+        ),
+        "key_points": [
+            "İş yükü başına ayrılan hesaplama sayesinde FinOps analisti ağır sorgular "
+            "çalıştırırken canlı portal etkilenmiyor (katalog sorguları 55-65 ms).",
+            "Ürün dokümantasyonunda nadir görülen bir dürüstlük: geçici çözümün "
+            "yarattığı bakım borcu açıkça yazılmış.",
+        ],
+        "for_you": (
+            "\"İşletim veritabanına analitik sorgu atmak\" sorusu her projede çıkar. "
+            "Tradebot'ta canlı veri yazan tabloya ağır bir analiz sorgusu attığında "
+            "yazma gecikmesinin nasıl bozulduğunu muhtemelen gördün. PostgreSQL'de "
+            "bunun karşılığı bir **read replica** kurup analitik sorguları oraya "
+            "yöneltmek. Yazının ikinci dersi ise daha genel: bir entegrasyonu "
+            "kurmak için ikinci bir kimlik doğrulama yolu açmak zorunda kalıyorsan, "
+            "bu geçici çözümü kodun içine gömme — belgelendir, çünkü bir yıl sonra "
+            "\"bu rol niye var?\" diye soran sen olacaksın."
+        ),
+        "terms": [
+            {
+                "en": "federation",
+                "tr": "federasyon",
+                "definition": "Farklı sistemlerdeki veriyi taşımadan, tek bir sorgu arayüzünden birlikte sorgulama.",
+            },
+            {
+                "en": "read replica",
+                "tr": "okuma kopyası",
+                "definition": "Ana veritabanının salt-okunur kopyası; ağır okuma sorgularını asıl sistemden ayırmak için kullanılır.",
+            },
+        ],
+    },
+    {
+        "url": "https://netflixtechblog.com/modeling-device-capabilities-for-analytics-e7607acebde8?source=rss----2615bd06b42e---4",
+        "slot": "brief",
+        "title_tr": "Netflix cihaz yeteneklerini analitik için nasıl modelliyor",
+        "difficulty": "başlangıç",
+        "tags": ["veri modelleme", "analitik", "veri mühendisliği"],
+        "summary": (
+            "Netflix 4K'dan bulut oyunculuğuna kadar geniş bir özellik yelpazesini "
+            "çok çeşitli cihazlarda sunuyor — ama her cihaz aynı değil. RAM, CPU "
+            "çekirdek sayısı, ekran yetenekleri ve platform desteği bazı özelliklerin "
+            "belirli modellerde çalışamayacağı anlamına geliyor.\n\n"
+            "Çözüm iki tablo deseni: **kümülatif tablo** her cihazın en güncel "
+            "yetenek durumunu tutuyor (ekran boyutu, desteklenen video profilleri "
+            "gibi). **Histogram tablosu** ise son 28 günün aktif cihaz sayılarını "
+            "model ve yazılım sürümüne göre kırıyor, ve belirli bir yeteneği "
+            "destekleyen cihaz oranını veriyor: örneğin \"playready %100, hevc %20\"."
+        ),
+        "key_points": [
+            "İki farklı soru, iki farklı tablo: \"bu cihaz neyi destekliyor?\" ile "
+            "\"kaç cihaz bunu destekliyor?\" aynı şemayla verimli cevaplanmıyor.",
+            "Yetenek verisiyle feature flag'leri birleştirmek, özelliğin ne kadar "
+            "yayıldığını (feature penetration) ölçmeyi mümkün kılıyor.",
+        ],
+        "for_you": (
+            "Kısa bir yazı ama içindeki desen çok kullanışlı: **mevcut durum tablosu** "
+            "ile **zaman içinde toplulaştırılmış tablo**yu ayırmak. KlioAI'da "
+            "\"bu kullanıcının aboneliği aktif mi?\" ile \"son 28 günde kaç kullanıcı "
+            "konuşma pratiği yaptı?\" sorularını aynı tablodan cevaplamaya çalışırsan "
+            "ikisi de yavaşlar. Birincisi indeksli tekil okuma, ikincisi ise "
+            "önceden toplulaştırılmış bir özet tablo ister. Bu ayrım OLTP/OLAP "
+            "ayrımının en küçük ve en pratik hâli."
+        ),
+        "terms": [
+            {
+                "en": "cumulative table",
+                "tr": "kümülatif tablo",
+                "definition": "Her varlığın en güncel durumunu tutan, sürekli güncellenen tablo.",
+            },
+            {
+                "en": "feature flag",
+                "tr": "özellik anahtarı",
+                "definition": "Bir özelliği kod dağıtmadan açıp kapatmayı sağlayan konfigürasyon anahtarı.",
+            },
+        ],
+    },
+    {
+        "url": "https://openai.com/index/building-abundant-intelligence",
+        "slot": "brief",
+        "title_tr": "Zeka ucuzlayınca ne değişir: model seçimi bir maliyet kararıdır",
+        "difficulty": "başlangıç",
+        "tags": ["LLM", "maliyet", "ürün"],
+        "summary": (
+            "OpenAI'ın altyapı ve fiyatlandırma üzerine yazısı. Ana tez basit: "
+            "AI altyapısı büyük olduğu için değil, mümkün kıldığı şey yüzünden "
+            "değerli. Faydalı zekânın maliyeti düştükçe, yapılmaya değer iş miktarı "
+            "artıyor.\n\n"
+            "Somut kısım fiyat değişikliği: GPT-5.6 Luna'nın fiyatı %80, Terra'nın "
+            "%20 düşürülmüş. Luna artık milyon girdi token'ı başına 0,20 dolar. "
+            "Fast mode ise iki katı fiyata 2,5 kata kadar hız veriyor — zekâda "
+            "değişiklik yok.\n\n"
+            "Yazının en kullanışlı cümlesi bir soru yeniden çerçevelemesi: "
+            "\"hangi model hangi göreve ait?\" yanlış soru. Doğru soru şu — "
+            "**bu sonuç ne kadar zekâ gerektiriyor, ne kadar hızlı gerekiyor, "
+            "ve maliyeti ne olmalı?**"
+        ),
+        "key_points": [
+            "Aynı model ailesinde hız ve fiyat ayrı eksenler; zekâyı düşürmeden hız "
+            "satın alabiliyorsun.",
+            "Model seçimi bir mimari karar değil, iş yükü başına verilen bir "
+            "maliyet-gecikme-kalite kararı.",
+        ],
+        "for_you": (
+            "Bu tam olarak senin gazete pipeline'ında vereceğin karar. Aynı sistemde "
+            "farklı işler farklı model ister: makaleyi puanlayıp elemek ucuz ve "
+            "hızlı bir model işi, kapak yazısını özetlemek ise en iyi modeli hak "
+            "ediyor. KlioAI'da da aynısı geçerli — gramer düzeltmesi ile konuşma "
+            "değerlendirmesi aynı modeli gerektirmiyor. Tek bir model seçip her yere "
+            "koymak, ya kaliteden ya paradan kaybettirir."
+        ),
+        "terms": [
+            {
+                "en": "input/output token pricing",
+                "tr": "girdi/çıktı token fiyatlandırması",
+                "definition": "LLM maliyetinin, gönderilen ve üretilen token sayısına göre ayrı ayrı hesaplanması.",
+            },
+        ],
+    },
+]
+
+if __name__ == "__main__":
+    save_edition(DATE, INTRO, DRAFTS)

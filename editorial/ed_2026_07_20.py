@@ -1,0 +1,148 @@
+"""20 Temmuz 2026 sayısı."""
+
+from pipeline.compose import save_edition
+
+DATE = "2026-07-20"
+
+INTRO = (
+    "İki yazı, ikisi de aynı konuda aslında: bir sistemi üretime çıkarmadan "
+    "önce her davranışını öngöremezsin. OpenAI bunu uzun süre çalışan modeller "
+    "üzerinden anlatıyor, Cloudflare ise ayrı yönetilen iki DNS sisteminin "
+    "zamanla nasıl birbirinden ayrıştığı üzerinden."
+)
+
+DRAFTS = [
+    {
+        "url": "https://openai.com/index/safety-alignment-long-horizon-models",
+        "slot": "cover",
+        "title_tr": "Hiçbir test paketi her davranışı öngöremez: kademeli yayına çıkmanın değeri",
+        "difficulty": "orta",
+        "tags": ["güvenlik", "LLM", "gözlemlenebilirlik", "yayına alma"],
+        "summary": (
+            "Uzun süre çalışabilen modeller zor ve açık uçlu problemleri "
+            "çözebiliyor. Ama onları faydalı kılan **ısrarcılık**, aynı zamanda "
+            "istenmeyen eylemler için daha fazla fırsat demek — ve bu eylemler, "
+            "kısa görevler için tasarlanmış değerlendirmelerin yakalayamayacağı "
+            "biçimlerde ortaya çıkabiliyor.\n\n"
+            "OpenAI, uzun süreli görevler için eğitilmiş bir modelin sınırlı iç "
+            "kullanımı sırasında, mevcut dağıtım öncesi değerlendirmelerinde "
+            "bulunmayan **yeni türden hatalar** gözlemlemiş ve erişimi "
+            "durdurmuş. Sonra bu hatalardan çıkardıklarıyla yeni değerlendirmeler "
+            "kurmuş, uzun-ufuk hizalamasını iyileştirmiş, **yörünge seviyesinde "
+            "izleme** (trajectory-level monitoring) eklemiş ve kullanıcılara "
+            "daha fazla görünürlük ile kontrol vermiş — ardından sınırlı erişimi "
+            "geri açmış.\n\n"
+            "Yazının kendi çıkardığı sonuç mühendislik açısından en değerli "
+            "kısım: **hiçbir sabit değerlendirme paketi her davranışı "
+            "öngöremez.** Bu yüzden dağıtım öncesi test, yakın izleme, müdahale "
+            "edebilen korumalar ve gerektiğinde duraklatma ya da geri alma "
+            "yeteneğiyle birlikte gelmeli."
+        ),
+        "key_points": [
+            "Uzun süren otonom çalışma, hata yüzeyini genişletiyor — süre başlı "
+            "başına bir risk değişkeni.",
+            "Tepki sırası örnek: gözlemle → durdur → yeni değerlendirme kur → "
+            "izleme ekle → kontrollü geri aç.",
+            "\"Yörünge seviyesinde izleme\": tek tek çıktılara değil, eylem "
+            "dizisinin bütününe bakmak.",
+            "Kademeli/yinelemeli yayına alma (iterative deployment), tek seferlik "
+            "kapsamlı testten daha güvenilir bulunmuş.",
+        ],
+        "why_it_matters": (
+            "Bu, AI'a özgü bir ders değil. \"Yeterince test edersek üretimde sürpriz "
+            "olmaz\" inancı her yazılım ekibinin bir dönem inandığı ve sonra "
+            "vazgeçtiği bir varsayım. Olgun yaklaşım şu: testi azaltma, ama "
+            "üretimde de gözünü açık tut ve **geri alabilme yeteneğini** bir "
+            "özellik olarak inşa et."
+        ),
+        "for_you": (
+            "Somut karşılığı şu: her yeni özelliği açarken üç şeyi hazır et — "
+            "(1) özelliği kapatabileceğin bir bayrak (feature flag), (2) bir şeyin "
+            "ters gittiğini anlayacağın metrik, (3) geri alma prosedürü. KlioAI'da "
+            "yeni bir prompt yayına aldığında bunu tüm kullanıcılara birden "
+            "vermek yerine %5'e ver, hata oranına ve kullanıcı düzeltmelerine bak, "
+            "sonra genişlet. \"Yörünge seviyesinde izleme\" fikrini de küçültebilirsin: "
+            "tek bir LLM cevabını değil, bir kullanıcı oturumunun tamamını "
+            "loglamak — sorunlar genelde tek bir cevapta değil, cevapların "
+            "birikiminde görünür."
+        ),
+        "terms": [
+            {
+                "en": "iterative deployment",
+                "tr": "kademeli yayına alma",
+                "definition": "Bir sistemi tek seferde herkese açmak yerine küçük dilimlerle, izleyerek yaygınlaştırma.",
+            },
+            {
+                "en": "long-horizon task",
+                "tr": "uzun ufuklu görev",
+                "definition": "Modelin uzun süre boyunca çok adımlı çalışması gereken açık uçlu görev.",
+            },
+            {
+                "en": "trajectory-level monitoring",
+                "tr": "yörünge seviyesinde izleme",
+                "definition": "Tek tek çıktılar yerine, modelin bir görev boyunca attığı adımların bütününü izleme.",
+            },
+            {
+                "en": "rollback",
+                "tr": "geri alma",
+                "definition": "Bir değişikliği hızla önceki bilinen iyi duruma döndürme yeteneği.",
+            },
+        ],
+    },
+    {
+        "url": "https://blog.cloudflare.com/internal-dns/",
+        "slot": "brief",
+        "title_tr": "İki ayrı DNS sistemi = iki ayrı gerçek: konsolidasyonun mantığı",
+        "difficulty": "orta",
+        "tags": ["DNS", "ağ", "altyapı", "operasyon"],
+        "summary": (
+            "Cloudflare Internal DNS genel kullanıma açıldı. Duyurunun içindeki "
+            "problem tanımı, ürün duyurusundan bağımsız olarak öğretici: iç DNS "
+            "(private DNS), kurumsal altyapıda hâlâ ağın geri kalanından **ayrı** "
+            "yönetilen son parçalardan biri. Birçok kurum genel DNS için bir "
+            "platform, iç DNS için başka bir platform işletiyor.\n\n"
+            "İki ayrı sistemin bedeli sayılıyor: politikayı iki yerde tanımlamak, "
+            "iki ayrı denetim izi, iki ayrı API. Konsolidasyonun vaadi ise "
+            "**split-horizon DNS**'i basitleştirmek — iç ve dış çözümleme, "
+            "paylaşılan bölgeler üzerinde ayrı \"görünümler\" olarak tanımlanıyor "
+            "ve tek bir kontrol düzleminden yönetiliyor. Yani senkron tutulacak "
+            "paralel sistem olmadığı için **kayma** (drift) da olmuyor."
+        ),
+        "key_points": [
+            "İki paralel sistemin gerçek maliyeti lisans değil, aralarındaki "
+            "farkın zamanla büyümesi.",
+            "Split-horizon DNS: aynı alan adının içeriden ve dışarıdan farklı "
+            "adreslere çözülmesi — yaygın ama hata yapmaya açık bir kurulum.",
+        ],
+        "for_you": (
+            "DNS'i \"alan adını IP'ye çeviren şey\" olarak bilmek yeterli "
+            "değil; backend mühendisliğinde arızaların şaşırtıcı bir kısmı "
+            "DNS kaynaklıdır. Öğrenmeye değer üç şey: TTL (bir kaydın ne kadar "
+            "önbelleklendiği — deploy sırasında neden eski IP'ye gittiğini "
+            "açıklar), split-horizon (aynı ad içeride farklı, dışarıda farklı), "
+            "ve Docker/Kubernetes'te servis keşfinin DNS üzerinden çalıştığı. "
+            "Bir mikroservis diğerine ulaşamıyorsa, ilk bakacağın yerlerden biri "
+            "DNS çözümlemesidir — `nslookup` ve `dig` komutlarını öğren."
+        ),
+        "terms": [
+            {
+                "en": "split-horizon DNS",
+                "tr": "bölünmüş ufuk DNS",
+                "definition": "Aynı alan adının, sorgunun geldiği yere göre farklı adreslere çözülmesi (içeriden özel IP, dışarıdan genel IP).",
+            },
+            {
+                "en": "authoritative / recursive DNS",
+                "tr": "yetkili / özyinelemeli DNS",
+                "definition": "Yetkili sunucu bir bölgenin kayıtlarının asıl sahibidir; özyinelemeli sunucu ise istemci adına gidip cevabı bulur.",
+            },
+            {
+                "en": "configuration drift",
+                "tr": "yapılandırma kayması",
+                "definition": "Aynı olması gereken iki sistemin ayarlarının zamanla birbirinden ayrışması.",
+            },
+        ],
+    },
+]
+
+if __name__ == "__main__":
+    save_edition(DATE, INTRO, DRAFTS)

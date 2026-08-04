@@ -1,0 +1,9 @@
+# Depoda her şey LF ile saklanır; Windows'ta çalışma kopyası CRLF olabilir.
+# GitHub Actions Ubuntu'da koştuğu için bu tutarlılık önemli.
+* text=auto eol=lf
+
+# İkili dosyalar dokunulmadan geçer
+*.pdf binary
+*.png binary
+*.jpg binary
+*.ico binary

@@ -1,0 +1,195 @@
+"""14 Temmuz 2026 sayısı."""
+
+from pipeline.compose import save_edition
+
+DATE = "2026-07-14"
+
+INTRO = (
+    "Günün kapağı bir ülkenin tüm alan adlarının erişilemez hâle gelmesiyle "
+    "başlıyor ve çok iyi bir mühendislik sorusuyla bitiyor: bir güvenlik "
+    "kontrolünü geçici olarak devre dışı bıraktığında, bunu istemciye nasıl "
+    "söylersin? Sessizce kurtarmak, kurtarmak sayılmıyor."
+)
+
+DRAFTS = [
+    {
+        "url": "https://blog.cloudflare.com/dnssec-nta-ede-33/",
+        "slot": "cover",
+        "title_tr": "Sessiz kurtarma bir kusur: .al kesintisi ve görünmez güvenlik kararları",
+        "difficulty": "ileri",
+        "tags": ["DNS", "güvenlik", "olay incelemesi", "ağ"],
+        "summary": (
+            "3 Temmuz 2026'da Arnavutluk'un iletişim otoritesi AKEP, `.al` "
+            "üst düzey alan adı için bir **DNSSEC anahtar devri** (key rollover) "
+            "denemiş. Bir şeyler ters gitmiş ve DNSSEC doğrulaması başarısız "
+            "olmaya başlamış. Spesifikasyon gereği, bu imzaları alan her "
+            "doğrulayıcı DNS çözümleyici bunları reddetmek ve istemciye hata "
+            "döndürmek zorunda — Cloudflare'in 1.1.1.1'i dahil.\n\n"
+            "Sonuç: `.al` altındaki Arnavut devlet servisleri, bankaları ve medya "
+            "siteleri, nerede barındırıldıklarından bağımsız olarak erişilemez "
+            "hâle gelmiş.\n\n"
+            "Sadece iki ay önce Almanya'nın `.de` alan adında benzer bir olay "
+            "yaşanmış. O zamanki müdahale bir **Negative Trust Anchor (NTA)** "
+            "kurmak olmuş: 1.1.1.1'de DNSSEC doğrulamasını geçici olarak askıya "
+            "alıp alan adlarını erişilebilir tutmak.\n\n"
+            "Ama burada asıl mühendislik problemi başlıyor. NTA çözümlemeyi geri "
+            "getirir — **ama sessizce.** NTA altında cevap alan bir istemcinin, "
+            "yalnızca cevaba bakarak DNSSEC doğrulamasının atlandığını anlamasının "
+            "hiçbir yolu yok. Yani meşru bir cevabı sahte bir cevaptan ayırt "
+            "edemiyor. Cloudflare'in bu olaydaki katkısı tam olarak bu boşluğu "
+            "kapatmak: artık **Extended DNS Error 33** ile istemciye doğrulamanın "
+            "atlandığı açıkça bildiriliyor."
+        ),
+        "key_points": [
+            "Tek bir anahtar devri hatası, bir ülkenin tüm alan adlarını "
+            "erişilemez yapabiliyor — merkezi bileşenlerin etki yarıçapı çok geniş.",
+            "Kurtarma müdahalesi (NTA) bir güvenlik kontrolünü kapatıyor; bu bir "
+            "takas ve takasın kendisi görünür olmalı.",
+            "Eklenen çözüm yeni bir mekanizma değil, **görünürlük**: istemci "
+            "artık hangi garantiyle cevap aldığını biliyor.",
+        ],
+        "why_it_matters": (
+            "Bir sistemi ayakta tutmak için bir güvenlik kontrolünü geçici olarak "
+            "gevşetmek meşru bir karardır. Sessizce yapmak değildir. Bu ayrım "
+            "her yerde geçerli: sertifika doğrulamasını atlayan bir istemci, "
+            "hata durumunda kimlik kontrolünü geçen bir servis, dolu olduğu için "
+            "kontrolü atlayan bir kuyruk — hepsi savunulabilir olabilir, ama "
+            "hepsi loglanmalı ve görünür olmalıdır."
+        ),
+        "for_you": (
+            "Bunu koduna doğrudan çevirebilirsin: her `try/except` bloğunda "
+            "\"bu hatayı yutuyorum\" kararı veriyorsun demektir. Sessizce yutma. "
+            "En azından logla, tercihen bir metriğe say. Mobit'teki doküman "
+            "işleme akışında bir dosya ayrıştırılamadığında ne oluyor — atlanıyor "
+            "mu, ve atlandığı bir yerde görünüyor mu? Aynı şekilde \"fail-open\" "
+            "kararları: yetkilendirme servisi cevap vermezse isteği geçiriyor "
+            "musun? Geçiriyorsan bu bilinçli bir karar olmalı ve alarma bağlı "
+            "olmalı. Sessiz düşüşler (silent failures), en pahalı hata sınıfıdır "
+            "çünkü aylarca fark edilmezler."
+        ),
+        "terms": [
+            {
+                "en": "DNSSEC",
+                "tr": "DNSSEC",
+                "definition": "DNS cevaplarını kriptografik imzayla doğrulayarak sahte cevapları engelleyen uzantı.",
+            },
+            {
+                "en": "key rollover",
+                "tr": "anahtar devri",
+                "definition": "Kriptografik anahtarın yenisiyle değiştirilmesi; yanlış yapılırsa doğrulama toptan bozulur.",
+            },
+            {
+                "en": "Negative Trust Anchor (NTA)",
+                "tr": "olumsuz güven çıpası",
+                "definition": "Bir alan adı için DNSSEC doğrulamasını geçici olarak askıya alan acil durum mekanizması.",
+            },
+            {
+                "en": "silent failure",
+                "tr": "sessiz hata",
+                "definition": "Sistemin hata verdiğini belli etmeden yanlış ya da eksik davranması; tespiti en zor hata türü.",
+            },
+        ],
+    },
+    {
+        "url": "https://aws.amazon.com/blogs/architecture/how-mapfre-usa-modernized-fraud-claims-with-amazon-emr-serverless/",
+        "slot": "brief",
+        "title_tr": "Dolandırıcılık halkalarını bulmak: yapılandırılmış veri neden yetmiyor",
+        "difficulty": "orta",
+        "tags": ["veri mühendisliği", "graph", "dolandırıcılık tespiti", "Spark"],
+        "summary": (
+            "Sigorta dolandırıcılığında klasik yaklaşım kural tabanlı kontroller, "
+            "elle tetiklenen incelemeler, geçmiş talep desenleri ve yalnızca "
+            "yapılandırılmış veri analizine dayanıyor. Bilinen desenler için "
+            "işe yarıyor, ama karmaşık **dolandırıcılık halkalarını** ya da "
+            "talep sahipleri, poliçeler, araçlar, sağlayıcılar, adresler ve "
+            "önceki şüpheli faaliyetler arasındaki gizli ilişkileri yakalamakta "
+            "zorlanıyor.\n\n"
+            "Mapfre'nin çözümü Amazon EMR Serverless üzerine kurulu. Problemin "
+            "özü şu: sahte talepler her zaman izole olaylar değil — çoğu zaman "
+            "poliçe sahipleri, araçlar ve sağlayıcılardan oluşan gizli ağlar "
+            "içeriyor. Bu ilişkileri tespit etmek, geleneksel yapılandırılmış "
+            "veri analizinin ötesine geçmeyi gerektiriyor."
+        ),
+        "key_points": [
+            "Anahtar geçiş: satırlara bakmaktan **satırlar arası ilişkilere** "
+            "bakmaya. Aynı adresi paylaşan üç ayrı talep, tek tek bakınca normal.",
+            "Serverless Spark (EMR Serverless), sürekli çalışan bir küme tutmadan "
+            "ağır analitik iş yükü çalıştırmayı ucuzlatıyor.",
+        ],
+        "for_you": (
+            "Bu, PostgreSQL bilgin üzerine kurabileceğin bir beceri. \"İlişkileri "
+            "ara\" sorusu SQL'de **recursive CTE** ile çözülür: bir noktadan "
+            "başlayıp bağlantıları adım adım takip edersin. `WITH RECURSIVE` "
+            "sözdizimini öğrenmek yarım günlük iş ama sana bir kapı açar — "
+            "ağaç yapıları, organizasyon şemaları, bağlantı zincirleri, "
+            "hepsi aynı desen. Mobit'teki ihale doküman sisteminde de karşılığı "
+            "var: \"bu firmayla ilişkili tüm belgeler\" sorusu, tablo "
+            "birleştirmelerinden çok bir graf gezinmesidir. Bunu bilerek "
+            "modellemek, sonradan sorguyla çözmeye çalışmaktan iyidir."
+        ),
+        "terms": [
+            {
+                "en": "fraud ring",
+                "tr": "dolandırıcılık halkası",
+                "definition": "Tek tek meşru görünen ama birbirine bağlı kişiler/varlıklar üzerinden yürütülen organize dolandırıcılık.",
+            },
+            {
+                "en": "recursive CTE",
+                "tr": "özyinelemeli ortak tablo ifadesi",
+                "definition": "SQL'de kendini çağıran sorgu yapısı; ağaç ve graf gezinmelerini tek sorguda yapmayı sağlar.",
+            },
+            {
+                "en": "serverless Spark",
+                "tr": "sunucusuz Spark",
+                "definition": "Küme yönetmeden, yalnızca çalıştığı sürede ücretlendirilen Spark iş yükü çalıştırma modeli.",
+            },
+        ],
+    },
+    {
+        "url": "https://openai.com/index/managing-ai-investments-in-agentic-era",
+        "slot": "brief",
+        "title_tr": "Token fiyatı %97 düştü ama fatura büyüyor: farklı irtifalardan bakmak",
+        "difficulty": "başlangıç",
+        "tags": ["maliyet", "LLM", "ölçüm"],
+        "summary": (
+            "Rakamlar çarpıcı: GPT-4'ten GPT-5.4'e milyon token başına fiyat "
+            "**%97** düşmüş. GPT-5.6 ise kodlama ajanı endeksinde daha iyi "
+            "performansı %54 daha az çıktı token'ı ve görev başına %57 daha az "
+            "zamanla veriyor.\n\n"
+            "Ama yazının asıl tezi şu: token fiyatı tek başına değer yaratılıp "
+            "yaratılmadığını göstermez. Bakılması gereken **dolar başına faydalı "
+            "iş**: tamamlanan görevler, kazanılan zaman, iyileşen kararlar.\n\n"
+            "Pratik kısım, kullanımı üç farklı **irtifadan** izlemek: "
+            "çalışma alanı seviyesinde (benimseme ile harcama birlikte mi "
+            "hareket ediyor?), ekip ve kullanıcı seviyesinde (talep nerede "
+            "büyüyor, kimin desteğe ihtiyacı var?), ürün ve model seviyesinde "
+            "(daha pahalı zekâ nerede kullanılıyor ve bu talep kalıcı mı?)."
+        ),
+        "key_points": [
+            "Birim fiyat düşerken toplam faturanın artması bir çelişki değil — "
+            "ucuzlayan şey daha çok kullanılır.",
+            "Tek bir toplam sayı yanıltıcıdır; aynı veriye farklı kırılımlardan "
+            "bakmak asıl bilgiyi verir.",
+        ],
+        "for_you": (
+            "Bu gazete için doğrudan kurabileceğin bir alışkanlık: her koşuda "
+            "harcanan token'ı kaydet ve gün başına, makale başına, model başına "
+            "kır. `usage.input_tokens` ve `usage.output_tokens` her API "
+            "cevabında geliyor — bunları bir CSV'ye yazmak beş satırlık iş. "
+            "Bir ay sonra \"en pahalı gün hangisiydi ve neden?\" sorusunu "
+            "cevaplayabilirsin. Aynı disiplin KlioAI'da da geçerli: kullanıcı "
+            "başına LLM maliyeti, abonelik fiyatının ne kadarını yiyor? Bu "
+            "sayıyı bilmeyen bir ürün, farkında olmadan zarar edebilir."
+        ),
+        "terms": [
+            {
+                "en": "unit economics",
+                "tr": "birim ekonomisi",
+                "definition": "Bir kullanıcı ya da işlem başına gelir ile maliyetin karşılaştırılması; ürünün sürdürülebilirliğinin ölçüsü.",
+            },
+        ],
+    },
+]
+
+if __name__ == "__main__":
+    save_edition(DATE, INTRO, DRAFTS)

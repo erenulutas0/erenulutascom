@@ -1,0 +1,72 @@
+name: Günlük sayı
+
+# Kaynakları tarar, günün sayısını üretir ve content/ altına commit'ler.
+# Commit atıldığı anda deploy.yml tetiklenir ve site yayına girer.
+#
+# ⚠️  Cron kapalı. Açmak için:
+#     1. Depo ayarlarından ANTHROPIC_API_KEY secret'ını ekle
+#        (Settings → Secrets and variables → Actions → New repository secret)
+#     2. Aşağıdaki `schedule` bloğunun başındaki # işaretlerini kaldır
+#     3. İlk koşuyu elle dene: Actions sekmesi → Günlük sayı → Run workflow
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Üretilecek gün (YYYY-MM-DD). Boşsa bugün."
+        required: false
+      batch:
+        description: "Batch API kullan (yarı fiyat, saatler sürebilir)"
+        type: boolean
+        default: false
+
+  # schedule:
+  #   # 04:30 UTC = 07:30 Türkiye. GitHub cron'u UTC ile çalışır.
+  #   - cron: "30 4 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-edition
+  cancel-in-progress: false
+
+jobs:
+  edition:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt
+
+      - name: Kaynakları tara
+        run: python -m pipeline.cli fetch
+
+      - name: Günün sayısını üret
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          ARGS=""
+          if [ -n "${{ inputs.date }}" ]; then ARGS="$ARGS --date ${{ inputs.date }}"; fi
+          if [ "${{ inputs.batch }}" = "true" ]; then ARGS="$ARGS --batch"; fi
+          python -m pipeline.cli daily $ARGS
+
+      - name: İçeriği doğrula
+        run: python -m pipeline.cli check
+
+      - name: Yeni sayıyı commit'le
+        run: |
+          if [ -z "$(git status --porcelain content/)" ]; then
+            echo "Yeni içerik yok, commit atlanıyor."
+            exit 0
+          fi
+          git config user.name  "gazete-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/
+          git commit -m "içerik: $(date -u +%Y-%m-%d) sayısı"
+          git push

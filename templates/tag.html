@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m %}
+
+{% block title %}{{ tag }} — {{ site.title }}{% endblock %}
+{% block description %}"{{ tag }}" etiketli {{ rows | length }} özet.{% endblock %}
+{% block canonical %}/etiket/{{ tag | slugify }}/{% endblock %}
+
+{% block content %}
+<div class="wrap">
+
+  <header class="page-head">
+    <span class="page-kicker">Konu</span>
+    <h1 class="page-title">{{ tag }}</h1>
+    <p class="page-sub">{{ rows | length }} özet</p>
+  </header>
+
+  <ul class="rowlist">
+    {% for e, a in rows %}
+    <li class="row">
+      <a class="row-link" href="/sayi/{{ e.date }}/#{{ a.id }}">
+        <span class="row-date">{{ a.published_tr }}</span>
+        <span class="row-body">
+          <strong>{{ a.title_tr }}</strong>
+          <span class="row-sum">{{ a.summary | plain | truncate(180, true, '…') }}</span>
+        </span>
+      </a>
+      {{ m.badge(a.source_key, a.source_name) }}
+    </li>
+    {% endfor %}
+  </ul>
+
+</div>
+{% endblock %}

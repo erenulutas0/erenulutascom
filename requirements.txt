@@ -1,0 +1,10 @@
+# Site üretimi
+jinja2>=3.1,<4
+
+# Makale gövde metni çıkarımı (HTML → temiz metin)
+trafilatura>=2.2,<3
+
+# Özetleme (yalnızca `daily` / `backfill` komutları için gerekli;
+# `build` ve `check` bunsuz da çalışır)
+anthropic>=0.120,<1
+pydantic>=2.0,<3

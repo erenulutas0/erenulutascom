@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Ara — {{ site.title }}{% endblock %}
+{% block description %}Tüm özetlerde başlık, konu ve kaynak üzerinden arama.{% endblock %}
+{% block canonical %}/ara/{% endblock %}
+
+{% block content %}
+<div class="wrap">
+
+  <header class="page-head">
+    <h1 class="page-title">Ara</h1>
+    <p class="page-sub">{{ stats.article_count }} özet içinde başlık, özet metni, konu ve kaynak taranır.</p>
+  </header>
+
+  <form class="searchbar" role="search" onsubmit="return false">
+    <input id="q" type="search" placeholder="örn. cache, postgres, agent, latency…"
+           autocomplete="off" autofocus aria-label="Arama">
+    <select id="kaynak" aria-label="Kaynak filtresi">
+      <option value="">Tüm kaynaklar</option>
+      {% for s in sources %}
+      {% if stats.per_source.get(s.key, 0) %}
+      <option value="{{ s.key }}">{{ s.name }}</option>
+      {% endif %}
+      {% endfor %}
+    </select>
+    <select id="seviye" aria-label="Seviye filtresi">
+      <option value="">Tüm seviyeler</option>
+      <option value="başlangıç">Başlangıç</option>
+      <option value="orta">Orta</option>
+      <option value="ileri">İleri</option>
+    </select>
+  </form>
+
+  <p id="sonuc-sayisi" class="muted search-count" aria-live="polite"></p>
+  <ul id="sonuclar" class="rowlist"></ul>
+  <p id="bos" class="muted center" hidden>Eşleşme yok. Farklı bir kelime dene.</p>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/search.js" defer></script>
+{% endblock %}

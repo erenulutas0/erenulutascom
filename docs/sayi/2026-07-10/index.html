@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10 Temmuz 2026 — Eren&#39;in Mühendislik Gazetesi</title>
+<meta name="description" content="Bugünün kapağı, işe yarayan bir optimizasyonun altındaki varsayım çürüdüğünde ne olduğunu anlatıyor: Cloudflare&#39;in &#34;en yakın sunucuyu bul&#34; algoritması, bulut kaynaklarında tutunacak bir şey bulamıyor. Yanına arşivden iki yazı ekledim — kendi yazdığın kuyruğu silmek ve embedding&#39;lerle öneri kurmak.">
+<meta name="author" content="Eren Ulutaş">
+<meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:title" content="10 Temmuz 2026 — Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:description" content="Bugünün kapağı, işe yarayan bir optimizasyonun altındaki varsayım çürüdüğünde ne olduğunu anlatıyor: Cloudflare&#39;in &#34;en yakın sunucuyu bul&#34; algoritması, bulut kaynaklarında tutunacak bir şey bulamıyor. Yanına arşivden iki yazı ekledim — kendi yazdığın kuyruğu silmek ve embedding&#39;lerle öneri kurmak.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<link rel="canonical" href="https://erenulutas.com/sayi/2026-07-10/">
+<link rel="alternate" type="application/rss+xml" title="Eren&#39;in Mühendislik Gazetesi" href="/feed.xml">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+<script>
+  // Tema tercihini ilk boyamadan önce uygula (flash olmasın)
+  (function () {
+    try {
+      var t = localStorage.getItem('tema');
+      if (t) document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip" href="#icerik">İçeriğe geç</a>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <div class="masthead-brand">
+      <a href="/" class="logo">
+        <span class="logo-mark">EU</span>
+        <span class="logo-text">
+          <strong>Eren&#39;in Mühendislik Gazetesi</strong>
+          <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
+        </span>
+      </a>
+    </div>
+    <nav class="masthead-nav" aria-label="Ana menü">
+      <a href="/">Bugün</a>
+      <a href="/arsiv/">Arşiv</a>
+      <a href="/ara/">Ara</a>
+      <a href="/hakkinda/">Hakkında</a>
+      <button id="tema" class="tema" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+        <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/></g></svg>
+        <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="icerik">
+<div class="wrap">
+
+  <div class="dateline">
+    <span class="dateline-date">10 Temmuz 2026, Cuma</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">3 yazı</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">Cloudflare Blog, Netflix Tech Blog, Uber Engineering</span>
+  </div>
+
+    <div class="editor-note">
+    <span class="label">Editörden</span>
+    <p>Bugünün kapağı, işe yarayan bir optimizasyonun altındaki varsayım çürüdüğünde ne olduğunu anlatıyor: Cloudflare&#x27;in &quot;en yakın sunucuyu bul&quot; algoritması, bulut kaynaklarında tutunacak bir şey bulamıyor. Yanına arşivden iki yazı ekledim — kendi yazdığın kuyruğu silmek ve embedding&#x27;lerle öneri kurmak.</p>
+  </div>
+
+    <article class="cover" id="b54dc71b30d5">
+  <div class="cover-head">
+    <span class="kicker">Günün Kapağı</span>
+    <div class="meta">
+    <a class="badge" href="/kaynak/cloudflare/"
+     style="--brand: #F6821F">Cloudflare Blog</a>
+
+<span class="meta-item">10 Temmuz 2026</span><span class="meta-item">6 dk okuma</span>  <span class="meta-item level level-ileri">ileri</span>
+</div>
+
+  </div>
+  <h2 class="cover-title">
+    <a href="https://blog.cloudflare.com/smart-tiered-cache-for-public-clouds/" rel="noopener nofollow" target="_blank">Ölçüm tutunacak bir şey bulamayınca: anycast ve önbellek verimliliği</a>
+  </h2>
+  <p class="original-title">Improving Smart Tiered Cache for Public Cloud Regions · Chenxi Zhang</p>
+
+  <div class="prose"><p>2021&#x27;de çıkan <strong>Smart Tiered Cache</strong>&#x27;in fikri basitti: sitenin arkasındaki her kaynak (origin) için Cloudflare, gerçek zamanlı gecikme ölçümlerine bakarak tek bir <strong>en iyi üst katman</strong> veri merkezi seçer. Tek anahtarı çevirirsin, ağdan kaynağına en hızlı yol bulunur.</p><p>Bu, bir kaynak IP&#x27;si sabit bir yerde durduğu sürece çalışıyor. <strong>Genel bulut kaynakları genelde durmuyor.</strong> Anycast ya da bölgesel unicast ön yüzlerin arkasında oturuyorlar; yani tek bir kaynak IP&#x27;si aynı anda bir düzine Cloudflare veri merkezine eşit derecede yakın görünebiliyor — ve gecikme ölçümlerinin tutunacak bir şeyi kalmıyor.</p><p>Smart Tiered Cache bu durumu <strong>güvenli yoldan</strong> ele alıyor: net bir kazanan yoksa birden fazla üst katmana düşüyor. Hiçbir şey bozulmuyor. Sadece tek bir en yakın katmanı değerli kılan şeyi kaybediyorsun: <strong>önbellek verimliliği</strong>. Çünkü aynı içerik birden fazla üst katmanda ayrı ayrı önbelleklenir; her biri kaynağa ayrı gider.</p><p>Çözüm bir <strong>bölge ipucu</strong> (region hint) vermene izin vermek. Bu ipuçla Cloudflare, kaynak IP&#x27;si her yere yakın görünse bile bulut kaynağını doğru bölgeye eşleyip daha iyi birincil ve yedek üst katman seçebiliyor.</p></div>
+
+  <div class="keypoints">
+    <h4 class="label">Öne çıkanlar</h4>
+    <ul>
+<li>Sessiz bozulma (graceful degradation) doğru tasarım — ama neyi kaybettiğini bilmek gerekiyor: burada kaybedilen doğruluk değil verimlilik.</li><li>Anycast bir adresi çok yerde duyurur; bu ağ katmanında harika, ama &quot;nerede?&quot; sorusunu cevapsız bırakır.</li><li>Otomatik keşif başarısız olduğunda çözüm, insanın bildiği bilgiyi sisteme <strong>ipucu</strong> olarak vermek.</li>    </ul>
+  </div>
+
+  <div class="callouts">
+    <div class="callout callout-why">
+      <h4 class="label">Neden önemli?</h4>
+      <p>Her otomatik optimizasyon bir varsayıma dayanır. Bu yazı o varsayımı (&quot;kaynak sabit bir yerdedir&quot;) ve çürüdüğünde ne olduğunu açıkça gösteriyor. Kendi sistemlerinde de sor: bu otomatik davranış hangi varsayıma dayanıyor ve varsayım bozulduğunda sistem ne yapıyor — gürültülü mü başarısız oluyor, yoksa sessizce mi kötüleşiyor?</p>
+    </div>
+    <div class="callout callout-you">
+      <h4 class="label">Sende karşılığı</h4>
+      <p>İki kavram burada senin için kritik. <strong>Anycast:</strong> aynı IP adresinin dünyada birçok noktadan duyurulması, trafiğin en yakın noktaya gitmesi. 1.1.1.1 ve 8.8.8.8 böyle çalışır. <strong>Katmanlı önbellek:</strong> uç sunucuların doğrudan kaynağa gitmek yerine bir ara önbellek katmanından geçmesi — 100 uç sunucu ıskaladığında kaynağa 100 değil 1 istek gider. Bu ikinci fikri kendi ölçeğinde de kur: Spring Boot uygulamanda uygulama içi önbellek (Caffeine) ile paylaşılan Redis önbelleğini birlikte kullanmak tam olarak katmanlı önbellektir ve veritabanına giden yükü ciddi düşürür.</p>
+    </div>
+  </div>
+
+  <div class="terms">
+  <h4 class="label">Sözlük</h4>
+  <dl>
+    <div class="term">
+      <dt><span class="term-en">anycast</span> <span class="term-tr">anycast</span></dt>
+      <dd>Aynı IP adresinin birden çok konumdan duyurulması; ağ, isteği en yakın konuma yönlendirir.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">tiered cache</span> <span class="term-tr">katmanlı önbellek</span></dt>
+      <dd>Uç önbelleklerin kaynağa doğrudan gitmek yerine bir ara önbellek katmanından geçmesi; kaynak yükünü azaltır.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">graceful degradation</span> <span class="term-tr">kademeli bozulma</span></dt>
+      <dd>Bir bileşen ideal çalışamadığında sistemin tamamen durmak yerine daha düşük verimle çalışmaya devam etmesi.</dd>
+    </div>
+  </dl>
+</div>
+
+
+  <div class="article-foot">
+    <ul class="tags">
+  <li><a href="/etiket/onbellek/">#önbellek</a></li>
+  <li><a href="/etiket/ag/">#ağ</a></li>
+  <li><a href="/etiket/cdn/">#CDN</a></li>
+  <li><a href="/etiket/mimari/">#mimari</a></li>
+</ul>
+
+    <a class="readmore" href="https://blog.cloudflare.com/smart-tiered-cache-for-public-clouds/" rel="noopener nofollow" target="_blank">
+      Orijinali oku <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+
+
+
+  <section class="section">
+    <h2 class="section-title"><span>Arşivden Seçmeler</span></h2>
+    <p class="section-note">
+      Bugün az yayın çıktı. Bu yazılar daha eski tarihli ama hâlâ öğretici —
+      her birinin gerçek yayın tarihi başlığın üstünde yazıyor.
+    </p>
+    <div class="grid">
+<article class="brief brief-archive" id="c45923a30b1a">
+  <div class="meta">
+    <span class="kicker kicker-sm">Arşivden</span>
+      <a class="badge" href="/kaynak/netflix/"
+     style="--brand: #E50914">Netflix Tech Blog</a>
+
+    <span class="meta-item">22 Haziran 2026</span>
+<span class="meta-item">6 dk</span>    <span class="meta-item level level-orta">orta</span>
+  </div>
+  <h3 class="brief-title">
+    <a href="https://netflixtechblog.com/how-netflix-simplified-batch-compute-with-kueue-87860682629c?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">Kendi yazdığın kuyruğu silmek: Netflix&#39;in Kueue&#39;ya geçişi</a>
+  </h3>
+  <p class="original-title">How Netflix Simplified Batch Compute with Kueue</p>
+  <div class="prose prose-sm"><p>Netflix hesaplama altyapısını daha Kubernetes-yerel hâle getirme yolculuğunda, Kubernetes ekosisteminden bileşenleri kendi konteyner platformu Titus&#x27;a dahil ediyor. Örneklerden biri <strong>Kueue</strong>: toplu iş yükleri için bulut-yerel bir iş kuyruğu sistemi.</p><p>Kueue, kendi geliştirdikleri <strong>CMB</strong> (Compute Managed Batch) çözümündeki özel kuyruklama ve zamanlama mantığının büyük kısmının yerini almış. CMB&#x27;nin yaptığı işler tanıdık: bir <strong>kiracı hiyerarşisi</strong> üzerinden iş yüklerini yönetip kuyruklamak, öncelikle sıralı çalıştırma sağlamak ve kapasiteyi kiracı bazında yönetmek. Kiracılar organizasyon, platform ya da uygulama bazında gruplama sağlıyor ve her kiracının bir kapasite yapılandırması var — ağırlık ve diğer kiracılardan izolasyon garantileri dahil.</p><p>Yazı milyonlarca toplu işin nasıl taşındığını da anlatıyor.</p></div>
+
+  <ul class="keypoints-inline">
+<li>Kendi yazdığın altyapıyı, olgunlaşan bir ekosistem bileşeniyle değiştirmek bakım yükünü kalıcı olarak düşürür.</li><li>Kiracı hiyerarşisi + kapasite ağırlıkları, çok takımlı bir platformda adil paylaşımın standart çözümü.</li><li>Göç &quot;milyonlarca iş&quot; ölçeğinde yapılmış — yani kesintisiz geçiş tasarımı işin asıl zor kısmı.</li>  </ul>
+
+  <div class="callout callout-you callout-sm">
+    <h4 class="label">Sende karşılığı</h4>
+    <p>Bu yazının bir alt seviyedeki karşılığını sen de yaşayacaksın: kendi yazdığın yardımcı sınıflar ve altyapı kodu. &quot;Ben yazdım, çalışıyor&quot; bir kodu tutmak için yeterli sebep değil — bakımını kim yapacak sorusu daha önemli. Kubernetes tarafında ise şu ayrımı öğren: <strong>Deployment</strong> sürekli çalışan servisler için, <strong>Job/CronJob</strong> ise başlayıp biten işler için. Bu gazetenin günlük pipeline&#x27;ı bir CronJob&#x27;un tam örneği — GitHub Actions cron&#x27;u da aynı işi yapan daha basit bir araç.</p>
+  </div>
+
+  <div class="terms">
+  <h4 class="label">Sözlük</h4>
+  <dl>
+    <div class="term">
+      <dt><span class="term-en">batch workload</span> <span class="term-tr">toplu iş yükü</span></dt>
+      <dd>Başlayıp tamamlanan, sürekli çalışmayan hesaplama işi (rapor üretme, veri işleme gibi).</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">multi-tenancy</span> <span class="term-tr">çok kiracılılık</span></dt>
+      <dd>Aynı platformu birden çok takımın/uygulamanın paylaşması; adil kapasite paylaşımı gerektirir.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">job queueing</span> <span class="term-tr">iş kuyruklama</span></dt>
+      <dd>Çalıştırılacak işlerin öncelik ve kapasiteye göre sıraya alınıp zamanlanması.</dd>
+    </div>
+  </dl>
+</div>
+
+
+  <div class="article-foot">
+    <ul class="tags">
+  <li><a href="/etiket/kubernetes/">#Kubernetes</a></li>
+  <li><a href="/etiket/toplu-isleme/">#toplu işleme</a></li>
+  <li><a href="/etiket/goc/">#göç</a></li>
+  <li><a href="/etiket/altyapi/">#altyapı</a></li>
+</ul>
+
+    <a class="readmore" href="https://netflixtechblog.com/how-netflix-simplified-batch-compute-with-kueue-87860682629c?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">
+      Orijinali oku <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+<article class="brief brief-archive" id="9b0db810c195">
+  <div class="meta">
+    <span class="kicker kicker-sm">Arşivden</span>
+      <a class="badge" href="/kaynak/uber/"
+     style="--brand: #000000">Uber Engineering</a>
+
+    <span class="meta-item">14 Nisan 2026</span>
+<span class="meta-item">16 dk</span>    <span class="meta-item level level-ileri">ileri</span>
+  </div>
+  <h3 class="brief-title">
+    <a href="https://www.uber.com/blog/innovative-recommendation-applications-using-two-tower-embeddings/" rel="noopener nofollow" target="_blank">Two-Tower embedding: öneri sistemlerinin çalışan iskeleti</a>
+  </h3>
+  <p class="original-title">Innovative Recommendation Applications Using Two Tower Embeddings at Uber</p>
+  <div class="prose prose-sm"><p>Uber&#x27;in ML ekibi 2022&#x27;de embedding&#x27;lere yatırım yapmış ve odak noktası <strong>Two-Tower Embeddings (TTE)</strong> olmuş. Amaç öneri sistemlerini beslemek: yemek siparişi verenler (eater) ve restoranlar (store) için embedding üretip uygulamak.</p><p>Embedding&#x27;in tanımı yazıda net veriliyor: bir varlığın (mağaza, kullanıcı, ürün, sürücü, konum) zengin bir temsili. İnsan dostu özellikleri — mağaza menüsü, ürün fiyatı, kullanıcının tercih ettiği mutfak, geçmiş siparişleri — makine öğrenmesi dostu vektörlere dönüştürüyor.</p><p>&quot;Two-tower&quot; adı mimariden geliyor: iki ayrı ağ (kule), biri kullanıcıyı biri öğeyi kendi vektörüne çeviriyor; eşleşme skoru bu iki vektörün benzerliği. Bunun pratik değeri büyük — öğe vektörlerini önceden hesaplayıp saklayabilirsin, sorgu anında yalnızca kullanıcı vektörünü hesaplayıp en yakın komşuları ararsın.</p><p>Yol da dürüstçe anlatılmış: yaklaşım yaklaşık bir yıl sonra yayına girmiş, ve şehir bazında binlerce modelden tek bir küresel bağlamsal modele doğru evrilmiş.</p></div>
+
+  <ul class="keypoints-inline">
+<li>İki kule ayrımı, öğe tarafını önceden hesaplanabilir kılıyor — gerçek zamanlı öneri bu sayede mümkün.</li><li>&quot;Binlerce şehir modeli&quot;nden &quot;tek küresel model&quot;e geçiş, ML sistemlerinde tekrarlanan bir olgunlaşma yolu.</li><li>Bir yıllık geliştirme süresi açıkça yazılmış — gerçekçi bir beklenti çıpası.</li>  </ul>
+
+  <div class="callout callout-you callout-sm">
+    <h4 class="label">Sende karşılığı</h4>
+    <p>Sen zaten embedding ve RAG ile çalışıyorsun, bu yüzden buradan alacağın şey somut: <strong>çift kule ayrımını</strong> kendi sisteminde tanı. Mobit&#x27;teki doküman aramada belge embedding&#x27;lerini önceden hesaplayıp saklıyorsun (öğe kulesi), sorgu geldiğinde sadece sorguyu vektörleştiriyorsun (kullanıcı kulesi). Aynı desen. Bir adım ilerisi: iki tarafı aynı hazır modelle değil, kendi verinle eğitilmiş iki ayrı kuleyle temsil etmek — Uber&#x27;in yaptığı bu ve alan-özgü aramada belirgin fark yaratır. Ayrıca <strong>yaklaşık en yakın komşu</strong> (ANN) araması öğren: pgvector PostgreSQL&#x27;de bunu doğrudan veriyor, senin stack&#x27;ine tam oturur.</p>
+  </div>
+
+  <div class="terms">
+  <h4 class="label">Sözlük</h4>
+  <dl>
+    <div class="term">
+      <dt><span class="term-en">embedding</span> <span class="term-tr">gömme vektörü</span></dt>
+      <dd>Bir varlığın anlamsal özelliklerini taşıyan sayısal vektör temsili.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">two-tower model</span> <span class="term-tr">çift kule modeli</span></dt>
+      <dd>Kullanıcı ve öğeyi ayrı ağlarla vektöre çevirip benzerliklerini karşılaştıran öneri mimarisi.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">approximate nearest neighbor (ANN)</span> <span class="term-tr">yaklaşık en yakın komşu</span></dt>
+      <dd>Milyonlarca vektör arasında en benzerlerini, tam doğruluktan biraz ödün vererek çok hızlı bulma tekniği.</dd>
+    </div>
+  </dl>
+</div>
+
+
+  <div class="article-foot">
+    <ul class="tags">
+  <li><a href="/etiket/oneri-sistemleri/">#öneri sistemleri</a></li>
+  <li><a href="/etiket/embedding/">#embedding</a></li>
+  <li><a href="/etiket/ml-altyapisi/">#ML altyapısı</a></li>
+</ul>
+
+    <a class="readmore" href="https://www.uber.com/blog/innovative-recommendation-applications-using-two-tower-embeddings/" rel="noopener nofollow" target="_blank">
+      Orijinali oku <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+    </div>
+  </section>
+
+
+  <nav class="pager" aria-label="Sayılar arası gezinme">
+    <a class="pager-link pager-prev" href="/sayi/2026-07-09/">
+      <span class="pager-label">← Önceki sayı</span>
+      <span class="pager-title">9 Temmuz 2026</span>
+    </a>
+
+    <a class="pager-mid" href="/arsiv/">Arşiv</a>
+
+    <a class="pager-link pager-next" href="/sayi/2026-07-13/">
+      <span class="pager-label">Sonraki sayı →</span>
+      <span class="pager-title">13 Temmuz 2026</span>
+    </a>
+  </nav>
+
+</div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-col">
+      <h3>Eren&#39;in Mühendislik Gazetesi</h3>
+      <p class="muted">
+        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını her gün derleyip
+        Türkçe özetleyen kişisel bir gazete. Özetler yeni mezun bir mühendisin
+        anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
+      </p>
+      <p class="muted small">
+        69 özet · 22 sayı ·
+        11 kaynak
+      </p>
+    </div>
+    <div class="footer-col">
+      <h3>Kaynaklar</h3>
+      <ul class="footer-sources">
+        <li><a href="https://www.uber.com/blog/engineering/" rel="noopener nofollow" target="_blank">Uber Engineering</a></li>
+        <li><a href="https://netflixtechblog.com" rel="noopener nofollow" target="_blank">Netflix Tech Blog</a></li>
+        <li><a href="https://aws.amazon.com/blogs/architecture/" rel="noopener nofollow" target="_blank">AWS Architecture Blog</a></li>
+        <li><a href="https://blog.cloudflare.com" rel="noopener nofollow" target="_blank">Cloudflare Blog</a></li>
+        <li><a href="https://stripe.com/blog" rel="noopener nofollow" target="_blank">Stripe Engineering</a></li>
+        <li><a href="https://www.databricks.com/blog" rel="noopener nofollow" target="_blank">Databricks Engineering</a></li>
+        <li><a href="https://engineering.fb.com" rel="noopener nofollow" target="_blank">Meta Engineering</a></li>
+        <li><a href="https://openai.com/news/" rel="noopener nofollow" target="_blank">OpenAI Research</a></li>
+        <li><a href="https://www.anthropic.com/engineering" rel="noopener nofollow" target="_blank">Anthropic Engineering</a></li>
+        <li><a href="https://research.google/blog/" rel="noopener nofollow" target="_blank">Google Research</a></li>
+        <li><a href="https://cloud.google.com/blog/" rel="noopener nofollow" target="_blank">Google Cloud Blog</a></li>
+        <li><a href="https://devblogs.microsoft.com/engineering-at-microsoft/" rel="noopener nofollow" target="_blank">Microsoft Engineering</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Eren Ulutaş</h3>
+      <ul class="footer-links">
+        <li><a href="https://github.com/erenulutas0" rel="me noopener" target="_blank">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/eren-u-55918a2a0" rel="me noopener" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:eerenulutass@gmail.com">E-posta</a></li>
+        <li><a href="/feed.xml">RSS</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-legal">
+    <p class="muted small">
+      Tüm özetler kaynak makalelere bağlıdır; telif orijinal yazarlara aittir.
+      Bu site yalnızca özet ve yönlendirme sunar. © 2026 Eren Ulutaş.
+    </p>
+  </div>
+</footer>
+
+<script src="/static/app.js" defer></script>
+</body>
+</html>

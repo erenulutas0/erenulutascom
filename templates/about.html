@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Hakkında — {{ site.title }}{% endblock %}
+{% block description %}Bu gazete nedir, nasıl üretilir, kim yapıyor?{% endblock %}
+{% block canonical %}/hakkinda/{% endblock %}
+
+{% block content %}
+<div class="wrap wrap-narrow">
+
+  <header class="page-head">
+    <h1 class="page-title">Hakkında</h1>
+    <p class="page-sub">Bu site ne, nasıl çalışıyor, kim yapıyor?</p>
+  </header>
+
+  <div class="prose prose-page">
+    <h2>Neden var?</h2>
+    <p>
+      Uber, Netflix, Meta, Stripe, Cloudflare gibi ekipler ürettikleri sistemleri
+      şaşırtıcı bir açıklıkla anlatıyor. Sorun şu: bu yazılar günde onlarca çıkıyor,
+      çoğu uzun, bir kısmı da pazarlama. Bu gazete o akışı süzüp günde birkaç
+      gerçek mühendislik yazısını Türkçe özetliyor.
+    </p>
+    <p>
+      Hedef kitle özel: <strong>yeni mezun, işe yeni başlamış bir yazılım mühendisi.</strong>
+      Yani her özet şunu varsayar — okuyan kişi kod yazmayı biliyor ama
+      "100 milyon eşzamanlı bağlantı" ölçeğini hiç görmedi. Bu yüzden her yazıda
+      <em>Neden önemli?</em> ve <em>Sende karşılığı</em> bölümleri var.
+    </p>
+
+    <h2>Kaynaklar</h2>
+    <p>Her gün şu {{ sources | length }} blog taranıyor:</p>
+    <ul class="about-sources">
+      {% for s in sources %}
+      <li>
+        <a href="{{ s.site }}" rel="noopener nofollow" target="_blank" style="--brand: {{ s.color }}">{{ s.name }}</a>
+        <span class="muted">— {{ s.focus }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <h2>Nasıl üretiliyor?</h2>
+    <ol>
+      <li><strong>Toplama.</strong> RSS besleyen kaynaklar doğrudan okunuyor. Uber'in RSS'i yok, blog sayfası kazınıyor; Anthropic için <code>sitemap.xml</code> kullanılıyor.</li>
+      <li><strong>Ayıklama.</strong> Makalenin gövde metni navigasyon ve footer gürültüsünden temizleniyor.</li>
+      <li><strong>Küratörlük.</strong> Her yazı konu sinyalleri ve kaynak ağırlığına göre puanlanıyor; duyuru ve pazarlama yazıları eleniyor. Günde en fazla birkaç yazı sayıya giriyor.</li>
+      <li><strong>Özetleme.</strong> Seçilen yazılar Türkçeye özetleniyor; teknik terimlerin İngilizcesi korunup sözlükte açıklanıyor.</li>
+      <li><strong>Yayın.</strong> Sonuç statik HTML olarak üretilip GitHub Pages üzerinden yayınlanıyor.</li>
+    </ol>
+    <p class="muted">
+      Kod tamamen Python; site şablonları Jinja2. Kaynak kod
+      <a href="{{ site.author_url }}" rel="noopener" target="_blank">GitHub'da</a>.
+    </p>
+
+    <h2>Dürüstlük notu</h2>
+    <ul>
+      <li>Her özetin altında orijinal makalenin linki var; amaç kaynağın yerine geçmek değil, ona yönlendirmek.</li>
+      <li>Yayın tarihleri gerçek. "Arşivden Seçmeler" bölümündeki yazılar o güne ait değildir ve tarihleri açıkça yazılıdır.</li>
+      <li>Özetler otomatik üretiliyor; hata olabilir. Kritik bir karar vereceksen orijinali oku.</li>
+    </ul>
+
+    <h2>Kim yazıyor?</h2>
+    <p>
+      Ben <strong>{{ site.author }}</strong>. Beykent Üniversitesi Bilgisayar Mühendisliği
+      mezunuyum (2026, tam burslu, 3.89). Backend, veri ve uygulamalı AI tarafında
+      çalışıyorum: Java/Spring Boot, Python/FastAPI, PostgreSQL, Redis, Docker,
+      PyTorch ve LLM API'leri.
+    </p>
+    <p>
+      Bugüne kadar bir ERP + mesajlaşma platformu, 10.000+ kaydı işleyen LLM tabanlı
+      bir sınıflandırma pipeline'ı, yayında olan bir mobil AI ürünü (KlioAI) ve
+      yaklaşık 1 TB piyasa verisi üzerinde çalışan bir algoritmik alım-satım
+      araştırma platformu geliştirdim.
+    </p>
+    <p>
+      Bu gazeteyi kendim için yapıyorum: her gün büyük ölçekli sistemlerden bir şey
+      öğrenmek ve öğrendiğimi yazıya dökmek için. Açık olması işinize de yararsa ne âlâ.
+    </p>
+    <p class="about-links">
+      <a class="btn" href="{{ site.author_url }}" rel="me noopener" target="_blank">GitHub</a>
+      <a class="btn" href="{{ site.linkedin }}" rel="me noopener" target="_blank">LinkedIn</a>
+      <a class="btn" href="mailto:{{ site.email }}">E-posta</a>
+      <a class="btn" href="/feed.xml">RSS</a>
+    </p>
+  </div>
+
+</div>
+{% endblock %}

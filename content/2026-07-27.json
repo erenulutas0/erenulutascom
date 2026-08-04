@@ -1,0 +1,130 @@
+{
+  "date": "2026-07-27",
+  "intro": "Pazar günü iki yazı: biri \"hata ayıklaması zor bir protokolü nasıl yaklaşılabilir hâle getirdik\", diğeri işin kendisinin nasıl değiştiğine dair veri. Arşivden de 600.000 testi otomatik taşıyan bir göç hikâyesi ekledim — Java yazan herkesin okuması gereken cinsten.",
+  "articles": [
+    {
+      "id": "7f45816e52f5",
+      "slot": "cover",
+      "source_key": "cloudflare",
+      "source_name": "Cloudflare Blog",
+      "title": "We’re open sourcing our privacy proxy CLI",
+      "title_tr": "Hata ayıklanamayan protokolü araçla ehlileştirmek: pvcli",
+      "url": "https://blog.cloudflare.com/open-sourcing-our-privacy-proxy-cli/",
+      "published": "2026-07-27",
+      "summary": "Gizliliği koruyan protokollerde hata ayıklamak zor. **Oblivious HTTP** (OHTTP) dört farklı taraf arasında birkaç adımdan oluşuyor; üstüne ikili HTTP kodlaması ve birden fazla taslak RFC'ye dağılmış detaylar ekleniyor. Cloudflare bu protokolleri saniyede milyonlarca istek ölçeğinde işletirken öğrendiklerini temiz bir komut satırı aracına sarmış ve açık kaynak yapmış: **pvcli**, Apache-2.0 lisansıyla.\n\nAracın gösterdiği şey basit ama etkili: eskiden dört tarafı ayrı ayrı kurup elle takip etmeni gerektiren tam bir OHTTP isteği, artık tek satırda çalışıyor — relay, gateway ve origin dahil.\n\nMotivasyon bölümü de öğretici. Cloudflare'in gizlilik ürün ailesi büyüdükçe (Privacy Proxy, Privacy Gateway — Apple'ın Private Relay'ini ve Microsoft Edge'in Secure Network VPN'ini besleyen altyapılar) sorunu teşhis etmek de zorlaşmış. Yani araç bir pazarlama ürünü değil, kendi operasyonel acılarının çözümü.",
+      "key_points": [
+        "OHTTP'nin zorluğu tek bir karmaşık adım değil: dört taraf, ikili kodlama ve dağınık taslak spesifikasyonlar bir araya geliyor.",
+        "Karmaşık bir protokolü benimsetmenin en etkili yolu, onu tek komutta denenebilir hâle getirmek.",
+        "Aracın kaynağı gerçek operasyon deneyimi — saniyede milyonlarca istek."
+      ],
+      "why_it_matters": "Bir teknolojinin benimsenmesini belirleyen şey çoğu zaman teknolojinin kendisi değil, etrafındaki araçlardır. Hata ayıklanamayan bir sistem, ne kadar iyi tasarlanmış olursa olsun üretimde kullanılmaz. \"Bu sistemde bir şey ters gittiğinde nasıl anlarım?\" sorusu, tasarımın kendisi kadar tasarımın parçasıdır.",
+      "for_you": "Bu yazıdaki alışkanlığı kendi projelerine taşı: kurduğun her karmaşık akış için küçük bir teşhis aracı yaz. Mobit'teki doküman arama mimarisi için bir CLI düşün — bir sorgu ver, hangi belgelerin getirildiğini, benzerlik skorlarını ve modele giden nihai prompt'u bassın. Python'da `argparse` ile yarım saatlik bir iş, ama RAG sisteminde \"neden bu cevabı verdi?\" sorusunu dakikalar yerine saniyeler içinde cevaplatır. Ayrıca mülakatta göstereceğin şey de bu tür araçlardır: sistemi yazmak kadar sistemi anlaşılır kılmak da mühendislik.",
+      "terms": [
+        {
+          "en": "Oblivious HTTP (OHTTP)",
+          "tr": "gizli HTTP",
+          "definition": "İsteği gönderen ile hedef sunucu arasına aracılar koyarak, hiçbir tarafın hem kimliği hem içeriği görememesini sağlayan protokol."
+        },
+        {
+          "en": "relay / gateway",
+          "tr": "röle / geçit",
+          "definition": "OHTTP'de aracılar: röle kimin istediğini bilir ama içeriği göremez; geçit içeriği görür ama kimin istediğini bilmez."
+        },
+        {
+          "en": "RFC draft",
+          "tr": "taslak RFC",
+          "definition": "Henüz standart hâline gelmemiş, üzerinde çalışılan internet protokol belgesi."
+        }
+      ],
+      "tags": [
+        "gizlilik",
+        "araçlar",
+        "protokol",
+        "açık kaynak"
+      ],
+      "difficulty": "orta",
+      "read_minutes": 8,
+      "authors": [
+        "Hannah Wang",
+        "Ben Yang"
+      ]
+    },
+    {
+      "id": "f143efbfe201",
+      "slot": "brief",
+      "source_key": "openai",
+      "source_name": "OpenAI Research",
+      "title": "How AI is expanding what people do at work",
+      "title_tr": "Görev geçişkenliği: işler değil, işi kimin yaptığı değişiyor",
+      "url": "https://openai.com/index/how-ai-is-expanding-what-people-do-at-work",
+      "published": "2026-07-27",
+      "summary": "OpenAI'ın ekonomi araştırması 800.000'den fazla ABD kullanıcı mesajını incelemiş. Bulgu: işle ilgili mesajların **%16,8'i** ve mesleğe özgü mesajların **%43,5'i** başka bir meslekle ilişkilendirilen görevlerle ilgili.\n\nBuna **görev geçişkenliği** (task crossover) diyorlar: tarihsel olarak bir mesleğe ait olan işin, başka bir meslekten insanın AI kullanımında görünmesi. Küçük işletme sahibi metin yazıyor, sözleşme inceliyor, temel finansal analiz yapıyor. Satışçı, eskiden analiste gidecek bir veri setini kendisi keşfediyor. Pazarlamacı, geliştiriciyi beklemeden web sitesindeki sorunu çözüyor.\n\nYazının kendi vurgusu şu: AI ile ilgili çoğu çalışma sabit bir görev listesiyle başlayıp \"model bunu yapabilir mi?\" diye soruyor. Bu araştırma farklı bir şeye işaret ediyor — AI **kimin hangi görevi üstlendiğini** de değiştiriyor.",
+      "key_points": [
+        "Değişim \"işler yok oluyor\" değil, iş sınırları bulanıklaşıyor biçiminde görünüyor.",
+        "Bu, yeni mezun bir mühendis için hem fırsat hem risk: senin işine başkaları girebilir, sen de başkalarının işine girebilirsin."
+      ],
+      "why_it_matters": "",
+      "for_you": "Kariyer açısından buradan çıkan ders net: bir aracı kullanabilmek artık ayırt edici değil — kimin ne yapabildiği hızla eşitleniyor. Ayırt edici olan **derinlik**. Herkes bir LLM'e sorgu yazabiliyorsa, senin değerin bir sistemin neden yavaşladığını bulabilmen, bir veritabanı indeksinin nasıl seçileceğini bilmen, bir dağıtık sistemde hangi tutarlılık garantisinin gerektiğini kestirebilmen olacak. Bu gazeteyi okumanın sebebi de tam olarak bu: yüzeyde kalmamak.",
+      "terms": [
+        {
+          "en": "task crossover",
+          "tr": "görev geçişkenliği",
+          "definition": "Bir mesleğe ait sayılan işin, başka meslekten kişiler tarafından yapılmaya başlanması."
+        }
+      ],
+      "tags": [
+        "kariyer",
+        "LLM",
+        "araştırma"
+      ],
+      "difficulty": "başlangıç",
+      "read_minutes": 4,
+      "authors": []
+    },
+    {
+      "id": "9ec08259ab07",
+      "slot": "archive",
+      "source_key": "uber",
+      "source_name": "Uber Engineering",
+      "title": "How Uber Executed A JUnit Migration at Massive Scale",
+      "title_tr": "600.000 testi elle taşımadan JUnit 5'e geçmek",
+      "url": "https://www.uber.com/blog/junit-migration/",
+      "published": "2026-04-07",
+      "summary": "Uber'in Java monorepo'sunda test paketinin ana çerçevesi JUnit 4'tü. Çalışıyordu, ama sekiz yıl önce çıkan JUnit 5'in yeteneklerini kullanmalarını engelliyordu — ve JUnit 4'ün aktif geliştirmesi 2021'de durmuştu, yani hata düzeltmeleri ve güvenlik yamaları da gelmiyordu.\n\nÖlçek şu: **15 milyon satır kodda 600.000'den fazla JUnit 4 testi.** Elle göç, geliştiricilerin Jupiter API'sini öğrenmesini ve özel test paketlerini taşımasını gerektirecekti — devasa bir mühendislik saati. Üstüne Uber Bazel kullanıyor ve Bazel'ın yerel JUnit 5 desteği yoktu. Yani problem hem teknik hem kültüreldi: geliştiricileri ikna etmek.\n\nSonuçlar: Bazel'da JUnit 5 desteği açılmış ve tüm test modülleri JUnit Platform'a alınmış (Vintage ve Jupiter motorlarıyla JUnit 4 ve 5 birlikte destekleniyor). **4 ay içinde 75.000'den fazla test sınıfı** taşınmış, 1,25 milyondan fazla satır değiştirilmiş, 5.000'den fazla otomatik değişiklik seti üretilmiş.",
+      "key_points": [
+        "Anahtar tasarım kararı: iki çerçeveyi aynı anda çalıştırabilmek (Vintage + Jupiter). Böylece göç tek seferde değil aşamalı yapılabiliyor.",
+        "Göç merkezîleştirilmiş — her ekibe \"kendi testlerinizi taşıyın\" demek yerine tek bir ekip otomatik dönüşüm yazmış.",
+        "Kültürel boyut teknik boyut kadar açıkça ele alınmış."
+      ],
+      "why_it_matters": "Büyük göçlerin başarısızlık sebebi genelde teknik değil, koordinasyon. \"Herkes kendi parçasını taşısın\" yaklaşımı yıllarca sürüncemede kalan yarım göçler üretir. Uber'in yaptığı şey — bir kere otomasyon yaz, merkezden uygula, geçiş döneminde ikisini birlikte çalıştır — her ölçekte doğru desendir.",
+      "for_you": "Bu, Java tarafında doğrudan uygulayabileceğin bir yazı. Kendi projelerinde bile aynı deseni kullan: bir kütüphane sürümü yükseltirken \"hepsini bir seferde değiştir\" yerine köprü katmanı kurup aşamalı geç. Ayrıca **OpenRewrite** gibi araçları öğren — Java'da otomatik kod dönüşümü yapan, tam da Uber'in yaptığı işi yapan araçlardır. Mülakatta \"600.000 testi nasıl taşırsın?\" sorusuna \"elle taşımam, dönüşüm kuralı yazar ve iki çerçeveyi bir süre birlikte çalıştırırım\" diyebilmek çok güçlü bir cevaptır.",
+      "terms": [
+        {
+          "en": "monorepo",
+          "tr": "tek depo",
+          "definition": "Bir şirketin tüm projelerini tek bir sürüm kontrol deposunda tutması."
+        },
+        {
+          "en": "Bazel",
+          "tr": "Bazel",
+          "definition": "Google kaynaklı, büyük monorepo'lar için tasarlanmış derleme ve test aracı."
+        },
+        {
+          "en": "codemod",
+          "tr": "otomatik kod dönüşümü",
+          "definition": "Kaynak kodu programatik olarak analiz edip toplu şekilde değiştiren betik ya da araç."
+        }
+      ],
+      "tags": [
+        "Java",
+        "test",
+        "göç",
+        "otomasyon"
+      ],
+      "difficulty": "orta",
+      "read_minutes": 11,
+      "authors": []
+    }
+  ],
+  "schema": 1
+}

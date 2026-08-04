@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m %}
+
+{% block title %}{{ site.title }} — {{ edition.date_short }}{% endblock %}
+{% block description %}{{ edition.intro or site.tagline }}{% endblock %}
+
+{% block content %}
+<div class="wrap">
+
+  <div class="dateline">
+    <span class="dateline-date">{{ edition.date_tr }}</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">{{ edition.articles | length }} yazı</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">{{ edition.sources | join(', ') }}</span>
+  </div>
+
+  {{ m.edition_body(edition) }}
+
+  {% if recent %}
+  <section class="section">
+    <h2 class="section-title"><span>Önceki Sayılar</span></h2>
+    <div class="prev-grid">
+      {% for e in recent %}
+      <a class="prev-card" href="{{ e.path }}">
+        <span class="prev-date">{{ e.date_short }}</span>
+        <span class="prev-title">{{ e.cover.title_tr if e.cover else '—' }}</span>
+        <span class="prev-count">{{ e.articles | length }} yazı · {{ e.sources | length }} kaynak</span>
+      </a>
+      {% endfor %}
+    </div>
+    <p class="center"><a class="btn" href="/arsiv/">Tüm arşivi gör</a></p>
+  </section>
+  {% endif %}
+
+</div>
+{% endblock %}

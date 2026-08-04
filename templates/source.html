@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m %}
+
+{% block title %}{{ source.name }} — {{ site.title }}{% endblock %}
+{% block description %}{{ source.name }} kaynağından çıkan {{ rows | length }} özet.{% endblock %}
+{% block canonical %}/kaynak/{{ source.key }}/{% endblock %}
+
+{% block content %}
+<div class="wrap">
+
+  <header class="page-head" style="--brand: {{ source.color }}">
+    <span class="page-kicker">Kaynak</span>
+    <h1 class="page-title brand-underline">{{ source.name }}</h1>
+    <p class="page-sub">{{ source.focus | capitalize }}</p>
+    <p class="page-sub">
+      {{ rows | length }} özet ·
+      <a href="{{ source.site }}" rel="noopener nofollow" target="_blank">Orijinal blog →</a>
+    </p>
+  </header>
+
+  <ul class="rowlist">
+    {% for e, a in rows %}
+    <li class="row">
+      <a class="row-link" href="/sayi/{{ e.date }}/#{{ a.id }}">
+        <span class="row-date">{{ a.published_tr }}</span>
+        <span class="row-body">
+          <strong>{{ a.title_tr }}</strong>
+          <span class="row-orig">{{ a.title }}</span>
+          <span class="row-sum">{{ a.summary | plain | truncate(180, true, '…') }}</span>
+        </span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+
+</div>
+{% endblock %}

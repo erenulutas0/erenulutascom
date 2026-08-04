@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>24 Temmuz 2026 — Eren&#39;in Mühendislik Gazetesi</title>
+<meta name="description" content="Bugün tek yazı var ama iyisinden: Cloudflare internetin yönlendirme protokolünde kimsenin bakmadığı bir alana bakmış ve yolların %70&#39;inde beklenmedik bir şey bulmuş. Yanına arşivden Uber&#39;in Go performans yazısını koydum — ikisi de aynı türden bir iş: kimsenin bakmadığı yere bakmak.">
+<meta name="author" content="Eren Ulutaş">
+<meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:title" content="24 Temmuz 2026 — Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:description" content="Bugün tek yazı var ama iyisinden: Cloudflare internetin yönlendirme protokolünde kimsenin bakmadığı bir alana bakmış ve yolların %70&#39;inde beklenmedik bir şey bulmuş. Yanına arşivden Uber&#39;in Go performans yazısını koydum — ikisi de aynı türden bir iş: kimsenin bakmadığı yere bakmak.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<link rel="canonical" href="https://erenulutas.com/sayi/2026-07-24/">
+<link rel="alternate" type="application/rss+xml" title="Eren&#39;in Mühendislik Gazetesi" href="/feed.xml">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+<script>
+  // Tema tercihini ilk boyamadan önce uygula (flash olmasın)
+  (function () {
+    try {
+      var t = localStorage.getItem('tema');
+      if (t) document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip" href="#icerik">İçeriğe geç</a>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <div class="masthead-brand">
+      <a href="/" class="logo">
+        <span class="logo-mark">EU</span>
+        <span class="logo-text">
+          <strong>Eren&#39;in Mühendislik Gazetesi</strong>
+          <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
+        </span>
+      </a>
+    </div>
+    <nav class="masthead-nav" aria-label="Ana menü">
+      <a href="/">Bugün</a>
+      <a href="/arsiv/">Arşiv</a>
+      <a href="/ara/">Ara</a>
+      <a href="/hakkinda/">Hakkında</a>
+      <button id="tema" class="tema" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+        <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/></g></svg>
+        <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="icerik">
+<div class="wrap">
+
+  <div class="dateline">
+    <span class="dateline-date">24 Temmuz 2026, Cuma</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">2 yazı</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">Cloudflare Blog, Uber Engineering</span>
+  </div>
+
+    <div class="editor-note">
+    <span class="label">Editörden</span>
+    <p>Bugün tek yazı var ama iyisinden: Cloudflare internetin yönlendirme protokolünde kimsenin bakmadığı bir alana bakmış ve yolların %70&#x27;inde beklenmedik bir şey bulmuş. Yanına arşivden Uber&#x27;in Go performans yazısını koydum — ikisi de aynı türden bir iş: kimsenin bakmadığı yere bakmak.</p>
+  </div>
+
+    <article class="cover" id="841fc0d10187">
+  <div class="cover-head">
+    <span class="kicker">Günün Kapağı</span>
+    <div class="meta">
+    <a class="badge" href="/kaynak/cloudflare/"
+     style="--brand: #F6821F">Cloudflare Blog</a>
+
+<span class="meta-item">24 Temmuz 2026</span><span class="meta-item">10 dk okuma</span>  <span class="meta-item level level-ileri">ileri</span>
+</div>
+
+  </div>
+  <h2 class="cover-title">
+    <a href="https://blog.cloudflare.com/bgp-origin-attribute/" rel="noopener nofollow" target="_blank">İnternetin yolları neden beklendiği gibi çalışmıyor: BGP ORIGIN bulgusu</a>
+  </h2>
+  <p class="original-title">BGP ORIGIN attribute manipulation and its impact on the Internet · Iliana Xygkou, Bryton Herdes</p>
+
+  <div class="prose"><p><strong>BGP</strong> (Border Gateway Protocol) internetin fiili yönlendirme protokolü. Otonom Sistemler (AS) — yani internet servis sağlayıcıları, bulut sağlayıcıları, büyük şirketler — trafiği nasıl gönderip almak istediklerini bu protokolle ifade eder. Bunun için <strong>yol nitelikleri</strong> (path attributes) kullanılır; yol seçim algoritması bu nitelikleri belirli bir sırayla işleyip en iyi yolu hesaplar.</p><p>Cloudflare bu niteliklerden birine, zorunlu olan <strong>ORIGIN</strong>&#x27;e bakmış. ORIGIN her BGP duyurusunda bulunmak zorunda ve kural şu: onu duyuran yönlendirici bir kez ayarladıktan sonra hiçbir yönlendirici bunu değiştirmemeli.</p><p>Bulgu çarpıcı: çok sayıda gözlem noktasında görülen yolların <strong>yaklaşık %70&#x27;inde</strong> ORIGIN değeri, onu duyuran otonom sistemin ayarladığından farklı. Yani spesifikasyonun &quot;değiştirilmemeli&quot; dediği alan, pratikte yaygın olarak değiştiriliyor.</p><p>Bunun somut bir sonucu var. BGP yol seçiminde iki yolun Local Preference değeri ve AS_PATH uzunluğu eşitse, yönlendirici <strong>daha düşük ORIGIN değerine sahip</strong> yolu seçer. Yani sessizce değiştirilen bu alan, trafiğin internette hangi yoldan aktığını doğrudan etkiliyor.</p></div>
+
+  <div class="keypoints">
+    <h4 class="label">Öne çıkanlar</h4>
+    <ul>
+<li>ORIGIN üç değer alır: IGP (0), EGP (1, artık kullanılmayan eski protokol), INCOMPLETE (2).</li><li>Halka açık BGP toplayıcılarında dağılım: %89,8 IGP, %3,5 EGP, %6,7 INCOMPLETE.</li><li>Spesifikasyonun &quot;değiştirilmemeli&quot; dediği bir alanın %70 oranında değiştirilmesi, standart ile pratik arasındaki mesafenin iyi bir örneği.</li><li>Etki teorik değil: eşitlik durumunda yol seçimini bu alan belirliyor.</li>    </ul>
+  </div>
+
+  <div class="callouts">
+    <div class="callout callout-why">
+      <h4 class="label">Neden önemli?</h4>
+      <p>Bu yazı bir mühendislik alışkanlığı öğretiyor: <strong>spesifikasyonun ne dediğine değil, sistemin ne yaptığına bak.</strong> Cloudflare&#x27;in avantajı özel bir zekâ değil, ölçüm yapabildiği bir konum — internetin geniş bir kesitini görebiliyorlar ve bu kesite bakmayı akıl ettiler. Kendi sistemlerinde de en değerli bulgular genelde &quot;herkesin doğru varsaydığı şeyi ölçtüm&quot; cümlesiyle başlar.</p>
+    </div>
+    <div class="callout callout-you">
+      <h4 class="label">Sende karşılığı</h4>
+      <p>Doğrudan BGP ile çalışmayacaksın, ama iki şey işine yarar. Birincisi kavram: internet trafiğinin yolu tek bir otoritenin kararı değil, binlerce bağımsız sistemin tercihlerinin bileşimi — &quot;neden bu sunucuya gecikme yüksek?&quot; sorusunun cevabı bazen senin kodunda değil burada. İkincisi yöntem: Tradebot&#x27;ta bir varsayımın (&quot;borsa verisi her zaman sıralı gelir&quot;, &quot;timestamp&#x27;ler hep artan&quot;) doğru olduğunu test etmeden kabul ediyorsan, Cloudflare&#x27;in yaptığını küçük ölçekte yap — ölç ve dağılıma bak. Sistemlerdeki en pahalı hatalar, doğrulanmamış varsayımlardan çıkar.</p>
+    </div>
+  </div>
+
+  <div class="terms">
+  <h4 class="label">Sözlük</h4>
+  <dl>
+    <div class="term">
+      <dt><span class="term-en">BGP (Border Gateway Protocol)</span> <span class="term-tr">sınır ağ geçidi protokolü</span></dt>
+      <dd>İnternetteki bağımsız ağların birbirine hangi yolların üzerinden ulaşılacağını duyurduğu yönlendirme protokolü.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">Autonomous System (AS)</span> <span class="term-tr">otonom sistem</span></dt>
+      <dd>Tek bir kurumun yönettiği, kendi yönlendirme politikası olan ağ; internet bunların birleşimidir.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">path attribute</span> <span class="term-tr">yol niteliği</span></dt>
+      <dd>Bir BGP duyurusuna eklenen ve yol seçimini etkileyen metadata alanı.</dd>
+    </div>
+  </dl>
+</div>
+
+
+  <div class="article-foot">
+    <ul class="tags">
+  <li><a href="/etiket/ag/">#ağ</a></li>
+  <li><a href="/etiket/internet-altyapisi/">#internet altyapısı</a></li>
+  <li><a href="/etiket/protokol/">#protokol</a></li>
+</ul>
+
+    <a class="readmore" href="https://blog.cloudflare.com/bgp-origin-attribute/" rel="noopener nofollow" target="_blank">
+      Orijinali oku <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+
+
+
+  <section class="section">
+    <h2 class="section-title"><span>Arşivden Seçmeler</span></h2>
+    <p class="section-note">
+      Bugün az yayın çıktı. Bu yazılar daha eski tarihli ama hâlâ öğretici —
+      her birinin gerçek yayın tarihi başlığın üstünde yazıyor.
+    </p>
+    <div class="grid">
+<article class="brief brief-archive" id="0f59dbf1e833">
+  <div class="meta">
+    <span class="kicker kicker-sm">Arşivden</span>
+      <a class="badge" href="/kaynak/uber/"
+     style="--brand: #000000">Uber Engineering</a>
+
+    <span class="meta-item">7 Mayıs 2026</span>
+<span class="meta-item">8 dk</span>    <span class="meta-item level level-ileri">ileri</span>
+  </div>
+  <h3 class="brief-title">
+    <a href="https://www.uber.com/blog/zero-growth-stack/" rel="noopener nofollow" target="_blank">Go&#39;da yığın büyümesini engelleyerek %10 CPU kazanmak</a>
+  </h3>
+  <p class="original-title">Zero-Growth Stack, Real Gains: How Stack Allocation Can Save 10% CPU in Go</p>
+  <div class="prose prose-sm"><p>Uber&#x27;de servislerin yaklaşık %65&#x27;i Go ile çalışıyor ve bu 2 milyondan fazla çekirdeğe denk geliyor. Bu ölçekte genel bir %1 verimlilik iyileşmesi birkaç milyon dolar demek. Yazı bir servisin kullanımını %10 iyileştirmelerini anlatıyor.</p><p>Problem Go çalışma zamanının bir takasından geliyor. Goroutine&#x27;ler (thread&#x27;lerin hafif alternatifi) küçük bir yığınla (<strong>stack</strong>) başlar — OS thread&#x27;lerinden çok daha fazla eşzamanlılık sağlamak için. Ama ayrılan boyut yetmezse Go özel bir kontrol yapar: <strong>iki katı</strong> büyüklükte yeni bir yığın oluşturur ve eskisinin içeriğini kopyalar (<code>runtime.morestack</code>). Bellek kullanımını düşük tutan bu mekanizma, ölçekte CPU&#x27;ya pahalıya patlıyor.</p><p>Go 1.19 uyarlanabilir yığın boyutu getirmiş: ortalama yığın kullanımını takip edip başlangıç boyutunu ona göre ayarlıyor. Kısmen iyileştirmiş ama hâlâ pahalı olabiliyor. Uber&#x27;in denediği alternatiflerden biri goroutine havuzlama — tek sorumluluğu olan worker havuzlarında çok iyi çalışıyor.</p></div>
+
+  <ul class="keypoints-inline">
+<li>Bellek ile CPU arasındaki takas: küçük başlayan yığın belleği korur ama tekrarlanan genişleme CPU yakar.</li><li>Çözüm yığını istenen boyutta önceden ayırmak (preallocation) — tekrarlanan kopyalamayı ortadan kaldırıyor.</li><li>Ölçek argümanı net: %1 verimlilik = milyonlarca dolar. Optimizasyonun değeri her zaman ölçeğe bağlı.</li>  </ul>
+
+  <div class="callout callout-you callout-sm">
+    <h4 class="label">Sende karşılığı</h4>
+    <p>Java tarafında bunun birebir karşılığı var ve senin işine daha yakın: JVM&#x27;de thread stack boyutu (<code>-Xss</code>), heap boyutu ve GC seçimi de aynı türden varsayılanlardır. Spring Boot uygulaman ölçeklenmeye başladığında &quot;neden bu kadar CPU yiyor?&quot; sorusunun cevabı kodda değil, çalışma zamanı ayarlarında olabilir. Ama yazının asıl dersi sıralama: Uber önce <strong>profilledi</strong>, sonra optimize etti. Sen de <code>async-profiler</code> ya da JFR ile alev grafiği (flame graph) çıkarmadan hiçbir şeyi optimize etme — tahminle yapılan optimizasyon genelde yanlış yeri düzeltir.</p>
+  </div>
+
+  <div class="terms">
+  <h4 class="label">Sözlük</h4>
+  <dl>
+    <div class="term">
+      <dt><span class="term-en">goroutine</span> <span class="term-tr">goroutine</span></dt>
+      <dd>Go&#39;nun hafif eşzamanlılık birimi; işletim sistemi thread&#39;inden çok daha ucuz.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">stack growth</span> <span class="term-tr">yığın büyümesi</span></dt>
+      <dd>Fonksiyon çağrı yığını ayrılan alanı aşınca daha büyük bir alan ayrılıp içeriğin kopyalanması.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">preallocation</span> <span class="term-tr">önceden ayırma</span></dt>
+      <dd>İhtiyaç duyulacak alanı baştan ayırarak sonradan büyütme maliyetinden kaçınma.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">flame graph</span> <span class="term-tr">alev grafiği</span></dt>
+      <dd>CPU zamanının hangi fonksiyonlarda geçtiğini gösteren, profilleme çıktısını görselleştiren grafik.</dd>
+    </div>
+  </dl>
+</div>
+
+
+  <div class="article-foot">
+    <ul class="tags">
+  <li><a href="/etiket/performans/">#performans</a></li>
+  <li><a href="/etiket/go/">#Go</a></li>
+  <li><a href="/etiket/profilleme/">#profilleme</a></li>
+  <li><a href="/etiket/maliyet/">#maliyet</a></li>
+</ul>
+
+    <a class="readmore" href="https://www.uber.com/blog/zero-growth-stack/" rel="noopener nofollow" target="_blank">
+      Orijinali oku <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+    </div>
+  </section>
+
+
+  <nav class="pager" aria-label="Sayılar arası gezinme">
+    <a class="pager-link pager-prev" href="/sayi/2026-07-23/">
+      <span class="pager-label">← Önceki sayı</span>
+      <span class="pager-title">23 Temmuz 2026</span>
+    </a>
+
+    <a class="pager-mid" href="/arsiv/">Arşiv</a>
+
+    <a class="pager-link pager-next" href="/sayi/2026-07-27/">
+      <span class="pager-label">Sonraki sayı →</span>
+      <span class="pager-title">27 Temmuz 2026</span>
+    </a>
+  </nav>
+
+</div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-col">
+      <h3>Eren&#39;in Mühendislik Gazetesi</h3>
+      <p class="muted">
+        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını her gün derleyip
+        Türkçe özetleyen kişisel bir gazete. Özetler yeni mezun bir mühendisin
+        anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
+      </p>
+      <p class="muted small">
+        69 özet · 22 sayı ·
+        11 kaynak
+      </p>
+    </div>
+    <div class="footer-col">
+      <h3>Kaynaklar</h3>
+      <ul class="footer-sources">
+        <li><a href="https://www.uber.com/blog/engineering/" rel="noopener nofollow" target="_blank">Uber Engineering</a></li>
+        <li><a href="https://netflixtechblog.com" rel="noopener nofollow" target="_blank">Netflix Tech Blog</a></li>
+        <li><a href="https://aws.amazon.com/blogs/architecture/" rel="noopener nofollow" target="_blank">AWS Architecture Blog</a></li>
+        <li><a href="https://blog.cloudflare.com" rel="noopener nofollow" target="_blank">Cloudflare Blog</a></li>
+        <li><a href="https://stripe.com/blog" rel="noopener nofollow" target="_blank">Stripe Engineering</a></li>
+        <li><a href="https://www.databricks.com/blog" rel="noopener nofollow" target="_blank">Databricks Engineering</a></li>
+        <li><a href="https://engineering.fb.com" rel="noopener nofollow" target="_blank">Meta Engineering</a></li>
+        <li><a href="https://openai.com/news/" rel="noopener nofollow" target="_blank">OpenAI Research</a></li>
+        <li><a href="https://www.anthropic.com/engineering" rel="noopener nofollow" target="_blank">Anthropic Engineering</a></li>
+        <li><a href="https://research.google/blog/" rel="noopener nofollow" target="_blank">Google Research</a></li>
+        <li><a href="https://cloud.google.com/blog/" rel="noopener nofollow" target="_blank">Google Cloud Blog</a></li>
+        <li><a href="https://devblogs.microsoft.com/engineering-at-microsoft/" rel="noopener nofollow" target="_blank">Microsoft Engineering</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Eren Ulutaş</h3>
+      <ul class="footer-links">
+        <li><a href="https://github.com/erenulutas0" rel="me noopener" target="_blank">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/eren-u-55918a2a0" rel="me noopener" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:eerenulutass@gmail.com">E-posta</a></li>
+        <li><a href="/feed.xml">RSS</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-legal">
+    <p class="muted small">
+      Tüm özetler kaynak makalelere bağlıdır; telif orijinal yazarlara aittir.
+      Bu site yalnızca özet ve yönlendirme sunar. © 2026 Eren Ulutaş.
+    </p>
+  </div>
+</footer>
+
+<script src="/static/app.js" defer></script>
+</body>
+</html>

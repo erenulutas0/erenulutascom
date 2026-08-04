@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7 Temmuz 2026 — Eren&#39;in Mühendislik Gazetesi</title>
+<meta name="description" content="Arşivin ilk günü. Üç yazı da aynı temayı taşıyor: bireysel olarak en iyi karar, sistem için en iyi karar olmayabilir. Felaket kurtarmada, trafikte ve log incelemesinde — üçünde de kazanan, bütüne bakan taraf.">
+<meta name="author" content="Eren Ulutaş">
+<meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:title" content="7 Temmuz 2026 — Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:description" content="Arşivin ilk günü. Üç yazı da aynı temayı taşıyor: bireysel olarak en iyi karar, sistem için en iyi karar olmayabilir. Felaket kurtarmada, trafikte ve log incelemesinde — üçünde de kazanan, bütüne bakan taraf.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<link rel="canonical" href="https://erenulutas.com/sayi/2026-07-07/">
+<link rel="alternate" type="application/rss+xml" title="Eren&#39;in Mühendislik Gazetesi" href="/feed.xml">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+<script>
+  // Tema tercihini ilk boyamadan önce uygula (flash olmasın)
+  (function () {
+    try {
+      var t = localStorage.getItem('tema');
+      if (t) document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip" href="#icerik">İçeriğe geç</a>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <div class="masthead-brand">
+      <a href="/" class="logo">
+        <span class="logo-mark">EU</span>
+        <span class="logo-text">
+          <strong>Eren&#39;in Mühendislik Gazetesi</strong>
+          <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
+        </span>
+      </a>
+    </div>
+    <nav class="masthead-nav" aria-label="Ana menü">
+      <a href="/">Bugün</a>
+      <a href="/arsiv/">Arşiv</a>
+      <a href="/ara/">Ara</a>
+      <a href="/hakkinda/">Hakkında</a>
+      <button id="tema" class="tema" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+        <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/></g></svg>
+        <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="icerik">
+<div class="wrap">
+
+  <div class="dateline">
+    <span class="dateline-date">7 Temmuz 2026, Salı</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">3 yazı</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">AWS Architecture Blog, Google Research, OpenAI Research</span>
+  </div>
+
+    <div class="editor-note">
+    <span class="label">Editörden</span>
+    <p>Arşivin ilk günü. Üç yazı da aynı temayı taşıyor: bireysel olarak en iyi karar, sistem için en iyi karar olmayabilir. Felaket kurtarmada, trafikte ve log incelemesinde — üçünde de kazanan, bütüne bakan taraf.</p>
+  </div>
+
+    <article class="cover" id="809dfe9de096">
+  <div class="cover-head">
+    <span class="kicker">Günün Kapağı</span>
+    <div class="meta">
+    <a class="badge" href="/kaynak/aws-architecture/"
+     style="--brand: #FF9900">AWS Architecture Blog</a>
+
+<span class="meta-item">7 Temmuz 2026</span><span class="meta-item">7 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
+</div>
+
+  </div>
+  <h2 class="cover-title">
+    <a href="https://aws.amazon.com/blogs/architecture/sp-globals-innovative-disaster-recovery-strategy-using-amazon-fsx-for-netapp-ontap-snapshots/" rel="noopener nofollow" target="_blank">Felaket kurtarmada ara mod: salt-okunur devretme</a>
+  </h2>
+  <p class="original-title">S&amp;P Global’s innovative disaster recovery strategy using Amazon FSx for NetApp ONTAP snapshots · Nishanth Charlakola</p>
+
+  <div class="prose"><p>Kuruluşların karmaşık SQL Server altyapıları için yüksek erişilebilirlik ve felaket kurtarma (HA/DR) çözümleri kurma zorunluluğu var — veri erişilebilirliğini ve bütünlüğünü korumak için. S&amp;P Global Market Intelligence, Capital IQ platformu için bunu Amazon FSx for NetApp ONTAP üzerine kurmuş.</p><p>Çözümün en öğretici kısmı ikili bir seçim yerine <strong>ara bir mod</strong> sunması: ikincil bölgede <strong>salt-okunur moda anında devretme</strong> (failover). Yani felaket anında sistem ya tamamen çalışıyor ya tamamen kapalı değil — okuma yapılabilen, yazma yapılamayan bir orta hâlde ayakta kalıyor.</p><p>Bu ayrım pratikte çok değerli. Çoğu iş yükünde okuma trafiği yazmadan kat kat fazladır; salt-okunur bir sistem kullanıcıların büyük kısmına hizmet vermeye devam eder. Ayrıca yazmayı kapatmak, bölünmüş beyin (split-brain) riskini ortadan kaldırır — iki bölge aynı anda yazarsa veriyi uzlaştırmak çok daha zor bir problemdir.</p><p>Yazı ayrıca bulut göçlerinde kavram kanıtının (POC) rolüne değiniyor: standart belirlemek, riski azaltmak ve hızı korurken iş ve teknik doğrulama yapmak.</p></div>
+
+  <div class="keypoints">
+    <h4 class="label">Öne çıkanlar</h4>
+    <ul>
+<li>&quot;Açık ya da kapalı&quot; yerine kademeli hizmet seviyeleri tasarlamak, dayanıklılığın en pratik biçimi.</li><li>Anlık görüntü (snapshot) tabanlı replikasyon, tam yedekten çok daha hızlı devretme sağlıyor.</li><li>Salt-okunur devretme, veri tutarlılığını koruma açısından da güvenli: çift yazma riski yok.</li>    </ul>
+  </div>
+
+  <div class="callouts">
+    <div class="callout callout-why">
+      <h4 class="label">Neden önemli?</h4>
+      <p>Felaket kurtarma planı olmayan sistem, sadece henüz felaket yaşamamış sistemdir. Ama iyi bir DR planının işareti &quot;her şeyi yedekliyoruz&quot; değil, <strong>RTO ve RPO hedeflerinin açıkça tanımlanmış olmasıdır</strong>: ne kadar sürede ayağa kalkmalıyız ve en fazla ne kadar veri kaybını kabul ediyoruz? Bu iki sayı verilmeden yapılan yatırım, ya yetersiz ya da gereksiz pahalı olur.</p>
+    </div>
+    <div class="callout callout-you">
+      <h4 class="label">Sende karşılığı</h4>
+      <p>Bu iki kısaltmayı ezberle, mülakatta çıkar: <strong>RTO</strong> (Recovery Time Objective) — kabul edilebilir kesinti süresi; <strong>RPO</strong> (Recovery Point Objective) — kabul edilebilir veri kaybı. KlioAI için sor: veritabanı bozulursa kaç saatlik kullanıcı verisini kaybetmeyi göze alabilirsin? Cevap &quot;hiç&quot; ise sürekli replikasyon gerekir; &quot;bir gün&quot; ise günlük yedek yeterlidir — ve maliyet farkı büyüktür. Bir de şunu yap: <strong>yedeğinden geri dönmeyi bir kere gerçekten dene.</strong> Test edilmemiş yedek, yedek değildir; bunu felaket anında öğrenmek en pahalı öğrenme biçimidir.</p>
+    </div>
+  </div>
+
+  <div class="terms">
+  <h4 class="label">Sözlük</h4>
+  <dl>
+    <div class="term">
+      <dt><span class="term-en">failover</span> <span class="term-tr">devretme</span></dt>
+      <dd>Ana sistem çalışamaz hâle geldiğinde hizmetin yedek sisteme geçirilmesi.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">RTO / RPO</span> <span class="term-tr">kurtarma süresi / kurtarma noktası hedefi</span></dt>
+      <dd>RTO ne kadar sürede ayağa kalkılacağını, RPO en fazla ne kadar veri kaybının kabul edildiğini tanımlar.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">split-brain</span> <span class="term-tr">bölünmüş beyin</span></dt>
+      <dd>İki düğümün birbirini görmeyip ikisinin de kendini lider sanması; çelişkili yazmalar üretir.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">snapshot</span> <span class="term-tr">anlık görüntü</span></dt>
+      <dd>Bir depolama biriminin belirli bir andaki durumunun hızlıca alınan kopyası.</dd>
+    </div>
+  </dl>
+</div>
+
+
+  <div class="article-foot">
+    <ul class="tags">
+  <li><a href="/etiket/felaket-kurtarma/">#felaket kurtarma</a></li>
+  <li><a href="/etiket/veritabani/">#veritabanı</a></li>
+  <li><a href="/etiket/mimari/">#mimari</a></li>
+  <li><a href="/etiket/dayaniklilik/">#dayanıklılık</a></li>
+</ul>
+
+    <a class="readmore" href="https://aws.amazon.com/blogs/architecture/sp-globals-innovative-disaster-recovery-strategy-using-amazon-fsx-for-netapp-ontap-snapshots/" rel="noopener nofollow" target="_blank">
+      Orijinali oku <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+
+
+  <section class="section">
+    <h2 class="section-title"><span>Kısa Kısa</span></h2>
+    <div class="grid">
+<article class="brief" id="d4a5348e5d11">
+  <div class="meta">
+    <a class="badge" href="/kaynak/google-research/"
+     style="--brand: #4285F4">Google Research</a>
+
+<span class="meta-item">7 Temmuz 2026</span><span class="meta-item">4 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
+</div>
+
+  <h3 class="brief-title">
+    <a href="https://research.google/blog/the-power-of-collaboration-how-we-can-reduce-traffic-congestion/" rel="noopener nofollow" target="_blank">Herkes en kısa yolu seçerse herkes gecikir: ağ-farkında yönlendirme</a>
+  </h3>
+  <p class="original-title">The power of collaboration: How we can reduce traffic congestion</p>
+  <div class="prose prose-sm"><p>Google Research, Nature Cities&#x27;te yayımlanan çalışmasında navigasyon platformlarının trafiği iyileştirmek için kullanılmasına dair ilk büyük ölçekli gerçek dünya araştırmasını sunuyor. Bulgu: sürücülerin <strong>küçük bir kısmını</strong> bile koordine etmek ağ verimliliğini iyileştiriyor.</p><p>Yazının açtığı soru bir mühendis için çok tanıdık: karayolu trafiği, havacılığın hava sahasını ya da internetin veri paketlerini yönettiği gibi sistem çapında yönetilebilir mi? Kara ulaşımının tarihsel olarak fiziksel bir kontrol kulesi olmadı, ama dijital platformlar daha koordineli bir geleceğin kapısını aralıyor.</p><p>Altta yatan kavram bilgisayar biliminde iyi bilinen bir sonuç: her aktör kendi için en iyi yolu seçtiğinde ortaya çıkan denge, sistem için en iyi çözümden <strong>daha kötü</strong> olabilir.</p></div>
+
+  <ul class="keypoints-inline">
+<li>Bireysel optimum ile toplam optimum aynı değil — trafikte, ağ yönlendirmesinde ve kaynak paylaşımında hep böyle.</li><li>Küçük bir azınlığı koordine etmek bile ölçülebilir kazanç veriyor; herkesi ikna etmek gerekmiyor.</li>  </ul>
+
+  <div class="callout callout-you callout-sm">
+    <h4 class="label">Sende karşılığı</h4>
+    <p>Bu, dağıtık sistemlerde doğrudan karşına çıkacak bir olgu. Klasik örnek: bir servis hata alınca hemen yeniden dener. Her istemci için makul olan bu davranış, hepsi aynı anda yaptığında zaten zorlanan sunucuyu tamamen düşürür — <strong>retry storm</strong>. Çözümler tam olarak &quot;koordinasyon&quot; fikrinden geliyor: üstel geri çekilme, rastgele <strong>jitter</strong> eklemek ve devre kesici (circuit breaker). Kod yazarken &quot;benim isteğim için en iyisi ne?&quot; yerine &quot;herkes bunu yaparsa ne olur?&quot; diye sormayı alışkanlık hâline getir — bu tek soru, ölçeklenebilir sistem tasarımının önemli bir kısmını kapsıyor.</p>
+  </div>
+
+  <div class="terms">
+  <h4 class="label">Sözlük</h4>
+  <dl>
+    <div class="term">
+      <dt><span class="term-en">selfish routing</span> <span class="term-tr">bencil yönlendirme</span></dt>
+      <dd>Her aktörün yalnızca kendi maliyetini düşünerek yol seçmesi; toplam verimliliği düşürebilir.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">retry storm</span> <span class="term-tr">yeniden deneme fırtınası</span></dt>
+      <dd>Çok sayıda istemcinin aynı anda yeniden denemesiyle zaten zorlanan sistemin tamamen çökmesi.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">jitter</span> <span class="term-tr">rastgele sapma</span></dt>
+      <dd>Yeniden deneme sürelerine eklenen rastgelelik; istemcilerin aynı anda tekrar denemesini önler.</dd>
+    </div>
+  </dl>
+</div>
+
+
+  <div class="article-foot">
+    <ul class="tags">
+  <li><a href="/etiket/optimizasyon/">#optimizasyon</a></li>
+  <li><a href="/etiket/arastirma/">#araştırma</a></li>
+  <li><a href="/etiket/sistem-tasarimi/">#sistem tasarımı</a></li>
+</ul>
+
+    <a class="readmore" href="https://research.google/blog/the-power-of-collaboration-how-we-can-reduce-traffic-congestion/" rel="noopener nofollow" target="_blank">
+      Orijinali oku <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+<article class="brief" id="60d1b56766e3">
+  <div class="meta">
+    <a class="badge" href="/kaynak/openai/"
+     style="--brand: #000000">OpenAI Research</a>
+
+<span class="meta-item">7 Temmuz 2026</span><span class="meta-item">4 dk okuma</span>  <span class="meta-item level level-baslangic">başlangıç</span>
+</div>
+
+  <h3 class="brief-title">
+    <a href="https://openai.com/index/australian-payments-plus" rel="noopener nofollow" target="_blank">4 saatlik mutabakat incelemesi 30 dakikaya: log izinde zaman damgası tutarsızlığı</a>
+  </h3>
+  <p class="original-title">Australian Payments Plus moves faster with ChatGPT and Codex</p>
+  <div class="prose prose-sm"><p>Australian Payments Plus (AP+) Avustralya&#x27;da ödeme ve kimlik altyapısı işletiyor. Ekipleri şema kuralları, teknik spesifikasyonlar, üye yükümlülükleri, operasyonel süreçler, siber güvenlik ve düzenleyici beklentiler arasında çalışıyor — hızın önemli olduğu ama doğruluk ve hesap verebilirliğin daha önemli olduğu bir alan.</p><p>Paylaşılan en somut örnek bir hata ayıklama vakası: bir mutabakat (reconciliation) sorununda ekipler, sistem logları ve mutabakat verisi arasında <strong>ince bir zaman damgası tutarsızlığını</strong> izlemek için Codex kullanmış. Günlerce sürebilecek elle inceleme <strong>30 dakikaya</strong> inmiş — önceki süre 4 saat olarak veriliyor.</p><p>Diğer sayılar: çalışanların %77&#x27;si haftada 2+ saat tasarruf bildiriyor, %80&#x27;i yaratıcılık ya da iş kalitesinde iyileşme belirtiyor.</p></div>
+
+  <ul class="keypoints-inline">
+<li>En değerli kullanım karmaşık yaratıcı iş değil, <strong>sıkıcı ve hacimli</strong> iş: çok sayıda log satırında bir tutarsızlık aramak.</li><li>Ödeme sistemlerinde zaman damgası tutarsızlıkları klasik bir hata kaynağı — saat dilimi, saat kayması, sıralama.</li>  </ul>
+
+  <div class="callout callout-you callout-sm">
+    <h4 class="label">Sende karşılığı</h4>
+    <p>Buradaki hata sınıfını tanı: <strong>zaman damgası tutarsızlığı</strong>. Tradebot&#x27;ta bunu mutlaka yaşamışsındır — borsa saati mi, sunucu saati mi, UTC mi? Kural basit ama sürekli ihlal edilir: <strong>her zaman damgasını UTC olarak sakla, yalnızca gösterirken yerel saate çevir.</strong> PostgreSQL&#x27;de <code>timestamptz</code> kullan, <code>timestamp</code> değil; Java&#x27;da <code>Instant</code> kullan, <code>LocalDateTime</code> değil. İkinci ders ise LLM kullanımıyla ilgili: modeli &quot;bana kod yaz&quot; için değil, &quot;bu 50.000 satır logda tutarsızlığı bul&quot; için kullanmak çok daha yüksek getirili. İnsanın sıkıldığı, makinenin sıkılmadığı işler.</p>
+  </div>
+
+  <div class="terms">
+  <h4 class="label">Sözlük</h4>
+  <dl>
+    <div class="term">
+      <dt><span class="term-en">reconciliation</span> <span class="term-tr">mutabakat</span></dt>
+      <dd>İki ayrı sistemin kayıtlarının birbirini tutup tutmadığının karşılaştırılması (ör. banka kaydı ile iç kayıt).</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">clock skew</span> <span class="term-tr">saat kayması</span></dt>
+      <dd>Farklı sunucuların saatlerinin birbirinden sapması; olayların yanlış sırada görünmesine yol açar.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">UTC</span> <span class="term-tr">UTC</span></dt>
+      <dd>Saat dilimlerinden bağımsız evrensel zaman standardı; veri saklamanın doğru birimi.</dd>
+    </div>
+  </dl>
+</div>
+
+
+  <div class="article-foot">
+    <ul class="tags">
+  <li><a href="/etiket/hata-ayiklama/">#hata ayıklama</a></li>
+  <li><a href="/etiket/llm/">#LLM</a></li>
+  <li><a href="/etiket/odeme-sistemleri/">#ödeme sistemleri</a></li>
+  <li><a href="/etiket/operasyon/">#operasyon</a></li>
+</ul>
+
+    <a class="readmore" href="https://openai.com/index/australian-payments-plus" rel="noopener nofollow" target="_blank">
+      Orijinali oku <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+    </div>
+  </section>
+
+
+
+  <nav class="pager" aria-label="Sayılar arası gezinme">
+<span></span>
+    <a class="pager-mid" href="/arsiv/">Arşiv</a>
+
+    <a class="pager-link pager-next" href="/sayi/2026-07-08/">
+      <span class="pager-label">Sonraki sayı →</span>
+      <span class="pager-title">8 Temmuz 2026</span>
+    </a>
+  </nav>
+
+</div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-col">
+      <h3>Eren&#39;in Mühendislik Gazetesi</h3>
+      <p class="muted">
+        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını her gün derleyip
+        Türkçe özetleyen kişisel bir gazete. Özetler yeni mezun bir mühendisin
+        anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
+      </p>
+      <p class="muted small">
+        69 özet · 22 sayı ·
+        11 kaynak
+      </p>
+    </div>
+    <div class="footer-col">
+      <h3>Kaynaklar</h3>
+      <ul class="footer-sources">
+        <li><a href="https://www.uber.com/blog/engineering/" rel="noopener nofollow" target="_blank">Uber Engineering</a></li>
+        <li><a href="https://netflixtechblog.com" rel="noopener nofollow" target="_blank">Netflix Tech Blog</a></li>
+        <li><a href="https://aws.amazon.com/blogs/architecture/" rel="noopener nofollow" target="_blank">AWS Architecture Blog</a></li>
+        <li><a href="https://blog.cloudflare.com" rel="noopener nofollow" target="_blank">Cloudflare Blog</a></li>
+        <li><a href="https://stripe.com/blog" rel="noopener nofollow" target="_blank">Stripe Engineering</a></li>
+        <li><a href="https://www.databricks.com/blog" rel="noopener nofollow" target="_blank">Databricks Engineering</a></li>
+        <li><a href="https://engineering.fb.com" rel="noopener nofollow" target="_blank">Meta Engineering</a></li>
+        <li><a href="https://openai.com/news/" rel="noopener nofollow" target="_blank">OpenAI Research</a></li>
+        <li><a href="https://www.anthropic.com/engineering" rel="noopener nofollow" target="_blank">Anthropic Engineering</a></li>
+        <li><a href="https://research.google/blog/" rel="noopener nofollow" target="_blank">Google Research</a></li>
+        <li><a href="https://cloud.google.com/blog/" rel="noopener nofollow" target="_blank">Google Cloud Blog</a></li>
+        <li><a href="https://devblogs.microsoft.com/engineering-at-microsoft/" rel="noopener nofollow" target="_blank">Microsoft Engineering</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Eren Ulutaş</h3>
+      <ul class="footer-links">
+        <li><a href="https://github.com/erenulutas0" rel="me noopener" target="_blank">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/eren-u-55918a2a0" rel="me noopener" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:eerenulutass@gmail.com">E-posta</a></li>
+        <li><a href="/feed.xml">RSS</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-legal">
+    <p class="muted small">
+      Tüm özetler kaynak makalelere bağlıdır; telif orijinal yazarlara aittir.
+      Bu site yalnızca özet ve yönlendirme sunar. © 2026 Eren Ulutaş.
+    </p>
+  </div>
+</footer>
+
+<script src="/static/app.js" defer></script>
+</body>
+</html>

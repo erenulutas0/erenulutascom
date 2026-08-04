@@ -1,0 +1,26 @@
+# İndirilen ham HTML ve ara çıktılar — yeniden üretilebilir, depoya girmez
+.cache/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Ortam değişkenleri (ANTHROPIC_API_KEY buraya)
+.env
+
+# Kişisel veri — telefon ve adres içeriyor, depoya girmesin.
+# Siteden indirilebilir yapmak istersen static/ altına koyup bu satırı kaldır.
+Eren_CV.pdf
+
+# Editör / işletim sistemi
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# NOT: docs/ bilerek dahil ediliyor.
+# GitHub Actions siteyi kendisi üretiyor, ama docs/ depoda durursa
+# Actions çalışmadan da site elle yayınlanabilir.

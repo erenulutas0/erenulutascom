@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m %}
+
+{% block title %}Arşiv — {{ site.title }}{% endblock %}
+{% block description %}{{ stats.edition_count }} sayı, {{ stats.article_count }} özet. Tüm günlerin listesi.{% endblock %}
+{% block canonical %}/arsiv/{% endblock %}
+
+{% block content %}
+<div class="wrap">
+
+  <header class="page-head">
+    <h1 class="page-title">Arşiv</h1>
+    <p class="page-sub">
+      {{ stats.edition_count }} sayı · {{ stats.article_count }} özet ·
+      {{ stats.first_date | tr_date }} — {{ stats.last_date | tr_date }}
+    </p>
+  </header>
+
+  {% if stats.top_tags %}
+  <section class="section">
+    <h2 class="section-title"><span>Konular</span></h2>
+    <ul class="tagcloud">
+      {% for name, count in stats.top_tags %}
+      <li><a href="/etiket/{{ name | slugify }}/">{{ name }} <span class="count">{{ count }}</span></a></li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  <section class="section">
+    <h2 class="section-title"><span>Kaynaklar</span></h2>
+    <ul class="sourcegrid">
+      {% for s in sources %}
+      {% set c = stats.per_source.get(s.key, 0) %}
+      {% if c %}
+      <li>
+        <a href="/kaynak/{{ s.key }}/" style="--brand: {{ s.color }}">
+          <strong>{{ s.name }}</strong>
+          <span class="count">{{ c }} özet</span>
+        </a>
+      </li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </section>
+
+  {% for month, items in by_month %}
+  <section class="section">
+    <h2 class="section-title"><span>{{ (month ~ '-01') | tr_date | replace('1 ', '') }}</span></h2>
+    <ul class="daylist">
+      {% for e in items %}
+      <li class="dayrow">
+        <a class="dayrow-link" href="{{ e.path }}">
+          <span class="dayrow-date">{{ e.date_short }}</span>
+          <span class="dayrow-body">
+            <strong>{{ e.cover.title_tr if e.cover else '—' }}</strong>
+            <span class="dayrow-meta">
+              {{ e.articles | length }} yazı ·
+              {{ e.sources | join(' · ') }}
+            </span>
+          </span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+
+</div>
+{% endblock %}

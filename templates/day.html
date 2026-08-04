@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m %}
+
+{% block title %}{{ edition.date_short }} — {{ site.title }}{% endblock %}
+{% block description %}{{ edition.intro or (edition.cover.title_tr if edition.cover else site.tagline) }}{% endblock %}
+{% block canonical %}/sayi/{{ edition.date }}/{% endblock %}
+
+{% block content %}
+<div class="wrap">
+
+  <div class="dateline">
+    <span class="dateline-date">{{ edition.date_tr }}</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">{{ edition.articles | length }} yazı</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">{{ edition.sources | join(', ') }}</span>
+  </div>
+
+  {{ m.edition_body(edition) }}
+
+  <nav class="pager" aria-label="Sayılar arası gezinme">
+    {% if older %}
+    <a class="pager-link pager-prev" href="{{ older.path }}">
+      <span class="pager-label">← Önceki sayı</span>
+      <span class="pager-title">{{ older.date_short }}</span>
+    </a>
+    {% else %}<span></span>{% endif %}
+
+    <a class="pager-mid" href="/arsiv/">Arşiv</a>
+
+    {% if newer %}
+    <a class="pager-link pager-next" href="{{ newer.path }}">
+      <span class="pager-label">Sonraki sayı →</span>
+      <span class="pager-title">{{ newer.date_short }}</span>
+    </a>
+    {% else %}<span></span>{% endif %}
+  </nav>
+
+</div>
+{% endblock %}
