@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3 Eylül 2026 — Eren&#39;in Mühendislik Gazetesi</title>
+<meta name="description" content="Meta&#39;nın en yaygın anahtar-değer deposunun önüne bir proxy koyma hikâyesi: milyon istemci, yüz binlerce veritabanı sunucusu ve baştan beri “doğrudan bağlan” diyen bir tasarım. İçinde dağıtık sistem tasarımının en temel matematiklerinden biri var: bağlantı sayısı.">
+<meta name="author" content="Eren Ulutaş">
+<meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:title" content="3 Eylül 2026 — Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:description" content="Meta&#39;nın en yaygın anahtar-değer deposunun önüne bir proxy koyma hikâyesi: milyon istemci, yüz binlerce veritabanı sunucusu ve baştan beri “doğrudan bağlan” diyen bir tasarım. İçinde dağıtık sistem tasarımının en temel matematiklerinden biri var: bağlantı sayısı.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<link rel="canonical" href="https://erenulutas.com/sayi/2026-09-03/">
+<link rel="alternate" type="application/rss+xml" title="Eren&#39;in Mühendislik Gazetesi" href="/feed.xml">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+<script>
+  // Tema tercihini ilk boyamadan önce uygula (flash olmasın)
+  (function () {
+    try {
+      var t = localStorage.getItem('tema');
+      if (t) document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip" href="#icerik">İçeriğe geç</a>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <div class="masthead-brand">
+      <a href="/" class="logo">
+        <span class="logo-mark">EU</span>
+        <span class="logo-text">
+          <strong>Eren&#39;in Mühendislik Gazetesi</strong>
+          <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
+        </span>
+      </a>
+    </div>
+    <nav class="masthead-nav" aria-label="Ana menü">
+      <a href="/">Bugün</a>
+      <a href="/arsiv/">Arşiv</a>
+      <a href="/ara/">Ara</a>
+      <a href="/hakkinda/">Hakkında</a>
+      <button id="tema" class="tema" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+        <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/></g></svg>
+        <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="icerik">
+<div class="wrap">
+
+  <div class="dateline">
+    <span class="dateline-date">3 Eylül 2026, Perşembe</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">1 yazı</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">Meta Engineering</span>
+  </div>
+
+    <div class="editor-note">
+    <span class="label">Editörden</span>
+    <p>Meta&#x27;nın en yaygın anahtar-değer deposunun önüne bir proxy koyma hikâyesi: milyon istemci, yüz binlerce veritabanı sunucusu ve baştan beri “doğrudan bağlan” diyen bir tasarım. İçinde dağıtık sistem tasarımının en temel matematiklerinden biri var: bağlantı sayısı.</p>
+  </div>
+
+    <article class="cover" id="fbe0118d00e6">
+  <div class="cover-head">
+    <span class="kicker">Günün Kapağı</span>
+    <div class="meta">
+    <a class="badge" href="/kaynak/meta/"
+     style="--brand: #0866FF">Meta Engineering</a>
+
+<span class="meta-item">3 Eylül 2026</span><span class="meta-item">13 dk okuma</span>  <span class="meta-item level level-ileri">ileri</span>
+</div>
+
+  </div>
+  <h2 class="cover-title">
+    <a href="https://engineering.fb.com/2026/09/03/core-infra/zgateway-proxy-zippydb-meta/" rel="noopener nofollow" target="_blank">Bağlantı sayısı bir ölçekleme sorunudur: ZippyDB&#39;nin önüne ZGateway koymak</a>
+  </h2>
+  <p class="original-title">ZGateway: Learnings from Putting a Proxy in Front of ZippyDB</p>
+
+  <div class="prose"><p>ZippyDB, Meta&#x27;da en yaygın kullanılan anahtar-değer deposu: ürün metadata&#x27;sı, sayaçlar ve yapılandırma için kullanılıyor ve küresel dağıtık bir filo üzerinde saniyede milyarlarca işlem sunabiliyor. <strong>ZGateway</strong>, ZippyDB istemci trafiğini birleştirmek için kullanılan proxy katmanı. Değeri yapısal çıktı: bir istemci, kısa sürede değiştirilemeyecek, yüzlerce ekibin sahip olduğu <strong>bir milyondan fazla ana makinenin</strong> biri olabilir. Proxy ise aynı anda çok sayıda istemcinin yolunda durduğu için hiçbir tek istemcinin yapamadığını yapabiliyor.</p><p>Doğrudan erişim modelinde her istemci ihtiyaç duyduğu her veritabanı sunucusuna bağlanıyor. Tek bir istemci kısa sürede on binlerce farklı shard&#x27;a dokunabiliyor; bu shard&#x27;lar yüz binlerce sunucuya yayılmış. Sonuç <strong>savurgan ve kırılgan bir ağ</strong>: her açık bağlantı iki uçta da bellek, CPU ve dosya tanıtıcısı tüketiyor (çoğu boşta), gelen bağlantı sayısı istemci nüfusuyla büyüyor, yani <strong>her yeni istemci grubu her veritabanı sunucusunu kötüleştiriyor</strong>. En kritiği: yeniden bağlanma fırtınası felakete dönüşebiliyor. Bir olayda bir yönlendirme hatası her istemcinin shard başına bir bağlantı açmasına yol açtı, sunucular dosya tanıtıcısı sınırını aştı ve filo çöktü.</p><p>ZGateway durumsuz bir proxy katmanı: saniyede <strong>1 milyardan fazla işlem</strong> taşıyabiliyor, ZippyDB trafiğinin yaklaşık %40&#x27;ını taşıyor (%60&#x27;ın üzerine çıkması öngörülüyor) ve ortalama bir kullanım için yalnızca yaklaşık %6 hesaplama yükü ekliyor. Bağlantı sayılarının asimetrisi anahtar özellik: her istemci yalnızca bölgesel ZGateway sunucularına yapışkan bir havuza ihtiyaç duyuyor; her veritabanı sunucusu yalnızca boyutunu kontrol ettikleri ZGateway filosundan bağlantı görüyor. Yazıdaki örnek rakamlarla toplam kalıcı bağlantı yaklaşık <strong>19 kat</strong> azalıyor. Ama asıl mesele tek seferlik azalma değil, ölçekleme davranışı: doğrudan modelde veritabanı sunucusundaki gelen bağlantı istemci nüfusuyla doğrusal artarken, ZGateway ile istemci nüfusu denklemden çıkıyor.</p><p>İkinci kazanım <strong>istek akışını daraltmak</strong>: proxy, ilgisiz çağıranlardan gelen istekleri shard başına gruplayıp tek bir arka uç RPC&#x27;sine birleştiriyor (batching) ve aynı anda aynı anahtarı isteyen çağıranlar için anahtarı bir kez çekip sonucu herkese dağıtıyor (coalescing). İstemci tarafındaki bir toplayıcı yalnızca kendi sürecinin isteklerini birleştirebilir.</p></div>
+
+  <div class="keypoints">
+    <h4 class="label">Öne çıkanlar</h4>
+    <ul>
+<li>Doğrudan erişim, istemci nüfusuyla doğrusal büyüyen bağlantı yükü demek; proxy bu sayıyı sahibi olduğun bir sayıya çevirir.</li><li>Proxy’nin iki bedeli var: ek bir atlama ve işletilecek bir katman daha. Kazanç, istemci nüfusu büyük, çeşitli ve senin değiştiremeyeceğin ölçüdeyse çıkıyor.</li><li>Batching (aynı hedefe giden istekleri birleştir) ve coalescing (aynı anahtarı bir kez getir) ancak birçok çağıranı gören bir noktada yapılabilir.</li><li>Yeniden bağlanma fırtınası, doğrudan bağlantı mimarisinin en tehlikeli arıza modu.</li><li>Sorumlulukları bilinçli bölmüşler: TLS, shard bulma ve kopya seçimi yerinde kalıyor; ZGateway yalnızca trafik yönetimini üstleniyor.</li>    </ul>
+  </div>
+
+  <div class="callouts">
+    <div class="callout callout-why">
+      <h4 class="label">Neden önemli?</h4>
+      <p>“Her istemci her sunucuya bağlanır” tasarımı küçükken kusursuz, büyüyünce sistemi öldüren bir tasarımdır; çünkü maliyeti kimsenin sahip olmadığı bir sayı (istemci nüfusu) belirler. Tasarımın ölçekleme sınırını belirleyen değişkeni kendi kontrolüne almak, ölçekli sistem mühendisliğinin ana hamlelerinden biri.</p>
+    </div>
+    <div class="callout callout-you">
+      <h4 class="label">Sende karşılığı</h4>
+      <p>Bunu bugün kendi stack&#x27;inde ölç: PostgreSQL&#x27;in <code>max_connections</code> değeri düşüktür (varsayılan 100) ve her Spring Boot örneği kendi bağlantı havuzunu açar. 10 örnek × 20 bağlantı = 200 bağlantı, veritabanı ayakta kalmaz. Çözümün adı <strong>PgBouncer</strong>, yani bu yazıdaki proxy’nin küçük hâli. Mobit’te birden fazla servis aynı veritabanına bağlanıyorsa toplam bağlantı sayısını <code>SELECT count(*) FROM pg_stat_activity</code> ile bak. HikariCP’de <code>maximumPoolSize</code> değerini ‘ne kadar büyük olursa o kadar iyi’ diye ayarlama; havuz büyüdükçe veritabanı yavaşlar.</p>
+    </div>
+  </div>
+
+  <div class="terms">
+  <h4 class="label">Sözlük</h4>
+  <dl>
+    <div class="term">
+      <dt><span class="term-en">connection fan-in</span> <span class="term-tr">bağlantı toplanması</span></dt>
+      <dd>Bir sunucunun, kendisine bağlanan istemci sayısıyla büyüyen gelen bağlantı yükü.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">request coalescing</span> <span class="term-tr">istek birleştirme</span></dt>
+      <dd>Aynı anda aynı veriyi isteyen birden çok çağıran için veriyi bir kez getirip herkese dağıtma.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">reconnection storm</span> <span class="term-tr">yeniden bağlanma fırtınası</span></dt>
+      <dd>Çok sayıda istemcinin aynı anda yeniden bağlanmaya çalışarak sistemi daha da yüklemesi.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">connection pooler</span> <span class="term-tr">bağlantı havuzlayıcı</span></dt>
+      <dd>Çok sayıda istemci bağlantısını az sayıda gerçek veritabanı bağlantısına çoğullayan ara katman (örn. PgBouncer).</dd>
+    </div>
+  </dl>
+</div>
+
+
+  <div class="article-foot">
+    <ul class="tags">
+  <li><a href="/etiket/proxy/">#proxy</a></li>
+  <li><a href="/etiket/dagitik-sistemler/">#dağıtık sistemler</a></li>
+  <li><a href="/etiket/baglanti-yonetimi/">#bağlantı yönetimi</a></li>
+  <li><a href="/etiket/dayaniklilik/">#dayanıklılık</a></li>
+</ul>
+
+    <a class="readmore" href="https://engineering.fb.com/2026/09/03/core-infra/zgateway-proxy-zippydb-meta/" rel="noopener nofollow" target="_blank">
+      Orijinali oku <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+
+
+
+
+
+  <nav class="pager" aria-label="Sayılar arası gezinme">
+    <a class="pager-link pager-prev" href="/sayi/2026-09-02/">
+      <span class="pager-label">← Önceki sayı</span>
+      <span class="pager-title">2 Eylül 2026</span>
+    </a>
+
+    <a class="pager-mid" href="/arsiv/">Arşiv</a>
+
+    <a class="pager-link pager-next" href="/sayi/2026-09-09/">
+      <span class="pager-label">Sonraki sayı →</span>
+      <span class="pager-title">9 Eylül 2026</span>
+    </a>
+  </nav>
+
+</div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-col">
+      <h3>Eren&#39;in Mühendislik Gazetesi</h3>
+      <p class="muted">
+        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını her gün derleyip
+        Türkçe özetleyen kişisel bir gazete. Özetler yeni mezun bir mühendisin
+        anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
+      </p>
+      <p class="muted small">
+        113 özet · 51 sayı ·
+        11 kaynak
+      </p>
+    </div>
+    <div class="footer-col">
+      <h3>Kaynaklar</h3>
+      <ul class="footer-sources">
+        <li><a href="https://www.uber.com/blog/engineering/" rel="noopener nofollow" target="_blank">Uber Engineering</a></li>
+        <li><a href="https://netflixtechblog.com" rel="noopener nofollow" target="_blank">Netflix Tech Blog</a></li>
+        <li><a href="https://aws.amazon.com/blogs/architecture/" rel="noopener nofollow" target="_blank">AWS Architecture Blog</a></li>
+        <li><a href="https://blog.cloudflare.com" rel="noopener nofollow" target="_blank">Cloudflare Blog</a></li>
+        <li><a href="https://stripe.com/blog" rel="noopener nofollow" target="_blank">Stripe Engineering</a></li>
+        <li><a href="https://www.databricks.com/blog" rel="noopener nofollow" target="_blank">Databricks Engineering</a></li>
+        <li><a href="https://engineering.fb.com" rel="noopener nofollow" target="_blank">Meta Engineering</a></li>
+        <li><a href="https://openai.com/news/" rel="noopener nofollow" target="_blank">OpenAI Research</a></li>
+        <li><a href="https://www.anthropic.com/engineering" rel="noopener nofollow" target="_blank">Anthropic Engineering</a></li>
+        <li><a href="https://research.google/blog/" rel="noopener nofollow" target="_blank">Google Research</a></li>
+        <li><a href="https://cloud.google.com/blog/" rel="noopener nofollow" target="_blank">Google Cloud Blog</a></li>
+        <li><a href="https://devblogs.microsoft.com/engineering-at-microsoft/" rel="noopener nofollow" target="_blank">Microsoft Engineering</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Eren Ulutaş</h3>
+      <ul class="footer-links">
+        <li><a href="https://github.com/erenulutas0" rel="me noopener" target="_blank">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/eren-u-55918a2a0" rel="me noopener" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:eerenulutass@gmail.com">E-posta</a></li>
+        <li><a href="/feed.xml">RSS</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-legal">
+    <p class="muted small">
+      Tüm özetler kaynak makalelere bağlıdır; telif orijinal yazarlara aittir.
+      Bu site yalnızca özet ve yönlendirme sunar. © 2026 Eren Ulutaş.
+    </p>
+  </div>
+</footer>
+
+<script src="/static/app.js" defer></script>
+</body>
+</html>

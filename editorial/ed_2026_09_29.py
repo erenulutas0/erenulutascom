@@ -1,0 +1,110 @@
+"""29 Eylül 2026 sayısı."""
+
+from pipeline.compose import save_edition
+
+DATE = "2026-09-29"
+
+INTRO = (
+    "Pahalı bir kaynağı (GPU) boşta tutan şey çoğunlukla ucuz bir kaynağın (CPU sandbox) "
+    "geç gelmesidir. Google’ın yazısı agent RL eğitiminde tam bunu çözüyor ve sayılar çarpıcı: "
+    "sandbox başlatma süresi 45-85 saniyeden 1-9 saniyeye."
+)
+
+DRAFTS = [
+    {
+        "url": "https://cloud.google.com/blog/products/containers-kubernetes/accelerate-agentic-rl-with-gke-agent-sandbox/",
+        "slot": "cover",
+        "title_tr": "GPU boşta bekliyor çünkü sandbox geç açılıyor: ısıtılmış havuz ve pod geri dönüşümü",
+        "difficulty": "ileri",
+        "tags": ["Kubernetes", "agent", "performans", "altyapı"],
+        "summary": (
+            "Agent'ları pekiştirmeli öğrenmeyle (RL) eğitmek ve değerlendirmek için büyük ölçekli "
+            "paralel rollout'lar çalıştırınca öncü laboratuvarlar hep aynı darboğaza çarpıyor: "
+            "pahalı GPU kümeleri, CPU sandbox'ların soğuk başlangıcını dakikalarca bekliyor. Üstüne "
+            "binlerce, her biri çok gigabaytlık SWE-bench tarzı imaj çekimi ve zamanlama "
+            "birikimleri geliyor.\n\n"
+            "Tipik bir agentic RL döngüsünde GPU'daki LLM politikası kod parçası gibi eylemler üretiyor "
+            "ve bunlar yalıtılmış CPU sandbox'larda çalıştırılıp bir ödül sinyali gözleniyor. On "
+            "binlerce paralel rollout'a ölçeklenince üç darboğaz çıkıyor. **Kuyruk gecikmesi tuzağı:** "
+            "RL adımı senkron, yani eğitim batch'teki **en yavaş sandbox** hazır olana kadar "
+            "ilerlemiyor. **İmaj kardinalitesi:** klasik konteyner önbelleği birkaç statik temel imaj "
+            "varsayar, oysa her görev (örneğin her GitHub deposu) başka bir imaj gerektirebiliyor. "
+            "**Kontrol düzlemi doygunluğu:** her eğitim adımı, aynı anda binlerce sandbox isteyen bir "
+            "rollout patlaması tetikliyor.\n\n"
+            "Google'ın çözümü RL için optimize edilmiş **GKE Agent Sandbox**, bir orkestrasyon SDK'sı "
+            "ve popüler RL ortamlarına yerel entegrasyonlar. Sonuçlar: **ilk komuta kadar süre 10-45 kat "
+            "daha kısa** (sandbox 45-85 saniye yerine 1-9 saniyede açılıyor), **en kötü durum bekleme 7,5 "
+            "dakikadan 10 saniyenin altına** iniyor ve **kontrol düzlemi yükü 3 kat azalıyor**. "
+            "Anahtar teknikler: gVisor sandbox havuzu ve GKE imaj akışı (image streaming); "
+            "**SandboxWarmPool**, önceden başlatılmış ve sağlıklı ortamları hazır tutarak soğuk "
+            "başlangıcı ortadan kaldırıyor; ve SDK'nın **yerinde geri dönüştürme** stratejisi, pod'ları "
+            "her rollout'ta silip yeniden yaratmak yerine yeniden kullanıyor (üç kat az pod yaratımı, "
+            "Kubernetes API sunucusu kararlı kalıyor). Test küme boyutu mütevazı: 10 düğümlük bir havuz. "
+            "Bu ilke Mistral AI'ın RL eğitim altyapısında kullanılıyor."
+        ),
+        "key_points": [
+            "Senkron toplu işte toplam süreyi ortalama değil **en yavaş eleman** belirler (tail latency).",
+            "Isıtılmış havuz (warm pool): başlatma maliyetini istek anından hazırlık zamanına kaydırır.",
+            "Nesne silip yeniden yaratmak yerine geri dönüştürmek kontrol düzlemi yükünü düşürür.",
+            "Darboğazları bulmak için kendi altyapılarını SWE-bench ile kasten zorlamışlar: ölçüm güdümlü iyileştirme.",
+        ],
+        "why_it_matters": (
+            "Pahalı kaynağın verimi, ucuz kaynağın gecikmesine bağlı olabilir. Bu desen (ısıtılmış "
+            "havuz, yeniden kullanım, kuyruk gecikmesine odaklanma) yalnızca RL için değil, "
+            "bağlantı havuzlarından sunucusuz fonksiyonlara kadar her yerde geçerli."
+        ),
+        "for_you": (
+            "Aynı fikir senin dünyanda üç yerde var. **Bağlantı havuzu:** HikariCP’nin ‘her istekte "
+            "yeni bağlantı açma’ maliyetini ısıtılmış havuzla çözmesi. **Spring Boot soğuk başlangıcı:** "
+            "bir konteyner ilk istekte yavaşsa ısınma (warm-up) isteği ya da minimum örnek sayısı. "
+            "**Bu gazetenin pipeline’ı:** `fetch` her koşuda sıfırdan indiriyor, ama `.cache/raw` "
+            "klasörü tam olarak bu ısıtma mantığı. Daha genel alışkanlık: bir işlemin **ortalama** "
+            "süresine değil **p99** süresine bak, çünkü toplu bir iş her zaman en yavaşı bekler."
+        ),
+        "terms": [
+            {"en": "cold start", "tr": "soğuk başlangıç", "definition": "Bir ortamın ilk kez ya da uzun bekleme sonrası başlatılırken yaşadığı ek gecikme."},
+            {"en": "warm pool", "tr": "ısıtılmış havuz", "definition": "Önceden başlatılıp hazır tutulan, istek gelince hemen kullanılan kaynak havuzu."},
+            {"en": "time-to-first-command (TTFC)", "tr": "ilk komuta kadar süre", "definition": "Bir sandbox’ın istenmesinden ilk komutu çalıştırabilecek hâle gelmesine kadar geçen süre."},
+            {"en": "rollout", "tr": "rollout", "definition": "RL’de bir politikanın ortamda adım adım eylem yapıp ödül topladığı tek bir deneme."},
+        ],
+    },
+    {
+        "url": "https://aws.amazon.com/blogs/architecture/build-adaptive-ai-interfaces-with-the-ag-ui-protocol-agent-swarms-and-nova-act-on-aws/",
+        "slot": "brief",
+        "title_tr": "Çıktısı değişken olan yapay zekâya sabit arayüz yetmez: AG-UI protokolü",
+        "difficulty": "orta",
+        "tags": ["agent", "arayüz", "protokol", "mimari"],
+        "summary": (
+            "Üretken yapay zekâ uygulamaları her çalıştırmada farklı sonuç üretir: bir röntgen tek bir "
+            "kırık gösterirken diğeri uzman incelemesi gerektiren yirmi belirsiz bölge çıkarabilir. "
+            "Sabit yerleşim, önceden belirlenmiş kontroller ve statik veri bağlama, çıktı uzayının "
+            "bilinen olduğu yerde (ödeme sayfası gibi) iyidir; ama yapay zekâ **dinamik keşfettiği** "
+            "yerde bir uçta eksik, diğer uçta boş panellerle karışık kalır.\n\n"
+            "Yazının önerisi üç parça: **AG-UI** (agent-to-UI) protokolü, agent ile arayüz arasındaki "
+            "iletişimi standartlaştırılmış akışla çözüyor (öncesinde her çerçeve için özel WebSocket "
+            "biçimleri ve yoklama mekanizmaları yazılıyordu); **Strands Agents SDK'nın Swarm "
+            "deseni**, ajanların eşler olarak hipotez paylaşıp uzlaşıya kadar bulguları iyileştirdiği "
+            "çoklu ajan iş birliği; ve **Nova Act**, API'si olmayan eski sistemlerle doğal dil "
+            "komutlarıyla tarayıcı üzerinden çalışan otomasyon."
+        ),
+        "key_points": [
+            "Agent çıktısı değişkense arayüz de çıktıya göre kendini şekillendirmeli.",
+            "Agent ile arayüz arasındaki akışı standartlaştırmak, çerçeveye özel yapıştırma kodunu ortadan kaldırır.",
+        ],
+        "for_you": (
+            "Mobit’teki doküman arama sonuçlarını düşün: bir sorgu tek bir net cevap, bir diğeri "
+            "yirmi ilgili pasaj döndürebilir. Arayüzü her ikisine uygun tek bir sabit ekran yapmak "
+            "yerine, cevabın **şekline** (tek cevap, liste, karşılaştırma) göre farklı bir bileşen "
+            "göstermeyi dene. Bunun basit bir başlangıcı, modelden yapılandırılmış bir çıktı "
+            "(JSON şeması içinde `type: answer | list | comparison`) istemek ve arayüzde "
+            "o alana göre bileşen seçmektir."
+        ),
+        "terms": [
+            {"en": "AG-UI protocol", "tr": "AG-UI protokolü", "definition": "Agent ile kullanıcı arayüzü arasındaki akış iletişimini standartlaştıran protokol."},
+            {"en": "agent swarm", "tr": "ajan sürüsü", "definition": "Merkezî bir yönetici olmadan, eşler olarak iş birliği yapan ajanlar topluluğu."},
+        ],
+    },
+]
+
+if __name__ == "__main__":
+    save_edition(DATE, INTRO, DRAFTS)

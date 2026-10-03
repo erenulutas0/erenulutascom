@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>12 Ağustos 2026 — Eren&#39;in Mühendislik Gazetesi</title>
+<meta name="description" content="İki yazı, iki “kanıtlanabilirlik” hikâyesi. WhatsApp, bir ML özelliğinin uçtan uca şifrelemeyi bozmadığını nasıl **kanıtlanabilir** kıldığını anlatıyor. Google ise LLM hatalarının çoğunun bilgi eksikliği değil, bilgiye ulaşamama olduğunu ölçüyor.">
+<meta name="author" content="Eren Ulutaş">
+<meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:title" content="12 Ağustos 2026 — Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:description" content="İki yazı, iki “kanıtlanabilirlik” hikâyesi. WhatsApp, bir ML özelliğinin uçtan uca şifrelemeyi bozmadığını nasıl **kanıtlanabilir** kıldığını anlatıyor. Google ise LLM hatalarının çoğunun bilgi eksikliği değil, bilgiye ulaşamama olduğunu ölçüyor.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<link rel="canonical" href="https://erenulutas.com/sayi/2026-08-12/">
+<link rel="alternate" type="application/rss+xml" title="Eren&#39;in Mühendislik Gazetesi" href="/feed.xml">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+<script>
+  // Tema tercihini ilk boyamadan önce uygula (flash olmasın)
+  (function () {
+    try {
+      var t = localStorage.getItem('tema');
+      if (t) document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip" href="#icerik">İçeriğe geç</a>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <div class="masthead-brand">
+      <a href="/" class="logo">
+        <span class="logo-mark">EU</span>
+        <span class="logo-text">
+          <strong>Eren&#39;in Mühendislik Gazetesi</strong>
+          <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
+        </span>
+      </a>
+    </div>
+    <nav class="masthead-nav" aria-label="Ana menü">
+      <a href="/">Bugün</a>
+      <a href="/arsiv/">Arşiv</a>
+      <a href="/ara/">Ara</a>
+      <a href="/hakkinda/">Hakkında</a>
+      <button id="tema" class="tema" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+        <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/></g></svg>
+        <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="icerik">
+<div class="wrap">
+
+  <div class="dateline">
+    <span class="dateline-date">12 Ağustos 2026, Çarşamba</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">2 yazı</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">Meta Engineering, Google Research</span>
+  </div>
+
+    <div class="editor-note">
+    <span class="label">Editörden</span>
+    <p>İki yazı, iki “kanıtlanabilirlik” hikâyesi. WhatsApp, bir ML özelliğinin uçtan uca şifrelemeyi bozmadığını nasıl <strong>kanıtlanabilir</strong> kıldığını anlatıyor. Google ise LLM hatalarının çoğunun bilgi eksikliği değil, bilgiye ulaşamama olduğunu ölçüyor.</p>
+  </div>
+
+    <article class="cover" id="1a16a68df88d">
+  <div class="cover-head">
+    <span class="kicker">Günün Kapağı</span>
+    <div class="meta">
+    <a class="badge" href="/kaynak/meta/"
+     style="--brand: #0866FF">Meta Engineering</a>
+
+<span class="meta-item">12 Ağustos 2026</span><span class="meta-item">18 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
+</div>
+
+  </div>
+  <h2 class="cover-title">
+    <a href="https://engineering.fb.com/2026/08/12/security/how-were-building-scam-alert-whatsapp/" rel="noopener nofollow" target="_blank">Şifreli mesajlarda dolandırıcılık uyarısı: cihaz üstü model ve doğrulanabilir gizlilik</a>
+  </h2>
+  <p class="original-title">How We’re Building Scam Alert on WhatsApp With End-to-End Encryption and Verifiability Guarantees</p>
+
+  <div class="prose"><p>WhatsApp, <strong>Scam Alert</strong> adlı yeni ve isteğe bağlı bir özelliğin teknik tasarımını, özellik sınırlı beta olarak çıkarken yayımladı. Özellik, kullanıcı açarsa cihaza bir ML modeli indiriyor ve kişi listesinde olmayan gönderenlerden gelen mesajları <strong>cihazın içinde</strong> sınıflandırıyor. Olası dolandırıcılıkta sohbette yalnızca kullanıcının gördüğü bir uyarı çıkıyor; mesaj içeriği sınıflandırma için cihazdan çıkmıyor ve otomatik raporlama yok.</p><p>Tasarım üç taahhüde dayanıyor ve her biri mimariyle zorlanıp dışarıdan doğrulanabilir kılınmış. <strong>Cihaz üstü işleme ve gizliliği koruyan analitik:</strong> özelliğin çalışıp çalışmadığını ölçmek için gereken en küçük telemetri (uyarı ve eylem sayıları) güvenilir yürütme ortamı (TEE) içinde işleniyor ve Meta&#x27;ya yalnızca <strong>diferansiyel gizli</strong> toplulaştırmalar olarak ulaşıyor. <strong>Hedefli model dağıtımı yok:</strong> her model sürümü, dağıtılmadan önce herkese açık bir şeffaflık defterinde yayımlanıyor; yani belirli bir kullanıcıya özel model yollanamaz. <strong>Doğrulanabilir davranış:</strong> model ağırlıkları yayımlanıyor, böylece araştırmacılar modelin yalnızca dolandırıcılık için üretildiğini kontrol edebilir.</p><p>Kullanıcı bir uyarıyı yanlış bulursa sohbeti güvenilir işaretleyebiliyor; isterse son 5 mesajı doğruluğu artırmak için paylaşmayı seçebiliyor.</p></div>
+
+  <div class="keypoints">
+    <h4 class="label">Öne çıkanlar</h4>
+    <ul>
+<li>Gizlilik sözü, “güveniniz bize” ile değil, dışarıdan denetlenebilir mimari kararlarla veriliyor.</li><li>Telemetri bile minimize edilmiş: sadece sayılar, TEE içinde, diferansiyel gizlilik gürültüsüyle.</li><li>Şeffaflık defteri hedefli dağıtımı engelliyor: herkes aynı modeli alıyor.</li><li>Kullanıcı kontrolü: özellik isteğe bağlı, sohbet güvenilir işaretlenebilir, paylaşım ayrı bir onaya bağlı.</li>    </ul>
+  </div>
+
+  <div class="callouts">
+    <div class="callout callout-why">
+      <h4 class="label">Neden önemli?</h4>
+      <p>Hassas veride “verinizi korumaya çalışıyoruz” demek yeterli değil. Güçlü ürünler, sözü <strong>doğrulanabilir</strong> hâle getiriyor: açık ağırlıklar, kamuya açık kayıtlar, bağımsız denetim. Bu, mühendislikte güvenin ölçülebilir bir özellik olabileceğini gösteriyor.</p>
+    </div>
+    <div class="callout callout-you">
+      <h4 class="label">Sende karşılığı</h4>
+      <p>KlioAI&#x27;da kullanıcı ses kayıtları tutuyorsun. Bu yazıdan üç somut kural çıkar: (1) <strong>Veri minimizasyonu</strong>: sunucuya yalnızca gerçekten gereken şeyi yolla (ham ses yerine transkript ya da puan yeterliyse onu). (2) Telemetriyi baştan toplulaştırılmış tasarla: bireysel olay yerine sayaç. (3) Kullanıcıya açık ve ayrı bir izin ver: model iyileştirmesi için veri kullanımı varsayılan olmasın. Bunları baştan tasarlamak, sonradan eklemekten çok daha ucuz.</p>
+    </div>
+  </div>
+
+  <div class="terms">
+  <h4 class="label">Sözlük</h4>
+  <dl>
+    <div class="term">
+      <dt><span class="term-en">end-to-end encryption (E2EE)</span> <span class="term-tr">uçtan uca şifreleme</span></dt>
+      <dd>Mesajın yalnızca gönderen ve alıcı cihazlarda çözülebildiği, aradaki sunucunun okuyamadığı şifreleme.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">trusted execution environment (TEE)</span> <span class="term-tr">güvenilir yürütme ortamı</span></dt>
+      <dd>İçindeki kodu ve veriyi sistem sahibinden bile koruyan donanım destekli yalıtılmış çalışma alanı.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">differential privacy</span> <span class="term-tr">diferansiyel gizlilik</span></dt>
+      <dd>Toplulaştırılmış sonuca ayarlanmış gürültü ekleyerek tek bir kişinin verisinin etkisini matematiksel olarak sınırlama.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">transparency ledger</span> <span class="term-tr">şeffaflık defteri</span></dt>
+      <dd>Yayımlanan sürümlerin değiştirilemez ve herkese açık biçimde kaydedildiği liste.</dd>
+    </div>
+  </dl>
+</div>
+
+
+  <div class="article-foot">
+    <ul class="tags">
+  <li><a href="/etiket/gizlilik/">#gizlilik</a></li>
+  <li><a href="/etiket/guvenlik/">#güvenlik</a></li>
+  <li><a href="/etiket/on-device-ml/">#on-device ML</a></li>
+  <li><a href="/etiket/mimari/">#mimari</a></li>
+</ul>
+
+    <a class="readmore" href="https://engineering.fb.com/2026/08/12/security/how-were-building-scam-alert-whatsapp/" rel="noopener nofollow" target="_blank">
+      Orijinali oku <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+
+
+  <section class="section">
+    <h2 class="section-title"><span>Kısa Kısa</span></h2>
+    <div class="grid">
+<article class="brief" id="4bec668cb686">
+  <div class="meta">
+    <a class="badge" href="/kaynak/google-research/"
+     style="--brand: #4285F4">Google Research</a>
+
+<span class="meta-item">12 Ağustos 2026</span><span class="meta-item">6 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
+</div>
+
+  <h3 class="brief-title">
+    <a href="https://research.google/blog/empty-shelves-or-lost-keys-recall-is-the-bottleneck-for-parametric-factuality/" rel="noopener nofollow" target="_blank">Boş raf mı, kaybolmuş anahtar mı? LLM hatalarının çoğu hatırlama hatası</a>
+  </h3>
+  <p class="original-title">Empty shelves or lost keys? Recall is the bottleneck for parametric factuality</p>
+  <div class="prose prose-sm"><p>Bir LLM yanlış cevap verdiğinde sebep iki olabilir: olguyu hiç öğrenmemiş (<strong>kodlama hatası</strong>, boş raf) ya da öğrenmiş ama erişemiyor (<strong>hatırlama hatası</strong>, kayıp anahtar). Standart doğruluk metrikleri ikisini birbirine karıştırıyor, oysa çözümleri farklı: birincisi daha büyük model ya da daha fazla veri ister, ikincisi son eğitim ve çıkarım-zamanı yöntemleriyle de giderilebilir.</p><p>Google&#x27;ın <strong>bilgi profillemesi</strong> çerçevesi soruyu sorudan olguya taşıyor: her olgu “hatırlanamıyor”, “doğrudan hatırlanıyor” ya da “yalnızca düşünerek hatırlanıyor” sınıflarından birine giriyor. Bulgu: Gemini 3 ve GPT-5 gibi öncü modeller olguların neredeyse hepsini kodluyor, ama birçoğunu hatırlamakta zorlanıyor.</p></div>
+
+  <ul class="keypoints-inline">
+<li>Hatayı doğru teşhis etmek, çözümü seçmenin ön koşulu: kodlama ve hatırlama farklı müdahale ister.</li><li>“Düşünerek hatırlanan” olgular, çıkarım zamanında akıl yürütmenin neden doğruluğu artırabildiğini açıklıyor.</li>  </ul>
+
+  <div class="callout callout-you callout-sm">
+    <h4 class="label">Sende karşılığı</h4>
+    <p>RAG sistemi kurarken aynı ayrımı yap: model cevabı yanlışsa sorun bilgiyi bağlama vermemek mi (retrieval hatası), yoksa verildiği hâlde kullanamamak mı? Mobit&#x27;teki doküman aramada hatalı bir cevabı incelerken önce doğru pasajın getirilen sonuçlar arasında olup olmadığına bak. Varsa sorun üretimde, yoksa getirmede; ikisini karıştırırsan yanlış yeri düzeltirsin.</p>
+  </div>
+
+  <div class="terms">
+  <h4 class="label">Sözlük</h4>
+  <dl>
+    <div class="term">
+      <dt><span class="term-en">parametric knowledge</span> <span class="term-tr">parametrik bilgi</span></dt>
+      <dd>Modelin ağırlıklarında saklanan, dış kaynak olmadan cevaplayabildiği bilgi.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">recall vs recognition</span> <span class="term-tr">hatırlama ve tanıma</span></dt>
+      <dd>Hatırlama cevabı sıfırdan üretmek, tanıma ise seçenekler arasından doğruyu seçmektir.</dd>
+    </div>
+  </dl>
+</div>
+
+
+  <div class="article-foot">
+    <ul class="tags">
+  <li><a href="/etiket/llm/">#LLM</a></li>
+  <li><a href="/etiket/degerlendirme/">#değerlendirme</a></li>
+  <li><a href="/etiket/arastirma/">#araştırma</a></li>
+  <li><a href="/etiket/dogruluk/">#doğruluk</a></li>
+</ul>
+
+    <a class="readmore" href="https://research.google/blog/empty-shelves-or-lost-keys-recall-is-the-bottleneck-for-parametric-factuality/" rel="noopener nofollow" target="_blank">
+      Orijinali oku <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+    </div>
+  </section>
+
+
+
+  <nav class="pager" aria-label="Sayılar arası gezinme">
+    <a class="pager-link pager-prev" href="/sayi/2026-08-11/">
+      <span class="pager-label">← Önceki sayı</span>
+      <span class="pager-title">11 Ağustos 2026</span>
+    </a>
+
+    <a class="pager-mid" href="/arsiv/">Arşiv</a>
+
+    <a class="pager-link pager-next" href="/sayi/2026-08-13/">
+      <span class="pager-label">Sonraki sayı →</span>
+      <span class="pager-title">13 Ağustos 2026</span>
+    </a>
+  </nav>
+
+</div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-col">
+      <h3>Eren&#39;in Mühendislik Gazetesi</h3>
+      <p class="muted">
+        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını her gün derleyip
+        Türkçe özetleyen kişisel bir gazete. Özetler yeni mezun bir mühendisin
+        anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
+      </p>
+      <p class="muted small">
+        113 özet · 51 sayı ·
+        11 kaynak
+      </p>
+    </div>
+    <div class="footer-col">
+      <h3>Kaynaklar</h3>
+      <ul class="footer-sources">
+        <li><a href="https://www.uber.com/blog/engineering/" rel="noopener nofollow" target="_blank">Uber Engineering</a></li>
+        <li><a href="https://netflixtechblog.com" rel="noopener nofollow" target="_blank">Netflix Tech Blog</a></li>
+        <li><a href="https://aws.amazon.com/blogs/architecture/" rel="noopener nofollow" target="_blank">AWS Architecture Blog</a></li>
+        <li><a href="https://blog.cloudflare.com" rel="noopener nofollow" target="_blank">Cloudflare Blog</a></li>
+        <li><a href="https://stripe.com/blog" rel="noopener nofollow" target="_blank">Stripe Engineering</a></li>
+        <li><a href="https://www.databricks.com/blog" rel="noopener nofollow" target="_blank">Databricks Engineering</a></li>
+        <li><a href="https://engineering.fb.com" rel="noopener nofollow" target="_blank">Meta Engineering</a></li>
+        <li><a href="https://openai.com/news/" rel="noopener nofollow" target="_blank">OpenAI Research</a></li>
+        <li><a href="https://www.anthropic.com/engineering" rel="noopener nofollow" target="_blank">Anthropic Engineering</a></li>
+        <li><a href="https://research.google/blog/" rel="noopener nofollow" target="_blank">Google Research</a></li>
+        <li><a href="https://cloud.google.com/blog/" rel="noopener nofollow" target="_blank">Google Cloud Blog</a></li>
+        <li><a href="https://devblogs.microsoft.com/engineering-at-microsoft/" rel="noopener nofollow" target="_blank">Microsoft Engineering</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Eren Ulutaş</h3>
+      <ul class="footer-links">
+        <li><a href="https://github.com/erenulutas0" rel="me noopener" target="_blank">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/eren-u-55918a2a0" rel="me noopener" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:eerenulutass@gmail.com">E-posta</a></li>
+        <li><a href="/feed.xml">RSS</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-legal">
+    <p class="muted small">
+      Tüm özetler kaynak makalelere bağlıdır; telif orijinal yazarlara aittir.
+      Bu site yalnızca özet ve yönlendirme sunar. © 2026 Eren Ulutaş.
+    </p>
+  </div>
+</footer>
+
+<script src="/static/app.js" defer></script>
+</body>
+</html>

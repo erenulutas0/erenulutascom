@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Eren&#39;in Mühendislik Gazetesi — 3 Ağustos 2026</title>
-<meta name="description" content="Bugünün ortak teması gecikme (latency) ve sınır çizmek: OpenAI ses sisteminde medya yolunu iş mantığından ayırıyor, Cloudflare Worker&#39;lara ham TCP sokedi veriyor, Meta öneri modelini LLM ölçeğinde eğitirken hesap ile iletişimi birbirinden ayırmaya çalışıyor. Üçü de aynı dersi veriyor: hızlı sistemler, yavaş işi kritik yolun dışına atarak hızlanır.">
+<title>Eren&#39;in Mühendislik Gazetesi — 2 Ekim 2026</title>
+<meta name="description" content="‘Veritabanına yaz, sonra kuyruğa mesaj at’ cümlesi iki ayrı sistemin tek işlemde buluşmasını varsayar ve çoğu zaman yanlış gider. Google, mesajı veritabanı işleminin içine alarak bu açığı kapatıyor. Cloudflare ise gözlemlenebilirliği tek çatıda topluyor.">
 <meta name="author" content="Eren Ulutaş">
 <meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
-<meta property="og:title" content="Eren&#39;in Mühendislik Gazetesi — 3 Ağustos 2026">
-<meta property="og:description" content="Bugünün ortak teması gecikme (latency) ve sınır çizmek: OpenAI ses sisteminde medya yolunu iş mantığından ayırıyor, Cloudflare Worker&#39;lara ham TCP sokedi veriyor, Meta öneri modelini LLM ölçeğinde eğitirken hesap ile iletişimi birbirinden ayırmaya çalışıyor. Üçü de aynı dersi veriyor: hızlı sistemler, yavaş işi kritik yolun dışına atarak hızlanır.">
+<meta property="og:title" content="Eren&#39;in Mühendislik Gazetesi — 2 Ekim 2026">
+<meta property="og:description" content="‘Veritabanına yaz, sonra kuyruğa mesaj at’ cümlesi iki ayrı sistemin tek işlemde buluşmasını varsayar ve çoğu zaman yanlış gider. Google, mesajı veritabanı işleminin içine alarak bu açığı kapatıyor. Cloudflare ise gözlemlenebilirliği tek çatıda topluyor.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <link rel="canonical" href="https://erenulutas.com/">
@@ -56,50 +56,50 @@
 <div class="wrap">
 
   <div class="dateline">
-    <span class="dateline-date">3 Ağustos 2026, Pazartesi</span>
+    <span class="dateline-date">2 Ekim 2026, Cuma</span>
     <span class="dateline-sep" aria-hidden="true">·</span>
-    <span class="dateline-meta">5 yazı</span>
+    <span class="dateline-meta">2 yazı</span>
     <span class="dateline-sep" aria-hidden="true">·</span>
-    <span class="dateline-meta">OpenAI Research, Meta Engineering, Cloudflare Blog, Google Cloud Blog</span>
+    <span class="dateline-meta">Google Cloud Blog, Cloudflare Blog</span>
   </div>
 
     <div class="editor-note">
     <span class="label">Editörden</span>
-    <p>Bugünün ortak teması gecikme (latency) ve sınır çizmek: OpenAI ses sisteminde medya yolunu iş mantığından ayırıyor, Cloudflare Worker&#x27;lara ham TCP sokedi veriyor, Meta öneri modelini LLM ölçeğinde eğitirken hesap ile iletişimi birbirinden ayırmaya çalışıyor. Üçü de aynı dersi veriyor: hızlı sistemler, yavaş işi kritik yolun dışına atarak hızlanır.</p>
+    <p>‘Veritabanına yaz, sonra kuyruğa mesaj at’ cümlesi iki ayrı sistemin tek işlemde buluşmasını varsayar ve çoğu zaman yanlış gider. Google, mesajı veritabanı işleminin içine alarak bu açığı kapatıyor. Cloudflare ise gözlemlenebilirliği tek çatıda topluyor.</p>
   </div>
 
-    <article class="cover" id="d04cc35bd3cc">
+    <article class="cover" id="220bcbde8276">
   <div class="cover-head">
     <span class="kicker">Günün Kapağı</span>
     <div class="meta">
-    <a class="badge" href="/kaynak/openai/"
-     style="--brand: #000000">OpenAI Research</a>
+    <a class="badge" href="/kaynak/google-cloud/"
+     style="--brand: #34A853">Google Cloud Blog</a>
 
-<span class="meta-item">3 Ağustos 2026</span><span class="meta-item">12 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
+<span class="meta-item">2 Ekim 2026</span><span class="meta-item">5 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
 </div>
 
   </div>
   <h2 class="cover-title">
-    <a href="https://openai.com/index/continuous-voice-interaction-with-gpt-live" rel="noopener nofollow" target="_blank">Sesli AI&#39;da altı ayda gerçek zamanlı mimari: sıra beklemeyi bırakmak</a>
+    <a href="https://cloud.google.com/blog/products/databases/spanner-queues-provide-native-transactional-messaging/" rel="noopener nofollow" target="_blank">Mesaj göndermek veritabanı yazmasının parçası olunca: Spanner queues</a>
   </h2>
-  <p class="original-title">How we built a realtime system for responsive voice AI in six months</p>
+  <p class="original-title">Spanner queues provide native transactional messaging</p>
 
-  <div class="prose"><p>İnsanlar konuşurken sırayı saniyenin küçük bir kesrinde devralır. Eski sesli asistanlar bunu yakalayamıyordu çünkü mimarileri sıra tabanlıydı (turn-based): önce küçük bir <strong>turn detector</strong> modeli &quot;kullanıcı sustu mu?&quot; diye karar veriyor, ancak ondan sonra büyük dil modeli çalışmaya başlıyordu. Erken karar verirse kullanıcının sözünü kesiyor, geç verirse sistem ağır hissettiriyordu.</p><p>GPT-Live bu dedektörü ses yolundan tamamen çıkarmış. Model <strong>full-duplex</strong> çalışıyor: aynı anda hem dinliyor hem konuşuyor. Yani &quot;sıra kimde?&quot; kararı ayrı bir bileşenin tahmini olmaktan çıkıp modelin kendi işinin parçası oluyor.</p><p>İşin mühendislik açısından asıl öğretici kısmı şu mimari karar: ses akışı ile uygulama mantığı iki ayrı yola ayrılmış. Ses, istemci ile model arasında kesintisiz bir <strong>hızlı yol</strong>da (fast path) akıyor; araç çağırma, daha derin akıl yürütme için GPT-5.5&#x27;e devretme gibi işler ise <strong>asenkron</strong> bir yan yolda yürüyor. Böylece pahalı bir işlem sesin akışını durdurmuyor.</p><p>Bu ayrım olmadan sistem çalışmıyor, çünkü sürekli akışta tolerans yok: eski sıra tabanlı sistemde bir ses parçasının 50 ms geç gelmesi fark edilmezken, kesintisiz akışta aynı gecikme kulakta duyulabilir bir boşluk ya da cızırtı hâline geliyor.</p></div>
+  <div class="prose"><p>Yapay zekâ agent’ları iade başlatmak, stok yönetmek ya da alt agent’lara iş devretmek gibi eylemler yapıyor. Bunun için durumu bir operasyonel veritabanında tutuyor, eylemleri ise ayrı bir mesajlaşma ya da olay kuyruğuna gönderiyor. İki sistemin ayrı işlem noktaları olduğu için tutarsızlık kaçınılmaz: durum güncellenir ama mesaj gitmez (agent karar verir ama eylem olmaz), ya da mesaj gider ama durum işlemi geri alınır (agent geçersiz duruma göre hareket eder). Çözüm olarak geliştiriciler outbox deseni, idempotency katmanları ve uzlaştırma işçileri yazmak zorunda kalıyor.</p><p>Google <strong>Spanner queues</strong>’u genel kullanıma açtı: mesaj oluşturmak, aynı işlemin içinde sıradan bir yazma. Durum değişikliği ve niyet edilen eylem <strong>birlikte kesinleşir ya da birlikte başarısız olur</strong>. Özellikler arasında mesajı hemen ya da ileri bir zamana planlama (geciken yeniden denemeler, SLA zamanlayıcıları), agent işçileri için akışlı SQL okuma ve kuyruk tablolarını standart SQL ile inceleyerek gözlemleme var. Garanti <strong>en az bir kez teslimat</strong>; yani tüketici tarafı yine idempotent yazılmalı.</p><p>Yazı agent senaryosuna odaklansa da kuyruğun yalnızca agent’lar için olmadığını da belirtiyor: etkinlik akışları ve canlı güncellemeler gibi klasik olay tabanlı mimarilerde de kullanılabilir.</p></div>
 
   <div class="keypoints">
     <h4 class="label">Öne çıkanlar</h4>
     <ul>
-<li>Turn detector&#x27;ı kaldırıp modeli full-duplex yapmak, &quot;tahmin et&quot; problemini tamamen ortadan kaldırıyor — çözülmesi zor bir problemi çözmek yerine yok etmek.</li><li>Medya yolu ile kontrol yolu ayrıldı: ses kesintisiz akarken tool use ve model devretme asenkron bir kanalda yürüyor.</li><li><strong>Stateful inference</strong> — model isteğe değil, oturuma bağlı. Bu, istekleri herhangi bir sunucuya dağıtmayı imkânsız kılıyor; yönlendirme oturum-farkında olmalı.</li><li>Sürekli akışta hata bütçesi çok daha dar: taşıma, işleme ve çıkarımdaki her gecikme doğrudan duyulabilir bir kusura dönüşüyor.</li><li>Protokol seviyesine kadar inilmiş — ses taşıma katmanı da öngörülebilir gecikme için yeniden yazılmış.</li>    </ul>
+<li>Veritabanı ve kuyruk ayrı sistemlerse ‘ikisi birden’ garantisi yoktur.</li><li>Mesajı işlemin parçası yapmak, outbox desenini platform özelliğine çevirir.</li><li>En az bir kez teslimat tüketicinin idempotent olmasını yine gerektirir.</li><li>Kuyruğu SQL ile sorgulayabilmek, takılan işi bulmayı kolaylaştırır.</li>    </ul>
   </div>
 
   <div class="callouts">
     <div class="callout callout-why">
       <h4 class="label">Neden önemli?</h4>
-      <p>&quot;Hızlı yol / yavaş yol ayrımı&quot; bu yazının asıl dersi ve sesli AI&#x27;a özgü değil. Aynı desen ödeme sistemlerinde (yetkilendirme senkron, mutabakat asenkron), mesajlaşma uygulamalarında (mesaj iletimi senkron, bildirim ve arşivleme asenkron) ve arama sistemlerinde de aynı. Bir sistemi hızlandırmanın en güçlü yolu genellikle kodu optimize etmek değil, kritik yoldan iş çıkarmaktır.</p>
+      <p>‘Dual write’ sorunu (iki sisteme ayrı yazmak) dağıtık sistemlerin klasik hatasıdır. Çözümü ya veritabanının içine kuyruk almak ya da outbox deseni uygulamaktır; her iki yaklaşım da aynı fikri paylaşır.</p>
     </div>
     <div class="callout callout-you">
       <h4 class="label">Sende karşılığı</h4>
-      <p>KlioAI&#x27;daki konuşma pratiği özelliği tam olarak bu problemin küçük ölçekli hâli: kullanıcı konuşurken kaydı işleme, değerlendirme ve puanlama işlerinin hepsini yanıt yolunda yaparsan uygulama ağır hisseder. Spring Boot tarafında kritik yolu &quot;sesi al, akışı sürdür&quot; ile sınırlayıp; değerlendirme, kayıt ve istatistik güncellemeyi bir kuyruğa (Redis Streams veya basit bir async queue) atmak bu yazının doğrudan uygulaması olur. Bir de &quot;stateful inference&quot; uyarısını not al: oturuma bağlı bir servisin önüne rastgele yük dengeleyici koyarsan oturumlar kopar — sticky routing gerekir.</p>
+      <p>Bunu Spring Boot’ta bugün <strong>transactional outbox</strong> ile uygulayabilirsin: iş verisini ve gönderilecek mesajı aynı Postgres işleminde <code>outbox</code> tablosuna yaz, ayrı bir işçi bu tabloyu okuyup mesajı gönderip satırı işaretlesin. Mobit’te bir doküman yüklendiğinde ‘indeksle’ işini bu yolla tetiklersen, yükleme kaydedilip indeksleme isteği kaybolmaz. Tüketici tarafında aynı mesajın iki kez gelme ihtimaline karşı bir <code>message_id</code> ile tekrarı yok say. Bu, mülakatlarda sık sorulan bir soru.</p>
     </div>
   </div>
 
@@ -107,20 +107,20 @@
   <h4 class="label">Sözlük</h4>
   <dl>
     <div class="term">
-      <dt><span class="term-en">full-duplex</span> <span class="term-tr">çift yönlü eşzamanlı</span></dt>
-      <dd>Bir kanalın aynı anda hem veri alıp hem gönderebilmesi. Telsiz (sırayla) değil, telefon (aynı anda) gibi.</dd>
+      <dt><span class="term-en">transactional outbox</span> <span class="term-tr">işlemsel gönderi kutusu</span></dt>
+      <dd>Mesajı iş verisiyle aynı işlemde bir tabloya yazıp ayrı bir süreçle iletme deseni.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">turn detection</span> <span class="term-tr">sıra tespiti</span></dt>
-      <dd>Konuşmada karşı tarafın sözünü bitirip bitirmediğini tahmin eden bileşen.</dd>
+      <dt><span class="term-en">dual write</span> <span class="term-tr">çift yazma</span></dt>
+      <dd>Aynı değişikliği iki ayrı sisteme ayrı ayrı yazmaya çalışmak; tutarsızlık riski taşır.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">stateful inference</span> <span class="term-tr">durum tutan çıkarım</span></dt>
-      <dd>Modelin her isteği sıfırdan işlemeyip oturum boyunca biriken durumu koruması; ölçeklemeyi zorlaştırır çünkü istek belirli bir sunucuya bağlanır.</dd>
+      <dt><span class="term-en">at-least-once delivery</span> <span class="term-tr">en az bir kez teslimat</span></dt>
+      <dd>Bir mesajın kaybolmaması ama ara sıra birden fazla kez iletilebilmesi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">fast path</span> <span class="term-tr">hızlı yol</span></dt>
-      <dd>Sistemde gecikmeye en duyarlı akış; buraya ek iş koymamak için özel olarak korunur.</dd>
+      <dt><span class="term-en">idempotency</span> <span class="term-tr">idempotans</span></dt>
+      <dd>Aynı işlemin birden fazla kez uygulanmasının sonucu değiştirmemesi.</dd>
     </div>
   </dl>
 </div>
@@ -128,13 +128,13 @@
 
   <div class="article-foot">
     <ul class="tags">
-  <li><a href="/etiket/gercek-zamanli-sistemler/">#gerçek zamanlı sistemler</a></li>
-  <li><a href="/etiket/gecikme/">#gecikme</a></li>
-  <li><a href="/etiket/mimari/">#mimari</a></li>
-  <li><a href="/etiket/llm/">#LLM</a></li>
+  <li><a href="/etiket/veritabani/">#veritabanı</a></li>
+  <li><a href="/etiket/mesajlasma/">#mesajlaşma</a></li>
+  <li><a href="/etiket/agent/">#agent</a></li>
+  <li><a href="/etiket/tutarlilik/">#tutarlılık</a></li>
 </ul>
 
-    <a class="readmore" href="https://openai.com/index/continuous-voice-interaction-with-gpt-live" rel="noopener nofollow" target="_blank">
+    <a class="readmore" href="https://cloud.google.com/blog/products/databases/spanner-queues-provide-native-transactional-messaging/" rel="noopener nofollow" target="_blank">
       Orijinali oku <span aria-hidden="true">→</span>
     </a>
   </div>
@@ -144,88 +144,38 @@
   <section class="section">
     <h2 class="section-title"><span>Kısa Kısa</span></h2>
     <div class="grid">
-<article class="brief" id="5ddb723efa92">
-  <div class="meta">
-    <a class="badge" href="/kaynak/meta/"
-     style="--brand: #0866FF">Meta Engineering</a>
-
-<span class="meta-item">3 Ağustos 2026</span><span class="meta-item">22 dk okuma</span>  <span class="meta-item level level-ileri">ileri</span>
-</div>
-
-  <h3 class="brief-title">
-    <a href="https://engineering.fb.com/2026/08/03/ml-applications/training-gem-at-llm-scale-meta-ads-recommendation-foundation-model/" rel="noopener nofollow" target="_blank">Meta reklam modelini LLM ölçeğinde eğitirken verimliliği ikiye katladı</a>
-  </h3>
-  <p class="original-title">GEM Training: How Meta Doubled the Efficiency of Its LLM-Scale Ads Foundation Model</p>
-  <div class="prose prose-sm"><p>GEM, Instagram ve Facebook&#x27;un reklam önerilerini besleyen temel model. Meta bunu binlerce GPU üzerinde eğitiyor ve 12 ayda toplam hesap gücünü 4 katına çıkarırken verimliliği (<strong>MFU</strong> — GPU&#x27;nun teorik kapasitesinin ne kadarının gerçekten kullanıldığı) %20-25&#x27;e, yani iki katına çıkarmış.</p><p>Yazının en çarpıcı iddiası şu: LLM&#x27;ler için optimize edilmiş altyapı öneri modellerine doğrudan aktarılamıyor. Sebebi veri: kullanıcı geçmişi kişiden kişiye çok değişken uzunlukta (<strong>jagged input</strong>), ve hepsini en uzun olana göre doldurmak hesabın %50&#x27;sine kadarını çöpe atıyor. Meta bu yüzden kendi çekirdek kütüphanesini yazmış (Jagged Flash Attention gibi) ve MXFP8 gibi çok düşük hassasiyetli sayı formatlarına inmiş.</p></div>
-
-  <ul class="keypoints-inline">
-<li>Ölçeklemek ≠ GPU eklemek: uçtan uca süre <code>max(hesap süresi, iletişim süresi)</code> ile belirleniyor, iletişim baskınsa yeni GPU&#x27;lar boş bekliyor.</li><li>Reklam tahmini (CTR/CVR) sayısal olarak hassas; düşük hassasiyete naif geçiş model kalitesini bozuyor.</li><li>Çözüm tek bir yerde değil: çekirdekler, sayı hassasiyeti, paralellik ve ağ topolojisi birlikte tasarlanmış.</li>  </ul>
-
-  <div class="callout callout-you callout-sm">
-    <h4 class="label">Sende karşılığı</h4>
-    <p>Bu yazıyı GPU sayısı için değil, <strong>kaynak israfını ölçme alışkanlığı</strong> için oku. &quot;Padding yüzünden hesabın %50&#x27;si boşa gidiyor&quot; tespiti, senin Tradebot projendeki değişken uzunluklu zaman serisi batch&#x27;lerinde birebir geçerli. PyTorch&#x27;ta değişken uzunluklu diziler için <code>pack_padded_sequence</code> ya da nested tensor kullanmak aynı israfı önler. Genel ders: bir işi hızlandırmadan önce kaç biriminin gerçekten işe yaradığını ölç.</p>
-  </div>
-
-  <div class="terms">
-  <h4 class="label">Sözlük</h4>
-  <dl>
-    <div class="term">
-      <dt><span class="term-en">MFU (Model FLOPs Utilization)</span> <span class="term-tr">model işlem verimliliği</span></dt>
-      <dd>GPU&#39;nun teorik işlem kapasitesinin yüzde kaçının gerçekten faydalı hesaba gittiği. %20 bile büyük ölçekte iyi sayılır.</dd>
-    </div>
-    <div class="term">
-      <dt><span class="term-en">jagged / ragged input</span> <span class="term-tr">düzensiz uzunluklu girdi</span></dt>
-      <dd>Batch içindeki örneklerin farklı uzunlukta olması; sabit uzunluğa doldurulunca (padding) hesap israf edilir.</dd>
-    </div>
-  </dl>
-</div>
-
-
-  <div class="article-foot">
-    <ul class="tags">
-  <li><a href="/etiket/ml-altyapisi/">#ML altyapısı</a></li>
-  <li><a href="/etiket/gpu/">#GPU</a></li>
-  <li><a href="/etiket/dagitik-egitim/">#dağıtık eğitim</a></li>
-  <li><a href="/etiket/performans/">#performans</a></li>
-</ul>
-
-    <a class="readmore" href="https://engineering.fb.com/2026/08/03/ml-applications/training-gem-at-llm-scale-meta-ads-recommendation-foundation-model/" rel="noopener nofollow" target="_blank">
-      Orijinali oku <span aria-hidden="true">→</span>
-    </a>
-  </div>
-</article>
-<article class="brief" id="32a76da78a0d">
+<article class="brief" id="423bae1fbafd">
   <div class="meta">
     <a class="badge" href="/kaynak/cloudflare/"
      style="--brand: #F6821F">Cloudflare Blog</a>
 
-<span class="meta-item">3 Ağustos 2026</span><span class="meta-item">7 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
+<span class="meta-item">2 Ekim 2026</span><span class="meta-item">7 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
 </div>
 
   <h3 class="brief-title">
-    <a href="https://blog.cloudflare.com/grpc-workers/" rel="noopener nofollow" target="_blank">Cloudflare Workers artık ham TCP bağlantısı ve gRPC kabul ediyor</a>
+    <a href="https://blog.cloudflare.com/one-observability-platform/" rel="noopener nofollow" target="_blank">Günlük, iz ve analiz tek yerde: Cloudflare Observability’de sekiz güncelleme</a>
   </h3>
-  <p class="original-title">Cloudflare Workers and Containers now support inbound TCP connections and gRPC</p>
-  <div class="prose prose-sm"><p>Workers 2017&#x27;den beri HTTP dünyasında yaşıyordu. Şimdi <code>connect(socket)</code> adında yeni bir handler ile gelen ham <strong>TCP</strong> bağlantısını doğrudan alabiliyor. Bu soket bir Worker&#x27;dan diğerine, oradan bir Durable Object&#x27;e ve nihayetinde bir container içindeki sunucuya geçirilebiliyor.</p><p>Pratik sonucu: HTTP&#x27;ye sığmayan protokoller — gRPC&#x27;nin çift yönlü akışı, veritabanı protokolleri, özel binary protokoller — artık edge üzerinde çalışabiliyor. Yazıda Worker → Durable Object → Container zincirinin her adımı kısa kod örnekleriyle gösteriliyor.</p></div>
+  <p class="original-title">8 major updates to Cloudflare Observability</p>
+  <div class="prose prose-sm"><p>Cloudflare, loglarını, izlerini (trace), analizlerini, uyarılarını, panolarını ve dışa aktarmayı tek bir gözlemlenebilirlik platformunda birleştiren sekiz güncelleme duyurdu. Gerekçe şu: 5xx artışı bir Worker’dan, kaynak sunucudan ya da Cloudflare’in kaynağa bağlanamamasından gelebilir ve bugün hangi sinyalin hangi ürüne ait olduğunu bilmek gerekiyor.</p><p>Öne çıkanlar: <strong>Logs</strong> artık Workers Observability ile Log Explorer’ı birleştiriyor (HTTP, güvenlik duvarı, Workers, R2, AI Gateway gibi veri kümeleri aynı arayüzde); <strong>Cloudflare Traces</strong> açık beta’da, isteğin güvenlik kuralları, önbellek kararları, yönlendirme ve Workers adımlarını gösteriyor ve OpenTelemetry ile dışa aktarılıyor; agent’lar için birleşik bir <strong>SQL API</strong> beta’da; ve tüm kayıt ve iz saklama için yeni birleşik fiyatlandırma <strong>1 Aralık 2026</strong>’dan itibaren geçerli olacak.</p></div>
 
   <ul class="keypoints-inline">
-<li><code>connect(socket)</code> handler&#x27;ı soketi bir nesne gibi devredilebilir kılıyor; yönlendirme kararını kod veriyor.</li><li>Worker&#x27;lar gRPC-web yazıp otomatik gRPC&#x27;ye çevrilebiliyor; tam çift yönlü akış için container gerekiyor.</li><li>Şu an özel beta — üretim için değil, mimari fikir için okunmalı.</li>  </ul>
+<li>Sorun çözerken ‘hangi araca bakmalıyım’ sorusu azalırsa teşhis süresi kısalır.</li><li>İz (trace) ile günlük (log) birbirine bağlanınca tek isteğin yolculuğu izlenebilir.</li><li>OpenTelemetry ve W3C trace context, farklı sistemler arasında iz taşımayı standartlaştırıyor.</li>  </ul>
 
   <div class="callout callout-you callout-sm">
     <h4 class="label">Sende karşılığı</h4>
-    <p>gRPC senin CV&#x27;nde yok ama backend mülakatlarında &quot;REST mi gRPC mi?&quot; sorusu sık çıkıyor. Buradan alacağın net cevap şu: gRPC HTTP/2 ve TCP üstünde çalışır, asıl kazancı çift yönlü akış (bidirectional streaming) ve sıkı sözleşmedir — ve tam da bu yüzden HTTP-only platformlarda çalıştırmak zordur. Mobit&#x27;teki mesajlaşma uygulaması gibi gerçek zamanlı bir üründe WebSocket yerine gRPC streaming&#x27;i neden seçip seçmeyeceğini bu yazıdan sonra anlatabilirsin.</p>
+    <p>Spring Boot uygulamana Micrometer Tracing ve OpenTelemetry ekleyip her isteğe bir trace id ver, log satırlarına da bu kimliği yaz. Bir hata olduğunda tek bir kimlikle o isteğin tüm adımlarını bulabilmek, gözlemlenebilirliğin en temel kazanımı.</p>
   </div>
 
   <div class="terms">
   <h4 class="label">Sözlük</h4>
   <dl>
     <div class="term">
-      <dt><span class="term-en">gRPC</span> <span class="term-tr">gRPC uzak yordam çağrısı</span></dt>
-      <dd>HTTP/2 üstünde çalışan, şema tabanlı (protobuf) ve akış destekli bir servisler-arası iletişim protokolü.</dd>
+      <dt><span class="term-en">distributed tracing</span> <span class="term-tr">dağıtık izleme</span></dt>
+      <dd>Bir isteğin birden çok servis boyunca izlediği yolu tek bir iz olarak kaydetme.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">Durable Object</span> <span class="term-tr">kalıcı nesne</span></dt>
-      <dd>Cloudflare&#39;ın tekil, durum tutan hesaplama birimi; aynı anahtar hep aynı örneğe yönlenir.</dd>
+      <dt><span class="term-en">OpenTelemetry</span> <span class="term-tr">OpenTelemetry</span></dt>
+      <dd>Günlük, metrik ve izleri toplamak için kullanılan açık standart ve araç seti.</dd>
     </div>
   </dl>
 </div>
@@ -233,117 +183,12 @@
 
   <div class="article-foot">
     <ul class="tags">
-  <li><a href="/etiket/edge-computing/">#edge computing</a></li>
-  <li><a href="/etiket/grpc/">#gRPC</a></li>
-  <li><a href="/etiket/ag/">#ağ</a></li>
-  <li><a href="/etiket/api/">#API</a></li>
+  <li><a href="/etiket/gozlemlenebilirlik/">#gözlemlenebilirlik</a></li>
+  <li><a href="/etiket/opentelemetry/">#OpenTelemetry</a></li>
+  <li><a href="/etiket/loglama/">#loglama</a></li>
 </ul>
 
-    <a class="readmore" href="https://blog.cloudflare.com/grpc-workers/" rel="noopener nofollow" target="_blank">
-      Orijinali oku <span aria-hidden="true">→</span>
-    </a>
-  </div>
-</article>
-<article class="brief" id="f5d40d2e83bb">
-  <div class="meta">
-    <a class="badge" href="/kaynak/cloudflare/"
-     style="--brand: #F6821F">Cloudflare Blog</a>
-
-<span class="meta-item">3 Ağustos 2026</span><span class="meta-item">7 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
-</div>
-
-  <h3 class="brief-title">
-    <a href="https://blog.cloudflare.com/python-workers-rpc/" rel="noopener nofollow" target="_blank">Python ve JavaScript arasında şemasız RPC: tip sistemlerini köprülemek</a>
-  </h3>
-  <p class="original-title">Workers RPC now works across Python and JavaScript</p>
-  <div class="prose prose-sm"><p>Normalde iki farklı dilde yazılmış servisi konuşturmak için protobuf gibi dilden bağımsız bir serileştirme formatı seçersin, şema yazarsın, kod üretirsin. Cloudflare bu adımı tamamen atlıyor: TypeScript&#x27;te tanımlı bir metodu Python&#x27;dan doğrudan çağırabiliyorsun, şema yok, bağımlılık yok.</p><p>Yazının öğretici kısmı bunun nasıl mümkün olduğu. İki dilin tip sistemi farklı düşünüyor: JavaScript karmaşık parametreyi tek bir nesne olarak geçer, Python ise adlandırılmış argüman (keyword argument) kullanır. Köprü, Pyodide&#x27;nin FFI katmanı üzerinden bu farkı otomatik çeviriyor — JS <code>Date</code> nesnesi Python <code>datetime</code>&#x27;a dönüşüyor, fonksiyonlar iki yönde geçirilebiliyor, istisnalar çağrı noktasında fırlatılıyor.</p></div>
-
-  <ul class="keypoints-inline">
-<li>Şema yazmadan çapraz dil RPC — protobuf&#x27;un getirdiği bakım yükü ortadan kalkıyor.</li><li>Çoğu durumda ağ üzerinden geçmiyor: çağrılan Worker aynı thread&#x27;de çalıştığı için maliyet neredeyse sıfır.</li><li>Tip köprüleme kolay değil; asıl iş iki dilin çağrı geleneklerini eşlemekte.</li>  </ul>
-
-  <div class="callout callout-you callout-sm">
-    <h4 class="label">Sende karşılığı</h4>
-    <p>Sen zaten iki dilli çalışıyorsun: Java/Spring Boot backend + Python/LLM pipeline. Bugün bunları muhtemelen REST veya kuyrukla konuşturuyorsun. Bu yazı sana &quot;aradaki sınırın maliyeti nedir?&quot; sorusunu sordurmalı — serileştirme, şema bakımı, tip uyuşmazlığı. Kendi projende de aynı soruyu sor: Python tarafındaki kategorizasyon pipeline&#x27;ı ile Java servisi arasındaki sözleşmeyi kim koruyor, şema değişince ne kırılıyor?</p>
-  </div>
-
-  <div class="terms">
-  <h4 class="label">Sözlük</h4>
-  <dl>
-    <div class="term">
-      <dt><span class="term-en">RPC (Remote Procedure Call)</span> <span class="term-tr">uzak yordam çağrısı</span></dt>
-      <dd>Başka bir süreçteki/makinedeki fonksiyonu yerel fonksiyon gibi çağırma yöntemi.</dd>
-    </div>
-    <div class="term">
-      <dt><span class="term-en">FFI (Foreign Function Interface)</span> <span class="term-tr">yabancı fonksiyon arayüzü</span></dt>
-      <dd>Bir dilin başka bir dilde yazılmış kodu çağırabilmesini sağlayan köprü katmanı.</dd>
-    </div>
-  </dl>
-</div>
-
-
-  <div class="article-foot">
-    <ul class="tags">
-  <li><a href="/etiket/rpc/">#RPC</a></li>
-  <li><a href="/etiket/python/">#Python</a></li>
-  <li><a href="/etiket/api/">#API</a></li>
-  <li><a href="/etiket/birlikte-calisabilirlik/">#birlikte çalışabilirlik</a></li>
-</ul>
-
-    <a class="readmore" href="https://blog.cloudflare.com/python-workers-rpc/" rel="noopener nofollow" target="_blank">
-      Orijinali oku <span aria-hidden="true">→</span>
-    </a>
-  </div>
-</article>
-<article class="brief" id="5da743913f12">
-  <div class="meta">
-    <a class="badge" href="/kaynak/google-cloud/"
-     style="--brand: #34A853">Google Cloud Blog</a>
-
-<span class="meta-item">3 Ağustos 2026</span><span class="meta-item">5 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
-</div>
-
-  <h3 class="brief-title">
-    <a href="https://cloud.google.com/blog/products/databases/unify-public-and-private-data-with-data-commons-on-spanner-graph/" rel="noopener nofollow" target="_blank">Önbellek katmanından graph veritabanına: Data Commons&#39;ın mimari göçü</a>
-  </h3>
-  <p class="original-title">Unify public and private data with Data Commons on Spanner Graph</p>
-  <div class="prose prose-sm"><p>Data Commons, BM&#x27;den Dünya Bankası&#x27;na 100+ kaynaktan gelen 400 milyar veri noktasını birleştiren açık bir bilgi grafiği. İlk kurulduğunda graph veritabanı teknolojisi olgun olmadığı için Bigtable üzerinde <strong>önceden hesaplanmış önbellek</strong> katmanıyla çalışıyordu.</p><p>Şimdi Spanner Graph&#x27;a taşınmışlar ve kazanç listesi klasik bir &quot;önbellek borcu&quot; hikâyesi: önceden hesaplanan indeksler her güncellemede pahalı bir yeniden inşa gerektiriyordu; artık tek bir veri kümesini artımlı olarak güncelleyebiliyorlar. Ayrıca <code>kıta → ülke → il → ilçe</code> gibi çok adımlı gezinmeler sorgu anında yapılabiliyor — bu da <strong>GraphRAG</strong> akışlarının önünü açıyor.</p></div>
-
-  <ul class="keypoints-inline">
-<li>Önceden hesaplanmış önbellek hızlıdır ama güncellemeyi pahalılaştırır; bu takas her sistemde karşına çıkar.</li><li>Çok adımlı ilişki sorgularını uygulama katmanında değil veritabanında yapmak kod karmaşıklığını ciddi düşürüyor.</li><li>GraphRAG: modele düz metin parçaları yerine grafik üzerinde gezinerek toplanmış bağlam vermek.</li>  </ul>
-
-  <div class="callout callout-you callout-sm">
-    <h4 class="label">Sende karşılığı</h4>
-    <p>Mobit&#x27;teki AI destekli doküman arama mimarisi ile doğrudan ilgili. Klasik RAG belgeleri parçalara bölüp embedding benzerliğiyle getirir; ama &quot;bu ihale hangi firmaya bağlı, o firmanın hangi belgeleri var?&quot; gibi ilişkisel sorularda benzerlik yetmez. Bu yazı sana ilişkinin kendisini modellemenin alternatifini gösteriyor. PostgreSQL kullandığın için Spanner&#x27;a geçmene gerek yok — recursive CTE ile aynı çok adımlı gezinmeyi yapabilirsin; önemli olan deseni tanımak.</p>
-  </div>
-
-  <div class="terms">
-  <h4 class="label">Sözlük</h4>
-  <dl>
-    <div class="term">
-      <dt><span class="term-en">knowledge graph</span> <span class="term-tr">bilgi grafiği</span></dt>
-      <dd>Varlıkları düğüm, aralarındaki ilişkileri kenar olarak tutan veri modeli.</dd>
-    </div>
-    <div class="term">
-      <dt><span class="term-en">GraphRAG</span> <span class="term-tr">grafik tabanlı bağlam getirme</span></dt>
-      <dd>RAG&#39;de bağlamı düz benzerlik yerine grafik üzerinde ilişkileri izleyerek toplama yöntemi.</dd>
-    </div>
-    <div class="term">
-      <dt><span class="term-en">incremental update</span> <span class="term-tr">artımlı güncelleme</span></dt>
-      <dd>Tüm veriyi yeniden işlemek yerine yalnızca değişen kısmı güncelleme.</dd>
-    </div>
-  </dl>
-</div>
-
-
-  <div class="article-foot">
-    <ul class="tags">
-  <li><a href="/etiket/veritabani/">#veritabanı</a></li>
-  <li><a href="/etiket/graph/">#graph</a></li>
-  <li><a href="/etiket/rag/">#RAG</a></li>
-  <li><a href="/etiket/mimari/">#mimari</a></li>
-</ul>
-
-    <a class="readmore" href="https://cloud.google.com/blog/products/databases/unify-public-and-private-data-with-data-commons-on-spanner-graph/" rel="noopener nofollow" target="_blank">
+    <a class="readmore" href="https://blog.cloudflare.com/one-observability-platform/" rel="noopener nofollow" target="_blank">
       Orijinali oku <span aria-hidden="true">→</span>
     </a>
   </div>
@@ -356,45 +201,45 @@
   <section class="section">
     <h2 class="section-title"><span>Önceki Sayılar</span></h2>
     <div class="prev-grid">
-      <a class="prev-card" href="/sayi/2026-08-02/">
-        <span class="prev-date">2 Ağustos 2026</span>
-        <span class="prev-title">&#34;Agent Cloud&#34; nedir? Cloudflare&#39;in sorduğu soru</span>
-        <span class="prev-count">3 yazı · 3 kaynak</span>
-      </a>
-      <a class="prev-card" href="/sayi/2026-08-01/">
-        <span class="prev-date">1 Ağustos 2026</span>
-        <span class="prev-title">On açık matematik problemi ve 2.000 dolarlık token faturası</span>
+      <a class="prev-card" href="/sayi/2026-10-01/">
+        <span class="prev-date">1 Ekim 2026</span>
+        <span class="prev-title">Karar vermek için sohbet modeli gerekmez: Cloudflare Clef</span>
         <span class="prev-count">2 yazı · 2 kaynak</span>
       </a>
-      <a class="prev-card" href="/sayi/2026-07-31/">
-        <span class="prev-date">31 Temmuz 2026</span>
-        <span class="prev-title">MoQ: canlı video, görüntülü arama ve mesajlaşmayı tek protokole indirmek</span>
-        <span class="prev-count">4 yazı · 4 kaynak</span>
-      </a>
-      <a class="prev-card" href="/sayi/2026-07-30/">
-        <span class="prev-date">30 Temmuz 2026</span>
-        <span class="prev-title">Netflix öneri sistemini dil modeline devretti: GenRec</span>
-        <span class="prev-count">4 yazı · 3 kaynak</span>
-      </a>
-      <a class="prev-card" href="/sayi/2026-07-29/">
-        <span class="prev-date">29 Temmuz 2026</span>
-        <span class="prev-title">İki ayar puanı üçe katladı: benchmark modeli mi harness&#39;ı mı ölçüyor?</span>
-        <span class="prev-count">4 yazı · 3 kaynak</span>
-      </a>
-      <a class="prev-card" href="/sayi/2026-07-28/">
-        <span class="prev-date">28 Temmuz 2026</span>
-        <span class="prev-title">İnternetin kırılganlığı: 2026 ikinci çeyreğinin büyük kesintileri</span>
+      <a class="prev-card" href="/sayi/2026-09-30/">
+        <span class="prev-date">30 Eylül 2026</span>
+        <span class="prev-title">Bir Availability Zone’u günlerce boşaltmak: ARC Zonal Shift ile N-1 tatbikatı</span>
         <span class="prev-count">3 yazı · 3 kaynak</span>
       </a>
-      <a class="prev-card" href="/sayi/2026-07-27/">
-        <span class="prev-date">27 Temmuz 2026</span>
-        <span class="prev-title">Hata ayıklanamayan protokolü araçla ehlileştirmek: pvcli</span>
-        <span class="prev-count">3 yazı · 3 kaynak</span>
-      </a>
-      <a class="prev-card" href="/sayi/2026-07-24/">
-        <span class="prev-date">24 Temmuz 2026</span>
-        <span class="prev-title">İnternetin yolları neden beklendiği gibi çalışmıyor: BGP ORIGIN bulgusu</span>
+      <a class="prev-card" href="/sayi/2026-09-29/">
+        <span class="prev-date">29 Eylül 2026</span>
+        <span class="prev-title">GPU boşta bekliyor çünkü sandbox geç açılıyor: ısıtılmış havuz ve pod geri dönüşümü</span>
         <span class="prev-count">2 yazı · 2 kaynak</span>
+      </a>
+      <a class="prev-card" href="/sayi/2026-09-28/">
+        <span class="prev-date">28 Eylül 2026</span>
+        <span class="prev-title">Güvenlik vakası (safety case): eğitime devam etmeden önce kanıtla</span>
+        <span class="prev-count">1 yazı · 1 kaynak</span>
+      </a>
+      <a class="prev-card" href="/sayi/2026-09-25/">
+        <span class="prev-date">25 Eylül 2026</span>
+        <span class="prev-title">Bulut kimliğini kendi kimliğine çevirmek: iki ayrı kanıtla iş yükü doğrulaması</span>
+        <span class="prev-count">1 yazı · 1 kaynak</span>
+      </a>
+      <a class="prev-card" href="/sayi/2026-09-24/">
+        <span class="prev-date">24 Eylül 2026</span>
+        <span class="prev-title">Bulutta bile okuyamadığın veri: Meta AI gözlükleri için Private Processing</span>
+        <span class="prev-count">1 yazı · 1 kaynak</span>
+      </a>
+      <a class="prev-card" href="/sayi/2026-09-22/">
+        <span class="prev-date">22 Eylül 2026</span>
+        <span class="prev-title">Eğitimde gördüğünü üretimde görmemek: Uber’in özellik loglama çerçevesi</span>
+        <span class="prev-count">2 yazı · 2 kaynak</span>
+      </a>
+      <a class="prev-card" href="/sayi/2026-09-21/">
+        <span class="prev-date">21 Eylül 2026</span>
+        <span class="prev-title">Problemi tarif etmek ile çözmek ayrı iştir: Meta’nın açık kaynak atama çözücüsü Rebalancer</span>
+        <span class="prev-count">1 yazı · 1 kaynak</span>
       </a>
     </div>
     <p class="center"><a class="btn" href="/arsiv/">Tüm arşivi gör</a></p>
@@ -413,7 +258,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small">
-        69 özet · 22 sayı ·
+        113 özet · 51 sayı ·
         11 kaynak
       </p>
     </div>

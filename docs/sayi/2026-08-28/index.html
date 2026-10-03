@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>28 Ağustos 2026 — Eren&#39;in Mühendislik Gazetesi</title>
+<meta name="description" content="Netflix&#39;ten cold-start (soğuk başlangıç) probleminin temiz bir çözümü: bir içeriğin görseline ID olarak değil, gerçekte ne gösterdiğine göre bak. Bu fikir kitap, ürün, belge, hangi alanda öneri yapıyorsan işe yarıyor.">
+<meta name="author" content="Eren Ulutaş">
+<meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:title" content="28 Ağustos 2026 — Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:description" content="Netflix&#39;ten cold-start (soğuk başlangıç) probleminin temiz bir çözümü: bir içeriğin görseline ID olarak değil, gerçekte ne gösterdiğine göre bak. Bu fikir kitap, ürün, belge, hangi alanda öneri yapıyorsan işe yarıyor.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<link rel="canonical" href="https://erenulutas.com/sayi/2026-08-28/">
+<link rel="alternate" type="application/rss+xml" title="Eren&#39;in Mühendislik Gazetesi" href="/feed.xml">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+<script>
+  // Tema tercihini ilk boyamadan önce uygula (flash olmasın)
+  (function () {
+    try {
+      var t = localStorage.getItem('tema');
+      if (t) document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip" href="#icerik">İçeriğe geç</a>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <div class="masthead-brand">
+      <a href="/" class="logo">
+        <span class="logo-mark">EU</span>
+        <span class="logo-text">
+          <strong>Eren&#39;in Mühendislik Gazetesi</strong>
+          <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
+        </span>
+      </a>
+    </div>
+    <nav class="masthead-nav" aria-label="Ana menü">
+      <a href="/">Bugün</a>
+      <a href="/arsiv/">Arşiv</a>
+      <a href="/ara/">Ara</a>
+      <a href="/hakkinda/">Hakkında</a>
+      <button id="tema" class="tema" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+        <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/></g></svg>
+        <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="icerik">
+<div class="wrap">
+
+  <div class="dateline">
+    <span class="dateline-date">28 Ağustos 2026, Cuma</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">1 yazı</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">Netflix Tech Blog</span>
+  </div>
+
+    <div class="editor-note">
+    <span class="label">Editörden</span>
+    <p>Netflix&#x27;ten cold-start (soğuk başlangıç) probleminin temiz bir çözümü: bir içeriğin görseline ID olarak değil, gerçekte ne gösterdiğine göre bak. Bu fikir kitap, ürün, belge, hangi alanda öneri yapıyorsan işe yarıyor.</p>
+  </div>
+
+    <article class="cover" id="80fef398a2c4">
+  <div class="cover-head">
+    <span class="kicker">Günün Kapağı</span>
+    <div class="meta">
+    <a class="badge" href="/kaynak/netflix/"
+     style="--brand: #E50914">Netflix Tech Blog</a>
+
+<span class="meta-item">28 Ağustos 2026</span><span class="meta-item">14 dk okuma</span>  <span class="meta-item level level-ileri">ileri</span>
+</div>
+
+  </div>
+  <h2 class="cover-title">
+    <a href="https://netflixtechblog.com/maps-netflixs-multimodal-asset-personalization-at-scale-32f96320785e?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">Modele resmi göstermek: embedding ile cold-start&#39;ı kısaltmak ve beş modeli bire indirmek</a>
+  </h2>
+  <p class="original-title">MAPS: Netflix’s Multimodal Asset Personalization at Scale · Netflix Technology Blog</p>
+
+  <div class="prose"><p>Netflix&#x27;te bir başlığın görseli ve otomatik oynayan önizlemesi (yazıda “asset”) başlı başına bir kişiselleştirme problemi: Squid Game için hangi görseli göstermelisin? Daha da zor soru bir başlık yayımlandığı anda, üzerinde neredeyse hiç etkileşim verisi yokken ne yapacağın.</p><p>Yıllarca modeller ilk soruyu iyi, ikincisini kötü cevapladı. Çünkü her asset&#x27;i <strong>opak bir ID</strong> olarak ele alıyorlardı: görselin içinde ne olduğunu bilmeden yalnızca hangisine tıklandığını öğreniyorlardı. Yeni yayınlanan başlığın asset&#x27;leri geçmişsiz olduğu için keşfi artırıp popülerlik sezgisellerine düşüyorlardı. Bu klasik <strong>cold-start</strong> problemi.</p><p>Çözüm: modele görseli “göstermek”. Her görseli önceden eğitilmiş bir görsel-metin embedding modeli olan <strong>CLIP</strong> ile kodlayıp, asset temsiline ekliyorlar. Böylece yeni bir görsel, oluşturulduğu anda modelin zaten anladığı bir embedding ile geliyor; benzer görsellerden gelen zevk sinyalini hemen taşıyor ve model kişiselleştirmeye başlamak için çok daha az etkileşim geçmişine ihtiyaç duyuyor.</p><p>İkinci kazanım <strong>model konsolidasyonu</strong>: bir başlığın görselleri farklı kanvaslarda (farklı kırpmalar) yer alıyor ve bu yüzden beş ayrı model çalışıyordu. CLIP embedding&#x27;leri kırpma, yeniden boyutlandırma ve en-boy oranına büyük ölçüde duyarsız olduğu için neredeyse aynı görseller neredeyse aynı vektöre düşüyor; tek bir birleşik model yeterli oluyor. Yazı üç üretim sistemini kapsıyor: görsel kişiselleştirme, sorguya duyarlı görsel sıralama ve video önizleme kişiselleştirme. Bir de pratik hile: yeni embedding&#x27;leri uçtan uca entegrasyon ve A/B testine girişmeden önce ucuz bir yolla seçmek.</p></div>
+
+  <div class="keypoints">
+    <h4 class="label">Öne çıkanlar</h4>
+    <ul>
+<li>ID olarak temsil edilen varlık, yeni geldiğinde sıfırdan öğrenilmek zorunda; içerik embedding&#x27;i ise anında bilgi taşır.</li><li>Önceden eğitilmiş embedding&#x27;i mevcut modele eklemek, sıfırdan bir model eğitmekten çok daha ucuz bir cold-start çözümü.</li><li>Girdideki gereksiz varyasyona (kırpma, boyut) duyarsız temsil, birden çok modeli tek modele indirmeyi sağlıyor.</li><li>Bir embedding&#x27;i tam entegrasyondan önce ucuz bir testle elemek, A/B testi bütçesini koruyor.</li>    </ul>
+  </div>
+
+  <div class="callouts">
+    <div class="callout callout-why">
+      <h4 class="label">Neden önemli?</h4>
+      <p>Cold-start, öneri sistemlerinin en yaygın acısıdır: yeni kullanıcı, yeni ürün, yeni belge. Çözümün ortak fikri, varlığı yalnızca geçmişte ne yaptığıyla değil <strong>kendi içeriğiyle</strong> tanımlamak.</p>
+    </div>
+    <div class="callout callout-you">
+      <h4 class="label">Sende karşılığı</h4>
+      <p>Mobit&#x27;teki doküman aramada bu doğrudan işine yarar. Yeni yüklenen bir belge için henüz kimse arama yapmadı, tıklama verisi yok; ama belgenin içeriğinden üretilmiş embedding ilk günden aranabilir kılıyor, tam olarak Netflix&#x27;in yaptığı gibi. Bunu pgvector ile PostgreSQL&#x27;de yapabilirsin. Ayrıca “ID yerine içerik” fikrini KlioAI&#x27;da kullan: bir alıştırmayı yalnızca kimlik numarasıyla değil, konusunun embedding&#x27;iyle tanımla; yeni eklenen alıştırmalar ilk günden benzer alıştırmaların başarı verisinden yararlanır.</p>
+    </div>
+  </div>
+
+  <div class="terms">
+  <h4 class="label">Sözlük</h4>
+  <dl>
+    <div class="term">
+      <dt><span class="term-en">cold-start</span> <span class="term-tr">soğuk başlangıç</span></dt>
+      <dd>Yeni bir kullanıcı ya da öğe için henüz etkileşim verisi olmadığından öneri yapılamama durumu.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">CLIP</span> <span class="term-tr">CLIP</span></dt>
+      <dd>Görselleri ve metinleri aynı vektör uzayına gömen, önceden eğitilmiş çok kipli model.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">model consolidation</span> <span class="term-tr">model birleştirme</span></dt>
+      <dd>Birbirine benzer işleri yapan birden çok modeli tek bir modele indirme.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">opaque ID</span> <span class="term-tr">opak kimlik</span></dt>
+      <dd>İçeriği hakkında hiçbir bilgi taşımayan, yalnızca ayırt etmeye yarayan tanımlayıcı.</dd>
+    </div>
+  </dl>
+</div>
+
+
+  <div class="article-foot">
+    <ul class="tags">
+  <li><a href="/etiket/embedding/">#embedding</a></li>
+  <li><a href="/etiket/oneri-sistemleri/">#öneri sistemleri</a></li>
+  <li><a href="/etiket/cold-start/">#cold-start</a></li>
+  <li><a href="/etiket/kisisellestirme/">#kişiselleştirme</a></li>
+</ul>
+
+    <a class="readmore" href="https://netflixtechblog.com/maps-netflixs-multimodal-asset-personalization-at-scale-32f96320785e?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">
+      Orijinali oku <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+
+
+
+
+
+  <nav class="pager" aria-label="Sayılar arası gezinme">
+    <a class="pager-link pager-prev" href="/sayi/2026-08-27/">
+      <span class="pager-label">← Önceki sayı</span>
+      <span class="pager-title">27 Ağustos 2026</span>
+    </a>
+
+    <a class="pager-mid" href="/arsiv/">Arşiv</a>
+
+    <a class="pager-link pager-next" href="/sayi/2026-08-31/">
+      <span class="pager-label">Sonraki sayı →</span>
+      <span class="pager-title">31 Ağustos 2026</span>
+    </a>
+  </nav>
+
+</div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-col">
+      <h3>Eren&#39;in Mühendislik Gazetesi</h3>
+      <p class="muted">
+        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını her gün derleyip
+        Türkçe özetleyen kişisel bir gazete. Özetler yeni mezun bir mühendisin
+        anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
+      </p>
+      <p class="muted small">
+        113 özet · 51 sayı ·
+        11 kaynak
+      </p>
+    </div>
+    <div class="footer-col">
+      <h3>Kaynaklar</h3>
+      <ul class="footer-sources">
+        <li><a href="https://www.uber.com/blog/engineering/" rel="noopener nofollow" target="_blank">Uber Engineering</a></li>
+        <li><a href="https://netflixtechblog.com" rel="noopener nofollow" target="_blank">Netflix Tech Blog</a></li>
+        <li><a href="https://aws.amazon.com/blogs/architecture/" rel="noopener nofollow" target="_blank">AWS Architecture Blog</a></li>
+        <li><a href="https://blog.cloudflare.com" rel="noopener nofollow" target="_blank">Cloudflare Blog</a></li>
+        <li><a href="https://stripe.com/blog" rel="noopener nofollow" target="_blank">Stripe Engineering</a></li>
+        <li><a href="https://www.databricks.com/blog" rel="noopener nofollow" target="_blank">Databricks Engineering</a></li>
+        <li><a href="https://engineering.fb.com" rel="noopener nofollow" target="_blank">Meta Engineering</a></li>
+        <li><a href="https://openai.com/news/" rel="noopener nofollow" target="_blank">OpenAI Research</a></li>
+        <li><a href="https://www.anthropic.com/engineering" rel="noopener nofollow" target="_blank">Anthropic Engineering</a></li>
+        <li><a href="https://research.google/blog/" rel="noopener nofollow" target="_blank">Google Research</a></li>
+        <li><a href="https://cloud.google.com/blog/" rel="noopener nofollow" target="_blank">Google Cloud Blog</a></li>
+        <li><a href="https://devblogs.microsoft.com/engineering-at-microsoft/" rel="noopener nofollow" target="_blank">Microsoft Engineering</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Eren Ulutaş</h3>
+      <ul class="footer-links">
+        <li><a href="https://github.com/erenulutas0" rel="me noopener" target="_blank">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/eren-u-55918a2a0" rel="me noopener" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:eerenulutass@gmail.com">E-posta</a></li>
+        <li><a href="/feed.xml">RSS</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-legal">
+    <p class="muted small">
+      Tüm özetler kaynak makalelere bağlıdır; telif orijinal yazarlara aittir.
+      Bu site yalnızca özet ve yönlendirme sunar. © 2026 Eren Ulutaş.
+    </p>
+  </div>
+</footer>
+
+<script src="/static/app.js" defer></script>
+</body>
+</html>

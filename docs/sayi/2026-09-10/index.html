@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10 Eylül 2026 — Eren&#39;in Mühendislik Gazetesi</title>
+<meta name="description" content="Dağıtık sistemlerin en eski sorusu: ‘bu işi tam olarak kim yapıyor?’ Bugünün kapağı, kalıcı WebSocket bağlantılarının sahipliğini DynamoDB ile nasıl bir kira (lease) mekanizmasına çevirdiklerini anlatıyor; yanında OpenAI’ın yönetilen agent API’si var.">
+<meta name="author" content="Eren Ulutaş">
+<meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:title" content="10 Eylül 2026 — Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:description" content="Dağıtık sistemlerin en eski sorusu: ‘bu işi tam olarak kim yapıyor?’ Bugünün kapağı, kalıcı WebSocket bağlantılarının sahipliğini DynamoDB ile nasıl bir kira (lease) mekanizmasına çevirdiklerini anlatıyor; yanında OpenAI’ın yönetilen agent API’si var.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<link rel="canonical" href="https://erenulutas.com/sayi/2026-09-10/">
+<link rel="alternate" type="application/rss+xml" title="Eren&#39;in Mühendislik Gazetesi" href="/feed.xml">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+<script>
+  // Tema tercihini ilk boyamadan önce uygula (flash olmasın)
+  (function () {
+    try {
+      var t = localStorage.getItem('tema');
+      if (t) document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip" href="#icerik">İçeriğe geç</a>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <div class="masthead-brand">
+      <a href="/" class="logo">
+        <span class="logo-mark">EU</span>
+        <span class="logo-text">
+          <strong>Eren&#39;in Mühendislik Gazetesi</strong>
+          <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
+        </span>
+      </a>
+    </div>
+    <nav class="masthead-nav" aria-label="Ana menü">
+      <a href="/">Bugün</a>
+      <a href="/arsiv/">Arşiv</a>
+      <a href="/ara/">Ara</a>
+      <a href="/hakkinda/">Hakkında</a>
+      <button id="tema" class="tema" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+        <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/></g></svg>
+        <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="icerik">
+<div class="wrap">
+
+  <div class="dateline">
+    <span class="dateline-date">10 Eylül 2026, Perşembe</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">2 yazı</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">AWS Architecture Blog, OpenAI Research</span>
+  </div>
+
+    <div class="editor-note">
+    <span class="label">Editörden</span>
+    <p>Dağıtık sistemlerin en eski sorusu: ‘bu işi tam olarak kim yapıyor?’ Bugünün kapağı, kalıcı WebSocket bağlantılarının sahipliğini DynamoDB ile nasıl bir kira (lease) mekanizmasına çevirdiklerini anlatıyor; yanında OpenAI’ın yönetilen agent API’si var.</p>
+  </div>
+
+    <article class="cover" id="e8b2c01bbf30">
+  <div class="cover-head">
+    <span class="kicker">Günün Kapağı</span>
+    <div class="meta">
+    <a class="badge" href="/kaynak/aws-architecture/"
+     style="--brand: #FF9900">AWS Architecture Blog</a>
+
+<span class="meta-item">10 Eylül 2026</span><span class="meta-item">18 dk okuma</span>  <span class="meta-item level level-ileri">ileri</span>
+</div>
+
+  </div>
+  <h2 class="cover-title">
+    <a href="https://aws.amazon.com/blogs/architecture/building-resilient-real-time-streaming-workers-with-amazon-dynamodb-leases/" rel="noopener nofollow" target="_blank">Bağlantının tek sahibi kim? DynamoDB ile dağıtık kira (lease) deseni</a>
+  </h2>
+  <p class="original-title">Building resilient real-time streaming workers with Amazon DynamoDB leases · Siddhesh Tiwari</p>
+
+  <div class="prose"><p>500 eşzamanlı toplantıyı işleyen bir gerçek zamanlı transkripsiyon servisi düşün. Her toplantı için bir işçi, kaynağa giden ayrı bir WebSocket bağlantısı tutuyor. Bir işçi çökerse 100&#x27;den fazla bağlantı düşüyor ve operatör servisi elle yeniden başlatana kadar bağlantı başına 2-3 dakika veri kaybı oluyor.</p><p>Problemin özü: her bağlantıya <strong>tam olarak bir işçi</strong> sahip olmalı, ama işçiler birbirinden bağımsız çöküyor, yeniden dağıtılıyor ve ölçekleniyor. Zorluklar dört tane: işçi çökmesi, kayan dağıtımlar (yeni görev başlarken eskisi bağlantılarını bırakır), yatay ölçekleme (eklemek kolay, çıkarırken bağlantıları devretmek zor) ve en tehlikelisi <strong>çift sahiplenme</strong>: iki işçi aynı bağlantıyı sahiplenip aynı kaynağa bağlanırsa çift veri işleme ve protokol hataları çıkar.</p><p>Çözümün anahtar fikri tek cümlede: <strong>DynamoDB koşullu yazmaları (conditional write), ayrı bir koordinasyon servisine gerek bırakmadan dağıtık kilit işlevi görür.</strong> Her bağlantının bir <strong>kirası</strong> var: süresi sınırlı bir sahiplik iddiası. İşçiler kirayı sürekli yenilemek (heartbeat) zorunda; bir işçi aniden durursa kira dolar ve başka bir işçi devralır. Tablo tek öğede hem kira bilgisini (<code>lease_owner</code>, <code>lease_expires_at_ms</code>) hem bağlantı durumunu (<code>desired_state</code>, <code>ws_url</code>, <code>last_seq</code>) tutuyor. Sahipsiz bağlantıları bulmak için <code>desired_state</code> ve <code>lease_expires_at_ms</code> üzerinde bir GSI var. SQS yalnızca hızlı bildirim kanalı: sahipliğin sürekli bir durum olduğunu, SQS’in ise tek seferlik görev teslimi için tasarlandığını açıkça belirtiyorlar.</p><p>Dikkat çekici bir dürüst not: kira süresi dolma kontrolü, <strong>işçilerin yerel saatlerine</strong> dayanıyor; yani saatler makul ölçüde senkron olmalı. Varsayılan kira süresi 20 saniye, heartbeat aralığı 5 saniye; saat kayması bu güvenlik payının çok içinde kalıyor.</p></div>
+
+  <div class="keypoints">
+    <h4 class="label">Öne çıkanlar</h4>
+    <ul>
+<li>Sahiplik bir görev değil sürekli bir durumdur; bu yüzden kuyruk değil süresi dolan bir kayıtla modellenir.</li><li>Koşullu yazma = atomik ‘şu koşulda yaz’ işlemi; ayrı kilit servisi olmadan dağıtık kilit sağlar.</li><li>Kira süresi ile heartbeat aralığı birlikte seçilir: süre, aralığın birkaç katı olmalı ki gecikmeler yanlış devralmaya yol açmasın.</li><li>Kira, saat doğruluğuna bağlı; senkronizasyonu varsaymak yerine kira süresini olası kaymayla payla.</li><li>Zarif kapatma (graceful shutdown) ile dağıtım sırasında bağlantılar kayıpsız devredilebilir.</li>    </ul>
+  </div>
+
+  <div class="callouts">
+    <div class="callout callout-why">
+      <h4 class="label">Neden önemli?</h4>
+      <p>‘Tam olarak bir sahip’ gereksinimi çıktığı her yerde (zamanlanmış iş, lider seçimi, bağlantı yönetimi) kira deseni yeniden karşına çıkar. Önemli olan sahipliğin süresiz değil sürekli yenilenen bir iddia olması: çöken sahibin kilidi sonsuza kadar tutmasını engelleyen tek şey bu.</p>
+    </div>
+    <div class="callout callout-you">
+      <h4 class="label">Sende karşılığı</h4>
+      <p>Bunu PostgreSQL ile de kurabilirsin: <code>UPDATE jobs SET owner = :me, expires_at = now() + interval &#x27;20 seconds&#x27; WHERE id = :id AND (owner IS NULL OR expires_at &lt; now())</code> ve etkilenen satır sayısı 1 ise kira senin. Mobit’te zamanlanmış bir iş birden fazla örnekte çalışıyorsa (belge indeksleme, bildirim gönderme) aynı işi iki örneğin birden yapmadığından emin misin? ShedLock gibi Spring kütüphaneleri bu deseni hazır sunar. Tradebot’ta da bir borsa bağlantısını yalnızca bir sürecin tutması gerekiyorsa aynı kira mantığı çift işlem emri riskini önler.</p>
+    </div>
+  </div>
+
+  <div class="terms">
+  <h4 class="label">Sözlük</h4>
+  <dl>
+    <div class="term">
+      <dt><span class="term-en">lease</span> <span class="term-tr">kira (süreli sahiplik)</span></dt>
+      <dd>Belirli bir süre için geçerli olan ve yenilenmezse kendiliğinden biten sahiplik iddiası.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">conditional write</span> <span class="term-tr">koşullu yazma</span></dt>
+      <dd>Yalnızca belirtilen koşul doğruysa gerçekleşen atomik yazma işlemi.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">heartbeat</span> <span class="term-tr">yaşam sinyali</span></dt>
+      <dd>Bir bileşenin hâlâ ayakta olduğunu belirtmek için düzenli aralıklarla gönderdiği sinyal.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">graceful shutdown</span> <span class="term-tr">zarif kapatma</span></dt>
+      <dd>Bir süreç kapanmadan önce işini ve bağlantılarını düzgünce devrederek bırakması.</dd>
+    </div>
+  </dl>
+</div>
+
+
+  <div class="article-foot">
+    <ul class="tags">
+  <li><a href="/etiket/dagitik-sistemler/">#dağıtık sistemler</a></li>
+  <li><a href="/etiket/websocket/">#WebSocket</a></li>
+  <li><a href="/etiket/dynamodb/">#DynamoDB</a></li>
+  <li><a href="/etiket/koordinasyon/">#koordinasyon</a></li>
+</ul>
+
+    <a class="readmore" href="https://aws.amazon.com/blogs/architecture/building-resilient-real-time-streaming-workers-with-amazon-dynamodb-leases/" rel="noopener nofollow" target="_blank">
+      Orijinali oku <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+
+
+  <section class="section">
+    <h2 class="section-title"><span>Kısa Kısa</span></h2>
+    <div class="grid">
+<article class="brief" id="2b26a8066576">
+  <div class="meta">
+    <a class="badge" href="/kaynak/openai/"
+     style="--brand: #000000">OpenAI Research</a>
+
+<span class="meta-item">10 Eylül 2026</span><span class="meta-item">4 dk okuma</span>  <span class="meta-item level level-baslangic">başlangıç</span>
+</div>
+
+  <h3 class="brief-title">
+    <a href="https://openai.com/index/introducing-the-agents-api" rel="noopener nofollow" target="_blank">Agent harness’ini barındırılan bir servis olarak sunmak: Agents API</a>
+  </h3>
+  <p class="original-title">Introducing the Agents API</p>
+  <div class="prose prose-sm"><p>OpenAI, Codex’i güçlendiren harness ve altyapıyı geliştiricilere <strong>Agents API</strong> adıyla halka açık betada sunuyor. Gerekçeleri tanıdık: uzun süre çalışan agent’ların iyi iş çıkarması için güçlü bir harness (bağlam yönetimi, verimli araç kullanımı, alt ajanların koordinasyonu) ve günlerce güvenilir çalışan bir altyapı gerekiyor.</p><p>Tek bir API çağrısıyla görev, model, araçlar ve ortam belirtilerek bulut agent’ı oluşturuluyor. Ortamı sen seçiyorsun: OpenAI’ın yönetilen sandbox’ı, kendi altyapın ya da bir sandbox ortağı. Harness’i OpenAI barındırıp sürümlüyor; uzun oturumlar için bağlam otomatik sıkıştırılıyor, araç arama ilgili araç tanımlarını gerektiğinde yükleyerek token ve maliyeti düşürüyor, alt ajanlar işi paralelleştiriyor.</p></div>
+
+  <ul class="keypoints-inline">
+<li>Harness’i kendin yazmak yerine yönetilen kullanmak: yeni model her çıktığında harness’i yeniden yazma işini devrediyor.</li><li>Ortam seçimi (barındırılan, kendi VPC’n, ortak) güvenlik ve maliyet kararı; agent mantığından ayrı.</li>  </ul>
+
+  <div class="callout callout-you callout-sm">
+    <h4 class="label">Sende karşılığı</h4>
+    <p>‘Kendim mi yazayım, yönetilen mi kullanayım?’ sorusunun iyi bir örneği. 21 Ağustos’taki Netflix autoscaler yazısındaki ders burada da geçerli: harness bir bakım yüküdür. Küçük bir agent için kendi döngünü yazmak öğreticidir, ama üretimde uzun süren, sandbox gerektiren agent’lar için yönetilen seçeneği değerlendir. Karar kriterin: ‘bu katmanı sürdürmek benim farkımı yaratıyor mu?’</p>
+  </div>
+
+  <div class="terms">
+  <h4 class="label">Sözlük</h4>
+  <dl>
+    <div class="term">
+      <dt><span class="term-en">agent harness</span> <span class="term-tr">agent koşum takımı</span></dt>
+      <dd>Modelin etrafındaki döngü, bağlam yönetimi, araç çağırma ve alt ajan koordinasyonu katmanı.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">sandbox</span> <span class="term-tr">yalıtılmış ortam</span></dt>
+      <dd>Agent’ın kod çalıştırıp dosyalarla çalıştığı, ana sistemden izole çalışma alanı.</dd>
+    </div>
+  </dl>
+</div>
+
+
+  <div class="article-foot">
+    <ul class="tags">
+  <li><a href="/etiket/agent/">#agent</a></li>
+  <li><a href="/etiket/api/">#API</a></li>
+  <li><a href="/etiket/mimari/">#mimari</a></li>
+</ul>
+
+    <a class="readmore" href="https://openai.com/index/introducing-the-agents-api" rel="noopener nofollow" target="_blank">
+      Orijinali oku <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+    </div>
+  </section>
+
+
+
+  <nav class="pager" aria-label="Sayılar arası gezinme">
+    <a class="pager-link pager-prev" href="/sayi/2026-09-09/">
+      <span class="pager-label">← Önceki sayı</span>
+      <span class="pager-title">9 Eylül 2026</span>
+    </a>
+
+    <a class="pager-mid" href="/arsiv/">Arşiv</a>
+
+    <a class="pager-link pager-next" href="/sayi/2026-09-11/">
+      <span class="pager-label">Sonraki sayı →</span>
+      <span class="pager-title">11 Eylül 2026</span>
+    </a>
+  </nav>
+
+</div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-col">
+      <h3>Eren&#39;in Mühendislik Gazetesi</h3>
+      <p class="muted">
+        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını her gün derleyip
+        Türkçe özetleyen kişisel bir gazete. Özetler yeni mezun bir mühendisin
+        anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
+      </p>
+      <p class="muted small">
+        113 özet · 51 sayı ·
+        11 kaynak
+      </p>
+    </div>
+    <div class="footer-col">
+      <h3>Kaynaklar</h3>
+      <ul class="footer-sources">
+        <li><a href="https://www.uber.com/blog/engineering/" rel="noopener nofollow" target="_blank">Uber Engineering</a></li>
+        <li><a href="https://netflixtechblog.com" rel="noopener nofollow" target="_blank">Netflix Tech Blog</a></li>
+        <li><a href="https://aws.amazon.com/blogs/architecture/" rel="noopener nofollow" target="_blank">AWS Architecture Blog</a></li>
+        <li><a href="https://blog.cloudflare.com" rel="noopener nofollow" target="_blank">Cloudflare Blog</a></li>
+        <li><a href="https://stripe.com/blog" rel="noopener nofollow" target="_blank">Stripe Engineering</a></li>
+        <li><a href="https://www.databricks.com/blog" rel="noopener nofollow" target="_blank">Databricks Engineering</a></li>
+        <li><a href="https://engineering.fb.com" rel="noopener nofollow" target="_blank">Meta Engineering</a></li>
+        <li><a href="https://openai.com/news/" rel="noopener nofollow" target="_blank">OpenAI Research</a></li>
+        <li><a href="https://www.anthropic.com/engineering" rel="noopener nofollow" target="_blank">Anthropic Engineering</a></li>
+        <li><a href="https://research.google/blog/" rel="noopener nofollow" target="_blank">Google Research</a></li>
+        <li><a href="https://cloud.google.com/blog/" rel="noopener nofollow" target="_blank">Google Cloud Blog</a></li>
+        <li><a href="https://devblogs.microsoft.com/engineering-at-microsoft/" rel="noopener nofollow" target="_blank">Microsoft Engineering</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Eren Ulutaş</h3>
+      <ul class="footer-links">
+        <li><a href="https://github.com/erenulutas0" rel="me noopener" target="_blank">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/eren-u-55918a2a0" rel="me noopener" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:eerenulutass@gmail.com">E-posta</a></li>
+        <li><a href="/feed.xml">RSS</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-legal">
+    <p class="muted small">
+      Tüm özetler kaynak makalelere bağlıdır; telif orijinal yazarlara aittir.
+      Bu site yalnızca özet ve yönlendirme sunar. © 2026 Eren Ulutaş.
+    </p>
+  </div>
+</footer>
+
+<script src="/static/app.js" defer></script>
+</body>
+</html>

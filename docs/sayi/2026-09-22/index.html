@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>22 Eylül 2026 — Eren&#39;in Mühendislik Gazetesi</title>
+<meta name="description" content="İki yazı da aynı tema: tekrar eden işi bir kez yap ve sakla. Uber, modelin eğitimde gördüğü özelliklerle üretimde gördüklerinin farklı çıktığı sinsi hatayı, özellikleri çıkarım anında loglayarak çözüyor. OpenAI ise prompt önbelleği için pratik bir kullanım kılavuzu yayımlamış.">
+<meta name="author" content="Eren Ulutaş">
+<meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:title" content="22 Eylül 2026 — Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:description" content="İki yazı da aynı tema: tekrar eden işi bir kez yap ve sakla. Uber, modelin eğitimde gördüğü özelliklerle üretimde gördüklerinin farklı çıktığı sinsi hatayı, özellikleri çıkarım anında loglayarak çözüyor. OpenAI ise prompt önbelleği için pratik bir kullanım kılavuzu yayımlamış.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<link rel="canonical" href="https://erenulutas.com/sayi/2026-09-22/">
+<link rel="alternate" type="application/rss+xml" title="Eren&#39;in Mühendislik Gazetesi" href="/feed.xml">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+<script>
+  // Tema tercihini ilk boyamadan önce uygula (flash olmasın)
+  (function () {
+    try {
+      var t = localStorage.getItem('tema');
+      if (t) document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip" href="#icerik">İçeriğe geç</a>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <div class="masthead-brand">
+      <a href="/" class="logo">
+        <span class="logo-mark">EU</span>
+        <span class="logo-text">
+          <strong>Eren&#39;in Mühendislik Gazetesi</strong>
+          <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
+        </span>
+      </a>
+    </div>
+    <nav class="masthead-nav" aria-label="Ana menü">
+      <a href="/">Bugün</a>
+      <a href="/arsiv/">Arşiv</a>
+      <a href="/ara/">Ara</a>
+      <a href="/hakkinda/">Hakkında</a>
+      <button id="tema" class="tema" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+        <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/></g></svg>
+        <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="icerik">
+<div class="wrap">
+
+  <div class="dateline">
+    <span class="dateline-date">22 Eylül 2026, Salı</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">2 yazı</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">Uber Engineering, OpenAI Research</span>
+  </div>
+
+    <div class="editor-note">
+    <span class="label">Editörden</span>
+    <p>İki yazı da aynı tema: tekrar eden işi bir kez yap ve sakla. Uber, modelin eğitimde gördüğü özelliklerle üretimde gördüklerinin farklı çıktığı sinsi hatayı, özellikleri çıkarım anında loglayarak çözüyor. OpenAI ise prompt önbelleği için pratik bir kullanım kılavuzu yayımlamış.</p>
+  </div>
+
+    <article class="cover" id="b694e4263171">
+  <div class="cover-head">
+    <span class="kicker">Günün Kapağı</span>
+    <div class="meta">
+    <a class="badge" href="/kaynak/uber/"
+     style="--brand: #000000">Uber Engineering</a>
+
+<span class="meta-item">22 Eylül 2026</span><span class="meta-item">9 dk okuma</span>  <span class="meta-item level level-ileri">ileri</span>
+</div>
+
+  </div>
+  <h2 class="cover-title">
+    <a href="https://www.uber.com/blog/taming-ml-firehose/" rel="noopener nofollow" target="_blank">Eğitimde gördüğünü üretimde görmemek: Uber’in özellik loglama çerçevesi</a>
+  </h2>
+  <p class="original-title">Taming the ML Firehose: Scaling Feature Consistency</p>
+
+  <div class="prose"><p>Uber&#x27;in hedefi net: <strong>çıkarım anında kullanılan özellikler, bir sonraki model yinelemesini eğitirken kullanılan özelliklerle aynı olsun.</strong> Tek doğruluk kaynağı, daha güçlü model performansı ve sorunların daha hızlı tespiti demek.</p><p>Problem sinsi: çevrimiçi ve çevrimdışı hatlar özellikleri farklı hesaplayıp tüketebiliyor. Model eğitimde sabit bir sözlükten öğreniyor (örneğin dil kodları <code>en-US</code>, <code>fr-FR</code>), ama servis anında aynı özellik <code>en</code> olarak gelebiliyor. Çevrimdışı hat da biçim farkı üretebiliyor (<code>jp_JA</code> ile <code>jp-JA</code>). Sonuç: model, servis sırasında hiç görünmeyen kategorilerden öğrenmiş oluyor ve güçlü sinyaller <strong>sessizce</strong> bozuluyor. Dağılımlar kayıyor, tahmin kararlılığı düşüyor ve görünür hiçbir hata yok. Ek sorunlar: birbirine bağımlı ETL işlerinden oluşan kırılgan veri hatları (eksik bölümler, sessizce bozulan eğitim verisi), çok günlük tazelik gecikmeleri ve geliştiricilerin sorunları anlamak için haftalar harcaması.</p><p>Çözüm <strong>özellik loglama</strong>: çıkarım anında modele giden gerçek özellikleri kaydedip eğitimde onları kullanmak. Ölçek ise başlı başına sorun. Transformer tabanlı öneri sistemleri saniyede 8 milyon sorguya ulaşıyor; her tahminin özelliklerini loglamak günde yüz milyarlarca kayıt, ayda 5 trilyon satır ve günde yaklaşık 1,7 PB demek. Restoran öneri modeli için tüm özellikleri yollamak saniyede yaklaşık 9,3 GiB ve mevcut Kafka kümelerinin çok üstünde.</p><p>Çevrimiçi mimarideki çözümler: <strong>özellik izin listesi</strong> (modelin kullanmadığı özellikleri loglamamak) yük boyutunu 4-5 kat düşürüyor; <strong>özellik adı takma adları</strong>: uzun adlar (<code>store_unique_identifier_operational_meal_period_context_key</code>) serileştirmede kompakt tamsayı kimliklere çevriliyor; <strong>gösterim filtreleme</strong>: sıralamaya giren adayların yalnızca yaklaşık %40&#x27;ı filtre sonrası kalıyor ve onların da yalnızca %5&#x27;i gerçekten gösterime dönüşüyor, o yüzden Flink&#x27;te tahminler istemci olaylarıyla zaman pencereli olarak birleştirilip yalnızca gerçekten gösterilenler tutuluyor.</p><p>Flink işini ölçeklemek de öğreticiydi. Paralelliği körü körüne artırmak işe yaramadı: her operatör ayrı profillendi ve birleştirme öncesi operatörlere 512, birleştirmeye 768 paralellik (Uber&#x27;in en büyük Flink dağıtımı) verildi. Varsayılan RocksDB kontrol noktası saatte 12 TB&#x27;ı aşarak bulut yazmalarını başarısız kıldı; çözüm özel durum yönetimi: yalnızca gerekli metadata&#x27;yı tutmak, birleştirmeden hemen sonra kayıtları atmak ve tekrarları silmek. Nesne yeniden kullanımı, tipli yükler, yapılandırma önbelleği ve daha az serileştirme gibi küçük iyileştirmeler tepe tüketici gecikmesini yaklaşık %70 düşürdü.</p></div>
+
+  <div class="keypoints">
+    <h4 class="label">Öne çıkanlar</h4>
+    <ul>
+<li>Training-serving skew hata vermez, sessizce kaliteyi düşürür; bu yüzden en tehlikeli ML hatalarından.</li><li>Tek doğruluk kaynağı: eğitimde, servisin gördüğü özellikleri kullan.</li><li>Her veriyi loglama: modelin kullandığı özellikler ve gerçekten gösterilen adaylar yeterli.</li><li>Uzun metin adları yerine tamsayı kimlik: milyarlarca kez gönderilen şeyde bayt başına maliyet çarpılır.</li><li>Paralellik artırmak yetmez; her operatörü ayrı profillendir. Varsayılan kontrol noktası stratejisi ölçekte patlayabilir.</li>    </ul>
+  </div>
+
+  <div class="callouts">
+    <div class="callout callout-why">
+      <h4 class="label">Neden önemli?</h4>
+      <p>ML sistemlerinin üretimde en sık kırıldığı yer model değil, modelin besleme hattıdır. Hata genelde ‘kod çalışıyor ama değerler farklı’ biçiminde gelir ve aylarca fark edilmez. Çözüm, eğitim verisini servisten elde etmek: iki ayrı hesaplamayı birbirine denk tutmaya çalışmak yerine tek hesaplamayı iki yerde kullanmak.</p>
+    </div>
+    <div class="callout callout-you">
+      <h4 class="label">Sende karşılığı</h4>
+      <p>Bu, Tradebot’un en kritik sorusu: <strong>backtest’te kullandığın özellikler canlıda hesapladıklarınla birebir aynı mı?</strong> Backtest için toplu (Pandas) bir kod, canlı için ayrı bir akış kodu yazdıysan, iki kodun farklı yuvarlama, farklı zaman penceresi ya da farklı eksik veri davranışı vardır. Paper/shadow execution’ın değeri de burada: canlıda karar anında hesaplanan özellikleri <strong>logla</strong> ve sonraki backtest’i o loglarla yap. Aynısı DBH’daki gibi kategori kodlayan her LLM hattında geçerli: eğitimde gördüğün <code>&#x27;Fuel&#x27;</code> ile üretimde gelen <code>&#x27;fuel &#x27;</code> farklı kategoridir; girdileri normalize edip şemayla doğrula.</p>
+    </div>
+  </div>
+
+  <div class="terms">
+  <h4 class="label">Sözlük</h4>
+  <dl>
+    <div class="term">
+      <dt><span class="term-en">training-serving skew</span> <span class="term-tr">eğitim-servis uyumsuzluğu</span></dt>
+      <dd>Modelin eğitimde gördüğü özelliklerle üretimde gördüklerinin farklı hesaplanması; sessiz kalite kaybına yol açar.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">feature store</span> <span class="term-tr">özellik deposu</span></dt>
+      <dd>Model özelliklerinin tutarlı biçimde saklandığı ve hem eğitime hem servise sunulduğu merkezî katman.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">allow list</span> <span class="term-tr">izin listesi</span></dt>
+      <dd>Yalnızca açıkça listelenen öğelerin kabul edildiği filtreleme yaklaşımı.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">windowed join</span> <span class="term-tr">pencereli birleştirme</span></dt>
+      <dd>Akış verilerini, belirli bir zaman penceresi içinde gelen karşılıklarıyla eşleştirme.</dd>
+    </div>
+  </dl>
+</div>
+
+
+  <div class="article-foot">
+    <ul class="tags">
+  <li><a href="/etiket/ml-altyapisi/">#ML altyapısı</a></li>
+  <li><a href="/etiket/veri-muhendisligi/">#veri mühendisliği</a></li>
+  <li><a href="/etiket/flink/">#Flink</a></li>
+  <li><a href="/etiket/training-serving-skew/">#training-serving skew</a></li>
+</ul>
+
+    <a class="readmore" href="https://www.uber.com/blog/taming-ml-firehose/" rel="noopener nofollow" target="_blank">
+      Orijinali oku <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+
+
+  <section class="section">
+    <h2 class="section-title"><span>Kısa Kısa</span></h2>
+    <div class="grid">
+<article class="brief" id="b6b1e4118cdb">
+  <div class="meta">
+    <a class="badge" href="/kaynak/openai/"
+     style="--brand: #000000">OpenAI Research</a>
+
+<span class="meta-item">22 Eylül 2026</span><span class="meta-item">2 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
+</div>
+
+  <h3 class="brief-title">
+    <a href="https://openai.com/index/better-prompt-caching-for-gpt-6" rel="noopener nofollow" target="_blank">Önbelleği bozmadan akıl yürütme çabasını değiştirmek: GPT-6 için prompt cache kılavuzu</a>
+  </h3>
+  <p class="original-title">Better prompt caching for GPT-6</p>
+  <div class="prose prose-sm"><p>Kalıcı agent&#x27;lar saatlerce çalışırken art arda API istekleri atıyor ve her istek öncekilerin talimatını, araç tanımlarını ve bağlamını taşıyor. OpenAI bu ortak bağlamı önbelleğe alıp hesabı yeniden kullanıyor: yanıt süresi düşüyor, önbellekten gelen girdi token&#x27;larında <strong>%90&#x27;a kadar indirim</strong> var. GPT-6 ailesiyle birlikte önbellek sistemi iyileştirildi: uygun ortak önekler <strong>30 dakikalık pencerede</strong> yeniden kullanıldığında indirim veriliyor.</p><p>Yeni araçlar pratik: bir <strong>kontrol paneli</strong> önbellekten gelen girdi oranını zaman içinde gösteriyor, bir <strong>teşhis aracı</strong> beklenmedik bir kaçırmada isteği son yanıtla karşılaştırıp model, araç, ayar ya da girdideki hangi değişikliğin yeniden kullanımı engellediğini söylüyor. Ayrıca açık <strong>önbellek kesme noktaları</strong>, önbelleğe alınacak öneki sen seçiyorsun.</p><p>İlginç kısım önbelleği korumak için verilen kurallar: (1) akıl yürütme çabasını yanıtlar arasında <strong><code>configuration_update</code> ekleyerek</strong> değiştir, istek düzeyindeki ayarı değil; (2) araç tanımlarını ve sıralarını sabit tut, araç kaldırmak yerine <code>allowed_tools</code> ile yalnızca ilgilileri çağrılabilir yap ya da araç gerekmiyorsa <code>tool_choice: none</code> kullan; (3) yeni talimatları bağlamın sonuna yeni geliştirici mesajı olarak ekle; (4) bilinen bağlamı açılışta <strong>önceden ısıt</strong> (prewarm), böylece işlem kullanıcının bekleme süresinin dışına çıkar.</p></div>
+
+  <ul class="keypoints-inline">
+<li>Önbellek bir önek eşleşmesidir: önekte olan her değişiklik sonrasındaki her şeyi geçersiz kılar.</li><li>Sabit olması gerekenler: araç tanımları, şemalar, sıralama. Değişken olanlar sona eklenir.</li><li>Değişimi ‘kaldır’ yerine ‘gizle’ ile yap (<code>allowed_tools</code>): tanım yerinde kalır.</li><li>Önbellek kaçırmalarını görünür kılmak (panel, teşhis) optimizasyonun ön koşulu.</li>  </ul>
+
+  <div class="callout callout-you callout-sm">
+    <h4 class="label">Sende karşılığı</h4>
+    <p>Bu, Anthropic ve OpenAI için ortak bir kural olduğundan öğrenmeye değer: sistem promptunu ve araç listesini <strong>sabit tut</strong>, tarih ya da kullanıcı adı gibi değişkenleri promptun başına koyma, sona koy. Bu gazetenin kendi <code>summarize.py</code> dosyasında sistem promptu zaten sabit ve önbelleğe alınabilir yapıda. KlioAI’da kullanıcı adını sistem promptunun içine enjekte ediyorsan, her kullanıcı için ayrı bir önbellek girdisi yaratıyorsun; adı kullanıcı mesajına taşırsan ortak önek tüm kullanıcılar için paylaşılır. API cevabındaki <code>cache_read_input_tokens</code> gibi alanlara bak: sıfırsa önbelleğin çalışmıyor.</p>
+  </div>
+
+  <div class="terms">
+  <h4 class="label">Sözlük</h4>
+  <dl>
+    <div class="term">
+      <dt><span class="term-en">prompt caching</span> <span class="term-tr">prompt önbellekleme</span></dt>
+      <dd>Tekrar eden prompt önekini yeniden işlemek yerine önbellekten okuyarak maliyet ve gecikmeyi düşürme.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">cache breakpoint</span> <span class="term-tr">önbellek kesme noktası</span></dt>
+      <dd>Promptun hangi noktaya kadarının önbelleğe alınacağını belirten işaret.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">prewarming</span> <span class="term-tr">önceden ısıtma</span></dt>
+      <dd>Bilinen bağlamı kullanıcı isteği gelmeden önce işleyip önbelleğe koyma.</dd>
+    </div>
+  </dl>
+</div>
+
+
+  <div class="article-foot">
+    <ul class="tags">
+  <li><a href="/etiket/prompt-caching/">#prompt caching</a></li>
+  <li><a href="/etiket/maliyet/">#maliyet</a></li>
+  <li><a href="/etiket/agent/">#agent</a></li>
+  <li><a href="/etiket/llm/">#LLM</a></li>
+</ul>
+
+    <a class="readmore" href="https://openai.com/index/better-prompt-caching-for-gpt-6" rel="noopener nofollow" target="_blank">
+      Orijinali oku <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+    </div>
+  </section>
+
+
+
+  <nav class="pager" aria-label="Sayılar arası gezinme">
+    <a class="pager-link pager-prev" href="/sayi/2026-09-21/">
+      <span class="pager-label">← Önceki sayı</span>
+      <span class="pager-title">21 Eylül 2026</span>
+    </a>
+
+    <a class="pager-mid" href="/arsiv/">Arşiv</a>
+
+    <a class="pager-link pager-next" href="/sayi/2026-09-24/">
+      <span class="pager-label">Sonraki sayı →</span>
+      <span class="pager-title">24 Eylül 2026</span>
+    </a>
+  </nav>
+
+</div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-col">
+      <h3>Eren&#39;in Mühendislik Gazetesi</h3>
+      <p class="muted">
+        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını her gün derleyip
+        Türkçe özetleyen kişisel bir gazete. Özetler yeni mezun bir mühendisin
+        anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
+      </p>
+      <p class="muted small">
+        113 özet · 51 sayı ·
+        11 kaynak
+      </p>
+    </div>
+    <div class="footer-col">
+      <h3>Kaynaklar</h3>
+      <ul class="footer-sources">
+        <li><a href="https://www.uber.com/blog/engineering/" rel="noopener nofollow" target="_blank">Uber Engineering</a></li>
+        <li><a href="https://netflixtechblog.com" rel="noopener nofollow" target="_blank">Netflix Tech Blog</a></li>
+        <li><a href="https://aws.amazon.com/blogs/architecture/" rel="noopener nofollow" target="_blank">AWS Architecture Blog</a></li>
+        <li><a href="https://blog.cloudflare.com" rel="noopener nofollow" target="_blank">Cloudflare Blog</a></li>
+        <li><a href="https://stripe.com/blog" rel="noopener nofollow" target="_blank">Stripe Engineering</a></li>
+        <li><a href="https://www.databricks.com/blog" rel="noopener nofollow" target="_blank">Databricks Engineering</a></li>
+        <li><a href="https://engineering.fb.com" rel="noopener nofollow" target="_blank">Meta Engineering</a></li>
+        <li><a href="https://openai.com/news/" rel="noopener nofollow" target="_blank">OpenAI Research</a></li>
+        <li><a href="https://www.anthropic.com/engineering" rel="noopener nofollow" target="_blank">Anthropic Engineering</a></li>
+        <li><a href="https://research.google/blog/" rel="noopener nofollow" target="_blank">Google Research</a></li>
+        <li><a href="https://cloud.google.com/blog/" rel="noopener nofollow" target="_blank">Google Cloud Blog</a></li>
+        <li><a href="https://devblogs.microsoft.com/engineering-at-microsoft/" rel="noopener nofollow" target="_blank">Microsoft Engineering</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Eren Ulutaş</h3>
+      <ul class="footer-links">
+        <li><a href="https://github.com/erenulutas0" rel="me noopener" target="_blank">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/eren-u-55918a2a0" rel="me noopener" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:eerenulutass@gmail.com">E-posta</a></li>
+        <li><a href="/feed.xml">RSS</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-legal">
+    <p class="muted small">
+      Tüm özetler kaynak makalelere bağlıdır; telif orijinal yazarlara aittir.
+      Bu site yalnızca özet ve yönlendirme sunar. © 2026 Eren Ulutaş.
+    </p>
+  </div>
+</footer>
+
+<script src="/static/app.js" defer></script>
+</body>
+</html>

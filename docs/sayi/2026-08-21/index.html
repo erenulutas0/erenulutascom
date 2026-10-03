@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>21 Ağustos 2026 — Eren&#39;in Mühendislik Gazetesi</title>
+<meta name="description" content="Netflix&#39;ten alışılmadık bir itiraf: “Bugün iki Flink autoscaler çalıştırıyoruz. Bu, istediğimizden tam olarak bir fazla.” Yazı, kendi yaptığını bırakıp hazır olanı benimsemenin gerçek maliyetini ve ölçüm tuzaklarını anlatıyor.">
+<meta name="author" content="Eren Ulutaş">
+<meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:title" content="21 Ağustos 2026 — Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:description" content="Netflix&#39;ten alışılmadık bir itiraf: “Bugün iki Flink autoscaler çalıştırıyoruz. Bu, istediğimizden tam olarak bir fazla.” Yazı, kendi yaptığını bırakıp hazır olanı benimsemenin gerçek maliyetini ve ölçüm tuzaklarını anlatıyor.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<link rel="canonical" href="https://erenulutas.com/sayi/2026-08-21/">
+<link rel="alternate" type="application/rss+xml" title="Eren&#39;in Mühendislik Gazetesi" href="/feed.xml">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+<script>
+  // Tema tercihini ilk boyamadan önce uygula (flash olmasın)
+  (function () {
+    try {
+      var t = localStorage.getItem('tema');
+      if (t) document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip" href="#icerik">İçeriğe geç</a>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <div class="masthead-brand">
+      <a href="/" class="logo">
+        <span class="logo-mark">EU</span>
+        <span class="logo-text">
+          <strong>Eren&#39;in Mühendislik Gazetesi</strong>
+          <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
+        </span>
+      </a>
+    </div>
+    <nav class="masthead-nav" aria-label="Ana menü">
+      <a href="/">Bugün</a>
+      <a href="/arsiv/">Arşiv</a>
+      <a href="/ara/">Ara</a>
+      <a href="/hakkinda/">Hakkında</a>
+      <button id="tema" class="tema" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+        <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/></g></svg>
+        <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="icerik">
+<div class="wrap">
+
+  <div class="dateline">
+    <span class="dateline-date">21 Ağustos 2026, Cuma</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">2 yazı</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">Netflix Tech Blog, Google Research</span>
+  </div>
+
+    <div class="editor-note">
+    <span class="label">Editörden</span>
+    <p>Netflix&#x27;ten alışılmadık bir itiraf: “Bugün iki Flink autoscaler çalıştırıyoruz. Bu, istediğimizden tam olarak bir fazla.” Yazı, kendi yaptığını bırakıp hazır olanı benimsemenin gerçek maliyetini ve ölçüm tuzaklarını anlatıyor.</p>
+  </div>
+
+    <article class="cover" id="90991ed98228">
+  <div class="cover-head">
+    <span class="kicker">Günün Kapağı</span>
+    <div class="meta">
+    <a class="badge" href="/kaynak/netflix/"
+     style="--brand: #E50914">Netflix Tech Blog</a>
+
+<span class="meta-item">21 Ağustos 2026</span><span class="meta-item">9 dk okuma</span>  <span class="meta-item level level-ileri">ileri</span>
+</div>
+
+  </div>
+  <h2 class="cover-title">
+    <a href="https://netflixtechblog.com/a-tale-of-two-flink-autoscalers-e9f6a1b1492b?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">İki autoscaler hikâyesi: dışarıdan izlemek ile içeriden akıl yürütmek</a>
+  </h2>
+  <p class="original-title">A Tale of Two Flink Autoscalers · Netflix Technology Blog</p>
+
+  <div class="prose"><p>Netflix 2017&#x27;den beri Apache Flink ile akış işliyor ve 2026 itibarıyla birden fazla AWS bölgesinde <strong>30.000&#x27;den fazla Flink işi</strong> çalıştırıyor. Çoğu elle değil, yönetilen platformları Data Mesh tarafından üretiliyor; daha küçük ama büyüyen bir kısmı kişiselleştirme, reklam ve canlı yayın gibi alanlarda ekiplerin kendi yazdığı işler. Yükleri günlük döngülerle, lansmanlarla ve bölgesel yük devirleriyle dalgalanıyor.</p><p>Zirveye göre kaynak ayırmak israf, ortalamaya göre ayırmak ani yükte gecikme. Üstelik ölçekleme bedava değil: varsayılan olarak savepoint almak, işi düzgünce durdurmak ve yeni boyutta yeniden başlatmak demek; büyük durumlu işlerde bu dakikalar sürüyor.</p><p><strong>İlk autoscaler</strong> (yaklaşık 2019) bir akış işi gibi kurulmuştu: Mantis üzerinde, Atlas telemetri platformundan küme düzeyinde metrikleri (CPU, ağ, Kafka gecikmesi, giriş hızı) tüketiyordu. Ama <strong>dışarıdan izlemenin tavanı</strong> vardı: tüm kümeyi kaba konteyner metrikleriyle değerlendiriyor ve tek bir düğmeyi (toplam TaskManager sayısı) çevirdiği için işteki bütün operatörler birlikte ölçekleniyordu. Daha kötüsü, bir iş tamamen meşgul olup bunun hiçbiri CPU kullanımına yansımayabiliyordu.</p><p><strong>İkinci autoscaler</strong>, topluluğun Apache Flink Autoscaler&#x27;ı, içeriden akıl yürütüyor. Anahtar fikir her operatörün <strong>gerçek işleme hızını (TPR)</strong> tahmin etmek: tamamen meşgul olsa sürdürebileceği verim. Flink, her alt görev için saniyenin ne kadarının gerçek iş yaparak geçtiğini, geri basınç ve boşta bekleme süresinden ayrı raporluyor. Netflix şimdi ikisini birlikte işletiyor ve adım adım açık kaynak olana yakınsıyor.</p></div>
+
+  <div class="keypoints">
+    <h4 class="label">Öne çıkanlar</h4>
+    <ul>
+<li>Dışarıdan metrik (CPU) ile içeriden metrik (meşgul oranı) aynı şeyi söylemeyebilir; yanlış sinyal yanlış ölçekleme demek.</li><li>Tek düğmeli ölçekleme (toplam TaskManager) her operatörü aynı oranda büyütür; darboğaz operatörü ayrı ölçeklemek daha verimli.</li><li>Ölçeklemenin kendisinin maliyeti var (savepoint, durdur, yeniden başlat); bu yüzden gereksiz ölçekleme de pahalı.</li><li>Kendi yazdığın altyapıyı sürdürmenin gizli fiyatı, hazır çözüm olgunlaştığında ortaya çıkıyor.</li>    </ul>
+  </div>
+
+  <div class="callouts">
+    <div class="callout callout-why">
+      <h4 class="label">Neden önemli?</h4>
+      <p>Otomatik ölçekleme kararı, beslendiği metrik kadar iyidir. Bu yazı, “CPU %40, demek ki rahatız” varsayımının ne zaman yalan söylediğini gösteriyor: iş doluyken CPU boş görünebilir. Doğru metrik, sistemin gerçekte neyi beklediğini ölçen metriktir.</p>
+    </div>
+    <div class="callout callout-you">
+      <h4 class="label">Sende karşılığı</h4>
+      <p>Kendi servislerinde de kuyruğa bağlı bir tüketici çalıştırırsan aynı tuzak var: CPU&#x27;ya göre ölçekleme yapma, <strong>kuyruk gecikmesine</strong> (consumer lag) göre yap. Spring Boot tüketicin CPU&#x27;da %20 görünürken kuyruk büyüyorsa, iş bir dış çağrıyı bekliyordur. İkinci ders “build vs buy” için: bu gazetenin <code>fetch.py</code> içindeki RSS ayrıştırıcısı gibi küçük şeyleri kendin yazmak sorun değil; ama olgun bir kütüphane varsa onu benimseme zamanını bilmek de beceridir.</p>
+    </div>
+  </div>
+
+  <div class="terms">
+  <h4 class="label">Sözlük</h4>
+  <dl>
+    <div class="term">
+      <dt><span class="term-en">autoscaler</span> <span class="term-tr">otomatik ölçekleyici</span></dt>
+      <dd>Yüke göre kaynak miktarını insan müdahalesi olmadan artıran ya da azaltan bileşen.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">backpressure</span> <span class="term-tr">geri basınç</span></dt>
+      <dd>Aşağı akıştaki bir bileşen yetişemediğinde, yukarıdaki üreticinin yavaşlatılması.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">savepoint</span> <span class="term-tr">kayıt noktası</span></dt>
+      <dd>Flink işinin durumunun tutarlı bir anlık görüntüsü; durdurup yeniden başlatırken veri kaybını önler.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">true processing rate (TPR)</span> <span class="term-tr">gerçek işleme hızı</span></dt>
+      <dd>Bir operatörün tamamen meşgul olsa sürdürebileceği teorik verim.</dd>
+    </div>
+  </dl>
+</div>
+
+
+  <div class="article-foot">
+    <ul class="tags">
+  <li><a href="/etiket/flink/">#Flink</a></li>
+  <li><a href="/etiket/otomatik-olcekleme/">#otomatik ölçekleme</a></li>
+  <li><a href="/etiket/stream-processing/">#stream processing</a></li>
+  <li><a href="/etiket/build-vs-buy/">#build vs buy</a></li>
+</ul>
+
+    <a class="readmore" href="https://netflixtechblog.com/a-tale-of-two-flink-autoscalers-e9f6a1b1492b?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">
+      Orijinali oku <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+
+
+  <section class="section">
+    <h2 class="section-title"><span>Kısa Kısa</span></h2>
+    <div class="grid">
+<article class="brief" id="76f9e71cff03">
+  <div class="meta">
+    <a class="badge" href="/kaynak/google-research/"
+     style="--brand: #4285F4">Google Research</a>
+
+<span class="meta-item">21 Ağustos 2026</span><span class="meta-item">6 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
+</div>
+
+  <h3 class="brief-title">
+    <a href="https://research.google/blog/how-mobility-gives-language-models-a-deeper-understanding-of-place/" rel="noopener nofollow" target="_blank">Bir mekânın kimliği ile işlevi aynı şey değil: hareketlilikle zenginleşmiş embedding</a>
+  </h3>
+  <p class="original-title">How mobility gives language models a deeper understanding of place</p>
+  <div class="prose prose-sm"><p>Dil modelleri mekânları (market, park, kafe gibi POI&#x27;ler) genelde adres, kategori ve metin açıklaması gibi <strong>statik metadata</strong> ile temsil eder. Google&#x27;ın önerdiği <strong>ME-POIs</strong> çerçevesi, mekânın iki imzasını ayırıyor: kâğıttaki kimliği (ad ve kategori) ve gerçek işlevsel ritmi (toplulaştırılmış ziyaret izi).</p><p>Ziyaretlerin varış pencereleri, ayrılış eğilimleri ve tipik kalış süreleri bir zamansal kodlayıcıyla vektöre çevriliyor. “Uzun kuyruk” problemi de ele alınmış: ünlü yerlerin çok verisi var, küçük mahalle işletmelerinin çok az. Çözüm <strong>mekânsal çok ölçekli ziyaret yayılımı</strong>: bölgesel olarak benzer yerlerin davranışsal özelliklerini paylaşması. Sonuç, çalışma saati, fiyat seviyesi ve yoğunluk tahminlerinde iyileşme.</p></div>
+
+  <ul class="keypoints-inline">
+<li>Statik metadata kimliği, davranış verisi işlevi anlatır; birleşince temsil zenginleşir.</li><li>Az veriye sahip varlıklar için komşu varlıklardan bilgi ödünç almak, uzun kuyruk problemine pratik bir çözüm.</li>  </ul>
+
+  <div class="callout callout-you callout-sm">
+    <h4 class="label">Sende karşılığı</h4>
+    <p>Mobit&#x27;teki doküman arama için bir fikir: belgeleri yalnızca içeriğiyle embedding&#x27;leme; kullanım sinyalini de ekle (hangi belge hangi sorgularda açıldı, hangisi sık paylaşıldı). Metin “bu belge ne hakkında” der, kullanım “bu belge ne işe yarıyor” der. Yeni eklenen belgelerde veri azdır; aynı firmaya ait komşu belgelerden başlangıç sinyali almak burada anlatılan uzun kuyruk çözümünün küçük bir uyarlaması.</p>
+  </div>
+
+  <div class="terms">
+  <h4 class="label">Sözlük</h4>
+  <dl>
+    <div class="term">
+      <dt><span class="term-en">point of interest (POI)</span> <span class="term-tr">ilgi noktası</span></dt>
+      <dd>Haritada bir işletmeyi, parkı ya da simge yapıyı temsil eden kayıt.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">long tail</span> <span class="term-tr">uzun kuyruk</span></dt>
+      <dd>Az sayıda yaygın öğenin yanında, her biri çok az veriye sahip çok sayıda nadir öğe.</dd>
+    </div>
+  </dl>
+</div>
+
+
+  <div class="article-foot">
+    <ul class="tags">
+  <li><a href="/etiket/embedding/">#embedding</a></li>
+  <li><a href="/etiket/arastirma/">#araştırma</a></li>
+  <li><a href="/etiket/cografi-veri/">#coğrafi veri</a></li>
+</ul>
+
+    <a class="readmore" href="https://research.google/blog/how-mobility-gives-language-models-a-deeper-understanding-of-place/" rel="noopener nofollow" target="_blank">
+      Orijinali oku <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+    </div>
+  </section>
+
+
+
+  <nav class="pager" aria-label="Sayılar arası gezinme">
+    <a class="pager-link pager-prev" href="/sayi/2026-08-13/">
+      <span class="pager-label">← Önceki sayı</span>
+      <span class="pager-title">13 Ağustos 2026</span>
+    </a>
+
+    <a class="pager-mid" href="/arsiv/">Arşiv</a>
+
+    <a class="pager-link pager-next" href="/sayi/2026-08-24/">
+      <span class="pager-label">Sonraki sayı →</span>
+      <span class="pager-title">24 Ağustos 2026</span>
+    </a>
+  </nav>
+
+</div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-col">
+      <h3>Eren&#39;in Mühendislik Gazetesi</h3>
+      <p class="muted">
+        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını her gün derleyip
+        Türkçe özetleyen kişisel bir gazete. Özetler yeni mezun bir mühendisin
+        anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
+      </p>
+      <p class="muted small">
+        113 özet · 51 sayı ·
+        11 kaynak
+      </p>
+    </div>
+    <div class="footer-col">
+      <h3>Kaynaklar</h3>
+      <ul class="footer-sources">
+        <li><a href="https://www.uber.com/blog/engineering/" rel="noopener nofollow" target="_blank">Uber Engineering</a></li>
+        <li><a href="https://netflixtechblog.com" rel="noopener nofollow" target="_blank">Netflix Tech Blog</a></li>
+        <li><a href="https://aws.amazon.com/blogs/architecture/" rel="noopener nofollow" target="_blank">AWS Architecture Blog</a></li>
+        <li><a href="https://blog.cloudflare.com" rel="noopener nofollow" target="_blank">Cloudflare Blog</a></li>
+        <li><a href="https://stripe.com/blog" rel="noopener nofollow" target="_blank">Stripe Engineering</a></li>
+        <li><a href="https://www.databricks.com/blog" rel="noopener nofollow" target="_blank">Databricks Engineering</a></li>
+        <li><a href="https://engineering.fb.com" rel="noopener nofollow" target="_blank">Meta Engineering</a></li>
+        <li><a href="https://openai.com/news/" rel="noopener nofollow" target="_blank">OpenAI Research</a></li>
+        <li><a href="https://www.anthropic.com/engineering" rel="noopener nofollow" target="_blank">Anthropic Engineering</a></li>
+        <li><a href="https://research.google/blog/" rel="noopener nofollow" target="_blank">Google Research</a></li>
+        <li><a href="https://cloud.google.com/blog/" rel="noopener nofollow" target="_blank">Google Cloud Blog</a></li>
+        <li><a href="https://devblogs.microsoft.com/engineering-at-microsoft/" rel="noopener nofollow" target="_blank">Microsoft Engineering</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Eren Ulutaş</h3>
+      <ul class="footer-links">
+        <li><a href="https://github.com/erenulutas0" rel="me noopener" target="_blank">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/eren-u-55918a2a0" rel="me noopener" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:eerenulutass@gmail.com">E-posta</a></li>
+        <li><a href="/feed.xml">RSS</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-legal">
+    <p class="muted small">
+      Tüm özetler kaynak makalelere bağlıdır; telif orijinal yazarlara aittir.
+      Bu site yalnızca özet ve yönlendirme sunar. © 2026 Eren Ulutaş.
+    </p>
+  </div>
+</footer>
+
+<script src="/static/app.js" defer></script>
+</body>
+</html>

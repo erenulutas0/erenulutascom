@@ -1,0 +1,82 @@
+"""24 Eylül 2026 sayısı."""
+
+from pipeline.compose import save_edition
+
+DATE = "2026-09-24"
+
+INTRO = (
+    "12 Ağustos’ta WhatsApp’ın cihaz üstü dolandırıcılık uyarısını okumuştun; bugün aynı "
+    "ailenin ağır işi: kişisel bağlamı buluta gönderip yine de kimsenin okuyamamasını sağlamak. "
+    "‘Kullanımdaki veri’ şifrelemesi yıllardır konuşulan bir kavramdı, Meta onu bir ürüne "
+    "bağlamış."
+)
+
+DRAFTS = [
+    {
+        "url": "https://engineering.fb.com/2026/09/23/security/private-processing-meta-ai-glasses/",
+        "slot": "cover",
+        "title_tr": "Bulutta bile okuyamadığın veri: Meta AI gözlükleri için Private Processing",
+        "difficulty": "ileri",
+        "tags": ["gizlilik", "confidential computing", "güvenlik", "mimari"],
+        "summary": (
+            "Gözlükler yapay zekâ için çok uygun bir form: kullanıcının bağlamını diğer cihazlardan "
+            "daha iyi anlıyor ve telefona uzanmadan yardım ediyor. Çağrı yapmak ya da mesajı sesli "
+            "cevaplamak gibi işler cihazın içinde bitiyor; ama daha gelişmiş özellikler, gözlüğe "
+            "sığmayacak kadar büyük modeller gerektiriyor. Üstelik bir asistanın gerçekten faydalı "
+            "olması için **durum tutması** ve günler ya da haftalar boyunca bağlam kurması, arka "
+            "planda çalışması lazım. Yani iş buluta taşınmak zorunda ve asıl soru şu: kullanıcıyı "
+            "derinden tanıyan kişiselleştirilmiş bir yapay zekâyı, gelişmiş gizlilikle nasıl "
+            "kurarsın?\n\n"
+            "Meta'nın cevabı **Private Processing**: yapay zekâ iş yüklerini **gizli sanal makineler "
+            "(CVM)** içinde çalıştıran, güven sınırını gözlükten bulut veri merkezlerine kadar "
+            "uzatan ve Meta dahil kimsenin verileri okuyamadığı bir gizli hesaplama altyapısı. "
+            "Temel fikir şu: endüstri veriyi iki durumda şifreliyordu, **diskte** (at rest) ve "
+            "**ağda** (in transit). Açık nokta hep üçüncü durumdu: **kullanımdaki veri**. İşlenmek "
+            "için bellekte çözülmesi gerekiyor ve orada ana işletim sistemine, hipervizöre ve "
+            "altyapı operatörüne açık kalıyordu. Gizli hesaplama (confidential computing) bu "
+            "boşluğu kapatıyor.\n\n"
+            "Donanım temeli **güvenilir yürütme ortamı (TEE)**: bazı CPU ve GPU'larda bulunan, bir "
+            "CVM'in belleğini işlemcinin şifrelediği yetenek. Confidential Computing Consortium'a göre "
+            "TEE üç garanti veriyor: **veri gizliliği** (CVM belleğini, Meta ve ana işletim sistemi "
+            "dahil kimse okuyamaz), **veri bütünlüğü** (kimse veri ekleyemez, çıkaramaz ya da "
+            "değiştiremez) ve **kod bütünlüğü** (yüklendikten sonra CVM'de çalışan kodu kimse "
+            "değiştiremez). İstemci, yalnızca çipin içinde bulunan bir anahtarla imzalanmış, CVM'in "
+            "yüklediği yazılım imajının ölçümünü taşıyan bir **uzaktan doğrulama (remote "
+            "attestation) raporu** talep ediyor ve imzanın çip üreticisinin yayımladığı kök anahtara "
+            "bağlandığını kontrol ediyor. Private Processing, donanımın sağladığı gizlilik ve "
+            "doğrulamanın üstüne **hedeflenemezlik** (non-targetability) ve şifreli depolama ekliyor. "
+            "Bu, 2025'te WhatsApp ve Meta AI uygulaması için duyurulan yaklaşımın gözlüklere "
+            "genişletilmesi."
+        ),
+        "key_points": [
+            "Üç veri durumu: diskte, ağda ve kullanımda; üçüncüsü yıllarca korumasız kalan durumdu.",
+            "Güven, ‘bize güvenin’ ile değil, donanım imzalı ölçümle (attestation) kuruluyor: istemci hangi kodun çalıştığını kendisi doğruluyor.",
+            "Kod bütünlüğü kritik: yüklenen kod sonradan değiştirilemiyorsa, doğrulanan şey gerçekten çalışan şeydir.",
+            "Durum tutan kişisel asistan ile gizlilik çelişmek zorunda değil, ama altyapıyı baştan bu garantiyle tasarlamak gerekiyor.",
+        ],
+        "why_it_matters": (
+            "Kişisel veriyle çalışan yapay zekâ ürünlerinin ana çatışması ‘kullanışlılık için buluta "
+            "gönder’ ile ‘gizlilik için gönderme’ arasındadır. Confidential computing üçüncü bir "
+            "yol açıyor: gönder ama operatör dahil kimse okuyamasın ve bunu istemci doğrulayabilsin."
+        ),
+        "for_you": (
+            "Bunu bugün kendi ölçeğinde uygulayamazsın ama iki şeyi hemen kullanabilirsin. Birincisi "
+            "**kavram**: AWS Nitro Enclaves ve Azure Confidential VM gibi hazır servisler var; "
+            "Mobit’in tutacağı hassas ihale belgeleri ya da KlioAI’daki ses kayıtları için ‘operatör "
+            "dahil kimse görmesin’ gereksinimi çıkarsa çözümün adı bu. İkincisi **mülakat vokabüleri**: "
+            "‘at rest, in transit, in use’ üçlüsünü ve attestation fikrini anlatabilmek, güvenlik "
+            "mimarisini kavradığını gösterir. Pratik bir ilk adım: uygulamandaki hassas alanları "
+            "(TC kimlik no, ses kaydı) uygulama düzeyinde şifrele (`pgcrypto` ya da JPA "
+            "AttributeConverter), bunu veritabanı yöneticisi bile okuyamayacak hâle getirir."
+        ),
+        "terms": [
+            {"en": "confidential computing", "tr": "gizli hesaplama", "definition": "Verinin işlenirken bile (bellekte) donanım düzeyinde korunduğu hesaplama yaklaşımı."},
+            {"en": "trusted execution environment (TEE)", "tr": "güvenilir yürütme ortamı", "definition": "Belleği işlemci tarafından şifrelenen, içindeki kod ve veriyi ana sistemden yalıtan donanım özelliği."},
+            {"en": "remote attestation", "tr": "uzaktan doğrulama", "definition": "Bir sistemin hangi yazılımı çalıştırdığını donanım imzalı bir raporla uzaktan ispatlaması."},
+            {"en": "non-targetability", "tr": "hedeflenemezlik", "definition": "Operatörün belirli bir kullanıcıyı ayırıp ona özel işlem ya da kod uygulayamaması."},
+        ],
+    },
+]
+
+if __name__ == "__main__":
+    save_edition(DATE, INTRO, DRAFTS)

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1 Eylül 2026 — Eren&#39;in Mühendislik Gazetesi</title>
+<meta name="description" content="Agent geliştiriyorsan bu yazın en önemli protokol haberi: MCP, çıkışından bu yana en büyük revizyonuyla oturumsuz (stateless) oldu. Yani “sticky session” ve ortak oturum deposu ihtiyacı protokol seviyesinde ortadan kalktı.">
+<meta name="author" content="Eren Ulutaş">
+<meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:title" content="1 Eylül 2026 — Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:description" content="Agent geliştiriyorsan bu yazın en önemli protokol haberi: MCP, çıkışından bu yana en büyük revizyonuyla oturumsuz (stateless) oldu. Yani “sticky session” ve ortak oturum deposu ihtiyacı protokol seviyesinde ortadan kalktı.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<link rel="canonical" href="https://erenulutas.com/sayi/2026-09-01/">
+<link rel="alternate" type="application/rss+xml" title="Eren&#39;in Mühendislik Gazetesi" href="/feed.xml">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+<script>
+  // Tema tercihini ilk boyamadan önce uygula (flash olmasın)
+  (function () {
+    try {
+      var t = localStorage.getItem('tema');
+      if (t) document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip" href="#icerik">İçeriğe geç</a>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <div class="masthead-brand">
+      <a href="/" class="logo">
+        <span class="logo-mark">EU</span>
+        <span class="logo-text">
+          <strong>Eren&#39;in Mühendislik Gazetesi</strong>
+          <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
+        </span>
+      </a>
+    </div>
+    <nav class="masthead-nav" aria-label="Ana menü">
+      <a href="/">Bugün</a>
+      <a href="/arsiv/">Arşiv</a>
+      <a href="/ara/">Ara</a>
+      <a href="/hakkinda/">Hakkında</a>
+      <button id="tema" class="tema" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+        <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/></g></svg>
+        <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="icerik">
+<div class="wrap">
+
+  <div class="dateline">
+    <span class="dateline-date">1 Eylül 2026, Salı</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">1 yazı</span>
+    <span class="dateline-sep" aria-hidden="true">·</span>
+    <span class="dateline-meta">AWS Architecture Blog</span>
+  </div>
+
+    <div class="editor-note">
+    <span class="label">Editörden</span>
+    <p>Agent geliştiriyorsan bu yazın en önemli protokol haberi: MCP, çıkışından bu yana en büyük revizyonuyla oturumsuz (stateless) oldu. Yani “sticky session” ve ortak oturum deposu ihtiyacı protokol seviyesinde ortadan kalktı.</p>
+  </div>
+
+    <article class="cover" id="7d5b6832fa5f">
+  <div class="cover-head">
+    <span class="kicker">Günün Kapağı</span>
+    <div class="meta">
+    <a class="badge" href="/kaynak/aws-architecture/"
+     style="--brand: #FF9900">AWS Architecture Blog</a>
+
+<span class="meta-item">1 Eylül 2026</span><span class="meta-item">14 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
+</div>
+
+  </div>
+  <h2 class="cover-title">
+    <a href="https://aws.amazon.com/blogs/architecture/mcp-went-stateless-is-your-aws-mcp-server-deployment-well-architected/" rel="noopener nofollow" target="_blank">MCP oturumsuz oldu: sticky session, oturum deposu ve yük dengeleyici ayarlarını silebilirsin</a>
+  </h2>
+  <p class="original-title">MCP went stateless: Is your AWS MCP server deployment well-architected? · Anand Komandooru</p>
+
+  <div class="prose"><p>28 Temmuz 2026&#x27;da MCP, çıkışından bu yana <strong>en büyük revizyonunu</strong> yayımladı ve protokol çekirdeğini oturumsuz hâle getirdi. <code>initialize</code> el sıkışması ve istemcinin sonraki her istekte geri yollamak zorunda olduğu <code>Mcp-Session-Id</code> başlığı kalktı. Artık her istek kendi protokol sürümünü ve istemci bağlamını taşıyor; istemcinin ilk mesajı doğrudan araç çağrısı olabiliyor ve <strong>herhangi bir sunucu örneği</strong> cevaplayabiliyor. İstemci sunucunun neleri desteklediğini önceden öğrenmek isterse yeni <code>server/discover</code> metodu tek cevapta protokol sürümlerini, yetenekleri ve kimliği dönüyor.</p><p>AWS açısından önemi: eski tasarım yatay ölçeklemeyle çatışıyordu. Oturum, onu başlatan örnekte yaşıyordu; birden fazla örnek çalıştırmak ya istemcileri <strong>sticky routing</strong> ile sabitlemek ya da oturum durumunu ortak bir depoya taşımak demekti. İkisi de o protokol için doğruydu; yeni protokolde ikisi de gereksiz. Yazının analojisi güzel: eski protokolde sunucu yüzünüzü hatırlayan bir vale gibiydi (hep aynı valeyle muhatap olmak zorundaydınız); yeni protokolde <strong>numaralı bilet</strong> alıyorsunuz ve herhangi bir görevli yardım edebiliyor.</p><p>Mimari değişimler: ALB sticky ayarları yerine düz round-robin; DynamoDB ya da ElastiCache oturum deposu yerine sunucunun ürettiği ve araç argümanı olarak taşınan tanımlayıcılar; gövde ayrıştırmadan <code>Mcp-Method</code> ve <code>Mcp-Name</code> başlıklarıyla yönlendirme ve hız sınırlama; Lambda için “istek gelir, cevap gider” doğal uyumu; araç listeleri için <code>ttlMs</code> ve <code>cacheScope</code> ile yerleşik önbellek; W3C Trace Context ile dağıtık izleme; ve akış devam ettirme (<code>Last-Event-ID</code>) yerine <strong>idempotent araçlar</strong>: kopan çağrıyı istemci tekrar gönderiyor.</p><p>Önemli bir uyarı: <strong>eski istemcilere hizmet veriyorsan altyapıyı silme.</strong> Spesifikasyon eski istemciler için geriye uyumlu bir hat taşıyor; sticky kuralları ve oturum deposu, eski sürümdeki trafik sıfıra inene kadar durmalı. Gateway&#x27;de istek başına protokol sürümünü logla, eski hat için bir kapatma tarihi koy.</p></div>
+
+  <div class="keypoints">
+    <h4 class="label">Öne çıkanlar</h4>
+    <ul>
+<li>Oturumsuz protokol yatay ölçeklemeyi bedavaya getirir: durumu istemciye ya da isteğin kendisine taşırsan her örnek her isteğe bakabilir.</li><li>“Stateless” protokol demektir, uygulamanın durumsuz olduğu anlamına gelmez: durum varsa sunucunun ürettiği tanımlayıcıyla taşınır.</li><li>Sunucu artık istemciye çağrı ortasında geri istek (onay, örnekleme) atamıyor; bunun yerine <code>input_required</code> sonucu ve <code>requestState</code> belirteciyle çok turlu istek akışı (MRTR) kullanılıyor.</li><li>Yeniden deneme güvenliği için araçları idempotent yaz: kopan çağrı güvenle tekrarlanabilmeli.</li><li>Göç sırası: önce protokol sürümünü logla, eski trafik bitince altyapıyı kaldır.</li>    </ul>
+  </div>
+
+  <div class="callouts">
+    <div class="callout callout-why">
+      <h4 class="label">Neden önemli?</h4>
+      <p>Durum, ölçeklemenin en pahalı düşmanıdır. Bir protokol ya da servis durumu istemciye itebiliyorsa, ona ait hiçbir altyapıyı (sticky yönlendirme, ortak depo, oturum temizleme işi) işletmek zorunda kalmazsın. Bu, HTTP&#x27;nin kendisinin neden başarılı olduğunun da özeti.</p>
+    </div>
+    <div class="callout callout-you">
+      <h4 class="label">Sende karşılığı</h4>
+      <p>Kendi MCP sunucunu yazarsan (KlioAI ya da Mobit için bir araç katmanı düşün) baştan oturumsuz tasarla; Spring Boot&#x27;ta bu, <code>HttpSession</code> kullanmamak ve her isteği bağımsız ele almak demek. Aynı ilke bugünkü tüm servislerin için bir kontrol: <code>HttpSession</code> ya da yerel bellekte tuttuğun her şey, ikinci bir örnek açtığın an sorun olur. İkinci pratik beceri <strong>idempotency</strong>: ödeme, abonelik ya da kayıt oluşturan her endpoint&#x27;e istemcinin ürettiği bir <code>Idempotency-Key</code> kabul ettir; aynı anahtar ikinci kez gelirse işlemi tekrarlama, ilk sonucu dön.</p>
+    </div>
+  </div>
+
+  <div class="terms">
+  <h4 class="label">Sözlük</h4>
+  <dl>
+    <div class="term">
+      <dt><span class="term-en">stateless protocol</span> <span class="term-tr">oturumsuz protokol</span></dt>
+      <dd>Her isteğin kendi başına işlenebildiği, sunucunun önceki istekleri hatırlamasına gerek olmayan protokol.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">sticky session</span> <span class="term-tr">yapışkan oturum</span></dt>
+      <dd>Yük dengeleyicinin bir istemciyi hep aynı sunucu örneğine yönlendirmesi.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">idempotency</span> <span class="term-tr">tekrar-güvenliği</span></dt>
+      <dd>Aynı isteğin birden çok kez işlenmesinin, bir kez işlenmesiyle aynı sonucu vermesi.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">W3C Trace Context</span> <span class="term-tr">W3C izleme bağlamı</span></dt>
+      <dd>Dağıtık sistemlerde bir isteğin servisler arasında izlenebilmesi için standart başlık biçimi.</dd>
+    </div>
+  </dl>
+</div>
+
+
+  <div class="article-foot">
+    <ul class="tags">
+  <li><a href="/etiket/mcp/">#MCP</a></li>
+  <li><a href="/etiket/agent/">#agent</a></li>
+  <li><a href="/etiket/mimari/">#mimari</a></li>
+  <li><a href="/etiket/olcekleme/">#ölçekleme</a></li>
+</ul>
+
+    <a class="readmore" href="https://aws.amazon.com/blogs/architecture/mcp-went-stateless-is-your-aws-mcp-server-deployment-well-architected/" rel="noopener nofollow" target="_blank">
+      Orijinali oku <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+
+
+
+
+
+  <nav class="pager" aria-label="Sayılar arası gezinme">
+    <a class="pager-link pager-prev" href="/sayi/2026-08-31/">
+      <span class="pager-label">← Önceki sayı</span>
+      <span class="pager-title">31 Ağustos 2026</span>
+    </a>
+
+    <a class="pager-mid" href="/arsiv/">Arşiv</a>
+
+    <a class="pager-link pager-next" href="/sayi/2026-09-02/">
+      <span class="pager-label">Sonraki sayı →</span>
+      <span class="pager-title">2 Eylül 2026</span>
+    </a>
+  </nav>
+
+</div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-col">
+      <h3>Eren&#39;in Mühendislik Gazetesi</h3>
+      <p class="muted">
+        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını her gün derleyip
+        Türkçe özetleyen kişisel bir gazete. Özetler yeni mezun bir mühendisin
+        anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
+      </p>
+      <p class="muted small">
+        113 özet · 51 sayı ·
+        11 kaynak
+      </p>
+    </div>
+    <div class="footer-col">
+      <h3>Kaynaklar</h3>
+      <ul class="footer-sources">
+        <li><a href="https://www.uber.com/blog/engineering/" rel="noopener nofollow" target="_blank">Uber Engineering</a></li>
+        <li><a href="https://netflixtechblog.com" rel="noopener nofollow" target="_blank">Netflix Tech Blog</a></li>
+        <li><a href="https://aws.amazon.com/blogs/architecture/" rel="noopener nofollow" target="_blank">AWS Architecture Blog</a></li>
+        <li><a href="https://blog.cloudflare.com" rel="noopener nofollow" target="_blank">Cloudflare Blog</a></li>
+        <li><a href="https://stripe.com/blog" rel="noopener nofollow" target="_blank">Stripe Engineering</a></li>
+        <li><a href="https://www.databricks.com/blog" rel="noopener nofollow" target="_blank">Databricks Engineering</a></li>
+        <li><a href="https://engineering.fb.com" rel="noopener nofollow" target="_blank">Meta Engineering</a></li>
+        <li><a href="https://openai.com/news/" rel="noopener nofollow" target="_blank">OpenAI Research</a></li>
+        <li><a href="https://www.anthropic.com/engineering" rel="noopener nofollow" target="_blank">Anthropic Engineering</a></li>
+        <li><a href="https://research.google/blog/" rel="noopener nofollow" target="_blank">Google Research</a></li>
+        <li><a href="https://cloud.google.com/blog/" rel="noopener nofollow" target="_blank">Google Cloud Blog</a></li>
+        <li><a href="https://devblogs.microsoft.com/engineering-at-microsoft/" rel="noopener nofollow" target="_blank">Microsoft Engineering</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Eren Ulutaş</h3>
+      <ul class="footer-links">
+        <li><a href="https://github.com/erenulutas0" rel="me noopener" target="_blank">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/eren-u-55918a2a0" rel="me noopener" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:eerenulutass@gmail.com">E-posta</a></li>
+        <li><a href="/feed.xml">RSS</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-legal">
+    <p class="muted small">
+      Tüm özetler kaynak makalelere bağlıdır; telif orijinal yazarlara aittir.
+      Bu site yalnızca özet ve yönlendirme sunar. © 2026 Eren Ulutaş.
+    </p>
+  </div>
+</footer>
+
+<script src="/static/app.js" defer></script>
+</body>
+</html>
