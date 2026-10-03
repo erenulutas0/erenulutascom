@@ -1,0 +1,99 @@
+"""13 Ağustos 2026 sayısı."""
+
+from pipeline.compose import save_edition
+
+DATE = "2026-08-13"
+
+INTRO = (
+    "OpenAI bugün iki şey yayımladı ve ikisi aynı soruya cevap veriyor: agent'ı hem ucuz "
+    "hem hızlı nasıl çalıştırırsın? Birincisi “daha düşük akıl yürütme çabası”, ikincisi "
+    "“daha hızlı donanım”. Pazarlama dilini süzünce geriye üç somut API kalıbı kalıyor."
+)
+
+DRAFTS = [
+    {
+        "url": "https://openai.com/index/builders-guide-to-gpt-5-6",
+        "slot": "cover",
+        "title_tr": "Agent maliyetini düşürmenin üç yolu: çabayı azalt, işi paralelleştir, deterministik işi koda taşı",
+        "difficulty": "orta",
+        "tags": ["agent", "LLM", "maliyet", "tasarım"],
+        "summary": (
+            "OpenAI'ın startup'lar için yazdığı rehber, GPT-5.6 ailesinin fiyat-performans iddiasını "
+            "somut kalıplara bağlıyor. Ana gözlem şu: harness sabit tutulduğunda, Agents' Last Exam "
+            "testinde **GPT-5.6 Sol “low” akıl yürütmeyle, GPT-5.5'i “high” akıl yürütmede geride "
+            "bıraktı**. Üretimdeki startup'lar da önceki varsayılanlara göre akıl yürütme çabasını "
+            "düşürerek ciddi maliyet kazancı bildiriyor. Küçük modeller (Luna, Terra) ise daha fazla "
+            "test-zamanı hesabıyla çoğu zaman GPT-5.4 ve 5.5'e yakın çalışıyor ve belirgin biçimde "
+            "daha ucuz. Örnek olarak BrowseComp'ta üç ay önce GPT-5.5 (Extra High) 84,36% puanı "
+            "33,27 dolara almıştı.\n\n"
+            "Rehberin asıl değeri üç **Responses API kalıbı**: (1) **Yapılmış işi yeniden kullan**: "
+            "akıl yürütmeyi turlar arasında kalıcı tut ve uzun konuşmaları yerel sıkıştırmayla "
+            "(compaction) taşı. (2) **Uygun yerde paralel ayrıştır**: yerel çoklu-ajan orkestrasyonuyla "
+            "paralel iş akışlarını koordine et. (3) **Deterministik işi koda taşı**: programatik araç "
+            "çağırmayla araç çıktılarını modelin bağlamı dışında süz, topla ve yönet; model token'ını "
+            "yargı gerektiren işe ayır.\n\n"
+            "Yani yazı model karşılaştırmasından çok bir tasarım listesi: neyi modele, neyi koda, neyi "
+            "paralele verdiğine göre maliyet değişiyor."
+        ),
+        "key_points": [
+            "Yeni model nesli, aynı görevi daha düşük akıl yürütme çabasıyla çözebilir; varsayılan çabayı gözden geçirmek ilk hamle.",
+            "Akıl yürütmeyi turlar arasında kalıcı tutmak ve bağlamı sıkıştırmak, uzun görevlerde tekrarı azaltır.",
+            "Filtreleme, toplama gibi deterministik işleri modelin bağlamı dışında kodla yapmak token ve gecikme tasarrufu sağlar.",
+            "Küçük model + daha fazla test-zamanı hesabı, çoğu iş yükünde pahalı modele yaklaşabilir.",
+        ],
+        "why_it_matters": (
+            "Agent maliyetinin büyük kısmı modelin tekrar tekrar aynı şeyi düşünmesinden ve "
+            "gereksiz verileri bağlamında taşımasından gelir. Bu yazının üç kalıbı da aynı fikre "
+            "çıkar: modelin dikkatini yalnızca gerçekten yargı gereken yere harca."
+        ),
+        "for_you": (
+            "Tradebot'taki ve Mobit'teki LLM akışlarına şu soruları sor: (1) Akıl yürütme çabasını "
+            "kaç yaptın, hiç düşürüp kalitenin değişip değişmediğini ölçtün mü? Kendi küçük "
+            "değerlendirme setinde `low`, `medium`, `high` çalıştırıp tabloya dök. (2) Modele 500 satırlık "
+            "bir araç çıktısı veriyorsan, o satırları kodla süzüp yalnızca ilgili 20'sini vermek hem "
+            "ucuz hem daha isabetli. DBH'daki 10.000 kaydı sınıflandıran pipeline'da da aynısı geçerli: "
+            "kural tabanlı kısımları koda, belirsiz kısmı modele bırak."
+        ),
+        "terms": [
+            {"en": "reasoning effort", "tr": "akıl yürütme çabası", "definition": "Modelin cevap vermeden önce ne kadar düşüneceğini belirleyen ayar; düşük çaba daha hızlı ve ucuz."},
+            {"en": "test-time compute", "tr": "test-zamanı hesabı", "definition": "Eğitimden sonra, cevap üretirken modelin harcadığı ek hesaplama."},
+            {"en": "context compaction", "tr": "bağlam sıkıştırma", "definition": "Uzun konuşma geçmişini özetleyerek bağlam penceresinde yer açma."},
+            {"en": "programmatic tool calling", "tr": "programatik araç çağırma", "definition": "Araç çağrılarını ve çıktılarını modelin bağlamı dışında kodla yönetme; model yalnızca nihai sonucu görür."},
+        ],
+    },
+    {
+        "url": "https://openai.com/index/previewing-ultrafast",
+        "slot": "brief",
+        "title_tr": "Ultrafast: saniyede 750 token ile “hız” artık bir ürün özelliği",
+        "difficulty": "başlangıç",
+        "tags": ["LLM", "gecikme", "altyapı"],
+        "summary": (
+            "OpenAI, GPT-5.6 Sol'u standart işlemeye göre **14 kata kadar** hızlı çalıştıran bir "
+            "hizmet katmanı olan Ultrafast'i önizlemeye açtı; önce API'de. Katman Cerebras donanımıyla "
+            "çalışıyor ve saniyede **750 çıktı token'ına** kadar üretiyor.\n\n"
+            "Yazının tezi şu: bugüne dek gerçek zamanlı hız istemek, daha küçük ya da özelleşmiş bir "
+            "modele inmek demekti. Ultrafast bu takası bozuyor: aynı zekâ, çok daha hızlı. Önerilen "
+            "kullanım alanları gecikmenin değer taşıdığı yerler: olay müdahalesi (log ve kod "
+            "değişikliklerinden olası sebebi arıza sürerken bulmak), müşteri desteği ve ses, "
+            "ve gece boyu süren bir deneyi etkileşimli bir çalışma oturumuna çevirmek."
+        ),
+        "key_points": [
+            "Hız, model boyutundan ayrı bir eksen olarak fiyatlanıyor: aynı model, farklı hizmet katmanı.",
+            "Önizleme aşamasında; sınırlı sayıda müşteriyle öğreniyorlar.",
+        ],
+        "for_you": (
+            "Bu, 31 Temmuz sayısındaki “model seçimi bir maliyet-hız-kalite kararıdır” fikrinin devamı. Pratik "
+            "çıkarım: bir özellikte yavaşlık sorunu yaşıyorsan önce şuna bak: darboğaz token üretme hızı "
+            "mı, yoksa senin kodundaki ardışık çağrılar mı? KlioAI'da bir yanıt 6 saniyede geliyorsa "
+            "bunun kaç saniyesi modelde, kaçı backend'de, ölçmeden hızlı donanıma para vermek "
+            "yanlış yere yatırım olur."
+        ),
+        "terms": [
+            {"en": "service tier", "tr": "hizmet katmanı", "definition": "Aynı modelin hız, fiyat ve öncelik bakımından farklı seviyelerde sunulması."},
+            {"en": "tokens per second", "tr": "saniyedeki token", "definition": "Modelin çıktı üretme hızı; kullanıcının beklediği süreyi doğrudan belirler."},
+        ],
+    },
+]
+
+if __name__ == "__main__":
+    save_edition(DATE, INTRO, DRAFTS)

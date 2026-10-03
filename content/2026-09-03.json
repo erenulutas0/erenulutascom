@@ -1,0 +1,58 @@
+{
+  "date": "2026-09-03",
+  "intro": "Meta'nın en yaygın anahtar-değer deposunun önüne bir proxy koyma hikâyesi: milyon istemci, yüz binlerce veritabanı sunucusu ve baştan beri “doğrudan bağlan” diyen bir tasarım. İçinde dağıtık sistem tasarımının en temel matematiklerinden biri var: bağlantı sayısı.",
+  "articles": [
+    {
+      "id": "fbe0118d00e6",
+      "slot": "cover",
+      "source_key": "meta",
+      "source_name": "Meta Engineering",
+      "title": "ZGateway: Learnings from Putting a Proxy in Front of ZippyDB",
+      "title_tr": "Bağlantı sayısı bir ölçekleme sorunudur: ZippyDB'nin önüne ZGateway koymak",
+      "url": "https://engineering.fb.com/2026/09/03/core-infra/zgateway-proxy-zippydb-meta/",
+      "published": "2026-09-03",
+      "summary": "ZippyDB, Meta'da en yaygın kullanılan anahtar-değer deposu: ürün metadata'sı, sayaçlar ve yapılandırma için kullanılıyor ve küresel dağıtık bir filo üzerinde saniyede milyarlarca işlem sunabiliyor. **ZGateway**, ZippyDB istemci trafiğini birleştirmek için kullanılan proxy katmanı. Değeri yapısal çıktı: bir istemci, kısa sürede değiştirilemeyecek, yüzlerce ekibin sahip olduğu **bir milyondan fazla ana makinenin** biri olabilir. Proxy ise aynı anda çok sayıda istemcinin yolunda durduğu için hiçbir tek istemcinin yapamadığını yapabiliyor.\n\nDoğrudan erişim modelinde her istemci ihtiyaç duyduğu her veritabanı sunucusuna bağlanıyor. Tek bir istemci kısa sürede on binlerce farklı shard'a dokunabiliyor; bu shard'lar yüz binlerce sunucuya yayılmış. Sonuç **savurgan ve kırılgan bir ağ**: her açık bağlantı iki uçta da bellek, CPU ve dosya tanıtıcısı tüketiyor (çoğu boşta), gelen bağlantı sayısı istemci nüfusuyla büyüyor, yani **her yeni istemci grubu her veritabanı sunucusunu kötüleştiriyor**. En kritiği: yeniden bağlanma fırtınası felakete dönüşebiliyor. Bir olayda bir yönlendirme hatası her istemcinin shard başına bir bağlantı açmasına yol açtı, sunucular dosya tanıtıcısı sınırını aştı ve filo çöktü.\n\nZGateway durumsuz bir proxy katmanı: saniyede **1 milyardan fazla işlem** taşıyabiliyor, ZippyDB trafiğinin yaklaşık %40'ını taşıyor (%60'ın üzerine çıkması öngörülüyor) ve ortalama bir kullanım için yalnızca yaklaşık %6 hesaplama yükü ekliyor. Bağlantı sayılarının asimetrisi anahtar özellik: her istemci yalnızca bölgesel ZGateway sunucularına yapışkan bir havuza ihtiyaç duyuyor; her veritabanı sunucusu yalnızca boyutunu kontrol ettikleri ZGateway filosundan bağlantı görüyor. Yazıdaki örnek rakamlarla toplam kalıcı bağlantı yaklaşık **19 kat** azalıyor. Ama asıl mesele tek seferlik azalma değil, ölçekleme davranışı: doğrudan modelde veritabanı sunucusundaki gelen bağlantı istemci nüfusuyla doğrusal artarken, ZGateway ile istemci nüfusu denklemden çıkıyor.\n\nİkinci kazanım **istek akışını daraltmak**: proxy, ilgisiz çağıranlardan gelen istekleri shard başına gruplayıp tek bir arka uç RPC'sine birleştiriyor (batching) ve aynı anda aynı anahtarı isteyen çağıranlar için anahtarı bir kez çekip sonucu herkese dağıtıyor (coalescing). İstemci tarafındaki bir toplayıcı yalnızca kendi sürecinin isteklerini birleştirebilir.",
+      "key_points": [
+        "Doğrudan erişim, istemci nüfusuyla doğrusal büyüyen bağlantı yükü demek; proxy bu sayıyı sahibi olduğun bir sayıya çevirir.",
+        "Proxy’nin iki bedeli var: ek bir atlama ve işletilecek bir katman daha. Kazanç, istemci nüfusu büyük, çeşitli ve senin değiştiremeyeceğin ölçüdeyse çıkıyor.",
+        "Batching (aynı hedefe giden istekleri birleştir) ve coalescing (aynı anahtarı bir kez getir) ancak birçok çağıranı gören bir noktada yapılabilir.",
+        "Yeniden bağlanma fırtınası, doğrudan bağlantı mimarisinin en tehlikeli arıza modu.",
+        "Sorumlulukları bilinçli bölmüşler: TLS, shard bulma ve kopya seçimi yerinde kalıyor; ZGateway yalnızca trafik yönetimini üstleniyor."
+      ],
+      "why_it_matters": "“Her istemci her sunucuya bağlanır” tasarımı küçükken kusursuz, büyüyünce sistemi öldüren bir tasarımdır; çünkü maliyeti kimsenin sahip olmadığı bir sayı (istemci nüfusu) belirler. Tasarımın ölçekleme sınırını belirleyen değişkeni kendi kontrolüne almak, ölçekli sistem mühendisliğinin ana hamlelerinden biri.",
+      "for_you": "Bunu bugün kendi stack'inde ölç: PostgreSQL'in `max_connections` değeri düşüktür (varsayılan 100) ve her Spring Boot örneği kendi bağlantı havuzunu açar. 10 örnek × 20 bağlantı = 200 bağlantı, veritabanı ayakta kalmaz. Çözümün adı **PgBouncer**, yani bu yazıdaki proxy’nin küçük hâli. Mobit’te birden fazla servis aynı veritabanına bağlanıyorsa toplam bağlantı sayısını `SELECT count(*) FROM pg_stat_activity` ile bak. HikariCP’de `maximumPoolSize` değerini ‘ne kadar büyük olursa o kadar iyi’ diye ayarlama; havuz büyüdükçe veritabanı yavaşlar.",
+      "terms": [
+        {
+          "en": "connection fan-in",
+          "tr": "bağlantı toplanması",
+          "definition": "Bir sunucunun, kendisine bağlanan istemci sayısıyla büyüyen gelen bağlantı yükü."
+        },
+        {
+          "en": "request coalescing",
+          "tr": "istek birleştirme",
+          "definition": "Aynı anda aynı veriyi isteyen birden çok çağıran için veriyi bir kez getirip herkese dağıtma."
+        },
+        {
+          "en": "reconnection storm",
+          "tr": "yeniden bağlanma fırtınası",
+          "definition": "Çok sayıda istemcinin aynı anda yeniden bağlanmaya çalışarak sistemi daha da yüklemesi."
+        },
+        {
+          "en": "connection pooler",
+          "tr": "bağlantı havuzlayıcı",
+          "definition": "Çok sayıda istemci bağlantısını az sayıda gerçek veritabanı bağlantısına çoğullayan ara katman (örn. PgBouncer)."
+        }
+      ],
+      "tags": [
+        "proxy",
+        "dağıtık sistemler",
+        "bağlantı yönetimi",
+        "dayanıklılık"
+      ],
+      "difficulty": "ileri",
+      "read_minutes": 13,
+      "authors": []
+    }
+  ],
+  "schema": 1
+}

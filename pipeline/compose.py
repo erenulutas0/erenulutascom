@@ -31,16 +31,25 @@ def _norm(url: str) -> str:
 
 
 def article_cache(path: Path | None = None) -> dict[str, Article]:
-    """Çekilmiş makaleleri URL -> Article olarak indeksler."""
+    """Çekilmiş makaleleri URL -> Article olarak indeksler.
+
+    `fetch` her koşuda enriched.json'ı yeniden yazar; eski dönemlerin makaleleri
+    kaybolmasın diye aynı klasördeki enriched_*.json yedekleri de okunur.
+    """
     global _ARTICLE_CACHE
     if _ARTICLE_CACHE is None or path is not None:
-        source = path or (ROOT / ".cache" / "enriched.json")
-        if not source.exists():
+        main = path or (ROOT / ".cache" / "enriched.json")
+        if not main.exists():
             raise FileNotFoundError(
-                f"makale önbelleği yok: {source}\n"
+                f"makale önbelleği yok: {main}" "\n"
                 "Önce `python -m pipeline.cli fetch` çalıştır."
             )
-        _ARTICLE_CACHE = {_norm(a.url): a for a in load_index(source)}
+        sources = [main] + sorted(main.parent.glob("enriched_*.json"))  # yedekler kazanır: ilk görülen tarih korunur
+        cache: dict[str, Article] = {}
+        for src in sources:
+            for a in load_index(src):
+                cache[_norm(a.url)] = a
+        _ARTICLE_CACHE = cache
     return _ARTICLE_CACHE
 
 

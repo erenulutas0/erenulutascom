@@ -1,0 +1,46 @@
+{
+  "date": "2026-08-11",
+  "intro": "Google'ın tıbbi AI sistemi AMIE artık video görüşmesi yapıyor. Tıbbı bir kenara koy: yazının mühendislik kısmı, konuşma hızıyla düşünme derinliğini aynı anda nasıl tutturduklarında yatıyor.",
+  "articles": [
+    {
+      "id": "605e3ba5201c",
+      "slot": "cover",
+      "source_key": "google-research",
+      "source_name": "Google Research",
+      "title": "Advancing AMIE towards expert-level audio-visual clinical consultations",
+      "title_tr": "Konuşma hızında düşünmek: AMIE'nin eşzamansız çoklu ajan mimarisi",
+      "url": "https://research.google/blog/advancing-amie-towards-expert-level-audio-visual-clinical-consultations/",
+      "published": "2026-08-11",
+      "summary": "Google Research, tıbbi akıl yürütme ve diyalog için geliştirdiği araştırma sistemi AMIE'nin **gerçek zamanlı video görüşmesi** yapan sürümünü (AMIE Video) tanıttı. Gemini ve Project Astra üzerine kurulu sistem, simüle edilmiş görüşmelerle yapılan rastgele kontrollü bir çalışmada uzman düzeyinde performans gösterdi.\n\nMotivasyon basit: metin tabanlı arayüz, muayenenin görsel ve işitsel boyutunu (yürüyüş, rahatsızlık işaretleri, nefes, muayene manevraları) çöpe atıyor. Hasta karmaşık fiziksel belirtileri yazıya dökmek zorunda kalıyor.\n\nMühendislik problemi ise iki çelişen talep: sistem hastaya **doğal konuşma hızında** cevap verirken aynı anda **dikkatli klinik akıl yürütme** yapmalı. Çözüm, işi üç özelleşmiş ajan arasında bölen **eşzamansız çoklu ajan mimarisi**; ajanlar sürekli ve paralel çalışıyor. Yani konuşan katman, düşünen katmanı beklemiyor.",
+      "key_points": [
+        "Hızlı yanıt ile derin akıl yürütme aynı ajanın işi olmaktan çıkarılıp ayrı ajanlara bölünüyor.",
+        "Eşzamansız çalışma, konuşmanın akışını yavaş düşünce adımlarından yalıtıyor.",
+        "Değerlendirme, rastgele atanmış simüle görüşmelerle yapılmış: kontrollü bir deney tasarımı."
+      ],
+      "why_it_matters": "Bu, 3 Ağustos'taki OpenAI ses sisteminin aynı dersi: gecikmeye duyarlı yolu ağır işten ayır. Gerçek zamanlı AI ürünlerinde mimari karar çoğu kez model seçiminden önce gelir.",
+      "for_you": "KlioAI'daki konuşma pratiği özelliğinde “anlık geri bildirim” ile “derin değerlendirme” farklı işler: ilkini hızlı ve kısa bir yanıt olarak, ikincisini oturum bittikten sonra arka planda üretmek tam bu desen. İkisini aynı çağrıya sıkıştırırsan kullanıcı ya bekler ya da yüzeysel cevap alır.",
+      "terms": [
+        {
+          "en": "multi-agent architecture",
+          "tr": "çoklu ajan mimarisi",
+          "definition": "İşi birden fazla özelleşmiş ajan arasında bölüştüren sistem tasarımı."
+        },
+        {
+          "en": "randomized controlled study",
+          "tr": "rastgele kontrollü çalışma",
+          "definition": "Katılımcıların koşullara rastgele atandığı, nedenselliği ölçebilen deney türü."
+        }
+      ],
+      "tags": [
+        "agent",
+        "çok kipli",
+        "araştırma",
+        "gerçek zamanlı sistemler"
+      ],
+      "difficulty": "orta",
+      "read_minutes": 7,
+      "authors": []
+    }
+  ],
+  "schema": 1
+}
