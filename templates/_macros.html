@@ -1,4 +1,4 @@
-{# Yeniden kullanılan parçalar: kaynak rozeti, künye, makale kartları #}
+{# Yeniden kullanılan parçalar: kaynak rozeti, künye, makaleler, sayı yerleşimi #}
 
 {% macro badge(source_key, source_name) %}
   {% set s = source_by_key.get(source_key) %}
@@ -7,20 +7,18 @@
 {% endmacro %}
 
 
-{% macro meta_line(a, show_date=true) %}
+{% macro meta_line(a, kicker='') %}
 <div class="meta">
+  {% if kicker %}<span class="kicker">{{ kicker }}</span>{% endif %}
   {{ badge(a.source_key, a.source_name) }}
-  {% if show_date %}<span class="meta-item">{{ a.published_tr }}</span>{% endif %}
+  <span class="meta-item">{{ a.published_tr }}</span>
   {% if a.read_minutes %}<span class="meta-item">{{ a.read_minutes }} dk okuma</span>{% endif %}
   <span class="meta-item level level-{{ a.difficulty | slugify }}">{{ a.difficulty }}</span>
 </div>
 {% endmacro %}
 
 
-{% macro terms_block(a) %}
-{% if a.terms %}
-<div class="terms">
-  <h4 class="label">Sözlük</h4>
+{% macro term_list(a) %}
   <dl>
     {% for t in a.terms %}
     <div class="term">
@@ -29,8 +27,6 @@
     </div>
     {% endfor %}
   </dl>
-</div>
-{% endif %}
 {% endmacro %}
 
 
@@ -45,13 +41,20 @@
 {% endmacro %}
 
 
+{% macro article_foot(a) %}
+<div class="article-foot">
+  {{ tags_block(a) }}
+  <a class="readmore" href="{{ a.url }}" rel="noopener nofollow" target="_blank">
+    Orijinali oku <span aria-hidden="true">↗</span>
+  </a>
+</div>
+{% endmacro %}
+
+
 {# --- Kapak yazısı: uzun format --- #}
 {% macro cover_article(a) %}
-<article class="cover" id="{{ a.id }}">
-  <div class="cover-head">
-    <span class="kicker">Günün Kapağı</span>
-    {{ meta_line(a) }}
-  </div>
+<article class="story cover" id="{{ a.id }}">
+  {{ meta_line(a, 'Günün kapağı') }}
   <h2 class="cover-title">
     <a href="{{ a.url }}" rel="noopener nofollow" target="_blank">{{ a.title_tr }}</a>
   </h2>
@@ -61,44 +64,46 @@
 
   {% if a.key_points %}
   <div class="keypoints">
-    <h4 class="label">Öne çıkanlar</h4>
-    <ul>
-      {% for p in a.key_points %}<li>{{ p | inline }}</li>{% endfor %}
-    </ul>
+    <h3 class="label">Öne çıkanlar</h3>
+    <ol>
+      {% for p in a.key_points %}<li><span>{{ p | inline }}</span></li>{% endfor %}
+    </ol>
   </div>
   {% endif %}
 
+  {% if a.why_it_matters or a.for_you %}
   <div class="callouts">
     {% if a.why_it_matters %}
     <div class="callout callout-why">
-      <h4 class="label">Neden önemli?</h4>
+      <h3 class="label">Neden önemli?</h3>
       <p>{{ a.why_it_matters | inline }}</p>
     </div>
     {% endif %}
     {% if a.for_you %}
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
+      <h3 class="label">Sende karşılığı</h3>
       <p>{{ a.for_you | inline }}</p>
     </div>
     {% endif %}
   </div>
+  {% endif %}
 
-  {{ terms_block(a) }}
-
-  <div class="article-foot">
-    {{ tags_block(a) }}
-    <a class="readmore" href="{{ a.url }}" rel="noopener nofollow" target="_blank">
-      Orijinali oku <span aria-hidden="true">→</span>
-    </a>
+  {% if a.terms %}
+  <div class="terms">
+    <h3 class="label">Sözlük</h3>
+    {{ term_list(a) }}
   </div>
+  {% endif %}
+
+  {{ article_foot(a) }}
 </article>
 {% endmacro %}
 
 
-{# --- Kısa yazı: grid kartı --- #}
-{% macro brief_article(a) %}
-<article class="brief" id="{{ a.id }}">
-  {{ meta_line(a) }}
+{# --- Kısa yazı ve arşivden seçme: aynı gövde, farklı künye --- #}
+{% macro brief_article(a, archive=false) %}
+<article class="story brief{% if archive %} brief-archive{% endif %}" id="{{ a.id }}">
+  {{ meta_line(a, 'Arşivden' if archive else '') }}
   <h3 class="brief-title">
     <a href="{{ a.url }}" rel="noopener nofollow" target="_blank">{{ a.title_tr }}</a>
   </h3>
@@ -106,115 +111,98 @@
   <div class="prose prose-sm">{{ a.summary | rich }}</div>
 
   {% if a.key_points %}
-  <ul class="keypoints-inline">
-    {% for p in a.key_points %}<li>{{ p | inline }}</li>{% endfor %}
-  </ul>
+  <div class="keypoints keypoints-sm">
+    <h4 class="label">Öne çıkanlar</h4>
+    <ol>
+      {% for p in a.key_points %}<li><span>{{ p | inline }}</span></li>{% endfor %}
+    </ol>
+  </div>
   {% endif %}
 
   {% if a.for_you %}
-  <div class="callout callout-you callout-sm">
-    <h4 class="label">Sende karşılığı</h4>
-    <p>{{ a.for_you | inline }}</p>
+  <div class="callouts">
+    <div class="callout callout-you">
+      <h4 class="label">Sende karşılığı</h4>
+      <p>{{ a.for_you | inline }}</p>
+    </div>
   </div>
   {% endif %}
 
-  {{ terms_block(a) }}
+  {% if a.terms %}
+  <details class="terms">
+    <summary class="label">Sözlük · {{ a.terms | length }} terim</summary>
+    {{ term_list(a) }}
+  </details>
+  {% endif %}
 
-  <div class="article-foot">
-    {{ tags_block(a) }}
-    <a class="readmore" href="{{ a.url }}" rel="noopener nofollow" target="_blank">
-      Orijinali oku <span aria-hidden="true">→</span>
-    </a>
-  </div>
+  {{ article_foot(a) }}
 </article>
 {% endmacro %}
 
 
-{# --- Arşivden seçme --- #}
-{% macro archive_article(a) %}
-<article class="brief brief-archive" id="{{ a.id }}">
-  <div class="meta">
-    <span class="kicker kicker-sm">Arşivden</span>
-    {{ badge(a.source_key, a.source_name) }}
-    <span class="meta-item">{{ a.published_tr }}</span>
-    {% if a.read_minutes %}<span class="meta-item">{{ a.read_minutes }} dk</span>{% endif %}
-    <span class="meta-item level level-{{ a.difficulty | slugify }}">{{ a.difficulty }}</span>
+{# --- Sayı başlığı: numara, tarih, önceki/sonraki, editör notu --- #}
+{% macro edition_head(edition, older=none, newer=none) %}
+<header class="edition-head">
+  <div class="edition-bar">
+    <span class="edition-no">Sayı {{ edition_no[edition.date] }}</span>
+    <h1 class="edition-date"><time datetime="{{ edition.date }}">{{ edition.date_tr }}</time></h1>
+    <nav class="edition-nav" aria-label="Sayılar arası gezinme">
+      {% if older %}<a href="{{ older.path }}" rel="prev"><span aria-hidden="true">←</span> {{ older.date_short }}</a>{% endif %}
+      {% if newer %}<a href="{{ newer.path }}" rel="next">{{ newer.date_short }} <span aria-hidden="true">→</span></a>
+      {% else %}<span>En güncel sayı</span>{% endif %}
+    </nav>
   </div>
-  <h3 class="brief-title">
-    <a href="{{ a.url }}" rel="noopener nofollow" target="_blank">{{ a.title_tr }}</a>
-  </h3>
-  <p class="original-title">{{ a.title }}</p>
-  <div class="prose prose-sm">{{ a.summary | rich }}</div>
+  {% if edition.intro %}<p class="lede">{{ edition.intro | inline }}</p>{% endif %}
+</header>
+{% endmacro %}
 
-  {% if a.key_points %}
-  <ul class="keypoints-inline">
-    {% for p in a.key_points %}<li>{{ p | inline }}</li>{% endfor %}
-  </ul>
-  {% endif %}
 
-  {% if a.for_you %}
-  <div class="callout callout-you callout-sm">
-    <h4 class="label">Sende karşılığı</h4>
-    <p>{{ a.for_you | inline }}</p>
+{# --- Yan sütun: içindekiler + sayının künyesi --- #}
+{% macro edition_aside(edition) %}
+<aside class="layout-aside" aria-label="Bu sayıda">
+  <div class="aside-block">
+    <h2 class="label">Bu sayıda</h2>
+    <ol class="toc" id="toc">
+      {% for a in edition.articles %}
+      <li>
+        <a href="#{{ a.id }}">
+          <span class="toc-title">{{ a.title_tr }}</span>
+          <span class="toc-meta">{{ a.source_name }}{% if a.read_minutes %} · {{ a.read_minutes }} dk{% endif %}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ol>
   </div>
-  {% endif %}
-
-  {{ terms_block(a) }}
-
-  <div class="article-foot">
-    {{ tags_block(a) }}
-    <a class="readmore" href="{{ a.url }}" rel="noopener nofollow" target="_blank">
-      Orijinali oku <span aria-hidden="true">→</span>
-    </a>
+  <div class="aside-block aside-facts">
+    <h2 class="label">Künye</h2>
+    <dl class="facts">
+      <div><dt>yazı</dt><dd>{{ edition.articles | length }}</dd></div>
+      <div><dt>dk okuma</dt><dd>{{ edition.articles | sum(attribute='read_minutes') }}</dd></div>
+      <div><dt>kaynak</dt><dd>{{ edition.sources | length }}</dd></div>
+      <div><dt>terim</dt><dd>{{ edition.articles | map(attribute='terms') | map('length') | sum }}</dd></div>
+    </dl>
   </div>
-</article>
+</aside>
 {% endmacro %}
 
 
 {# --- Sayı gövdesi: kapak + kısa kısa + arşiv --- #}
 {% macro edition_body(edition) %}
-  {% if edition.intro %}
-  <div class="editor-note">
-    <span class="label">Editörden</span>
-    <p>{{ edition.intro | inline }}</p>
-  </div>
-  {% endif %}
-
   {% if edition.cover %}
     {{ cover_article(edition.cover) }}
   {% endif %}
 
   {% if edition.briefs %}
-  <section class="section">
-    <h2 class="section-title"><span>Kısa Kısa</span></h2>
-    <div class="grid">
-      {% for a in edition.briefs %}{{ brief_article(a) }}{% endfor %}
-    </div>
-  </section>
+    <h2 class="subhead">Kısa kısa</h2>
+    {% for a in edition.briefs %}{{ brief_article(a) }}{% endfor %}
   {% endif %}
 
   {% if edition.archive_picks %}
-  <section class="section">
-    <h2 class="section-title"><span>Arşivden Seçmeler</span></h2>
+    <h2 class="subhead">Arşivden seçmeler</h2>
     <p class="section-note">
-      Bugün az yayın çıktı. Bu yazılar daha eski tarihli ama hâlâ öğretici —
+      Bugün az yayın çıktı. Bu yazılar daha eski tarihli ama hâlâ öğretici;
       her birinin gerçek yayın tarihi başlığın üstünde yazıyor.
     </p>
-    <div class="grid">
-      {% for a in edition.archive_picks %}{{ archive_article(a) }}{% endfor %}
-    </div>
-  </section>
+    {% for a in edition.archive_picks %}{{ brief_article(a, archive=true) }}{% endfor %}
   {% endif %}
-{% endmacro %}
-
-
-{# --- Listelerde kullanılan tek satırlık kayıt --- #}
-{% macro row(edition, a) %}
-<li class="row">
-  <a class="row-link" href="/sayi/{{ edition.date }}/#{{ a.id }}">
-    <span class="row-date">{{ edition.date_short }}</span>
-    <span class="row-title">{{ a.title_tr }}</span>
-  </a>
-  {{ badge(a.source_key, a.source_name) }}
-</li>
 {% endmacro %}

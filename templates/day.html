@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% import "_macros.html" as m %}
+{% set active = 'arsiv' %}
 
 {% block title %}{{ edition.date_short }} — {{ site.title }}{% endblock %}
 {% block description %}{{ edition.intro or (edition.cover.title_tr if edition.cover else site.tagline) }}{% endblock %}
@@ -8,32 +9,28 @@
 {% block content %}
 <div class="wrap">
 
-  <div class="dateline">
-    <span class="dateline-date">{{ edition.date_tr }}</span>
-    <span class="dateline-sep" aria-hidden="true">·</span>
-    <span class="dateline-meta">{{ edition.articles | length }} yazı</span>
-    <span class="dateline-sep" aria-hidden="true">·</span>
-    <span class="dateline-meta">{{ edition.sources | join(', ') }}</span>
-  </div>
+  {{ m.edition_head(edition, older=older, newer=newer) }}
 
-  {{ m.edition_body(edition) }}
+  <div class="layout">
+    <div class="layout-main">
+      {{ m.edition_body(edition) }}
+    </div>
+    {{ m.edition_aside(edition) }}
+  </div>
 
   <nav class="pager" aria-label="Sayılar arası gezinme">
     {% if older %}
-    <a class="pager-link pager-prev" href="{{ older.path }}">
-      <span class="pager-label">← Önceki sayı</span>
-      <span class="pager-title">{{ older.date_short }}</span>
+    <a class="pager-link pager-prev" href="{{ older.path }}" rel="prev">
+      <span class="pager-label">← Önceki sayı · {{ older.date_short }}</span>
+      <span class="pager-title">{{ older.cover.title_tr if older.cover else older.date_short }}</span>
     </a>
-    {% else %}<span></span>{% endif %}
-
-    <a class="pager-mid" href="/arsiv/">Arşiv</a>
-
+    {% endif %}
     {% if newer %}
-    <a class="pager-link pager-next" href="{{ newer.path }}">
-      <span class="pager-label">Sonraki sayı →</span>
-      <span class="pager-title">{{ newer.date_short }}</span>
+    <a class="pager-link pager-next" href="{{ newer.path }}" rel="next">
+      <span class="pager-label">Sonraki sayı · {{ newer.date_short }} →</span>
+      <span class="pager-title">{{ newer.cover.title_tr if newer.cover else newer.date_short }}</span>
     </a>
-    {% else %}<span></span>{% endif %}
+    {% endif %}
   </nav>
 
 </div>

@@ -6,15 +6,22 @@
 <title>9 Eylül 2026 — Eren&#39;in Mühendislik Gazetesi</title>
 <meta name="description" content="Bugünün iki yazısı aynı disiplini öğretiyor: dayanıklılığı varsaymak yerine kontrollü arıza enjekte ederek test etmek. Biri bir kuyruğa erişimi keserek, diğeri bir bölge arızasını taklit ederek. İkisinde de değerli olan, deneyi nasıl kurguladıkları.">
 <meta name="author" content="Eren Ulutaş">
+<meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131310" media="(prefers-color-scheme: dark)">
 <meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
 <meta property="og:title" content="9 Eylül 2026 — Eren&#39;in Mühendislik Gazetesi">
 <meta property="og:description" content="Bugünün iki yazısı aynı disiplini öğretiyor: dayanıklılığı varsaymak yerine kontrollü arıza enjekte ederek test etmek. Biri bir kuyruğa erişimi keserek, diğeri bir bölge arızasını taklit ederek. İkisinde de değerli olan, deneyi nasıl kurguladıkları.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
+<meta property="og:url" content="https://erenulutas.com/sayi/2026-09-09/">
+<meta name="twitter:card" content="summary">
 <link rel="canonical" href="https://erenulutas.com/sayi/2026-09-09/">
 <link rel="alternate" type="application/rss+xml" title="Eren&#39;in Mühendislik Gazetesi" href="/feed.xml">
-<link rel="stylesheet" href="/static/style.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
+<link rel="stylesheet" href="/static/style.css?v=eae14b0f">
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
 <script>
   // Tema tercihini ilk boyamadan önce uygula (flash olmasın)
   (function () {
@@ -30,55 +37,52 @@
 
 <header class="masthead">
   <div class="wrap masthead-inner">
-    <div class="masthead-brand">
-      <a href="/" class="logo">
-        <span class="logo-mark">EU</span>
-        <span class="logo-text">
-          <strong>Eren&#39;in Mühendislik Gazetesi</strong>
-          <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
-        </span>
-      </a>
-    </div>
+    <a href="/" class="logo">
+      <span class="logo-mark">EU</span>
+      <span class="logo-text">
+        <strong>Eren&#39;in Mühendislik Gazetesi</strong>
+        <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
+      </span>
+    </a>
     <nav class="masthead-nav" aria-label="Ana menü">
       <a href="/">Bugün</a>
-      <a href="/arsiv/">Arşiv</a>
+      <a href="/arsiv/" aria-current="page">Arşiv</a>
       <a href="/ara/">Ara</a>
       <a href="/hakkinda/">Hakkında</a>
-      <button id="tema" class="tema" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <button id="tema" class="tema" type="button" aria-label="Açık/koyu temayı değiştir" title="Açık/koyu tema">
         <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/></g></svg>
         <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg>
       </button>
     </nav>
   </div>
+  <div class="progress" id="ilerleme" aria-hidden="true"></div>
 </header>
 
 <main id="icerik">
 <div class="wrap">
 
-  <div class="dateline">
-    <span class="dateline-date">9 Eylül 2026, Çarşamba</span>
-    <span class="dateline-sep" aria-hidden="true">·</span>
-    <span class="dateline-meta">2 yazı</span>
-    <span class="dateline-sep" aria-hidden="true">·</span>
-    <span class="dateline-meta">AWS Architecture Blog</span>
+  <header class="edition-head">
+  <div class="edition-bar">
+    <span class="edition-no">Sayı 38</span>
+    <h1 class="edition-date"><time datetime="2026-09-09">9 Eylül 2026, Çarşamba</time></h1>
+    <nav class="edition-nav" aria-label="Sayılar arası gezinme">
+<a href="/sayi/2026-09-03/" rel="prev"><span aria-hidden="true">←</span> 3 Eylül 2026</a><a href="/sayi/2026-09-10/" rel="next">10 Eylül 2026 <span aria-hidden="true">→</span></a>
+    </nav>
   </div>
+<p class="lede">Bugünün iki yazısı aynı disiplini öğretiyor: dayanıklılığı varsaymak yerine kontrollü arıza enjekte ederek test etmek. Biri bir kuyruğa erişimi keserek, diğeri bir bölge arızasını taklit ederek. İkisinde de değerli olan, deneyi nasıl kurguladıkları.</p></header>
 
-    <div class="editor-note">
-    <span class="label">Editörden</span>
-    <p>Bugünün iki yazısı aynı disiplini öğretiyor: dayanıklılığı varsaymak yerine kontrollü arıza enjekte ederek test etmek. Biri bir kuyruğa erişimi keserek, diğeri bir bölge arızasını taklit ederek. İkisinde de değerli olan, deneyi nasıl kurguladıkları.</p>
-  </div>
 
-    <article class="cover" id="741f3d22792d">
-  <div class="cover-head">
-    <span class="kicker">Günün Kapağı</span>
-    <div class="meta">
-    <a class="badge" href="/kaynak/aws-architecture/"
+  <div class="layout">
+    <div class="layout-main">
+          <article class="story cover" id="741f3d22792d">
+  <div class="meta">
+<span class="kicker">Günün kapağı</span>    <a class="badge" href="/kaynak/aws-architecture/"
      style="--brand: #FF9900">AWS Architecture Blog</a>
 
-<span class="meta-item">9 Eylül 2026</span><span class="meta-item">21 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
+  <span class="meta-item">9 Eylül 2026</span>
+<span class="meta-item">21 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
 </div>
 
-  </div>
   <h2 class="cover-title">
     <a href="https://aws.amazon.com/blogs/architecture/testing-application-resilience-with-amazon-sqs-and-aws-fault-injection-service/" rel="noopener nofollow" target="_blank">Kuyruk çökerse uygulaman ne yapar? Hipotezli bir dayanıklılık deneyi kurmak</a>
   </h2>
@@ -87,25 +91,25 @@
   <div class="prose"><p>Uygulaman SQS kuyruğuna mesaj gönderemez ya da alamaz hâle gelirse, aşağı akıştaki işleme durur. Sebep yanlış yapılandırılmış bir IAM politikası, ağ bölünmesi, kötü bir dağıtım ya da geçici bir servis olayı olabilir; uygulamanın gördüğü hep aynı: SQS işlemleri başarısız oluyor. Servislerin bu hatayı nasıl ele aldığı (kaçınılmaz olanı hızlı başarısız saymak, devre kesici açmak, üretici tarafında tamponlamak) kısa bir aksaklıkla zincirleme bir kesinti arasındaki farkı belirleyebilir. Yazının ana cümlesi: <strong>bu mekanizmaları arıza altında hiç test etmediysen, varsayımlara güveniyorsun.</strong></p><p>Deneyin amacı SQS&#x27;in çalıştığını doğrulamak değil, <strong>SQS işlemleri başarısız olunca uygulamanın ne yaptığını ve bunu fark edip etmeyeceğini</strong> öğrenmek. Yöntem: AWS Fault Injection Service (FIS) ve SSM Automation ile uygulamanın SQS&#x27;e erişimini kapsamı dar bir <strong>deny kaynak politikasıyla</strong> engellemek, sonra erişimi geri verip toparlanmayı gözlemek. Politika yalnızca uygulamanın bağımlı olduğu veri düzlemi işlemlerini reddediyor (gönderme, alma, silme, görünürlük süresini değiştirme, temizleme), kuyruk yönetimine dokunmuyor. Kesinti süresi dört aşamada kademeli artıyor: kısa kesintiler hata yönetim mekanizmalarının devreye girip girmediğini, uzun kesintiler ancak sürekli arızada ortaya çıkan sistemik sorunları gösteriyor.</p><p>İki arıza yüzeyi aynı anda izleniyor. <strong>Üretici tarafı:</strong> gönderim reddedilince hızlı başarısız mı oluyor, devre kesici mi açıyor, yerelde tamponluyor mu, yoksa mesajı mı düşürüyor? <strong>Tüketici tarafı:</strong> alma reddedilince birikim büyüyor mu, toparlanmada yeniden teslimat ve birikmiş yükle başa çıkış nasıl? Yazı kritik bir tuzağı da vurguluyor: **<code>sqs:*</code> işlemini reddetme.** IAM&#x27;de açık bir Deny her Allow&#x27;u geçer, otomasyonun kendi politikayı sonradan kaldırma iznini bile; kendi ellerinle kendini kilitlersin.</p></div>
 
   <div class="keypoints">
-    <h4 class="label">Öne çıkanlar</h4>
-    <ul>
-<li>İyi bir dayanıklılık deneyi ölçülebilir hipotez ve başarı ölçütüyle başlar: ne gözlemlemeyi bekliyorsun?</li><li>Deney iki şeyi aynı anda test eder: kurtarma mekanizmaların ve gözlemlenebilirliğin (arızayı fark ettin mi?).</li><li>Arızayı kademeli artır: kısa kesinti tepkiyi, uzun kesinti sistemik birikimi gösterir.</li><li>Üretici ve tüketici tarafı farklı arıza davranışları sergiler; ikisini ayrı ölç.</li><li>Arıza enjeksiyonunun kendisi bir arıza kaynağı olabilir: geri alma yolunu kesen bir Deny yazma.</li>    </ul>
+    <h3 class="label">Öne çıkanlar</h3>
+    <ol>
+<li><span>İyi bir dayanıklılık deneyi ölçülebilir hipotez ve başarı ölçütüyle başlar: ne gözlemlemeyi bekliyorsun?</span></li><li><span>Deney iki şeyi aynı anda test eder: kurtarma mekanizmaların ve gözlemlenebilirliğin (arızayı fark ettin mi?).</span></li><li><span>Arızayı kademeli artır: kısa kesinti tepkiyi, uzun kesinti sistemik birikimi gösterir.</span></li><li><span>Üretici ve tüketici tarafı farklı arıza davranışları sergiler; ikisini ayrı ölç.</span></li><li><span>Arıza enjeksiyonunun kendisi bir arıza kaynağı olabilir: geri alma yolunu kesen bir Deny yazma.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-why">
-      <h4 class="label">Neden önemli?</h4>
+      <h3 class="label">Neden önemli?</h3>
       <p>Devre kesici, yeniden deneme ve tamponlama kodda yazılıdır ama çalışıp çalışmadığı yalnızca gerçek arıza altında bilinir. Bu yazı, ‘test ettiğimi sanıyorum’ ile ‘test ettim’ arasındaki farkı küçük, kontrollü ve geri alınabilir bir deneyle kapatıyor.</p>
     </div>
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
+      <h3 class="label">Sende karşılığı</h3>
       <p>Aynı deneyi yerelde, parasız yapabilirsin: bir Redis ya da PostgreSQL konteynerini <code>docker stop</code> ile durdur ve Spring Boot uygulamanın ne yaptığına bak. İstekler sonsuza dek mi asılıyor, zaman aşımı kaç saniye, hata kullanıcıya anlamlı dönüyor mu, alarm çalıyor mu? Hipotezini önce yaz (‘5 saniye içinde 503 dönmeli, 30 saniye sonra otomatik toparlanmalı’), sonra gözlemle. Çoğu projede ilk denemede en az bir sürprizle karşılaşırsın; Mobit’teki mesajlaşma altyapısında bunu yapmak tam bu tür bir sürprizi üretimden önce yakalamanın en ucuz yolu.</p>
     </div>
   </div>
 
   <div class="terms">
-  <h4 class="label">Sözlük</h4>
-  <dl>
+    <h3 class="label">Sözlük</h3>
+      <dl>
     <div class="term">
       <dt><span class="term-en">chaos engineering</span> <span class="term-tr">kaos mühendisliği</span></dt>
       <dd>Sistemin arızaya dayanıklılığını, kontrollü biçimde arıza enjekte ederek önceden test etme pratiği.</dd>
@@ -123,33 +127,33 @@
       <dd>Ne olacağını önceden yazıp sonucu buna karşı ölçen deney kurgusu.</dd>
     </div>
   </dl>
-</div>
 
+  </div>
 
   <div class="article-foot">
-    <ul class="tags">
+  <ul class="tags">
   <li><a href="/etiket/dayaniklilik/">#dayanıklılık</a></li>
   <li><a href="/etiket/chaos-engineering/">#chaos engineering</a></li>
   <li><a href="/etiket/kuyruk/">#kuyruk</a></li>
   <li><a href="/etiket/test/">#test</a></li>
 </ul>
 
-    <a class="readmore" href="https://aws.amazon.com/blogs/architecture/testing-application-resilience-with-amazon-sqs-and-aws-fault-injection-service/" rel="noopener nofollow" target="_blank">
-      Orijinali oku <span aria-hidden="true">→</span>
-    </a>
-  </div>
+  <a class="readmore" href="https://aws.amazon.com/blogs/architecture/testing-application-resilience-with-amazon-sqs-and-aws-fault-injection-service/" rel="noopener nofollow" target="_blank">
+    Orijinali oku <span aria-hidden="true">↗</span>
+  </a>
+</div>
+
 </article>
 
 
-  <section class="section">
-    <h2 class="section-title"><span>Kısa Kısa</span></h2>
-    <div class="grid">
-<article class="brief" id="7f2c1fc66604">
+    <h2 class="subhead">Kısa kısa</h2>
+<article class="story brief" id="7f2c1fc66604">
   <div class="meta">
     <a class="badge" href="/kaynak/aws-architecture/"
      style="--brand: #FF9900">AWS Architecture Blog</a>
 
-<span class="meta-item">9 Eylül 2026</span><span class="meta-item">16 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
+  <span class="meta-item">9 Eylül 2026</span>
+<span class="meta-item">16 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
 </div>
 
   <h3 class="brief-title">
@@ -158,17 +162,22 @@
   <p class="original-title">Validating multi-Region DR for Terraform Enterprise with AWS FIS</p>
   <div class="prose prose-sm"><p>Ekim 2025&#x27;te büyük bir Kuzey Amerika sağlık kaydı sağlayıcısı olan Athenahealth bir boşluk keşfetti: us-east-1&#x27;deki bölgesel bir AWS olayı, tek bölgede çalışan Terraform Enterprise (TFE) kurulumlarına geliştiricilerin erişimini kesti. Yani altyapı değiştirmek için kullanılan araç, altyapı arızalandığında kendisi de erişilmez oldu.</p><p>Çözüm, müşterinin kendi işlettiği çok bölgeli bir felaket kurtarma deseni (Aurora global veritabanı ve S3 bölgeler arası çoğaltma ile). Dürüst bir not: TFE yalnızca tek bölgeyi destekliyor, çok bölgeli devir tasarımı müşterinin kendisine ait. Yazının asıl dersi doğrulama: <strong>üç aşamalı FIS deneyleri</strong> devir otomasyonundaki gizli bağımlılıkları ortaya çıkarıyor ve hem devri (failover) hem geri dönüşü (failback) doğruluyor; sonuç 12-14 dakikalık kurtarma süresi.</p></div>
 
-  <ul class="keypoints-inline">
-<li>Altyapı yönetim aracının kendisi de bir bağımlılıktır; ayakta kalması ayrıca planlanmalı.</li><li>Devri test etmek yetmez, geri dönüşü (failback) de test etmek gerekir.</li>  </ul>
-
-  <div class="callout callout-you callout-sm">
-    <h4 class="label">Sende karşılığı</h4>
-    <p>Kendi ‘kurtarma aracın’ için aynı soruyu sor: CI/CD’n, yedekleme betiğin ve loglarına bakmak için kullandığın panel arıza yaşadığın sistemle aynı yerde mi duruyor? Bu gazetenin içeriği GitHub’da, yayını GitHub Pages’te; yani GitHub çökerse hem kaynak hem yayın etkilenir. <code>content/</code> klasörünü ikinci bir yere (yerel disk, ikinci uzak depo) yedeklemek bu riski küçük bir maliyetle kapatır.</p>
+  <div class="keypoints keypoints-sm">
+    <h4 class="label">Öne çıkanlar</h4>
+    <ol>
+<li><span>Altyapı yönetim aracının kendisi de bir bağımlılıktır; ayakta kalması ayrıca planlanmalı.</span></li><li><span>Devri test etmek yetmez, geri dönüşü (failback) de test etmek gerekir.</span></li>    </ol>
   </div>
 
-  <div class="terms">
-  <h4 class="label">Sözlük</h4>
-  <dl>
+  <div class="callouts">
+    <div class="callout callout-you">
+      <h4 class="label">Sende karşılığı</h4>
+      <p>Kendi ‘kurtarma aracın’ için aynı soruyu sor: CI/CD’n, yedekleme betiğin ve loglarına bakmak için kullandığın panel arıza yaşadığın sistemle aynı yerde mi duruyor? Bu gazetenin içeriği GitHub’da, yayını GitHub Pages’te; yani GitHub çökerse hem kaynak hem yayın etkilenir. <code>content/</code> klasörünü ikinci bir yere (yerel disk, ikinci uzak depo) yedeklemek bu riski küçük bir maliyetle kapatır.</p>
+    </div>
+  </div>
+
+  <details class="terms">
+    <summary class="label">Sözlük · 2 terim</summary>
+      <dl>
     <div class="term">
       <dt><span class="term-en">failover / failback</span> <span class="term-tr">devir / geri dönüş</span></dt>
       <dd>Hizmeti yedek sisteme geçirmek ve sonra ana sisteme geri döndürmek.</dd>
@@ -178,37 +187,64 @@
       <dd>Belgelenmemiş ya da fark edilmemiş, ancak arıza anında ortaya çıkan bileşen bağımlılığı.</dd>
     </div>
   </dl>
-</div>
 
+  </details>
 
   <div class="article-foot">
-    <ul class="tags">
+  <ul class="tags">
   <li><a href="/etiket/felaket-kurtarma/">#felaket kurtarma</a></li>
   <li><a href="/etiket/altyapi/">#altyapı</a></li>
   <li><a href="/etiket/chaos-engineering/">#chaos engineering</a></li>
 </ul>
 
-    <a class="readmore" href="https://aws.amazon.com/blogs/architecture/validating-multi-region-dr-for-terraform-enterprise-with-aws-fis/" rel="noopener nofollow" target="_blank">
-      Orijinali oku <span aria-hidden="true">→</span>
-    </a>
-  </div>
+  <a class="readmore" href="https://aws.amazon.com/blogs/architecture/validating-multi-region-dr-for-terraform-enterprise-with-aws-fis/" rel="noopener nofollow" target="_blank">
+    Orijinali oku <span aria-hidden="true">↗</span>
+  </a>
+</div>
+
 </article>
+
+
     </div>
-  </section>
+    <aside class="layout-aside" aria-label="Bu sayıda">
+  <div class="aside-block">
+    <h2 class="label">Bu sayıda</h2>
+    <ol class="toc" id="toc">
+      <li>
+        <a href="#741f3d22792d">
+          <span class="toc-title">Kuyruk çökerse uygulaman ne yapar? Hipotezli bir dayanıklılık deneyi kurmak</span>
+          <span class="toc-meta">AWS Architecture Blog · 21 dk</span>
+        </a>
+      </li>
+      <li>
+        <a href="#7f2c1fc66604">
+          <span class="toc-title">Kurtarma planın test edilmemişse plan değildir: üç aşamalı bölge devri doğrulaması</span>
+          <span class="toc-meta">AWS Architecture Blog · 16 dk</span>
+        </a>
+      </li>
+    </ol>
+  </div>
+  <div class="aside-block aside-facts">
+    <h2 class="label">Künye</h2>
+    <dl class="facts">
+      <div><dt>yazı</dt><dd>2</dd></div>
+      <div><dt>dk okuma</dt><dd>37</dd></div>
+      <div><dt>kaynak</dt><dd>1</dd></div>
+      <div><dt>terim</dt><dd>6</dd></div>
+    </dl>
+  </div>
+</aside>
 
-
+  </div>
 
   <nav class="pager" aria-label="Sayılar arası gezinme">
-    <a class="pager-link pager-prev" href="/sayi/2026-09-03/">
-      <span class="pager-label">← Önceki sayı</span>
-      <span class="pager-title">3 Eylül 2026</span>
+    <a class="pager-link pager-prev" href="/sayi/2026-09-03/" rel="prev">
+      <span class="pager-label">← Önceki sayı · 3 Eylül 2026</span>
+      <span class="pager-title">Bağlantı sayısı bir ölçekleme sorunudur: ZippyDB&#39;nin önüne ZGateway koymak</span>
     </a>
-
-    <a class="pager-mid" href="/arsiv/">Arşiv</a>
-
-    <a class="pager-link pager-next" href="/sayi/2026-09-10/">
-      <span class="pager-label">Sonraki sayı →</span>
-      <span class="pager-title">10 Eylül 2026</span>
+    <a class="pager-link pager-next" href="/sayi/2026-09-10/" rel="next">
+      <span class="pager-label">Sonraki sayı · 10 Eylül 2026 →</span>
+      <span class="pager-title">Bağlantının tek sahibi kim? DynamoDB ile dağıtık kira (lease) deseni</span>
     </a>
   </nav>
 
@@ -218,13 +254,13 @@
 <footer class="footer">
   <div class="wrap footer-inner">
     <div class="footer-col">
-      <h3>Eren&#39;in Mühendislik Gazetesi</h3>
+      <p class="footer-brand">Eren&#39;in Mühendislik Gazetesi</p>
       <p class="muted">
-        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını her gün derleyip
+        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını derleyip
         Türkçe özetleyen kişisel bir gazete. Özetler yeni mezun bir mühendisin
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
-      <p class="muted small">
+      <p class="muted small num">
         113 özet · 51 sayı ·
         11 kaynak
       </p>
@@ -264,6 +300,6 @@
   </div>
 </footer>
 
-<script src="/static/app.js" defer></script>
+<script src="/static/app.js?v=eae14b0f" defer></script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% import "_macros.html" as m %}
+{% set active = 'arsiv' %}
 
 {% block title %}{{ source.name }} — {{ site.title }}{% endblock %}
 {% block description %}{{ source.name }} kaynağından çıkan {{ rows | length }} özet.{% endblock %}
@@ -12,7 +13,7 @@
     <span class="page-kicker">Kaynak</span>
     <h1 class="page-title brand-underline">{{ source.name }}</h1>
     <p class="page-sub">{{ source.focus | capitalize }}</p>
-    <p class="page-sub">
+    <p class="page-sub muted small">
       {{ rows | length }} özet ·
       <a href="{{ source.site }}" rel="noopener nofollow" target="_blank">Orijinal blog →</a>
     </p>

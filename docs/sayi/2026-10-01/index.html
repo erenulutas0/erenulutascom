@@ -6,15 +6,22 @@
 <title>1 Ekim 2026 — Eren&#39;in Mühendislik Gazetesi</title>
 <meta name="description" content="Bir sınıflandırma kararı için bile büyük bir dil modelini çağırmak çoğu zaman gereğinden pahalı ve yavaş. Cloudflare’in açık kaynak ‘karar modelleri’ bu açığı hedefliyor. Yanında bir yedekleme sorusu: bozuk bir yazma fark edildiğinde veritabanını ne kadar hızlı geri alabilirsin?">
 <meta name="author" content="Eren Ulutaş">
+<meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131310" media="(prefers-color-scheme: dark)">
 <meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
 <meta property="og:title" content="1 Ekim 2026 — Eren&#39;in Mühendislik Gazetesi">
 <meta property="og:description" content="Bir sınıflandırma kararı için bile büyük bir dil modelini çağırmak çoğu zaman gereğinden pahalı ve yavaş. Cloudflare’in açık kaynak ‘karar modelleri’ bu açığı hedefliyor. Yanında bir yedekleme sorusu: bozuk bir yazma fark edildiğinde veritabanını ne kadar hızlı geri alabilirsin?">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
+<meta property="og:url" content="https://erenulutas.com/sayi/2026-10-01/">
+<meta name="twitter:card" content="summary">
 <link rel="canonical" href="https://erenulutas.com/sayi/2026-10-01/">
 <link rel="alternate" type="application/rss+xml" title="Eren&#39;in Mühendislik Gazetesi" href="/feed.xml">
-<link rel="stylesheet" href="/static/style.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
+<link rel="stylesheet" href="/static/style.css?v=eae14b0f">
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
 <script>
   // Tema tercihini ilk boyamadan önce uygula (flash olmasın)
   (function () {
@@ -30,55 +37,52 @@
 
 <header class="masthead">
   <div class="wrap masthead-inner">
-    <div class="masthead-brand">
-      <a href="/" class="logo">
-        <span class="logo-mark">EU</span>
-        <span class="logo-text">
-          <strong>Eren&#39;in Mühendislik Gazetesi</strong>
-          <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
-        </span>
-      </a>
-    </div>
+    <a href="/" class="logo">
+      <span class="logo-mark">EU</span>
+      <span class="logo-text">
+        <strong>Eren&#39;in Mühendislik Gazetesi</strong>
+        <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
+      </span>
+    </a>
     <nav class="masthead-nav" aria-label="Ana menü">
       <a href="/">Bugün</a>
-      <a href="/arsiv/">Arşiv</a>
+      <a href="/arsiv/" aria-current="page">Arşiv</a>
       <a href="/ara/">Ara</a>
       <a href="/hakkinda/">Hakkında</a>
-      <button id="tema" class="tema" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <button id="tema" class="tema" type="button" aria-label="Açık/koyu temayı değiştir" title="Açık/koyu tema">
         <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/></g></svg>
         <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg>
       </button>
     </nav>
   </div>
+  <div class="progress" id="ilerleme" aria-hidden="true"></div>
 </header>
 
 <main id="icerik">
 <div class="wrap">
 
-  <div class="dateline">
-    <span class="dateline-date">1 Ekim 2026, Perşembe</span>
-    <span class="dateline-sep" aria-hidden="true">·</span>
-    <span class="dateline-meta">2 yazı</span>
-    <span class="dateline-sep" aria-hidden="true">·</span>
-    <span class="dateline-meta">Cloudflare Blog, Databricks Engineering</span>
+  <header class="edition-head">
+  <div class="edition-bar">
+    <span class="edition-no">Sayı 50</span>
+    <h1 class="edition-date"><time datetime="2026-10-01">1 Ekim 2026, Perşembe</time></h1>
+    <nav class="edition-nav" aria-label="Sayılar arası gezinme">
+<a href="/sayi/2026-09-30/" rel="prev"><span aria-hidden="true">←</span> 30 Eylül 2026</a><a href="/sayi/2026-10-02/" rel="next">2 Ekim 2026 <span aria-hidden="true">→</span></a>
+    </nav>
   </div>
+<p class="lede">Bir sınıflandırma kararı için bile büyük bir dil modelini çağırmak çoğu zaman gereğinden pahalı ve yavaş. Cloudflare’in açık kaynak ‘karar modelleri’ bu açığı hedefliyor. Yanında bir yedekleme sorusu: bozuk bir yazma fark edildiğinde veritabanını ne kadar hızlı geri alabilirsin?</p></header>
 
-    <div class="editor-note">
-    <span class="label">Editörden</span>
-    <p>Bir sınıflandırma kararı için bile büyük bir dil modelini çağırmak çoğu zaman gereğinden pahalı ve yavaş. Cloudflare’in açık kaynak ‘karar modelleri’ bu açığı hedefliyor. Yanında bir yedekleme sorusu: bozuk bir yazma fark edildiğinde veritabanını ne kadar hızlı geri alabilirsin?</p>
-  </div>
 
-    <article class="cover" id="ebb2d7850d0e">
-  <div class="cover-head">
-    <span class="kicker">Günün Kapağı</span>
-    <div class="meta">
-    <a class="badge" href="/kaynak/cloudflare/"
+  <div class="layout">
+    <div class="layout-main">
+          <article class="story cover" id="ebb2d7850d0e">
+  <div class="meta">
+<span class="kicker">Günün kapağı</span>    <a class="badge" href="/kaynak/cloudflare/"
      style="--brand: #F6821F">Cloudflare Blog</a>
 
-<span class="meta-item">1 Ekim 2026</span><span class="meta-item">11 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
+  <span class="meta-item">1 Ekim 2026</span>
+<span class="meta-item">11 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
 </div>
 
-  </div>
   <h2 class="cover-title">
     <a href="https://blog.cloudflare.com/clef-decision-models/" rel="noopener nofollow" target="_blank">Karar vermek için sohbet modeli gerekmez: Cloudflare Clef</a>
   </h2>
@@ -87,25 +91,25 @@
   <div class="prose"><p>Cloudflare, <strong>Clef</strong> adlı bir karar modeli (decision model) ailesini açık kaynak (Apache 2.0) olarak yayımladı. Karar modeli, serbest metin üretmek yerine önceden tanımlı seçenekler arasından seçim yapan bir model: örneğin bir isteğin etki şiddetini ‘etki yok / küçük / büyük / kritik’ olarak puanlamak ya da bir alan adını sınıflandırmak. Çıktı katı biçimde tiplenmiş (strictly typed) olduğundan sonucu ayrıştırmak için metin işlemek gerekmiyor.</p><p>Clef’in öne çıkan özellikleri: görselleri sınıflandırabilen bir <strong>görü kodlayıcısı</strong>, <strong>64k bağlam penceresi</strong> (Cloudflare’in önceki modeli Jev’de 32k) ve Jev ile API uyumluluğu. İki boyutu var: daha güçlü <strong>Clef</strong> ve gecikmeye duyarlı kararlar için <strong>Clef-Flash</strong>. Alan sınıflandırma örneğinde Clef 2,2 saniyede cevap veriyor; karşılaştırılan gpt-oss-120b 4,7 saniyede.</p><p>Hızın nedeni mimaride: Clef, Qwen tabanlı bir model üzerinde yalnızca <strong>prefill</strong> geçişi yapıyor ve geçerli şema seçeneklerini <strong>paralel puanlıyor</strong>. Karar adımı otoregresif olmadığından token token ara metin üretilmiyor. Cloudflare ayrıca bu modeller için ince ayar (fine-tuning) hizmeti sunuyor: önce ileri konuşlandırılmış mühendis ekibiyle, ileride kendin kullanabileceğin bir platform olarak.</p></div>
 
   <div class="keypoints">
-    <h4 class="label">Öne çıkanlar</h4>
-    <ul>
-<li>Seçenekli karar problemi için serbest metin üretmek hem yavaş hem hata yapmaya açık.</li><li>Tipli çıktı (şemaya uyan seçim) ayrıştırma hatalarını ortadan kaldırır.</li><li>Prefill-only ve paralel puanlama: üretim yok, token token bekleme yok.</li><li>Karar modeli ne kadar küçük ve hızlıysa, onu isteğin her adımında çağırmak o kadar mümkün olur.</li>    </ul>
+    <h3 class="label">Öne çıkanlar</h3>
+    <ol>
+<li><span>Seçenekli karar problemi için serbest metin üretmek hem yavaş hem hata yapmaya açık.</span></li><li><span>Tipli çıktı (şemaya uyan seçim) ayrıştırma hatalarını ortadan kaldırır.</span></li><li><span>Prefill-only ve paralel puanlama: üretim yok, token token bekleme yok.</span></li><li><span>Karar modeli ne kadar küçük ve hızlıysa, onu isteğin her adımında çağırmak o kadar mümkün olur.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-why">
-      <h4 class="label">Neden önemli?</h4>
+      <h3 class="label">Neden önemli?</h3>
       <p>LLM’leri her işte kullanma eğilimi maliyet ve gecikme biriktirir. Bu yazı, işin doğasına uygun daha dar bir araç seçmenin (sınıflandırma için karar modeli) hem hızı hem güvenilirliği artırdığını gösteriyor.</p>
     </div>
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
+      <h3 class="label">Sende karşılığı</h3>
       <p>DBH’daki LLM hattında bunu doğrudan düşünebilirsin: bir belgeyi ‘yakıt, elektrik, su’ gibi sabit kategorilere ayırmak serbest metin üretimi gerektirmez. Mevcut çağrıyı JSON şeması ve <code>enum</code> ile kısıtlayıp çıktıyı doğrula; ya da küçük, açık bir model denemesi yap ve doğruluk ile süreyi ölç. Mobit’te sorgu türünü (arama mı, soru mu) belirleyen adım için de aynı yaklaşım geçerli.</p>
     </div>
   </div>
 
   <div class="terms">
-  <h4 class="label">Sözlük</h4>
-  <dl>
+    <h3 class="label">Sözlük</h3>
+      <dl>
     <div class="term">
       <dt><span class="term-en">decision model</span> <span class="term-tr">karar modeli</span></dt>
       <dd>Serbest metin üretmek yerine verilen seçenekler arasından seçim yapan model.</dd>
@@ -123,33 +127,33 @@
       <dd>Hazır bir modeli kendi veriyle belirli bir göreve uyarlamak için ek eğitme.</dd>
     </div>
   </dl>
-</div>
 
+  </div>
 
   <div class="article-foot">
-    <ul class="tags">
+  <ul class="tags">
   <li><a href="/etiket/llm/">#LLM</a></li>
   <li><a href="/etiket/siniflandirma/">#sınıflandırma</a></li>
   <li><a href="/etiket/acik-kaynak/">#açık kaynak</a></li>
   <li><a href="/etiket/performans/">#performans</a></li>
 </ul>
 
-    <a class="readmore" href="https://blog.cloudflare.com/clef-decision-models/" rel="noopener nofollow" target="_blank">
-      Orijinali oku <span aria-hidden="true">→</span>
-    </a>
-  </div>
+  <a class="readmore" href="https://blog.cloudflare.com/clef-decision-models/" rel="noopener nofollow" target="_blank">
+    Orijinali oku <span aria-hidden="true">↗</span>
+  </a>
+</div>
+
 </article>
 
 
-  <section class="section">
-    <h2 class="section-title"><span>Kısa Kısa</span></h2>
-    <div class="grid">
-<article class="brief" id="e79eb7ef5d76">
+    <h2 class="subhead">Kısa kısa</h2>
+<article class="story brief" id="e79eb7ef5d76">
   <div class="meta">
     <a class="badge" href="/kaynak/databricks/"
      style="--brand: #FF3621">Databricks Engineering</a>
 
-<span class="meta-item">1 Ekim 2026</span><span class="meta-item">6 dk okuma</span>  <span class="meta-item level level-ileri">ileri</span>
+  <span class="meta-item">1 Ekim 2026</span>
+<span class="meta-item">6 dk okuma</span>  <span class="meta-item level level-ileri">ileri</span>
 </div>
 
   <h3 class="brief-title">
@@ -158,17 +162,22 @@
   <p class="original-title">Lakebase Postgres branch-based restores for fast recovery at scale</p>
   <div class="prose prose-sm"><p>Geleneksel yönetilen Postgres’te zamana göre geri yükleme (PITR) üç adımdan oluşur: yeni bir örnek ayağa kaldırmak, anlık görüntüyü (snapshot) nesne depolamadan diske çekmek ve WAL kayıtlarını hedef ana kadar yeniden oynatmak. Veritabanı büyüdükçe bunlar saatler sürer. Bir kopya (replica) donanım arızasında kurtarır, ama kötü bir yazma kopyaya da yansımışsa yalnızca geri yükleme çözer.</p><p>Lakebase hesaplamayı ve depolamayı ayırıyor; veritabanı geçmişi zaten nesne depolamada referans verilebilir durumda tutuluyor. Bu yüzden geri yükleme veri kopyalamıyor, <strong>belirli bir zaman damgasında bir dal (branch) oluşturuyor</strong>: bu bir metadata işlemi. Databricks, 100 TB’lık veritabanında bile süreyi saniyelere indirdiğini söylüyor.</p></div>
 
-  <ul class="keypoints-inline">
-<li>Kopya (replica) donanım arızasına karşı korur; hatalı yazmaya karşı korumaz.</li><li>Hesaplama ve depolama ayrıldığında geri yükleme kopyalama işi olmaktan çıkar.</li><li>Geçmişi nesne depolamada tutmak, geri dönüşü bir metadata işlemine çevirir.</li>  </ul>
-
-  <div class="callout callout-you callout-sm">
-    <h4 class="label">Sende karşılığı</h4>
-    <p>Kendi Postgres’inde bile PITR’ı bir kez dene: WAL arşivlemeyi aç, bir tabloyu kasten boz ve belirli bir ana geri dön. Geri yükleme süresini ölçmek, ‘yedeğim var’ ile ‘yedeğimden ne kadar sürede dönerim’ arasındaki farkı gösterir.</p>
+  <div class="keypoints keypoints-sm">
+    <h4 class="label">Öne çıkanlar</h4>
+    <ol>
+<li><span>Kopya (replica) donanım arızasına karşı korur; hatalı yazmaya karşı korumaz.</span></li><li><span>Hesaplama ve depolama ayrıldığında geri yükleme kopyalama işi olmaktan çıkar.</span></li><li><span>Geçmişi nesne depolamada tutmak, geri dönüşü bir metadata işlemine çevirir.</span></li>    </ol>
   </div>
 
-  <div class="terms">
-  <h4 class="label">Sözlük</h4>
-  <dl>
+  <div class="callouts">
+    <div class="callout callout-you">
+      <h4 class="label">Sende karşılığı</h4>
+      <p>Kendi Postgres’inde bile PITR’ı bir kez dene: WAL arşivlemeyi aç, bir tabloyu kasten boz ve belirli bir ana geri dön. Geri yükleme süresini ölçmek, ‘yedeğim var’ ile ‘yedeğimden ne kadar sürede dönerim’ arasındaki farkı gösterir.</p>
+    </div>
+  </div>
+
+  <details class="terms">
+    <summary class="label">Sözlük · 2 terim</summary>
+      <dl>
     <div class="term">
       <dt><span class="term-en">point-in-time recovery (PITR)</span> <span class="term-tr">zamana göre geri yükleme</span></dt>
       <dd>Veritabanını geçmişteki belirli bir ana döndürme.</dd>
@@ -178,38 +187,65 @@
       <dd>Değişikliklerin kalıcı hâle gelmeden önce sırayla yazıldığı kayıt; geri yüklemede yeniden oynatılır.</dd>
     </div>
   </dl>
-</div>
 
+  </details>
 
   <div class="article-foot">
-    <ul class="tags">
+  <ul class="tags">
   <li><a href="/etiket/postgres/">#Postgres</a></li>
   <li><a href="/etiket/yedekleme/">#yedekleme</a></li>
   <li><a href="/etiket/mimari/">#mimari</a></li>
   <li><a href="/etiket/veritabani/">#veritabanı</a></li>
 </ul>
 
-    <a class="readmore" href="https://www.databricks.com/blog/lakebase-postgres-branch-based-restores-fast-recovery-scale" rel="noopener nofollow" target="_blank">
-      Orijinali oku <span aria-hidden="true">→</span>
-    </a>
-  </div>
+  <a class="readmore" href="https://www.databricks.com/blog/lakebase-postgres-branch-based-restores-fast-recovery-scale" rel="noopener nofollow" target="_blank">
+    Orijinali oku <span aria-hidden="true">↗</span>
+  </a>
+</div>
+
 </article>
+
+
     </div>
-  </section>
+    <aside class="layout-aside" aria-label="Bu sayıda">
+  <div class="aside-block">
+    <h2 class="label">Bu sayıda</h2>
+    <ol class="toc" id="toc">
+      <li>
+        <a href="#ebb2d7850d0e">
+          <span class="toc-title">Karar vermek için sohbet modeli gerekmez: Cloudflare Clef</span>
+          <span class="toc-meta">Cloudflare Blog · 11 dk</span>
+        </a>
+      </li>
+      <li>
+        <a href="#e79eb7ef5d76">
+          <span class="toc-title">100 TB’lık veritabanını saniyeler içinde geri almak: dal tabanlı restore</span>
+          <span class="toc-meta">Databricks Engineering · 6 dk</span>
+        </a>
+      </li>
+    </ol>
+  </div>
+  <div class="aside-block aside-facts">
+    <h2 class="label">Künye</h2>
+    <dl class="facts">
+      <div><dt>yazı</dt><dd>2</dd></div>
+      <div><dt>dk okuma</dt><dd>17</dd></div>
+      <div><dt>kaynak</dt><dd>2</dd></div>
+      <div><dt>terim</dt><dd>6</dd></div>
+    </dl>
+  </div>
+</aside>
 
-
+  </div>
 
   <nav class="pager" aria-label="Sayılar arası gezinme">
-    <a class="pager-link pager-prev" href="/sayi/2026-09-30/">
-      <span class="pager-label">← Önceki sayı</span>
-      <span class="pager-title">30 Eylül 2026</span>
+    <a class="pager-link pager-prev" href="/sayi/2026-09-30/" rel="prev">
+      <span class="pager-label">← Önceki sayı · 30 Eylül 2026</span>
+      <span class="pager-title">Bir Availability Zone’u günlerce boşaltmak: ARC Zonal Shift ile N-1 tatbikatı</span>
     </a>
-
-    <a class="pager-mid" href="/arsiv/">Arşiv</a>
-
-    <a class="pager-link pager-next" href="/sayi/2026-10-02/">
-      <span class="pager-label">Sonraki sayı →</span>
-      <span class="pager-title">2 Ekim 2026</span>
+    <a class="pager-link pager-next" href="/sayi/2026-10-02/" rel="next">
+      <span class="pager-label">Sonraki sayı · 2 Ekim 2026 →</span>
+      <span class="pager-title">Mesaj göndermek veritabanı yazmasının parçası olunca: Spanner queues</span>
     </a>
   </nav>
 
@@ -219,13 +255,13 @@
 <footer class="footer">
   <div class="wrap footer-inner">
     <div class="footer-col">
-      <h3>Eren&#39;in Mühendislik Gazetesi</h3>
+      <p class="footer-brand">Eren&#39;in Mühendislik Gazetesi</p>
       <p class="muted">
-        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını her gün derleyip
+        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını derleyip
         Türkçe özetleyen kişisel bir gazete. Özetler yeni mezun bir mühendisin
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
-      <p class="muted small">
+      <p class="muted small num">
         113 özet · 51 sayı ·
         11 kaynak
       </p>
@@ -265,6 +301,6 @@
   </div>
 </footer>
 
-<script src="/static/app.js" defer></script>
+<script src="/static/app.js?v=eae14b0f" defer></script>
 </body>
 </html>

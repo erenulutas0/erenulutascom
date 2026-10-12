@@ -6,15 +6,22 @@
 <title>Arşiv — Eren&#39;in Mühendislik Gazetesi</title>
 <meta name="description" content="51 sayı, 113 özet. Tüm günlerin listesi.">
 <meta name="author" content="Eren Ulutaş">
+<meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131310" media="(prefers-color-scheme: dark)">
 <meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
 <meta property="og:title" content="Arşiv — Eren&#39;in Mühendislik Gazetesi">
 <meta property="og:description" content="51 sayı, 113 özet. Tüm günlerin listesi.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
+<meta property="og:url" content="https://erenulutas.com/arsiv/">
+<meta name="twitter:card" content="summary">
 <link rel="canonical" href="https://erenulutas.com/arsiv/">
 <link rel="alternate" type="application/rss+xml" title="Eren&#39;in Mühendislik Gazetesi" href="/feed.xml">
-<link rel="stylesheet" href="/static/style.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
+<link rel="stylesheet" href="/static/style.css?v=eae14b0f">
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
 <script>
   // Tema tercihini ilk boyamadan önce uygula (flash olmasın)
   (function () {
@@ -30,26 +37,25 @@
 
 <header class="masthead">
   <div class="wrap masthead-inner">
-    <div class="masthead-brand">
-      <a href="/" class="logo">
-        <span class="logo-mark">EU</span>
-        <span class="logo-text">
-          <strong>Eren&#39;in Mühendislik Gazetesi</strong>
-          <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
-        </span>
-      </a>
-    </div>
+    <a href="/" class="logo">
+      <span class="logo-mark">EU</span>
+      <span class="logo-text">
+        <strong>Eren&#39;in Mühendislik Gazetesi</strong>
+        <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
+      </span>
+    </a>
     <nav class="masthead-nav" aria-label="Ana menü">
       <a href="/">Bugün</a>
-      <a href="/arsiv/">Arşiv</a>
+      <a href="/arsiv/" aria-current="page">Arşiv</a>
       <a href="/ara/">Ara</a>
       <a href="/hakkinda/">Hakkında</a>
-      <button id="tema" class="tema" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <button id="tema" class="tema" type="button" aria-label="Açık/koyu temayı değiştir" title="Açık/koyu tema">
         <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/></g></svg>
         <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg>
       </button>
     </nav>
   </div>
+  <div class="progress" id="ilerleme" aria-hidden="true"></div>
 </header>
 
 <main id="icerik">
@@ -58,13 +64,19 @@
   <header class="page-head">
     <h1 class="page-title">Arşiv</h1>
     <p class="page-sub">
-      51 sayı · 113 özet ·
-      7 Temmuz 2026 — 2 Ekim 2026
+      7 Temmuz 2026 — 2 Ekim 2026 arasında yayımlanan tüm sayılar.
     </p>
   </header>
 
+  <dl class="stats">
+    <div><dt>sayı</dt><dd>51</dd></div>
+    <div><dt>özet</dt><dd>113</dd></div>
+    <div><dt>kaynak</dt><dd>11</dd></div>
+    <div><dt>sözlük terimi</dt><dd>336</dd></div>
+  </dl>
+
   <section class="section">
-    <h2 class="section-title"><span>Konular</span></h2>
+    <div class="section-head"><h2 class="section-title">Konular</h2></div>
     <ul class="tagcloud">
       <li><a href="/etiket/llm/">LLM <span class="count">29</span></a></li>
       <li><a href="/etiket/mimari/">mimari <span class="count">24</span></a></li>
@@ -94,83 +106,86 @@
   </section>
 
   <section class="section">
-    <h2 class="section-title"><span>Kaynaklar</span></h2>
+    <div class="section-head"><h2 class="section-title">Kaynaklar</h2></div>
     <ul class="sourcegrid">
       <li>
         <a href="/kaynak/uber/" style="--brand: #000000">
           <strong>Uber Engineering</strong>
-          <span class="count">6 özet</span>
+          <span class="count">6</span>
         </a>
       </li>
       <li>
         <a href="/kaynak/netflix/" style="--brand: #E50914">
           <strong>Netflix Tech Blog</strong>
-          <span class="count">11 özet</span>
+          <span class="count">11</span>
         </a>
       </li>
       <li>
         <a href="/kaynak/aws-architecture/" style="--brand: #FF9900">
           <strong>AWS Architecture Blog</strong>
-          <span class="count">18 özet</span>
+          <span class="count">18</span>
         </a>
       </li>
       <li>
         <a href="/kaynak/cloudflare/" style="--brand: #F6821F">
           <strong>Cloudflare Blog</strong>
-          <span class="count">18 özet</span>
+          <span class="count">18</span>
         </a>
       </li>
       <li>
         <a href="/kaynak/stripe/" style="--brand: #635BFF">
           <strong>Stripe Engineering</strong>
-          <span class="count">1 özet</span>
+          <span class="count">1</span>
         </a>
       </li>
       <li>
         <a href="/kaynak/databricks/" style="--brand: #FF3621">
           <strong>Databricks Engineering</strong>
-          <span class="count">4 özet</span>
+          <span class="count">4</span>
         </a>
       </li>
       <li>
         <a href="/kaynak/meta/" style="--brand: #0866FF">
           <strong>Meta Engineering</strong>
-          <span class="count">10 özet</span>
+          <span class="count">10</span>
         </a>
       </li>
       <li>
         <a href="/kaynak/openai/" style="--brand: #000000">
           <strong>OpenAI Research</strong>
-          <span class="count">26 özet</span>
+          <span class="count">26</span>
         </a>
       </li>
       <li>
         <a href="/kaynak/anthropic/" style="--brand: #D97757">
           <strong>Anthropic Engineering</strong>
-          <span class="count">1 özet</span>
+          <span class="count">1</span>
         </a>
       </li>
       <li>
         <a href="/kaynak/google-research/" style="--brand: #4285F4">
           <strong>Google Research</strong>
-          <span class="count">10 özet</span>
+          <span class="count">10</span>
         </a>
       </li>
       <li>
         <a href="/kaynak/google-cloud/" style="--brand: #34A853">
           <strong>Google Cloud Blog</strong>
-          <span class="count">8 özet</span>
+          <span class="count">8</span>
         </a>
       </li>
     </ul>
   </section>
 
   <section class="section">
-    <h2 class="section-title"><span>Ekim 2026</span></h2>
+    <div class="section-head">
+      <h2 class="section-title">Ekim 2026</h2>
+      <span class="count">2 sayı</span>
+    </div>
     <ul class="daylist">
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-10-02/">
-          <span class="dayrow-date">2 Ekim 2026</span>
+          <span class="dayrow-date"><b>№ 51</b>2 Ekim 2026</span>
           <span class="dayrow-body">
             <strong>Mesaj göndermek veritabanı yazmasının parçası olunca: Spanner queues</strong>
             <span class="dayrow-meta">
@@ -182,7 +197,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-10-01/">
-          <span class="dayrow-date">1 Ekim 2026</span>
+          <span class="dayrow-date"><b>№ 50</b>1 Ekim 2026</span>
           <span class="dayrow-body">
             <strong>Karar vermek için sohbet modeli gerekmez: Cloudflare Clef</strong>
             <span class="dayrow-meta">
@@ -195,11 +210,14 @@
     </ul>
   </section>
   <section class="section">
-    <h2 class="section-title"><span>Eylül 2026</span></h2>
+    <div class="section-head">
+      <h2 class="section-title">Eylül 2026</h2>
+      <span class="count">15 sayı</span>
+    </div>
     <ul class="daylist">
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-09-30/">
-          <span class="dayrow-date">30 Eylül 2026</span>
+          <span class="dayrow-date"><b>№ 49</b>30 Eylül 2026</span>
           <span class="dayrow-body">
             <strong>Bir Availability Zone’u günlerce boşaltmak: ARC Zonal Shift ile N-1 tatbikatı</strong>
             <span class="dayrow-meta">
@@ -211,7 +229,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-09-29/">
-          <span class="dayrow-date">29 Eylül 2026</span>
+          <span class="dayrow-date"><b>№ 48</b>29 Eylül 2026</span>
           <span class="dayrow-body">
             <strong>GPU boşta bekliyor çünkü sandbox geç açılıyor: ısıtılmış havuz ve pod geri dönüşümü</strong>
             <span class="dayrow-meta">
@@ -223,7 +241,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-09-28/">
-          <span class="dayrow-date">28 Eylül 2026</span>
+          <span class="dayrow-date"><b>№ 47</b>28 Eylül 2026</span>
           <span class="dayrow-body">
             <strong>Güvenlik vakası (safety case): eğitime devam etmeden önce kanıtla</strong>
             <span class="dayrow-meta">
@@ -235,7 +253,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-09-25/">
-          <span class="dayrow-date">25 Eylül 2026</span>
+          <span class="dayrow-date"><b>№ 46</b>25 Eylül 2026</span>
           <span class="dayrow-body">
             <strong>Bulut kimliğini kendi kimliğine çevirmek: iki ayrı kanıtla iş yükü doğrulaması</strong>
             <span class="dayrow-meta">
@@ -247,7 +265,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-09-24/">
-          <span class="dayrow-date">24 Eylül 2026</span>
+          <span class="dayrow-date"><b>№ 45</b>24 Eylül 2026</span>
           <span class="dayrow-body">
             <strong>Bulutta bile okuyamadığın veri: Meta AI gözlükleri için Private Processing</strong>
             <span class="dayrow-meta">
@@ -259,7 +277,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-09-22/">
-          <span class="dayrow-date">22 Eylül 2026</span>
+          <span class="dayrow-date"><b>№ 44</b>22 Eylül 2026</span>
           <span class="dayrow-body">
             <strong>Eğitimde gördüğünü üretimde görmemek: Uber’in özellik loglama çerçevesi</strong>
             <span class="dayrow-meta">
@@ -271,7 +289,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-09-21/">
-          <span class="dayrow-date">21 Eylül 2026</span>
+          <span class="dayrow-date"><b>№ 43</b>21 Eylül 2026</span>
           <span class="dayrow-body">
             <strong>Problemi tarif etmek ile çözmek ayrı iştir: Meta’nın açık kaynak atama çözücüsü Rebalancer</strong>
             <span class="dayrow-meta">
@@ -283,7 +301,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-09-18/">
-          <span class="dayrow-date">18 Eylül 2026</span>
+          <span class="dayrow-date"><b>№ 42</b>18 Eylül 2026</span>
           <span class="dayrow-body">
             <strong>Namespace bir güvenlik sınırı değildir: çok kiracılı Kubernetes’te dört duvar</strong>
             <span class="dayrow-meta">
@@ -295,7 +313,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-09-15/">
-          <span class="dayrow-date">15 Eylül 2026</span>
+          <span class="dayrow-date"><b>№ 41</b>15 Eylül 2026</span>
           <span class="dayrow-body">
             <strong>Pahalı düşünmeyi sorgu anından eğitime taşımak: Retrieve-for-Train</strong>
             <span class="dayrow-meta">
@@ -307,7 +325,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-09-11/">
-          <span class="dayrow-date">11 Eylül 2026</span>
+          <span class="dayrow-date"><b>№ 40</b>11 Eylül 2026</span>
           <span class="dayrow-body">
             <strong>İstemci kütüphanesinden servise: OpenAI’ın Habitat depolama platformu neden Python’da kaldı</strong>
             <span class="dayrow-meta">
@@ -319,7 +337,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-09-10/">
-          <span class="dayrow-date">10 Eylül 2026</span>
+          <span class="dayrow-date"><b>№ 39</b>10 Eylül 2026</span>
           <span class="dayrow-body">
             <strong>Bağlantının tek sahibi kim? DynamoDB ile dağıtık kira (lease) deseni</strong>
             <span class="dayrow-meta">
@@ -331,7 +349,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-09-09/">
-          <span class="dayrow-date">9 Eylül 2026</span>
+          <span class="dayrow-date"><b>№ 38</b>9 Eylül 2026</span>
           <span class="dayrow-body">
             <strong>Kuyruk çökerse uygulaman ne yapar? Hipotezli bir dayanıklılık deneyi kurmak</strong>
             <span class="dayrow-meta">
@@ -343,7 +361,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-09-03/">
-          <span class="dayrow-date">3 Eylül 2026</span>
+          <span class="dayrow-date"><b>№ 37</b>3 Eylül 2026</span>
           <span class="dayrow-body">
             <strong>Bağlantı sayısı bir ölçekleme sorunudur: ZippyDB&#39;nin önüne ZGateway koymak</strong>
             <span class="dayrow-meta">
@@ -355,7 +373,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-09-02/">
-          <span class="dayrow-date">2 Eylül 2026</span>
+          <span class="dayrow-date"><b>№ 36</b>2 Eylül 2026</span>
           <span class="dayrow-body">
             <strong>Kurumsal “ikinci beyin”: bilgiyi modelin ağırlıklarına değil, denetlenebilir dosyalara yazmak</strong>
             <span class="dayrow-meta">
@@ -367,7 +385,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-09-01/">
-          <span class="dayrow-date">1 Eylül 2026</span>
+          <span class="dayrow-date"><b>№ 35</b>1 Eylül 2026</span>
           <span class="dayrow-body">
             <strong>MCP oturumsuz oldu: sticky session, oturum deposu ve yük dengeleyici ayarlarını silebilirsin</strong>
             <span class="dayrow-meta">
@@ -380,11 +398,14 @@
     </ul>
   </section>
   <section class="section">
-    <h2 class="section-title"><span>Ağustos 2026</span></h2>
+    <div class="section-head">
+      <h2 class="section-title">Ağustos 2026</h2>
+      <span class="count">15 sayı</span>
+    </div>
     <ul class="daylist">
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-08-31/">
-          <span class="dayrow-date">31 Ağustos 2026</span>
+          <span class="dayrow-date"><b>№ 34</b>31 Ağustos 2026</span>
           <span class="dayrow-body">
             <strong>Eğitmeden tahmin: çok değişkenli zaman serileri için TimesFM-3</strong>
             <span class="dayrow-meta">
@@ -396,7 +417,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-08-28/">
-          <span class="dayrow-date">28 Ağustos 2026</span>
+          <span class="dayrow-date"><b>№ 33</b>28 Ağustos 2026</span>
           <span class="dayrow-body">
             <strong>Modele resmi göstermek: embedding ile cold-start&#39;ı kısaltmak ve beş modeli bire indirmek</strong>
             <span class="dayrow-meta">
@@ -408,7 +429,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-08-27/">
-          <span class="dayrow-date">27 Ağustos 2026</span>
+          <span class="dayrow-date"><b>№ 32</b>27 Ağustos 2026</span>
           <span class="dayrow-body">
             <strong>Yazılım fabrikasını verimli işletmek: AI maliyetini parçalara bölüp ölçmek</strong>
             <span class="dayrow-meta">
@@ -420,7 +441,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-08-26/">
-          <span class="dayrow-date">26 Ağustos 2026</span>
+          <span class="dayrow-date"><b>№ 31</b>26 Ağustos 2026</span>
           <span class="dayrow-body">
             <strong>Agent&#39;a yetkiyi kademeli ver: sürekli güvenilirlikle kazanılan, bozulunca geri alınan izinler</strong>
             <span class="dayrow-meta">
@@ -432,7 +453,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-08-24/">
-          <span class="dayrow-date">24 Ağustos 2026</span>
+          <span class="dayrow-date"><b>№ 30</b>24 Ağustos 2026</span>
           <span class="dayrow-body">
             <strong>İletişimi birinci sınıf vatandaş yapmak: ağı çipin içine gömen MTIA 300</strong>
             <span class="dayrow-meta">
@@ -444,7 +465,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-08-21/">
-          <span class="dayrow-date">21 Ağustos 2026</span>
+          <span class="dayrow-date"><b>№ 29</b>21 Ağustos 2026</span>
           <span class="dayrow-body">
             <strong>İki autoscaler hikâyesi: dışarıdan izlemek ile içeriden akıl yürütmek</strong>
             <span class="dayrow-meta">
@@ -456,7 +477,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-08-13/">
-          <span class="dayrow-date">13 Ağustos 2026</span>
+          <span class="dayrow-date"><b>№ 28</b>13 Ağustos 2026</span>
           <span class="dayrow-body">
             <strong>Agent maliyetini düşürmenin üç yolu: çabayı azalt, işi paralelleştir, deterministik işi koda taşı</strong>
             <span class="dayrow-meta">
@@ -468,7 +489,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-08-12/">
-          <span class="dayrow-date">12 Ağustos 2026</span>
+          <span class="dayrow-date"><b>№ 27</b>12 Ağustos 2026</span>
           <span class="dayrow-body">
             <strong>Şifreli mesajlarda dolandırıcılık uyarısı: cihaz üstü model ve doğrulanabilir gizlilik</strong>
             <span class="dayrow-meta">
@@ -480,7 +501,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-08-11/">
-          <span class="dayrow-date">11 Ağustos 2026</span>
+          <span class="dayrow-date"><b>№ 26</b>11 Ağustos 2026</span>
           <span class="dayrow-body">
             <strong>Konuşma hızında düşünmek: AMIE&#39;nin eşzamansız çoklu ajan mimarisi</strong>
             <span class="dayrow-meta">
@@ -492,7 +513,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-08-07/">
-          <span class="dayrow-date">7 Ağustos 2026</span>
+          <span class="dayrow-date"><b>№ 25</b>7 Ağustos 2026</span>
           <span class="dayrow-body">
             <strong>Milyar kenarlı grafı 100 ms altında sorgulamak: önce genişlik, async ve tek istek</strong>
             <span class="dayrow-meta">
@@ -504,7 +525,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-08-05/">
-          <span class="dayrow-date">5 Ağustos 2026</span>
+          <span class="dayrow-date"><b>№ 24</b>5 Ağustos 2026</span>
           <span class="dayrow-body">
             <strong>Kullanıcı dizilerinden ölçekleme yasalarına: ağır modelleme çevrimdışı, sıralama çevrimiçi</strong>
             <span class="dayrow-meta">
@@ -516,7 +537,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-08-04/">
-          <span class="dayrow-date">4 Ağustos 2026</span>
+          <span class="dayrow-date"><b>№ 23</b>4 Ağustos 2026</span>
           <span class="dayrow-body">
             <strong>Test ortamı da bir saldırı yüzeyidir: üçüncü taraf siber değerlendirmelerde sızıntı</strong>
             <span class="dayrow-meta">
@@ -528,7 +549,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-08-03/">
-          <span class="dayrow-date">3 Ağustos 2026</span>
+          <span class="dayrow-date"><b>№ 22</b>3 Ağustos 2026</span>
           <span class="dayrow-body">
             <strong>Sesli AI&#39;da altı ayda gerçek zamanlı mimari: sıra beklemeyi bırakmak</strong>
             <span class="dayrow-meta">
@@ -540,7 +561,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-08-02/">
-          <span class="dayrow-date">2 Ağustos 2026</span>
+          <span class="dayrow-date"><b>№ 21</b>2 Ağustos 2026</span>
           <span class="dayrow-body">
             <strong>&#34;Agent Cloud&#34; nedir? Cloudflare&#39;in sorduğu soru</strong>
             <span class="dayrow-meta">
@@ -552,7 +573,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-08-01/">
-          <span class="dayrow-date">1 Ağustos 2026</span>
+          <span class="dayrow-date"><b>№ 20</b>1 Ağustos 2026</span>
           <span class="dayrow-body">
             <strong>On açık matematik problemi ve 2.000 dolarlık token faturası</strong>
             <span class="dayrow-meta">
@@ -565,11 +586,14 @@
     </ul>
   </section>
   <section class="section">
-    <h2 class="section-title"><span>Temmuz 2026</span></h2>
+    <div class="section-head">
+      <h2 class="section-title">Temmuz 2026</h2>
+      <span class="count">19 sayı</span>
+    </div>
     <ul class="daylist">
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-07-31/">
-          <span class="dayrow-date">31 Temmuz 2026</span>
+          <span class="dayrow-date"><b>№ 19</b>31 Temmuz 2026</span>
           <span class="dayrow-body">
             <strong>MoQ: canlı video, görüntülü arama ve mesajlaşmayı tek protokole indirmek</strong>
             <span class="dayrow-meta">
@@ -581,7 +605,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-07-30/">
-          <span class="dayrow-date">30 Temmuz 2026</span>
+          <span class="dayrow-date"><b>№ 18</b>30 Temmuz 2026</span>
           <span class="dayrow-body">
             <strong>Netflix öneri sistemini dil modeline devretti: GenRec</strong>
             <span class="dayrow-meta">
@@ -593,7 +617,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-07-29/">
-          <span class="dayrow-date">29 Temmuz 2026</span>
+          <span class="dayrow-date"><b>№ 17</b>29 Temmuz 2026</span>
           <span class="dayrow-body">
             <strong>İki ayar puanı üçe katladı: benchmark modeli mi harness&#39;ı mı ölçüyor?</strong>
             <span class="dayrow-meta">
@@ -605,7 +629,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-07-28/">
-          <span class="dayrow-date">28 Temmuz 2026</span>
+          <span class="dayrow-date"><b>№ 16</b>28 Temmuz 2026</span>
           <span class="dayrow-body">
             <strong>İnternetin kırılganlığı: 2026 ikinci çeyreğinin büyük kesintileri</strong>
             <span class="dayrow-meta">
@@ -617,7 +641,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-07-27/">
-          <span class="dayrow-date">27 Temmuz 2026</span>
+          <span class="dayrow-date"><b>№ 15</b>27 Temmuz 2026</span>
           <span class="dayrow-body">
             <strong>Hata ayıklanamayan protokolü araçla ehlileştirmek: pvcli</strong>
             <span class="dayrow-meta">
@@ -629,7 +653,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-07-24/">
-          <span class="dayrow-date">24 Temmuz 2026</span>
+          <span class="dayrow-date"><b>№ 14</b>24 Temmuz 2026</span>
           <span class="dayrow-body">
             <strong>İnternetin yolları neden beklendiği gibi çalışmıyor: BGP ORIGIN bulgusu</strong>
             <span class="dayrow-meta">
@@ -641,7 +665,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-07-23/">
-          <span class="dayrow-date">23 Temmuz 2026</span>
+          <span class="dayrow-date"><b>№ 13</b>23 Temmuz 2026</span>
           <span class="dayrow-body">
             <strong>Bir Set-Cookie başlığı önbelleğini nasıl mahveder</strong>
             <span class="dayrow-meta">
@@ -653,7 +677,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-07-22/">
-          <span class="dayrow-date">22 Temmuz 2026</span>
+          <span class="dayrow-date"><b>№ 12</b>22 Temmuz 2026</span>
           <span class="dayrow-body">
             <strong>İnternetin olmadığı yerde AI: çevrimdışı-öncelikli mimari</strong>
             <span class="dayrow-meta">
@@ -665,7 +689,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-07-21/">
-          <span class="dayrow-date">21 Temmuz 2026</span>
+          <span class="dayrow-date"><b>№ 11</b>21 Temmuz 2026</span>
           <span class="dayrow-body">
             <strong>Sandbox&#39;tan kaçış: değerlendirme ortamı neden bir güvenlik sınırıdır</strong>
             <span class="dayrow-meta">
@@ -677,7 +701,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-07-20/">
-          <span class="dayrow-date">20 Temmuz 2026</span>
+          <span class="dayrow-date"><b>№ 10</b>20 Temmuz 2026</span>
           <span class="dayrow-body">
             <strong>Hiçbir test paketi her davranışı öngöremez: kademeli yayına çıkmanın değeri</strong>
             <span class="dayrow-meta">
@@ -689,7 +713,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-07-17/">
-          <span class="dayrow-date">17 Temmuz 2026</span>
+          <span class="dayrow-date"><b>№ 9</b>17 Temmuz 2026</span>
           <span class="dayrow-body">
             <strong>Netflix LLM sunumunu neden kendi işletiyor — ve hangi takasları yaptı</strong>
             <span class="dayrow-meta">
@@ -701,7 +725,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-07-16/">
-          <span class="dayrow-date">16 Temmuz 2026</span>
+          <span class="dayrow-date"><b>№ 8</b>16 Temmuz 2026</span>
           <span class="dayrow-body">
             <strong>Alarm yorgunluğunu çözmek: önce filtrele, sonra önceliklendir</strong>
             <span class="dayrow-meta">
@@ -713,7 +737,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-07-15/">
-          <span class="dayrow-date">15 Temmuz 2026</span>
+          <span class="dayrow-date"><b>№ 7</b>15 Temmuz 2026</span>
           <span class="dayrow-body">
             <strong>121 milyon bağlantı ve tek bir DNS ayarı: ağırlıklı mı, çok-değerli mi?</strong>
             <span class="dayrow-meta">
@@ -725,7 +749,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-07-14/">
-          <span class="dayrow-date">14 Temmuz 2026</span>
+          <span class="dayrow-date"><b>№ 6</b>14 Temmuz 2026</span>
           <span class="dayrow-body">
             <strong>Sessiz kurtarma bir kusur: .al kesintisi ve görünmez güvenlik kararları</strong>
             <span class="dayrow-meta">
@@ -737,7 +761,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-07-13/">
-          <span class="dayrow-date">13 Temmuz 2026</span>
+          <span class="dayrow-date"><b>№ 5</b>13 Temmuz 2026</span>
           <span class="dayrow-body">
             <strong>&#34;Yerelde mükemmel çalıştı&#34;: Netflix&#39;in servis haritası üretimde nasıl kırıldı</strong>
             <span class="dayrow-meta">
@@ -749,7 +773,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-07-10/">
-          <span class="dayrow-date">10 Temmuz 2026</span>
+          <span class="dayrow-date"><b>№ 4</b>10 Temmuz 2026</span>
           <span class="dayrow-body">
             <strong>Ölçüm tutunacak bir şey bulamayınca: anycast ve önbellek verimliliği</strong>
             <span class="dayrow-meta">
@@ -761,7 +785,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-07-09/">
-          <span class="dayrow-date">9 Temmuz 2026</span>
+          <span class="dayrow-date"><b>№ 3</b>9 Temmuz 2026</span>
           <span class="dayrow-body">
             <strong>Mükemmeli beklemek bir strateji değil: ML-DSA ile yaşamayı öğrenmek</strong>
             <span class="dayrow-meta">
@@ -773,7 +797,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-07-08/">
-          <span class="dayrow-date">8 Temmuz 2026</span>
+          <span class="dayrow-date"><b>№ 2</b>8 Temmuz 2026</span>
           <span class="dayrow-body">
             <strong>Bozuk benchmark: testin kendisini denetlemek</strong>
             <span class="dayrow-meta">
@@ -785,7 +809,7 @@
       </li>
       <li class="dayrow">
         <a class="dayrow-link" href="/sayi/2026-07-07/">
-          <span class="dayrow-date">7 Temmuz 2026</span>
+          <span class="dayrow-date"><b>№ 1</b>7 Temmuz 2026</span>
           <span class="dayrow-body">
             <strong>Felaket kurtarmada ara mod: salt-okunur devretme</strong>
             <span class="dayrow-meta">
@@ -804,13 +828,13 @@
 <footer class="footer">
   <div class="wrap footer-inner">
     <div class="footer-col">
-      <h3>Eren&#39;in Mühendislik Gazetesi</h3>
+      <p class="footer-brand">Eren&#39;in Mühendislik Gazetesi</p>
       <p class="muted">
-        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını her gün derleyip
+        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını derleyip
         Türkçe özetleyen kişisel bir gazete. Özetler yeni mezun bir mühendisin
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
-      <p class="muted small">
+      <p class="muted small num">
         113 özet · 51 sayı ·
         11 kaynak
       </p>
@@ -850,6 +874,6 @@
   </div>
 </footer>
 
-<script src="/static/app.js" defer></script>
+<script src="/static/app.js?v=eae14b0f" defer></script>
 </body>
 </html>

@@ -6,15 +6,22 @@
 <title>maliyet — Eren&#39;in Mühendislik Gazetesi</title>
 <meta name="description" content=""maliyet" etiketli 15 özet.">
 <meta name="author" content="Eren Ulutaş">
+<meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131310" media="(prefers-color-scheme: dark)">
 <meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
 <meta property="og:title" content="maliyet — Eren&#39;in Mühendislik Gazetesi">
 <meta property="og:description" content=""maliyet" etiketli 15 özet.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
+<meta property="og:url" content="https://erenulutas.com/etiket/maliyet/">
+<meta name="twitter:card" content="summary">
 <link rel="canonical" href="https://erenulutas.com/etiket/maliyet/">
 <link rel="alternate" type="application/rss+xml" title="Eren&#39;in Mühendislik Gazetesi" href="/feed.xml">
-<link rel="stylesheet" href="/static/style.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
+<link rel="stylesheet" href="/static/style.css?v=eae14b0f">
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
 <script>
   // Tema tercihini ilk boyamadan önce uygula (flash olmasın)
   (function () {
@@ -30,26 +37,25 @@
 
 <header class="masthead">
   <div class="wrap masthead-inner">
-    <div class="masthead-brand">
-      <a href="/" class="logo">
-        <span class="logo-mark">EU</span>
-        <span class="logo-text">
-          <strong>Eren&#39;in Mühendislik Gazetesi</strong>
-          <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
-        </span>
-      </a>
-    </div>
+    <a href="/" class="logo">
+      <span class="logo-mark">EU</span>
+      <span class="logo-text">
+        <strong>Eren&#39;in Mühendislik Gazetesi</strong>
+        <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
+      </span>
+    </a>
     <nav class="masthead-nav" aria-label="Ana menü">
       <a href="/">Bugün</a>
-      <a href="/arsiv/">Arşiv</a>
+      <a href="/arsiv/" aria-current="page">Arşiv</a>
       <a href="/ara/">Ara</a>
       <a href="/hakkinda/">Hakkında</a>
-      <button id="tema" class="tema" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <button id="tema" class="tema" type="button" aria-label="Açık/koyu temayı değiştir" title="Açık/koyu tema">
         <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/></g></svg>
         <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg>
       </button>
     </nav>
   </div>
+  <div class="progress" id="ilerleme" aria-hidden="true"></div>
 </header>
 
 <main id="icerik">
@@ -250,13 +256,13 @@
 <footer class="footer">
   <div class="wrap footer-inner">
     <div class="footer-col">
-      <h3>Eren&#39;in Mühendislik Gazetesi</h3>
+      <p class="footer-brand">Eren&#39;in Mühendislik Gazetesi</p>
       <p class="muted">
-        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını her gün derleyip
+        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını derleyip
         Türkçe özetleyen kişisel bir gazete. Özetler yeni mezun bir mühendisin
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
-      <p class="muted small">
+      <p class="muted small num">
         113 özet · 51 sayı ·
         11 kaynak
       </p>
@@ -296,6 +302,6 @@
   </div>
 </footer>
 
-<script src="/static/app.js" defer></script>
+<script src="/static/app.js?v=eae14b0f" defer></script>
 </body>
 </html>

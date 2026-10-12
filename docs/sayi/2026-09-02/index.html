@@ -6,15 +6,22 @@
 <title>2 Eylül 2026 — Eren&#39;in Mühendislik Gazetesi</title>
 <meta name="description" content="Meta&#39;dan, RAG üzerine düşündüren bir yazı: belgeleri her soruda yeniden parçalayıp getirmek yerine, uzmanın nasıl düşündüğünü baştan yapılandırılmış dosyalara damıtırsan ne olur? Cevap: daha tutarlı, denetlenebilir ve modeli yeniden eğitmeden öğrenen bir agent.">
 <meta name="author" content="Eren Ulutaş">
+<meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131310" media="(prefers-color-scheme: dark)">
 <meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
 <meta property="og:title" content="2 Eylül 2026 — Eren&#39;in Mühendislik Gazetesi">
 <meta property="og:description" content="Meta&#39;dan, RAG üzerine düşündüren bir yazı: belgeleri her soruda yeniden parçalayıp getirmek yerine, uzmanın nasıl düşündüğünü baştan yapılandırılmış dosyalara damıtırsan ne olur? Cevap: daha tutarlı, denetlenebilir ve modeli yeniden eğitmeden öğrenen bir agent.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
+<meta property="og:url" content="https://erenulutas.com/sayi/2026-09-02/">
+<meta name="twitter:card" content="summary">
 <link rel="canonical" href="https://erenulutas.com/sayi/2026-09-02/">
 <link rel="alternate" type="application/rss+xml" title="Eren&#39;in Mühendislik Gazetesi" href="/feed.xml">
-<link rel="stylesheet" href="/static/style.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
+<link rel="stylesheet" href="/static/style.css?v=eae14b0f">
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
 <script>
   // Tema tercihini ilk boyamadan önce uygula (flash olmasın)
   (function () {
@@ -30,55 +37,52 @@
 
 <header class="masthead">
   <div class="wrap masthead-inner">
-    <div class="masthead-brand">
-      <a href="/" class="logo">
-        <span class="logo-mark">EU</span>
-        <span class="logo-text">
-          <strong>Eren&#39;in Mühendislik Gazetesi</strong>
-          <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
-        </span>
-      </a>
-    </div>
+    <a href="/" class="logo">
+      <span class="logo-mark">EU</span>
+      <span class="logo-text">
+        <strong>Eren&#39;in Mühendislik Gazetesi</strong>
+        <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
+      </span>
+    </a>
     <nav class="masthead-nav" aria-label="Ana menü">
       <a href="/">Bugün</a>
-      <a href="/arsiv/">Arşiv</a>
+      <a href="/arsiv/" aria-current="page">Arşiv</a>
       <a href="/ara/">Ara</a>
       <a href="/hakkinda/">Hakkında</a>
-      <button id="tema" class="tema" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <button id="tema" class="tema" type="button" aria-label="Açık/koyu temayı değiştir" title="Açık/koyu tema">
         <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/></g></svg>
         <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg>
       </button>
     </nav>
   </div>
+  <div class="progress" id="ilerleme" aria-hidden="true"></div>
 </header>
 
 <main id="icerik">
 <div class="wrap">
 
-  <div class="dateline">
-    <span class="dateline-date">2 Eylül 2026, Çarşamba</span>
-    <span class="dateline-sep" aria-hidden="true">·</span>
-    <span class="dateline-meta">1 yazı</span>
-    <span class="dateline-sep" aria-hidden="true">·</span>
-    <span class="dateline-meta">Meta Engineering</span>
+  <header class="edition-head">
+  <div class="edition-bar">
+    <span class="edition-no">Sayı 36</span>
+    <h1 class="edition-date"><time datetime="2026-09-02">2 Eylül 2026, Çarşamba</time></h1>
+    <nav class="edition-nav" aria-label="Sayılar arası gezinme">
+<a href="/sayi/2026-09-01/" rel="prev"><span aria-hidden="true">←</span> 1 Eylül 2026</a><a href="/sayi/2026-09-03/" rel="next">3 Eylül 2026 <span aria-hidden="true">→</span></a>
+    </nav>
   </div>
+<p class="lede">Meta&#x27;dan, RAG üzerine düşündüren bir yazı: belgeleri her soruda yeniden parçalayıp getirmek yerine, uzmanın nasıl düşündüğünü baştan yapılandırılmış dosyalara damıtırsan ne olur? Cevap: daha tutarlı, denetlenebilir ve modeli yeniden eğitmeden öğrenen bir agent.</p></header>
 
-    <div class="editor-note">
-    <span class="label">Editörden</span>
-    <p>Meta&#x27;dan, RAG üzerine düşündüren bir yazı: belgeleri her soruda yeniden parçalayıp getirmek yerine, uzmanın nasıl düşündüğünü baştan yapılandırılmış dosyalara damıtırsan ne olur? Cevap: daha tutarlı, denetlenebilir ve modeli yeniden eğitmeden öğrenen bir agent.</p>
-  </div>
 
-    <article class="cover" id="9a479285b1a4">
-  <div class="cover-head">
-    <span class="kicker">Günün Kapağı</span>
-    <div class="meta">
-    <a class="badge" href="/kaynak/meta/"
+  <div class="layout">
+    <div class="layout-main">
+          <article class="story cover" id="9a479285b1a4">
+  <div class="meta">
+<span class="kicker">Günün kapağı</span>    <a class="badge" href="/kaynak/meta/"
      style="--brand: #0866FF">Meta Engineering</a>
 
-<span class="meta-item">2 Eylül 2026</span><span class="meta-item">13 dk okuma</span>  <span class="meta-item level level-ileri">ileri</span>
+  <span class="meta-item">2 Eylül 2026</span>
+<span class="meta-item">13 dk okuma</span>  <span class="meta-item level level-ileri">ileri</span>
 </div>
 
-  </div>
   <h2 class="cover-title">
     <a href="https://engineering.fb.com/2026/09/02/ml-applications/organizational-second-brain-ai-learns-from-experts/" rel="noopener nofollow" target="_blank">Kurumsal “ikinci beyin”: bilgiyi modelin ağırlıklarına değil, denetlenebilir dosyalara yazmak</a>
   </h2>
@@ -87,25 +91,25 @@
   <div class="prose"><p>Büyük kurumların ortak sorunu: uzman bilgisi ya hiç yazılmamış ya da belgelere dağılmış. Uyum alanında aynı soru tipleri yüzlerce ürün incelemesinde tekrar ediyor, uzman değerlendirmeleri günler sürüyor ve değerlendirmeler arası tutarsızlık gerçek bir risk yaratıyor. Uzmanlar zamanlarının büyük kısmını rutin sorulara harcıyor, yargılarının asıl gerektiği yeni ve belirsiz işe değil.</p><p>Meta, belirli bir uyum alanı için bir <strong>ikinci beyin</strong> ajanı kurmuş. Yeniliği iki katmanın birleşiminde: (1) <strong>bilmeyi muhakemeden ayıran yapılandırılmış ve denetlenebilir bir bilgi mimarisi</strong>, (2) uzman geri bildirimini <strong>modeli yeniden eğitmeden</strong>, doğrulanmış ve regresyon testinden geçmiş güncellemelere derleyen bir <strong>kendini geliştirme döngüsü</strong>. Sistemin dört katmanı var: bilgi sistemi, akıl yürütme katmanı, değerlendirme çerçevesi ve iyileştirme döngüsü. Biri çıkarılırsa diğerleri bozuluyor.</p><p>Temel tespit şu: bir ajan çıkarım anında belge parçaları getirirse, uzmanın muhakemesini her çalıştırmada ham kaynaklardan yeniden türetmek zorunda kalır; bu yavaş, hataya açık ve tutarsız. Bunun yerine uzun süren bir çevrimdışı süreç kaynak belgeleri üzerinde akıl yürütüp <strong>200&#x27;den fazla yapılandırılmış bilgi dosyasına</strong> damıtıyor: kurumun alanı nasıl yorumladığı, kısıtları, sınırları ve yönlendirme sonuçları makine tarafından okunur hâlde. Dosyalar sıkı bir sınıflandırmada: <strong>pozisyon dosyaları</strong> (kurumun otoriter duruşları), <strong>taksonomi ve sözlük dosyaları</strong> (tek doğruluk kaynağı), <strong>yönlendirme dizinleri</strong> (girdi özelliklerini ilgili pozisyonlara eşler; embedding benzerliğine tek başına dayanmadan, yani getirme belirlenimci ve denetlenebilir) ve <strong>geçit dosyaları</strong> (ajanın bir analiz alanına girmeden geçmesi gereken eşik testleri). Her dosya YAML başlığında <code>depends_on</code> ve <code>referenced_by</code> bildiriyor, böylece çift yönlü bağımlılık grafiği oluşuyor: bir dosya değişince nelerin etkilendiği izlenebiliyor.</p><p>Wiki ile RAG arasında bölme kararı da açık: <strong>yoğun ve sık kullanılan</strong> bilgi wiki&#x27;ye, seyrek ve duruma özgü kaynaklar anlamsal ya da sözcüksel aramaya (RAG) gidiyor.</p></div>
 
   <div class="keypoints">
-    <h4 class="label">Öne çıkanlar</h4>
-    <ul>
-<li>Bilgiyi her sorguda yeniden türetmek yerine önceden çıkarıp yapılandırmak: yavaşlık ve tutarsızlık azalıyor.</li><li>Yönlendirme dizinleri getirmeyi belirlenimci kılıyor; embedding benzerliği tek başına yeterli sayılmıyor.</li><li>Bağımlılık grafiği (<code>depends_on</code> / <code>referenced_by</code>) otomatik düzenlemeyi güvenli yapıyor: neyin etkileneceği önceden biliniyor.</li><li>Uzman düzeltmeleri model eğitimi yerine bilgi dosyalarının doğrulanmış güncellemelerine dönüşüyor.</li><li>Yoğun ve sık kullanılan bilgi wiki&#x27;de, seyrek bilgi RAG&#x27;de: bölme ölçütü yoğunluk ve kullanım sıklığı.</li>    </ul>
+    <h3 class="label">Öne çıkanlar</h3>
+    <ol>
+<li><span>Bilgiyi her sorguda yeniden türetmek yerine önceden çıkarıp yapılandırmak: yavaşlık ve tutarsızlık azalıyor.</span></li><li><span>Yönlendirme dizinleri getirmeyi belirlenimci kılıyor; embedding benzerliği tek başına yeterli sayılmıyor.</span></li><li><span>Bağımlılık grafiği (<code>depends_on</code> / <code>referenced_by</code>) otomatik düzenlemeyi güvenli yapıyor: neyin etkileneceği önceden biliniyor.</span></li><li><span>Uzman düzeltmeleri model eğitimi yerine bilgi dosyalarının doğrulanmış güncellemelerine dönüşüyor.</span></li><li><span>Yoğun ve sık kullanılan bilgi wiki&#x27;de, seyrek bilgi RAG&#x27;de: bölme ölçütü yoğunluk ve kullanım sıklığı.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-why">
-      <h4 class="label">Neden önemli?</h4>
+      <h3 class="label">Neden önemli?</h3>
       <p>RAG&#x27;in yaygın zayıflığı her sorguda aynı muhakemenin yeniden ve biraz farklı biçimde kurulması. Bu yazı alternatifi gösteriyor: kritik bilgiyi bir kez damıt, sürümle, test et ve ajan yalnızca onu kullansın. Bu, bilgiyi koda yaklaştırmak: gözden geçirilebilir, geri alınabilir ve regresyon testli.</p>
     </div>
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
+      <h3 class="label">Sende karşılığı</h3>
       <p>Mobit&#x27;teki doküman arama mimarisine doğrudan bir soru: ihale belgelerinde tekrar eden soruların (“bu firmanın şartnamesinde X şartı var mı?”) cevaplarını her seferinde ham parçalardan mı türetiyorsun? Sık sorulan 20 soru için bir kez damıtılmış, sürümlenmiş bir “pozisyon” dosyası (Markdown + YAML) tutmayı dene; seyrek sorular RAG&#x27;e kalsın. Ve düzeltme akışı kur: kullanıcı bir cevabı düzelttiğinde bu düzeltme o dosyaya bir PR olarak gelsin, küçük bir test setinden geçsin. Modeli yeniden eğitmeden öğrenen bir sistem, hem ucuz hem de açıklanabilir.</p>
     </div>
   </div>
 
   <div class="terms">
-  <h4 class="label">Sözlük</h4>
-  <dl>
+    <h3 class="label">Sözlük</h3>
+      <dl>
     <div class="term">
       <dt><span class="term-en">knowledge distillation (documents)</span> <span class="term-tr">bilgi damıtma</span></dt>
       <dd>Çok sayıda ham belgeyi, yargıyı koruyarak az sayıda yapılandırılmış ve kullanıma hazır dosyaya indirgeme.</dd>
@@ -123,38 +127,61 @@
       <dd>Modele cevap üretmeden önce ilgili belgeleri getirip bağlam olarak verme yöntemi.</dd>
     </div>
   </dl>
-</div>
 
+  </div>
 
   <div class="article-foot">
-    <ul class="tags">
+  <ul class="tags">
   <li><a href="/etiket/rag/">#RAG</a></li>
   <li><a href="/etiket/agent/">#agent</a></li>
   <li><a href="/etiket/bilgi-yonetimi/">#bilgi yönetimi</a></li>
   <li><a href="/etiket/mimari/">#mimari</a></li>
 </ul>
 
-    <a class="readmore" href="https://engineering.fb.com/2026/09/02/ml-applications/organizational-second-brain-ai-learns-from-experts/" rel="noopener nofollow" target="_blank">
-      Orijinali oku <span aria-hidden="true">→</span>
-    </a>
-  </div>
+  <a class="readmore" href="https://engineering.fb.com/2026/09/02/ml-applications/organizational-second-brain-ai-learns-from-experts/" rel="noopener nofollow" target="_blank">
+    Orijinali oku <span aria-hidden="true">↗</span>
+  </a>
+</div>
+
 </article>
 
 
 
 
+    </div>
+    <aside class="layout-aside" aria-label="Bu sayıda">
+  <div class="aside-block">
+    <h2 class="label">Bu sayıda</h2>
+    <ol class="toc" id="toc">
+      <li>
+        <a href="#9a479285b1a4">
+          <span class="toc-title">Kurumsal “ikinci beyin”: bilgiyi modelin ağırlıklarına değil, denetlenebilir dosyalara yazmak</span>
+          <span class="toc-meta">Meta Engineering · 13 dk</span>
+        </a>
+      </li>
+    </ol>
+  </div>
+  <div class="aside-block aside-facts">
+    <h2 class="label">Künye</h2>
+    <dl class="facts">
+      <div><dt>yazı</dt><dd>1</dd></div>
+      <div><dt>dk okuma</dt><dd>13</dd></div>
+      <div><dt>kaynak</dt><dd>1</dd></div>
+      <div><dt>terim</dt><dd>4</dd></div>
+    </dl>
+  </div>
+</aside>
+
+  </div>
 
   <nav class="pager" aria-label="Sayılar arası gezinme">
-    <a class="pager-link pager-prev" href="/sayi/2026-09-01/">
-      <span class="pager-label">← Önceki sayı</span>
-      <span class="pager-title">1 Eylül 2026</span>
+    <a class="pager-link pager-prev" href="/sayi/2026-09-01/" rel="prev">
+      <span class="pager-label">← Önceki sayı · 1 Eylül 2026</span>
+      <span class="pager-title">MCP oturumsuz oldu: sticky session, oturum deposu ve yük dengeleyici ayarlarını silebilirsin</span>
     </a>
-
-    <a class="pager-mid" href="/arsiv/">Arşiv</a>
-
-    <a class="pager-link pager-next" href="/sayi/2026-09-03/">
-      <span class="pager-label">Sonraki sayı →</span>
-      <span class="pager-title">3 Eylül 2026</span>
+    <a class="pager-link pager-next" href="/sayi/2026-09-03/" rel="next">
+      <span class="pager-label">Sonraki sayı · 3 Eylül 2026 →</span>
+      <span class="pager-title">Bağlantı sayısı bir ölçekleme sorunudur: ZippyDB&#39;nin önüne ZGateway koymak</span>
     </a>
   </nav>
 
@@ -164,13 +191,13 @@
 <footer class="footer">
   <div class="wrap footer-inner">
     <div class="footer-col">
-      <h3>Eren&#39;in Mühendislik Gazetesi</h3>
+      <p class="footer-brand">Eren&#39;in Mühendislik Gazetesi</p>
       <p class="muted">
-        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını her gün derleyip
+        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını derleyip
         Türkçe özetleyen kişisel bir gazete. Özetler yeni mezun bir mühendisin
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
-      <p class="muted small">
+      <p class="muted small num">
         113 özet · 51 sayı ·
         11 kaynak
       </p>
@@ -210,6 +237,6 @@
   </div>
 </footer>
 
-<script src="/static/app.js" defer></script>
+<script src="/static/app.js?v=eae14b0f" defer></script>
 </body>
 </html>

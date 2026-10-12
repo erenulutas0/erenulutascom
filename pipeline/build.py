@@ -6,6 +6,7 @@ Arama istemci tarafında `search-index.json` üzerinden çalışır (sunucu gere
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import shutil
@@ -45,6 +46,14 @@ def rich(text: str) -> Markup:
     return Markup("".join(f"<p>{_inline_md(p)}</p>" for p in _paragraphs(text)))
 
 
+def _asset_version() -> str:
+    digest = hashlib.sha1()
+    for f in sorted(STATIC_DIR.glob("*")):
+        if f.is_file():
+            digest.update(f.read_bytes())
+    return digest.hexdigest()[:8]
+
+
 def make_env() -> Environment:
     env = Environment(
         loader=FileSystemLoader(str(TEMPLATE_DIR)),
@@ -61,6 +70,8 @@ def make_env() -> Environment:
     env.globals["sources"] = SOURCES
     env.globals["source_by_key"] = SOURCE_BY_KEY
     env.globals["now"] = datetime.now(timezone.utc)
+    # Statik dosyalar değişince tarayıcı önbelleği kendiliğinden kırılsın
+    env.globals["asset_version"] = _asset_version()
     return env
 
 
@@ -92,6 +103,7 @@ def collect_stats(editions: list[Edition]) -> dict:
         "edition_count": len(editions),
         "article_count": len(articles),
         "source_count": len({a.source_key for a in articles}),
+        "term_count": sum(len(a.terms) for a in articles),
         "per_source": per_source,
         "top_tags": tags.most_common(24),
         "first_date": editions[-1].date if editions else "",
@@ -177,6 +189,8 @@ def build(content_dir: Path = CONTENT_DIR, out_root: Path = OUTPUT_DIR) -> dict:
 
     env = make_env()
     stats = collect_stats(editions)
+    # Sayı numarası: en eski sayı 1
+    env.globals["edition_no"] = {e.date: n for n, e in enumerate(reversed(editions), 1)}
 
     # Temiz çıktı (CNAME'i koru)
     cname = (out_root / "CNAME").read_text(encoding="utf-8").strip() if (out_root / "CNAME").exists() else SITE["domain"]

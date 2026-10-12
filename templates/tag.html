@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% import "_macros.html" as m %}
+{% set active = 'arsiv' %}
 
 {% block title %}{{ tag }} — {{ site.title }}{% endblock %}
 {% block description %}"{{ tag }}" etiketli {{ rows | length }} özet.{% endblock %}

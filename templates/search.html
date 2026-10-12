@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% set active = 'ara' %}
 
 {% block title %}Ara — {{ site.title }}{% endblock %}
 {% block description %}Tüm özetlerde başlık, konu ve kaynak üzerinden arama.{% endblock %}
@@ -9,7 +10,7 @@
 
   <header class="page-head">
     <h1 class="page-title">Ara</h1>
-    <p class="page-sub">{{ stats.article_count }} özet içinde başlık, özet metni, konu ve kaynak taranır.</p>
+    <p class="page-sub">{{ stats.article_count }} özet içinde başlık, özet metni, konu ve kaynak taranır. Her sayfadan <kbd>/</kbd> tuşuyla buraya gelebilirsin.</p>
   </header>
 
   <form class="searchbar" role="search" onsubmit="return false">

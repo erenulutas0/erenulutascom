@@ -6,15 +6,22 @@
 <title>2 Ağustos 2026 — Eren&#39;in Mühendislik Gazetesi</title>
 <meta name="description" content="Bugün tek yayın çıktı — Cloudflare&#39;in &#34;Agents Week&#34; açılışı. Yazının kendisi kısa ama sorduğu soru iyi: bulut insanlar için tasarlandı, peki yazılım ajanları için tasarlansaydı neye benzerdi? Bu soruyu ciddiye almak için arşivden iki yazı ekledim: biri agent mimarisinin temel desenleri, diğeri de &#34;ölçekte ne kırılır&#34; sorusunun çok somut bir cevabı.">
 <meta name="author" content="Eren Ulutaş">
+<meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131310" media="(prefers-color-scheme: dark)">
 <meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
 <meta property="og:title" content="2 Ağustos 2026 — Eren&#39;in Mühendislik Gazetesi">
 <meta property="og:description" content="Bugün tek yayın çıktı — Cloudflare&#39;in &#34;Agents Week&#34; açılışı. Yazının kendisi kısa ama sorduğu soru iyi: bulut insanlar için tasarlandı, peki yazılım ajanları için tasarlansaydı neye benzerdi? Bu soruyu ciddiye almak için arşivden iki yazı ekledim: biri agent mimarisinin temel desenleri, diğeri de &#34;ölçekte ne kırılır&#34; sorusunun çok somut bir cevabı.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
+<meta property="og:url" content="https://erenulutas.com/sayi/2026-08-02/">
+<meta name="twitter:card" content="summary">
 <link rel="canonical" href="https://erenulutas.com/sayi/2026-08-02/">
 <link rel="alternate" type="application/rss+xml" title="Eren&#39;in Mühendislik Gazetesi" href="/feed.xml">
-<link rel="stylesheet" href="/static/style.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
+<link rel="stylesheet" href="/static/style.css?v=eae14b0f">
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
 <script>
   // Tema tercihini ilk boyamadan önce uygula (flash olmasın)
   (function () {
@@ -30,55 +37,52 @@
 
 <header class="masthead">
   <div class="wrap masthead-inner">
-    <div class="masthead-brand">
-      <a href="/" class="logo">
-        <span class="logo-mark">EU</span>
-        <span class="logo-text">
-          <strong>Eren&#39;in Mühendislik Gazetesi</strong>
-          <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
-        </span>
-      </a>
-    </div>
+    <a href="/" class="logo">
+      <span class="logo-mark">EU</span>
+      <span class="logo-text">
+        <strong>Eren&#39;in Mühendislik Gazetesi</strong>
+        <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
+      </span>
+    </a>
     <nav class="masthead-nav" aria-label="Ana menü">
       <a href="/">Bugün</a>
-      <a href="/arsiv/">Arşiv</a>
+      <a href="/arsiv/" aria-current="page">Arşiv</a>
       <a href="/ara/">Ara</a>
       <a href="/hakkinda/">Hakkında</a>
-      <button id="tema" class="tema" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <button id="tema" class="tema" type="button" aria-label="Açık/koyu temayı değiştir" title="Açık/koyu tema">
         <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/></g></svg>
         <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg>
       </button>
     </nav>
   </div>
+  <div class="progress" id="ilerleme" aria-hidden="true"></div>
 </header>
 
 <main id="icerik">
 <div class="wrap">
 
-  <div class="dateline">
-    <span class="dateline-date">2 Ağustos 2026, Pazar</span>
-    <span class="dateline-sep" aria-hidden="true">·</span>
-    <span class="dateline-meta">3 yazı</span>
-    <span class="dateline-sep" aria-hidden="true">·</span>
-    <span class="dateline-meta">Cloudflare Blog, Anthropic Engineering, Uber Engineering</span>
+  <header class="edition-head">
+  <div class="edition-bar">
+    <span class="edition-no">Sayı 21</span>
+    <h1 class="edition-date"><time datetime="2026-08-02">2 Ağustos 2026, Pazar</time></h1>
+    <nav class="edition-nav" aria-label="Sayılar arası gezinme">
+<a href="/sayi/2026-08-01/" rel="prev"><span aria-hidden="true">←</span> 1 Ağustos 2026</a><a href="/sayi/2026-08-03/" rel="next">3 Ağustos 2026 <span aria-hidden="true">→</span></a>
+    </nav>
   </div>
+<p class="lede">Bugün tek yayın çıktı — Cloudflare&#x27;in &quot;Agents Week&quot; açılışı. Yazının kendisi kısa ama sorduğu soru iyi: bulut insanlar için tasarlandı, peki yazılım ajanları için tasarlansaydı neye benzerdi? Bu soruyu ciddiye almak için arşivden iki yazı ekledim: biri agent mimarisinin temel desenleri, diğeri de &quot;ölçekte ne kırılır&quot; sorusunun çok somut bir cevabı.</p></header>
 
-    <div class="editor-note">
-    <span class="label">Editörden</span>
-    <p>Bugün tek yayın çıktı — Cloudflare&#x27;in &quot;Agents Week&quot; açılışı. Yazının kendisi kısa ama sorduğu soru iyi: bulut insanlar için tasarlandı, peki yazılım ajanları için tasarlansaydı neye benzerdi? Bu soruyu ciddiye almak için arşivden iki yazı ekledim: biri agent mimarisinin temel desenleri, diğeri de &quot;ölçekte ne kırılır&quot; sorusunun çok somut bir cevabı.</p>
-  </div>
 
-    <article class="cover" id="40845b495654">
-  <div class="cover-head">
-    <span class="kicker">Günün Kapağı</span>
-    <div class="meta">
-    <a class="badge" href="/kaynak/cloudflare/"
+  <div class="layout">
+    <div class="layout-main">
+          <article class="story cover" id="40845b495654">
+  <div class="meta">
+<span class="kicker">Günün kapağı</span>    <a class="badge" href="/kaynak/cloudflare/"
      style="--brand: #F6821F">Cloudflare Blog</a>
 
-<span class="meta-item">2 Ağustos 2026</span><span class="meta-item">2 dk okuma</span>  <span class="meta-item level level-baslangic">başlangıç</span>
+  <span class="meta-item">2 Ağustos 2026</span>
+<span class="meta-item">2 dk okuma</span>  <span class="meta-item level level-baslangic">başlangıç</span>
 </div>
 
-  </div>
   <h2 class="cover-title">
     <a href="https://blog.cloudflare.com/agents-week-welcome/" rel="noopener nofollow" target="_blank">&#34;Agent Cloud&#34; nedir? Cloudflare&#39;in sorduğu soru</a>
   </h2>
@@ -87,25 +91,25 @@
   <div class="prose"><p>Cloudflare bir haftalık duyuru serisi açıyor ve açılış yazısı teknik değil, kavramsal. Sordukları soru şu: bugünkü bulut ve üstündeki web, <strong>insanlar</strong> için tasarlandı. Her katman ekranın başında bir insan olduğunu varsayıyor — dikkat çekmek için tasarlanmış sayfalar, tıklanacak panolar, insan okuma hızına göre ayarlanmış arayüzler.</p><p>Yazılım ajanları böyle çalışmıyor. Dikkatleri dağılmıyor, yorulmuyor; buna karşılık hız, yapı ve erişim konusunda kendi ihtiyaçları var. Cloudflare&#x27;in iddiası bir &quot;Agent Cloud&quot;un iki işi aynı anda yapması gerektiği: ajanlar için sıfırdan tasarlanmış temel yapıtaşları sunmak, ve bu arada bugünkü insan-şekilli web ile ajan-şekilli web arasında bir <strong>çeviri katmanı</strong> olarak durmak.</p></div>
 
   <div class="keypoints">
-    <h4 class="label">Öne çıkanlar</h4>
-    <ul>
-<li>Bugünkü web&#x27;in her katmanı &quot;karşıda bir insan var&quot; varsayımıyla tasarlandı; ajanlar bu varsayımı bozuyor.</li><li>İki ayrı ihtiyaç var: ajan-yerel (agent-native) yeni yapıtaşları, ve mevcut web&#x27;i ajanlara çevirecek bir ara katman.</li><li>Yazının kendisi bir duyuru değil, çerçeve kurma denemesi — asıl teknik içerik haftanın geri kalanında geliyor.</li>    </ul>
+    <h3 class="label">Öne çıkanlar</h3>
+    <ol>
+<li><span>Bugünkü web&#x27;in her katmanı &quot;karşıda bir insan var&quot; varsayımıyla tasarlandı; ajanlar bu varsayımı bozuyor.</span></li><li><span>İki ayrı ihtiyaç var: ajan-yerel (agent-native) yeni yapıtaşları, ve mevcut web&#x27;i ajanlara çevirecek bir ara katman.</span></li><li><span>Yazının kendisi bir duyuru değil, çerçeve kurma denemesi — asıl teknik içerik haftanın geri kalanında geliyor.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-why">
-      <h4 class="label">Neden önemli?</h4>
+      <h3 class="label">Neden önemli?</h3>
       <p>Bu tür &quot;çerçeve kurma&quot; yazıları genelde pazarlama olur, ama buradaki gözlem gerçek bir mühendislik sorusuna işaret ediyor: bir API&#x27;yi insan geliştiriciler mi yoksa bir LLM mi tüketecek, tasarımı değiştirir. Hata mesajları, sayfalama, kimlik doğrulama akışları, dokümantasyon biçimi — hepsi tüketicinin insan olup olmamasına göre farklılaşır.</p>
     </div>
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
+      <h3 class="label">Sende karşılığı</h3>
       <p>Bunu somut bir tasarım kontrolüne çevir: Mobit&#x27;teki doküman arama API&#x27;sini bir LLM çağıracaksa, dönen hata mesajı &quot;400 Bad Request&quot; değil &quot;tarih formatı YYYY-MM-DD olmalı, sen 12/03/2026 gönderdin&quot; olmalı — çünkü modelin kendini düzeltmesi için okunabilir bir sinyal gerekiyor. Aynı şekilde sayfalama: insan &quot;sonraki sayfa&quot; düğmesine basar, ajan ise toplam sayıyı ve kalanı bilmek ister. Bu küçük kararlar, LLM tabanlı bir istemcinin çalışıp çalışmamasını belirliyor.</p>
     </div>
   </div>
 
   <div class="terms">
-  <h4 class="label">Sözlük</h4>
-  <dl>
+    <h3 class="label">Sözlük</h3>
+      <dl>
     <div class="term">
       <dt><span class="term-en">agent</span> <span class="term-tr">yazılım ajanı</span></dt>
       <dd>Bir hedefi verilen, hangi araçları hangi sırayla çağıracağına kendisi karar veren LLM tabanlı program.</dd>
@@ -115,57 +119,61 @@
       <dd>Bir platformun sunduğu en küçük yapı birimi (kuyruk, nesne deposu, çalıştırma birimi gibi).</dd>
     </div>
   </dl>
-</div>
 
+  </div>
 
   <div class="article-foot">
-    <ul class="tags">
+  <ul class="tags">
   <li><a href="/etiket/agent/">#agent</a></li>
   <li><a href="/etiket/bulut/">#bulut</a></li>
   <li><a href="/etiket/mimari/">#mimari</a></li>
 </ul>
 
-    <a class="readmore" href="https://blog.cloudflare.com/agents-week-welcome/" rel="noopener nofollow" target="_blank">
-      Orijinali oku <span aria-hidden="true">→</span>
-    </a>
-  </div>
+  <a class="readmore" href="https://blog.cloudflare.com/agents-week-welcome/" rel="noopener nofollow" target="_blank">
+    Orijinali oku <span aria-hidden="true">↗</span>
+  </a>
+</div>
+
 </article>
 
 
 
-  <section class="section">
-    <h2 class="section-title"><span>Arşivden Seçmeler</span></h2>
+    <h2 class="subhead">Arşivden seçmeler</h2>
     <p class="section-note">
-      Bugün az yayın çıktı. Bu yazılar daha eski tarihli ama hâlâ öğretici —
+      Bugün az yayın çıktı. Bu yazılar daha eski tarihli ama hâlâ öğretici;
       her birinin gerçek yayın tarihi başlığın üstünde yazıyor.
     </p>
-    <div class="grid">
-<article class="brief brief-archive" id="7d24e5faa28b">
+<article class="story brief brief-archive" id="7d24e5faa28b">
   <div class="meta">
-    <span class="kicker kicker-sm">Arşivden</span>
-      <a class="badge" href="/kaynak/anthropic/"
+<span class="kicker">Arşivden</span>    <a class="badge" href="/kaynak/anthropic/"
      style="--brand: #D97757">Anthropic Engineering</a>
 
-    <span class="meta-item">13 Nisan 2026</span>
-<span class="meta-item">9 dk</span>    <span class="meta-item level level-orta">orta</span>
-  </div>
+  <span class="meta-item">13 Nisan 2026</span>
+<span class="meta-item">9 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
+</div>
+
   <h3 class="brief-title">
     <a href="https://www.anthropic.com/engineering/building-effective-agents" rel="noopener nofollow" target="_blank">Etkili agent kurmanın sırrı: framework değil, basit desenler</a>
   </h3>
   <p class="original-title">Building Effective AI Agents</p>
   <div class="prose prose-sm"><p>Anthropic onlarca ekiple LLM tabanlı agent kuruldu ve şu sonuca varmış: en başarılı uygulamalar karmaşık framework&#x27;ler kullanmıyordu, basit ve birleştirilebilir desenler kullanıyordu.</p><p>Yazının en değerli kısmı bir ayrım: <strong>workflow</strong> (iş akışı) ile <strong>agent</strong> aynı şey değil. Workflow&#x27;da adımlar önceden kodla tanımlanır; agent&#x27;ta hangi aracı ne zaman kullanacağına modelin kendisi karar verir. Workflow öngörülebilir ve tutarlıdır, iyi tanımlanmış görevler için doğru seçimdir. Agent ise esneklik ve ölçekte model-güdümlü karar gerektiğinde kazanır. Anthropic&#x27;in tavsiyesi net: en basit çözümle başla, ancak gerektiğinde karmaşıklığı artır — çoğu uygulama için tek bir LLM çağrısını retrieval ve örneklerle güçlendirmek zaten yeterli.</p></div>
 
-  <ul class="keypoints-inline">
-<li>Agent sistemleri gecikme ve maliyeti, görev başarısıyla takas eder. Bu takasın ne zaman mantıklı olduğunu bilerek karar ver.</li><li>Framework&#x27;ler başlangıcı kolaylaştırır ama araya soyutlama katmanı koyar; altındaki prompt&#x27;u ve çağrıları göremezsen hata ayıklamak zorlaşır.</li><li>Tavsiye: doğrudan LLM API&#x27;siyle başla. Çoğu desen birkaç satır kod.</li><li>Temel yapıtaşı &quot;güçlendirilmiş LLM&quot;: retrieval + araçlar + hafıza eklenmiş bir model.</li>  </ul>
-
-  <div class="callout callout-you callout-sm">
-    <h4 class="label">Sende karşılığı</h4>
-    <p>Sen zaten 10.000+ kaydı işleyen bir LLM kategorizasyon pipeline&#x27;ı yazdın — bu yazının tanımıyla o bir *workflow*, agent değil, ve doğrusu da o. Bunu mülakatta böyle anlatabilmen değerli: &quot;kategorizasyon adımları sabit olduğu için agent kurmadım, deterministik bir pipeline yazdım; model kararı sadece sınıflandırma noktasında devreye giriyor.&quot; Mobit&#x27;teki doküman aramada ise agent mantıklı olabilir, çünkü hangi belgeye bakılacağı sorudan soruya değişiyor. Ayrımı bilerek seçmek, ikisini de körlemesine kullanmaktan iyi.</p>
+  <div class="keypoints keypoints-sm">
+    <h4 class="label">Öne çıkanlar</h4>
+    <ol>
+<li><span>Agent sistemleri gecikme ve maliyeti, görev başarısıyla takas eder. Bu takasın ne zaman mantıklı olduğunu bilerek karar ver.</span></li><li><span>Framework&#x27;ler başlangıcı kolaylaştırır ama araya soyutlama katmanı koyar; altındaki prompt&#x27;u ve çağrıları göremezsen hata ayıklamak zorlaşır.</span></li><li><span>Tavsiye: doğrudan LLM API&#x27;siyle başla. Çoğu desen birkaç satır kod.</span></li><li><span>Temel yapıtaşı &quot;güçlendirilmiş LLM&quot;: retrieval + araçlar + hafıza eklenmiş bir model.</span></li>    </ol>
   </div>
 
-  <div class="terms">
-  <h4 class="label">Sözlük</h4>
-  <dl>
+  <div class="callouts">
+    <div class="callout callout-you">
+      <h4 class="label">Sende karşılığı</h4>
+      <p>Sen zaten 10.000+ kaydı işleyen bir LLM kategorizasyon pipeline&#x27;ı yazdın — bu yazının tanımıyla o bir *workflow*, agent değil, ve doğrusu da o. Bunu mülakatta böyle anlatabilmen değerli: &quot;kategorizasyon adımları sabit olduğu için agent kurmadım, deterministik bir pipeline yazdım; model kararı sadece sınıflandırma noktasında devreye giriyor.&quot; Mobit&#x27;teki doküman aramada ise agent mantıklı olabilir, çünkü hangi belgeye bakılacağı sorudan soruya değişiyor. Ayrımı bilerek seçmek, ikisini de körlemesine kullanmaktan iyi.</p>
+    </div>
+  </div>
+
+  <details class="terms">
+    <summary class="label">Sözlük · 3 terim</summary>
+      <dl>
     <div class="term">
       <dt><span class="term-en">workflow</span> <span class="term-tr">iş akışı</span></dt>
       <dd>Adımların ve sıralarının önceden kodla belirlendiği sistem; model sadece belirli noktalarda karar verir.</dd>
@@ -179,48 +187,54 @@
       <dd>Retrieval, araç kullanımı ve hafıza yetenekleriyle desteklenmiş dil modeli — agent mimarilerinin temel birimi.</dd>
     </div>
   </dl>
-</div>
 
+  </details>
 
   <div class="article-foot">
-    <ul class="tags">
+  <ul class="tags">
   <li><a href="/etiket/agent/">#agent</a></li>
   <li><a href="/etiket/llm/">#LLM</a></li>
   <li><a href="/etiket/mimari/">#mimari</a></li>
   <li><a href="/etiket/tasarim/">#tasarım</a></li>
 </ul>
 
-    <a class="readmore" href="https://www.anthropic.com/engineering/building-effective-agents" rel="noopener nofollow" target="_blank">
-      Orijinali oku <span aria-hidden="true">→</span>
-    </a>
-  </div>
+  <a class="readmore" href="https://www.anthropic.com/engineering/building-effective-agents" rel="noopener nofollow" target="_blank">
+    Orijinali oku <span aria-hidden="true">↗</span>
+  </a>
+</div>
+
 </article>
-<article class="brief brief-archive" id="498638f75453">
+<article class="story brief brief-archive" id="498638f75453">
   <div class="meta">
-    <span class="kicker kicker-sm">Arşivden</span>
-      <a class="badge" href="/kaynak/uber/"
+<span class="kicker">Arşivden</span>    <a class="badge" href="/kaynak/uber/"
      style="--brand: #000000">Uber Engineering</a>
 
-    <span class="meta-item">20 Nisan 2026</span>
-<span class="meta-item">14 dk</span>    <span class="meta-item level level-ileri">ileri</span>
-  </div>
+  <span class="meta-item">20 Nisan 2026</span>
+<span class="meta-item">14 dk okuma</span>  <span class="meta-item level level-ileri">ileri</span>
+</div>
+
   <h3 class="brief-title">
     <a href="https://www.uber.com/blog/from-static-rate-limiting-to-intelligent-load-management/" rel="noopener nofollow" target="_blank">Uber veritabanı çökmesini nasıl durdurdu: sabit kotadan akıllı yük yönetimine</a>
   </h3>
   <p class="original-title">How Uber Conquered Database Overload: The Journey from Static Rate-Limiting to Intelligent Load Management</p>
   <div class="prose prose-sm"><p>Uber&#x27;in binlerce mikroservisi 170 milyondan fazla aylık aktif kullanıcıya hizmet veriyor. Altta Docstore ve Schemaless var: MySQL üzerine kurulmuş, binlerce küme, onlarca petabyte veri, saniyede on milyonlarca istek.</p><p>Bu ölçekte küçük aşırı yüklenmeler izole kalmıyor, <strong>çığ etkisi</strong> yaratıyor: bir yerdeki kısa ani yük aşağı akıştaki servislerin zaman aşımına uğramasına, yeniden denemelerin (retry) birikmesine ve bozulmanın büyüyerek genel bir arızaya dönüşmesine yol açıyor.</p><p>İlk denedikleri çözüm klasik: sorgu motoru katmanında kota tabanlı rate limiting. Her isteğe işlenen bayta göre bir maliyet ver, kullanıcılara sabit kota tanı, aşınca 429 dön. Ama işe yaramamış. Sebebi öğretici: her istek için Redis&#x27;e gitmek gerekiyordu — yani yeni bir hata noktası ve fazladan bir ağ turu. Yükü korumak için eklenen mekanizmanın kendisi yük ve kırılganlık üretiyordu.</p></div>
 
-  <ul class="keypoints-inline">
-<li>Çok kiracılı (multitenant) bir sistemde tek bir kiracının tüm kaynağı yutmasını engellemek, korumanın yarısı kadar önemli.</li><li>Statik kota işe yaramıyor çünkü iş yükleri trafik şekli, gecikme profili ve sistem etkisi bakımından birbirine benzemiyor.</li><li>Mimari üç katman: durumsuz sorgu motoru (yönlendirme, şema, yetkilendirme), durumlu depolama motoru (işlem, replikasyon), ve Raft ile koordine edilen 1 lider + 2 takipçi bölümler.</li><li>Çözüm tek bir sinyale değil, birden fazla sinyalden aşırı yükü tespit eden bir yük yöneticisine dayanıyor.</li>  </ul>
-
-  <div class="callout callout-you callout-sm">
-    <h4 class="label">Sende karşılığı</h4>
-    <p>Tradebot&#x27;ta piyasa verisi çekerken rate limit mantığını mutlaka kurmuşsundur; oradaki tasarımı bu gözle bir daha bak. Redis&#x27;i sayaç olarak kullanıyorsan Redis düştüğünde ne oluyor — istekler geçiyor mu (fail-open) yoksa duruyor mu (fail-closed)? İkisi de geçerli bir karar ama <strong>bilinçli</strong> verilmiş olmalı. Ayrıca yerel bir token bucket (in-process) ile merkezî sayacı birleştirmek, her istekte ağ turu ödemekten çok daha ucuz — Uber&#x27;in tam da kaçındığı maliyet bu.</p>
+  <div class="keypoints keypoints-sm">
+    <h4 class="label">Öne çıkanlar</h4>
+    <ol>
+<li><span>Çok kiracılı (multitenant) bir sistemde tek bir kiracının tüm kaynağı yutmasını engellemek, korumanın yarısı kadar önemli.</span></li><li><span>Statik kota işe yaramıyor çünkü iş yükleri trafik şekli, gecikme profili ve sistem etkisi bakımından birbirine benzemiyor.</span></li><li><span>Mimari üç katman: durumsuz sorgu motoru (yönlendirme, şema, yetkilendirme), durumlu depolama motoru (işlem, replikasyon), ve Raft ile koordine edilen 1 lider + 2 takipçi bölümler.</span></li><li><span>Çözüm tek bir sinyale değil, birden fazla sinyalden aşırı yükü tespit eden bir yük yöneticisine dayanıyor.</span></li>    </ol>
   </div>
 
-  <div class="terms">
-  <h4 class="label">Sözlük</h4>
-  <dl>
+  <div class="callouts">
+    <div class="callout callout-you">
+      <h4 class="label">Sende karşılığı</h4>
+      <p>Tradebot&#x27;ta piyasa verisi çekerken rate limit mantığını mutlaka kurmuşsundur; oradaki tasarımı bu gözle bir daha bak. Redis&#x27;i sayaç olarak kullanıyorsan Redis düştüğünde ne oluyor — istekler geçiyor mu (fail-open) yoksa duruyor mu (fail-closed)? İkisi de geçerli bir karar ama <strong>bilinçli</strong> verilmiş olmalı. Ayrıca yerel bir token bucket (in-process) ile merkezî sayacı birleştirmek, her istekte ağ turu ödemekten çok daha ucuz — Uber&#x27;in tam da kaçındığı maliyet bu.</p>
+    </div>
+  </div>
+
+  <details class="terms">
+    <summary class="label">Sözlük · 4 terim</summary>
+      <dl>
     <div class="term">
       <dt><span class="term-en">cascading failure</span> <span class="term-tr">çığ etkisiyle arıza</span></dt>
       <dd>Bir bileşendeki küçük bir sorunun, yeniden denemeler ve zaman aşımlarıyla büyüyerek tüm sistemi düşürmesi.</dd>
@@ -238,37 +252,70 @@
       <dd>Belirli bir sürede kabul edilecek istek sayısını sınırlayarak sistemi aşırı yüklenmeden koruma tekniği.</dd>
     </div>
   </dl>
-</div>
 
+  </details>
 
   <div class="article-foot">
-    <ul class="tags">
+  <ul class="tags">
   <li><a href="/etiket/veritabani/">#veritabanı</a></li>
   <li><a href="/etiket/dagitik-sistemler/">#dağıtık sistemler</a></li>
   <li><a href="/etiket/rate-limiting/">#rate limiting</a></li>
   <li><a href="/etiket/dayaniklilik/">#dayanıklılık</a></li>
 </ul>
 
-    <a class="readmore" href="https://www.uber.com/blog/from-static-rate-limiting-to-intelligent-load-management/" rel="noopener nofollow" target="_blank">
-      Orijinali oku <span aria-hidden="true">→</span>
-    </a>
-  </div>
-</article>
-    </div>
-  </section>
+  <a class="readmore" href="https://www.uber.com/blog/from-static-rate-limiting-to-intelligent-load-management/" rel="noopener nofollow" target="_blank">
+    Orijinali oku <span aria-hidden="true">↗</span>
+  </a>
+</div>
 
+</article>
+
+    </div>
+    <aside class="layout-aside" aria-label="Bu sayıda">
+  <div class="aside-block">
+    <h2 class="label">Bu sayıda</h2>
+    <ol class="toc" id="toc">
+      <li>
+        <a href="#40845b495654">
+          <span class="toc-title">&#34;Agent Cloud&#34; nedir? Cloudflare&#39;in sorduğu soru</span>
+          <span class="toc-meta">Cloudflare Blog · 2 dk</span>
+        </a>
+      </li>
+      <li>
+        <a href="#7d24e5faa28b">
+          <span class="toc-title">Etkili agent kurmanın sırrı: framework değil, basit desenler</span>
+          <span class="toc-meta">Anthropic Engineering · 9 dk</span>
+        </a>
+      </li>
+      <li>
+        <a href="#498638f75453">
+          <span class="toc-title">Uber veritabanı çökmesini nasıl durdurdu: sabit kotadan akıllı yük yönetimine</span>
+          <span class="toc-meta">Uber Engineering · 14 dk</span>
+        </a>
+      </li>
+    </ol>
+  </div>
+  <div class="aside-block aside-facts">
+    <h2 class="label">Künye</h2>
+    <dl class="facts">
+      <div><dt>yazı</dt><dd>3</dd></div>
+      <div><dt>dk okuma</dt><dd>25</dd></div>
+      <div><dt>kaynak</dt><dd>3</dd></div>
+      <div><dt>terim</dt><dd>9</dd></div>
+    </dl>
+  </div>
+</aside>
+
+  </div>
 
   <nav class="pager" aria-label="Sayılar arası gezinme">
-    <a class="pager-link pager-prev" href="/sayi/2026-08-01/">
-      <span class="pager-label">← Önceki sayı</span>
-      <span class="pager-title">1 Ağustos 2026</span>
+    <a class="pager-link pager-prev" href="/sayi/2026-08-01/" rel="prev">
+      <span class="pager-label">← Önceki sayı · 1 Ağustos 2026</span>
+      <span class="pager-title">On açık matematik problemi ve 2.000 dolarlık token faturası</span>
     </a>
-
-    <a class="pager-mid" href="/arsiv/">Arşiv</a>
-
-    <a class="pager-link pager-next" href="/sayi/2026-08-03/">
-      <span class="pager-label">Sonraki sayı →</span>
-      <span class="pager-title">3 Ağustos 2026</span>
+    <a class="pager-link pager-next" href="/sayi/2026-08-03/" rel="next">
+      <span class="pager-label">Sonraki sayı · 3 Ağustos 2026 →</span>
+      <span class="pager-title">Sesli AI&#39;da altı ayda gerçek zamanlı mimari: sıra beklemeyi bırakmak</span>
     </a>
   </nav>
 
@@ -278,13 +325,13 @@
 <footer class="footer">
   <div class="wrap footer-inner">
     <div class="footer-col">
-      <h3>Eren&#39;in Mühendislik Gazetesi</h3>
+      <p class="footer-brand">Eren&#39;in Mühendislik Gazetesi</p>
       <p class="muted">
-        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını her gün derleyip
+        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını derleyip
         Türkçe özetleyen kişisel bir gazete. Özetler yeni mezun bir mühendisin
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
-      <p class="muted small">
+      <p class="muted small num">
         113 özet · 51 sayı ·
         11 kaynak
       </p>
@@ -324,6 +371,6 @@
   </div>
 </footer>
 
-<script src="/static/app.js" defer></script>
+<script src="/static/app.js?v=eae14b0f" defer></script>
 </body>
 </html>
