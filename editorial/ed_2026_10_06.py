@@ -1,0 +1,162 @@
+"""6 Ekim 2026 sayısı."""
+
+from pipeline.compose import save_edition
+
+DATE = "2026-10-06"
+
+INTRO = (
+    "Bugünün üç yazısı da ‘zaten çalışıyor’ sanılan temel katmanlarla ilgili. Sertifikalar, "
+    "token’lar ve imzalar saate göre doğrulanır, ama saatin kendisi 1985’ten beri kimliği "
+    "doğrulanmadan gelir. Meta bunu düzeltiyor. Yanında hibrit aramanın en kırılgan adımını "
+    "kaldıran bir yöntem ve DNS’in kök anahtarının değişimi var."
+)
+
+DRAFTS = [
+    {
+        "url": "https://engineering.fb.com/2026/10/06/production-engineering/nts-authenticated-time-at-meta/",
+        "slot": "cover",
+        "title_tr": "Saate güvenmeden hiçbir şeye güvenemezsin: Meta’da kimliği doğrulanmış zaman (NTS)",
+        "difficulty": "ileri",
+        "tags": ["güvenlik", "ağ", "protokol", "kriptografi"],
+        "summary": (
+            "Meta’nın herkese açık zaman servisi artık `nts.meta.com` üzerinden **NTS** (Network "
+            "Time Security, RFC 8915) konuşuyor. Paketler kimlik doğrulamalı: cihaz, zamanın "
+            "gerçekten Meta’dan geldiğini ve yolda değiştirilmediğini doğrulayabiliyor. Protokol, "
+            "sunucu ve istemci açık kaynak.\n\n"
+            "Neden önemli? NTP 1985’ten beri doğrulamasız: istemci 48 bayt gönderir, bir şey 48 "
+            "bayt geri gönderir ve istemci buna inanır. İmza yok, kimlik yok. Oysa zaman, diğer "
+            "bütün güvenlik kararlarının ölçüldüğü girdi: **sertifika doğrulama** (`notBefore` ve "
+            "`notAfter` yerel saatle karşılaştırılır), **token süresi** (‘15 dakika geçerli’ bir "
+            "saat iddiasıdır), **tekrar saldırısı pencereleri** ve **log sıralaması**. Üstelik "
+            "döngüsel bir sorun var: saati bilmeden sertifika süresini doğrulayamazsın. Yaygın iki "
+            "çözüm de kötü: saat ayarlanana kadar doğrulamayı atlamak ya da iki tarafın birbirinin "
+            "saat hatasını tahmin ederek pay bırakması.\n\n"
+            "Bu, sertifikalar 398 gün yaşarken idare edilebiliyordu. CA/Browser Forum kararıyla "
+            "TLS sertifikalarının azami ömrü Mart 2026’da 200 güne indi, Mart 2027’de 100, Mart "
+            "2029’da **47 güne** inecek. 47 günde elle yönetim mümkün değil; yenileme ACME ile "
+            "gözetimsiz yapılıyor. Saati kaymış bir makinede otomatik yenileme döngüsü bilet "
+            "açmaz; kimsenin bakmadığı bir takvimde sessizce başarısız olur.\n\n"
+            "NTS iki aşamalı. **Anahtar kurulumu (NTS-KE):** TCP/4460 üzerinde TLS 1.3; istemci ve "
+            "sunucu bir AEAD algoritmasında anlaşıp oturum anahtarlarını doğrudan TLS oturumundan "
+            "türetiyor. **Doğrulanmış NTP:** UDP/123 üzerinde standart NTPv4; istek benzersiz bir "
+            "kimlik, bir **çerez** ve bir doğrulayıcı taşıyor. Doğrulayıcı hiçbir şeyi şifrelemiyor, "
+            "yalnızca imzalıyor. Sahte paket doğrulamadan geçemeyip düşürülüyor ve sunucu hata "
+            "cevabı göndermiyor; böylece başarısızlık paket kaybından ayırt edilemiyor ve istemciyi "
+            "yeni bir anahtar değişimine zorlamak için kullanılamıyor.\n\n"
+            "En zarif kısım **durumsuz çerezler**. Çerez, sunucu durumunun istemciye emanet edilmiş "
+            "hâli: oturum anahtarlarını yalnızca sunucunun açabileceği biçimde mühürlü taşıyor. "
+            "Bariz uygulama her sunucuya çoğaltılan bir anahtarlık olurdu ve zaman servisini bir "
+            "dağıtık durum problemine çevirirdi. Meta anahtar çoğaltmıyor: her sunucu mühür "
+            "anahtarını ortak bir ana sırdan ve **günün numarasından** HKDF ile türetiyor. Gün, Unix "
+            "epoch’tan beri geçen tam 24 saatlik dilim; saat dilimi ve yaz saati yok, her makine "
+            "aynı an için aynı tamsayıyı hesaplıyor. Sonuç: anahtarlık yok, çoğaltma yok, oturum "
+            "tablosu yok, saldırganın tüketebileceği bir kaynak yok."
+        ),
+        "key_points": [
+            "Zaman, sertifika ve token doğrulamasının girdisidir; doğrulanmamış saat tüm zincirin zayıf halkasıdır.",
+            "Sertifika ömrü 47 güne inerken yenileme otomatikleşiyor ve saat hatası sessiz arızaya dönüşüyor.",
+            "Durumu sunucuda tutmak yerine mühürleyip istemciye vermek, servisi durumsuz yapar.",
+            "Anahtarı çoğaltmak yerine ortak sır + deterministik girdiden türetmek, senkronizasyon sorununu ortadan kaldırır.",
+            "Hata cevabı göndermemek de bir güvenlik kararıdır: saldırgana sinyal vermez.",
+        ],
+        "why_it_matters": (
+            "‘Durumu istemciye emanet et, anahtarı türet’ deseni yalnızca zaman servisine özgü "
+            "değil; yatay ölçeklenen her kimlik doğrulama servisinde aynı problem çıkar. Yazı "
+            "ayrıca saat senkronizasyonunun operasyonel bir ayrıntı değil, güvenlik bağımlılığı "
+            "olduğunu hatırlatıyor."
+        ),
+        "for_you": (
+            "İki somut karşılığı var. **JWT:** KlioAI’da token doğrularken `exp` ve `nbf` alanlarını "
+            "sunucu saatiyle karşılaştırıyorsun; birkaç saniyelik saat farkı için küçük bir tolerans "
+            "(`clockSkew`, örneğin 30 sn) tanımla ve sunucularında NTP’nin çalıştığını doğrula "
+            "(`chronyc tracking`). **Durumsuz oturum:** NTS çerezi ile imzalı JWT aynı fikir; "
+            "sunucu oturum tablosu tutmaz, istemci mühürlü durumu taşır. Anahtar döndürmeyi de "
+            "buradan öğren: anahtar kimliğini (`kid`) token’ın içine açık yaz ki sunucu hangi "
+            "anahtarla doğrulayacağını bilsin."
+        ),
+        "terms": [
+            {"en": "NTS (Network Time Security)", "tr": "ağ zaman güvenliği", "definition": "NTP paketlerine kimlik doğrulama ekleyen standart (RFC 8915)."},
+            {"en": "AEAD", "tr": "kimlik doğrulamalı şifreleme", "definition": "Veriyi şifrelerken aynı anda bütünlüğünü de doğrulayan şifreleme türü."},
+            {"en": "HKDF", "tr": "anahtar türetme fonksiyonu", "definition": "Bir ana sırdan, farklı amaçlar için bağımsız anahtarlar türeten standart yöntem."},
+            {"en": "stateless server", "tr": "durumsuz sunucu", "definition": "İstekler arasında istemciye özgü veri saklamayan sunucu; her istek kendi başına işlenebilir."},
+            {"en": "ACME", "tr": "ACME", "definition": "TLS sertifikalarının otomatik alınıp yenilenmesini sağlayan protokol."},
+        ],
+    },
+    {
+        "url": "https://cloud.google.com/blog/products/databases/simplify-ai-search-with-alloydb-hybrid-search-and-rrf/",
+        "slot": "brief",
+        "title_tr": "Hibrit aramada puanları değil sıraları birleştir: Reciprocal Rank Fusion",
+        "difficulty": "orta",
+        "tags": ["arama", "RAG", "Postgres", "veritabanı"],
+        "summary": (
+            "RAG uygulamalarında iyi sonuç için en az iki teknik gerekiyor: anlam için **vektör "
+            "araması**, anahtar kelime kesinliği için **tam metin araması (FTS)**. Zor olan "
+            "aramaları çalıştırmak değil, iki sonuç kümesini birleştirmek. Vektör sorgusu mesafe "
+            "puanı, FTS alaka puanı üretiyor; ikisini ortak bir ölçeğe taşımak için yazılan "
+            "**normalizasyon** mantığı, veri dağılımı değişince bozulan kırılgan adım.\n\n"
+            "Google’ın AlloyDB’de sunduğu çözüm **Reciprocal Rank Fusion (RRF)**: puanlara değil "
+            "sıralara baktığı için normalizasyonu tümüyle atlıyor. Tek bir `hybrid_search()` SQL "
+            "fonksiyonu her bileşen için bir CTE üretip sonuçlara `ROW_NUMBER()` ile sıra veriyor, "
+            "bunları belge kimliği üzerinden `FULL OUTER JOIN` ile birleştiriyor ve RRF puanını "
+            "hesaplıyor. Yazı ayrıca kelime konumlarını indekste tutan RUM eklentisini, yerleşik "
+            "BM25 indeksini ve Elasticsearch gibi dış kümeleri sorgulayan bir FDW’yi duyuruyor."
+        ),
+        "key_points": [
+            "Farklı ölçekteki puanları toplamak yerine sıraları birleştir; ölçek sorunu ortadan kalkar.",
+            "Vektör araması anlamı, tam metin araması tam eşleşmeyi yakalar; ikisi birbirinin açığını kapatır.",
+            "Birleştirmeyi uygulama belleği yerine tek sorguda yapmak gecikmeyi ve hata yüzeyini azaltır.",
+        ],
+        "for_you": (
+            "Bu, Mobit’teki doküman aramasına doğrudan uygulanabilir ve AlloyDB gerektirmez. Düz "
+            "Postgres’te `pgvector` ile ilk 20 sonucu, `tsvector` ile ilk 20 sonucu al; her belgeye "
+            "`1 / (60 + sıra)` puanını ver ve iki listedeki puanları topla. Birkaç satırlık SQL ya da "
+            "Python. Ürün kodu ya da ihale numarası gibi tam eşleşme gereken sorgularda vektör "
+            "aramasının kaçırdığını FTS yakalar."
+        ),
+        "terms": [
+            {"en": "Reciprocal Rank Fusion (RRF)", "tr": "karşılıklı sıra birleştirme", "definition": "Birden çok sıralı listeyi, her öğenin sırasının tersini toplayarak birleştiren yöntem."},
+            {"en": "hybrid search", "tr": "hibrit arama", "definition": "Vektör (anlamsal) ve anahtar kelime aramasını birlikte kullanan arama."},
+            {"en": "BM25", "tr": "BM25", "definition": "Kelime sıklığı ve belge uzunluğuna dayanan yaygın anahtar kelime alaka puanı."},
+        ],
+    },
+    {
+        "url": "https://blog.cloudflare.com/root-ksk-2024-rollover/",
+        "slot": "brief",
+        "title_tr": "İnternetin anahtarı tarihte ikinci kez değişiyor: DNS kök KSK değişimi",
+        "difficulty": "orta",
+        "tags": ["DNS", "güvenlik", "kriptografi", "ağ"],
+        "summary": (
+            "11 Ekim 2026’da DNS kökü, anahtar imzalama anahtarını (KSK) tarihinde yalnızca ikinci "
+            "kez değiştirecek. Bu anahtar **DNSSEC güven zincirinin** başlangıcı. Zincir şöyle "
+            "işliyor: her üst alan, alt alanın açık anahtarının parmak izini bir DS kaydıyla "
+            "yayımlıyor (kök `.com` için, `.com` da `cloudflare.com` için). Kökün ise üstü yok; "
+            "bu yüzden doğrulayan çözümleyici kök açık anahtarına baştan güvenmek zorunda. Buna "
+            "**güven çapası** (trust anchor) deniyor.\n\n"
+            "Yeni anahtar KSK-2024, eskisi KSK-2017’nin yerini alıyor. Doğrulayan çözümleyiciler "
+            "değişimden önce yeni anahtara güvenmiyorsa, sağlıklı siteler erişilemez hâle gelir. "
+            "Cloudflare, 2018’deki ilk değişimde çözümleyicilerin yazılım güncellemesi ya da "
+            "makine taşıması sırasında öğrendikleri güveni kaybettiğini gördüğünü yazıyor. Çoğu "
+            "site sahibinin bir şey yapması gerekmiyor; kendi DNSSEC doğrulayan çözümleyicisini "
+            "işletenler yeni anahtarın yüklü olduğunu kontrol etmeli."
+        ),
+        "key_points": [
+            "Her güven zincirinin sorgusuz güvenilen bir başlangıç noktası vardır.",
+            "Anahtarı önceden yayımlamak yetmez; karşı tarafın onu gerçekten sakladığını da doğrulamak gerekir.",
+            "DNSSEC doğrulaması başarısız olursa site çalışsa bile erişilemez.",
+        ],
+        "for_you": (
+            "Aynı desen kendi sistemlerinde: JWT imzalama anahtarını ya da bir API sırrını "
+            "değiştirirken eskiyi hemen silme. Önce yeni anahtarı yayımla (JWKS’e ekle), bir "
+            "süre ikisini de kabul et, sonra eskisini kaldır. Bu üç adımlı döndürme, kesintisiz "
+            "anahtar değişiminin standart yolu."
+        ),
+        "terms": [
+            {"en": "DNSSEC", "tr": "DNSSEC", "definition": "DNS cevaplarının sahte olmadığını dijital imzayla doğrulamayı sağlayan uzantı."},
+            {"en": "trust anchor", "tr": "güven çapası", "definition": "Bir güven zincirinin, doğrulanmadan baştan güvenilen başlangıç anahtarı."},
+            {"en": "key rollover", "tr": "anahtar değişimi", "definition": "Kullanımdaki kriptografik anahtarın planlı biçimde yenisiyle değiştirilmesi."},
+        ],
+    },
+]
+
+if __name__ == "__main__":
+    save_edition(DATE, INTRO, DRAFTS)

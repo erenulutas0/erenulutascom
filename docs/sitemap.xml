@@ -4,6 +4,12 @@
   <url><loc>https://erenulutas.com/arsiv/</loc></url>
   <url><loc>https://erenulutas.com/hakkinda/</loc></url>
   <url><loc>https://erenulutas.com/ara/</loc></url>
+  <url><loc>https://erenulutas.com/sayi/2026-10-12/</loc></url>
+  <url><loc>https://erenulutas.com/sayi/2026-10-09/</loc></url>
+  <url><loc>https://erenulutas.com/sayi/2026-10-08/</loc></url>
+  <url><loc>https://erenulutas.com/sayi/2026-10-07/</loc></url>
+  <url><loc>https://erenulutas.com/sayi/2026-10-06/</loc></url>
+  <url><loc>https://erenulutas.com/sayi/2026-10-05/</loc></url>
   <url><loc>https://erenulutas.com/sayi/2026-10-02/</loc></url>
   <url><loc>https://erenulutas.com/sayi/2026-10-01/</loc></url>
   <url><loc>https://erenulutas.com/sayi/2026-09-30/</loc></url>
@@ -66,42 +72,62 @@
   <url><loc>https://erenulutas.com/kaynak/anthropic/</loc></url>
   <url><loc>https://erenulutas.com/kaynak/google-research/</loc></url>
   <url><loc>https://erenulutas.com/kaynak/google-cloud/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/veritabani/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/mesajlasma/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/agent/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/tutarlilik/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/gozlemlenebilirlik/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/opentelemetry/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/loglama/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/llm/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/siniflandirma/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/acik-kaynak/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/performans/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/postgres/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/yedekleme/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/mimari/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/ag/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/protokol/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/video/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/gecis/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/ml-altyapisi/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/kapasite/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/oneri-sistemleri/</loc></url>
   <url><loc>https://erenulutas.com/etiket/dayaniklilik/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/loglama/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/gozlemlenebilirlik/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/maliyet/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/gizlilik/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/llm/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/cok-kipli/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/ince-ayar/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/acik-kaynak/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/platform/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/sunucusuz/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/sektor/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/agent/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/rag/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/urun/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/postgres/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/veri-muhendisligi/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/performans/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/lakebase/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/gelistirici-deneyimi/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/ci-cd/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/guvenlik/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/mimari/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/gecikme/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/finans/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/altyapi/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/kriptografi/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/arama/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/veritabani/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/dns/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/arastirma/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/mesajlasma/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/tutarlilik/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/opentelemetry/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/siniflandirma/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/yedekleme/</loc></url>
   <url><loc>https://erenulutas.com/etiket/aws/</loc></url>
   <url><loc>https://erenulutas.com/etiket/kubernetes/</loc></url>
   <url><loc>https://erenulutas.com/etiket/tatbikat/</loc></url>
   <url><loc>https://erenulutas.com/etiket/spanner/</loc></url>
   <url><loc>https://erenulutas.com/etiket/dagitik-sistemler/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/maliyet/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/lakebase/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/altyapi/</loc></url>
   <url><loc>https://erenulutas.com/etiket/arayuz/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/protokol/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/guvenlik/</loc></url>
   <url><loc>https://erenulutas.com/etiket/surec/</loc></url>
   <url><loc>https://erenulutas.com/etiket/izolasyon/</loc></url>
   <url><loc>https://erenulutas.com/etiket/izleme/</loc></url>
   <url><loc>https://erenulutas.com/etiket/kimlik/</loc></url>
   <url><loc>https://erenulutas.com/etiket/mtls/</loc></url>
   <url><loc>https://erenulutas.com/etiket/spark/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/gizlilik/</loc></url>
   <url><loc>https://erenulutas.com/etiket/confidential-computing/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/ml-altyapisi/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/veri-muhendisligi/</loc></url>
   <url><loc>https://erenulutas.com/etiket/flink/</loc></url>
   <url><loc>https://erenulutas.com/etiket/training-serving-skew/</loc></url>
   <url><loc>https://erenulutas.com/etiket/prompt-caching/</loc></url>
@@ -111,11 +137,8 @@
   <url><loc>https://erenulutas.com/etiket/cok-kiracililik/</loc></url>
   <url><loc>https://erenulutas.com/etiket/java/</loc></url>
   <url><loc>https://erenulutas.com/etiket/araclar/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/gelistirici-deneyimi/</loc></url>
   <url><loc>https://erenulutas.com/etiket/serverless/</loc></url>
   <url><loc>https://erenulutas.com/etiket/athena/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/arama/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/rag/</loc></url>
   <url><loc>https://erenulutas.com/etiket/pekistirmeli-ogrenme/</loc></url>
   <url><loc>https://erenulutas.com/etiket/depolama/</loc></url>
   <url><loc>https://erenulutas.com/etiket/teknik-borc/</loc></url>
@@ -135,27 +158,22 @@
   <url><loc>https://erenulutas.com/etiket/zaman-serisi/</loc></url>
   <url><loc>https://erenulutas.com/etiket/temel-model/</loc></url>
   <url><loc>https://erenulutas.com/etiket/tahmin/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/arastirma/</loc></url>
   <url><loc>https://erenulutas.com/etiket/embedding/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/oneri-sistemleri/</loc></url>
   <url><loc>https://erenulutas.com/etiket/cold-start/</loc></url>
   <url><loc>https://erenulutas.com/etiket/kisisellestirme/</loc></url>
   <url><loc>https://erenulutas.com/etiket/olcum/</loc></url>
   <url><loc>https://erenulutas.com/etiket/yetkilendirme/</loc></url>
   <url><loc>https://erenulutas.com/etiket/olay-incelemesi/</loc></url>
   <url><loc>https://erenulutas.com/etiket/donanim/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/ag/</loc></url>
   <url><loc>https://erenulutas.com/etiket/dagitik-egitim/</loc></url>
   <url><loc>https://erenulutas.com/etiket/ai-altyapisi/</loc></url>
   <url><loc>https://erenulutas.com/etiket/otomatik-olcekleme/</loc></url>
   <url><loc>https://erenulutas.com/etiket/stream-processing/</loc></url>
   <url><loc>https://erenulutas.com/etiket/build-vs-buy/</loc></url>
   <url><loc>https://erenulutas.com/etiket/cografi-veri/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/gecikme/</loc></url>
   <url><loc>https://erenulutas.com/etiket/on-device-ml/</loc></url>
   <url><loc>https://erenulutas.com/etiket/degerlendirme/</loc></url>
   <url><loc>https://erenulutas.com/etiket/dogruluk/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/cok-kipli/</loc></url>
   <url><loc>https://erenulutas.com/etiket/gercek-zamanli-sistemler/</loc></url>
   <url><loc>https://erenulutas.com/etiket/graph/</loc></url>
   <url><loc>https://erenulutas.com/etiket/grpc/</loc></url>
@@ -171,11 +189,9 @@
   <url><loc>https://erenulutas.com/etiket/kimlik-dogrulama/</loc></url>
   <url><loc>https://erenulutas.com/etiket/veri-modelleme/</loc></url>
   <url><loc>https://erenulutas.com/etiket/analitik/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/urun/</loc></url>
   <url><loc>https://erenulutas.com/etiket/sql/</loc></url>
   <url><loc>https://erenulutas.com/etiket/goc/</loc></url>
   <url><loc>https://erenulutas.com/etiket/baglam-yonetimi/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/kriptografi/</loc></url>
   <url><loc>https://erenulutas.com/etiket/tls/</loc></url>
   <url><loc>https://erenulutas.com/etiket/veri-ambari/</loc></url>
   <url><loc>https://erenulutas.com/etiket/internet-altyapisi/</loc></url>
@@ -194,7 +210,6 @@
   <url><loc>https://erenulutas.com/etiket/veri-analizi/</loc></url>
   <url><loc>https://erenulutas.com/etiket/odeme-sistemleri/</loc></url>
   <url><loc>https://erenulutas.com/etiket/yayina-alma/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/dns/</loc></url>
   <url><loc>https://erenulutas.com/etiket/waf/</loc></url>
   <url><loc>https://erenulutas.com/etiket/guvenlik-acigi/</loc></url>
   <url><loc>https://erenulutas.com/etiket/is-akisi/</loc></url>

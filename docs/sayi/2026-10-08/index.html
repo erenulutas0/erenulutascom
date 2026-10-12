@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8 Ekim 2026 — Eren&#39;in Mühendislik Gazetesi</title>
+<meta name="description" content="Uber’in hukuk ekibi için yazdığı sözleşme agent’ının hikâyesi dört yinelemeden oluşuyor ve en kalıcı ders modelle ilgili değil: aracı avukatın zaten çalıştığı yere koymak ve geri bildirimini sisteme geri beslemek. Yanında Postgres’e dair iki yazı var: toplu veri yüklemenin darboğazı ve her kodlama agent’ına ayrı bir veritabanı dalı.">
+<meta name="author" content="Eren Ulutaş">
+<meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131310" media="(prefers-color-scheme: dark)">
+<meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:title" content="8 Ekim 2026 — Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:description" content="Uber’in hukuk ekibi için yazdığı sözleşme agent’ının hikâyesi dört yinelemeden oluşuyor ve en kalıcı ders modelle ilgili değil: aracı avukatın zaten çalıştığı yere koymak ve geri bildirimini sisteme geri beslemek. Yanında Postgres’e dair iki yazı var: toplu veri yüklemenin darboğazı ve her kodlama agent’ına ayrı bir veritabanı dalı.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:url" content="https://erenulutas.com/sayi/2026-10-08/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://erenulutas.com/sayi/2026-10-08/">
+<link rel="alternate" type="application/rss+xml" title="Eren&#39;in Mühendislik Gazetesi" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
+<link rel="stylesheet" href="/static/style.css?v=eae14b0f">
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+<script>
+  // Tema tercihini ilk boyamadan önce uygula (flash olmasın)
+  (function () {
+    try {
+      var t = localStorage.getItem('tema');
+      if (t) document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip" href="#icerik">İçeriğe geç</a>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <a href="/" class="logo">
+      <span class="logo-mark">EU</span>
+      <span class="logo-text">
+        <strong>Eren&#39;in Mühendislik Gazetesi</strong>
+        <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
+      </span>
+    </a>
+    <nav class="masthead-nav" aria-label="Ana menü">
+      <a href="/">Bugün</a>
+      <a href="/arsiv/" aria-current="page">Arşiv</a>
+      <a href="/ara/">Ara</a>
+      <a href="/hakkinda/">Hakkında</a>
+      <button id="tema" class="tema" type="button" aria-label="Açık/koyu temayı değiştir" title="Açık/koyu tema">
+        <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/></g></svg>
+        <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg>
+      </button>
+    </nav>
+  </div>
+  <div class="progress" id="ilerleme" aria-hidden="true"></div>
+</header>
+
+<main id="icerik">
+<div class="wrap">
+
+  <header class="edition-head">
+  <div class="edition-bar">
+    <span class="edition-no">Sayı 55</span>
+    <h1 class="edition-date"><time datetime="2026-10-08">8 Ekim 2026, Perşembe</time></h1>
+    <nav class="edition-nav" aria-label="Sayılar arası gezinme">
+<a href="/sayi/2026-10-07/" rel="prev"><span aria-hidden="true">←</span> 7 Ekim 2026</a><a href="/sayi/2026-10-09/" rel="next">9 Ekim 2026 <span aria-hidden="true">→</span></a>
+    </nav>
+  </div>
+<p class="lede">Uber’in hukuk ekibi için yazdığı sözleşme agent’ının hikâyesi dört yinelemeden oluşuyor ve en kalıcı ders modelle ilgili değil: aracı avukatın zaten çalıştığı yere koymak ve geri bildirimini sisteme geri beslemek. Yanında Postgres’e dair iki yazı var: toplu veri yüklemenin darboğazı ve her kodlama agent’ına ayrı bir veritabanı dalı.</p></header>
+
+
+  <div class="layout">
+    <div class="layout-main">
+          <article class="story cover" id="a81dbc1a369f">
+  <div class="meta">
+<span class="kicker">Günün kapağı</span>    <a class="badge" href="/kaynak/uber/"
+     style="--brand: #000000">Uber Engineering</a>
+
+  <span class="meta-item">8 Ekim 2026</span>
+<span class="meta-item">14 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
+</div>
+
+  <h2 class="cover-title">
+    <a href="https://www.uber.com/blog/building-ubers-redlining-agent/" rel="noopener nofollow" target="_blank">RAG yetmedi, geri bildirim işe yaradı: Uber’in sözleşme agent’ı dört yinelemede nasıl olgunlaştı</a>
+  </h2>
+  <p class="original-title">Scaling AI in Legal: Building Uber&#39;s Redlining Agent</p>
+
+  <div class="prose"><p>Uber’de her yıl binlerce sözleşme müzakere ediliyor. İş yüksek riskli ve ayrıntıcı, ama içinde şaşırtıcı ölçüde yapı var: benzer maddeler, müşteriler arasında tekrar eden düzeltmeler (redline) ve yerleşik akıl yürütme kalıpları. <strong>Legal Redlining Agent (LRA)</strong>, avukatların zaten çalıştığı yere, Microsoft Word’e eklenti olarak yerleşiyor: karşı tarafın düzeltmelerini buluyor, niyeti yorumluyor, politikaya uygun kabul/ret/değiştir önerisi veriyor, gerekçeli yorum yazıyor ve riskli maddeleri işaretliyor. Uber’in bildirdiği sonuç: ortalama inceleme süresinde %20’den fazla azalma ve yapay zekâ kararlarında %91 doğruluk. Avukatın yargısının yerini almıyor.</p><p><strong>1. yineleme, RAG.</strong> Hukuk ekibinin el kitapları ve örnek müzakere turları içeri alındı. Üç sorun çıktı: <strong>isabetsiz anlamsal benzerlik</strong> (gömülen ‘anahtar’ ile getirilmek istenen içerik doğası gereği farklıydı), <strong>uygunsuz ton</strong> (aşırı savunmacı ya da aşırı olumlu cevaplar) ve <strong>genelleyememe</strong> (el kitabında olmayan durumlarda fiilen rastgele cevaplar).</p><p><strong>2. yineleme, geri bildirim.</strong> Başta yalnızca avukatın kararı, metin ve bir ‘beğenmedim’ işareti saklanıyordu. Dönüm noktası, avukatın <strong>beklediği eylemi, yorumunu ve sonunda kullandığı metni</strong> toplamak oldu: böylece karşı tarafın niyeti doğrudan avukatın kesin diline eşlendi. Çalışma anında agent binlerce geçmiş etkileşimi tutan bu depoyu sorguluyor: önce metadata filtreli benzerlik araması havuzu yaklaşık 20 belgeye indiriyor, sonra bir LLM adayların niyetle gerçekten örtüştüğünü doğruluyor. Bağlam kurulurken <strong>üstel azalma ağırlığı</strong> son kararları öne alıyor (değişen hukuki tutuma uyum, kavram kaymasına karşı) ve kabul/ret örnekleri dengeli tutuluyor. Sonuç: model ince ayarı olmadan neredeyse gerçek zamanlı öğrenen, dinamik few-shot bir sistem. Öneriyi etkileyen geçmiş geri bildirimler arayüzde gösteriliyor; bu şeffaflık güveni kuran şey.</p><p><strong>3. yineleme, ton.</strong> Hattın sonuna yalnızca üslubu ayarlayan ek bir LLM çağrısı kondu. Asıl kırılma, tonu tanımlayan dilin sahipliğini avukatlara vermek oldu: mühendisler promptun iskeletini, hukuk ekibi içeriğini yönetti ve günler içinde kendi seslerine oturttular. Çıkan ilke: çıktı biçimini doğrudan etkileyen promptları alan uzmanları yazmalı, yapay zekâ ekibi yalnızca iyi uygulamaları gözetmeli.</p><p><strong>4. yineleme, agent ile değişiklik.</strong> Asıl zaman kazancı karşı teklifi yazmakta. Düz metin üretimi terim uyduruyor ya da sözleşmenin tanımlı terimlerinden sapıyordu; ‘değiştir’ kararında geçmiş geri bildirim ve kurallara başvuran bir agent iş akışına geçildi. Yazı, bu ilk neslin bugünkü agent altyapıları yaygınlaşmadan kurulduğunu da not ediyor.</p></div>
+
+  <div class="keypoints">
+    <h3 class="label">Öne çıkanlar</h3>
+    <ol>
+<li><span>Aracı kullanıcının çalıştığı yere koymak (Word eklentisi) benimsenmenin ön koşulu.</span></li><li><span>Sorgu ile getirilmek istenen içerik farklı türdeyse düz gömme benzerliği isabetsiz kalır.</span></li><li><span>‘Beğenmedim’ zayıf sinyaldir; uzmanın düzelttiği son metin güçlü sinyaldir.</span></li><li><span>Yeni örneklere daha çok ağırlık vermek, değişen politikaya ince ayarsız uyum sağlar.</span></li><li><span>Ton ve biçim promptlarını alan uzmanı yazsın; mühendis iskeleti yönetsin.</span></li>    </ol>
+  </div>
+
+  <div class="callouts">
+    <div class="callout callout-why">
+      <h3 class="label">Neden önemli?</h3>
+      <p>Çoğu RAG projesi 1. yinelemede takılır: belgeleri gömüp arar ve sonuçların neden tutarsız olduğunu anlamaz. Uber’in yolu, kaliteyi asıl yükselten şeyin daha iyi bir model değil, uzman düzeltmelerinden oluşan ve sürekli büyüyen bir örnek deposu olduğunu gösteriyor.</p>
+    </div>
+    <div class="callout callout-you">
+      <h3 class="label">Sende karşılığı</h3>
+      <p>DBH’daki sınıflandırma hattı için hazır bir tarif. Bir insanın düzelttiği her kaydı (girdi, modelin cevabı, doğru cevap, tarih) bir tabloda sakla. Yeni kayıt gelince bu tablodan en benzer birkaç düzeltmeyi getirip prompta few-shot örnek olarak koy ve yeni düzeltmelere daha yüksek ağırlık ver (örneğin <code>exp(-gün/30)</code>). İnce ayar yok, GPU yok, ama sistem her düzeltmeyle iyileşir. İki ayrıntıyı atlama: örneklerde sınıfları dengeli tut, ve arayüzde ‘bu kararı şu geçmiş örnekler etkiledi’ diye göster. Mobit için de aynı ders: doküman aramasını ayrı bir ekran yapmak yerine kullanıcının zaten çalıştığı ERP ekranının içine yerleştir.</p>
+    </div>
+  </div>
+
+  <div class="terms">
+    <h3 class="label">Sözlük</h3>
+      <dl>
+    <div class="term">
+      <dt><span class="term-en">redline</span> <span class="term-tr">sözleşme düzeltmesi</span></dt>
+      <dd>Bir sözleşme taslağında karşı tarafın önerdiği, izlenebilir biçimde işaretlenmiş değişiklik.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">few-shot prompting</span> <span class="term-tr">az örnekli yönlendirme</span></dt>
+      <dd>Modele görevi, promptun içine konan birkaç çözümlü örnekle öğretme.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">concept drift</span> <span class="term-tr">kavram kayması</span></dt>
+      <dd>Doğru cevabın zamanla değişmesi; eski örneklerin güncelliğini yitirmesi.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">exponential decay</span> <span class="term-tr">üstel azalma</span></dt>
+      <dd>Bir değerin ağırlığını yaşı arttıkça sabit oranla düşüren ağırlıklandırma.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">metadata filtering</span> <span class="term-tr">metadata filtreleme</span></dt>
+      <dd>Benzerlik aramasını, kayıtların etiketlerine göre önce daraltma.</dd>
+    </div>
+  </dl>
+
+  </div>
+
+  <div class="article-foot">
+  <ul class="tags">
+  <li><a href="/etiket/agent/">#agent</a></li>
+  <li><a href="/etiket/rag/">#RAG</a></li>
+  <li><a href="/etiket/llm/">#LLM</a></li>
+  <li><a href="/etiket/urun/">#ürün</a></li>
+</ul>
+
+  <a class="readmore" href="https://www.uber.com/blog/building-ubers-redlining-agent/" rel="noopener nofollow" target="_blank">
+    Orijinali oku <span aria-hidden="true">↗</span>
+  </a>
+</div>
+
+</article>
+
+
+    <h2 class="subhead">Kısa kısa</h2>
+<article class="story brief" id="4ef67c426724">
+  <div class="meta">
+    <a class="badge" href="/kaynak/databricks/"
+     style="--brand: #FF3621">Databricks Engineering</a>
+
+  <span class="meta-item">8 Ekim 2026</span>
+<span class="meta-item">6 dk okuma</span>  <span class="meta-item level level-ileri">ileri</span>
+</div>
+
+  <h3 class="brief-title">
+    <a href="https://www.databricks.com/blog/load-terabytes-data-minutes-lakebase-postgres" rel="noopener nofollow" target="_blank">Postgres’e toplu yüklemede darboğaz okuma değil, tek yazıcı</a>
+  </h3>
+  <p class="original-title">Load terabytes of data in minutes into Lakebase Postgres</p>
+  <div class="prose prose-sm"><p>Postgres gibi operasyonel veritabanları, verinin küçük alt kümeleri üzerinde çok sayıda eşzamanlı, düşük gecikmeli sorgu için tasarlandı. Terabaytlarca veri yüklemek ya da tabloyu baştan sona tarayan analitik sorgular aynı kaynaklar için uygulama trafiğiyle yarışıyor. Databricks’in anlattığı müşteri günde yaklaşık 1 milyar satır yüklüyordu: yükleme 8 saatten uzun sürüyor, CPU ve belleği tümüyle dolduruyordu.</p><p>Yazının net tespiti: yüklemeyi dağıtık bir Spark işi olarak başlatsan bile her satır yine <strong>tek bir Postgres yazıcısından</strong> (<code>COPY</code>) geçmek zorunda. Kaynak tarafı yatay ölçeklenir, hedef tarafı ölçeklenmez; yürütücü eklemek taramayı hızlandırır ama darboğazı kaldırmaz. Lakebase’in çözümü (LTAP adını verdikleri mimari), ağır toplu işi birincil sunucudan alıp Spark’a vermek: veri sayfaları dağıtık motorda oluşturuluyor. Yazı bir sınırı da açıkça belirtiyor: ölçülen şey veri yükleme süresi; indeks oluşturmayı paralelleştirme çalışması sürüyor.</p></div>
+
+  <div class="keypoints keypoints-sm">
+    <h4 class="label">Öne çıkanlar</h4>
+    <ol>
+<li><span>Bir hattın hızını en dar noktası belirler; okuyucuyu paralelleştirmek tek yazıcıyı hızlandırmaz.</span></li><li><span>Toplu iş ve canlı trafik aynı kaynakları paylaşıyorsa biri diğerini bozar.</span></li><li><span>Bir ölçümün neyi kapsamadığını söylemek (burada indeks kurulumu) ölçümün kendisi kadar değerli.</span></li>    </ol>
+  </div>
+
+  <div class="callouts">
+    <div class="callout callout-you">
+      <h4 class="label">Sende karşılığı</h4>
+      <p>Tradebot’ta piyasa verisini Postgres’e yüklerken satır satır <code>INSERT</code> yerine <code>COPY</code> kullan; fark onlarca kat olabilir. Büyük yüklemede indeksleri ve kısıtları önce kaldırıp yükleme bitince yeniden kur. Ve ağır yüklemeyi canlı sorgularla aynı sunucuda, aynı saatte çalıştırma.</p>
+    </div>
+  </div>
+
+  <details class="terms">
+    <summary class="label">Sözlük · 3 terim</summary>
+      <dl>
+    <div class="term">
+      <dt><span class="term-en">bulk load</span> <span class="term-tr">toplu yükleme</span></dt>
+      <dd>Çok büyük miktarda verinin veritabanına tek seferde aktarılması.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">OLTP</span> <span class="term-tr">çevrimiçi işlem işleme</span></dt>
+      <dd>Çok sayıda kısa, eşzamanlı okuma-yazma işlemine göre tasarlanmış veritabanı iş yükü.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">single-writer bottleneck</span> <span class="term-tr">tek yazıcı darboğazı</span></dt>
+      <dd>Tüm yazmaların tek bir süreçten geçmek zorunda olması yüzünden oluşan hız sınırı.</dd>
+    </div>
+  </dl>
+
+  </details>
+
+  <div class="article-foot">
+  <ul class="tags">
+  <li><a href="/etiket/postgres/">#Postgres</a></li>
+  <li><a href="/etiket/veri-muhendisligi/">#veri mühendisliği</a></li>
+  <li><a href="/etiket/performans/">#performans</a></li>
+  <li><a href="/etiket/lakebase/">#Lakebase</a></li>
+</ul>
+
+  <a class="readmore" href="https://www.databricks.com/blog/load-terabytes-data-minutes-lakebase-postgres" rel="noopener nofollow" target="_blank">
+    Orijinali oku <span aria-hidden="true">↗</span>
+  </a>
+</div>
+
+</article>
+<article class="story brief" id="d953dbc7e61c">
+  <div class="meta">
+    <a class="badge" href="/kaynak/databricks/"
+     style="--brand: #FF3621">Databricks Engineering</a>
+
+  <span class="meta-item">8 Ekim 2026</span>
+<span class="meta-item">5 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
+</div>
+
+  <h3 class="brief-title">
+    <a href="https://www.databricks.com/blog/lakebase-and-agentic-sdlc-branching-databases-coding-agents" rel="noopener nofollow" target="_blank">Her kodlama agent’ına kendi veritabanı dalı</a>
+  </h3>
+  <p class="original-title">Lakebase and Agentic SDLC: Branching Databases for Coding Agents</p>
+  <div class="prose prose-sm"><p>Kodlama agent’larını paralel çalıştırmak olağan hâle geliyor ve araçlar buna göre gelişti. Geliştirme akışının gözden kaçan parçası ise veritabanı. Her agent’ın kod yazması, şema değişikliği uygulaması ve test çalıştırması gerekiyor; paylaşılan tek bir geliştirme veritabanında agent’lar şema değişikliklerinde çakışıyor, birbirinin verisini bozuyor ya da gerçeği yansıtmayan mock’lara dönüyor.</p><p>Kod tarafında çözüm <strong>git worktree</strong>: her agent’a kendi dizini ve dalı. Lakebase aynı yalıtımı veritabanına getiriyor: <strong>copy-on-write</strong> ile bütün veritabanı, boyutundan bağımsız olarak bir saniyenin altında dallanıyor; dal üst dalın verisini paylaşıyor ve yalnızca ayrıştıkça ek depolama tüketiyor, boştayken sıfıra ölçekleniyor. Agent migration’ı uyguluyor, testleri koşuyor, PR açıyor ve dal kapatılıyor. Önemli bir fark: Git’in aksine veritabanı dalları birleştirilmiyor; şema değişikliği ana dala migration dosyalarıyla taşınıyor.</p></div>
+
+  <div class="keypoints keypoints-sm">
+    <h4 class="label">Öne çıkanlar</h4>
+    <ol>
+<li><span>Paralel çalışan agent’lar için kod yalıtımı yetmez; veritabanı da yalıtılmalı.</span></li><li><span>Copy-on-write, tam kopya maliyeti olmadan gerçek veriyle test etmeyi mümkün kılar.</span></li><li><span>Veritabanı dalı birleştirilmez; değişiklik migration dosyasıyla taşınır.</span></li>    </ol>
+  </div>
+
+  <div class="callouts">
+    <div class="callout callout-you">
+      <h4 class="label">Sende karşılığı</h4>
+      <p>Bunu bugün ücretsiz araçlarla kurabilirsin: her git worktree için ayrı bir Docker Postgres konteyneri (farklı port) aç ve Flyway/Liquibase migration’larını o veritabanına uygula. Testlerde Testcontainers zaten aynı yalıtımı sağlıyor. Asıl alışkanlık: şema değişikliğini asla elle yapma, her zaman sürümlü bir migration dosyasıyla yap.</p>
+    </div>
+  </div>
+
+  <details class="terms">
+    <summary class="label">Sözlük · 3 terim</summary>
+      <dl>
+    <div class="term">
+      <dt><span class="term-en">copy-on-write</span> <span class="term-tr">yazınca kopyala</span></dt>
+      <dd>Kopyanın veriyi paylaştığı, yalnızca değiştirilen kısmın ayrıca saklandığı yöntem.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">git worktree</span> <span class="term-tr">git çalışma ağacı</span></dt>
+      <dd>Aynı deponun farklı dallarını ayrı dizinlerde aynı anda açık tutma özelliği.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">schema migration</span> <span class="term-tr">şema geçişi</span></dt>
+      <dd>Veritabanı yapısındaki değişikliğin sürümlü ve tekrarlanabilir bir dosyayla uygulanması.</dd>
+    </div>
+  </dl>
+
+  </details>
+
+  <div class="article-foot">
+  <ul class="tags">
+  <li><a href="/etiket/agent/">#agent</a></li>
+  <li><a href="/etiket/postgres/">#Postgres</a></li>
+  <li><a href="/etiket/gelistirici-deneyimi/">#geliştirici deneyimi</a></li>
+  <li><a href="/etiket/ci-cd/">#CI/CD</a></li>
+</ul>
+
+  <a class="readmore" href="https://www.databricks.com/blog/lakebase-and-agentic-sdlc-branching-databases-coding-agents" rel="noopener nofollow" target="_blank">
+    Orijinali oku <span aria-hidden="true">↗</span>
+  </a>
+</div>
+
+</article>
+
+
+    </div>
+    <aside class="layout-aside" aria-label="Bu sayıda">
+  <div class="aside-block">
+    <h2 class="label">Bu sayıda</h2>
+    <ol class="toc" id="toc">
+      <li>
+        <a href="#a81dbc1a369f">
+          <span class="toc-title">RAG yetmedi, geri bildirim işe yaradı: Uber’in sözleşme agent’ı dört yinelemede nasıl olgunlaştı</span>
+          <span class="toc-meta">Uber Engineering · 14 dk</span>
+        </a>
+      </li>
+      <li>
+        <a href="#4ef67c426724">
+          <span class="toc-title">Postgres’e toplu yüklemede darboğaz okuma değil, tek yazıcı</span>
+          <span class="toc-meta">Databricks Engineering · 6 dk</span>
+        </a>
+      </li>
+      <li>
+        <a href="#d953dbc7e61c">
+          <span class="toc-title">Her kodlama agent’ına kendi veritabanı dalı</span>
+          <span class="toc-meta">Databricks Engineering · 5 dk</span>
+        </a>
+      </li>
+    </ol>
+  </div>
+  <div class="aside-block aside-facts">
+    <h2 class="label">Künye</h2>
+    <dl class="facts">
+      <div><dt>yazı</dt><dd>3</dd></div>
+      <div><dt>dk okuma</dt><dd>25</dd></div>
+      <div><dt>kaynak</dt><dd>2</dd></div>
+      <div><dt>terim</dt><dd>11</dd></div>
+    </dl>
+  </div>
+</aside>
+
+  </div>
+
+  <nav class="pager" aria-label="Sayılar arası gezinme">
+    <a class="pager-link pager-prev" href="/sayi/2026-10-07/" rel="prev">
+      <span class="pager-label">← Önceki sayı · 7 Ekim 2026</span>
+      <span class="pager-title">Önce kanıtı kod toplasın, sonra model yorumlasın: Cloudflare’in çok ajanlı güvenlik hattı</span>
+    </a>
+    <a class="pager-link pager-next" href="/sayi/2026-10-09/" rel="next">
+      <span class="pager-label">Sonraki sayı · 9 Ekim 2026 →</span>
+      <span class="pager-title">Ses ve video için ayrı model zinciri kurma: Clef-omni ve arkasındaki eğitim tarifi</span>
+    </a>
+  </nav>
+
+</div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-col">
+      <p class="footer-brand">Eren&#39;in Mühendislik Gazetesi</p>
+      <p class="muted">
+        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını derleyip
+        Türkçe özetleyen kişisel bir gazete. Özetler yeni mezun bir mühendisin
+        anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
+      </p>
+      <p class="muted small num">
+        127 özet · 57 sayı ·
+        11 kaynak
+      </p>
+    </div>
+    <div class="footer-col">
+      <h3>Kaynaklar</h3>
+      <ul class="footer-sources">
+        <li><a href="https://www.uber.com/blog/engineering/" rel="noopener nofollow" target="_blank">Uber Engineering</a></li>
+        <li><a href="https://netflixtechblog.com" rel="noopener nofollow" target="_blank">Netflix Tech Blog</a></li>
+        <li><a href="https://aws.amazon.com/blogs/architecture/" rel="noopener nofollow" target="_blank">AWS Architecture Blog</a></li>
+        <li><a href="https://blog.cloudflare.com" rel="noopener nofollow" target="_blank">Cloudflare Blog</a></li>
+        <li><a href="https://stripe.com/blog" rel="noopener nofollow" target="_blank">Stripe Engineering</a></li>
+        <li><a href="https://www.databricks.com/blog" rel="noopener nofollow" target="_blank">Databricks Engineering</a></li>
+        <li><a href="https://engineering.fb.com" rel="noopener nofollow" target="_blank">Meta Engineering</a></li>
+        <li><a href="https://openai.com/news/" rel="noopener nofollow" target="_blank">OpenAI Research</a></li>
+        <li><a href="https://www.anthropic.com/engineering" rel="noopener nofollow" target="_blank">Anthropic Engineering</a></li>
+        <li><a href="https://research.google/blog/" rel="noopener nofollow" target="_blank">Google Research</a></li>
+        <li><a href="https://cloud.google.com/blog/" rel="noopener nofollow" target="_blank">Google Cloud Blog</a></li>
+        <li><a href="https://devblogs.microsoft.com/engineering-at-microsoft/" rel="noopener nofollow" target="_blank">Microsoft Engineering</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Eren Ulutaş</h3>
+      <ul class="footer-links">
+        <li><a href="https://github.com/erenulutas0" rel="me noopener" target="_blank">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/eren-u-55918a2a0" rel="me noopener" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:eerenulutass@gmail.com">E-posta</a></li>
+        <li><a href="/feed.xml">RSS</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-legal">
+    <p class="muted small">
+      Tüm özetler kaynak makalelere bağlıdır; telif orijinal yazarlara aittir.
+      Bu site yalnızca özet ve yönlendirme sunar. © 2026 Eren Ulutaş.
+    </p>
+  </div>
+</footer>
+
+<script src="/static/app.js?v=eae14b0f" defer></script>
+</body>
+</html>

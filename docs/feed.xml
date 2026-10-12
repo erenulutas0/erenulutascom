@@ -6,6 +6,118 @@
     <description>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</description>
     <language>tr</language>
     <item>
+      <title>Canlı yayının altındaki protokolü değiştirmek: Instagram Live’da Media over QUIC</title>
+      <link>https://erenulutas.com/sayi/2026-10-12/#464a40458259</link>
+      <guid isPermaLink="false">464a40458259</guid>
+      <pubDate>Mon, 12 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Meta Engineering</category>
+      <description>Instagram Live artık iOS ve Android’de canlı video yüklemesi (ingest) için açık standart Media over QUIC (MoQ) kullanıyor. İnternet yıllar içinde her biri kendi sorununa göre biçimlenmiş bir protokol yığını biriktirdi: yükleme için RTMP, oynatma için HLS ve DASH, gerçek zamanlı aramalar için WebRTC. Meta’da canlı yayın başlatıp aynı uygulamada sesli arama yapan biri üç ayrı protokol yığınına dokunuyor; her birinin kendi sunucu altyapısı, izlemesi ve uzmanlığı var. MoQ’un vaadi, yükleme, dağıtım ve oynatma için tek bir taşıma katmanı. MoQ nasıl çalışır? IETF’te Meta, Google, Akamai, Cisco, Clou</description>
+    </item>
+    <item>
+      <title>Küresel olarak kıt, yerel olarak boşta: Meta atıl çıkarım kapasitesini nasıl kullanıyor</title>
+      <link>https://erenulutas.com/sayi/2026-10-12/#edc939989dc9</link>
+      <guid isPermaLink="false">edc939989dc9</guid>
+      <pubDate>Mon, 12 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Meta Engineering</category>
+      <description>Çıkarım filolarında bir paradoks var: kapasite küresel olarak kısıtlıyken yerel olarak anlamlı miktarda boşta kalabiliyor. Nedenleri tanıdık: filo tepe talebe göre kuruluyor ama trafik gün içinde değişiyor; donanım tedarik zincirinin takvimiyle, modeller ise başka bir takvimle geliyor. Meta bu boş cepleri ortak bir fırsatçı kapasite havuzunda toplayıp daha iyi reklam önerisine çeviriyor. Zorluk şu: bu kapasite ekiplere, bölgelere ve hızlandırıcı türlerine dağılmış ve çok kısa bir uyarıyla geri alınabiliyor. Sistem iki esneklik koluyla çalışıyor. Rank More Ads (RMA): sıralama aşamalarının değer</description>
+    </item>
+    <item>
+      <title>Logu yola çıkmadan süz: Logpush Transformers</title>
+      <link>https://erenulutas.com/sayi/2026-10-12/#ae4b5b752a8d</link>
+      <guid isPermaLink="false">ae4b5b752a8d</guid>
+      <pubDate>Mon, 12 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Cloudflare Blog</category>
+      <description>Ekipler Cloudflare loglarını SIEM’lere, analitik platformlarına ve nesne depolamaya aktarıyor. Loglar hedefe varmadan önce çoğu zaman sağlık kontrollerini çıkarmak, hassas alanları atmak ya da kayıtları yeniden biçimlendirmek gerekiyor ve bu, kurulup ölçeklenip izlenmesi gereken ayrı bir işleme servisi demek. Üstelik ekipler varır varmaz atacakları kayıtların aktarımı, alımı ve saklanması için de para ödüyor. Transformers bu işlemi aktarım hattının içine alıyor. Bir Transformer, belirli bir veri kümesi için yazılmış bir SQL sorgusu: kayıtları filtreliyor, hassas veriyi karartıyor ve alan ekley</description>
+    </item>
+    <item>
+      <title>Ses ve video için ayrı model zinciri kurma: Clef-omni ve arkasındaki eğitim tarifi</title>
+      <link>https://erenulutas.com/sayi/2026-10-09/#6229f18e6ef4</link>
+      <guid isPermaLink="false">6229f18e6ef4</guid>
+      <pubDate>Fri, 09 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Cloudflare Blog</category>
+      <description>Cloudflare, geçen hafta yayımladığı açık ağırlıklı karar modelleri Clef ve Clef-flash’ın ardından Clef-omni’yi duyurdu: metin ve görselin yanında ses (wav, mp3) ve video (mp4, webm) girdisi alan bir karar modeli. Aynı yazıda Clef-flash’ın fiyatı düşürüldü ve Clef hızlandırıldı. Ağırlıklar Hugging Face’te açık. Pratik fark şu: konuşmayı önce metne çeviren, videoyu ses ve görüntü kanallarına ayıran ardışık model zincirleri kurmak yerine tek bir modele soruyorsun. Yazıdaki örnek bir kurulum denetimi: cihazın bir fotoğrafı, çalışırken alınmış bir ses kaydı ve fanın bir videosu tek istekte gönderil</description>
+    </item>
+    <item>
+      <title>Deno Cloudflare’e katılıyor: ‘platform kilidi’ tartışmasına bir cevap</title>
+      <link>https://erenulutas.com/sayi/2026-10-09/#f7c4a724ff80</link>
+      <guid isPermaLink="false">f7c4a724ff80</guid>
+      <pubDate>Fri, 09 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Cloudflare Blog</category>
+      <description>Cloudflare, Deno ekibinin kendisine katıldığını duyurdu ve yazıyı yaygın bir eleştiriye cevap olarak kurdu. Eleştiri şu: Workers diğer bulut platformlarından farklı çalışıyor, özellikle Durable Objects kullanan uygulamalar yalnızca farklı yazılmıyor, farklı tasarlanıyor; dolayısıyla başka yere taşımak zor ve bu bilinçli bir tuzak. Bu bakışa göre Deno’nun ağustosta yayımladığı, Workers ve Durable Objects’in açık kaynak bir uygulaması olan celld bir tehditti. Cloudflare’in savunması: Workers farklı çünkü daha iyi bir programlama modeli (yüzlerce konumda çalışan uygulamayı yönetmek, ‘binding’ ile</description>
+    </item>
+    <item>
+      <title>RAG yetmedi, geri bildirim işe yaradı: Uber’in sözleşme agent’ı dört yinelemede nasıl olgunlaştı</title>
+      <link>https://erenulutas.com/sayi/2026-10-08/#a81dbc1a369f</link>
+      <guid isPermaLink="false">a81dbc1a369f</guid>
+      <pubDate>Thu, 08 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Uber Engineering</category>
+      <description>Uber’de her yıl binlerce sözleşme müzakere ediliyor. İş yüksek riskli ve ayrıntıcı, ama içinde şaşırtıcı ölçüde yapı var: benzer maddeler, müşteriler arasında tekrar eden düzeltmeler (redline) ve yerleşik akıl yürütme kalıpları. Legal Redlining Agent (LRA), avukatların zaten çalıştığı yere, Microsoft Word’e eklenti olarak yerleşiyor: karşı tarafın düzeltmelerini buluyor, niyeti yorumluyor, politikaya uygun kabul/ret/değiştir önerisi veriyor, gerekçeli yorum yazıyor ve riskli maddeleri işaretliyor. Uber’in bildirdiği sonuç: ortalama inceleme süresinde %20’den fazla azalma ve yapay zekâ kararlar</description>
+    </item>
+    <item>
+      <title>Postgres’e toplu yüklemede darboğaz okuma değil, tek yazıcı</title>
+      <link>https://erenulutas.com/sayi/2026-10-08/#4ef67c426724</link>
+      <guid isPermaLink="false">4ef67c426724</guid>
+      <pubDate>Thu, 08 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Databricks Engineering</category>
+      <description>Postgres gibi operasyonel veritabanları, verinin küçük alt kümeleri üzerinde çok sayıda eşzamanlı, düşük gecikmeli sorgu için tasarlandı. Terabaytlarca veri yüklemek ya da tabloyu baştan sona tarayan analitik sorgular aynı kaynaklar için uygulama trafiğiyle yarışıyor. Databricks’in anlattığı müşteri günde yaklaşık 1 milyar satır yüklüyordu: yükleme 8 saatten uzun sürüyor, CPU ve belleği tümüyle dolduruyordu. Yazının net tespiti: yüklemeyi dağıtık bir Spark işi olarak başlatsan bile her satır yine tek bir Postgres yazıcısından (COPY) geçmek zorunda. Kaynak tarafı yatay ölçeklenir, hedef tarafı </description>
+    </item>
+    <item>
+      <title>Her kodlama agent’ına kendi veritabanı dalı</title>
+      <link>https://erenulutas.com/sayi/2026-10-08/#d953dbc7e61c</link>
+      <guid isPermaLink="false">d953dbc7e61c</guid>
+      <pubDate>Thu, 08 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Databricks Engineering</category>
+      <description>Kodlama agent’larını paralel çalıştırmak olağan hâle geliyor ve araçlar buna göre gelişti. Geliştirme akışının gözden kaçan parçası ise veritabanı. Her agent’ın kod yazması, şema değişikliği uygulaması ve test çalıştırması gerekiyor; paylaşılan tek bir geliştirme veritabanında agent’lar şema değişikliklerinde çakışıyor, birbirinin verisini bozuyor ya da gerçeği yansıtmayan mock’lara dönüyor. Kod tarafında çözüm git worktree: her agent’a kendi dizini ve dalı. Lakebase aynı yalıtımı veritabanına getiriyor: copy-on-write ile bütün veritabanı, boyutundan bağımsız olarak bir saniyenin altında dalla</description>
+    </item>
+    <item>
+      <title>Önce kanıtı kod toplasın, sonra model yorumlasın: Cloudflare’in çok ajanlı güvenlik hattı</title>
+      <link>https://erenulutas.com/sayi/2026-10-07/#efc47ac2f82e</link>
+      <guid isPermaLink="false">efc47ac2f82e</guid>
+      <pubDate>Wed, 07 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Cloudflare Blog</category>
+      <description>Güvenlik uyarıları nadiren tek tek gelir. Bir uyarı ortamda bir dalga yaratır ve bir analistin hangilerinin ilişkili olduğuna, ne anlama geldiklerine karar vermesi gerekir. Cloudflare, Managed Defense ekibi için bu işin büyük kısmını üstlenen çok ajanlı bir düzenek kurdu ve ilk denemenin neden başarısız olduğunu açıkça anlatıyor. Tek ajan neden başarısız oldu? İlk prototipte tüm soruşturma tek bir genel amaçlı ajana verildi. Faydalı analiz üretti ama kanıtın desteklemediği iddialar da uydurdu. Telemetri, dedektör açıklamaları, politikalar ve tehdit istihbaratı tek bir prompta ezilince rolleri </description>
+    </item>
+    <item>
+      <title>Bulutta yüksek frekanslı alım-satım: gecikme değil, gecikmenin tutarlılığı</title>
+      <link>https://erenulutas.com/sayi/2026-10-07/#57075208c36b</link>
+      <guid isPermaLink="false">57075208c36b</guid>
+      <pubDate>Wed, 07 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Google Cloud Blog</category>
+      <description>Sermaye piyasalarında paket zamanlamasındaki küçük oynamalar bile kuyruk önceliğini ve emrin gerçekleşmesini değiştirir. Google Cloud, Ultra Low Latency (ULL) çözümünü ve yeni U4 makine ailesini genel kullanıma açtı. Hedef yalnızca düşük gecikme değil, determinizm: kritik işlemin her seferinde aynı sürede bitmesi. Teknik parçalar öğretici: sanallaştırma kaynaklı titremeyi (jitter) azaltan bare metal makineler; yedekli A/B multicast piyasa veri akışlarının iki bağımsız ağ bağdaştırıcısından alınması, telemetri ve yönetimin üçüncü bir bağdaştırıcıya ayrılması; çekirdeği atlayan kullanıcı alanı a</description>
+    </item>
+    <item>
+      <title>Saate güvenmeden hiçbir şeye güvenemezsin: Meta’da kimliği doğrulanmış zaman (NTS)</title>
+      <link>https://erenulutas.com/sayi/2026-10-06/#a6a0dd44a94f</link>
+      <guid isPermaLink="false">a6a0dd44a94f</guid>
+      <pubDate>Tue, 06 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Meta Engineering</category>
+      <description>Meta’nın herkese açık zaman servisi artık nts.meta.com üzerinden NTS (Network Time Security, RFC 8915) konuşuyor. Paketler kimlik doğrulamalı: cihaz, zamanın gerçekten Meta’dan geldiğini ve yolda değiştirilmediğini doğrulayabiliyor. Protokol, sunucu ve istemci açık kaynak. Neden önemli? NTP 1985’ten beri doğrulamasız: istemci 48 bayt gönderir, bir şey 48 bayt geri gönderir ve istemci buna inanır. İmza yok, kimlik yok. Oysa zaman, diğer bütün güvenlik kararlarının ölçüldüğü girdi: sertifika doğrulama (notBefore ve notAfter yerel saatle karşılaştırılır), token süresi (‘15 dakika geçerli’ bir saa</description>
+    </item>
+    <item>
+      <title>Hibrit aramada puanları değil sıraları birleştir: Reciprocal Rank Fusion</title>
+      <link>https://erenulutas.com/sayi/2026-10-06/#50e1a96cc3ea</link>
+      <guid isPermaLink="false">50e1a96cc3ea</guid>
+      <pubDate>Tue, 06 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Google Cloud Blog</category>
+      <description>RAG uygulamalarında iyi sonuç için en az iki teknik gerekiyor: anlam için vektör araması, anahtar kelime kesinliği için tam metin araması (FTS). Zor olan aramaları çalıştırmak değil, iki sonuç kümesini birleştirmek. Vektör sorgusu mesafe puanı, FTS alaka puanı üretiyor; ikisini ortak bir ölçeğe taşımak için yazılan normalizasyon mantığı, veri dağılımı değişince bozulan kırılgan adım. Google’ın AlloyDB’de sunduğu çözüm Reciprocal Rank Fusion (RRF): puanlara değil sıralara baktığı için normalizasyonu tümüyle atlıyor. Tek bir hybrid_search() SQL fonksiyonu her bileşen için bir CTE üretip sonuçlar</description>
+    </item>
+    <item>
+      <title>İnternetin anahtarı tarihte ikinci kez değişiyor: DNS kök KSK değişimi</title>
+      <link>https://erenulutas.com/sayi/2026-10-06/#1424f8a74fdc</link>
+      <guid isPermaLink="false">1424f8a74fdc</guid>
+      <pubDate>Tue, 06 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Cloudflare Blog</category>
+      <description>11 Ekim 2026’da DNS kökü, anahtar imzalama anahtarını (KSK) tarihinde yalnızca ikinci kez değiştirecek. Bu anahtar DNSSEC güven zincirinin başlangıcı. Zincir şöyle işliyor: her üst alan, alt alanın açık anahtarının parmak izini bir DS kaydıyla yayımlıyor (kök .com için, .com da cloudflare.com için). Kökün ise üstü yok; bu yüzden doğrulayan çözümleyici kök açık anahtarına baştan güvenmek zorunda. Buna güven çapası (trust anchor) deniyor. Yeni anahtar KSK-2024, eskisi KSK-2017’nin yerini alıyor. Doğrulayan çözümleyiciler değişimden önce yeni anahtara güvenmiyorsa, sağlıklı siteler erişilemez hâl</description>
+    </item>
+    <item>
+      <title>Gizlilik bir izin kutusu değil, bağlama uygun bilgi akışıdır: agent’lar için Contextual Integrity</title>
+      <link>https://erenulutas.com/sayi/2026-10-05/#c3d66983a8dc</link>
+      <guid isPermaLink="false">c3d66983a8dc</guid>
+      <pubDate>Mon, 05 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Google Research</category>
+      <description>LLM tabanlı agent’lar plan üretip dış araçları çağırarak çok adımlı işleri bizim yerimize yapıyor. Faydalı olmaları için kişisel veriye ve sonuç doğuran eylemlere erişmeleri gerekiyor; ama deterministik klasik yazılımdan farklı davrandıkları için alışılmış güvenlik yaklaşımları yetmiyor. Google Research, 2025 sonunda New York’ta düzenlenen CAPS çalıştayının çıktısı olan ve 50’den fazla akademi ve sektör araştırmacısının katkı verdiği bir rapor yayımladı. Raporun temeli Contextual Integrity (CI) kuramı. CI gizliliği ‘sır tutmak’ ya da ‘kontrol’ olarak değil, yerleşik toplumsal normlara göre uyg</description>
+    </item>
+    <item>
       <title>Mesaj göndermek veritabanı yazmasının parçası olunca: Spanner queues</title>
       <link>https://erenulutas.com/sayi/2026-10-02/#220bcbde8276</link>
       <guid isPermaLink="false">220bcbde8276</guid>
@@ -196,54 +308,6 @@
       <pubDate>Wed, 09 Sep 2026 08:00:00 +0000</pubDate>
       <category>AWS Architecture Blog</category>
       <description>Ekim 2025&#x27;te büyük bir Kuzey Amerika sağlık kaydı sağlayıcısı olan Athenahealth bir boşluk keşfetti: us-east-1&#x27;deki bölgesel bir AWS olayı, tek bölgede çalışan Terraform Enterprise (TFE) kurulumlarına geliştiricilerin erişimini kesti. Yani altyapı değiştirmek için kullanılan araç, altyapı arızalandığında kendisi de erişilmez oldu. Çözüm, müşterinin kendi işlettiği çok bölgeli bir felaket kurtarma deseni (Aurora global veritabanı ve S3 bölgeler arası çoğaltma ile). Dürüst bir not: TFE yalnızca tek bölgeyi destekliyor, çok bölgeli devir tasarımı müşterinin kendisine ait. Yazının asıl dersi doğru</description>
-    </item>
-    <item>
-      <title>Bağlantı sayısı bir ölçekleme sorunudur: ZippyDB&#x27;nin önüne ZGateway koymak</title>
-      <link>https://erenulutas.com/sayi/2026-09-03/#fbe0118d00e6</link>
-      <guid isPermaLink="false">fbe0118d00e6</guid>
-      <pubDate>Thu, 03 Sep 2026 08:00:00 +0000</pubDate>
-      <category>Meta Engineering</category>
-      <description>ZippyDB, Meta&#x27;da en yaygın kullanılan anahtar-değer deposu: ürün metadata&#x27;sı, sayaçlar ve yapılandırma için kullanılıyor ve küresel dağıtık bir filo üzerinde saniyede milyarlarca işlem sunabiliyor. ZGateway, ZippyDB istemci trafiğini birleştirmek için kullanılan proxy katmanı. Değeri yapısal çıktı: bir istemci, kısa sürede değiştirilemeyecek, yüzlerce ekibin sahip olduğu bir milyondan fazla ana makinenin biri olabilir. Proxy ise aynı anda çok sayıda istemcinin yolunda durduğu için hiçbir tek istemcinin yapamadığını yapabiliyor. Doğrudan erişim modelinde her istemci ihtiyaç duyduğu her veritaba</description>
-    </item>
-    <item>
-      <title>Kurumsal “ikinci beyin”: bilgiyi modelin ağırlıklarına değil, denetlenebilir dosyalara yazmak</title>
-      <link>https://erenulutas.com/sayi/2026-09-02/#9a479285b1a4</link>
-      <guid isPermaLink="false">9a479285b1a4</guid>
-      <pubDate>Wed, 02 Sep 2026 08:00:00 +0000</pubDate>
-      <category>Meta Engineering</category>
-      <description>Büyük kurumların ortak sorunu: uzman bilgisi ya hiç yazılmamış ya da belgelere dağılmış. Uyum alanında aynı soru tipleri yüzlerce ürün incelemesinde tekrar ediyor, uzman değerlendirmeleri günler sürüyor ve değerlendirmeler arası tutarsızlık gerçek bir risk yaratıyor. Uzmanlar zamanlarının büyük kısmını rutin sorulara harcıyor, yargılarının asıl gerektiği yeni ve belirsiz işe değil. Meta, belirli bir uyum alanı için bir ikinci beyin ajanı kurmuş. Yeniliği iki katmanın birleşiminde: (1) bilmeyi muhakemeden ayıran yapılandırılmış ve denetlenebilir bir bilgi mimarisi, (2) uzman geri bildirimini mo</description>
-    </item>
-    <item>
-      <title>MCP oturumsuz oldu: sticky session, oturum deposu ve yük dengeleyici ayarlarını silebilirsin</title>
-      <link>https://erenulutas.com/sayi/2026-09-01/#7d5b6832fa5f</link>
-      <guid isPermaLink="false">7d5b6832fa5f</guid>
-      <pubDate>Tue, 01 Sep 2026 08:00:00 +0000</pubDate>
-      <category>AWS Architecture Blog</category>
-      <description>28 Temmuz 2026&#x27;da MCP, çıkışından bu yana en büyük revizyonunu yayımladı ve protokol çekirdeğini oturumsuz hâle getirdi. initialize el sıkışması ve istemcinin sonraki her istekte geri yollamak zorunda olduğu Mcp-Session-Id başlığı kalktı. Artık her istek kendi protokol sürümünü ve istemci bağlamını taşıyor; istemcinin ilk mesajı doğrudan araç çağrısı olabiliyor ve herhangi bir sunucu örneği cevaplayabiliyor. İstemci sunucunun neleri desteklediğini önceden öğrenmek isterse yeni server/discover metodu tek cevapta protokol sürümlerini, yetenekleri ve kimliği dönüyor. AWS açısından önemi: eski tas</description>
-    </item>
-    <item>
-      <title>Eğitmeden tahmin: çok değişkenli zaman serileri için TimesFM-3</title>
-      <link>https://erenulutas.com/sayi/2026-08-31/#14a087bdb589</link>
-      <guid isPermaLink="false">14a087bdb589</guid>
-      <pubDate>Mon, 31 Aug 2026 08:00:00 +0000</pubDate>
-      <category>Google Research</category>
-      <description>2024&#x27;te çıkan TimesFM&#x27;den bu yana zaman serisi temel modelleri perakende, finans, gözlemlenebilirlik, üretim ve sağlık gibi alanlarda gerçek tahmin görevlerinde kullanılıyor. TimesFM-2.5&#x27;e kadar (Eylül 2025) modeller yalnızca tek değişkenliydi: tek bir serinin geçmişine bakarak tahmin ediyordu. Oysa gerçek problemlerin çoğu çok değişkenli: dondurma satışını tahmin ederken yalnızca geçmiş satışlar yetmez; ilişkili ürünlerin satışı, mağaza trafiği, hava tahmini, promosyonlar ve tatiller de gerekir. TimesFM-3, 330 milyon parametreli ve 1 trilyondan fazla zaman noktası içeren gerçek ve sentetik bi</description>
-    </item>
-    <item>
-      <title>Modele resmi göstermek: embedding ile cold-start&#x27;ı kısaltmak ve beş modeli bire indirmek</title>
-      <link>https://erenulutas.com/sayi/2026-08-28/#80fef398a2c4</link>
-      <guid isPermaLink="false">80fef398a2c4</guid>
-      <pubDate>Fri, 28 Aug 2026 08:00:00 +0000</pubDate>
-      <category>Netflix Tech Blog</category>
-      <description>Netflix&#x27;te bir başlığın görseli ve otomatik oynayan önizlemesi (yazıda “asset”) başlı başına bir kişiselleştirme problemi: Squid Game için hangi görseli göstermelisin? Daha da zor soru bir başlık yayımlandığı anda, üzerinde neredeyse hiç etkileşim verisi yokken ne yapacağın. Yıllarca modeller ilk soruyu iyi, ikincisini kötü cevapladı. Çünkü her asset&#x27;i opak bir ID olarak ele alıyorlardı: görselin içinde ne olduğunu bilmeden yalnızca hangisine tıklandığını öğreniyorlardı. Yeni yayınlanan başlığın asset&#x27;leri geçmişsiz olduğu için keşfi artırıp popülerlik sezgisellerine düşüyorlardı. Bu klasik co</description>
-    </item>
-    <item>
-      <title>Yazılım fabrikasını verimli işletmek: AI maliyetini parçalara bölüp ölçmek</title>
-      <link>https://erenulutas.com/sayi/2026-08-27/#0a437174bc88</link>
-      <guid isPermaLink="false">0a437174bc88</guid>
-      <pubDate>Thu, 27 Aug 2026 08:00:00 +0000</pubDate>
-      <category>Uber Engineering</category>
-      <description>Uber&#x27;de AI araçları yazılım geliştirmenin her aşamasına girmiş durumda: pull request&#x27;lerin %70&#x27;inden fazlası yerel ya da bulut agent&#x27;lara atfediliyor. Mühendisler yazılım yaşam döngüsü boyunca 3.600&#x27;ü aşkın agent becerisi (skill) yazmış ve günde 30 binin üzerinde beceri çalıştırılıyor. Oturumların artan bir kısmını insan değil, kod incelemesi, CI hatalarını kendi kendine onarma, görsel doğrulamalı uçtan uca PR&#x27;lar, nöbet alarmlarının triyajı ve hata ayıklama yapan otomatik yönetilen agent&#x27;lar başlatıyor. Şubat&#x27;tan Ağustos&#x27;a kadar haftalık aktif kullanıcılar 7, haftalık agent istekleri 9,4 kat </description>
     </item>
   </channel>
 </rss>

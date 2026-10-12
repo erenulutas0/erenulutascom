@@ -50,7 +50,7 @@
       "title": "Building Effective AI Agents",
       "title_tr": "Etkili agent kurmanın sırrı: framework değil, basit desenler",
       "url": "https://www.anthropic.com/engineering/building-effective-agents",
-      "published": "2026-04-13",
+      "published": "2026-08-10",
       "summary": "Anthropic onlarca ekiple LLM tabanlı agent kuruldu ve şu sonuca varmış: en başarılı uygulamalar karmaşık framework'ler kullanmıyordu, basit ve birleştirilebilir desenler kullanıyordu.\n\nYazının en değerli kısmı bir ayrım: **workflow** (iş akışı) ile **agent** aynı şey değil. Workflow'da adımlar önceden kodla tanımlanır; agent'ta hangi aracı ne zaman kullanacağına modelin kendisi karar verir. Workflow öngörülebilir ve tutarlıdır, iyi tanımlanmış görevler için doğru seçimdir. Agent ise esneklik ve ölçekte model-güdümlü karar gerektiğinde kazanır. Anthropic'in tavsiyesi net: en basit çözümle başla, ancak gerektiğinde karmaşıklığı artır — çoğu uygulama için tek bir LLM çağrısını retrieval ve örneklerle güçlendirmek zaten yeterli.",
       "key_points": [
         "Agent sistemleri gecikme ve maliyeti, görev başarısıyla takas eder. Bu takasın ne zaman mantıklı olduğunu bilerek karar ver.",
