@@ -44,7 +44,9 @@ def article_cache(path: Path | None = None) -> dict[str, Article]:
                 f"makale önbelleği yok: {main}" "\n"
                 "Önce `python -m pipeline.cli fetch` çalıştır."
             )
-        sources = [main] + sorted(main.parent.glob("enriched_*.json"))  # yedekler kazanır: ilk görülen tarih korunur
+        # Yedekler enriched_YYYY-MM-DD.json adıyla durur. Yeniden eskiye doğru okunur ki
+        # en eski yedek en son yazsın: bir yazının ilk görüldüğü tarih korunur.
+        sources = [main] + sorted(main.parent.glob("enriched_*.json"), reverse=True)
         cache: dict[str, Article] = {}
         for src in sources:
             for a in load_index(src):
