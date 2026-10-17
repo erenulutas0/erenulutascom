@@ -1,0 +1,103 @@
+{
+  "date": "2026-10-15",
+  "intro": "Ölçek mühendisliğinde en değerli bilgi ‘ne kadar trafik’ değil, ‘trafik ne zaman ve neden geldi’. Meta’nın Dünya Kupası yazısı, trafiğin gol anında değil molalarda patladığını gösteriyor ve bütün kapasite kararlarını bu tek gözlemden türetiyor. Yanında Meta’nın bir uygulamayı AI agent’la nasıl yaptığının mühendislik hesabı var.",
+  "articles": [
+    {
+      "id": "058a2a8bdcc8",
+      "slot": "cover",
+      "source_key": "meta",
+      "source_name": "Meta Engineering",
+      "title": "2026 World Cup: Breaking Records, Spiky Charts and Reliability at Scale",
+      "title_tr": "Trafik topu değil molayı izledi: Meta Dünya Kupası’nda rekor yükü nasıl taşıdı",
+      "url": "https://engineering.fb.com/2026/10/15/production-engineering/2026-world-cup-record-traffic-reliability-at-scale/",
+      "published": "2026-10-15",
+      "summary": "Her dört yılda bir Dünya Kupası, Meta’nın altyapısı için planlı en büyük stres testi. 2026’da mesajlaşma, video, öneri ve ağ aynı anda rekor kırdı: WhatsApp 19 Temmuz’daki finalde saniyede 30 milyondan fazla mesaj (rekor, bir önceki rekor 12 gün önce 29 milyonla kırılmıştı); Messenger, Threads ve Instagram Direct dakikada 49 milyon mesaj; Instagram öneri trafiği haftalık bazda yüzde 80’e kadar yüksek; canlı video izleme süresi Instagram’da yüzde 90, Facebook’ta yüzde 242 arttı.\n\n**Asıl bulgu: trafik molaları izledi.** Maç olaylarını küresel çıkış trafiğiyle hizalayınca, paylaşımın büyük ölçüde molalarda (su molası, devre arası, uzatma, son düdük, ödül töreni) patladığı görüldü. Finalde normal sürenin bitişinde trafik yaklaşık dört dakikada yüzde 46, son düdükte yaklaşık 15 dakikada yüzde 57 yükseldi; turnuvanın en büyük tepesi normal süre bitiş düdüğüydü. Yazının cümlesi: grafikleri oyun değil, oyundan sonraki sohbetler oynattı. ‘Bütün kapasite kararları o tek örüntüden çıkıyor.’\n\n**Katmanlı sistemler, elle müdahale yok.** Yükü Taiji veri merkezleri arasında dengeledi, Katran ve Proxygen L4/L7 trafiği dağıttı, küresel yük dengeleme kullanıcıları en uygun uca yönlendirdi ve otomatik ölçekleme kapasiteyi talebe göre sağladı. Ağ ekipleri aylar önceden ISS ortaklarıyla çalışıp yükseltmeleri en çok fayda sağlayacak yerlere yaptı; bu ön yatırım kalıcı kapasite olarak kalıyor.\n\n**Instagram: 39 ardışık gün tepe.** Dört ayak: **kapasite tamponları** (tepeler otomatik ölçeklemeyi beklemesin diye önceden fazladan ayırma); **ülke düzeyinde zarif bozulma** (yüksek riskli maçlarda en yoğun ülkelerde kritik olmayan arka plan yükünü atmak); **zincirleme yayılmayı önleme** (ön yüzdeki tepe alttaki veri sistemlerine sıçramasın); ve **erken uyarı sinyalleri** (eşiğe yaklaşırken, aşınca değil). Hepsi 2028 Olimpiyatları gibi sonraki büyük olaylar için tekrar kullanılabilir bir çalışma kılavuzuna dönüştü. WhatsApp’ın en yoğun beş dakikalık penceresinde yaklaşık 8,4 milyar mesaj kesintisiz iletildi; 100’den fazla iç servis önceden yük testinden geçirilip boyutlandırıldı, eleme turları ilerledikçe yeniden test edildi.\n\n**Bu sefer yapmadıkları iki şey.** Birincisi **bölgeler arası yük kaydırma**: geçmiş büyük olaylarda varsayılan, talebi birçok bölgeye yaymak ve sakin bölgelerin kapasitesinin tepeyi emmesiydi. Yılbaşı gibi tepelerin saatler arayla geldiği durumda işe yarıyor; bu sefer **her bölge aynı anda tepe yaptığı için ödünç alınacak boş kapasite yoktu**. Bunun yerine her bölgenin tepesi küresel bir çarpan yerine kendi başına tahmin edildi. İkincisi **dağıtım dondurma**: büyük olaylarda sürekli dağıtımı durdurmak standart hamledir; yıllardır süren güvenilirlik çalışmasına güvenip hiç dondurmadılar, ekipler tepe anı dahil normal ritimde yayın yaptı.",
+      "key_points": [
+        "Kapasite kararından önce talebin ne zaman ve neden geldiğini ölç: tetikleyici beklediğin şey olmayabilir.",
+        "Tepe anında ölçekleme beklememek için kapasiteyi önceden ayır.",
+        "Zarif bozulma planı önceden yazılmalı: hangi yük, hangi ülkede, hangi koşulda atılır.",
+        "Tüm bölgeler aynı anda tepe yapıyorsa ‘başka bölgeden ödünç al’ stratejisi çalışmaz; bölgeyi bağımsız tahmin et.",
+        "Dağıtımı dondurmadan büyük olayı geçmek, yalnızca güvenilir bir dağıtım hattıyla mümkündür."
+      ],
+      "why_it_matters": "Bu yazı ‘ölçeklenme’yi sihir değil, bir dizi sıkıcı ve ölçülmüş karar olarak gösteriyor: önce örüntüyü bul, sonra kapasite tamponu, zarif bozulma ve erken uyarıyla koru. Hepsi bir çalışma kılavuzu olarak yazıldığı için bir sonraki olayda tekrar kullanılabilir.",
+      "for_you": "Bunu kendi ölçeğinde şöyle uygularsın. **Önce ölç:** KlioAI’da kullanıcı isteklerini saat bazında günlüğe al ve ‘yük ne zaman artıyor’ grafiğini çiz; beklediğinden farklı bir örüntü çıkabilir (örneğin ders saatleri ya da sınav öncesi). **Sonra sınır koy:** yük arttığında önce kritik olmayan işleri (analitik, ikinci model geçişi) kapatan bir bayrak ekle. **Mülakatta kullanılacak vokabüler:** tampon kapasite (headroom), zarif bozulma, zincirleme çöküşü önleme, erken uyarı. Bir de ayrıntı: yük testini ortalamaya değil beklenen tepe değerine göre yap; `k6` ya da `locust` ile birkaç dakikalık bir tepe senaryosu yazmak yeterli bir başlangıç.",
+      "terms": [
+        {
+          "en": "graceful degradation",
+          "tr": "zarif bozulma",
+          "definition": "Aşırı yükte sistemi tümüyle düşürmek yerine kritik olmayan işleri kapatarak ayakta tutma."
+        },
+        {
+          "en": "capacity buffer (headroom)",
+          "tr": "kapasite tamponu",
+          "definition": "Beklenen tepe yükün üzerinde, önceden ayrılmış yedek kapasite."
+        },
+        {
+          "en": "cascade failure",
+          "tr": "zincirleme çöküş",
+          "definition": "Bir bileşendeki aşırı yükün bağlı bileşenlere yayılarak onları da devirmesi."
+        },
+        {
+          "en": "load testing",
+          "tr": "yük testi",
+          "definition": "Sistemi beklenen ya da üstü yük altında önceden deneme."
+        },
+        {
+          "en": "runbook",
+          "tr": "çalışma kılavuzu",
+          "definition": "Bir olay ya da operasyon sırasında izlenecek adımların yazılı hâli."
+        }
+      ],
+      "tags": [
+        "ölçeklenme",
+        "dayanıklılık",
+        "kapasite planlama",
+        "Meta"
+      ],
+      "difficulty": "orta",
+      "read_minutes": 4,
+      "authors": []
+    },
+    {
+      "id": "adb6c89c63b3",
+      "slot": "brief",
+      "source_key": "meta",
+      "source_name": "Meta Engineering",
+      "title": "How Meta Built Forum With AI-Native Engineering",
+      "title_tr": "Döngüde değil döngünün üstünde: Meta bir uygulamayı AI agent’la nasıl yaptı",
+      "url": "https://engineering.fb.com/2026/10/15/ml-applications/how-meta-built-forum-ai-native-engineering/",
+      "published": "2026-10-15",
+      "summary": "Meta, Facebook gruplarının derin sohbetleri için yeni bir uygulama olan Forum’u küçük bir ekiple sıfırdan yaptı ve geliştirme sürecine bir AI agent’ı katılımcı olarak aldı. Başarı ölçütü kod miktarı değil, **doğrulanmış, üretime hazır sonuç**: derlenen, testi geçen ve incelemeden sağ çıkan değişiklik. Fark: **human-in-the-loop** (mühendis her adımı yürütür, AI içinde yardım eder) yerine **human-on-the-loop** (agent planla, yaz, derle, test et, düzelt döngüsünü yürütür; mühendis hedefi koyar, izler, sapınca müdahale eder ve onaylar). Yazının uyarısı: doğrulama yoksa sorun kod yazmaktan, bitmiş gibi görünen kodu incelemeye kayar.\n\nKazandıran şeyler: **spesifikasyon olarak planlama** (belirsizliği sezgiyle çözen insanın aksine agent belirsizlikte başarısız olur), **döngü içi otomatik doğrulama** (derleme, birim testi, arayüz eşleşmesi), **simüle edilmiş kullanıcı testi** (uygulamayı insan gibi kullanan gezinti agent’ları) ve **üretimde agent destekli kök neden analizi**. İşletim modeli beş parça: kurallar (agent bir hatayı ikiden fazla tekrarlarsa düzeltme herkes için bir kez yazılır), beceriler, agent’lar, komutlar ve kancalar (her agent turundan sonra linter çalıştırmak gibi). ‘En büyük kazanç prompt’tan değil, kod ve araçları değiştirmekten geldi’: sade ve modüler mimari, agent’a betimleme yerine durumu kontrol eden araçlar (canlı görünüm hiyerarşisini okumak, ekrandaki öğeleri listelemek) vermek ve prototip kodunu üretim derlemesinden tamamen dışarıda tutan ayrı bir derleme türü. Rutin stres senaryoları (agresif kaydırma, hızlı gezinme) geliştirme sırasında bir bellek sorununu yakaladı ve düzeltmeden sonra bellek ve sayfa hataları yaklaşık yarıya indi.",
+      "key_points": [
+        "Başarı ölçütü ‘üretilen kod’ değil ‘doğrulanmış sonuç’ olmalı.",
+        "Agent’a bir şeyi betimlemek yerine durumu kontrol edebileceği bir araç ver.",
+        "Agent aynı hatayı tekrarlıyorsa promptu değil kuralı ya da kodu düzelt.",
+        "Prototip kodunu yalnızca bayrakla gizleme; üretim derlemesine hiç koyma."
+      ],
+      "why_it_matters": "",
+      "for_you": "Bunu bugün Claude Code ya da benzeri bir araçla kendi projelerinde uygula. **(1)** Repo köküne bir `CLAUDE.md` yaz: derleme ve test komutları, proje kuralları. Agent aynı hatayı iki kez yaparsa düzeltmeyi oraya ekle. **(2)** Agent’ın ‘bitti’ demesini testin geçmesine bağla; testi olmayan bir görevi agent’a verme. **(3)** Agent’a ‘bu ekran şöyle’ diye anlatmak yerine, ekran çıktısını ya da API cevabını okuyabileceği bir komut ver.",
+      "terms": [
+        {
+          "en": "human-on-the-loop",
+          "tr": "döngünün üstündeki insan",
+          "definition": "İşi agent’ın yürüttüğü, insanın hedefi koyup izlediği ve onayladığı çalışma biçimi."
+        },
+        {
+          "en": "build flavor",
+          "tr": "derleme türü",
+          "definition": "Aynı koddan farklı yapılandırmayla üretilen ayrı uygulama sürümü (örneğin prototip ve üretim)."
+        }
+      ],
+      "tags": [
+        "agent",
+        "geliştirici deneyimi",
+        "test",
+        "yapay zekâ ile geliştirme"
+      ],
+      "difficulty": "orta",
+      "read_minutes": 8,
+      "authors": []
+    }
+  ],
+  "schema": 1
+}

@@ -6,6 +6,78 @@
     <description>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</description>
     <language>tr</language>
     <item>
+      <title>Agent’ı kapanış cümlesine göre notlama: dört eval mühendisliği dersi</title>
+      <link>https://erenulutas.com/sayi/2026-10-16/#debbc6d22d5f</link>
+      <guid isPermaLink="false">debbc6d22d5f</guid>
+      <pubDate>Fri, 16 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Google Cloud Blog</category>
+      <description>Yazının tezi: agent’lı bir sistemin asıl zorluğu inşası değil ölçümü. Yazar, Google’da yıllardır değerlendirme mühendisliği yürütüyor ve yeni Google Cloud Developer eklentisini bu ilkeleri gerçek geliştirici iş akışlarında denemek için bir test yatağı olarak kullanmış. Çıkan dört ders: 1. Özeti değil yürütme adımlarını notla. İlk değerlendirmede agent’ın son metin cevabını bir LLM hakemi (LLM-as-judge) kontrol listesine göre puanlıyordu. 11 istemlik ilk sette otomatik hakem üç istemi başarısız saydı; ham araç çağrısı kayıtları okununca eklentinin üçünü de geçtiği görüldü. Örnek: rubrik, hiçbir</description>
+    </item>
+    <item>
+      <title>Aynı şeye üç araçta üç ad: Netflix’in gözlemlenebilirlik ontolojisi</title>
+      <link>https://erenulutas.com/sayi/2026-10-16/#1b11483a2cf8</link>
+      <guid isPermaLink="false">1b11483a2cf8</guid>
+      <pubDate>Fri, 16 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Netflix Tech Blog</category>
+      <description>Netflix’te ana ekran 1,5 saniye yavaşlıyor, alarm çalıyor, ve nedeni bulmak dört saat sürüyor. Zamanın çoğu zor bir hesaba değil, gözlem sistemlerinin zaten bildiği ama hiçbir yerde okunabilir biçimde yazılmamış ilişkileri yeniden kurmaya gidiyor. Her sistem kendi içinde tutarlı, dışarıya kapalı: bir şey bir sistemde ‘uygulama’, ötekinde ‘servis’, üçüncüsünde ‘küme’ oluyor; adları bir ek, bir büyük harf ya da bir yeniden adlandırma ayırıyor. Eksik olan, operasyonel dünyadaki varlıklar üzerine açık ve makinece okunabilir bir anlaşma. Çözüm bir ontoloji: türlerin, özelliklerin ve ilişkilerin biç</description>
+    </item>
+    <item>
+      <title>npm’deki gizli ikili dosya: LLM’e alan bilgisini prompt’la enjekte etmek</title>
+      <link>https://erenulutas.com/sayi/2026-10-16/#2552bec412d6</link>
+      <guid isPermaLink="false">2552bec412d6</guid>
+      <pubDate>Fri, 16 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Databricks Engineering</category>
+      <description>Databricks, kasım 2025’ten beri npm kayıt defterindeki kötü amaçlı paketleri topluyor. OSV tavsiyeleriyle doğrulanmış 11.413 paket sürümünün yüzde 96,2’sinde kötü amaçlı kod kaynakta saklı ya da harici bir sunucudan indiriliyor. Kalan yüzde 3,8’i (432 sürüm) ikili dosya gömüyor. Az ama tehlikeli: temiz görünen kaynak ve metadata arasına yerleştirilmiş, sembolleri silinmiş opak bir ikili dosya, LLM’i ‘zararsız’ kararına kaydırabiliyor. İkili dosyalı paketler, yalnızca kaynaklılara göre iki kattan fazla sıklıkla kesin bir ‘kötü amaçlı’ karara ulaşamıyor (yüzde 14,4 ve yüzde 6,2). Ekibin hattı: n</description>
+    </item>
+    <item>
+      <title>Trafik topu değil molayı izledi: Meta Dünya Kupası’nda rekor yükü nasıl taşıdı</title>
+      <link>https://erenulutas.com/sayi/2026-10-15/#058a2a8bdcc8</link>
+      <guid isPermaLink="false">058a2a8bdcc8</guid>
+      <pubDate>Thu, 15 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Meta Engineering</category>
+      <description>Her dört yılda bir Dünya Kupası, Meta’nın altyapısı için planlı en büyük stres testi. 2026’da mesajlaşma, video, öneri ve ağ aynı anda rekor kırdı: WhatsApp 19 Temmuz’daki finalde saniyede 30 milyondan fazla mesaj (rekor, bir önceki rekor 12 gün önce 29 milyonla kırılmıştı); Messenger, Threads ve Instagram Direct dakikada 49 milyon mesaj; Instagram öneri trafiği haftalık bazda yüzde 80’e kadar yüksek; canlı video izleme süresi Instagram’da yüzde 90, Facebook’ta yüzde 242 arttı. Asıl bulgu: trafik molaları izledi. Maç olaylarını küresel çıkış trafiğiyle hizalayınca, paylaşımın büyük ölçüde mola</description>
+    </item>
+    <item>
+      <title>Döngüde değil döngünün üstünde: Meta bir uygulamayı AI agent’la nasıl yaptı</title>
+      <link>https://erenulutas.com/sayi/2026-10-15/#adb6c89c63b3</link>
+      <guid isPermaLink="false">adb6c89c63b3</guid>
+      <pubDate>Thu, 15 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Meta Engineering</category>
+      <description>Meta, Facebook gruplarının derin sohbetleri için yeni bir uygulama olan Forum’u küçük bir ekiple sıfırdan yaptı ve geliştirme sürecine bir AI agent’ı katılımcı olarak aldı. Başarı ölçütü kod miktarı değil, doğrulanmış, üretime hazır sonuç: derlenen, testi geçen ve incelemeden sağ çıkan değişiklik. Fark: human-in-the-loop (mühendis her adımı yürütür, AI içinde yardım eder) yerine human-on-the-loop (agent planla, yaz, derle, test et, düzelt döngüsünü yürütür; mühendis hedefi koyar, izler, sapınca müdahale eder ve onaylar). Yazının uyarısı: doğrulama yoksa sorun kod yazmaktan, bitmiş gibi görünen</description>
+    </item>
+    <item>
+      <title>Konteyner boyutunu makine ayarlasın: Netflix’in otomatik küçültme sistemi ve kendi hatasından dersi</title>
+      <link>https://erenulutas.com/sayi/2026-10-14/#d74566c60131</link>
+      <guid isPermaLink="false">d74566c60131</guid>
+      <pubDate>Wed, 14 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Netflix Tech Blog</category>
+      <description>Stratum, Netflix’in kodlama, paketleme, denetleme ve kalite puanlama gibi medya işlerini yürüten sunucusuz platformu; günde yüz binlerce konteyner yönetiyor. Fonksiyon sahipleri CPU, bellek, disk ve ağ sınırlarını YAML’la yazıyor. Pratikte yeni bir fonksiyonun yapılandırması başka bir fonksiyondan kopyalanıyor ya da en kötü senaryoya göre ayarlanıyor ve bir arıza çıkana kadar kimse dönüp bakmıyor. Altyapı ve codec’ler değiştikçe doğru değer sessizce kayıyor. Netflix ölçeğinde küçük bir fazlalık hızla çarpılıyor. Çözüm, çalışan konteynerleri insan olmadan güvenle küçülten Stratum Resource Tuner</description>
+    </item>
+    <item>
+      <title>Soğuk veriyi diskte değil yedekte oku: Netflix TimeSeries’in katmanlı depolama yolculuğu</title>
+      <link>https://erenulutas.com/sayi/2026-10-14/#a4fedcec0787</link>
+      <guid isPermaLink="false">a4fedcec0787</guid>
+      <pubDate>Wed, 14 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Netflix Tech Blog</category>
+      <description>Netflix’in TimeSeries Abstraction’ı, zamansal olay verisini yüksek hacimde saklayan ve sorgulayan platform; en büyük veri kümeleri artık birden çok petabayt. Düşük milisaniye gecikme için ayarlı sıcak depoda bu kadar veri tutmak pahalı. Oysa sorguların çoğu yakın olaylara gidiyor, eski veri yalnızca ara sıra denetim ve inceleme için gerekiyor. Hedef: yakın veriyi hızlı depoda, eskisini ucuz nesne depolamada tutmak ve API’yi değiştirmemek. Yazı iki çözümü sırayla anlatıyor. Çözüm 1: Kafka/Flink ile S3’e akıtma. Veri Cassandra’ya yazılırken eş zamanlı olarak S3’e de akıyor. Flink, olayları saat </description>
+    </item>
+    <item>
+      <title>Bir tabloyu silmeden önce maliyeti söyle: DynamoDB Bulk Executor’ı yazarken öğrenilenler</title>
+      <link>https://erenulutas.com/sayi/2026-10-13/#0f52f6bf973e</link>
+      <guid isPermaLink="false">0f52f6bf973e</guid>
+      <pubDate>Tue, 13 Oct 2026 08:00:00 +0000</pubDate>
+      <category>AWS Architecture Blog</category>
+      <description>Bulk Executor, bir DynamoDB tablosundaki çok sayıda ya da tüm öğeler üzerinde toplu işlem yapan açık kaynak bir araç: eski kayıtları silmek, iki tabloyu karşılaştırmak gibi. Yazının ikinci bölümü aracın nasıl yazıldığını, tasarım tercihlerini ve çarpılan duvarları anlatıyor. Üç gereksinim kararların çoğunu belirlemiş: komut yerel bir betik gibi hissettirmeli (anlık çıktı, ^C ile kesilebilmeli), yüzlerce paralel işçiye altyapı yönetmeden ölçeklenmeli ve yeni komut eklemek çerçeveye sıkı bağlı olmamalı. Neden AWS Glue? Paralel yürütmeyi Glue sürüyor: sunucusuz, işi yüzlerce işçiye dağıtıyor ve h</description>
+    </item>
+    <item>
+      <title>Milyonlarca küçük veritabanı: D1’in kontrol düzlemi neden sorgu yolunun dışında</title>
+      <link>https://erenulutas.com/sayi/2026-10-13/#6ec21beb693f</link>
+      <guid isPermaLink="false">6ec21beb693f</guid>
+      <pubDate>Tue, 13 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Cloudflare Blog</category>
+      <description>Geleneksel mimari uygulama başına bir iki büyük veritabanı kümesi ve bir bağlantı havuzu varsayar. Yapay zekâ destekli geliştirme platformları bu modeli ters çeviriyor: kullanıcı, uygulama, önizleme ortamı ya da kiracı başına bir küçük veritabanı. Cloudflare D1 (SQLite tabanlı, sunucusuz) buna uygun: her veritabanı bir SQLite Durable Object’i ile destekleniyor. 8 Ekim 2026 itibarıyla canlı veritabanı sayısı bir yılda 15, iki yılda 65 kat; günlük aktif veritabanı bir yılda 18 kat artmış. Yazının ana sorusu: milyonlarca veritabanını yöneten kontrol düzlemini, her sorguyu merkezi bir darboğazdan </description>
+    </item>
+    <item>
       <title>Canlı yayının altındaki protokolü değiştirmek: Instagram Live’da Media over QUIC</title>
       <link>https://erenulutas.com/sayi/2026-10-12/#464a40458259</link>
       <guid isPermaLink="false">464a40458259</guid>
@@ -260,54 +332,6 @@
       <pubDate>Fri, 18 Sep 2026 08:00:00 +0000</pubDate>
       <category>AWS Architecture Blog</category>
       <description>Avustralya’nın ulusal bilim kurumu CSIRO, genomik varyant verisini güvenle sorgulamak için sBeacon adlı sunucusuz bir çözüm kurmuş (GA4GH Beacon standardının üretime hazır bir uygulaması). Yapı taşları S3, Lambda, DynamoDB ve Athena. İddialar somut: yüz milyonlarca kişiyi ve milyarlarca genomik konumu kapsayan veri kümelerine ölçekleniyor; 1000 Genomes boyutundaki bir veri kümesi için aylık yaklaşık 0,40 dolara çalışıyor; gerçek sorgular yaklaşık 5 saniyede dönüyor. En dikkat çekici tasarım kararı: standart VCF dosyalarını doğrudan tüketiyor, veritabanına yükleme ve dönüştürme gerekmiyor. Merk</description>
-    </item>
-    <item>
-      <title>Pahalı düşünmeyi sorgu anından eğitime taşımak: Retrieve-for-Train</title>
-      <link>https://erenulutas.com/sayi/2026-09-15/#e0b2eaa994e7</link>
-      <guid isPermaLink="false">e0b2eaa994e7</guid>
-      <pubDate>Tue, 15 Sep 2026 08:00:00 +0000</pubDate>
-      <category>Google Research</category>
-      <description>Modern arama ve öneri uygulamalarından artık tek en iyi eşleşme değil, tutarlı bir sonuç kümesi bekleniyor. ‘Kamp malzemesi’ arayan biri dört kişilik çadırın on küçük varyasyonunu istemez; çadır, uyku tulumu, taşınabilir ocak ve kafa lambası gibi birbirini tamamlayan bir küme ister. Sistemler bunun için sorgu dallandırma (query fan-out) kullanıyor: geniş bir isteği ilişkili alt sorgulara bölüp olası ilgi alanlarını kapsamak. Maliyet sorunu şu: veritabanını bilen bir ayrıştırmayı LLM’e her sorguda çıkarım anında yaptırmak büyük bir ‘düşünme bütçesi’ harcatıyor. Google’ın ICML 2026 makalesindeki</description>
-    </item>
-    <item>
-      <title>İstemci kütüphanesinden servise: OpenAI’ın Habitat depolama platformu neden Python’da kaldı</title>
-      <link>https://erenulutas.com/sayi/2026-09-11/#c7d3c8aeae42</link>
-      <guid isPermaLink="false">c7d3c8aeae42</guid>
-      <pubDate>Fri, 11 Sep 2026 08:00:00 +0000</pubDate>
-      <category>OpenAI Research</category>
-      <description>Habitat, OpenAI ürünlerinin ihtiyaç duyduğu bilgiye hızlı ve güvenilir erişmesi için kurulan çevrimiçi depolama platformu. Bugün saniyede 70 milyondan fazla isteği işliyor, haftada 1 milyar kişinin kullandığı ürünleri destekliyor, yaklaşık 40 coğrafi bölgede çalışıyor ve 500 petabayttan fazla veri sunuyor. Başlangıcı ise çok mütevazı: DevDay 2023’te GPT’ler için, tek bir veritabanına bağlanan basit bir Python istemci kütüphanesi olarak çıktı. Kütüphane fikri işe yaradı: ürün mühendisleri şema arama, yönlendirme, yetkilendirme, şifreleme, serileştirme ve bağlantı havuzlamayı düşünmek zorunda de</description>
-    </item>
-    <item>
-      <title>Bağlantının tek sahibi kim? DynamoDB ile dağıtık kira (lease) deseni</title>
-      <link>https://erenulutas.com/sayi/2026-09-10/#e8b2c01bbf30</link>
-      <guid isPermaLink="false">e8b2c01bbf30</guid>
-      <pubDate>Thu, 10 Sep 2026 08:00:00 +0000</pubDate>
-      <category>AWS Architecture Blog</category>
-      <description>500 eşzamanlı toplantıyı işleyen bir gerçek zamanlı transkripsiyon servisi düşün. Her toplantı için bir işçi, kaynağa giden ayrı bir WebSocket bağlantısı tutuyor. Bir işçi çökerse 100&#x27;den fazla bağlantı düşüyor ve operatör servisi elle yeniden başlatana kadar bağlantı başına 2-3 dakika veri kaybı oluyor. Problemin özü: her bağlantıya tam olarak bir işçi sahip olmalı, ama işçiler birbirinden bağımsız çöküyor, yeniden dağıtılıyor ve ölçekleniyor. Zorluklar dört tane: işçi çökmesi, kayan dağıtımlar (yeni görev başlarken eskisi bağlantılarını bırakır), yatay ölçekleme (eklemek kolay, çıkarırken ba</description>
-    </item>
-    <item>
-      <title>Agent harness’ini barındırılan bir servis olarak sunmak: Agents API</title>
-      <link>https://erenulutas.com/sayi/2026-09-10/#2b26a8066576</link>
-      <guid isPermaLink="false">2b26a8066576</guid>
-      <pubDate>Thu, 10 Sep 2026 08:00:00 +0000</pubDate>
-      <category>OpenAI Research</category>
-      <description>OpenAI, Codex’i güçlendiren harness ve altyapıyı geliştiricilere Agents API adıyla halka açık betada sunuyor. Gerekçeleri tanıdık: uzun süre çalışan agent’ların iyi iş çıkarması için güçlü bir harness (bağlam yönetimi, verimli araç kullanımı, alt ajanların koordinasyonu) ve günlerce güvenilir çalışan bir altyapı gerekiyor. Tek bir API çağrısıyla görev, model, araçlar ve ortam belirtilerek bulut agent’ı oluşturuluyor. Ortamı sen seçiyorsun: OpenAI’ın yönetilen sandbox’ı, kendi altyapın ya da bir sandbox ortağı. Harness’i OpenAI barındırıp sürümlüyor; uzun oturumlar için bağlam otomatik sıkıştır</description>
-    </item>
-    <item>
-      <title>Kuyruk çökerse uygulaman ne yapar? Hipotezli bir dayanıklılık deneyi kurmak</title>
-      <link>https://erenulutas.com/sayi/2026-09-09/#741f3d22792d</link>
-      <guid isPermaLink="false">741f3d22792d</guid>
-      <pubDate>Wed, 09 Sep 2026 08:00:00 +0000</pubDate>
-      <category>AWS Architecture Blog</category>
-      <description>Uygulaman SQS kuyruğuna mesaj gönderemez ya da alamaz hâle gelirse, aşağı akıştaki işleme durur. Sebep yanlış yapılandırılmış bir IAM politikası, ağ bölünmesi, kötü bir dağıtım ya da geçici bir servis olayı olabilir; uygulamanın gördüğü hep aynı: SQS işlemleri başarısız oluyor. Servislerin bu hatayı nasıl ele aldığı (kaçınılmaz olanı hızlı başarısız saymak, devre kesici açmak, üretici tarafında tamponlamak) kısa bir aksaklıkla zincirleme bir kesinti arasındaki farkı belirleyebilir. Yazının ana cümlesi: bu mekanizmaları arıza altında hiç test etmediysen, varsayımlara güveniyorsun. Deneyin amacı</description>
-    </item>
-    <item>
-      <title>Kurtarma planın test edilmemişse plan değildir: üç aşamalı bölge devri doğrulaması</title>
-      <link>https://erenulutas.com/sayi/2026-09-09/#7f2c1fc66604</link>
-      <guid isPermaLink="false">7f2c1fc66604</guid>
-      <pubDate>Wed, 09 Sep 2026 08:00:00 +0000</pubDate>
-      <category>AWS Architecture Blog</category>
-      <description>Ekim 2025&#x27;te büyük bir Kuzey Amerika sağlık kaydı sağlayıcısı olan Athenahealth bir boşluk keşfetti: us-east-1&#x27;deki bölgesel bir AWS olayı, tek bölgede çalışan Terraform Enterprise (TFE) kurulumlarına geliştiricilerin erişimini kesti. Yani altyapı değiştirmek için kullanılan araç, altyapı arızalandığında kendisi de erişilmez oldu. Çözüm, müşterinin kendi işlettiği çok bölgeli bir felaket kurtarma deseni (Aurora global veritabanı ve S3 bölgeler arası çoğaltma ile). Dürüst bir not: TFE yalnızca tek bölgeyi destekliyor, çok bölgeli devir tasarımı müşterinin kendisine ait. Yazının asıl dersi doğru</description>
     </item>
   </channel>
 </rss>
