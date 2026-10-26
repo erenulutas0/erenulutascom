@@ -84,26 +84,26 @@
 </div>
 
   <h2 class="cover-title">
-    <a href="https://cloud.google.com/blog/products/containers-kubernetes/accelerate-agentic-rl-with-gke-agent-sandbox/" rel="noopener nofollow" target="_blank">GPU boşta bekliyor çünkü sandbox geç açılıyor: ısıtılmış havuz ve pod geri dönüşümü</a>
+    <a href="https://cloud.google.com/blog/products/containers-kubernetes/accelerate-agentic-rl-with-gke-agent-sandbox/" rel="noopener nofollow" target="_blank">GPU boşta bekliyor çünkü sandbox geç açılıyor: warm pool ve pod geri dönüşümü</a>
   </h2>
   <p class="original-title">Accelerate agentic RL with GKE Agent Sandbox</p>
 
-  <div class="prose"><p>Agent&#x27;ları pekiştirmeli öğrenmeyle (RL) eğitmek ve değerlendirmek için büyük ölçekli paralel rollout&#x27;lar çalıştırınca öncü laboratuvarlar hep aynı darboğaza çarpıyor: pahalı GPU kümeleri, CPU sandbox&#x27;ların soğuk başlangıcını dakikalarca bekliyor. Üstüne binlerce, her biri çok gigabaytlık SWE-bench tarzı imaj çekimi ve zamanlama birikimleri geliyor.</p><p>Tipik bir agentic RL döngüsünde GPU&#x27;daki LLM politikası kod parçası gibi eylemler üretiyor ve bunlar yalıtılmış CPU sandbox&#x27;larda çalıştırılıp bir ödül sinyali gözleniyor. On binlerce paralel rollout&#x27;a ölçeklenince üç darboğaz çıkıyor. <strong>Kuyruk gecikmesi tuzağı:</strong> RL adımı senkron, yani eğitim batch&#x27;teki <strong>en yavaş sandbox</strong> hazır olana kadar ilerlemiyor. <strong>İmaj kardinalitesi:</strong> klasik konteyner önbelleği birkaç statik temel imaj varsayar, oysa her görev (örneğin her GitHub deposu) başka bir imaj gerektirebiliyor. <strong>Kontrol düzlemi doygunluğu:</strong> her eğitim adımı, aynı anda binlerce sandbox isteyen bir rollout patlaması tetikliyor.</p><p>Google&#x27;ın çözümü RL için optimize edilmiş <strong>GKE Agent Sandbox</strong>, bir orkestrasyon SDK&#x27;sı ve popüler RL ortamlarına yerel entegrasyonlar. Sonuçlar: <strong>ilk komuta kadar süre 10-45 kat daha kısa</strong> (sandbox 45-85 saniye yerine 1-9 saniyede açılıyor), <strong>en kötü durum bekleme 7,5 dakikadan 10 saniyenin altına</strong> iniyor ve <strong>kontrol düzlemi yükü 3 kat azalıyor</strong>. Anahtar teknikler: gVisor sandbox havuzu ve GKE imaj akışı (image streaming); <strong>SandboxWarmPool</strong>, önceden başlatılmış ve sağlıklı ortamları hazır tutarak soğuk başlangıcı ortadan kaldırıyor; ve SDK&#x27;nın <strong>yerinde geri dönüştürme</strong> stratejisi, pod&#x27;ları her rollout&#x27;ta silip yeniden yaratmak yerine yeniden kullanıyor (üç kat az pod yaratımı, Kubernetes API sunucusu kararlı kalıyor). Test küme boyutu mütevazı: 10 düğümlük bir havuz. Bu ilke Mistral AI&#x27;ın RL eğitim altyapısında kullanılıyor.</p></div>
+  <div class="prose"><p>Agent&#x27;ları reinforcement learning’le (RL) eğitmek ve değerlendirmek için büyük ölçekli paralel rollout&#x27;lar çalıştırınca öncü laboratuvarlar hep aynı darboğaza çarpıyor: pahalı GPU kümeleri, CPU sandbox&#x27;ların soğuk başlangıcını dakikalarca bekliyor. Üstüne binlerce, her biri çok gigabaytlık SWE-bench tarzı imaj çekimi ve zamanlama birikimleri geliyor.</p><p>Tipik bir agentic RL döngüsünde GPU&#x27;daki LLM politikası kod parçası gibi eylemler üretiyor ve bunlar yalıtılmış CPU sandbox&#x27;larda çalıştırılıp bir ödül sinyali gözleniyor. On binlerce paralel rollout&#x27;a ölçeklenince üç darboğaz çıkıyor. <strong>Consumer lag tuzağı:</strong> RL adımı senkron, yani eğitim batch&#x27;teki <strong>en yavaş sandbox</strong> hazır olana kadar ilerlemiyor. <strong>İmaj kardinalitesi:</strong> klasik konteyner cache’i birkaç statik temel imaj varsayar, oysa her görev (örneğin her GitHub deposu) başka bir imaj gerektirebiliyor. <strong>Control plane doygunluğu:</strong> her eğitim adımı, aynı anda binlerce sandbox isteyen bir rollout patlaması tetikliyor.</p><p>Google&#x27;ın çözümü RL için optimize edilmiş <strong>GKE Agent Sandbox</strong>, bir orkestrasyon SDK&#x27;sı ve popüler RL ortamlarına yerel entegrasyonlar. Sonuçlar: <strong>ilk komuta kadar süre 10-45 kat daha kısa</strong> (sandbox 45-85 saniye yerine 1-9 saniyede açılıyor), <strong>en kötü durum bekleme 7,5 dakikadan 10 saniyenin altına</strong> iniyor ve <strong>control plane yükü 3 kat azalıyor</strong>. Anahtar teknikler: gVisor sandbox havuzu ve GKE imaj akışı (image streaming); <strong>SandboxWarmPool</strong>, önceden başlatılmış ve sağlıklı ortamları hazır tutarak soğuk başlangıcı ortadan kaldırıyor; ve SDK&#x27;nın <strong>yerinde geri dönüştürme</strong> stratejisi, pod&#x27;ları her rollout&#x27;ta silip yeniden yaratmak yerine yeniden kullanıyor (üç kat az pod yaratımı, Kubernetes API sunucusu kararlı kalıyor). Test küme boyutu mütevazı: 10 node’luk bir havuz. Bu ilke Mistral AI&#x27;ın RL eğitim altyapısında kullanılıyor.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Senkron toplu işte toplam süreyi ortalama değil <strong>en yavaş eleman</strong> belirler (tail latency).</span></li><li><span>Isıtılmış havuz (warm pool): başlatma maliyetini istek anından hazırlık zamanına kaydırır.</span></li><li><span>Nesne silip yeniden yaratmak yerine geri dönüştürmek kontrol düzlemi yükünü düşürür.</span></li><li><span>Darboğazları bulmak için kendi altyapılarını SWE-bench ile kasten zorlamışlar: ölçüm güdümlü iyileştirme.</span></li>    </ol>
+<li><span>Senkron toplu işte toplam süreyi ortalama değil <strong>en yavaş eleman</strong> belirler (tail latency).</span></li><li><span>Warm pool (warm pool): başlatma maliyetini istek anından hazırlık zamanına kaydırır.</span></li><li><span>Nesne silip yeniden yaratmak yerine geri dönüştürmek control plane yükünü düşürür.</span></li><li><span>Darboğazları bulmak için kendi altyapılarını SWE-bench ile kasten zorlamışlar: ölçüm güdümlü iyileştirme.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-why">
       <h3 class="label">Neden önemli?</h3>
-      <p>Pahalı kaynağın verimi, ucuz kaynağın gecikmesine bağlı olabilir. Bu desen (ısıtılmış havuz, yeniden kullanım, kuyruk gecikmesine odaklanma) yalnızca RL için değil, bağlantı havuzlarından sunucusuz fonksiyonlara kadar her yerde geçerli.</p>
+      <p>Pahalı kaynağın verimi, ucuz kaynağın gecikmesine bağlı olabilir. Bu desen (warm pool, yeniden kullanım, consumer lag’a odaklanma) yalnızca RL için değil, bağlantı havuzlarından serverless fonksiyonlara kadar her yerde geçerli.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Aynı fikir senin dünyanda üç yerde var. <strong>Bağlantı havuzu:</strong> HikariCP’nin ‘her istekte yeni bağlantı açma’ maliyetini ısıtılmış havuzla çözmesi. <strong>Spring Boot soğuk başlangıcı:</strong> bir konteyner ilk istekte yavaşsa ısınma (warm-up) isteği ya da minimum örnek sayısı. <strong>Bu gazetenin pipeline’ı:</strong> <code>fetch</code> her koşuda sıfırdan indiriyor, ama <code>.cache/raw</code> klasörü tam olarak bu ısıtma mantığı. Daha genel alışkanlık: bir işlemin <strong>ortalama</strong> süresine değil <strong>p99</strong> süresine bak, çünkü toplu bir iş her zaman en yavaşı bekler.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Aynı fikir senin dünyanda üç yerde var. <strong>Connection pool:</strong> HikariCP’nin ‘her istekte yeni bağlantı açma’ maliyetini warm pool ile çözmesi. <strong>Spring Boot cold start:</strong> bir container ilk istekte yavaşsa warm-up isteği ya da minimum instance sayısı. <strong>Cache:</strong> ilk çalıştırmada her şeyi indiren bir batch job’un ikinci çalıştırmada yerel cache’i kullanması. Daha genel alışkanlık: bir işlemin <strong>ortalama</strong> süresine değil <strong>p99</strong> süresine bak, çünkü toplu bir iş her zaman en yavaşı bekler.</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">cold start</span> <span class="term-tr">soğuk başlangıç</span></dt>
+      <dt><span class="term-en">cold start</span></dt>
       <dd>Bir ortamın ilk kez ya da uzun bekleme sonrası başlatılırken yaşadığı ek gecikme.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">warm pool</span> <span class="term-tr">ısıtılmış havuz</span></dt>
+      <dt><span class="term-en">warm pool</span></dt>
       <dd>Önceden başlatılıp hazır tutulan, istek gelince hemen kullanılan kaynak havuzu.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">time-to-first-command (TTFC)</span> <span class="term-tr">ilk komuta kadar süre</span></dt>
+      <dt><span class="term-en">time-to-first-command (TTFC)</span></dt>
       <dd>Bir sandbox’ın istenmesinden ilk komutu çalıştırabilecek hâle gelmesine kadar geçen süre.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">rollout</span> <span class="term-tr">rollout</span></dt>
+      <dt><span class="term-en">rollout</span></dt>
       <dd>RL’de bir politikanın ortamda adım adım eylem yapıp ödül topladığı tek bir deneme.</dd>
     </div>
   </dl>
@@ -134,8 +134,8 @@
   <ul class="tags">
   <li><a href="/etiket/kubernetes/">#Kubernetes</a></li>
   <li><a href="/etiket/agent/">#agent</a></li>
-  <li><a href="/etiket/performans/">#performans</a></li>
-  <li><a href="/etiket/altyapi/">#altyapı</a></li>
+  <li><a href="/etiket/performance/">#performance</a></li>
+  <li><a href="/etiket/infrastructure/">#infrastructure</a></li>
 </ul>
 
   <a class="readmore" href="https://cloud.google.com/blog/products/containers-kubernetes/accelerate-agentic-rl-with-gke-agent-sandbox/" rel="noopener nofollow" target="_blank">
@@ -160,7 +160,7 @@
     <a href="https://aws.amazon.com/blogs/architecture/build-adaptive-ai-interfaces-with-the-ag-ui-protocol-agent-swarms-and-nova-act-on-aws/" rel="noopener nofollow" target="_blank">Çıktısı değişken olan yapay zekâya sabit arayüz yetmez: AG-UI protokolü</a>
   </h3>
   <p class="original-title">Build adaptive AI interfaces with the AG-UI protocol, agent swarms, and Nova Act on AWS</p>
-  <div class="prose prose-sm"><p>Üretken yapay zekâ uygulamaları her çalıştırmada farklı sonuç üretir: bir röntgen tek bir kırık gösterirken diğeri uzman incelemesi gerektiren yirmi belirsiz bölge çıkarabilir. Sabit yerleşim, önceden belirlenmiş kontroller ve statik veri bağlama, çıktı uzayının bilinen olduğu yerde (ödeme sayfası gibi) iyidir; ama yapay zekâ <strong>dinamik keşfettiği</strong> yerde bir uçta eksik, diğer uçta boş panellerle karışık kalır.</p><p>Yazının önerisi üç parça: <strong>AG-UI</strong> (agent-to-UI) protokolü, agent ile arayüz arasındaki iletişimi standartlaştırılmış akışla çözüyor (öncesinde her çerçeve için özel WebSocket biçimleri ve yoklama mekanizmaları yazılıyordu); <strong>Strands Agents SDK&#x27;nın Swarm deseni</strong>, ajanların eşler olarak hipotez paylaşıp uzlaşıya kadar bulguları iyileştirdiği çoklu ajan iş birliği; ve <strong>Nova Act</strong>, API&#x27;si olmayan eski sistemlerle doğal dil komutlarıyla tarayıcı üzerinden çalışan otomasyon.</p></div>
+  <div class="prose prose-sm"><p>Üretken yapay zekâ uygulamaları her çalıştırmada farklı sonuç üretir: bir röntgen tek bir kırık gösterirken diğeri uzman incelemesi gerektiren yirmi belirsiz bölge çıkarabilir. Sabit yerleşim, önceden belirlenmiş kontroller ve statik veri bağlama, çıktı uzayının bilinen olduğu yerde (ödeme sayfası gibi) iyidir; ama yapay zekâ <strong>dinamik keşfettiği</strong> yerde bir uçta eksik, diğer uçta boş panellerle karışık kalır.</p><p>Yazının önerisi üç parça: <strong>AG-UI</strong> (agent-to-UI) protokolü, agent ile arayüz arasındaki iletişimi standartlaştırılmış akışla çözüyor (öncesinde her çerçeve için özel WebSocket biçimleri ve yoklama mekanizmaları yazılıyordu); <strong>Strands Agents SDK&#x27;nın Swarm deseni</strong>, agent’ların eşler olarak hipotez paylaşıp uzlaşıya kadar bulguları iyileştirdiği çoklu agent iş birliği; ve <strong>Nova Act</strong>, API&#x27;si olmayan eski sistemlerle doğal dil komutlarıyla tarayıcı üzerinden çalışan otomasyon.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
@@ -170,8 +170,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Mobit’teki doküman arama sonuçlarını düşün: bir sorgu tek bir net cevap, bir diğeri yirmi ilgili pasaj döndürebilir. Arayüzü her ikisine uygun tek bir sabit ekran yapmak yerine, cevabın <strong>şekline</strong> (tek cevap, liste, karşılaştırma) göre farklı bir bileşen göstermeyi dene. Bunun basit bir başlangıcı, modelden yapılandırılmış bir çıktı (JSON şeması içinde <code>type: answer | list | comparison</code>) istemek ve arayüzde o alana göre bileşen seçmektir.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Doküman arama sonuçlarını düşün: bir sorgu tek bir net cevap, bir diğeri yirmi ilgili pasaj döndürebilir. Arayüzü her ikisine uygun tek bir sabit ekran yapmak yerine, cevabın <strong>şekline</strong> (tek cevap, liste, karşılaştırma) göre farklı bir bileşen göstermeyi dene. Basit bir başlangıç: modelden yapılandırılmış bir çıktı (JSON şeması içinde <code>type: answer | list | comparison</code>) istemek ve arayüzde o alana göre bileşen seçmek.</p>
     </div>
   </div>
 
@@ -179,12 +179,12 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">AG-UI protocol</span> <span class="term-tr">AG-UI protokolü</span></dt>
+      <dt><span class="term-en">AG-UI protocol</span></dt>
       <dd>Agent ile kullanıcı arayüzü arasındaki akış iletişimini standartlaştıran protokol.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">agent swarm</span> <span class="term-tr">ajan sürüsü</span></dt>
-      <dd>Merkezî bir yönetici olmadan, eşler olarak iş birliği yapan ajanlar topluluğu.</dd>
+      <dt><span class="term-en">agent swarm</span></dt>
+      <dd>Merkezî bir yönetici olmadan, eşler olarak iş birliği yapan agent’lar topluluğu.</dd>
     </div>
   </dl>
 
@@ -193,9 +193,9 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/agent/">#agent</a></li>
-  <li><a href="/etiket/arayuz/">#arayüz</a></li>
-  <li><a href="/etiket/protokol/">#protokol</a></li>
-  <li><a href="/etiket/mimari/">#mimari</a></li>
+  <li><a href="/etiket/ui/">#UI</a></li>
+  <li><a href="/etiket/protocol/">#protocol</a></li>
+  <li><a href="/etiket/architecture/">#architecture</a></li>
 </ul>
 
   <a class="readmore" href="https://aws.amazon.com/blogs/architecture/build-adaptive-ai-interfaces-with-the-ag-ui-protocol-agent-swarms-and-nova-act-on-aws/" rel="noopener nofollow" target="_blank">
@@ -213,7 +213,7 @@
     <ol class="toc" id="toc">
       <li>
         <a href="#1c5df4cdcf62">
-          <span class="toc-title">GPU boşta bekliyor çünkü sandbox geç açılıyor: ısıtılmış havuz ve pod geri dönüşümü</span>
+          <span class="toc-title">GPU boşta bekliyor çünkü sandbox geç açılıyor: warm pool ve pod geri dönüşümü</span>
           <span class="toc-meta">Google Cloud Blog · 6 dk</span>
         </a>
       </li>
@@ -241,7 +241,7 @@
   <nav class="pager" aria-label="Sayılar arası gezinme">
     <a class="pager-link pager-prev" href="/sayi/2026-09-28/" rel="prev">
       <span class="pager-label">← Önceki sayı · 28 Eylül 2026</span>
-      <span class="pager-title">Güvenlik vakası (safety case): eğitime devam etmeden önce kanıtla</span>
+      <span class="pager-title">Safety case (safety case): eğitime devam etmeden önce kanıtla</span>
     </a>
     <a class="pager-link pager-next" href="/sayi/2026-09-30/" rel="next">
       <span class="pager-label">Sonraki sayı · 30 Eylül 2026 →</span>
@@ -262,7 +262,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

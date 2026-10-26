@@ -8,46 +8,46 @@
       "source_key": "aws-architecture",
       "source_name": "AWS Architecture Blog",
       "title": "Testing application resilience with Amazon SQS and AWS Fault Injection Service",
-      "title_tr": "Kuyruk çökerse uygulaman ne yapar? Hipotezli bir dayanıklılık deneyi kurmak",
+      "title_tr": "Kuyruk çökerse uygulaman ne yapar? Hipotezli bir resilience deneyi kurmak",
       "url": "https://aws.amazon.com/blogs/architecture/testing-application-resilience-with-amazon-sqs-and-aws-fault-injection-service/",
       "published": "2026-09-09",
-      "summary": "Uygulaman SQS kuyruğuna mesaj gönderemez ya da alamaz hâle gelirse, aşağı akıştaki işleme durur. Sebep yanlış yapılandırılmış bir IAM politikası, ağ bölünmesi, kötü bir dağıtım ya da geçici bir servis olayı olabilir; uygulamanın gördüğü hep aynı: SQS işlemleri başarısız oluyor. Servislerin bu hatayı nasıl ele aldığı (kaçınılmaz olanı hızlı başarısız saymak, devre kesici açmak, üretici tarafında tamponlamak) kısa bir aksaklıkla zincirleme bir kesinti arasındaki farkı belirleyebilir. Yazının ana cümlesi: **bu mekanizmaları arıza altında hiç test etmediysen, varsayımlara güveniyorsun.**\n\nDeneyin amacı SQS'in çalıştığını doğrulamak değil, **SQS işlemleri başarısız olunca uygulamanın ne yaptığını ve bunu fark edip etmeyeceğini** öğrenmek. Yöntem: AWS Fault Injection Service (FIS) ve SSM Automation ile uygulamanın SQS'e erişimini kapsamı dar bir **deny kaynak politikasıyla** engellemek, sonra erişimi geri verip toparlanmayı gözlemek. Politika yalnızca uygulamanın bağımlı olduğu veri düzlemi işlemlerini reddediyor (gönderme, alma, silme, görünürlük süresini değiştirme, temizleme), kuyruk yönetimine dokunmuyor. Kesinti süresi dört aşamada kademeli artıyor: kısa kesintiler hata yönetim mekanizmalarının devreye girip girmediğini, uzun kesintiler ancak sürekli arızada ortaya çıkan sistemik sorunları gösteriyor.\n\nİki arıza yüzeyi aynı anda izleniyor. **Üretici tarafı:** gönderim reddedilince hızlı başarısız mı oluyor, devre kesici mi açıyor, yerelde tamponluyor mu, yoksa mesajı mı düşürüyor? **Tüketici tarafı:** alma reddedilince birikim büyüyor mu, toparlanmada yeniden teslimat ve birikmiş yükle başa çıkış nasıl? Yazı kritik bir tuzağı da vurguluyor: **`sqs:*` işlemini reddetme.** IAM'de açık bir Deny her Allow'u geçer, otomasyonun kendi politikayı sonradan kaldırma iznini bile; kendi ellerinle kendini kilitlersin.",
+      "summary": "Uygulaman SQS kuyruğuna mesaj gönderemez ya da alamaz hâle gelirse, aşağı akıştaki işleme durur. Sebep yanlış yapılandırılmış bir IAM politikası, ağ bölünmesi, kötü bir dağıtım ya da geçici bir servis olayı olabilir; uygulamanın gördüğü hep aynı: SQS işlemleri başarısız oluyor. Servislerin bu hatayı nasıl ele aldığı (kaçınılmaz olanı hızlı başarısız saymak, circuit breaker açmak, üretici tarafında tamponlamak) kısa bir aksaklıkla zincirleme bir kesinti arasındaki farkı belirleyebilir. Yazının ana cümlesi: **bu mekanizmaları arıza altında hiç test etmediysen, varsayımlara güveniyorsun.**\n\nDeneyin amacı SQS'in çalıştığını doğrulamak değil, **SQS işlemleri başarısız olunca uygulamanın ne yaptığını ve bunu fark edip etmeyeceğini** öğrenmek. Yöntem: AWS Fault Injection Service (FIS) ve SSM Automation ile uygulamanın SQS'e erişimini kapsamı dar bir **deny kaynak politikasıyla** engellemek, sonra erişimi geri verip toparlanmayı gözlemek. Politika yalnızca uygulamanın bağımlı olduğu data plane işlemlerini reddediyor (gönderme, alma, silme, görünürlük süresini değiştirme, temizleme), kuyruk yönetimine dokunmuyor. Kesinti süresi dört aşamada kademeli artıyor: kısa kesintiler hata yönetim mekanizmalarının devreye girip girmediğini, uzun kesintiler ancak sürekli arızada ortaya çıkan sistemik sorunları gösteriyor.\n\nİki arıza yüzeyi aynı anda izleniyor. **Üretici tarafı:** gönderim reddedilince hızlı başarısız mı oluyor, circuit breaker mi açıyor, yerelde tamponluyor mu, yoksa mesajı mı düşürüyor? **Consumer tarafı:** alma reddedilince birikim büyüyor mu, toparlanmada yeniden teslimat ve birikmiş yükle başa çıkış nasıl? Yazı kritik bir tuzağı da vurguluyor: **`sqs:*` işlemini reddetme.** IAM'de açık bir Deny her Allow'u geçer, otomasyonun kendi politikayı sonradan kaldırma iznini bile; kendi ellerinle kendini kilitlersin.",
       "key_points": [
-        "İyi bir dayanıklılık deneyi ölçülebilir hipotez ve başarı ölçütüyle başlar: ne gözlemlemeyi bekliyorsun?",
+        "İyi bir resilience deneyi ölçülebilir hipotez ve başarı ölçütüyle başlar: ne gözlemlemeyi bekliyorsun?",
         "Deney iki şeyi aynı anda test eder: kurtarma mekanizmaların ve gözlemlenebilirliğin (arızayı fark ettin mi?).",
         "Arızayı kademeli artır: kısa kesinti tepkiyi, uzun kesinti sistemik birikimi gösterir.",
-        "Üretici ve tüketici tarafı farklı arıza davranışları sergiler; ikisini ayrı ölç.",
-        "Arıza enjeksiyonunun kendisi bir arıza kaynağı olabilir: geri alma yolunu kesen bir Deny yazma."
+        "Üretici ve consumer tarafı farklı arıza davranışları sergiler; ikisini ayrı ölç.",
+        "Arıza enjeksiyonunun kendisi bir arıza kaynağı olabilir: rollback yolunu kesen bir Deny yazma."
       ],
-      "why_it_matters": "Devre kesici, yeniden deneme ve tamponlama kodda yazılıdır ama çalışıp çalışmadığı yalnızca gerçek arıza altında bilinir. Bu yazı, ‘test ettiğimi sanıyorum’ ile ‘test ettim’ arasındaki farkı küçük, kontrollü ve geri alınabilir bir deneyle kapatıyor.",
-      "for_you": "Aynı deneyi yerelde, parasız yapabilirsin: bir Redis ya da PostgreSQL konteynerini `docker stop` ile durdur ve Spring Boot uygulamanın ne yaptığına bak. İstekler sonsuza dek mi asılıyor, zaman aşımı kaç saniye, hata kullanıcıya anlamlı dönüyor mu, alarm çalıyor mu? Hipotezini önce yaz (‘5 saniye içinde 503 dönmeli, 30 saniye sonra otomatik toparlanmalı’), sonra gözlemle. Çoğu projede ilk denemede en az bir sürprizle karşılaşırsın; Mobit’teki mesajlaşma altyapısında bunu yapmak tam bu tür bir sürprizi üretimden önce yakalamanın en ucuz yolu.",
+      "why_it_matters": "Circuit breaker, yeniden deneme ve tamponlama kodda yazılıdır ama çalışıp çalışmadığı yalnızca gerçek arıza altında bilinir. Bu yazı, ‘test ettiğimi sanıyorum’ ile ‘test ettim’ arasındaki farkı küçük, kontrollü ve geri alınabilir bir deneyle kapatıyor.",
+      "for_you": "Aynı deneyi yerelde, parasız yapabilirsin: bir Redis ya da PostgreSQL container’ını `docker stop` ile durdur ve Spring Boot uygulamanın ne yaptığına bak. İstekler sonsuza dek mi asılıyor, timeout kaç saniye, hata kullanıcıya anlamlı dönüyor mu, alarm çalıyor mu? Hipotezini önce yaz (‘5 saniye içinde 503 dönmeli, 30 saniye sonra otomatik toparlanmalı’), sonra gözlemle. Çoğu projede ilk denemede en az bir sürprizle karşılaşırsın; bunu production’dan önce yakalamanın en ucuz yolu budur.",
       "terms": [
         {
           "en": "chaos engineering",
-          "tr": "kaos mühendisliği",
+          "tr": "chaos engineering",
           "definition": "Sistemin arızaya dayanıklılığını, kontrollü biçimde arıza enjekte ederek önceden test etme pratiği."
         },
         {
           "en": "circuit breaker",
-          "tr": "devre kesici",
+          "tr": "circuit breaker",
           "definition": "Sürekli başarısız bir bağımlılığa istek göndermeyi geçici olarak durdurup sistemi koruyan desen."
         },
         {
           "en": "data plane vs control plane",
-          "tr": "veri düzlemi / kontrol düzlemi",
-          "definition": "Veri düzlemi gerçek işi (mesaj gönder/al) yapar; kontrol düzlemi kaynakları yönetir (kuyruk oluştur/ayarla)."
+          "tr": "data plane vs control plane",
+          "definition": "Data plane gerçek işi (mesaj gönder/al) yapar; control plane kaynakları yönetir (kuyruk oluştur/ayarla)."
         },
         {
           "en": "hypothesis-driven experiment",
-          "tr": "hipotez güdümlü deney",
+          "tr": "hypothesis-driven experiment",
           "definition": "Ne olacağını önceden yazıp sonucu buna karşı ölçen deney kurgusu."
         }
       ],
       "tags": [
-        "dayanıklılık",
+        "resilience",
         "chaos engineering",
         "kuyruk",
-        "test"
+        "testing"
       ],
       "difficulty": "orta",
       "read_minutes": 21,
@@ -64,28 +64,28 @@
       "title_tr": "Kurtarma planın test edilmemişse plan değildir: üç aşamalı bölge devri doğrulaması",
       "url": "https://aws.amazon.com/blogs/architecture/validating-multi-region-dr-for-terraform-enterprise-with-aws-fis/",
       "published": "2026-09-09",
-      "summary": "Ekim 2025'te büyük bir Kuzey Amerika sağlık kaydı sağlayıcısı olan Athenahealth bir boşluk keşfetti: us-east-1'deki bölgesel bir AWS olayı, tek bölgede çalışan Terraform Enterprise (TFE) kurulumlarına geliştiricilerin erişimini kesti. Yani altyapı değiştirmek için kullanılan araç, altyapı arızalandığında kendisi de erişilmez oldu.\n\nÇözüm, müşterinin kendi işlettiği çok bölgeli bir felaket kurtarma deseni (Aurora global veritabanı ve S3 bölgeler arası çoğaltma ile). Dürüst bir not: TFE yalnızca tek bölgeyi destekliyor, çok bölgeli devir tasarımı müşterinin kendisine ait. Yazının asıl dersi doğrulama: **üç aşamalı FIS deneyleri** devir otomasyonundaki gizli bağımlılıkları ortaya çıkarıyor ve hem devri (failover) hem geri dönüşü (failback) doğruluyor; sonuç 12-14 dakikalık kurtarma süresi.",
+      "summary": "Ekim 2025'te büyük bir Kuzey Amerika sağlık kaydı sağlayıcısı olan Athenahealth bir boşluk keşfetti: us-east-1'deki bölgesel bir AWS olayı, tek bölgede çalışan Terraform Enterprise (TFE) kurulumlarına geliştiricilerin erişimini kesti. Yani altyapı değiştirmek için kullanılan araç, altyapı arızalandığında kendisi de erişilmez oldu.\n\nÇözüm, müşterinin kendi işlettiği çok bölgeli bir felaket kurtarma deseni (Aurora global veritabanı ve S3 bölgeler arası çoğaltma ile). Dürüst bir not: TFE yalnızca tek bölgeyi destekliyor, çok bölgeli devir tasarımı müşterinin kendisine ait. Yazının asıl dersi doğrulama: **üç aşamalı FIS deneyleri** devir otomasyonundaki hidden dependency’leri ortaya çıkarıyor ve hem devri (failover) hem geri dönüşü (failback) doğruluyor; sonuç 12-14 dakikalık kurtarma süresi.",
       "key_points": [
         "Altyapı yönetim aracının kendisi de bir bağımlılıktır; ayakta kalması ayrıca planlanmalı.",
         "Devri test etmek yetmez, geri dönüşü (failback) de test etmek gerekir."
       ],
       "why_it_matters": "",
-      "for_you": "Kendi ‘kurtarma aracın’ için aynı soruyu sor: CI/CD’n, yedekleme betiğin ve loglarına bakmak için kullandığın panel arıza yaşadığın sistemle aynı yerde mi duruyor? Bu gazetenin içeriği GitHub’da, yayını GitHub Pages’te; yani GitHub çökerse hem kaynak hem yayın etkilenir. `content/` klasörünü ikinci bir yere (yerel disk, ikinci uzak depo) yedeklemek bu riski küçük bir maliyetle kapatır.",
+      "for_you": "Kendi ‘kurtarma aracın’ için aynı soruyu sor: CI/CD’n, backup betiğin ve log’larına bakmak için kullandığın panel, arıza yaşadığın sistemle aynı yerde mi duruyor? Kaynak kodun ve yayının aynı platformdaysa o platform çöktüğünde ikisi birden etkilenir. Önemli içeriği ikinci bir yere (yerel disk, ikinci uzak depo) yedeklemek bu riski küçük bir maliyetle kapatır.",
       "terms": [
         {
           "en": "failover / failback",
-          "tr": "devir / geri dönüş",
+          "tr": "failover / failback",
           "definition": "Hizmeti yedek sisteme geçirmek ve sonra ana sisteme geri döndürmek."
         },
         {
           "en": "hidden dependency",
-          "tr": "gizli bağımlılık",
+          "tr": "hidden dependency",
           "definition": "Belgelenmemiş ya da fark edilmemiş, ancak arıza anında ortaya çıkan bileşen bağımlılığı."
         }
       ],
       "tags": [
         "felaket kurtarma",
-        "altyapı",
+        "infrastructure",
         "chaos engineering"
       ],
       "difficulty": "orta",

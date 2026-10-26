@@ -88,12 +88,12 @@
   </h2>
   <p class="original-title">How We’re Building Scam Alert on WhatsApp With End-to-End Encryption and Verifiability Guarantees</p>
 
-  <div class="prose"><p>WhatsApp, <strong>Scam Alert</strong> adlı yeni ve isteğe bağlı bir özelliğin teknik tasarımını, özellik sınırlı beta olarak çıkarken yayımladı. Özellik, kullanıcı açarsa cihaza bir ML modeli indiriyor ve kişi listesinde olmayan gönderenlerden gelen mesajları <strong>cihazın içinde</strong> sınıflandırıyor. Olası dolandırıcılıkta sohbette yalnızca kullanıcının gördüğü bir uyarı çıkıyor; mesaj içeriği sınıflandırma için cihazdan çıkmıyor ve otomatik raporlama yok.</p><p>Tasarım üç taahhüde dayanıyor ve her biri mimariyle zorlanıp dışarıdan doğrulanabilir kılınmış. <strong>Cihaz üstü işleme ve gizliliği koruyan analitik:</strong> özelliğin çalışıp çalışmadığını ölçmek için gereken en küçük telemetri (uyarı ve eylem sayıları) güvenilir yürütme ortamı (TEE) içinde işleniyor ve Meta&#x27;ya yalnızca <strong>diferansiyel gizli</strong> toplulaştırmalar olarak ulaşıyor. <strong>Hedefli model dağıtımı yok:</strong> her model sürümü, dağıtılmadan önce herkese açık bir şeffaflık defterinde yayımlanıyor; yani belirli bir kullanıcıya özel model yollanamaz. <strong>Doğrulanabilir davranış:</strong> model ağırlıkları yayımlanıyor, böylece araştırmacılar modelin yalnızca dolandırıcılık için üretildiğini kontrol edebilir.</p><p>Kullanıcı bir uyarıyı yanlış bulursa sohbeti güvenilir işaretleyebiliyor; isterse son 5 mesajı doğruluğu artırmak için paylaşmayı seçebiliyor.</p></div>
+  <div class="prose"><p>WhatsApp, <strong>Scam Alert</strong> adlı yeni ve isteğe bağlı bir özelliğin teknik tasarımını, özellik sınırlı beta olarak çıkarken yayımladı. Özellik, kullanıcı açarsa cihaza bir ML modeli indiriyor ve kişi listesinde olmayan gönderenlerden gelen mesajları <strong>cihazın içinde</strong> sınıflandırıyor. Olası dolandırıcılıkta sohbette yalnızca kullanıcının gördüğü bir uyarı çıkıyor; mesaj içeriği sınıflandırma için cihazdan çıkmıyor ve otomatik raporlama yok.</p><p>Tasarım üç taahhüde dayanıyor ve her biri mimariyle zorlanıp dışarıdan doğrulanabilir kılınmış. <strong>Cihaz üstü işleme ve gizliliği koruyan analitik:</strong> özelliğin çalışıp çalışmadığını ölçmek için gereken en küçük telemetri (uyarı ve eylem sayıları) trusted execution environment (TEE) (TEE) içinde işleniyor ve Meta&#x27;ya yalnızca <strong>diferansiyel gizli</strong> toplulaştırmalar olarak ulaşıyor. <strong>Hedefli model dağıtımı yok:</strong> her model sürümü, dağıtılmadan önce herkese açık bir transparency ledger’da yayımlanıyor; yani belirli bir kullanıcıya özel model yollanamaz. <strong>Doğrulanabilir davranış:</strong> model ağırlıkları yayımlanıyor, böylece araştırmacılar modelin yalnızca dolandırıcılık için üretildiğini kontrol edebilir.</p><p>Kullanıcı bir uyarıyı yanlış bulursa sohbeti güvenilir işaretleyebiliyor; isterse son 5 mesajı doğruluğu artırmak için paylaşmayı seçebiliyor.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Gizlilik sözü, “güveniniz bize” ile değil, dışarıdan denetlenebilir mimari kararlarla veriliyor.</span></li><li><span>Telemetri bile minimize edilmiş: sadece sayılar, TEE içinde, diferansiyel gizlilik gürültüsüyle.</span></li><li><span>Şeffaflık defteri hedefli dağıtımı engelliyor: herkes aynı modeli alıyor.</span></li><li><span>Kullanıcı kontrolü: özellik isteğe bağlı, sohbet güvenilir işaretlenebilir, paylaşım ayrı bir onaya bağlı.</span></li>    </ol>
+<li><span>Gizlilik sözü, “güveniniz bize” ile değil, dışarıdan denetlenebilir mimari kararlarla veriliyor.</span></li><li><span>Telemetri bile minimize edilmiş: sadece sayılar, TEE içinde, diferansiyel gizlilik gürültüsüyle.</span></li><li><span>Transparency ledger hedefli dağıtımı engelliyor: herkes aynı modeli alıyor.</span></li><li><span>Kullanıcı kontrolü: özellik isteğe bağlı, sohbet güvenilir işaretlenebilir, paylaşım ayrı bir onaya bağlı.</span></li>    </ol>
   </div>
 
   <div class="callouts">
@@ -102,8 +102,8 @@
       <p>Hassas veride “verinizi korumaya çalışıyoruz” demek yeterli değil. Güçlü ürünler, sözü <strong>doğrulanabilir</strong> hâle getiriyor: açık ağırlıklar, kamuya açık kayıtlar, bağımsız denetim. Bu, mühendislikte güvenin ölçülebilir bir özellik olabileceğini gösteriyor.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>KlioAI&#x27;da kullanıcı ses kayıtları tutuyorsun. Bu yazıdan üç somut kural çıkar: (1) <strong>Veri minimizasyonu</strong>: sunucuya yalnızca gerçekten gereken şeyi yolla (ham ses yerine transkript ya da puan yeterliyse onu). (2) Telemetriyi baştan toplulaştırılmış tasarla: bireysel olay yerine sayaç. (3) Kullanıcıya açık ve ayrı bir izin ver: model iyileştirmesi için veri kullanımı varsayılan olmasın. Bunları baştan tasarlamak, sonradan eklemekten çok daha ucuz.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Kullanıcı ses kaydı gibi hassas veri tutan bir uygulama yazarsan bu yazıdan üç somut kural çıkar: <strong>(1) Data minimization:</strong> sunucuya yalnızca gerçekten gereken şeyi yolla (ham ses yerine transkript ya da puan yeterliyse onu). <strong>(2)</strong> Telemetriyi baştan aggregate tasarla: bireysel olay yerine sayaç. <strong>(3)</strong> Kullanıcıya açık ve ayrı bir izin ver: model iyileştirmesi için veri kullanımı varsayılan olmasın. Bunları baştan tasarlamak, sonradan eklemekten çok daha ucuzdur.</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">end-to-end encryption (E2EE)</span> <span class="term-tr">uçtan uca şifreleme</span></dt>
+      <dt><span class="term-en">end-to-end encryption (E2EE)</span></dt>
       <dd>Mesajın yalnızca gönderen ve alıcı cihazlarda çözülebildiği, aradaki sunucunun okuyamadığı şifreleme.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">trusted execution environment (TEE)</span> <span class="term-tr">güvenilir yürütme ortamı</span></dt>
+      <dt><span class="term-en">trusted execution environment (TEE)</span></dt>
       <dd>İçindeki kodu ve veriyi sistem sahibinden bile koruyan donanım destekli yalıtılmış çalışma alanı.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">differential privacy</span> <span class="term-tr">diferansiyel gizlilik</span></dt>
+      <dt><span class="term-en">differential privacy</span></dt>
       <dd>Toplulaştırılmış sonuca ayarlanmış gürültü ekleyerek tek bir kişinin verisinin etkisini matematiksel olarak sınırlama.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">transparency ledger</span> <span class="term-tr">şeffaflık defteri</span></dt>
+      <dt><span class="term-en">transparency ledger</span></dt>
       <dd>Yayımlanan sürümlerin değiştirilemez ve herkese açık biçimde kaydedildiği liste.</dd>
     </div>
   </dl>
@@ -132,10 +132,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/gizlilik/">#gizlilik</a></li>
-  <li><a href="/etiket/guvenlik/">#güvenlik</a></li>
+  <li><a href="/etiket/privacy/">#privacy</a></li>
+  <li><a href="/etiket/security/">#security</a></li>
   <li><a href="/etiket/on-device-ml/">#on-device ML</a></li>
-  <li><a href="/etiket/mimari/">#mimari</a></li>
+  <li><a href="/etiket/architecture/">#architecture</a></li>
 </ul>
 
   <a class="readmore" href="https://engineering.fb.com/2026/08/12/security/how-were-building-scam-alert-whatsapp/" rel="noopener nofollow" target="_blank">
@@ -160,18 +160,18 @@
     <a href="https://research.google/blog/empty-shelves-or-lost-keys-recall-is-the-bottleneck-for-parametric-factuality/" rel="noopener nofollow" target="_blank">Boş raf mı, kaybolmuş anahtar mı? LLM hatalarının çoğu hatırlama hatası</a>
   </h3>
   <p class="original-title">Empty shelves or lost keys? Recall is the bottleneck for parametric factuality</p>
-  <div class="prose prose-sm"><p>Bir LLM yanlış cevap verdiğinde sebep iki olabilir: olguyu hiç öğrenmemiş (<strong>kodlama hatası</strong>, boş raf) ya da öğrenmiş ama erişemiyor (<strong>hatırlama hatası</strong>, kayıp anahtar). Standart doğruluk metrikleri ikisini birbirine karıştırıyor, oysa çözümleri farklı: birincisi daha büyük model ya da daha fazla veri ister, ikincisi son eğitim ve çıkarım-zamanı yöntemleriyle de giderilebilir.</p><p>Google&#x27;ın <strong>bilgi profillemesi</strong> çerçevesi soruyu sorudan olguya taşıyor: her olgu “hatırlanamıyor”, “doğrudan hatırlanıyor” ya da “yalnızca düşünerek hatırlanıyor” sınıflarından birine giriyor. Bulgu: Gemini 3 ve GPT-5 gibi öncü modeller olguların neredeyse hepsini kodluyor, ama birçoğunu hatırlamakta zorlanıyor.</p></div>
+  <div class="prose prose-sm"><p>Bir LLM yanlış cevap verdiğinde sebep iki olabilir: olguyu hiç öğrenmemiş (<strong>kodlama hatası</strong>, boş raf) ya da öğrenmiş ama erişemiyor (<strong>hatırlama hatası</strong>, kayıp anahtar). Standart doğruluk metrikleri ikisini birbirine karıştırıyor, oysa çözümleri farklı: birincisi daha büyük model ya da daha fazla veri ister, ikincisi son eğitim ve inference-zamanı yöntemleriyle de giderilebilir.</p><p>Google&#x27;ın <strong>bilgi profillemesi</strong> çerçevesi soruyu sorudan olguya taşıyor: her olgu “hatırlanamıyor”, “doğrudan hatırlanıyor” ya da “yalnızca düşünerek hatırlanıyor” sınıflarından birine giriyor. Bulgu: Gemini 3 ve GPT-5 gibi öncü modeller olguların neredeyse hepsini kodluyor, ama birçoğunu hatırlamakta zorlanıyor.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
     <ol>
-<li><span>Hatayı doğru teşhis etmek, çözümü seçmenin ön koşulu: kodlama ve hatırlama farklı müdahale ister.</span></li><li><span>“Düşünerek hatırlanan” olgular, çıkarım zamanında akıl yürütmenin neden doğruluğu artırabildiğini açıklıyor.</span></li>    </ol>
+<li><span>Hatayı doğru teşhis etmek, çözümü seçmenin ön koşulu: kodlama ve hatırlama farklı müdahale ister.</span></li><li><span>“Düşünerek hatırlanan” olgular, inference zamanında reasoning’in neden doğruluğu artırabildiğini açıklıyor.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>RAG sistemi kurarken aynı ayrımı yap: model cevabı yanlışsa sorun bilgiyi bağlama vermemek mi (retrieval hatası), yoksa verildiği hâlde kullanamamak mı? Mobit&#x27;teki doküman aramada hatalı bir cevabı incelerken önce doğru pasajın getirilen sonuçlar arasında olup olmadığına bak. Varsa sorun üretimde, yoksa getirmede; ikisini karıştırırsan yanlış yeri düzeltirsin.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>RAG sistemi kurarken aynı ayrımı yap: model cevabı yanlışsa sorun bilgiyi bağlama vermemek mi (retrieval hatası), yoksa verildiği hâlde kullanamamak mı? Hatalı bir cevabı incelerken önce doğru pasajın getirilen sonuçlar arasında olup olmadığına bak. Varsa sorun generation’da, yoksa retrieval’da; ikisini karıştırırsan yanlış yeri düzeltirsin.</p>
     </div>
   </div>
 
@@ -179,11 +179,11 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">parametric knowledge</span> <span class="term-tr">parametrik bilgi</span></dt>
+      <dt><span class="term-en">parametric knowledge</span></dt>
       <dd>Modelin ağırlıklarında saklanan, dış kaynak olmadan cevaplayabildiği bilgi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">recall vs recognition</span> <span class="term-tr">hatırlama ve tanıma</span></dt>
+      <dt><span class="term-en">recall vs recognition</span></dt>
       <dd>Hatırlama cevabı sıfırdan üretmek, tanıma ise seçenekler arasından doğruyu seçmektir.</dd>
     </div>
   </dl>
@@ -193,9 +193,9 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/llm/">#LLM</a></li>
-  <li><a href="/etiket/degerlendirme/">#değerlendirme</a></li>
-  <li><a href="/etiket/arastirma/">#araştırma</a></li>
-  <li><a href="/etiket/dogruluk/">#doğruluk</a></li>
+  <li><a href="/etiket/evaluation/">#evaluation</a></li>
+  <li><a href="/etiket/research/">#research</a></li>
+  <li><a href="/etiket/accuracy/">#accuracy</a></li>
 </ul>
 
   <a class="readmore" href="https://research.google/blog/empty-shelves-or-lost-keys-recall-is-the-bottleneck-for-parametric-factuality/" rel="noopener nofollow" target="_blank">
@@ -241,7 +241,7 @@
   <nav class="pager" aria-label="Sayılar arası gezinme">
     <a class="pager-link pager-prev" href="/sayi/2026-08-11/" rel="prev">
       <span class="pager-label">← Önceki sayı · 11 Ağustos 2026</span>
-      <span class="pager-title">Konuşma hızında düşünmek: AMIE&#39;nin eşzamansız çoklu ajan mimarisi</span>
+      <span class="pager-title">Konuşma hızında düşünmek: AMIE&#39;nin eşzamansız multi-agent architecture</span>
     </a>
     <a class="pager-link pager-next" href="/sayi/2026-08-13/" rel="next">
       <span class="pager-label">Sonraki sayı · 13 Ağustos 2026 →</span>
@@ -262,7 +262,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

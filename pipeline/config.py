@@ -201,16 +201,12 @@ SOURCE_BY_KEY = {s.key: s for s in SOURCES}
 # Bir günde en fazla kaç makale yayınlanacak. Fazlası "ayrıca bugün" listesine düşer.
 MAX_ARTICLES_PER_DAY = 6
 
-# Eren'in profili: özetlerin "senin için bağlantı" kısmını kalibre eder.
+# Okuyucu profili: özetlerin "Pratikte" kısmını kalibre eder. Kişisel proje adı yok.
 READER_PROFILE = """
-Okuyucu: Eren Ulutaş — 2026 mezunu, yeni junior yazılım mühendisi (Istanbul).
-Güçlü olduğu yerler: Java/Spring Boot, Python/FastAPI, PostgreSQL, Redis, Pandas,
-Docker, Linux, GitHub Actions, PyTorch, LLM API'leri, RAG, embeddings, SQL, biraz Rust.
-Deneyimi: ERP + mesajlaşma uygulaması (auth, dosya yönetimi, AI destekli doküman arama),
-LLM tabanlı kategorizasyon pipeline'ı (10.000+ kayıt), yayınlanmış bir mobil AI ürünü
-(KlioAI: Spring Boot backend, OAuth, abonelik, offline senkron), algoritmik alım-satım
-araştırma platformu (~1 TB veri, backtesting, risk kontrolleri).
-Zayıf/geliştirmek istediği yerler: çok büyük ölçekte dağıtık sistemler, üretim
-gözlemlenebilirliği (observability), maliyet mühendisliği, kıdemli seviye sistem tasarımı.
-Hedefi: iyi bir mühendislik ekibinde backend / veri / uygulamalı AI rolü.
+Okuyucu: yeni mezun, junior bir yazılım mühendisi.
+Güçlü olduğu yerler: Java/Spring Boot, Python, PostgreSQL, Redis, Docker, Linux,
+CI/CD, LLM API'leri, RAG, embeddings, SQL.
+Geliştirmek istediği yerler: büyük ölçekte distributed systems, production observability,
+maliyet mühendisliği, kıdemli seviye sistem tasarımı.
+Hedefi: iyi bir mühendislik ekibinde backend / data / uygulamalı AI rolü.
 """.strip()

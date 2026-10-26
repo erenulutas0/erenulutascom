@@ -88,7 +88,7 @@
   </h2>
   <p class="original-title">MTIA 300: Meta’s First Training Chip with Built-in NICs and Communication-Offloading Engines</p>
 
-  <div class="prose"><p>MTIA 300, Meta&#x27;nın kendi geliştirdiği eğitim ve çıkarım hızlandırıcı ailesinin, <strong>sıralama ve öneri modellerini eğitmeye</strong> göre optimize edilmiş ilk üyesi. Yazının çıkış noktası şu gözlem: öneri modelleri büyük dil modellerinden farklı olarak devasa kayan nokta işlem gücüne değil, <strong>hızlandırıcılar arası hızlı ve verimli iletişime</strong> muhtaç. Gömme tabloları (embedding tables) modelin parametrelerinin %99&#x27;undan fazlasını tutabiliyor; bu da yüzlerce hızlandırıcı arasında sık AllReduce, AllToAll ve AllGather işlemleri gerektiriyor.</p><p>GPU&#x27;larda bu iletişim işlemleri (NCCL gibi kütüphanelerle) eğitim hesabıyla <strong>aynı kaynakları</strong> (streaming multiprocessor&#x27;ları) paylaşıyor; ikisi birlikte koşunca ikisi de yavaşlıyor ve pahalı donanım boşta kalıyor. Meta&#x27;nın çözümü iki katmanlı. Birincisi: ağ arayüzünü çip paketinin içine koymak: iki ağ chiplet&#x27;i, toplam 12 adet 800 Gbps RDMA NIC ile <strong>1,2 TB/s G/Ç bant genişliği</strong> sağlıyor ve PCIe&#x27;ye hiç çıkmıyor. Aynı 12 NIC hem rack içi (16 düğüm, 1 TB/s&#x27;ye kadar) hem raflar arası (200 GB/s) iletişim için esnekçe bölünebiliyor. İkincisi: iletişimi hesap ızgarasından ayırmak. Çip, 12×6&#x27;lık işlem elemanı ızgarasının yanında iletişimi bağımsız yürüten 16 ayrı <strong>mesaj motoru</strong> taşıyor.</p><p>Donanımla birlikte yazılım da (HCCL iletişim kütüphanesi) sıfırdan, donanımla birlikte tasarlanmış.</p></div>
+  <div class="prose"><p>MTIA 300, Meta&#x27;nın kendi geliştirdiği eğitim ve inference hızlandırıcı ailesinin, <strong>sıralama ve öneri modellerini eğitmeye</strong> göre optimize edilmiş ilk üyesi. Yazının çıkış noktası şu gözlem: öneri modelleri büyük dil modellerinden farklı olarak devasa kayan nokta işlem gücüne değil, <strong>hızlandırıcılar arası hızlı ve verimli iletişime</strong> muhtaç. Gömme tabloları (embedding tables) modelin parametrelerinin %99&#x27;undan fazlasını tutabiliyor; bu da yüzlerce hızlandırıcı arasında sık AllReduce, AllToAll ve AllGather işlemleri gerektiriyor.</p><p>GPU&#x27;larda bu iletişim işlemleri (NCCL gibi kütüphanelerle) eğitim hesabıyla <strong>aynı kaynakları</strong> (streaming multiprocessor&#x27;ları) paylaşıyor; ikisi birlikte koşunca ikisi de yavaşlıyor ve pahalı donanım boşta kalıyor. Meta&#x27;nın çözümü iki katmanlı. Birincisi: ağ arayüzünü çip paketinin içine koymak: iki ağ chiplet&#x27;i, toplam 12 adet 800 Gbps RDMA NIC ile <strong>1,2 TB/s G/Ç bant genişliği</strong> sağlıyor ve PCIe&#x27;ye hiç çıkmıyor. Aynı 12 NIC hem rack içi (16 node, 1 TB/s&#x27;ye kadar) hem raflar arası (200 GB/s) iletişim için esnekçe bölünebiliyor. İkincisi: iletişimi hesap ızgarasından ayırmak. Çip, 12×6&#x27;lık işlem elemanı ızgarasının yanında iletişimi bağımsız yürüten 16 ayrı <strong>mesaj motoru</strong> taşıyor.</p><p>Donanımla birlikte yazılım da (HCCL iletişim kütüphanesi) sıfırdan, donanımla birlikte tasarlanmış.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
@@ -102,7 +102,7 @@
       <p>Genel amaçlı donanım her iş yükünde iyi olmak zorundadır; belirli bir iş yükü için tasarım yapınca kaynak çakışmalarını mimariyle ortadan kaldırabilirsin. Bu ilke yazılımda da geçerli: hesabı ve I/O&#x27;yu aynı thread havuzunda yarıştırma.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
+      <h3 class="label">Pratikte</h3>
       <p>Donanım tasarlamayacaksın ama aynı deseni bir Spring Boot servisinde tanırsın: CPU ağırlıklı işi ve ağ bekleyen işi aynı thread havuzuna koyarsan biri diğerini aç bırakır. Ayrı havuzlar (<code>@Async</code> ile ayrı executor) ya da sanal thread&#x27;ler bu ayrımı yapar. Daha genel ders: “yavaş” dediğin sistemde önce hangi kaynağın paylaşıldığını bul.</p>
     </div>
   </div>
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">collective communication</span> <span class="term-tr">toplu iletişim</span></dt>
+      <dt><span class="term-en">collective communication</span></dt>
       <dd>AllReduce, AllToAll gibi, birçok hızlandırıcının birlikte katıldığı veri paylaşım işlemleri.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">RDMA</span> <span class="term-tr">uzaktan doğrudan bellek erişimi</span></dt>
+      <dt><span class="term-en">RDMA</span></dt>
       <dd>Veriyi işlemciyi yormadan bir makinenin belleğinden diğerinin belleğine taşıyan ağ tekniği.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">embedding table</span> <span class="term-tr">gömme tablosu</span></dt>
+      <dt><span class="term-en">embedding table</span></dt>
       <dd>Kategorik varlıkların (kullanıcı, reklam) vektörlerini tutan büyük arama tablosu.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">co-design</span> <span class="term-tr">birlikte tasarım</span></dt>
+      <dt><span class="term-en">co-design</span></dt>
       <dd>Donanımı ve onu kullanan yazılımı birbirine göre aynı anda tasarlama yaklaşımı.</dd>
     </div>
   </dl>
@@ -132,10 +132,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/donanim/">#donanım</a></li>
-  <li><a href="/etiket/ml-altyapisi/">#ML altyapısı</a></li>
-  <li><a href="/etiket/ag/">#ağ</a></li>
-  <li><a href="/etiket/dagitik-egitim/">#dağıtık eğitim</a></li>
+  <li><a href="/etiket/hardware/">#hardware</a></li>
+  <li><a href="/etiket/ml-infrastructure/">#ML infrastructure</a></li>
+  <li><a href="/etiket/networking/">#networking</a></li>
+  <li><a href="/etiket/distributed-training/">#distributed training</a></li>
 </ul>
 
   <a class="readmore" href="https://engineering.fb.com/2026/08/24/networking-traffic/mtia-300-meta-training-chip-built-in-nics/" rel="noopener nofollow" target="_blank">
@@ -160,7 +160,7 @@
     <a href="https://engineering.fb.com/2026/08/24/networking-traffic/metaroce-rdma-transport-ai-ethernet/" rel="noopener nofollow" target="_blank">Sıra bozukluğunu hata değil normal saymak: MetaRoCE</a>
   </h3>
   <p class="original-title">MetaRoCE: A New RDMA Transport Built for AI-Scale Ethernet</p>
-  <div class="prose prose-sm"><p>Meta, yapay zekâ iş yükleri için sıfırdan tasarlanmış, ticari Ethernet üzerinde çalışan bir RDMA taşıma protokolü olan <strong>MetaRoCE</strong>&#x27;yi tanıttı ve spesifikasyonunu, referans yazılım uygulamasını ve uyumluluk test paketini Open Compute Project&#x27;e açtı.</p><p>Standart RoCE ağın her çerçeveyi <strong>sırayla</strong> teslim etmesini bekler ve bunun için PFC gibi mekanizmalara dayanır; bu da çok düzlemli büyük ağlarda performans getiren paket serpiştirmeyi (packet spraying) caydırır. MetaRoCE&#x27;nin temel fikri tek cümlede: <strong>“Ağ paketleri görür, NIC niyeti görür.”</strong> Zekâyı anahtarlardan uca (NIC&#x27;e) taşıyor. Paketler birçok yol üzerinden serpiştiriliyor ve <strong>sırasız varış tasarım gereği normal</strong>; her paket kendi hedef adresini taşıdığı için veri doğrudan son bellek konumuna yazılıyor.</p></div>
+  <div class="prose prose-sm"><p>Meta, yapay zekâ iş yükleri için sıfırdan tasarlanmış, ticari Ethernet üzerinde çalışan bir RDMA taşıma protokolü olan <strong>MetaRoCE</strong>&#x27;yi tanıttı ve spesifikasyonunu, referans yazılım uygulamasını ve uyumluluk test paketini Open Compute Project&#x27;e açtı.</p><p>Standart RoCE ağın her çerçeveyi <strong>sırayla</strong> teslim etmesini bekler ve bunun için PFC gibi mekanizmalara dayanır; bu da çok düzlemli büyük ağlarda performans getiren packet spraying’i (packet spraying) caydırır. MetaRoCE&#x27;nin temel fikri tek cümlede: <strong>“Ağ paketleri görür, NIC niyeti görür.”</strong> Zekâyı anahtarlardan uca (NIC&#x27;e) taşıyor. Paketler birçok yol üzerinden serpiştiriliyor ve <strong>sırasız varış tasarım gereği normal</strong>; her paket kendi hedef adresini taşıdığı için veri doğrudan son bellek konumuna yazılıyor.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
@@ -170,8 +170,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>“Sırasız gelmesini normal say” fikri dağıtık yazılımda da çok kullanışlı: mesaj kuyruklarında sırayı garanti etmek pahalıdır; tüketicilerini <strong>idempotent</strong> ve sıradan bağımsız yazarsan sistem hem ölçeklenir hem basitleşir. Tradebot&#x27;ta olayları zaman damgasıyla sıralayıp geç gelenleri doğru yere yerleştirmek, sıralı teslimata güvenmekten daha sağlamdır.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>‘Sırasız gelmesini normal say’ fikri distributed yazılımda da çok kullanışlı: message queue’larda sırayı garanti etmek pahalıdır; consumer’larını <strong>idempotent</strong> ve sıradan bağımsız yazarsan sistem hem ölçeklenir hem basitleşir. Olayları timestamp’le sıralayıp geç gelenleri doğru yere yerleştirmek, sıralı teslimata güvenmekten daha sağlamdır.</p>
     </div>
   </div>
 
@@ -179,15 +179,15 @@
     <summary class="label">Sözlük · 3 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">packet spraying</span> <span class="term-tr">paket serpiştirme</span></dt>
+      <dt><span class="term-en">packet spraying</span></dt>
       <dd>Bir bağlantının paketlerini birden fazla yol üzerinden dağıtarak ağı daha verimli kullanma.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">out-of-order delivery</span> <span class="term-tr">sırasız teslimat</span></dt>
+      <dt><span class="term-en">out-of-order delivery</span></dt>
       <dd>Paketlerin gönderildikleri sırayla değil, farklı sırayla varması.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">ECMP</span> <span class="term-tr">eşit maliyetli çoklu yol</span></dt>
+      <dt><span class="term-en">ECMP</span></dt>
       <dd>Aynı hedefe giden birden çok eşit yol arasında trafiği dağıtan yönlendirme tekniği.</dd>
     </div>
   </dl>
@@ -196,10 +196,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/ag/">#ağ</a></li>
-  <li><a href="/etiket/protokol/">#protokol</a></li>
-  <li><a href="/etiket/acik-kaynak/">#açık kaynak</a></li>
-  <li><a href="/etiket/ai-altyapisi/">#AI altyapısı</a></li>
+  <li><a href="/etiket/networking/">#networking</a></li>
+  <li><a href="/etiket/protocol/">#protocol</a></li>
+  <li><a href="/etiket/open-source/">#open source</a></li>
+  <li><a href="/etiket/ai-infrastructure/">#AI infrastructure</a></li>
 </ul>
 
   <a class="readmore" href="https://engineering.fb.com/2026/08/24/networking-traffic/metaroce-rdma-transport-ai-ethernet/" rel="noopener nofollow" target="_blank">
@@ -266,7 +266,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

@@ -88,22 +88,22 @@
   </h2>
   <p class="original-title">How we built a realtime system for responsive voice AI in six months</p>
 
-  <div class="prose"><p>İnsanlar konuşurken sırayı saniyenin küçük bir kesrinde devralır. Eski sesli asistanlar bunu yakalayamıyordu çünkü mimarileri sıra tabanlıydı (turn-based): önce küçük bir <strong>turn detector</strong> modeli &quot;kullanıcı sustu mu?&quot; diye karar veriyor, ancak ondan sonra büyük dil modeli çalışmaya başlıyordu. Erken karar verirse kullanıcının sözünü kesiyor, geç verirse sistem ağır hissettiriyordu.</p><p>GPT-Live bu dedektörü ses yolundan tamamen çıkarmış. Model <strong>full-duplex</strong> çalışıyor: aynı anda hem dinliyor hem konuşuyor. Yani &quot;sıra kimde?&quot; kararı ayrı bir bileşenin tahmini olmaktan çıkıp modelin kendi işinin parçası oluyor.</p><p>İşin mühendislik açısından asıl öğretici kısmı şu mimari karar: ses akışı ile uygulama mantığı iki ayrı yola ayrılmış. Ses, istemci ile model arasında kesintisiz bir <strong>hızlı yol</strong>da (fast path) akıyor; araç çağırma, daha derin akıl yürütme için GPT-5.5&#x27;e devretme gibi işler ise <strong>asenkron</strong> bir yan yolda yürüyor. Böylece pahalı bir işlem sesin akışını durdurmuyor.</p><p>Bu ayrım olmadan sistem çalışmıyor, çünkü sürekli akışta tolerans yok: eski sıra tabanlı sistemde bir ses parçasının 50 ms geç gelmesi fark edilmezken, kesintisiz akışta aynı gecikme kulakta duyulabilir bir boşluk ya da cızırtı hâline geliyor.</p></div>
+  <div class="prose"><p>İnsanlar konuşurken sırayı saniyenin küçük bir kesrinde devralır. Eski sesli asistanlar bunu yakalayamıyordu çünkü mimarileri sıra tabanlıydı (turn-based): önce küçük bir <strong>turn detector</strong> modeli &quot;kullanıcı sustu mu?&quot; diye karar veriyor, ancak ondan sonra büyük dil modeli çalışmaya başlıyordu. Erken karar verirse kullanıcının sözünü kesiyor, geç verirse sistem ağır hissettiriyordu.</p><p>GPT-Live bu dedektörü ses yolundan tamamen çıkarmış. Model <strong>full-duplex</strong> çalışıyor: aynı anda hem dinliyor hem konuşuyor. Yani &quot;sıra kimde?&quot; kararı ayrı bir bileşenin tahmini olmaktan çıkıp modelin kendi işinin parçası oluyor.</p><p>İşin mühendislik açısından asıl öğretici kısmı şu mimari karar: ses akışı ile uygulama mantığı iki ayrı yola ayrılmış. Ses, istemci ile model arasında kesintisiz bir <strong>fast path</strong>da (fast path) akıyor; araç çağırma, daha derin reasoning için GPT-5.5&#x27;e failover gibi işler ise <strong>asenkron</strong> bir yan yolda yürüyor. Böylece pahalı bir işlem sesin akışını durdurmuyor.</p><p>Bu ayrım olmadan sistem çalışmıyor, çünkü sürekli akışta tolerans yok: eski sıra tabanlı sistemde bir ses parçasının 50 ms geç gelmesi fark edilmezken, kesintisiz akışta aynı gecikme kulakta duyulabilir bir boşluk ya da cızırtı hâline geliyor.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Turn detector&#x27;ı kaldırıp modeli full-duplex yapmak, &quot;tahmin et&quot; problemini tamamen ortadan kaldırıyor — çözülmesi zor bir problemi çözmek yerine yok etmek.</span></li><li><span>Medya yolu ile kontrol yolu ayrıldı: ses kesintisiz akarken tool use ve model devretme asenkron bir kanalda yürüyor.</span></li><li><span><strong>Stateful inference</strong> — model isteğe değil, oturuma bağlı. Bu, istekleri herhangi bir sunucuya dağıtmayı imkânsız kılıyor; yönlendirme oturum-farkında olmalı.</span></li><li><span>Sürekli akışta hata bütçesi çok daha dar: taşıma, işleme ve çıkarımdaki her gecikme doğrudan duyulabilir bir kusura dönüşüyor.</span></li><li><span>Protokol seviyesine kadar inilmiş — ses taşıma katmanı da öngörülebilir gecikme için yeniden yazılmış.</span></li>    </ol>
+<li><span>Turn detector&#x27;ı kaldırıp modeli full-duplex yapmak, &quot;tahmin et&quot; problemini tamamen ortadan kaldırıyor — çözülmesi zor bir problemi çözmek yerine yok etmek.</span></li><li><span>Medya yolu ile kontrol yolu ayrıldı: ses kesintisiz akarken tool use ve model failover asenkron bir kanalda yürüyor.</span></li><li><span><strong>Stateful inference</strong> — model isteğe değil, oturuma bağlı. Bu, istekleri herhangi bir sunucuya dağıtmayı imkânsız kılıyor; yönlendirme oturum-farkında olmalı.</span></li><li><span>Sürekli akışta hata bütçesi çok daha dar: taşıma, işleme ve inference’taki her gecikme doğrudan duyulabilir bir kusura dönüşüyor.</span></li><li><span>Protokol seviyesine kadar inilmiş — ses taşıma katmanı da öngörülebilir gecikme için yeniden yazılmış.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-why">
       <h3 class="label">Neden önemli?</h3>
-      <p>&quot;Hızlı yol / yavaş yol ayrımı&quot; bu yazının asıl dersi ve sesli AI&#x27;a özgü değil. Aynı desen ödeme sistemlerinde (yetkilendirme senkron, mutabakat asenkron), mesajlaşma uygulamalarında (mesaj iletimi senkron, bildirim ve arşivleme asenkron) ve arama sistemlerinde de aynı. Bir sistemi hızlandırmanın en güçlü yolu genellikle kodu optimize etmek değil, kritik yoldan iş çıkarmaktır.</p>
+      <p>&quot;Fast path / yavaş yol ayrımı&quot; bu yazının asıl dersi ve sesli AI&#x27;a özgü değil. Aynı desen ödeme sistemlerinde (yetkilendirme senkron, reconciliation asenkron), mesajlaşma uygulamalarında (mesaj iletimi senkron, bildirim ve arşivleme asenkron) ve arama sistemlerinde de aynı. Bir sistemi hızlandırmanın en güçlü yolu genellikle kodu optimize etmek değil, kritik yoldan iş çıkarmaktır.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>KlioAI&#x27;daki konuşma pratiği özelliği tam olarak bu problemin küçük ölçekli hâli: kullanıcı konuşurken kaydı işleme, değerlendirme ve puanlama işlerinin hepsini yanıt yolunda yaparsan uygulama ağır hisseder. Spring Boot tarafında kritik yolu &quot;sesi al, akışı sürdür&quot; ile sınırlayıp; değerlendirme, kayıt ve istatistik güncellemeyi bir kuyruğa (Redis Streams veya basit bir async queue) atmak bu yazının doğrudan uygulaması olur. Bir de &quot;stateful inference&quot; uyarısını not al: oturuma bağlı bir servisin önüne rastgele yük dengeleyici koyarsan oturumlar kopar — sticky routing gerekir.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Bir konuşma pratiği ya da sesli asistan özelliği tam olarak bu problemin küçük ölçekli hâli: kullanıcı konuşurken kaydı işleme, değerlendirme ve puanlama işlerinin hepsini cevap yolunda yaparsan uygulama ağır hisseder. Spring Boot tarafında kritik yolu ‘sesi al, akışı sürdür’ ile sınırlayıp değerlendirme, kayıt ve istatistik güncellemeyi bir kuyruğa (Redis Streams ya da basit bir async queue) atmak bu yazının doğrudan uygulaması olur. Bir de ‘stateful inference’ uyarısını not al: oturuma bağlı bir servisin önüne rastgele load balancer koyarsan oturumlar kopar; sticky routing gerekir.</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">full-duplex</span> <span class="term-tr">çift yönlü eşzamanlı</span></dt>
+      <dt><span class="term-en">full-duplex</span></dt>
       <dd>Bir kanalın aynı anda hem veri alıp hem gönderebilmesi. Telsiz (sırayla) değil, telefon (aynı anda) gibi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">turn detection</span> <span class="term-tr">sıra tespiti</span></dt>
+      <dt><span class="term-en">turn detection</span></dt>
       <dd>Konuşmada karşı tarafın sözünü bitirip bitirmediğini tahmin eden bileşen.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">stateful inference</span> <span class="term-tr">durum tutan çıkarım</span></dt>
+      <dt><span class="term-en">stateful inference</span></dt>
       <dd>Modelin her isteği sıfırdan işlemeyip oturum boyunca biriken durumu koruması; ölçeklemeyi zorlaştırır çünkü istek belirli bir sunucuya bağlanır.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">fast path</span> <span class="term-tr">hızlı yol</span></dt>
+      <dt><span class="term-en">fast path</span></dt>
       <dd>Sistemde gecikmeye en duyarlı akış; buraya ek iş koymamak için özel olarak korunur.</dd>
     </div>
   </dl>
@@ -132,9 +132,9 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/gercek-zamanli-sistemler/">#gerçek zamanlı sistemler</a></li>
-  <li><a href="/etiket/gecikme/">#gecikme</a></li>
-  <li><a href="/etiket/mimari/">#mimari</a></li>
+  <li><a href="/etiket/real-time-systems/">#real-time systems</a></li>
+  <li><a href="/etiket/latency/">#latency</a></li>
+  <li><a href="/etiket/architecture/">#architecture</a></li>
   <li><a href="/etiket/llm/">#LLM</a></li>
 </ul>
 
@@ -160,7 +160,7 @@
     <a href="https://engineering.fb.com/2026/08/03/ml-applications/training-gem-at-llm-scale-meta-ads-recommendation-foundation-model/" rel="noopener nofollow" target="_blank">Meta reklam modelini LLM ölçeğinde eğitirken verimliliği ikiye katladı</a>
   </h3>
   <p class="original-title">GEM Training: How Meta Doubled the Efficiency of Its LLM-Scale Ads Foundation Model</p>
-  <div class="prose prose-sm"><p>GEM, Instagram ve Facebook&#x27;un reklam önerilerini besleyen temel model. Meta bunu binlerce GPU üzerinde eğitiyor ve 12 ayda toplam hesap gücünü 4 katına çıkarırken verimliliği (<strong>MFU</strong> — GPU&#x27;nun teorik kapasitesinin ne kadarının gerçekten kullanıldığı) %20-25&#x27;e, yani iki katına çıkarmış.</p><p>Yazının en çarpıcı iddiası şu: LLM&#x27;ler için optimize edilmiş altyapı öneri modellerine doğrudan aktarılamıyor. Sebebi veri: kullanıcı geçmişi kişiden kişiye çok değişken uzunlukta (<strong>jagged input</strong>), ve hepsini en uzun olana göre doldurmak hesabın %50&#x27;sine kadarını çöpe atıyor. Meta bu yüzden kendi çekirdek kütüphanesini yazmış (Jagged Flash Attention gibi) ve MXFP8 gibi çok düşük hassasiyetli sayı formatlarına inmiş.</p></div>
+  <div class="prose prose-sm"><p>GEM, Instagram ve Facebook&#x27;un reklam önerilerini besleyen foundation model. Meta bunu binlerce GPU üzerinde eğitiyor ve 12 ayda toplam hesap gücünü 4 katına çıkarırken verimliliği (<strong>MFU</strong> — GPU&#x27;nun teorik kapasitesinin ne kadarının gerçekten kullanıldığı) %20-25&#x27;e, yani iki katına çıkarmış.</p><p>Yazının en çarpıcı iddiası şu: LLM&#x27;ler için optimize edilmiş altyapı öneri modellerine doğrudan aktarılamıyor. Sebebi veri: kullanıcı geçmişi kişiden kişiye çok değişken uzunlukta (<strong>jagged input</strong>), ve hepsini en uzun olana göre doldurmak hesabın %50&#x27;sine kadarını çöpe atıyor. Meta bu yüzden kendi çekirdek kütüphanesini yazmış (Jagged Flash Attention gibi) ve MXFP8 gibi çok düşük hassasiyetli sayı formatlarına inmiş.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
@@ -170,8 +170,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Bu yazıyı GPU sayısı için değil, <strong>kaynak israfını ölçme alışkanlığı</strong> için oku. &quot;Padding yüzünden hesabın %50&#x27;si boşa gidiyor&quot; tespiti, senin Tradebot projendeki değişken uzunluklu zaman serisi batch&#x27;lerinde birebir geçerli. PyTorch&#x27;ta değişken uzunluklu diziler için <code>pack_padded_sequence</code> ya da nested tensor kullanmak aynı israfı önler. Genel ders: bir işi hızlandırmadan önce kaç biriminin gerçekten işe yaradığını ölç.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Bu yazıyı GPU sayısı için değil, <strong>kaynak israfını ölçme alışkanlığı</strong> için oku. ‘Padding yüzünden hesabın yüzde 50’si boşa gidiyor’ tespiti, değişken uzunluklu zaman serisi batch’lerinde birebir geçerli. PyTorch’ta değişken uzunluklu diziler için <code>pack_padded_sequence</code> ya da nested tensor kullanmak aynı israfı önler. Genel ders: bir işi hızlandırmadan önce kaç biriminin gerçekten işe yaradığını ölç.</p>
     </div>
   </div>
 
@@ -179,11 +179,11 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">MFU (Model FLOPs Utilization)</span> <span class="term-tr">model işlem verimliliği</span></dt>
+      <dt><span class="term-en">MFU (Model FLOPs Utilization)</span></dt>
       <dd>GPU&#39;nun teorik işlem kapasitesinin yüzde kaçının gerçekten faydalı hesaba gittiği. %20 bile büyük ölçekte iyi sayılır.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">jagged / ragged input</span> <span class="term-tr">düzensiz uzunluklu girdi</span></dt>
+      <dt><span class="term-en">jagged / ragged input</span></dt>
       <dd>Batch içindeki örneklerin farklı uzunlukta olması; sabit uzunluğa doldurulunca (padding) hesap israf edilir.</dd>
     </div>
   </dl>
@@ -192,10 +192,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/ml-altyapisi/">#ML altyapısı</a></li>
+  <li><a href="/etiket/ml-infrastructure/">#ML infrastructure</a></li>
   <li><a href="/etiket/gpu/">#GPU</a></li>
-  <li><a href="/etiket/dagitik-egitim/">#dağıtık eğitim</a></li>
-  <li><a href="/etiket/performans/">#performans</a></li>
+  <li><a href="/etiket/distributed-training/">#distributed training</a></li>
+  <li><a href="/etiket/performance/">#performance</a></li>
 </ul>
 
   <a class="readmore" href="https://engineering.fb.com/2026/08/03/ml-applications/training-gem-at-llm-scale-meta-ads-recommendation-foundation-model/" rel="noopener nofollow" target="_blank">
@@ -227,8 +227,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>gRPC senin CV&#x27;nde yok ama backend mülakatlarında &quot;REST mi gRPC mi?&quot; sorusu sık çıkıyor. Buradan alacağın net cevap şu: gRPC HTTP/2 ve TCP üstünde çalışır, asıl kazancı çift yönlü akış (bidirectional streaming) ve sıkı sözleşmedir — ve tam da bu yüzden HTTP-only platformlarda çalıştırmak zordur. Mobit&#x27;teki mesajlaşma uygulaması gibi gerçek zamanlı bir üründe WebSocket yerine gRPC streaming&#x27;i neden seçip seçmeyeceğini bu yazıdan sonra anlatabilirsin.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>gRPC backend mülakatlarında ‘REST mi gRPC mi?’ sorusuyla sık çıkıyor. Buradan alacağın net cevap şu: gRPC HTTP/2 ve TCP üstünde çalışır, asıl kazancı bidirectional streaming ve sıkı sözleşmedir (protobuf), ve tam da bu yüzden yalnızca HTTP destekleyen platformlarda çalıştırmak zordur. Mesajlaşma gibi gerçek zamanlı bir üründe WebSocket yerine gRPC streaming’i neden seçip seçmeyeceğini bu yazıdan sonra anlatabilirsin.</p>
     </div>
   </div>
 
@@ -236,11 +236,11 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">gRPC</span> <span class="term-tr">gRPC uzak yordam çağrısı</span></dt>
+      <dt><span class="term-en">gRPC</span></dt>
       <dd>HTTP/2 üstünde çalışan, şema tabanlı (protobuf) ve akış destekli bir servisler-arası iletişim protokolü.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">Durable Object</span> <span class="term-tr">kalıcı nesne</span></dt>
+      <dt><span class="term-en">Durable Object</span></dt>
       <dd>Cloudflare&#39;ın tekil, durum tutan hesaplama birimi; aynı anahtar hep aynı örneğe yönlenir.</dd>
     </div>
   </dl>
@@ -251,7 +251,7 @@
   <ul class="tags">
   <li><a href="/etiket/edge-computing/">#edge computing</a></li>
   <li><a href="/etiket/grpc/">#gRPC</a></li>
-  <li><a href="/etiket/ag/">#ağ</a></li>
+  <li><a href="/etiket/networking/">#networking</a></li>
   <li><a href="/etiket/api/">#API</a></li>
 </ul>
 
@@ -284,7 +284,7 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
+      <h4 class="label">Pratikte</h4>
       <p>Sen zaten iki dilli çalışıyorsun: Java/Spring Boot backend + Python/LLM pipeline. Bugün bunları muhtemelen REST veya kuyrukla konuşturuyorsun. Bu yazı sana &quot;aradaki sınırın maliyeti nedir?&quot; sorusunu sordurmalı — serileştirme, şema bakımı, tip uyuşmazlığı. Kendi projende de aynı soruyu sor: Python tarafındaki kategorizasyon pipeline&#x27;ı ile Java servisi arasındaki sözleşmeyi kim koruyor, şema değişince ne kırılıyor?</p>
     </div>
   </div>
@@ -293,11 +293,11 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">RPC (Remote Procedure Call)</span> <span class="term-tr">uzak yordam çağrısı</span></dt>
+      <dt><span class="term-en">RPC (Remote Procedure Call)</span></dt>
       <dd>Başka bir süreçteki/makinedeki fonksiyonu yerel fonksiyon gibi çağırma yöntemi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">FFI (Foreign Function Interface)</span> <span class="term-tr">yabancı fonksiyon arayüzü</span></dt>
+      <dt><span class="term-en">FFI (Foreign Function Interface)</span></dt>
       <dd>Bir dilin başka bir dilde yazılmış kodu çağırabilmesini sağlayan köprü katmanı.</dd>
     </div>
   </dl>
@@ -309,7 +309,7 @@
   <li><a href="/etiket/rpc/">#RPC</a></li>
   <li><a href="/etiket/python/">#Python</a></li>
   <li><a href="/etiket/api/">#API</a></li>
-  <li><a href="/etiket/birlikte-calisabilirlik/">#birlikte çalışabilirlik</a></li>
+  <li><a href="/etiket/interoperability/">#interoperability</a></li>
 </ul>
 
   <a class="readmore" href="https://blog.cloudflare.com/python-workers-rpc/" rel="noopener nofollow" target="_blank">
@@ -328,21 +328,21 @@
 </div>
 
   <h3 class="brief-title">
-    <a href="https://cloud.google.com/blog/products/databases/unify-public-and-private-data-with-data-commons-on-spanner-graph/" rel="noopener nofollow" target="_blank">Önbellek katmanından graph veritabanına: Data Commons&#39;ın mimari göçü</a>
+    <a href="https://cloud.google.com/blog/products/databases/unify-public-and-private-data-with-data-commons-on-spanner-graph/" rel="noopener nofollow" target="_blank">Cache katmanından graph veritabanına: Data Commons&#39;ın mimari göçü</a>
   </h3>
   <p class="original-title">Unify public and private data with Data Commons on Spanner Graph</p>
-  <div class="prose prose-sm"><p>Data Commons, BM&#x27;den Dünya Bankası&#x27;na 100+ kaynaktan gelen 400 milyar veri noktasını birleştiren açık bir bilgi grafiği. İlk kurulduğunda graph veritabanı teknolojisi olgun olmadığı için Bigtable üzerinde <strong>önceden hesaplanmış önbellek</strong> katmanıyla çalışıyordu.</p><p>Şimdi Spanner Graph&#x27;a taşınmışlar ve kazanç listesi klasik bir &quot;önbellek borcu&quot; hikâyesi: önceden hesaplanan indeksler her güncellemede pahalı bir yeniden inşa gerektiriyordu; artık tek bir veri kümesini artımlı olarak güncelleyebiliyorlar. Ayrıca <code>kıta → ülke → il → ilçe</code> gibi çok adımlı gezinmeler sorgu anında yapılabiliyor — bu da <strong>GraphRAG</strong> akışlarının önünü açıyor.</p></div>
+  <div class="prose prose-sm"><p>Data Commons, BM&#x27;den Dünya Bankası&#x27;na 100+ kaynaktan gelen 400 milyar veri noktasını birleştiren açık bir knowledge graph. İlk kurulduğunda graph veritabanı teknolojisi olgun olmadığı için Bigtable üzerinde <strong>önceden hesaplanmış cache</strong> katmanıyla çalışıyordu.</p><p>Şimdi Spanner Graph&#x27;a taşınmışlar ve kazanç listesi klasik bir &quot;cache borcu&quot; hikâyesi: önceden hesaplanan indeksler her güncellemede pahalı bir yeniden inşa gerektiriyordu; artık tek bir veri kümesini artımlı olarak güncelleyebiliyorlar. Ayrıca <code>kıta → ülke → il → ilçe</code> gibi çok adımlı gezinmeler sorgu anında yapılabiliyor — bu da <strong>GraphRAG</strong> akışlarının önünü açıyor.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
     <ol>
-<li><span>Önceden hesaplanmış önbellek hızlıdır ama güncellemeyi pahalılaştırır; bu takas her sistemde karşına çıkar.</span></li><li><span>Çok adımlı ilişki sorgularını uygulama katmanında değil veritabanında yapmak kod karmaşıklığını ciddi düşürüyor.</span></li><li><span>GraphRAG: modele düz metin parçaları yerine grafik üzerinde gezinerek toplanmış bağlam vermek.</span></li>    </ol>
+<li><span>Önceden hesaplanmış cache hızlıdır ama güncellemeyi pahalılaştırır; bu takas her sistemde karşına çıkar.</span></li><li><span>Çok adımlı ilişki sorgularını uygulama katmanında değil veritabanında yapmak kod karmaşıklığını ciddi düşürüyor.</span></li><li><span>GraphRAG: modele düz metin parçaları yerine grafik üzerinde gezinerek toplanmış bağlam vermek.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Mobit&#x27;teki AI destekli doküman arama mimarisi ile doğrudan ilgili. Klasik RAG belgeleri parçalara bölüp embedding benzerliğiyle getirir; ama &quot;bu ihale hangi firmaya bağlı, o firmanın hangi belgeleri var?&quot; gibi ilişkisel sorularda benzerlik yetmez. Bu yazı sana ilişkinin kendisini modellemenin alternatifini gösteriyor. PostgreSQL kullandığın için Spanner&#x27;a geçmene gerek yok — recursive CTE ile aynı çok adımlı gezinmeyi yapabilirsin; önemli olan deseni tanımak.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>AI destekli doküman arama mimarisiyle doğrudan ilgili. Klasik RAG belgeleri parçalara bölüp embedding benzerliğiyle getirir ama ‘bu ihale hangi firmaya bağlı, o firmanın hangi belgeleri var?’ gibi ilişkisel sorularda benzerlik yetmez. Bu yazı ilişkinin kendisini modellemenin alternatifini gösteriyor. PostgreSQL kullanıyorsan Spanner’a geçmen gerekmez: recursive CTE ile aynı çok adımlı gezinmeyi yapabilirsin; önemli olan deseni tanımak.</p>
     </div>
   </div>
 
@@ -350,15 +350,15 @@
     <summary class="label">Sözlük · 3 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">knowledge graph</span> <span class="term-tr">bilgi grafiği</span></dt>
-      <dd>Varlıkları düğüm, aralarındaki ilişkileri kenar olarak tutan veri modeli.</dd>
+      <dt><span class="term-en">knowledge graph</span></dt>
+      <dd>Varlıkları node, aralarındaki ilişkileri kenar olarak tutan veri modeli.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">GraphRAG</span> <span class="term-tr">grafik tabanlı bağlam getirme</span></dt>
+      <dt><span class="term-en">GraphRAG</span></dt>
       <dd>RAG&#39;de bağlamı düz benzerlik yerine grafik üzerinde ilişkileri izleyerek toplama yöntemi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">incremental update</span> <span class="term-tr">artımlı güncelleme</span></dt>
+      <dt><span class="term-en">incremental update</span></dt>
       <dd>Tüm veriyi yeniden işlemek yerine yalnızca değişen kısmı güncelleme.</dd>
     </div>
   </dl>
@@ -367,10 +367,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/veritabani/">#veritabanı</a></li>
+  <li><a href="/etiket/database/">#database</a></li>
   <li><a href="/etiket/graph/">#graph</a></li>
   <li><a href="/etiket/rag/">#RAG</a></li>
-  <li><a href="/etiket/mimari/">#mimari</a></li>
+  <li><a href="/etiket/architecture/">#architecture</a></li>
 </ul>
 
   <a class="readmore" href="https://cloud.google.com/blog/products/databases/unify-public-and-private-data-with-data-commons-on-spanner-graph/" rel="noopener nofollow" target="_blank">
@@ -412,7 +412,7 @@
       </li>
       <li>
         <a href="#5da743913f12">
-          <span class="toc-title">Önbellek katmanından graph veritabanına: Data Commons&#39;ın mimari göçü</span>
+          <span class="toc-title">Cache katmanından graph veritabanına: Data Commons&#39;ın mimari göçü</span>
           <span class="toc-meta">Google Cloud Blog · 5 dk</span>
         </a>
       </li>
@@ -455,7 +455,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

@@ -88,7 +88,7 @@
   </h2>
   <p class="original-title">Bringing Private Processing to Meta AI Glasses</p>
 
-  <div class="prose"><p>Gözlükler yapay zekâ için çok uygun bir form: kullanıcının bağlamını diğer cihazlardan daha iyi anlıyor ve telefona uzanmadan yardım ediyor. Çağrı yapmak ya da mesajı sesli cevaplamak gibi işler cihazın içinde bitiyor; ama daha gelişmiş özellikler, gözlüğe sığmayacak kadar büyük modeller gerektiriyor. Üstelik bir asistanın gerçekten faydalı olması için <strong>durum tutması</strong> ve günler ya da haftalar boyunca bağlam kurması, arka planda çalışması lazım. Yani iş buluta taşınmak zorunda ve asıl soru şu: kullanıcıyı derinden tanıyan kişiselleştirilmiş bir yapay zekâyı, gelişmiş gizlilikle nasıl kurarsın?</p><p>Meta&#x27;nın cevabı <strong>Private Processing</strong>: yapay zekâ iş yüklerini <strong>gizli sanal makineler (CVM)</strong> içinde çalıştıran, güven sınırını gözlükten bulut veri merkezlerine kadar uzatan ve Meta dahil kimsenin verileri okuyamadığı bir gizli hesaplama altyapısı. Temel fikir şu: endüstri veriyi iki durumda şifreliyordu, <strong>diskte</strong> (at rest) ve <strong>ağda</strong> (in transit). Açık nokta hep üçüncü durumdu: <strong>kullanımdaki veri</strong>. İşlenmek için bellekte çözülmesi gerekiyor ve orada ana işletim sistemine, hipervizöre ve altyapı operatörüne açık kalıyordu. Gizli hesaplama (confidential computing) bu boşluğu kapatıyor.</p><p>Donanım temeli <strong>güvenilir yürütme ortamı (TEE)</strong>: bazı CPU ve GPU&#x27;larda bulunan, bir CVM&#x27;in belleğini işlemcinin şifrelediği yetenek. Confidential Computing Consortium&#x27;a göre TEE üç garanti veriyor: <strong>veri gizliliği</strong> (CVM belleğini, Meta ve ana işletim sistemi dahil kimse okuyamaz), <strong>veri bütünlüğü</strong> (kimse veri ekleyemez, çıkaramaz ya da değiştiremez) ve <strong>kod bütünlüğü</strong> (yüklendikten sonra CVM&#x27;de çalışan kodu kimse değiştiremez). İstemci, yalnızca çipin içinde bulunan bir anahtarla imzalanmış, CVM&#x27;in yüklediği yazılım imajının ölçümünü taşıyan bir <strong>uzaktan doğrulama (remote attestation) raporu</strong> talep ediyor ve imzanın çip üreticisinin yayımladığı kök anahtara bağlandığını kontrol ediyor. Private Processing, donanımın sağladığı gizlilik ve doğrulamanın üstüne <strong>hedeflenemezlik</strong> (non-targetability) ve şifreli depolama ekliyor. Bu, 2025&#x27;te WhatsApp ve Meta AI uygulaması için duyurulan yaklaşımın gözlüklere genişletilmesi.</p></div>
+  <div class="prose"><p>Gözlükler yapay zekâ için çok uygun bir form: kullanıcının bağlamını diğer cihazlardan daha iyi anlıyor ve telefona uzanmadan yardım ediyor. Çağrı yapmak ya da mesajı sesli cevaplamak gibi işler cihazın içinde bitiyor; ama daha gelişmiş özellikler, gözlüğe sığmayacak kadar büyük modeller gerektiriyor. Üstelik bir asistanın gerçekten faydalı olması için <strong>durum tutması</strong> ve günler ya da haftalar boyunca bağlam kurması, arka planda çalışması lazım. Yani iş buluta taşınmak zorunda ve asıl soru şu: kullanıcıyı derinden tanıyan kişiselleştirilmiş bir yapay zekâyı, gelişmiş gizlilikle nasıl kurarsın?</p><p>Meta&#x27;nın cevabı <strong>Private Processing</strong>: yapay zekâ iş yüklerini <strong>gizli sanal makineler (CVM)</strong> içinde çalıştıran, güven sınırını gözlükten bulut veri merkezlerine kadar uzatan ve Meta dahil kimsenin verileri okuyamadığı bir confidential computing altyapısı. Temel fikir şu: endüstri veriyi iki durumda şifreliyordu, <strong>diskte</strong> (at rest) ve <strong>ağda</strong> (in transit). Açık nokta hep üçüncü durumdu: <strong>kullanımdaki veri</strong>. İşlenmek için bellekte çözülmesi gerekiyor ve orada ana işletim sistemine, hipervizöre ve altyapı operatörüne açık kalıyordu. Confidential computing (confidential computing) bu boşluğu kapatıyor.</p><p>Donanım temeli <strong>trusted execution environment (TEE) (TEE)</strong>: bazı CPU ve GPU&#x27;larda bulunan, bir CVM&#x27;in belleğini işlemcinin şifrelediği yetenek. Confidential Computing Consortium&#x27;a göre TEE üç garanti veriyor: <strong>veri gizliliği</strong> (CVM belleğini, Meta ve ana işletim sistemi dahil kimse okuyamaz), <strong>veri bütünlüğü</strong> (kimse veri ekleyemez, çıkaramaz ya da değiştiremez) ve <strong>kod bütünlüğü</strong> (yüklendikten sonra CVM&#x27;de çalışan kodu kimse değiştiremez). İstemci, yalnızca çipin içinde bulunan bir anahtarla imzalanmış, CVM&#x27;in yüklediği yazılım imajının ölçümünü taşıyan bir <strong>remote attestation (remote attestation) raporu</strong> talep ediyor ve imzanın çip üreticisinin yayımladığı kök anahtara bağlandığını kontrol ediyor. Private Processing, donanımın sağladığı gizlilik ve doğrulamanın üstüne <strong>non-targetability</strong> (non-targetability) ve şifreli depolama ekliyor. Bu, 2025&#x27;te WhatsApp ve Meta AI uygulaması için duyurulan yaklaşımın gözlüklere genişletilmesi.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
@@ -102,8 +102,8 @@
       <p>Kişisel veriyle çalışan yapay zekâ ürünlerinin ana çatışması ‘kullanışlılık için buluta gönder’ ile ‘gizlilik için gönderme’ arasındadır. Confidential computing üçüncü bir yol açıyor: gönder ama operatör dahil kimse okuyamasın ve bunu istemci doğrulayabilsin.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Bunu bugün kendi ölçeğinde uygulayamazsın ama iki şeyi hemen kullanabilirsin. Birincisi <strong>kavram</strong>: AWS Nitro Enclaves ve Azure Confidential VM gibi hazır servisler var; Mobit’in tutacağı hassas ihale belgeleri ya da KlioAI’daki ses kayıtları için ‘operatör dahil kimse görmesin’ gereksinimi çıkarsa çözümün adı bu. İkincisi <strong>mülakat vokabüleri</strong>: ‘at rest, in transit, in use’ üçlüsünü ve attestation fikrini anlatabilmek, güvenlik mimarisini kavradığını gösterir. Pratik bir ilk adım: uygulamandaki hassas alanları (TC kimlik no, ses kaydı) uygulama düzeyinde şifrele (<code>pgcrypto</code> ya da JPA AttributeConverter), bunu veritabanı yöneticisi bile okuyamayacak hâle getirir.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Bunu bugün kendi ölçeğinde uygulayamazsın ama iki şeyi hemen kullanabilirsin. Birincisi <strong>kavram</strong>: AWS Nitro Enclaves ve Azure Confidential VM gibi hazır servisler var; hassas belgeler ya da ses kayıtları için ‘operatör dahil kimse görmesin’ gereksinimi çıkarsa çözümün adı bu. İkincisi <strong>mülakat vokabüleri</strong>: ‘at rest, in transit, in use’ üçlüsünü ve attestation fikrini anlatabilmek, güvenlik mimarisini kavradığını gösterir. Pratik bir ilk adım: uygulamandaki hassas alanları (TC kimlik no, ses kaydı) uygulama düzeyinde şifrele (<code>pgcrypto</code> ya da JPA AttributeConverter), bu veritabanı yöneticisi bile okuyamayacak hâle getirir.</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">confidential computing</span> <span class="term-tr">gizli hesaplama</span></dt>
+      <dt><span class="term-en">confidential computing</span></dt>
       <dd>Verinin işlenirken bile (bellekte) donanım düzeyinde korunduğu hesaplama yaklaşımı.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">trusted execution environment (TEE)</span> <span class="term-tr">güvenilir yürütme ortamı</span></dt>
+      <dt><span class="term-en">trusted execution environment (TEE)</span></dt>
       <dd>Belleği işlemci tarafından şifrelenen, içindeki kod ve veriyi ana sistemden yalıtan donanım özelliği.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">remote attestation</span> <span class="term-tr">uzaktan doğrulama</span></dt>
+      <dt><span class="term-en">remote attestation</span></dt>
       <dd>Bir sistemin hangi yazılımı çalıştırdığını donanım imzalı bir raporla uzaktan ispatlaması.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">non-targetability</span> <span class="term-tr">hedeflenemezlik</span></dt>
+      <dt><span class="term-en">non-targetability</span></dt>
       <dd>Operatörün belirli bir kullanıcıyı ayırıp ona özel işlem ya da kod uygulayamaması.</dd>
     </div>
   </dl>
@@ -132,10 +132,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/gizlilik/">#gizlilik</a></li>
+  <li><a href="/etiket/privacy/">#privacy</a></li>
   <li><a href="/etiket/confidential-computing/">#confidential computing</a></li>
-  <li><a href="/etiket/guvenlik/">#güvenlik</a></li>
-  <li><a href="/etiket/mimari/">#mimari</a></li>
+  <li><a href="/etiket/security/">#security</a></li>
+  <li><a href="/etiket/architecture/">#architecture</a></li>
 </ul>
 
   <a class="readmore" href="https://engineering.fb.com/2026/09/23/security/private-processing-meta-ai-glasses/" rel="noopener nofollow" target="_blank">
@@ -181,7 +181,7 @@
     </a>
     <a class="pager-link pager-next" href="/sayi/2026-09-25/" rel="next">
       <span class="pager-label">Sonraki sayı · 25 Eylül 2026 →</span>
-      <span class="pager-title">Bulut kimliğini kendi kimliğine çevirmek: iki ayrı kanıtla iş yükü doğrulaması</span>
+      <span class="pager-title">Bulut kimliğini kendi kimliğine çevirmek: iki ayrı kanıtla workload attestation</span>
     </a>
   </nav>
 
@@ -198,7 +198,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

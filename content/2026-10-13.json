@@ -1,6 +1,6 @@
 {
   "date": "2026-10-13",
-  "intro": "Toplu iş yapan bir araç yazmak, tek bir komutu yazmaktan çok ‘yanlış giderse ne olur’ sorusunu cevaplamaktır. AWS’nin DynamoDB aracını yazanlar bunu iki cümleyle özetlemiyor, somut kararlarla anlatıyor. Yanında milyonlarca küçük veritabanını tek bir kontrol düzleminde yöneten Cloudflare D1 var.",
+  "intro": "Toplu iş yapan bir araç yazmak, tek bir komutu yazmaktan çok ‘yanlış giderse ne olur’ sorusunu cevaplamaktır. AWS’nin DynamoDB aracını yazanlar bunu iki cümleyle özetlemiyor, somut kararlarla anlatıyor. Yanında milyonlarca küçük veritabanını tek bir control plane’de yöneten Cloudflare D1 var.",
   "articles": [
     {
       "id": "0f52f6bf973e",
@@ -11,36 +11,36 @@
       "title_tr": "Bir tabloyu silmeden önce maliyeti söyle: DynamoDB Bulk Executor’ı yazarken öğrenilenler",
       "url": "https://aws.amazon.com/blogs/architecture/bulk-executor-for-amazon-dynamodb-part-2-lessons-we-learned-the-hard-way/",
       "published": "2026-10-13",
-      "summary": "Bulk Executor, bir DynamoDB tablosundaki çok sayıda ya da tüm öğeler üzerinde toplu işlem yapan açık kaynak bir araç: eski kayıtları silmek, iki tabloyu karşılaştırmak gibi. Yazının ikinci bölümü aracın nasıl yazıldığını, tasarım tercihlerini ve çarpılan duvarları anlatıyor. Üç gereksinim kararların çoğunu belirlemiş: komut yerel bir betik gibi hissettirmeli (anlık çıktı, `^C` ile kesilebilmeli), yüzlerce paralel işçiye altyapı yönetmeden ölçeklenmeli ve yeni komut eklemek çerçeveye sıkı bağlı olmamalı.\n\n**Neden AWS Glue?** Paralel yürütmeyi Glue sürüyor: sunucusuz, işi yüzlerce işçiye dağıtıyor ve hazır bir DynamoDB bağlayıcısı var. SQS ile Lambda, Fargate, EMR ve Ray da düşünülmüş. Spark DataFrame’in `filter`, `orderBy` ve `limit` yetenekleri sayesinde ilk komut olan `find`, `--where`, `--orderby`, `--limit` parametreleriyle neredeyse hiç kod yazılmadan çıkmış. Bağlayıcının bir bedeli var: veri tiplerini tam temsil etmiyor, örneğin string kümesi ile string listesini ayırt etmiyor.\n\n**Çalışmadan önce maliyet tahmini.** Büyük tablolarda iş başlamadan fiyat veriliyor. Okuma için tablonun metadata’sındaki boyuttan (yaklaşık 6 saatte bir güncellenir, yani yeni yüklenmiş tablo olduğundan küçük görünebilir) tam tarama için gereken okuma birimi hesaplanıp Pricing API’deki bölge fiyatıyla çarpılıyor. Provisioned modda tahmin zor olduğundan sezgisel bir kural: on-demand fiyatın üçte ikisi (1,5’e bölme). Mantık: yüzde 100 kullanımda provisioned maliyet on-demand’ın yaklaşık yüzde 30’u, yüzde 50 kullanımda yaklaşık yüzde 60’ı; yüzde 100’e pratikte ulaşılamadığı için yüzde 67 seçilmiş, çünkü ‘biraz yüksek söylemek daha iyi’. `delete` iki aşamalı fiyatlıyor: önce okuma maliyeti, eşleşenler bulunduktan sonra yazma maliyeti. Glue işlem birimi (DPU) maliyeti tahmin edilmiyor, çünkü büyük işlerde DynamoDB maliyetinin küçük bir kesri çıkıyor.\n\n**Güvenlik kararları.** `^C` yalnızca istemci betiğini durduruyor, Glue işi zaman aşımına kadar çalışmaya devam ediyordu; çözüm, kesme sinyalini kodla yakalayıp bir bayrak koymak ve sürekli çalışan bir izleyici döngüsünün işi durdurması. Silme gibi değiştiren her komut için tabloda **zamana göre kurtarma (PITR) zorunlu**: `--where` beklenenden fazlasını silerse geri dönülebilsin. Bunun için PITR’ye dayalı artımlı dışa aktarmayla yazmaları yerinde geri alan bir `revert-export` komutu da yazılmış.\n\n**Çıktı ve hatalar.** İlk sürüm Glue çıktısını CloudWatch Logs’tan yoklayarak alıyordu: gecikmeli ve parça parça. CloudWatch Live Tail’e geçince çıktı neredeyse anlık akmaya başladı; ama Live Tail saniyede en çok 500 olay gösteriyor, fazlasında örnekleme yapıyor. Çözüm: büyük çıktıyı S3’e yazmak, terminale yalnızca ilk 10 sonucu ve tam veriye bir bağlantı basmak. Hata yönetiminde dört desen: istemci tarafında parametreleri Glue başlamadan doğrulamak (yazım hatası yerelde yakalanır); Spark accumulator ile yüzlerce aynı istisna yerine ilkini tek mesaj olarak göstermek; `AccessDeniedException`, `OutOfMemoryError` gibi kendiliğinden düzelmeyecek hataları akıştan tanıyıp işi hemen durdurmak; ve ‘where’ cümlesindeki yazım hatası için korkutucu yığın izi yerine yalnızca mesaj gösteren özel bir istisna türü.\n\n**Bağlayıcı ile doğrudan erişim.** Bağlayıcı DataFrame okuyup yazıyor ama öğe silemiyor; silme için doğrudan DynamoDB API’si ve `batch_writer` kullanılmış, Spark bölümleri paralel çalıştırmış. Bu desen o kadar iyi çalışmış ki ilk komutlar da yeniden düşünülmüş: bağlayıcısız `scancount` (bölümlü tarama, filtreyi sunucuda uygulayıp yalnızca sayıyı döndürüyor) sürekli daha hızlı çıkmış, çünkü bağlayıcı tüm öğeleri Glue bağlamına yüklüyor. `diff` ve `copy` ise hız için değil, **veri tipi aslına uygunluğu** için doğrudan okuyor. `diff` her görevin çıktısını kendi S3 nesnesine yazıyor, sürücüye toplamıyor, çünkü o ölçeklenmez. Bağlayıcının yerleşik hız sınırı var; doğrudan API çağıran komutlarda (`delete`, `fill`, `copy`, `scancount`) yok.",
+      "summary": "Bulk Executor, bir DynamoDB tablosundaki çok sayıda ya da tüm öğeler üzerinde toplu işlem yapan açık kaynak bir araç: eski kayıtları silmek, iki tabloyu karşılaştırmak gibi. Yazının ikinci bölümü aracın nasıl yazıldığını, tasarım tercihlerini ve çarpılan duvarları anlatıyor. Üç gereksinim kararların çoğunu belirlemiş: komut yerel bir betik gibi hissettirmeli (anlık çıktı, `^C` ile kesilebilmeli), yüzlerce paralel işçiye altyapı yönetmeden ölçeklenmeli ve yeni komut eklemek çerçeveye sıkı bağlı olmamalı.\n\n**Neden AWS Glue?** Paralel yürütmeyi Glue sürüyor: serverless, işi yüzlerce işçiye dağıtıyor ve hazır bir DynamoDB bağlayıcısı var. SQS ile Lambda, Fargate, EMR ve Ray da düşünülmüş. Spark DataFrame’in `filter`, `orderBy` ve `limit` yetenekleri sayesinde ilk komut olan `find`, `--where`, `--orderby`, `--limit` parametreleriyle neredeyse hiç kod yazılmadan çıkmış. Bağlayıcının bir bedeli var: veri tiplerini tam temsil etmiyor, örneğin string kümesi ile string listesini ayırt etmiyor.\n\n**Çalışmadan önce maliyet tahmini.** Büyük tablolarda iş başlamadan fiyat veriliyor. Okuma için tablonun metadata’sındaki boyuttan (yaklaşık 6 saatte bir güncellenir, yani yeni yüklenmiş tablo olduğundan küçük görünebilir) tam tarama için gereken okuma birimi hesaplanıp Pricing API’deki bölge fiyatıyla çarpılıyor. Provisioned modda tahmin zor olduğundan sezgisel bir kural: on-demand fiyatın üçte ikisi (1,5’e bölme). Mantık: yüzde 100 kullanımda provisioned maliyet on-demand’ın yaklaşık yüzde 30’u, yüzde 50 kullanımda yaklaşık yüzde 60’ı; yüzde 100’e pratikte ulaşılamadığı için yüzde 67 seçilmiş, çünkü ‘biraz yüksek söylemek daha iyi’. `delete` iki aşamalı fiyatlıyor: önce okuma maliyeti, eşleşenler bulunduktan sonra yazma maliyeti. Glue işlem birimi (DPU) maliyeti tahmin edilmiyor, çünkü büyük işlerde DynamoDB maliyetinin küçük bir kesri çıkıyor.\n\n**Güvenlik kararları.** `^C` yalnızca istemci betiğini durduruyor, Glue işi zaman aşımına kadar çalışmaya devam ediyordu; çözüm, kesme sinyalini kodla yakalayıp bir bayrak koymak ve sürekli çalışan bir izleyici döngüsünün işi durdurması. Silme gibi değiştiren her komut için tabloda **zamana göre kurtarma (PITR) zorunlu**: `--where` beklenenden fazlasını silerse geri dönülebilsin. Bunun için PITR’ye dayalı artımlı dışa aktarmayla yazmaları yerinde geri alan bir `revert-export` komutu da yazılmış.\n\n**Çıktı ve hatalar.** İlk sürüm Glue çıktısını CloudWatch Logs’tan yoklayarak alıyordu: gecikmeli ve parça parça. CloudWatch Live Tail’e geçince çıktı neredeyse anlık akmaya başladı; ama Live Tail saniyede en çok 500 olay gösteriyor, fazlasında örnekleme yapıyor. Çözüm: büyük çıktıyı S3’e yazmak, terminale yalnızca ilk 10 sonucu ve tam veriye bir bağlantı basmak. Hata yönetiminde dört desen: istemci tarafında parametreleri Glue başlamadan doğrulamak (yazım hatası yerelde yakalanır); Spark accumulator ile yüzlerce aynı istisna yerine ilkini tek mesaj olarak göstermek; `AccessDeniedException`, `OutOfMemoryError` gibi kendiliğinden düzelmeyecek hataları akıştan tanıyıp işi hemen durdurmak; ve ‘where’ cümlesindeki yazım hatası için korkutucu yığın izi yerine yalnızca mesaj gösteren özel bir istisna türü.\n\n**Bağlayıcı ile doğrudan erişim.** Bağlayıcı DataFrame okuyup yazıyor ama öğe silemiyor; silme için doğrudan DynamoDB API’si ve `batch_writer` kullanılmış, Spark bölümleri paralel çalıştırmış. Bu desen o kadar iyi çalışmış ki ilk komutlar da yeniden düşünülmüş: bağlayıcısız `scancount` (segmented scan, filtreyi sunucuda uygulayıp yalnızca sayıyı döndürüyor) sürekli daha hızlı çıkmış, çünkü bağlayıcı tüm öğeleri Glue bağlamına yüklüyor. `diff` ve `copy` ise hız için değil, **veri tipi aslına uygunluğu** için doğrudan okuyor. `diff` her görevin çıktısını kendi S3 nesnesine yazıyor, sürücüye toplamıyor, çünkü o ölçeklenmez. Bağlayıcının yerleşik rate limit var; doğrudan API çağıran komutlarda (`delete`, `fill`, `copy`, `scancount`) yok.",
       "key_points": [
         "Yıkıcı bir işlem başlamadan maliyetini ve etkisini göstermek, aracın en değerli özelliğidir.",
-        "Değiştiren komutlar için geri alma yolunu (PITR) zorunlu kılmak, ‘yanlış where’ riskini güvenli hâle getirir.",
+        "Değiştiren komutlar için rollback yolunu (PITR) zorunlu kılmak, ‘yanlış where’ riskini güvenli hâle getirir.",
         "‘Biraz yüksek söylemek’ tahminde iyi bir yanlılıktır: kullanıcı sürprizle karşılaşmaz.",
         "Bir kütüphane bağlayıcısı kolaylık sağlar ama tipleri bozabilir; doğruluk gerekince doğrudan API’ye in.",
         "Hatayı erken yakala, tek mesaja indir ve son satırda başarılı mı başarısız mı olduğunu söyle."
       ],
-      "why_it_matters": "Üretim verisine dokunan her betik, eninde sonunda yanlış bir koşulla çalıştırılır. Bu yazı, ‘dikkatli ol’ demek yerine aracın içine fren koymanın somut örnekleri: önce fiyat, zorunlu geri alma, erken durdurma.",
-      "for_you": "Bu desenleri bugün kendi betiklerine ekleyebilirsin. Tradebot’ta eski piyasa verisini silen ya da Mobit’te dokümanları toplu yeniden indeksleyen bir betik yazarsan: **(1)** varsayılan olarak `--dry-run` çalıştır ve ‘şu kadar kayıt etkilenecek’ diye yaz; gerçekten uygulamak için ayrı bir `--yes` iste. **(2)** Silmeden önce o tablonun yedeğinin ya da silinen satırların bir arşiv tablosunun var olduğunu kontrol et. **(3)** Toplu işi küçük gruplar hâlinde yürüt ve ilk gruptaki hatada dur. Yazının DynamoDB’ye özgü kısmı (Glue, PITR) şimdi lazım olmayabilir, ama ‘önce fiyat, sonra izin, sonra uygula’ sırası her veritabanı için geçerli.",
+      "why_it_matters": "Üretim verisine dokunan her betik, eninde sonunda yanlış bir koşulla çalıştırılır. Bu yazı, ‘dikkatli ol’ demek yerine aracın içine fren koymanın somut örnekleri: önce fiyat, zorunlu rollback, erken durdurma.",
+      "for_you": "Bu desenleri bugün kendi betiklerine ekleyebilirsin. Eski veriyi silen ya da dokümanları toplu yeniden indeksleyen bir betik yazarsan: **(1)** varsayılan olarak `--dry-run` çalıştır ve ‘şu kadar kayıt etkilenecek’ diye yaz; gerçekten uygulamak için ayrı bir `--yes` iste. **(2)** Silmeden önce o tablonun backup’ının ya da silinen satırların bir arşiv tablosunun var olduğunu kontrol et. **(3)** Toplu işi küçük gruplar hâlinde yürüt ve ilk gruptaki hatada dur. Yazının DynamoDB’ye özgü kısmı (Glue, PITR) şimdi lazım olmayabilir ama ‘önce fiyat, sonra izin, sonra uygula’ sırası her veritabanı için geçerli.",
       "terms": [
         {
           "en": "point-in-time recovery (PITR)",
-          "tr": "zamana göre geri yükleme",
+          "tr": "point-in-time recovery (PITR)",
           "definition": "Veritabanını geçmişteki belirli bir ana döndürme yeteneği."
         },
         {
           "en": "dry run",
-          "tr": "kuru çalıştırma",
+          "tr": "dry run",
           "definition": "Hiçbir şeyi değiştirmeden bir işlemin ne yapacağını gösteren deneme koşusu."
         },
         {
           "en": "segmented scan",
-          "tr": "bölümlü tarama",
+          "tr": "segmented scan",
           "definition": "Tabloyu birbirinden bağımsız dilimlere bölüp her dilimi ayrı işçiyle paralel taramak."
         },
         {
           "en": "AWS Glue",
           "tr": "AWS Glue",
-          "definition": "İşi birçok işçiye dağıtan sunucusuz veri işleme servisi (Spark tabanlı)."
+          "definition": "İşi birçok işçiye dağıtan serverless veri işleme servisi (Spark tabanlı)."
         },
         {
           "en": "idempotent",
@@ -51,8 +51,8 @@
       "tags": [
         "DynamoDB",
         "AWS",
-        "araç tasarımı",
-        "güvenlik"
+        "tooling",
+        "security"
       ],
       "difficulty": "orta",
       "read_minutes": 13,
@@ -66,37 +66,37 @@
       "source_key": "cloudflare",
       "source_name": "Cloudflare Blog",
       "title": "Under the hood, off the hot path: how D1 scales to millions of databases",
-      "title_tr": "Milyonlarca küçük veritabanı: D1’in kontrol düzlemi neden sorgu yolunun dışında",
+      "title_tr": "Milyonlarca küçük veritabanı: D1’in control plane neden sorgu yolunun dışında",
       "url": "https://blog.cloudflare.com/d1-control-plane/",
       "published": "2026-10-13",
-      "summary": "Geleneksel mimari uygulama başına bir iki büyük veritabanı kümesi ve bir bağlantı havuzu varsayar. Yapay zekâ destekli geliştirme platformları bu modeli ters çeviriyor: kullanıcı, uygulama, önizleme ortamı ya da kiracı başına bir küçük veritabanı. Cloudflare D1 (SQLite tabanlı, sunucusuz) buna uygun: her veritabanı bir SQLite Durable Object’i ile destekleniyor. 8 Ekim 2026 itibarıyla canlı veritabanı sayısı bir yılda 15, iki yılda 65 kat; günlük aktif veritabanı bir yılda 18 kat artmış.\n\nYazının ana sorusu: milyonlarca veritabanını yöneten kontrol düzlemini, her sorguyu merkezi bir darboğazdan geçirmeden nasıl ölçeklersin? İlkeleri açık: her süreci başarısızlık ve idempotans düşünülerek tasarla; veri düzlemi (sorgular) yolunda merkezi tek bölgeli bileşen olmasın; kritik yönlendirme metadata’sını küresel dağıtık Workers KV’de tut ki önbellek ıskalaması merkezi veritabanına nadiren gitsin; merkezi Postgres’e Hyperdrive ile eriş; toplamları önceden hesapla ki kullanıcı isteği sırasında tarama sorgusu çalışmasın; güçlü tutarlılık gerekmeyen bileşenler arasında nihai tutarlılık ve kuyruk kullan; gerçekçi yükle test et. İş ayrımı net: sorgu ile ilgili her şey veri düzlemi ve her zaman uçta; oluşturma, silme, listeleme gibi işler kontrol düzlemi ve merkezi bileşenlere bağımlı olabilir.",
+      "summary": "Geleneksel mimari uygulama başına bir iki büyük veritabanı kümesi ve bir connection pool varsayar. Yapay zekâ destekli geliştirme platformları bu modeli ters çeviriyor: kullanıcı, uygulama, önizleme ortamı ya da tenant başına bir küçük veritabanı. Cloudflare D1 (SQLite tabanlı, serverless) buna uygun: her veritabanı bir SQLite Durable Object’i ile destekleniyor. 8 Ekim 2026 itibarıyla canlı veritabanı sayısı bir yılda 15, iki yılda 65 kat; günlük aktif veritabanı bir yılda 18 kat artmış.\n\nYazının ana sorusu: milyonlarca veritabanını yöneten control plane’i, her sorguyu merkezi bir darboğazdan geçirmeden nasıl ölçeklersin? İlkeleri açık: her süreci başarısızlık ve idempotency düşünülerek tasarla; data plane (sorgular) yolunda merkezi tek bölgeli bileşen olmasın; kritik yönlendirme metadata’sını küresel dağıtık Workers KV’de tut ki cache ıskalaması merkezi veritabanına nadiren gitsin; merkezi Postgres’e Hyperdrive ile eriş; toplamları önceden hesapla ki kullanıcı isteği sırasında tarama sorgusu çalışmasın; strong consistency gerekmeyen bileşenler arasında eventual consistency ve kuyruk kullan; gerçekçi yükle test et. İş ayrımı net: sorgu ile ilgili her şey data plane ve her zaman uçta; oluşturma, silme, listeleme gibi işler control plane ve merkezi bileşenlere bağımlı olabilir.",
       "key_points": [
-        "Veri düzlemi (hızlı yol) ile kontrol düzlemi (yönetim) ayrı tasarlanmalı; ikincisinin yavaşlığı birincisine yansımamalı.",
-        "Okuması çok, değişmesi az metadata’yı önbellekte ya da dağıtık KV’de tut.",
+        "Data plane (fast path) ile control plane (yönetim) ayrı tasarlanmalı; ikincisinin yavaşlığı birincisine yansımamalı.",
+        "Okuması çok, değişmesi az metadata’yı cache’te ya da dağıtık KV’de tut.",
         "Kullanıcı isteği sırasında tarama yapmak yerine toplamları önceden hesapla."
       ],
       "why_it_matters": "",
-      "for_you": "Mobit’te her müşteriye (kiracı) ayrı bir şema ya da veritabanı verme fikrini düşünürsen aynı soru çıkar: ‘müşteri sayısı arttıkça yönetim işleri sorguları yavaşlatıyor mu?’ Pratik adım: ‘hangi kiracı hangi veritabanında’ bilgisini sık okunan küçük bir tabloda tut ve Redis’te önbellekle; tüm kiracıları sayan ya da toplayan sorguları kullanıcı isteğinde değil, gece çalışan bir işte hesapla.",
+      "for_you": "Her müşteriye (tenant) ayrı bir şema ya da veritabanı verme fikrini düşünürsen aynı soru çıkar: ‘müşteri sayısı arttıkça yönetim işleri sorguları yavaşlatıyor mu?’ Pratik adım: ‘hangi tenant hangi veritabanında’ bilgisini sık okunan küçük bir tabloda tut ve Redis’te cache’le; tüm tenant’ları sayan ya da toplayan sorguları kullanıcı isteğinde değil, gece çalışan bir işte hesapla.",
       "terms": [
         {
           "en": "control plane / data plane",
-          "tr": "kontrol düzlemi / veri düzlemi",
-          "definition": "Kontrol düzlemi kaynakları yönetir (oluştur, sil); veri düzlemi gerçek isteği (sorguyu) işler."
+          "tr": "control plane / data plane",
+          "definition": "Control plane kaynakları yönetir (oluştur, sil); data plane gerçek isteği (sorguyu) işler."
         },
         {
           "en": "multi-tenant",
-          "tr": "çok kiracılı",
-          "definition": "Tek bir sistemin birçok müşteriye (kiracıya) verilerini ayırarak hizmet vermesi."
+          "tr": "multi-tenant",
+          "definition": "Tek bir sistemin birçok müşteriye (tenant’a) verilerini ayırarak hizmet vermesi."
         },
         {
           "en": "eventual consistency",
-          "tr": "nihai tutarlılık",
+          "tr": "eventual consistency",
           "definition": "Değişikliğin tüm kopyalara hemen değil, kısa bir süre içinde yansıması."
         }
       ],
       "tags": [
-        "veritabanı",
-        "mimari",
+        "database",
+        "architecture",
         "multi-tenant",
         "SQLite"
       ],

@@ -88,22 +88,22 @@
   </h2>
   <p class="original-title">Introducing Clef: our open-source decision models, and new RL fine-tuning platform · Michelle Chen, Alex Reneau</p>
 
-  <div class="prose"><p>Cloudflare, <strong>Clef</strong> adlı bir karar modeli (decision model) ailesini açık kaynak (Apache 2.0) olarak yayımladı. Karar modeli, serbest metin üretmek yerine önceden tanımlı seçenekler arasından seçim yapan bir model: örneğin bir isteğin etki şiddetini ‘etki yok / küçük / büyük / kritik’ olarak puanlamak ya da bir alan adını sınıflandırmak. Çıktı katı biçimde tiplenmiş (strictly typed) olduğundan sonucu ayrıştırmak için metin işlemek gerekmiyor.</p><p>Clef’in öne çıkan özellikleri: görselleri sınıflandırabilen bir <strong>görü kodlayıcısı</strong>, <strong>64k bağlam penceresi</strong> (Cloudflare’in önceki modeli Jev’de 32k) ve Jev ile API uyumluluğu. İki boyutu var: daha güçlü <strong>Clef</strong> ve gecikmeye duyarlı kararlar için <strong>Clef-Flash</strong>. Alan sınıflandırma örneğinde Clef 2,2 saniyede cevap veriyor; karşılaştırılan gpt-oss-120b 4,7 saniyede.</p><p>Hızın nedeni mimaride: Clef, Qwen tabanlı bir model üzerinde yalnızca <strong>prefill</strong> geçişi yapıyor ve geçerli şema seçeneklerini <strong>paralel puanlıyor</strong>. Karar adımı otoregresif olmadığından token token ara metin üretilmiyor. Cloudflare ayrıca bu modeller için ince ayar (fine-tuning) hizmeti sunuyor: önce ileri konuşlandırılmış mühendis ekibiyle, ileride kendin kullanabileceğin bir platform olarak.</p></div>
+  <div class="prose"><p>Cloudflare, <strong>Clef</strong> adlı bir decision model (decision model) ailesini açık kaynak (Apache 2.0) olarak yayımladı. Decision model, serbest metin üretmek yerine önceden tanımlı seçenekler arasından seçim yapan bir model: örneğin bir isteğin etki şiddetini ‘etki yok / küçük / büyük / kritik’ olarak puanlamak ya da bir alan adını sınıflandırmak. Çıktı katı biçimde tiplenmiş (strictly typed) olduğundan sonucu ayrıştırmak için metin işlemek gerekmiyor.</p><p>Clef’in öne çıkan özellikleri: görselleri sınıflandırabilen bir <strong>görü kodlayıcısı</strong>, <strong>64k context window</strong> (Cloudflare’in önceki modeli Jev’de 32k) ve Jev ile API uyumluluğu. İki boyutu var: daha güçlü <strong>Clef</strong> ve gecikmeye duyarlı kararlar için <strong>Clef-Flash</strong>. Alan sınıflandırma örneğinde Clef 2,2 saniyede cevap veriyor; karşılaştırılan gpt-oss-120b 4,7 saniyede.</p><p>Hızın nedeni mimaride: Clef, Qwen tabanlı bir model üzerinde yalnızca <strong>prefill</strong> geçişi yapıyor ve geçerli şema seçeneklerini <strong>paralel puanlıyor</strong>. Karar adımı autoregressive olmadığından token token ara metin üretilmiyor. Cloudflare ayrıca bu modeller için fine-tuning (fine-tuning) hizmeti sunuyor: önce ileri konuşlandırılmış mühendis ekibiyle, ileride kendin kullanabileceğin bir platform olarak.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Seçenekli karar problemi için serbest metin üretmek hem yavaş hem hata yapmaya açık.</span></li><li><span>Tipli çıktı (şemaya uyan seçim) ayrıştırma hatalarını ortadan kaldırır.</span></li><li><span>Prefill-only ve paralel puanlama: üretim yok, token token bekleme yok.</span></li><li><span>Karar modeli ne kadar küçük ve hızlıysa, onu isteğin her adımında çağırmak o kadar mümkün olur.</span></li>    </ol>
+<li><span>Seçenekli karar problemi için serbest metin üretmek hem yavaş hem hata yapmaya açık.</span></li><li><span>Typed output (şemaya uyan seçim) ayrıştırma hatalarını ortadan kaldırır.</span></li><li><span>Prefill-only ve paralel puanlama: üretim yok, token token bekleme yok.</span></li><li><span>Decision model ne kadar küçük ve hızlıysa, onu isteğin her adımında çağırmak o kadar mümkün olur.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-why">
       <h3 class="label">Neden önemli?</h3>
-      <p>LLM’leri her işte kullanma eğilimi maliyet ve gecikme biriktirir. Bu yazı, işin doğasına uygun daha dar bir araç seçmenin (sınıflandırma için karar modeli) hem hızı hem güvenilirliği artırdığını gösteriyor.</p>
+      <p>LLM’leri her işte kullanma eğilimi maliyet ve gecikme biriktirir. Bu yazı, işin doğasına uygun daha dar bir araç seçmenin (sınıflandırma için decision model) hem hızı hem güvenilirliği artırdığını gösteriyor.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>DBH’daki LLM hattında bunu doğrudan düşünebilirsin: bir belgeyi ‘yakıt, elektrik, su’ gibi sabit kategorilere ayırmak serbest metin üretimi gerektirmez. Mevcut çağrıyı JSON şeması ve <code>enum</code> ile kısıtlayıp çıktıyı doğrula; ya da küçük, açık bir model denemesi yap ve doğruluk ile süreyi ölç. Mobit’te sorgu türünü (arama mı, soru mu) belirleyen adım için de aynı yaklaşım geçerli.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Bir LLM hattında bunu doğrudan düşünebilirsin: bir belgeyi ‘yakıt, elektrik, su’ gibi sabit kategorilere ayırmak serbest metin üretimi gerektirmez. Mevcut çağrıyı JSON şeması ve <code>enum</code> ile kısıtlayıp çıktıyı doğrula; ya da küçük, açık bir model denemesi yap ve doğruluk ile süreyi ölç. Sorgu türünü (arama mı, soru mu) belirleyen bir adım için de aynı yaklaşım geçerli.</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">decision model</span> <span class="term-tr">karar modeli</span></dt>
+      <dt><span class="term-en">decision model</span></dt>
       <dd>Serbest metin üretmek yerine verilen seçenekler arasından seçim yapan model.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">prefill</span> <span class="term-tr">ön doldurma</span></dt>
+      <dt><span class="term-en">prefill</span></dt>
       <dd>Girdi token’larının modelden tek seferde geçirilip işlendiği aşama.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">autoregressive</span> <span class="term-tr">otoregresif</span></dt>
+      <dt><span class="term-en">autoregressive</span></dt>
       <dd>Çıktıyı her adımda bir token olarak, önceki tokenlara bakarak üretme yöntemi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">fine-tuning</span> <span class="term-tr">ince ayar</span></dt>
+      <dt><span class="term-en">fine-tuning</span></dt>
       <dd>Hazır bir modeli kendi veriyle belirli bir göreve uyarlamak için ek eğitme.</dd>
     </div>
   </dl>
@@ -133,9 +133,9 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/llm/">#LLM</a></li>
-  <li><a href="/etiket/siniflandirma/">#sınıflandırma</a></li>
-  <li><a href="/etiket/acik-kaynak/">#açık kaynak</a></li>
-  <li><a href="/etiket/performans/">#performans</a></li>
+  <li><a href="/etiket/classification/">#classification</a></li>
+  <li><a href="/etiket/open-source/">#open source</a></li>
+  <li><a href="/etiket/performance/">#performance</a></li>
 </ul>
 
   <a class="readmore" href="https://blog.cloudflare.com/clef-decision-models/" rel="noopener nofollow" target="_blank">
@@ -160,7 +160,7 @@
     <a href="https://www.databricks.com/blog/lakebase-postgres-branch-based-restores-fast-recovery-scale" rel="noopener nofollow" target="_blank">100 TB’lık veritabanını saniyeler içinde geri almak: dal tabanlı restore</a>
   </h3>
   <p class="original-title">Lakebase Postgres branch-based restores for fast recovery at scale</p>
-  <div class="prose prose-sm"><p>Geleneksel yönetilen Postgres’te zamana göre geri yükleme (PITR) üç adımdan oluşur: yeni bir örnek ayağa kaldırmak, anlık görüntüyü (snapshot) nesne depolamadan diske çekmek ve WAL kayıtlarını hedef ana kadar yeniden oynatmak. Veritabanı büyüdükçe bunlar saatler sürer. Bir kopya (replica) donanım arızasında kurtarır, ama kötü bir yazma kopyaya da yansımışsa yalnızca geri yükleme çözer.</p><p>Lakebase hesaplamayı ve depolamayı ayırıyor; veritabanı geçmişi zaten nesne depolamada referans verilebilir durumda tutuluyor. Bu yüzden geri yükleme veri kopyalamıyor, <strong>belirli bir zaman damgasında bir dal (branch) oluşturuyor</strong>: bu bir metadata işlemi. Databricks, 100 TB’lık veritabanında bile süreyi saniyelere indirdiğini söylüyor.</p></div>
+  <div class="prose prose-sm"><p>Geleneksel yönetilen Postgres’te point-in-time recovery (PITR) (PITR) üç adımdan oluşur: yeni bir örnek ayağa kaldırmak, snapshot’u (snapshot) nesne depolamadan diske çekmek ve WAL kayıtlarını hedef ana kadar yeniden oynatmak. Veritabanı büyüdükçe bunlar saatler sürer. Bir kopya (replica) donanım arızasında kurtarır, ama kötü bir yazma kopyaya da yansımışsa yalnızca geri yükleme çözer.</p><p>Lakebase hesaplamayı ve depolamayı ayırıyor; veritabanı geçmişi zaten nesne depolamada referans verilebilir durumda tutuluyor. Bu yüzden geri yükleme veri kopyalamıyor, <strong>belirli bir timestamp’ta bir dal (branch) oluşturuyor</strong>: bu bir metadata işlemi. Databricks, 100 TB’lık veritabanında bile süreyi saniyelere indirdiğini söylüyor.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
@@ -170,7 +170,7 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
+      <h4 class="label">Pratikte</h4>
       <p>Kendi Postgres’inde bile PITR’ı bir kez dene: WAL arşivlemeyi aç, bir tabloyu kasten boz ve belirli bir ana geri dön. Geri yükleme süresini ölçmek, ‘yedeğim var’ ile ‘yedeğimden ne kadar sürede dönerim’ arasındaki farkı gösterir.</p>
     </div>
   </div>
@@ -179,11 +179,11 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">point-in-time recovery (PITR)</span> <span class="term-tr">zamana göre geri yükleme</span></dt>
+      <dt><span class="term-en">point-in-time recovery (PITR)</span></dt>
       <dd>Veritabanını geçmişteki belirli bir ana döndürme.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">WAL (write-ahead log)</span> <span class="term-tr">ön yazma günlüğü</span></dt>
+      <dt><span class="term-en">WAL (write-ahead log)</span></dt>
       <dd>Değişikliklerin kalıcı hâle gelmeden önce sırayla yazıldığı kayıt; geri yüklemede yeniden oynatılır.</dd>
     </div>
   </dl>
@@ -193,9 +193,9 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/postgres/">#Postgres</a></li>
-  <li><a href="/etiket/yedekleme/">#yedekleme</a></li>
-  <li><a href="/etiket/mimari/">#mimari</a></li>
-  <li><a href="/etiket/veritabani/">#veritabanı</a></li>
+  <li><a href="/etiket/backup/">#backup</a></li>
+  <li><a href="/etiket/architecture/">#architecture</a></li>
+  <li><a href="/etiket/database/">#database</a></li>
 </ul>
 
   <a class="readmore" href="https://www.databricks.com/blog/lakebase-postgres-branch-based-restores-fast-recovery-scale" rel="noopener nofollow" target="_blank">
@@ -262,7 +262,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>9 Ekim 2026 — Eren&#39;in Mühendislik Gazetesi</title>
-<meta name="description" content="1 Ekim’de Cloudflare’in karar modeli Clef’i okumuştun; bir hafta sonra ses ve video da alan sürümü geldi. Yazının ilginç kısmı duyuru değil, eğitim tarifi: omurgayı dondur, küçük adaptörler eğit, olasılıkları kalibre et. Yanında bir satın alma haberi ve ‘platform kilidi’ tartışması var.">
+<meta name="description" content="1 Ekim’de Cloudflare’in decision model Clef’i okumuştun; bir hafta sonra ses ve video da alan sürümü geldi. Yazının ilginç kısmı duyuru değil, eğitim tarifi: omurgayı dondur, küçük adaptörler eğit, olasılıkları kalibre et. Yanında bir satın alma haberi ve ‘platform kilidi’ tartışması var.">
 <meta name="author" content="Eren Ulutaş">
 <meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#131310" media="(prefers-color-scheme: dark)">
 <meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
 <meta property="og:title" content="9 Ekim 2026 — Eren&#39;in Mühendislik Gazetesi">
-<meta property="og:description" content="1 Ekim’de Cloudflare’in karar modeli Clef’i okumuştun; bir hafta sonra ses ve video da alan sürümü geldi. Yazının ilginç kısmı duyuru değil, eğitim tarifi: omurgayı dondur, küçük adaptörler eğit, olasılıkları kalibre et. Yanında bir satın alma haberi ve ‘platform kilidi’ tartışması var.">
+<meta property="og:description" content="1 Ekim’de Cloudflare’in decision model Clef’i okumuştun; bir hafta sonra ses ve video da alan sürümü geldi. Yazının ilginç kısmı duyuru değil, eğitim tarifi: omurgayı dondur, küçük adaptörler eğit, olasılıkları kalibre et. Yanında bir satın alma haberi ve ‘platform kilidi’ tartışması var.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:url" content="https://erenulutas.com/sayi/2026-10-09/">
@@ -69,7 +69,7 @@
 <a href="/sayi/2026-10-08/" rel="prev"><span aria-hidden="true">←</span> 8 Ekim 2026</a><a href="/sayi/2026-10-12/" rel="next">12 Ekim 2026 <span aria-hidden="true">→</span></a>
     </nav>
   </div>
-<p class="lede">1 Ekim’de Cloudflare’in karar modeli Clef’i okumuştun; bir hafta sonra ses ve video da alan sürümü geldi. Yazının ilginç kısmı duyuru değil, eğitim tarifi: omurgayı dondur, küçük adaptörler eğit, olasılıkları kalibre et. Yanında bir satın alma haberi ve ‘platform kilidi’ tartışması var.</p></header>
+<p class="lede">1 Ekim’de Cloudflare’in decision model Clef’i okumuştun; bir hafta sonra ses ve video da alan sürümü geldi. Yazının ilginç kısmı duyuru değil, eğitim tarifi: omurgayı dondur, küçük adaptörler eğit, olasılıkları kalibre et. Yanında bir satın alma haberi ve ‘platform kilidi’ tartışması var.</p></header>
 
 
   <div class="layout">
@@ -88,22 +88,22 @@
   </h2>
   <p class="original-title">Introducing Clef-omni with full multimodality, plus a faster Clef and a cheaper Clef-flash · Michelle Chen, Alex Reneau</p>
 
-  <div class="prose"><p>Cloudflare, geçen hafta yayımladığı açık ağırlıklı karar modelleri Clef ve Clef-flash’ın ardından <strong>Clef-omni</strong>’yi duyurdu: metin ve görselin yanında ses (wav, mp3) ve video (mp4, webm) girdisi alan bir karar modeli. Aynı yazıda Clef-flash’ın fiyatı düşürüldü ve Clef hızlandırıldı. Ağırlıklar Hugging Face’te açık.</p><p>Pratik fark şu: konuşmayı önce metne çeviren, videoyu ses ve görüntü kanallarına ayıran <strong>ardışık model zincirleri</strong> kurmak yerine tek bir modele soruyorsun. Yazıdaki örnek bir kurulum denetimi: cihazın bir fotoğrafı, çalışırken alınmış bir ses kaydı ve fanın bir videosu tek istekte gönderiliyor; sorular şema olarak veriliyor (‘etiket fotoğrafta görünüyor mu’, ‘cihaz takırtısız çalışıyor mu’, ‘fan dönüyor mu’) ve her biri tipli bir cevap alıyor.</p><p>Mimari tarafı öğretici. Clef-omni, zaten metin, görsel, ses ve video işleyebilen Qwen3-Omni-30B-A3B-Instruct adlı bir <strong>uzman karışımı (MoE)</strong> modelin üzerine kurulu. Clef modelleri çıktı token’ı üretmediği için (LLM gibi metin yazmıyorlar) gelen dosyaları yazıya dökme ya da altyazılama maliyeti ortadan kalkıyor; medya ögeleri doğrudan tek bir dizinin içine yerleşiyor.</p><p>Eğitim tarifi Clef ile aynı: <strong>omurga donduruluyor</strong>, yalnızca <strong>düşük ranklı adaptörler (LoRA)</strong> eğitiliyor ve standart son-eğitim yaklaşımı uygulanıyor: <strong>etiket yumuşatmalı çapraz entropi</strong> kaybı ile <strong>Brier puanı kalibrasyonu</strong> birlikte. Kalibrasyon bir karar modeli için kritik: ‘%90 eminim’ dediği kararların gerçekten yaklaşık %90’ı doğru çıkmalı. Yazıya göre yalnızca metin içeren kararlar medyanda yaklaşık 130 ms’de dönüyor. Bir not daha: Clef’in ilk sürümü bir cuma akşamı karar verilip hafta sonu eğitilmiş ve perşembe yayımlanmış.</p></div>
+  <div class="prose"><p>Cloudflare, geçen hafta yayımladığı açık ağırlıklı karar modelleri Clef ve Clef-flash’ın ardından <strong>Clef-omni</strong>’yi duyurdu: metin ve görselin yanında ses (wav, mp3) ve video (mp4, webm) girdisi alan bir decision model. Aynı yazıda Clef-flash’ın fiyatı düşürüldü ve Clef hızlandırıldı. Ağırlıklar Hugging Face’te açık.</p><p>Pratik fark şu: konuşmayı önce metne çeviren, videoyu ses ve görüntü kanallarına ayıran <strong>ardışık model zincirleri</strong> kurmak yerine tek bir modele soruyorsun. Yazıdaki örnek bir kurulum denetimi: cihazın bir fotoğrafı, çalışırken alınmış bir ses kaydı ve fanın bir videosu tek istekte gönderiliyor; sorular şema olarak veriliyor (‘etiket fotoğrafta görünüyor mu’, ‘cihaz takırtısız çalışıyor mu’, ‘fan dönüyor mu’) ve her biri tipli bir cevap alıyor.</p><p>Mimari tarafı öğretici. Clef-omni, zaten metin, görsel, ses ve video işleyebilen Qwen3-Omni-30B-A3B-Instruct adlı bir <strong>mixture of experts (MoE) (MoE)</strong> modelin üzerine kurulu. Clef modelleri çıktı token’ı üretmediği için (LLM gibi metin yazmıyorlar) gelen dosyaları yazıya dökme ya da altyazılama maliyeti ortadan kalkıyor; medya ögeleri doğrudan tek bir dizinin içine yerleşiyor.</p><p>Eğitim tarifi Clef ile aynı: <strong>omurga donduruluyor</strong>, yalnızca <strong>düşük ranklı adaptörler (LoRA)</strong> eğitiliyor ve standart son-eğitim yaklaşımı uygulanıyor: <strong>etiket yumuşatmalı çapraz entropi</strong> kaybı ile <strong>Brier puanı calibration’ı</strong> birlikte. Calibration bir decision model için kritik: ‘%90 eminim’ dediği kararların gerçekten yaklaşık %90’ı doğru çıkmalı. Yazıya göre yalnızca metin içeren kararlar medyanda yaklaşık 130 ms’de dönüyor. Bir not daha: Clef’in ilk sürümü bir cuma akşamı karar verilip hafta sonu eğitilmiş ve perşembe yayımlanmış.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Model zinciri (ses→metin→karar) her halkada gecikme ve hata biriktirir; tek model bunu kaldırır.</span></li><li><span>Omurgayı dondurup yalnızca LoRA eğitmek, büyük bir modeli günler içinde ve ucuza uyarlamayı sağlar.</span></li><li><span>Karar modelinde doğruluk kadar kalibrasyon önemli: güven puanı gerçek isabet oranını yansıtmalı.</span></li><li><span>Çıktı token’ı üretmemek, gecikmenin en büyük kalemini ortadan kaldırır.</span></li>    </ol>
+<li><span>Model zinciri (ses→metin→karar) her halkada gecikme ve hata biriktirir; tek model bunu kaldırır.</span></li><li><span>Omurgayı dondurup yalnızca LoRA eğitmek, büyük bir modeli günler içinde ve ucuza uyarlamayı sağlar.</span></li><li><span>Decision model’de doğruluk kadar calibration önemli: güven puanı gerçek isabet oranını yansıtmalı.</span></li><li><span>Çıktı token’ı üretmemek, gecikmenin en büyük kalemini ortadan kaldırır.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-why">
       <h3 class="label">Neden önemli?</h3>
-      <p>Dondurulmuş omurga + LoRA + kalibrasyon, bugün küçük bir ekibin açık bir modelden kendi işine özel bir model çıkarmasının en erişilebilir yolu. Yazı ayrıca ‘her şeyi metne çevir, sonra LLM’e sor’ alışkanlığının tek seçenek olmadığını gösteriyor.</p>
+      <p>Dondurulmuş omurga + LoRA + calibration, bugün küçük bir ekibin açık bir modelden kendi işine özel bir model çıkarmasının en erişilebilir yolu. Yazı ayrıca ‘her şeyi metne çevir, sonra LLM’e sor’ alışkanlığının tek seçenek olmadığını gösteriyor.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>KlioAI’daki ses akışını düşün: konuşmayı önce metne çevirip sonra bir LLM’e soruyorsan iki modelin gecikmesini ve iki modelin hatasını topluyorsun. Sorun bir sınıflandırma ise (telaffuz doğru mu, cümle tamamlandı mı) sesi doğrudan alan bir modeli denemeye değer. Kalibrasyonu da kendi modellerinde ölç: PyTorch’ta bir sınıflandırıcının tahminlerini güven aralıklarına böl (%80-90, %90-100) ve her aralıktaki gerçek isabet oranına bak. Model ‘%95 eminim’ deyip %70 tutturuyorsa eşik değerlerin anlamsızdır; sıcaklık ölçekleme (temperature scaling) bunu birkaç satırda düzeltir.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Ses akışı olan bir uygulamada konuşmayı önce metne çevirip sonra bir LLM’e soruyorsan iki modelin gecikmesini ve iki modelin hatasını topluyorsun. Sorun bir sınıflandırma ise (telaffuz doğru mu, cümle tamamlandı mı) sesi doğrudan alan bir modeli denemeye değer. Calibration’ı da kendi modellerinde ölç: PyTorch’ta bir sınıflandırıcının tahminlerini güven aralıklarına böl (yüzde 80-90, yüzde 90-100) ve her aralıktaki gerçek isabet oranına bak. Model ‘yüzde 95 eminim’ deyip yüzde 70 tutturuyorsa eşik değerlerin anlamsızdır; temperature scaling bunu birkaç satırda düzeltir.</p>
     </div>
   </div>
 
@@ -111,23 +111,23 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">LoRA (low-rank adaptation)</span> <span class="term-tr">düşük ranklı uyarlama</span></dt>
-      <dd>Modelin ağırlıklarını dondurup yalnızca küçük ek matrisleri eğiterek yapılan ucuz ince ayar.</dd>
+      <dt><span class="term-en">LoRA (low-rank adaptation)</span></dt>
+      <dd>Modelin ağırlıklarını dondurup yalnızca küçük ek matrisleri eğiterek yapılan ucuz fine-tuning.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">calibration</span> <span class="term-tr">kalibrasyon</span></dt>
+      <dt><span class="term-en">calibration</span></dt>
       <dd>Modelin bildirdiği güven olasılığının gerçek doğruluk oranıyla örtüşmesi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">Brier score</span> <span class="term-tr">Brier puanı</span></dt>
+      <dt><span class="term-en">Brier score</span></dt>
       <dd>Tahmin edilen olasılık ile gerçek sonuç arasındaki farkın karesinin ortalaması; düşük olan iyidir.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">mixture of experts (MoE)</span> <span class="term-tr">uzman karışımı</span></dt>
+      <dt><span class="term-en">mixture of experts (MoE)</span></dt>
       <dd>Her girdi için yalnızca bir kısmı çalışan alt ağlardan oluşan model mimarisi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">multimodal</span> <span class="term-tr">çok kipli</span></dt>
+      <dt><span class="term-en">multimodal</span></dt>
       <dd>Metin, görsel, ses ve video gibi birden çok girdi türünü birlikte işleyebilen.</dd>
     </div>
   </dl>
@@ -137,9 +137,9 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/llm/">#LLM</a></li>
-  <li><a href="/etiket/cok-kipli/">#çok kipli</a></li>
-  <li><a href="/etiket/ince-ayar/">#ince ayar</a></li>
-  <li><a href="/etiket/acik-kaynak/">#açık kaynak</a></li>
+  <li><a href="/etiket/multimodal/">#multimodal</a></li>
+  <li><a href="/etiket/fine-tuning/">#fine-tuning</a></li>
+  <li><a href="/etiket/open-source/">#open source</a></li>
 </ul>
 
   <a class="readmore" href="https://blog.cloudflare.com/clef-faster-cheaper-multimodal/" rel="noopener nofollow" target="_blank">
@@ -174,8 +174,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Bir platform seçerken kendine şu soruyu sor: ‘buradan çıkmam gerekirse neyi yeniden yazarım?’ İş mantığını platforma özgü API’lerden ince bir arayüzle ayır (Spring’de bir <code>StorageService</code> arayüzü, arkasında S3 ya da R2). KlioAI’da bir sağlayıcıya özel özelliği kullanmak yanlış değil; bilinçsizce her yere yaymak yanlış.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Bir platform seçerken kendine şu soruyu sor: ‘buradan çıkmam gerekirse neyi yeniden yazarım?’ İş mantığını platforma özgü API’lerden ince bir arayüzle ayır (Spring’de bir <code>StorageService</code> interface’i, arkasında S3 ya da R2). Bir sağlayıcıya özel özelliği kullanmak yanlış değil; bilinçsizce her yere yaymak yanlış.</p>
     </div>
   </div>
 
@@ -183,12 +183,12 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">vendor lock-in</span> <span class="term-tr">satıcı kilidi</span></dt>
+      <dt><span class="term-en">vendor lock-in</span></dt>
       <dd>Bir sağlayıcıya özgü teknolojiye bağımlı kalıp başka sağlayıcıya geçmenin pahalı hâle gelmesi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">Durable Objects</span> <span class="term-tr">Durable Objects</span></dt>
-      <dd>Cloudflare Workers’da durum tutan, tekil ve adreslenebilir sunucusuz nesneler.</dd>
+      <dt><span class="term-en">Durable Objects</span></dt>
+      <dd>Cloudflare Workers’da durum tutan, tekil ve adreslenebilir serverless nesneler.</dd>
     </div>
   </dl>
 
@@ -197,9 +197,9 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/platform/">#platform</a></li>
-  <li><a href="/etiket/acik-kaynak/">#açık kaynak</a></li>
-  <li><a href="/etiket/sunucusuz/">#sunucusuz</a></li>
-  <li><a href="/etiket/sektor/">#sektör</a></li>
+  <li><a href="/etiket/open-source/">#open source</a></li>
+  <li><a href="/etiket/serverless/">#serverless</a></li>
+  <li><a href="/etiket/industry/">#industry</a></li>
 </ul>
 
   <a class="readmore" href="https://blog.cloudflare.com/deno-joins-cloudflare/" rel="noopener nofollow" target="_blank">
@@ -266,7 +266,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

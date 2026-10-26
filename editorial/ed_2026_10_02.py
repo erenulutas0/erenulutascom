@@ -4,11 +4,7 @@ from pipeline.compose import save_edition
 
 DATE = "2026-10-02"
 
-INTRO = (
-    "‘Veritabanına yaz, sonra kuyruğa mesaj at’ cümlesi iki ayrı sistemin tek işlemde "
-    "buluşmasını varsayar ve çoğu zaman yanlış gider. Google, mesajı veritabanı işleminin "
-    "içine alarak bu açığı kapatıyor. Cloudflare ise gözlemlenebilirliği tek çatıda topluyor."
-)
+INTRO = "‘Veritabanına yaz, sonra kuyruğa mesaj at’ cümlesi iki ayrı sistemin tek işlemde buluşmasını varsayar ve çoğu zaman yanlış gider. Google, mesajı veritabanı işleminin içine alarak bu açığı kapatıyor. Cloudflare ise gözlemlenebilirliği tek çatıda topluyor."
 
 DRAFTS = [
     {
@@ -16,87 +12,74 @@ DRAFTS = [
         "slot": "cover",
         "title_tr": "Mesaj göndermek veritabanı yazmasının parçası olunca: Spanner queues",
         "difficulty": "orta",
-        "tags": ["veritabanı", "mesajlaşma", "agent", "tutarlılık"],
-        "summary": (
-            "Yapay zekâ agent’ları iade başlatmak, stok yönetmek ya da alt agent’lara iş devretmek "
-            "gibi eylemler yapıyor. Bunun için durumu bir operasyonel veritabanında tutuyor, "
-            "eylemleri ise ayrı bir mesajlaşma ya da olay kuyruğuna gönderiyor. İki sistemin "
-            "ayrı işlem noktaları olduğu için tutarsızlık kaçınılmaz: durum güncellenir ama "
-            "mesaj gitmez (agent karar verir ama eylem olmaz), ya da mesaj gider ama durum "
-            "işlemi geri alınır (agent geçersiz duruma göre hareket eder). Çözüm olarak "
-            "geliştiriciler outbox deseni, idempotency katmanları ve uzlaştırma işçileri yazmak "
-            "zorunda kalıyor.\n\n"
-            "Google **Spanner queues**’u genel kullanıma açtı: mesaj oluşturmak, aynı işlemin "
-            "içinde sıradan bir yazma. Durum değişikliği ve niyet edilen eylem **birlikte "
-            "kesinleşir ya da birlikte başarısız olur**. Özellikler arasında mesajı hemen ya da "
-            "ileri bir zamana planlama (geciken yeniden denemeler, SLA zamanlayıcıları), "
-            "agent işçileri için akışlı SQL okuma ve kuyruk tablolarını standart SQL ile "
-            "inceleyerek gözlemleme var. Garanti **en az bir kez teslimat**; yani tüketici "
-            "tarafı yine idempotent yazılmalı.\n\n"
-            "Yazı agent senaryosuna odaklansa da kuyruğun yalnızca agent’lar için olmadığını "
-            "da belirtiyor: etkinlik akışları ve canlı güncellemeler gibi klasik olay "
-            "tabanlı mimarilerde de kullanılabilir."
-        ),
+        "tags": [
+            "database",
+            "messaging",
+            "agent",
+            "consistency"
+        ],
+        "summary": "Yapay zekâ agent’ları iade başlatmak, stok yönetmek ya da alt agent’lara iş devretmek gibi eylemler yapıyor. Bunun için durumu bir operasyonel veritabanında tutuyor, eylemleri ise ayrı bir mesajlaşma ya da olay kuyruğuna gönderiyor. İki sistemin ayrı işlem noktaları olduğu için tutarsızlık kaçınılmaz: durum güncellenir ama mesaj gitmez (agent karar verir ama eylem olmaz), ya da mesaj gider ama durum işlemi geri alınır (agent geçersiz duruma göre hareket eder). Çözüm olarak geliştiriciler outbox deseni, idempotency katmanları ve uzlaştırma işçileri yazmak zorunda kalıyor.\n\nGoogle **Spanner queues**’u genel kullanıma açtı: mesaj oluşturmak, aynı işlemin içinde sıradan bir yazma. Durum değişikliği ve niyet edilen eylem **birlikte kesinleşir ya da birlikte başarısız olur**. Özellikler arasında mesajı hemen ya da ileri bir zamana planlama (geciken yeniden denemeler, SLA zamanlayıcıları), agent işçileri için akışlı SQL okuma ve kuyruk tablolarını standart SQL ile inceleyerek gözlemleme var. Garanti **at-least-once delivery**; yani consumer tarafı yine idempotent yazılmalı.\n\nYazı agent senaryosuna odaklansa da kuyruğun yalnızca agent’lar için olmadığını da belirtiyor: etkinlik akışları ve canlı güncellemeler gibi klasik olay tabanlı mimarilerde de kullanılabilir.",
         "key_points": [
             "Veritabanı ve kuyruk ayrı sistemlerse ‘ikisi birden’ garantisi yoktur.",
             "Mesajı işlemin parçası yapmak, outbox desenini platform özelliğine çevirir.",
-            "En az bir kez teslimat tüketicinin idempotent olmasını yine gerektirir.",
-            "Kuyruğu SQL ile sorgulayabilmek, takılan işi bulmayı kolaylaştırır.",
+            "At-least-once delivery consumer’ın idempotent olmasını yine gerektirir.",
+            "Kuyruğu SQL ile sorgulayabilmek, takılan işi bulmayı kolaylaştırır."
         ],
-        "why_it_matters": (
-            "‘Dual write’ sorunu (iki sisteme ayrı yazmak) dağıtık sistemlerin klasik hatasıdır. "
-            "Çözümü ya veritabanının içine kuyruk almak ya da outbox deseni uygulamaktır; her "
-            "iki yaklaşım da aynı fikri paylaşır."
-        ),
-        "for_you": (
-            "Bunu Spring Boot’ta bugün **transactional outbox** ile uygulayabilirsin: iş verisini ve "
-            "gönderilecek mesajı aynı Postgres işleminde `outbox` tablosuna yaz, ayrı bir "
-            "işçi bu tabloyu okuyup mesajı gönderip satırı işaretlesin. Mobit’te bir doküman "
-            "yüklendiğinde ‘indeksle’ işini bu yolla tetiklersen, yükleme kaydedilip indeksleme "
-            "isteği kaybolmaz. Tüketici tarafında aynı mesajın iki kez gelme ihtimaline karşı "
-            "bir `message_id` ile tekrarı yok say. Bu, mülakatlarda sık sorulan bir soru."
-        ),
+        "why_it_matters": "‘Dual write’ sorunu (iki sisteme ayrı yazmak) dağıtık sistemlerin klasik hatasıdır. Çözümü ya veritabanının içine kuyruk almak ya da outbox deseni uygulamaktır; her iki yaklaşım da aynı fikri paylaşır.",
+        "for_you": "Bunu Spring Boot’ta bugün **transactional outbox** ile uygulayabilirsin: iş verisini ve gönderilecek mesajı aynı Postgres transaction’ında `outbox` tablosuna yaz, ayrı bir worker bu tabloyu okuyup mesajı gönderip satırı işaretlesin. Bir doküman yüklendiğinde ‘indeksle’ işini bu yolla tetiklersen, yükleme kaydedilip indeksleme isteği kaybolmaz. Consumer tarafında aynı mesajın iki kez gelme ihtimaline karşı bir `message_id` ile tekrarı yok say. Bu, mülakatlarda sık sorulan bir soru.",
         "terms": [
-            {"en": "transactional outbox", "tr": "işlemsel gönderi kutusu", "definition": "Mesajı iş verisiyle aynı işlemde bir tabloya yazıp ayrı bir süreçle iletme deseni."},
-            {"en": "dual write", "tr": "çift yazma", "definition": "Aynı değişikliği iki ayrı sisteme ayrı ayrı yazmaya çalışmak; tutarsızlık riski taşır."},
-            {"en": "at-least-once delivery", "tr": "en az bir kez teslimat", "definition": "Bir mesajın kaybolmaması ama ara sıra birden fazla kez iletilebilmesi."},
-            {"en": "idempotency", "tr": "idempotans", "definition": "Aynı işlemin birden fazla kez uygulanmasının sonucu değiştirmemesi."},
-        ],
+            {
+                "en": "transactional outbox",
+                "tr": "transactional outbox",
+                "definition": "Mesajı iş verisiyle aynı işlemde bir tabloya yazıp ayrı bir süreçle iletme deseni."
+            },
+            {
+                "en": "dual write",
+                "tr": "dual write",
+                "definition": "Aynı değişikliği iki ayrı sisteme ayrı ayrı yazmaya çalışmak; tutarsızlık riski taşır."
+            },
+            {
+                "en": "at-least-once delivery",
+                "tr": "at-least-once delivery",
+                "definition": "Bir mesajın kaybolmaması ama ara sıra birden fazla kez iletilebilmesi."
+            },
+            {
+                "en": "idempotency",
+                "tr": "idempotency",
+                "definition": "Aynı işlemin birden fazla kez uygulanmasının sonucu değiştirmemesi."
+            }
+        ]
     },
     {
         "url": "https://blog.cloudflare.com/one-observability-platform/",
         "slot": "brief",
         "title_tr": "Günlük, iz ve analiz tek yerde: Cloudflare Observability’de sekiz güncelleme",
         "difficulty": "orta",
-        "tags": ["gözlemlenebilirlik", "OpenTelemetry", "loglama"],
-        "summary": (
-            "Cloudflare, loglarını, izlerini (trace), analizlerini, uyarılarını, panolarını ve "
-            "dışa aktarmayı tek bir gözlemlenebilirlik platformunda birleştiren sekiz güncelleme "
-            "duyurdu. Gerekçe şu: 5xx artışı bir Worker’dan, kaynak sunucudan ya da Cloudflare’in "
-            "kaynağa bağlanamamasından gelebilir ve bugün hangi sinyalin hangi ürüne ait "
-            "olduğunu bilmek gerekiyor.\n\n"
-            "Öne çıkanlar: **Logs** artık Workers Observability ile Log Explorer’ı birleştiriyor "
-            "(HTTP, güvenlik duvarı, Workers, R2, AI Gateway gibi veri kümeleri aynı arayüzde); "
-            "**Cloudflare Traces** açık beta’da, isteğin güvenlik kuralları, önbellek kararları, "
-            "yönlendirme ve Workers adımlarını gösteriyor ve OpenTelemetry ile dışa aktarılıyor; "
-            "agent’lar için birleşik bir **SQL API** beta’da; ve tüm kayıt ve iz saklama için "
-            "yeni birleşik fiyatlandırma **1 Aralık 2026**’dan itibaren geçerli olacak."
-        ),
+        "tags": [
+            "observability",
+            "OpenTelemetry",
+            "loglama"
+        ],
+        "summary": "Cloudflare, loglarını, izlerini (trace), analizlerini, uyarılarını, panolarını ve dışa aktarmayı tek bir observability platformunda birleştiren sekiz güncelleme duyurdu. Gerekçe şu: 5xx artışı bir Worker’dan, origin server’dan ya da Cloudflare’in kaynağa bağlanamamasından gelebilir ve bugün hangi sinyalin hangi ürüne ait olduğunu bilmek gerekiyor.\n\nÖne çıkanlar: **Logs** artık Workers Observability ile Log Explorer’ı birleştiriyor (HTTP, güvenlik duvarı, Workers, R2, AI Gateway gibi veri kümeleri aynı arayüzde); **Cloudflare Traces** açık beta’da, isteğin güvenlik kuralları, cache kararları, yönlendirme ve Workers adımlarını gösteriyor ve OpenTelemetry ile dışa aktarılıyor; agent’lar için birleşik bir **SQL API** beta’da; ve tüm kayıt ve iz saklama için yeni birleşik fiyatlandırma **1 Aralık 2026**’dan itibaren geçerli olacak.",
         "key_points": [
             "Sorun çözerken ‘hangi araca bakmalıyım’ sorusu azalırsa teşhis süresi kısalır.",
             "İz (trace) ile günlük (log) birbirine bağlanınca tek isteğin yolculuğu izlenebilir.",
-            "OpenTelemetry ve W3C trace context, farklı sistemler arasında iz taşımayı standartlaştırıyor.",
+            "OpenTelemetry ve W3C trace context, farklı sistemler arasında iz taşımayı standartlaştırıyor."
         ],
-        "for_you": (
-            "Spring Boot uygulamana Micrometer Tracing ve OpenTelemetry ekleyip her isteğe bir "
-            "trace id ver, log satırlarına da bu kimliği yaz. Bir hata olduğunda tek bir "
-            "kimlikle o isteğin tüm adımlarını bulabilmek, gözlemlenebilirliğin en temel kazanımı."
-        ),
+        "for_you": "Spring Boot uygulamana Micrometer Tracing ve OpenTelemetry ekleyip her isteğe bir trace id ver, log satırlarına da bu kimliği yaz. Bir hata olduğunda tek bir kimlikle o isteğin tüm adımlarını bulabilmek, gözlemlenebilirliğin en temel kazanımı.",
         "terms": [
-            {"en": "distributed tracing", "tr": "dağıtık izleme", "definition": "Bir isteğin birden çok servis boyunca izlediği yolu tek bir iz olarak kaydetme."},
-            {"en": "OpenTelemetry", "tr": "OpenTelemetry", "definition": "Günlük, metrik ve izleri toplamak için kullanılan açık standart ve araç seti."},
-        ],
-    },
+            {
+                "en": "distributed tracing",
+                "tr": "distributed tracing",
+                "definition": "Bir isteğin birden çok servis boyunca izlediği yolu tek bir iz olarak kaydetme."
+            },
+            {
+                "en": "OpenTelemetry",
+                "tr": "OpenTelemetry",
+                "definition": "Günlük, metrik ve izleri toplamak için kullanılan açık standart ve araç seti."
+            }
+        ]
+    }
 ]
 
 if __name__ == "__main__":

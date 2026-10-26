@@ -18,23 +18,23 @@
         "Matematik, LLM çıktısının bağımsız olarak doğrulanabildiği bir alan; bu, sonuçları çoğu \"AI şunu yaptı\" iddiasından daha güvenilir kılıyor."
       ],
       "why_it_matters": "Bir alanda ilerlemenin darboğazı \"fikir üretmek\" ise ve fikir üretmek ucuzluyorsa, darboğaz **doğrulamaya** kayar. Yazılımda da aynı şey oluyor: kod üretmek ucuzladıkça değerli olan şey kodu yazmak değil, doğru olduğunu ispatlayan test ve tip sistemlerini kurmak.",
-      "for_you": "Buradan çıkaracağın pratik ders şu: LLM'i devreye soktuğun her yerde \"çıktıyı ne doğrulayacak?\" sorusunun bir cevabı olmalı. Tradebot'ta bir stratejiyi modelin önermesi kolay; onu backtest ve walk-forward doğrulamasından geçirmeden kabul etmek pahalı. Aynı şekilde LLM kategorizasyon pipeline'ında: modelin verdiği etiketi şema, enum ya da iş kuralı ile doğrulayabiliyorsan güvenebilirsin; doğrulayamıyorsan eline geçen şey yalnızca inandırıcı bir tahmin.",
+      "for_you": "Buradan çıkaracağın pratik ders şu: LLM’i devreye soktuğun her yerde ‘çıktıyı ne doğrulayacak?’ sorusunun bir cevabı olmalı. Bir trading stratejisini modelin önermesi kolay; onu backtest ve walk-forward doğrulamasından geçirmeden kabul etmek pahalı. Aynı şekilde bir LLM sınıflandırma pipeline’ında: modelin verdiği etiketi schema, enum ya da iş kuralı ile doğrulayabiliyorsan güvenebilirsin; doğrulayamıyorsan eline geçen şey yalnızca inandırıcı bir tahmin.",
       "terms": [
         {
           "en": "open problem",
-          "tr": "açık problem",
+          "tr": "open problem",
           "definition": "Bir alanda uzun süredir çözülememiş, üzerinde çalışılan matematiksel soru."
         },
         {
           "en": "verifiability",
-          "tr": "doğrulanabilirlik",
+          "tr": "verifiability",
           "definition": "Bir çıktının doğru olup olmadığının bağımsız ve kesin biçimde kontrol edilebilmesi."
         }
       ],
       "tags": [
         "LLM",
-        "araştırma",
-        "maliyet"
+        "research",
+        "cost"
       ],
       "difficulty": "orta",
       "read_minutes": 3,
@@ -57,16 +57,16 @@
         "Doğrulama sentetik veriyle değil gerçek üretim trafiğiyle yapılıyor."
       ],
       "why_it_matters": "Çoğu ekip CI/CD'yi kurar, testleri yazar, kanarya dağıtımı yapar — ve sonra veriyi tamamen denetimsiz bırakır. Oysa veri odaklı sistemlerde arızaların önemli bir kısmı koddan değil veriden gelir: boş bir alan, değişen bir şema, bozulan bir kaynak. Bu yazı o kör noktayı isimlendiriyor.",
-      "for_you": "Bu senin en çok işine yarayacak yazılardan biri. DBH'daki yakıt analizi uygulamasında veri ASIS'ten geliyordu — kaynak bir gün formatı değiştirseydi ya da bir alanı boş göndermeye başlasaydı, pipeline muhtemelen sessizce yanlış sonuç üretirdi. Uygulanabilir hâli şu: her ETL adımının sonuna ucuz **invariant kontrolleri** koy — satır sayısı bir önceki koşunun %20'sinden az mı, kritik kolonlarda null oranı sıçradı mı, kategori dağılımı tanınmayacak kadar kaydı mı. Pandas'ta bu birkaç `assert` satırı; ama arızayı üretime çıkmadan yakalamanın en ucuz yolu.",
+      "for_you": "Bu en çok işine yarayacak yazılardan biri. Bir veri kaynağı bir gün formatı değiştirirse ya da bir alanı boş göndermeye başlarsa, pipeline muhtemelen sessizce yanlış sonuç üretir. Uygulanabilir hâli şu: her ETL adımının sonuna ucuz **invariant kontrolleri** koy: satır sayısı bir önceki koşunun yüzde 20’sinden az mı, kritik kolonlarda null oranı sıçradı mı, kategori dağılımı tanınmayacak kadar kaydı mı? Pandas’ta bu birkaç `assert` satırı ama arızayı production’a çıkmadan yakalamanın en ucuz yolu.",
       "terms": [
         {
           "en": "canary deployment",
-          "tr": "kanarya dağıtımı",
+          "tr": "canary deployment",
           "definition": "Yeni sürümü önce küçük bir trafik dilimine verip metrikleri izleyerek yaygınlaştırma yöntemi."
         },
         {
           "en": "data canary",
-          "tr": "veri kanaryası",
+          "tr": "data canary",
           "definition": "Aynı fikrin veriye uygulanmışı: yeni üretilen veri kümesini yayımlamadan önce doğrulayıp bozuksa engelleme."
         },
         {
@@ -76,9 +76,9 @@
         }
       ],
       "tags": [
-        "veri mühendisliği",
-        "dayanıklılık",
-        "gözlemlenebilirlik",
+        "data engineering",
+        "resilience",
+        "observability",
         "pipeline"
       ],
       "difficulty": "orta",

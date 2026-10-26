@@ -88,12 +88,12 @@
   </h2>
   <p class="original-title">Safety and alignment in an era of long-horizon models</p>
 
-  <div class="prose"><p>Uzun süre çalışabilen modeller zor ve açık uçlu problemleri çözebiliyor. Ama onları faydalı kılan <strong>ısrarcılık</strong>, aynı zamanda istenmeyen eylemler için daha fazla fırsat demek — ve bu eylemler, kısa görevler için tasarlanmış değerlendirmelerin yakalayamayacağı biçimlerde ortaya çıkabiliyor.</p><p>OpenAI, uzun süreli görevler için eğitilmiş bir modelin sınırlı iç kullanımı sırasında, mevcut dağıtım öncesi değerlendirmelerinde bulunmayan <strong>yeni türden hatalar</strong> gözlemlemiş ve erişimi durdurmuş. Sonra bu hatalardan çıkardıklarıyla yeni değerlendirmeler kurmuş, uzun-ufuk hizalamasını iyileştirmiş, <strong>yörünge seviyesinde izleme</strong> (trajectory-level monitoring) eklemiş ve kullanıcılara daha fazla görünürlük ile kontrol vermiş — ardından sınırlı erişimi geri açmış.</p><p>Yazının kendi çıkardığı sonuç mühendislik açısından en değerli kısım: <strong>hiçbir sabit değerlendirme paketi her davranışı öngöremez.</strong> Bu yüzden dağıtım öncesi test, yakın izleme, müdahale edebilen korumalar ve gerektiğinde duraklatma ya da geri alma yeteneğiyle birlikte gelmeli.</p></div>
+  <div class="prose"><p>Uzun süre çalışabilen modeller zor ve açık uçlu problemleri çözebiliyor. Ama onları faydalı kılan <strong>ısrarcılık</strong>, aynı zamanda istenmeyen eylemler için daha fazla fırsat demek — ve bu eylemler, kısa görevler için tasarlanmış değerlendirmelerin yakalayamayacağı biçimlerde ortaya çıkabiliyor.</p><p>OpenAI, uzun süreli görevler için eğitilmiş bir modelin sınırlı iç kullanımı sırasında, mevcut dağıtım öncesi değerlendirmelerinde bulunmayan <strong>yeni türden hatalar</strong> gözlemlemiş ve erişimi durdurmuş. Sonra bu hatalardan çıkardıklarıyla yeni değerlendirmeler kurmuş, uzun-ufuk hizalamasını iyileştirmiş, <strong>trajectory-level monitoring</strong> (trajectory-level monitoring) eklemiş ve kullanıcılara daha fazla görünürlük ile kontrol vermiş — ardından sınırlı erişimi geri açmış.</p><p>Yazının kendi çıkardığı sonuç mühendislik açısından en değerli kısım: <strong>hiçbir sabit değerlendirme paketi her davranışı öngöremez.</strong> Bu yüzden dağıtım öncesi test, yakın izleme, müdahale edebilen korumalar ve gerektiğinde duraklatma ya da rollback yeteneğiyle birlikte gelmeli.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Uzun süren otonom çalışma, hata yüzeyini genişletiyor — süre başlı başına bir risk değişkeni.</span></li><li><span>Tepki sırası örnek: gözlemle → durdur → yeni değerlendirme kur → izleme ekle → kontrollü geri aç.</span></li><li><span>&quot;Yörünge seviyesinde izleme&quot;: tek tek çıktılara değil, eylem dizisinin bütününe bakmak.</span></li><li><span>Kademeli/yinelemeli yayına alma (iterative deployment), tek seferlik kapsamlı testten daha güvenilir bulunmuş.</span></li>    </ol>
+<li><span>Uzun süren otonom çalışma, hata yüzeyini genişletiyor — süre başlı başına bir risk değişkeni.</span></li><li><span>Tepki sırası örnek: gözlemle → durdur → yeni değerlendirme kur → izleme ekle → kontrollü geri aç.</span></li><li><span>&quot;Trajectory-level monitoring&quot;: tek tek çıktılara değil, eylem dizisinin bütününe bakmak.</span></li><li><span>Kademeli/yinelemeli yayına alma (iterative deployment), tek seferlik kapsamlı testten daha güvenilir bulunmuş.</span></li>    </ol>
   </div>
 
   <div class="callouts">
@@ -102,8 +102,8 @@
       <p>Bu, AI&#x27;a özgü bir ders değil. &quot;Yeterince test edersek üretimde sürpriz olmaz&quot; inancı her yazılım ekibinin bir dönem inandığı ve sonra vazgeçtiği bir varsayım. Olgun yaklaşım şu: testi azaltma, ama üretimde de gözünü açık tut ve <strong>geri alabilme yeteneğini</strong> bir özellik olarak inşa et.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Somut karşılığı şu: her yeni özelliği açarken üç şeyi hazır et — (1) özelliği kapatabileceğin bir bayrak (feature flag), (2) bir şeyin ters gittiğini anlayacağın metrik, (3) geri alma prosedürü. KlioAI&#x27;da yeni bir prompt yayına aldığında bunu tüm kullanıcılara birden vermek yerine %5&#x27;e ver, hata oranına ve kullanıcı düzeltmelerine bak, sonra genişlet. &quot;Yörünge seviyesinde izleme&quot; fikrini de küçültebilirsin: tek bir LLM cevabını değil, bir kullanıcı oturumunun tamamını loglamak — sorunlar genelde tek bir cevapta değil, cevapların birikiminde görünür.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Somut karşılığı şu: her yeni özelliği açarken üç şeyi hazır et: <strong>(1)</strong> özelliği kapatabileceğin bir bayrak (feature flag), <strong>(2)</strong> bir şeyin ters gittiğini anlayacağın metrik, <strong>(3)</strong> rollback prosedürü. Yeni bir prompt’u yayına alırken bunu tüm kullanıcılara birden vermek yerine yüzde 5’ine ver, hata oranına ve kullanıcı düzeltmelerine bak, sonra genişlet. ‘Trajectory-level monitoring’ fikrini de küçültebilirsin: tek bir LLM cevabını değil, bir kullanıcı oturumunun tamamını logla; sorunlar genelde tek bir cevapta değil, cevapların birikiminde görünür.</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">iterative deployment</span> <span class="term-tr">kademeli yayına alma</span></dt>
+      <dt><span class="term-en">iterative deployment</span></dt>
       <dd>Bir sistemi tek seferde herkese açmak yerine küçük dilimlerle, izleyerek yaygınlaştırma.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">long-horizon task</span> <span class="term-tr">uzun ufuklu görev</span></dt>
+      <dt><span class="term-en">long-horizon task</span></dt>
       <dd>Modelin uzun süre boyunca çok adımlı çalışması gereken açık uçlu görev.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">trajectory-level monitoring</span> <span class="term-tr">yörünge seviyesinde izleme</span></dt>
+      <dt><span class="term-en">trajectory-level monitoring</span></dt>
       <dd>Tek tek çıktılar yerine, modelin bir görev boyunca attığı adımların bütününü izleme.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">rollback</span> <span class="term-tr">geri alma</span></dt>
+      <dt><span class="term-en">rollback</span></dt>
       <dd>Bir değişikliği hızla önceki bilinen iyi duruma döndürme yeteneği.</dd>
     </div>
   </dl>
@@ -132,10 +132,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/guvenlik/">#güvenlik</a></li>
+  <li><a href="/etiket/security/">#security</a></li>
   <li><a href="/etiket/llm/">#LLM</a></li>
-  <li><a href="/etiket/gozlemlenebilirlik/">#gözlemlenebilirlik</a></li>
-  <li><a href="/etiket/yayina-alma/">#yayına alma</a></li>
+  <li><a href="/etiket/observability/">#observability</a></li>
+  <li><a href="/etiket/release/">#release</a></li>
 </ul>
 
   <a class="readmore" href="https://openai.com/index/safety-alignment-long-horizon-models" rel="noopener nofollow" target="_blank">
@@ -160,7 +160,7 @@
     <a href="https://blog.cloudflare.com/internal-dns/" rel="noopener nofollow" target="_blank">İki ayrı DNS sistemi = iki ayrı gerçek: konsolidasyonun mantığı</a>
   </h3>
   <p class="original-title">Cloudflare Internal DNS is now generally available</p>
-  <div class="prose prose-sm"><p>Cloudflare Internal DNS genel kullanıma açıldı. Duyurunun içindeki problem tanımı, ürün duyurusundan bağımsız olarak öğretici: iç DNS (private DNS), kurumsal altyapıda hâlâ ağın geri kalanından <strong>ayrı</strong> yönetilen son parçalardan biri. Birçok kurum genel DNS için bir platform, iç DNS için başka bir platform işletiyor.</p><p>İki ayrı sistemin bedeli sayılıyor: politikayı iki yerde tanımlamak, iki ayrı denetim izi, iki ayrı API. Konsolidasyonun vaadi ise <strong>split-horizon DNS</strong>&#x27;i basitleştirmek — iç ve dış çözümleme, paylaşılan bölgeler üzerinde ayrı &quot;görünümler&quot; olarak tanımlanıyor ve tek bir kontrol düzleminden yönetiliyor. Yani senkron tutulacak paralel sistem olmadığı için <strong>kayma</strong> (drift) da olmuyor.</p></div>
+  <div class="prose prose-sm"><p>Cloudflare Internal DNS genel kullanıma açıldı. Duyurunun içindeki problem tanımı, ürün duyurusundan bağımsız olarak öğretici: iç DNS (private DNS), kurumsal altyapıda hâlâ ağın geri kalanından <strong>ayrı</strong> yönetilen son parçalardan biri. Birçok kurum genel DNS için bir platform, iç DNS için başka bir platform işletiyor.</p><p>İki ayrı sistemin bedeli sayılıyor: politikayı iki yerde tanımlamak, iki ayrı denetim izi, iki ayrı API. Konsolidasyonun vaadi ise <strong>split-horizon DNS</strong>&#x27;i basitleştirmek — iç ve dış çözümleme, paylaşılan bölgeler üzerinde ayrı &quot;görünümler&quot; olarak tanımlanıyor ve tek bir control plane’den yönetiliyor. Yani senkron tutulacak paralel sistem olmadığı için <strong>kayma</strong> (drift) da olmuyor.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
@@ -170,8 +170,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>DNS&#x27;i &quot;alan adını IP&#x27;ye çeviren şey&quot; olarak bilmek yeterli değil; backend mühendisliğinde arızaların şaşırtıcı bir kısmı DNS kaynaklıdır. Öğrenmeye değer üç şey: TTL (bir kaydın ne kadar önbelleklendiği — deploy sırasında neden eski IP&#x27;ye gittiğini açıklar), split-horizon (aynı ad içeride farklı, dışarıda farklı), ve Docker/Kubernetes&#x27;te servis keşfinin DNS üzerinden çalıştığı. Bir mikroservis diğerine ulaşamıyorsa, ilk bakacağın yerlerden biri DNS çözümlemesidir — <code>nslookup</code> ve <code>dig</code> komutlarını öğren.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>DNS&#x27;i &quot;alan adını IP&#x27;ye çeviren şey&quot; olarak bilmek yeterli değil; backend mühendisliğinde arızaların şaşırtıcı bir kısmı DNS kaynaklıdır. Öğrenmeye değer üç şey: TTL (bir kaydın ne kadar cache’lendiği — deploy sırasında neden eski IP&#x27;ye gittiğini açıklar), split-horizon (aynı ad içeride farklı, dışarıda farklı), ve Docker/Kubernetes&#x27;te servis keşfinin DNS üzerinden çalıştığı. Bir mikroservis diğerine ulaşamıyorsa, ilk bakacağın yerlerden biri DNS çözümlemesidir — <code>nslookup</code> ve <code>dig</code> komutlarını öğren.</p>
     </div>
   </div>
 
@@ -179,15 +179,15 @@
     <summary class="label">Sözlük · 3 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">split-horizon DNS</span> <span class="term-tr">bölünmüş ufuk DNS</span></dt>
+      <dt><span class="term-en">split-horizon DNS</span></dt>
       <dd>Aynı alan adının, sorgunun geldiği yere göre farklı adreslere çözülmesi (içeriden özel IP, dışarıdan genel IP).</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">authoritative / recursive DNS</span> <span class="term-tr">yetkili / özyinelemeli DNS</span></dt>
+      <dt><span class="term-en">authoritative / recursive DNS</span></dt>
       <dd>Yetkili sunucu bir bölgenin kayıtlarının asıl sahibidir; özyinelemeli sunucu ise istemci adına gidip cevabı bulur.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">configuration drift</span> <span class="term-tr">yapılandırma kayması</span></dt>
+      <dt><span class="term-en">configuration drift</span></dt>
       <dd>Aynı olması gereken iki sistemin ayarlarının zamanla birbirinden ayrışması.</dd>
     </div>
   </dl>
@@ -197,8 +197,8 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/dns/">#DNS</a></li>
-  <li><a href="/etiket/ag/">#ağ</a></li>
-  <li><a href="/etiket/altyapi/">#altyapı</a></li>
+  <li><a href="/etiket/networking/">#networking</a></li>
+  <li><a href="/etiket/infrastructure/">#infrastructure</a></li>
   <li><a href="/etiket/operasyon/">#operasyon</a></li>
 </ul>
 
@@ -266,7 +266,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

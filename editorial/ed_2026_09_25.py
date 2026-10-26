@@ -4,91 +4,58 @@ from pipeline.compose import save_edition
 
 DATE = "2026-09-25"
 
-INTRO = (
-    "Kimlik, bulut mühendisliğinin en az konuşulan ama en çok kırılan yeri. Netflix’in yazısı "
-    "tek bir soruyu cevaplıyor: bulut sağlayıcısının verdiği kimliği, kendi iç sistemlerinin "
-    "tanıdığı bir kimliğe nasıl güvenle çevirirsin?"
-)
+INTRO = "Kimlik, bulut mühendisliğinin en az konuşulan ama en çok kırılan yeri. Netflix’in yazısı tek bir soruyu cevaplıyor: bulut sağlayıcısının verdiği kimliği, kendi iç sistemlerinin tanıdığı bir kimliğe nasıl güvenle çevirirsin?"
 
 DRAFTS = [
     {
         "url": "https://netflixtechblog.com/trading-a-cloud-identity-for-your-own-workload-attestation-on-managed-compute-516d5a29b252?source=rss----2615bd06b42e---4",
         "slot": "cover",
-        "title_tr": "Bulut kimliğini kendi kimliğine çevirmek: iki ayrı kanıtla iş yükü doğrulaması",
+        "title_tr": "Bulut kimliğini kendi kimliğine çevirmek: iki ayrı kanıtla workload attestation",
         "difficulty": "ileri",
-        "tags": ["kimlik", "güvenlik", "mTLS", "Spark"],
-        "summary": (
-            "Yıllardır var olan kurumlar genelde iki kimlik sistemi işletir: biri bulut sağlayıcısının "
-            "(IAM rolleri, yürütme rolleri), diğeri kendilerinin; iç servisler bir isteğe cevap "
-            "verirken asıl bu ikinciye bakar. Kendi kurduğun altyapıda kimliği istediğin gibi "
-            "başlatabilirsin. **Yönetilen hesaplamada ise sağlayıcı sürecine bir bulut kimliği verir ve "
-            "başka bir şey vermez.** Yazı bu boşluğu Amazon EMR üzerindeki Spark iş yükleri için nasıl "
-            "kapattıklarını anlatıyor; ama ‘anlatılanların çok azı Spark’a ya da EMR’a özgü’.\n\n"
-            "Netflix'te servisler arası kimlik doğrulama **Metatron** adlı özel bir PKI üzerinde "
-            "çalışıyor: her iş yükü kısa ömürlü bir X.509 sertifikası alıyor ve servisler karşılıklı "
-            "TLS (mTLS) ile birbirini doğruluyor. Sertifikayı iş yükü kendisi isteyemiyor; kimlik "
-            "servisi, isteyenin iddia ettiği iş yükü olduğuna kanaat getirdikten sonra veriyor. Bu "
-            "doğrulamaya **attestation** deniyor. İkinci kavram **Data Project**: verinin sahiplik "
-            "birimi; tabloların sahibi, yetkili kullanıcıları ve kendi kimliği var ve işler kendilerini "
-            "başlatan kişi olarak değil Data Project olarak çalışıyor.\n\n"
-            "Tasarımın temeli Spark yığınının dışında verilmiş bir karar: her Data Project kimliği, "
-            "**özel bir IAM rolüne 1:1** eşleniyor ve bu eşlemeyi Data Project servisi kaydediyor. "
-            "Eşleme ‘bu süreç R rolüyle çalışıyor’ (sağlayıcının dili) cümlesini ‘bu süreç W iş yükü’ "
-            "(bizim dilimiz) cümlesine çevirmeyi mümkün kılıyor; yazıdaki tespit: iki kimlik sistemini "
-            "köprülemenin zor kısmı protokol değil, bir eşlemeyi taahhüt edip yetkili tutmak. Bir AWS "
-            "hesabı on binlerce rol tutamadığı için roller hesaplar arasında deterministik olarak "
-            "bölünüyor.\n\n"
-            "Akış üç adım. **(1) Kontrol düzlemi imzalı bir iddia üretir:** Spark işlerini başlatma "
-            "yetkisi yalnızca ona ait; Data Project'in rolünü çözüp iş yükü metadata'sını imzalıyor. "
-            "**(2) İş yükü bulut kimliğine sahip olduğunu kanıtlar:** sürücü tarafındaki Spark eklentisi, "
-            "rolün kimlik bilgileriyle `sts:GetCallerIdentity` isteğini **imzalıyor ama göndermiyor** ve "
-            "ortaya kısa ömürlü bir ön-imzalı URL çıkıyor. URL'yi herkes çağırabilir, ama onu yalnızca "
-            "rolün kimlik bilgilerine sahip olan üretebilir; ve cevap iş yükünden değil AWS'ten gelir, "
-            "yani iş yükü cevap konusunda yalan söyleyemez. **(3) Kimlik servisi iki kanıtı karşılaştırır:** "
-            "URL'yi AWS STS'e karşı çağırıp rolü okur (sağlayıcının beyanı), kontrol düzleminin "
-            "imzasını doğrular (platformun beyanı), ikisinin tutarlı olduğunu görürse sertifikayı "
-            "verir.\n\n"
-            "Tasarımın can alıcı noktası bu üçüncü adım: **ikisi tek başına yetmez ve birbirini "
-            "tamamlar.** Sağlayıcının beyanı sahtelenemez ama eksik tanımlıdır (rol bir iş yükü "
-            "değildir). Platformun beyanı iyi tanımlıdır ama tek başına doğrulanamaz. Birlikte: imza "
-            "iş yükünün meşru biçimde gönderildiğini, URL ise gerçekten o olduğunu söylüyor. Uygulama "
-            "kimliğini rol adından türetmek kırılgan bir dize eşleştirmesi olacağı için, uygulama "
-            "kimliği **imzalı metadata'dan** alınıyor, sağlayıcının cevabı yalnızca doğrulama için "
-            "kullanılıyor. Bunun bedeli bir ağ turu ve daha sıkı imzalama; kazancı çok daha net bir "
-            "güven hikâyesi. Bir de **fan-out** problemi var: bir Spark uygulaması bir sürücü ve binlerce "
-            "yürütücüden oluşuyor; hepsi ayrı attest ederse binlerce STS çağrısı bir saldırı gibi "
-            "görünür ve sağlayıcı hız sınırlarına sert bir bağımlılık yaratır."
-        ),
+        "tags": [
+            "identity",
+            "security",
+            "mTLS",
+            "Spark"
+        ],
+        "summary": "Yıllardır var olan kurumlar genelde iki kimlik sistemi işletir: biri bulut sağlayıcısının (IAM rolleri, yürütme rolleri), diğeri kendilerinin; iç servisler bir isteğe cevap verirken asıl bu ikinciye bakar. Kendi kurduğun altyapıda kimliği istediğin gibi başlatabilirsin. **Yönetilen hesaplamada ise sağlayıcı sürecine bir bulut kimliği verir ve başka bir şey vermez.** Yazı bu boşluğu Amazon EMR üzerindeki Spark iş yükleri için nasıl kapattıklarını anlatıyor; ama ‘anlatılanların çok azı Spark’a ya da EMR’a özgü’.\n\nNetflix'te servisler arası kimlik doğrulama **Metatron** adlı özel bir PKI üzerinde çalışıyor: her iş yükü kısa ömürlü bir X.509 sertifikası alıyor ve servisler mutual TLS (mTLS) (mTLS) ile birbirini doğruluyor. Sertifikayı iş yükü kendisi isteyemiyor; kimlik servisi, isteyenin iddia ettiği iş yükü olduğuna kanaat getirdikten sonra veriyor. Bu doğrulamaya **attestation** deniyor. İkinci kavram **Data Project**: verinin sahiplik birimi; tabloların sahibi, yetkili kullanıcıları ve kendi kimliği var ve işler kendilerini başlatan kişi olarak değil Data Project olarak çalışıyor.\n\nTasarımın temeli Spark yığınının dışında verilmiş bir karar: her Data Project kimliği, **özel bir IAM rolüne 1:1** eşleniyor ve bu eşlemeyi Data Project servisi kaydediyor. Eşleme ‘bu süreç R rolüyle çalışıyor’ (sağlayıcının dili) cümlesini ‘bu süreç W iş yükü’ (bizim dilimiz) cümlesine çevirmeyi mümkün kılıyor; yazıdaki tespit: iki kimlik sistemini köprülemenin zor kısmı protokol değil, bir eşlemeyi taahhüt edip yetkili tutmak. Bir AWS hesabı on binlerce rol tutamadığı için roller hesaplar arasında deterministik olarak bölünüyor.\n\nAkış üç adım. **(1) Control plane imzalı bir iddia üretir:** Spark işlerini başlatma yetkisi yalnızca ona ait; Data Project'in rolünü çözüp iş yükü metadata'sını imzalıyor. **(2) İş yükü bulut kimliğine sahip olduğunu kanıtlar:** sürücü tarafındaki Spark eklentisi, rolün kimlik bilgileriyle `sts:GetCallerIdentity` isteğini **imzalıyor ama göndermiyor** ve ortaya kısa ömürlü bir ön-imzalı URL çıkıyor. URL'yi herkes çağırabilir, ama onu yalnızca rolün kimlik bilgilerine sahip olan üretebilir; ve cevap iş yükünden değil AWS'ten gelir, yani iş yükü cevap konusunda yalan söyleyemez. **(3) Kimlik servisi iki kanıtı karşılaştırır:** URL'yi AWS STS'e karşı çağırıp rolü okur (sağlayıcının beyanı), control plane’in imzasını doğrular (platformun beyanı), ikisinin tutarlı olduğunu görürse sertifikayı verir.\n\nTasarımın can alıcı noktası bu üçüncü adım: **ikisi tek başına yetmez ve birbirini tamamlar.** Sağlayıcının beyanı sahtelenemez ama eksik tanımlıdır (rol bir iş yükü değildir). Platformun beyanı iyi tanımlıdır ama tek başına doğrulanamaz. Birlikte: imza iş yükünün meşru biçimde gönderildiğini, URL ise gerçekten o olduğunu söylüyor. Uygulama kimliğini rol adından türetmek kırılgan bir dize eşleştirmesi olacağı için, uygulama kimliği **imzalı metadata'dan** alınıyor, sağlayıcının cevabı yalnızca doğrulama için kullanılıyor. Bunun bedeli bir ağ turu ve daha sıkı imzalama; kazancı çok daha net bir güven hikâyesi. Bir de **fan-out** problemi var: bir Spark uygulaması bir sürücü ve binlerce yürütücüden oluşuyor; hepsi ayrı attest ederse binlerce STS çağrısı bir saldırı gibi görünür ve sağlayıcı hız sınırlarına sert bir bağımlılık yaratır.",
         "key_points": [
             "Birincil kanıt iş yükünün kendi beyanı olamaz; bağımsız bir üçüncü tarafın (AWS) cevabı gerekir.",
             "İki zayıf kanıtı birleştirmek tek bir güçlü kanıttan daha sağlam olabilir: biri sahtelenemez, diğeri iyi tanımlı.",
             "Kimlik eşlemesi (rol ↔ iş yükü) tasarımın yetkili kaynağıdır; asıl zor iş protokol değil bu eşlemeyi doğru tutmak.",
             "Dize eşleştirmesiyle kimlik türetmek kırılgandır; kimliği imzalı veriden al.",
-            "Ölçek davranışını baştan düşün: binlerce sürecin aynı anda doğrulama yapması saldırı gibi görünür.",
+            "Ölçek davranışını baştan düşün: binlerce sürecin aynı anda doğrulama yapması saldırı gibi görünür."
         ],
-        "why_it_matters": (
-            "‘Bu isteği gönderen gerçekten iddia ettiği şey mi?’ sorusu güvenliğin temelidir. "
-            "Bu yazı, cevabın iş yükünün kendisinden değil, onu doğrulayabilen bağımsız bir "
-            "taraftan gelmesi gerektiğini somut bir mimariyle gösteriyor; aynı fikir "
-            "Vault’un AWS IAM doğrulamasında da kullanılıyor."
-        ),
-        "for_you": (
-            "Bu desenin en yakın karşılığı senin CI/CD’nde: GitHub Actions’tan buluta dağıtım yaparken "
-            "uzun ömürlü bir erişim anahtarını sır olarak saklamak yerine **OIDC federasyonu** kullan. "
-            "GitHub, çalışan işin kim olduğunu imzalı bir belirteçle kanıtlıyor, bulut sağlayıcısı o "
-            "belirteci doğrulayıp kısa ömürlü yetki veriyor; iş yükü kimlik hakkında kendi beyanını "
-            "vermiyor, doğrulanabilir bir üçüncü taraf veriyor. Sır yönetimi gerektirmiyor, çalınacak "
-            "anahtar da yok. KlioAI’da Google OAuth kullandığına göre mantık sana tanıdık: kimliği "
-            "kendin tutmak yerine doğrulanabilir bir sağlayıcıya devret."
-        ),
+        "why_it_matters": "‘Bu isteği gönderen gerçekten iddia ettiği şey mi?’ sorusu güvenliğin temelidir. Bu yazı, cevabın iş yükünün kendisinden değil, onu doğrulayabilen bağımsız bir taraftan gelmesi gerektiğini somut bir mimariyle gösteriyor; aynı fikir Vault’un AWS IAM doğrulamasında da kullanılıyor.",
+        "for_you": "Bu desenin en yakın karşılığı CI/CD’de: GitHub Actions’tan buluta dağıtım yaparken uzun ömürlü bir access key’i secret olarak saklamak yerine **OIDC federation** kullan. GitHub, çalışan işin kim olduğunu imzalı bir token ile kanıtlıyor, bulut sağlayıcısı o token’ı doğrulayıp kısa ömürlü yetki veriyor; iş yükü kimlik hakkında kendi beyanını vermiyor, doğrulanabilir bir üçüncü taraf veriyor. Secret yönetimi gerektirmiyor, çalınacak key de yok. Google OAuth gibi bir sağlayıcı kullandıysan mantık tanıdık: kimliği kendin tutmak yerine doğrulanabilir bir sağlayıcıya devret.",
         "terms": [
-            {"en": "workload attestation", "tr": "iş yükü doğrulaması", "definition": "Bir sürecin, iddia ettiği iş yükü olduğunu bağımsız ve doğrulanabilir kanıtlarla ispatlaması."},
-            {"en": "mutual TLS (mTLS)", "tr": "karşılıklı TLS", "definition": "Hem sunucunun hem istemcinin sertifikayla kimliğini kanıtladığı TLS kurulumu."},
-            {"en": "PKI", "tr": "açık anahtar altyapısı", "definition": "Sertifikaları üreten, dağıtan ve doğrulayan kimlik altyapısı."},
-            {"en": "proof of possession", "tr": "sahiplik kanıtı", "definition": "Bir gizli bilgiyi ifşa etmeden ona sahip olunduğunu gösteren kanıt."},
-            {"en": "OIDC federation", "tr": "OIDC federasyonu", "definition": "Bir sağlayıcının verdiği imzalı kimlik belirtecine başka bir sistemin güvenmesi."},
-        ],
-    },
+            {
+                "en": "workload attestation",
+                "tr": "workload attestation",
+                "definition": "Bir sürecin, iddia ettiği iş yükü olduğunu bağımsız ve doğrulanabilir kanıtlarla ispatlaması."
+            },
+            {
+                "en": "mutual TLS (mTLS)",
+                "tr": "mutual TLS (mTLS)",
+                "definition": "Hem sunucunun hem istemcinin sertifikayla kimliğini kanıtladığı TLS kurulumu."
+            },
+            {
+                "en": "PKI",
+                "tr": "PKI",
+                "definition": "Sertifikaları üreten, dağıtan ve doğrulayan kimlik altyapısı."
+            },
+            {
+                "en": "proof of possession",
+                "tr": "proof of possession",
+                "definition": "Bir gizli bilgiyi ifşa etmeden ona sahip olunduğunu gösteren kanıt."
+            },
+            {
+                "en": "OIDC federation",
+                "tr": "OIDC federation",
+                "definition": "Bir sağlayıcının verdiği imzalı kimlik belirtecine başka bir sistemin güvenmesi."
+            }
+        ]
+    }
 ]
 
 if __name__ == "__main__":

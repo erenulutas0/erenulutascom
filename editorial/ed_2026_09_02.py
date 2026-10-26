@@ -4,11 +4,7 @@ from pipeline.compose import save_edition
 
 DATE = "2026-09-02"
 
-INTRO = (
-    "Meta'dan, RAG üzerine düşündüren bir yazı: belgeleri her soruda yeniden parçalayıp getirmek "
-    "yerine, uzmanın nasıl düşündüğünü baştan yapılandırılmış dosyalara damıtırsan ne olur? "
-    "Cevap: daha tutarlı, denetlenebilir ve modeli yeniden eğitmeden öğrenen bir agent."
-)
+INTRO = "Meta'dan, RAG üzerine düşündüren bir yazı: belgeleri her soruda yeniden parçalayıp getirmek yerine, uzmanın nasıl düşündüğünü baştan yapılandırılmış dosyalara damıtırsan ne olur? Cevap: daha tutarlı, denetlenebilir ve modeli yeniden eğitmeden öğrenen bir agent."
 
 DRAFTS = [
     {
@@ -16,63 +12,45 @@ DRAFTS = [
         "slot": "cover",
         "title_tr": "Kurumsal “ikinci beyin”: bilgiyi modelin ağırlıklarına değil, denetlenebilir dosyalara yazmak",
         "difficulty": "ileri",
-        "tags": ["RAG", "agent", "bilgi yönetimi", "mimari"],
-        "summary": (
-            "Büyük kurumların ortak sorunu: uzman bilgisi ya hiç yazılmamış ya da belgelere dağılmış. "
-            "Uyum alanında aynı soru tipleri yüzlerce ürün incelemesinde tekrar ediyor, uzman "
-            "değerlendirmeleri günler sürüyor ve değerlendirmeler arası tutarsızlık gerçek bir risk "
-            "yaratıyor. Uzmanlar zamanlarının büyük kısmını rutin sorulara harcıyor, yargılarının asıl "
-            "gerektiği yeni ve belirsiz işe değil.\n\n"
-            "Meta, belirli bir uyum alanı için bir **ikinci beyin** ajanı kurmuş. Yeniliği iki katmanın "
-            "birleşiminde: (1) **bilmeyi muhakemeden ayıran yapılandırılmış ve denetlenebilir bir bilgi "
-            "mimarisi**, (2) uzman geri bildirimini **modeli yeniden eğitmeden**, doğrulanmış ve "
-            "regresyon testinden geçmiş güncellemelere derleyen bir **kendini geliştirme döngüsü**. "
-            "Sistemin dört katmanı var: bilgi sistemi, akıl yürütme katmanı, değerlendirme çerçevesi ve "
-            "iyileştirme döngüsü. Biri çıkarılırsa diğerleri bozuluyor.\n\n"
-            "Temel tespit şu: bir ajan çıkarım anında belge parçaları getirirse, uzmanın muhakemesini "
-            "her çalıştırmada ham kaynaklardan yeniden türetmek zorunda kalır; bu yavaş, hataya "
-            "açık ve tutarsız. Bunun yerine uzun süren bir çevrimdışı süreç kaynak belgeleri üzerinde "
-            "akıl yürütüp **200'den fazla yapılandırılmış bilgi dosyasına** damıtıyor: kurumun alanı nasıl "
-            "yorumladığı, kısıtları, sınırları ve yönlendirme sonuçları makine tarafından okunur hâlde. "
-            "Dosyalar sıkı bir sınıflandırmada: **pozisyon dosyaları** (kurumun otoriter duruşları), "
-            "**taksonomi ve sözlük dosyaları** (tek doğruluk kaynağı), **yönlendirme dizinleri** (girdi "
-            "özelliklerini ilgili pozisyonlara eşler; embedding benzerliğine tek başına dayanmadan, "
-            "yani getirme belirlenimci ve denetlenebilir) ve **geçit dosyaları** (ajanın bir analiz "
-            "alanına girmeden geçmesi gereken eşik testleri). Her dosya YAML başlığında `depends_on` ve "
-            "`referenced_by` bildiriyor, böylece çift yönlü bağımlılık grafiği oluşuyor: bir dosya "
-            "değişince nelerin etkilendiği izlenebiliyor.\n\n"
-            "Wiki ile RAG arasında bölme kararı da açık: **yoğun ve sık kullanılan** bilgi wiki'ye, "
-            "seyrek ve duruma özgü kaynaklar anlamsal ya da sözcüksel aramaya (RAG) gidiyor."
-        ),
+        "tags": [
+            "RAG",
+            "agent",
+            "knowledge management",
+            "architecture"
+        ],
+        "summary": "Büyük kurumların ortak sorunu: uzman bilgisi ya hiç yazılmamış ya da belgelere dağılmış. Uyum alanında aynı soru tipleri yüzlerce ürün incelemesinde tekrar ediyor, uzman değerlendirmeleri günler sürüyor ve değerlendirmeler arası tutarsızlık gerçek bir risk yaratıyor. Uzmanlar zamanlarının büyük kısmını rutin sorulara harcıyor, yargılarının asıl gerektiği yeni ve belirsiz işe değil.\n\nMeta, belirli bir uyum alanı için bir **ikinci beyin** agent’ı kurmuş. Yeniliği iki katmanın birleşiminde: (1) **bilmeyi muhakemeden ayıran yapılandırılmış ve denetlenebilir bir bilgi mimarisi**, (2) uzman geri bildirimini **modeli yeniden eğitmeden**, doğrulanmış ve regression test’ten geçmiş güncellemelere derleyen bir **kendini geliştirme döngüsü**. Sistemin dört katmanı var: bilgi sistemi, reasoning katmanı, değerlendirme çerçevesi ve iyileştirme döngüsü. Biri çıkarılırsa diğerleri bozuluyor.\n\nTemel tespit şu: bir agent inference anında belge parçaları getirirse, uzmanın muhakemesini her çalıştırmada ham kaynaklardan yeniden türetmek zorunda kalır; bu yavaş, hataya açık ve tutarsız. Bunun yerine uzun süren bir çevrimdışı süreç kaynak belgeleri üzerinde akıl yürütüp **200'den fazla yapılandırılmış bilgi dosyasına** damıtıyor: kurumun alanı nasıl yorumladığı, kısıtları, sınırları ve yönlendirme sonuçları makine tarafından okunur hâlde. Dosyalar sıkı bir sınıflandırmada: **pozisyon dosyaları** (kurumun otoriter duruşları), **taksonomi ve sözlük dosyaları** (tek doğruluk kaynağı), **yönlendirme dizinleri** (girdi özelliklerini ilgili pozisyonlara eşler; embedding benzerliğine tek başına dayanmadan, yani getirme belirlenimci ve denetlenebilir) ve **geçit dosyaları** (agent’ın bir analiz alanına girmeden geçmesi gereken eşik testleri). Her dosya YAML başlığında `depends_on` ve `referenced_by` bildiriyor, böylece çift yönlü bağımlılık grafiği oluşuyor: bir dosya değişince nelerin etkilendiği izlenebiliyor.\n\nWiki ile RAG arasında bölme kararı da açık: **yoğun ve sık kullanılan** bilgi wiki'ye, seyrek ve duruma özgü kaynaklar anlamsal ya da sözcüksel aramaya (RAG) gidiyor.",
         "key_points": [
             "Bilgiyi her sorguda yeniden türetmek yerine önceden çıkarıp yapılandırmak: yavaşlık ve tutarsızlık azalıyor.",
             "Yönlendirme dizinleri getirmeyi belirlenimci kılıyor; embedding benzerliği tek başına yeterli sayılmıyor.",
             "Bağımlılık grafiği (`depends_on` / `referenced_by`) otomatik düzenlemeyi güvenli yapıyor: neyin etkileneceği önceden biliniyor.",
             "Uzman düzeltmeleri model eğitimi yerine bilgi dosyalarının doğrulanmış güncellemelerine dönüşüyor.",
-            "Yoğun ve sık kullanılan bilgi wiki'de, seyrek bilgi RAG'de: bölme ölçütü yoğunluk ve kullanım sıklığı.",
+            "Yoğun ve sık kullanılan bilgi wiki'de, seyrek bilgi RAG'de: bölme ölçütü yoğunluk ve kullanım sıklığı."
         ],
-        "why_it_matters": (
-            "RAG'in yaygın zayıflığı her sorguda aynı muhakemenin yeniden ve biraz farklı biçimde "
-            "kurulması. Bu yazı alternatifi gösteriyor: kritik bilgiyi bir kez damıt, sürümle, test et "
-            "ve ajan yalnızca onu kullansın. Bu, bilgiyi koda yaklaştırmak: gözden geçirilebilir, "
-            "geri alınabilir ve regresyon testli."
-        ),
-        "for_you": (
-            "Mobit'teki doküman arama mimarisine doğrudan bir soru: ihale belgelerinde tekrar eden "
-            "soruların (“bu firmanın şartnamesinde X şartı var mı?”) cevaplarını her seferinde ham "
-            "parçalardan mı türetiyorsun? Sık sorulan 20 soru için bir kez damıtılmış, sürümlenmiş "
-            "bir “pozisyon” dosyası (Markdown + YAML) tutmayı dene; seyrek sorular RAG'e kalsın. "
-            "Ve düzeltme akışı kur: kullanıcı bir cevabı düzelttiğinde bu düzeltme o dosyaya "
-            "bir PR olarak gelsin, küçük bir test setinden geçsin. Modeli yeniden eğitmeden öğrenen "
-            "bir sistem, hem ucuz hem de açıklanabilir."
-        ),
+        "why_it_matters": "RAG'in yaygın zayıflığı her sorguda aynı muhakemenin yeniden ve biraz farklı biçimde kurulması. Bu yazı alternatifi gösteriyor: kritik bilgiyi bir kez damıt, sürümle, test et ve agent yalnızca onu kullansın. Bu, bilgiyi koda yaklaştırmak: gözden geçirilebilir, geri alınabilir ve regresyon testli.",
+        "for_you": "Doküman arama gibi bir sistemde tekrar eden soruların cevaplarını her seferinde ham parçalardan mı türetiyorsun? Sık sorulan 20 soru için bir kez damıtılmış, versiyonlanan bir ‘pozisyon’ dosyası (Markdown + YAML) tutmayı dene; seyrek sorular RAG’e kalsın. Ve düzeltme akışı kur: kullanıcı bir cevabı düzelttiğinde bu düzeltme o dosyaya bir PR olarak gelsin, küçük bir test setinden geçsin. Modeli yeniden eğitmeden öğrenen bir sistem hem ucuz hem de açıklanabilir.",
         "terms": [
-            {"en": "knowledge distillation (documents)", "tr": "bilgi damıtma", "definition": "Çok sayıda ham belgeyi, yargıyı koruyarak az sayıda yapılandırılmış ve kullanıma hazır dosyaya indirgeme."},
-            {"en": "routing index", "tr": "yönlendirme dizini", "definition": "Girdinin özelliklerine göre hangi bilgi dosyalarının uygulanacağını belirleyen kural tablosu."},
-            {"en": "regression test", "tr": "regresyon testi", "definition": "Bir değişikliğin daha önce çalışan davranışları bozmadığını doğrulayan test."},
-            {"en": "retrieval-augmented generation (RAG)", "tr": "getirme destekli üretim", "definition": "Modele cevap üretmeden önce ilgili belgeleri getirip bağlam olarak verme yöntemi."},
-        ],
-    },
+            {
+                "en": "knowledge distillation (documents)",
+                "tr": "knowledge distillation (documents)",
+                "definition": "Çok sayıda ham belgeyi, yargıyı koruyarak az sayıda yapılandırılmış ve kullanıma hazır dosyaya indirgeme."
+            },
+            {
+                "en": "routing index",
+                "tr": "routing index",
+                "definition": "Girdinin özelliklerine göre hangi bilgi dosyalarının uygulanacağını belirleyen kural tablosu."
+            },
+            {
+                "en": "regression test",
+                "tr": "regression test",
+                "definition": "Bir değişikliğin daha önce çalışan davranışları bozmadığını doğrulayan test."
+            },
+            {
+                "en": "retrieval-augmented generation (RAG)",
+                "tr": "retrieval-augmented generation (RAG)",
+                "definition": "Modele cevap üretmeden önce ilgili belgeleri getirip bağlam olarak verme yöntemi."
+            }
+        ]
+    }
 ]
 
 if __name__ == "__main__":

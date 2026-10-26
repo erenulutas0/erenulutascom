@@ -22,7 +22,7 @@
   <dl>
     {% for t in a.terms %}
     <div class="term">
-      <dt><span class="term-en">{{ t.en }}</span> <span class="term-tr">{{ t.tr }}</span></dt>
+      <dt><span class="term-en">{{ t.en }}</span></dt>
       <dd>{{ t.definition }}</dd>
     </div>
     {% endfor %}
@@ -81,7 +81,7 @@
     {% endif %}
     {% if a.for_you %}
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
+      <h3 class="label">Pratikte</h3>
       <p>{{ a.for_you | inline }}</p>
     </div>
     {% endif %}
@@ -122,7 +122,7 @@
   {% if a.for_you %}
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
+      <h4 class="label">Pratikte</h4>
       <p>{{ a.for_you | inline }}</p>
     </div>
   </div>

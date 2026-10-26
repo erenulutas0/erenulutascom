@@ -6,6 +6,110 @@
     <description>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</description>
     <language>tr</language>
     <item>
+      <title>Log’u LLM’e vermek yetmez: Netflix Pensive AI’da deterministik sistemin etrafına AI sarmak</title>
+      <link>https://erenulutas.com/sayi/2026-10-26/#97a0aa466cd0</link>
+      <guid isPermaLink="false">97a0aa466cd0</guid>
+      <pubDate>Mon, 26 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Netflix Tech Blog</category>
+      <description>Netflix’te data ve ML kullanıcıları her gün milyonlarca workload çalıştırıyor (Titus, Spark, Trino, Druid gibi motorlarda) ve pik günlerde yaklaşık 100.000 tanesi başarısız oluyor. Başarısızlık yalnızca başlangıç: birinin birkaç log arasında faydalı sinyali bulması, sebebin kendi kodunda mı platformda mı olduğuna karar vermesi ve yeniden deneme, yeniden yapılandırma ya da yükseltme kararı vermesi gerekiyor. İlk çözüm Pensive idi: başarısız workload loglarını toplayıp regex ve elle yazılmış Java kurallarıyla hataları çıkaran ve sınıflandıran, yeniden deneme ya da düzeltme önerisini Maestro gibi</description>
+    </item>
+    <item>
+      <title>Incident’ta 30 saniye eşiği: OpenAI mühendisleri hızlı bir kodlama agent’ını nasıl kullanıyor</title>
+      <link>https://erenulutas.com/sayi/2026-10-26/#8f2f08b6e197</link>
+      <guid isPermaLink="false">8f2f08b6e197</guid>
+      <pubDate>Mon, 26 Oct 2026 08:00:00 +0000</pubDate>
+      <category>OpenAI Research</category>
+      <description>OpenAI, Codex’in yüksek hızlı modu Ultrafast’i iç kullanım örneği olarak anlatıyor (kendi ürününü anlatan bir yazı; abartı payı olabilir). Mühendisler için incident response’ta varsayılan olmuş: bir şey bozulduğunda dakikalarca cevap beklemek sorunu büyütüyor. Bir mühendis incident için bir Slack kanalı açıp Codex’i olayı izlemesi, araştırması ve gelen soruları yanıtlaması için görevlendiriyor ve ‘birçok olası nedeni aynı anda arayabildiğini’ söylüyor. Bir güvenlik mimarı, yapılandırılmış ve yapılandırılmamış veriyi toplayıp normalleştirme ve bağlam verme işinin bir iki saatten 10-15 dakikaya,</description>
+    </item>
+    <item>
+      <title>Önce her ekibe ayrı container, sonra geri dönüş: OpenAI Habitat’ın Cosmos DB’de multi-tenancy yolculuğu</title>
+      <link>https://erenulutas.com/sayi/2026-10-23/#298c8de07d18</link>
+      <guid isPermaLink="false">298c8de07d18</guid>
+      <pubDate>Fri, 23 Oct 2026 08:00:00 +0000</pubDate>
+      <category>OpenAI Research</category>
+      <description>OpenAI ürünlerinin tamamı hızlı ve güvenilir veri erişimine ihtiyaç duyuyor ve bunu Habitat adlı depolama platformu sağlıyor: 40 coğrafi bölgede 1 milyardan fazla kullanıcıya milisaniye cevap, toplamda 500 petabayttan fazla veri. Bu ikinci bölüm, altta yatan depolama bileşeni olan Azure Cosmos DB’nin nasıl ölçeklendiğini anlatıyor. Yolculuk dairesel: tek bir paylaşımlı container → her kullanım için ayrı single-tenant container → tekrar paylaşımlı container (varsayılan olarak). Cosmos DB’ye kısa giriş. Bir hesap container’ları ve replikasyon politikasını tanımlıyor; her container belirli bir th</description>
+    </item>
+    <item>
+      <title>API’yi sildiğinde kimin kırılacağını bil: Netflix Quasar ile blast radius ölçümü</title>
+      <link>https://erenulutas.com/sayi/2026-10-23/#2740539d9b47</link>
+      <guid isPermaLink="false">2740539d9b47</guid>
+      <pubDate>Fri, 23 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Netflix Tech Blog</category>
+      <description>Netflix’te paylaşılan Java kütüphaneleri, bağımsız gelişen çok sayıda repository tarafından kullanılıyor. Kütüphane sahibi (producer) API farkını görüyor ama değişen sembolleri kimin hâlâ kullandığını göremiyor: kaldırılan bir deprecated metodu hâlâ çağıran var mı, consumer’lar tek sürümde mi yoksa birkaç nesilde mi, başka bir kütüphane API’yi sarmalıyor mu? Kanıt olmadan producer ya breaking change çıkarıp etkiyi consumer hatalarından öğreniyor ya da riski bilmediği için eski API’yi sonsuza dek tutuyor. Coding agent’lar geliştirme döngüsünü hızlandırdıkça bu görünürlük daha da önemli: agent’ı</description>
+    </item>
+    <item>
+      <title>Eğitim ortamında internet yok: OpenAI frontier model eğitimini nasıl sıkılaştırdı</title>
+      <link>https://erenulutas.com/sayi/2026-10-23/#48e2274fdf2b</link>
+      <guid isPermaLink="false">48e2274fdf2b</guid>
+      <pubDate>Fri, 23 Oct 2026 08:00:00 +0000</pubDate>
+      <category>OpenAI Research</category>
+      <description>Modellerin yazılımla çalışabilmesi için kod yazıp çalıştırabildiği, bilgi aradığı bilgisayar ortamlarına ihtiyacı var; bu ortamlar hem beceriyi geliştiriyor hem de modelin neye erişebileceğini sınırlıyor. Modeller yetkinleştikçe bu sınırları aşmanın yollarını bulmakta da iyileşiyor: bir yazılım hatasını ya da yanlış yapılandırmayı sömürüp sandbox’tan çıkmak, bir internal servisi kullanarak canlı internete ulaşmak, başka sandbox’lardaki agent’larla yetkisiz iletişim kurmak. OpenAI temmuzdaki Hugging Face olayının ve diğer misalignment örneklerinin bunu gösterdiğini söylüyor ve araştırma ortamla</description>
+    </item>
+    <item>
+      <title>Noisy neighbor’ın cgroup’u yok: Netflix Titus’ta single-tenant VM isolation</title>
+      <link>https://erenulutas.com/sayi/2026-10-22/#f04dfee991c9</link>
+      <guid isPermaLink="false">f04dfee991c9</guid>
+      <pubDate>Thu, 22 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Netflix Tech Blog</category>
+      <description>Titus, Netflix’in Kubernetes tabanlı internal container platformu: hem control plane’i hem container host’larını Netflix güncel tutuyor, uygulama ekipleri host, cluster ya da kernel sahiplenmeden container veriyor. Haftada milyonlarca container on binlerce EC2 instance üzerinde çalışıyor ve varsayılan olarak multi-tenant: birçok ekibin container’ı aynı host’u paylaşıyor. Bu yoğunluk verimliliğin kaynağı. Ama bazı iş yükleri, en talepkâr gerçek zamanlı sistemler dahil, paylaşımlı host’ta iyi çalışmıyor. Neden iyi komşuluk yetmiyor? Titus kernel’in sağladığı araçlarla izolasyon yapıyor: cgroup’l</description>
+    </item>
+    <item>
+      <title>Decisions API: sınırlı cevaplı küçük kararlar için hızlı ve ucuz çağrı</title>
+      <link>https://erenulutas.com/sayi/2026-10-22/#27825e300358</link>
+      <guid isPermaLink="false">27825e300358</guid>
+      <pubDate>Thu, 22 Oct 2026 08:00:00 +0000</pubDate>
+      <category>OpenAI Research</category>
+      <description>Uygulamalar ve agent’lar bir workflow’da çok sayıda küçük karar veriyor: bir girdiyi sınıflandırmak, isteği nereye yönlendireceğini seçmek, bir sonraki eylemi belirlemek. Tek tek basit, ölçekte gecikme ve maliyetleri birikiyor. OpenAI, Decisions API’yi genel kullanıma açtı: GPT-6 Luna ile kurulu, cevabı sınırlı sorulara odaklanan bu API metin, görsel ve yapılandırılmış girdiden Responses API üzerinden Luna’dan 10 kata kadar hızlı, neredeyse gerçek zamanlı karar veriyor. Sistemin tasarımı Cloudflare’in 1 Ekim’deki Clef karar modelleriyle aynı fikre dayanıyor: serbest metin üretme, seçenekler ar</description>
+    </item>
+    <item>
+      <title>Olay değil konuşma: ChatGPT’nin ad stack’i neden request-response değil, stateful session</title>
+      <link>https://erenulutas.com/sayi/2026-10-21/#edef63b51aed</link>
+      <guid isPermaLink="false">edef63b51aed</guid>
+      <pubDate>Wed, 21 Oct 2026 08:00:00 +0000</pubDate>
+      <category>OpenAI Research</category>
+      <description>Geleneksel bir reklam sistemi iyi tanımlanmış bir olayla başlar: kullanıcı bir arama yapar ya da bir sayfa açar, sistem aday reklamları getirir, sıralar, bir açık artırma (auction) çalıştırır ve sonucu gösterir. ChatGPT’de böyle somut bir an yok: insanlar tek bir arama sorgusuyla değil hedeflerle geliyor (bir gezi planlamak, bir yazılım seçmek, ev döşemek) ve niyet birkaç turda, hatta birkaç oturumda netleşiyor. Yazıdaki örnek: bir konuşma koşuyla ilgili genel bir soruyla başlıyor, birkaç tur sonra ayakkabı sorusuna geliyor. İlk mesaja göre hareket eden bir sistem yanlış niyeti yakalayabilir. </description>
+    </item>
+    <item>
+      <title>Dosyayı kopyalama, işaret et: BigQuery ObjectRef ile unstructured data</title>
+      <link>https://erenulutas.com/sayi/2026-10-21/#4eb3cff6cbc4</link>
+      <guid isPermaLink="false">4eb3cff6cbc4</guid>
+      <pubDate>Wed, 21 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Google Cloud Blog</category>
+      <description>Görsel, video, ses ve doküman gibi yapılandırılmamış veriyi analiz etmek bugüne kadar yapılandırılmış ve yapılandırılmamış veri için ayrı pipeline’lar yönetmek demekti. Dosyalar Cloud Storage’da dursa bile inference için harici ML iş yükleri orkestre edilip sonuçlar tekrar veri ambarına dikilmek zorundaydı; bu da kırılgan bir adım. Google, ObjectRef ve multimodal veri analitiğini genel kullanıma açtı. ObjectRef, Cloud Storage’daki nesnelere işaret eden yerleşik bir STRUCT tipi: bu işaretçileri normal tablolarda diğer sütunların yanında tutuyorsun ve çok sütunlu, multimodal girdiyi tek bir SQL </description>
+    </item>
+    <item>
+      <title>Agent’ın hafızası: neyi saklayacağına karar vermek ve ‘dreaming’ pipeline’ı (MemCurrent)</title>
+      <link>https://erenulutas.com/sayi/2026-10-20/#dca2db5ccf15</link>
+      <guid isPermaLink="false">dca2db5ccf15</guid>
+      <pubDate>Tue, 20 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Databricks Engineering</category>
+      <description>Production agent’ı yazmak ve sürdürmek, ‘vibe coding’ ile bir agent çıkarmaktan çok daha zor. Geliştiriciler çoğunlukla kalite (özellikle long-tail görevlerde doğru cevap) ile verimlilik (maliyet ve gecikme) arasında takas yapmak zorunda kalıyor. Memory ikisini birden iyileştirebilecek az sayıdaki yöntemden biri: kullanıcı tercihleri, önceki düzeltmeler, metrik tanımları ve işe yarayan workflow’lar görevler arasında taşınabilir. Ama yazının temel uyarısı şu: daha fazla geçmiş daha iyi memory demek değil; her etkileşimi vermek hem pahalı hem de eski, çelişen ya da alakasız bağlam sokabilir. Ası</description>
+    </item>
+    <item>
+      <title>Round-robin yetmiyor: llm-d 1.0 ile agent trafiği için cache-aware routing</title>
+      <link>https://erenulutas.com/sayi/2026-10-20/#5cd199de4b7d</link>
+      <guid isPermaLink="false">5cd199de4b7d</guid>
+      <pubDate>Tue, 20 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Google Cloud Blog</category>
+      <description>Google, Red Hat, IBM ve diğerleriyle birlikte kurduğu llm-d’nin 1.0 sürümünü PyTorch Conference’ta yayımladı: CNCF Sandbox projesi, Kubernetes-native, dağıtık LLM inference için açık kaynak bir stack (500’den fazla katkıcı, 25 kuruluş). Gerekçe: bir yıl önce inference trafiğinin çoğu chat’ti (bir prompt, bir cevap). Bugün multi-step agent’lar ve reinforcement learning rollout’ları araçlara dağılıyor, uzun prefix’leri paylaşıyor ve burst’lerle geliyor. Böyle yükü tek makinede ya da generic round-robin load balancer arkasında sunmak hızla çöküyor: replica’lar aynı prompt’ları yeniden hesaplıyor,</description>
+    </item>
+    <item>
+      <title>Token’lar nereye gidiyor? Cloudflare AI code reviewer maliyetini yüzde 68 nasıl düşürdü</title>
+      <link>https://erenulutas.com/sayi/2026-10-19/#a26c408d34d1</link>
+      <guid isPermaLink="false">a26c408d34d1</guid>
+      <pubDate>Mon, 19 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Cloudflare Blog</category>
+      <description>Cloudflare’in AI code reviewer’ı nisan ayında ortalama 1,19 dolara bir review yapıyordu; ağustos sonunda bu rakam yaklaşık 2,46 dolara çıktı. Mimaride önemli bir değişiklik yoktu: aynı coordinator, aynı specialist reviewer’lar, aynı risk tier’ları. Eylül ortasında agent’lara ‘token’lar nereye gidiyor, agresif biçimde kes’ görevi verildi. Sonuç: kod kalitesi yüksek efor seviyesinde kalarak ortalama review maliyeti en pahalı iki haftanın ortalaması olan 2,43 dolardan 0,77 dolara (yüzde 68) indi; medyan süre 4 dk 09 sn’den 1 dk 32 sn’ye düştü. Tasarrufun yaklaşık yüzde 40’ı reviewer kodundaki değ</description>
+    </item>
+    <item>
+      <title>Router’a daha az iş ver, agent daha güvenilir olsun: Meta’nın thin orchestrator deseni</title>
+      <link>https://erenulutas.com/sayi/2026-10-19/#5641e45c2126</link>
+      <guid isPermaLink="false">5641e45c2126</guid>
+      <pubDate>Mon, 19 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Meta Engineering</category>
+      <description>Meta, öneri sistemlerindeki data column onboarding işini otomatikleştirmek için önce her şeyi bilen tek bir agent kurdu: konfigürasyon şemaları, kod üretim kuralları, pipeline yönlendirme, doğrulama ve 10’dan fazla veri kaynağı için doldurma kalıpları. Demoda çalıştı, production’da hallucination başladı. Belirli bir bağlam eşiğinden sonra ek bilgi sonucu iyileştirmek yerine bozuyordu: agent kavramları karıştırıyor, bir alt sistemin isimlendirme kuralını diğerine uyguluyordu. Manuel prompt engineering ile bile başarı oranı yüzde 70-80’di; elle hazırlanmış prompt olmadan yüzde 10-20’ye düşüyordu</description>
+    </item>
+    <item>
       <title>Agent’ı kapanış cümlesine göre notlama: dört eval mühendisliği dersi</title>
       <link>https://erenulutas.com/sayi/2026-10-16/#debbc6d22d5f</link>
       <guid isPermaLink="false">debbc6d22d5f</guid>
@@ -14,7 +118,7 @@
       <description>Yazının tezi: agent’lı bir sistemin asıl zorluğu inşası değil ölçümü. Yazar, Google’da yıllardır değerlendirme mühendisliği yürütüyor ve yeni Google Cloud Developer eklentisini bu ilkeleri gerçek geliştirici iş akışlarında denemek için bir test yatağı olarak kullanmış. Çıkan dört ders: 1. Özeti değil yürütme adımlarını notla. İlk değerlendirmede agent’ın son metin cevabını bir LLM hakemi (LLM-as-judge) kontrol listesine göre puanlıyordu. 11 istemlik ilk sette otomatik hakem üç istemi başarısız saydı; ham araç çağrısı kayıtları okununca eklentinin üçünü de geçtiği görüldü. Örnek: rubrik, hiçbir</description>
     </item>
     <item>
-      <title>Aynı şeye üç araçta üç ad: Netflix’in gözlemlenebilirlik ontolojisi</title>
+      <title>Aynı şeye üç araçta üç ad: Netflix’in observability ontolojisi</title>
       <link>https://erenulutas.com/sayi/2026-10-16/#1b11483a2cf8</link>
       <guid isPermaLink="false">1b11483a2cf8</guid>
       <pubDate>Fri, 16 Oct 2026 08:00:00 +0000</pubDate>
@@ -51,10 +155,10 @@
       <guid isPermaLink="false">d74566c60131</guid>
       <pubDate>Wed, 14 Oct 2026 08:00:00 +0000</pubDate>
       <category>Netflix Tech Blog</category>
-      <description>Stratum, Netflix’in kodlama, paketleme, denetleme ve kalite puanlama gibi medya işlerini yürüten sunucusuz platformu; günde yüz binlerce konteyner yönetiyor. Fonksiyon sahipleri CPU, bellek, disk ve ağ sınırlarını YAML’la yazıyor. Pratikte yeni bir fonksiyonun yapılandırması başka bir fonksiyondan kopyalanıyor ya da en kötü senaryoya göre ayarlanıyor ve bir arıza çıkana kadar kimse dönüp bakmıyor. Altyapı ve codec’ler değiştikçe doğru değer sessizce kayıyor. Netflix ölçeğinde küçük bir fazlalık hızla çarpılıyor. Çözüm, çalışan konteynerleri insan olmadan güvenle küçülten Stratum Resource Tuner</description>
+      <description>Stratum, Netflix’in kodlama, paketleme, denetleme ve kalite puanlama gibi medya işlerini yürüten serverless platformu; günde yüz binlerce konteyner yönetiyor. Fonksiyon sahipleri CPU, bellek, disk ve ağ sınırlarını YAML’la yazıyor. Pratikte yeni bir fonksiyonun yapılandırması başka bir fonksiyondan kopyalanıyor ya da en kötü senaryoya göre ayarlanıyor ve bir arıza çıkana kadar kimse dönüp bakmıyor. Altyapı ve codec’ler değiştikçe doğru değer sessizce kayıyor. Netflix ölçeğinde küçük bir fazlalık hızla çarpılıyor. Çözüm, çalışan konteynerleri insan olmadan güvenle küçülten Stratum Resource Tune</description>
     </item>
     <item>
-      <title>Soğuk veriyi diskte değil yedekte oku: Netflix TimeSeries’in katmanlı depolama yolculuğu</title>
+      <title>Soğuk veriyi diskte değil yedekte oku: Netflix TimeSeries’in tiered storage yolculuğu</title>
       <link>https://erenulutas.com/sayi/2026-10-14/#a4fedcec0787</link>
       <guid isPermaLink="false">a4fedcec0787</guid>
       <pubDate>Wed, 14 Oct 2026 08:00:00 +0000</pubDate>
@@ -67,15 +171,15 @@
       <guid isPermaLink="false">0f52f6bf973e</guid>
       <pubDate>Tue, 13 Oct 2026 08:00:00 +0000</pubDate>
       <category>AWS Architecture Blog</category>
-      <description>Bulk Executor, bir DynamoDB tablosundaki çok sayıda ya da tüm öğeler üzerinde toplu işlem yapan açık kaynak bir araç: eski kayıtları silmek, iki tabloyu karşılaştırmak gibi. Yazının ikinci bölümü aracın nasıl yazıldığını, tasarım tercihlerini ve çarpılan duvarları anlatıyor. Üç gereksinim kararların çoğunu belirlemiş: komut yerel bir betik gibi hissettirmeli (anlık çıktı, ^C ile kesilebilmeli), yüzlerce paralel işçiye altyapı yönetmeden ölçeklenmeli ve yeni komut eklemek çerçeveye sıkı bağlı olmamalı. Neden AWS Glue? Paralel yürütmeyi Glue sürüyor: sunucusuz, işi yüzlerce işçiye dağıtıyor ve h</description>
+      <description>Bulk Executor, bir DynamoDB tablosundaki çok sayıda ya da tüm öğeler üzerinde toplu işlem yapan açık kaynak bir araç: eski kayıtları silmek, iki tabloyu karşılaştırmak gibi. Yazının ikinci bölümü aracın nasıl yazıldığını, tasarım tercihlerini ve çarpılan duvarları anlatıyor. Üç gereksinim kararların çoğunu belirlemiş: komut yerel bir betik gibi hissettirmeli (anlık çıktı, ^C ile kesilebilmeli), yüzlerce paralel işçiye altyapı yönetmeden ölçeklenmeli ve yeni komut eklemek çerçeveye sıkı bağlı olmamalı. Neden AWS Glue? Paralel yürütmeyi Glue sürüyor: serverless, işi yüzlerce işçiye dağıtıyor ve </description>
     </item>
     <item>
-      <title>Milyonlarca küçük veritabanı: D1’in kontrol düzlemi neden sorgu yolunun dışında</title>
+      <title>Milyonlarca küçük veritabanı: D1’in control plane neden sorgu yolunun dışında</title>
       <link>https://erenulutas.com/sayi/2026-10-13/#6ec21beb693f</link>
       <guid isPermaLink="false">6ec21beb693f</guid>
       <pubDate>Tue, 13 Oct 2026 08:00:00 +0000</pubDate>
       <category>Cloudflare Blog</category>
-      <description>Geleneksel mimari uygulama başına bir iki büyük veritabanı kümesi ve bir bağlantı havuzu varsayar. Yapay zekâ destekli geliştirme platformları bu modeli ters çeviriyor: kullanıcı, uygulama, önizleme ortamı ya da kiracı başına bir küçük veritabanı. Cloudflare D1 (SQLite tabanlı, sunucusuz) buna uygun: her veritabanı bir SQLite Durable Object’i ile destekleniyor. 8 Ekim 2026 itibarıyla canlı veritabanı sayısı bir yılda 15, iki yılda 65 kat; günlük aktif veritabanı bir yılda 18 kat artmış. Yazının ana sorusu: milyonlarca veritabanını yöneten kontrol düzlemini, her sorguyu merkezi bir darboğazdan </description>
+      <description>Geleneksel mimari uygulama başına bir iki büyük veritabanı kümesi ve bir connection pool varsayar. Yapay zekâ destekli geliştirme platformları bu modeli ters çeviriyor: kullanıcı, uygulama, önizleme ortamı ya da tenant başına bir küçük veritabanı. Cloudflare D1 (SQLite tabanlı, serverless) buna uygun: her veritabanı bir SQLite Durable Object’i ile destekleniyor. 8 Ekim 2026 itibarıyla canlı veritabanı sayısı bir yılda 15, iki yılda 65 kat; günlük aktif veritabanı bir yılda 18 kat artmış. Yazının ana sorusu: milyonlarca veritabanını yöneten control plane’i, her sorguyu merkezi bir darboğazdan g</description>
     </item>
     <item>
       <title>Canlı yayının altındaki protokolü değiştirmek: Instagram Live’da Media over QUIC</title>
@@ -86,12 +190,12 @@
       <description>Instagram Live artık iOS ve Android’de canlı video yüklemesi (ingest) için açık standart Media over QUIC (MoQ) kullanıyor. İnternet yıllar içinde her biri kendi sorununa göre biçimlenmiş bir protokol yığını biriktirdi: yükleme için RTMP, oynatma için HLS ve DASH, gerçek zamanlı aramalar için WebRTC. Meta’da canlı yayın başlatıp aynı uygulamada sesli arama yapan biri üç ayrı protokol yığınına dokunuyor; her birinin kendi sunucu altyapısı, izlemesi ve uzmanlığı var. MoQ’un vaadi, yükleme, dağıtım ve oynatma için tek bir taşıma katmanı. MoQ nasıl çalışır? IETF’te Meta, Google, Akamai, Cisco, Clou</description>
     </item>
     <item>
-      <title>Küresel olarak kıt, yerel olarak boşta: Meta atıl çıkarım kapasitesini nasıl kullanıyor</title>
+      <title>Küresel olarak kıt, yerel olarak boşta: Meta atıl inference kapasitesini nasıl kullanıyor</title>
       <link>https://erenulutas.com/sayi/2026-10-12/#edc939989dc9</link>
       <guid isPermaLink="false">edc939989dc9</guid>
       <pubDate>Mon, 12 Oct 2026 08:00:00 +0000</pubDate>
       <category>Meta Engineering</category>
-      <description>Çıkarım filolarında bir paradoks var: kapasite küresel olarak kısıtlıyken yerel olarak anlamlı miktarda boşta kalabiliyor. Nedenleri tanıdık: filo tepe talebe göre kuruluyor ama trafik gün içinde değişiyor; donanım tedarik zincirinin takvimiyle, modeller ise başka bir takvimle geliyor. Meta bu boş cepleri ortak bir fırsatçı kapasite havuzunda toplayıp daha iyi reklam önerisine çeviriyor. Zorluk şu: bu kapasite ekiplere, bölgelere ve hızlandırıcı türlerine dağılmış ve çok kısa bir uyarıyla geri alınabiliyor. Sistem iki esneklik koluyla çalışıyor. Rank More Ads (RMA): sıralama aşamalarının değer</description>
+      <description>Inference filolarında bir paradoks var: kapasite küresel olarak kısıtlıyken yerel olarak anlamlı miktarda boşta kalabiliyor. Nedenleri tanıdık: filo tepe talebe göre kuruluyor ama trafik gün içinde değişiyor; donanım tedarik zincirinin takvimiyle, modeller ise başka bir takvimle geliyor. Meta bu boş cepleri ortak bir opportunistic capacity havuzunda toplayıp daha iyi reklam önerisine çeviriyor. Zorluk şu: bu kapasite ekiplere, bölgelere ve hızlandırıcı türlerine dağılmış ve çok kısa bir uyarıyla geri alınabiliyor. Sistem iki esneklik koluyla çalışıyor. Rank More Ads (RMA): sıralama aşamalarını</description>
     </item>
     <item>
       <title>Logu yola çıkmadan süz: Logpush Transformers</title>
@@ -107,7 +211,7 @@
       <guid isPermaLink="false">6229f18e6ef4</guid>
       <pubDate>Fri, 09 Oct 2026 08:00:00 +0000</pubDate>
       <category>Cloudflare Blog</category>
-      <description>Cloudflare, geçen hafta yayımladığı açık ağırlıklı karar modelleri Clef ve Clef-flash’ın ardından Clef-omni’yi duyurdu: metin ve görselin yanında ses (wav, mp3) ve video (mp4, webm) girdisi alan bir karar modeli. Aynı yazıda Clef-flash’ın fiyatı düşürüldü ve Clef hızlandırıldı. Ağırlıklar Hugging Face’te açık. Pratik fark şu: konuşmayı önce metne çeviren, videoyu ses ve görüntü kanallarına ayıran ardışık model zincirleri kurmak yerine tek bir modele soruyorsun. Yazıdaki örnek bir kurulum denetimi: cihazın bir fotoğrafı, çalışırken alınmış bir ses kaydı ve fanın bir videosu tek istekte gönderil</description>
+      <description>Cloudflare, geçen hafta yayımladığı açık ağırlıklı karar modelleri Clef ve Clef-flash’ın ardından Clef-omni’yi duyurdu: metin ve görselin yanında ses (wav, mp3) ve video (mp4, webm) girdisi alan bir decision model. Aynı yazıda Clef-flash’ın fiyatı düşürüldü ve Clef hızlandırıldı. Ağırlıklar Hugging Face’te açık. Pratik fark şu: konuşmayı önce metne çeviren, videoyu ses ve görüntü kanallarına ayıran ardışık model zincirleri kurmak yerine tek bir modele soruyorsun. Yazıdaki örnek bir kurulum denetimi: cihazın bir fotoğrafı, çalışırken alınmış bir ses kaydı ve fanın bir videosu tek istekte gönder</description>
     </item>
     <item>
       <title>Deno Cloudflare’e katılıyor: ‘platform kilidi’ tartışmasına bir cevap</title>
@@ -123,10 +227,10 @@
       <guid isPermaLink="false">a81dbc1a369f</guid>
       <pubDate>Thu, 08 Oct 2026 08:00:00 +0000</pubDate>
       <category>Uber Engineering</category>
-      <description>Uber’de her yıl binlerce sözleşme müzakere ediliyor. İş yüksek riskli ve ayrıntıcı, ama içinde şaşırtıcı ölçüde yapı var: benzer maddeler, müşteriler arasında tekrar eden düzeltmeler (redline) ve yerleşik akıl yürütme kalıpları. Legal Redlining Agent (LRA), avukatların zaten çalıştığı yere, Microsoft Word’e eklenti olarak yerleşiyor: karşı tarafın düzeltmelerini buluyor, niyeti yorumluyor, politikaya uygun kabul/ret/değiştir önerisi veriyor, gerekçeli yorum yazıyor ve riskli maddeleri işaretliyor. Uber’in bildirdiği sonuç: ortalama inceleme süresinde %20’den fazla azalma ve yapay zekâ kararlar</description>
+      <description>Uber’de her yıl binlerce sözleşme müzakere ediliyor. İş yüksek riskli ve ayrıntıcı, ama içinde şaşırtıcı ölçüde yapı var: benzer maddeler, müşteriler arasında tekrar eden düzeltmeler (redline) ve yerleşik reasoning kalıpları. Legal Redlining Agent (LRA), avukatların zaten çalıştığı yere, Microsoft Word’e eklenti olarak yerleşiyor: karşı tarafın düzeltmelerini buluyor, niyeti yorumluyor, politikaya uygun kabul/ret/değiştir önerisi veriyor, gerekçeli yorum yazıyor ve riskli maddeleri işaretliyor. Uber’in bildirdiği sonuç: ortalama inceleme süresinde %20’den fazla azalma ve yapay zekâ kararlarınd</description>
     </item>
     <item>
-      <title>Postgres’e toplu yüklemede darboğaz okuma değil, tek yazıcı</title>
+      <title>Postgres’e bulk load’da darboğaz okuma değil, tek yazıcı</title>
       <link>https://erenulutas.com/sayi/2026-10-08/#4ef67c426724</link>
       <guid isPermaLink="false">4ef67c426724</guid>
       <pubDate>Thu, 08 Oct 2026 08:00:00 +0000</pubDate>
@@ -142,12 +246,12 @@
       <description>Kodlama agent’larını paralel çalıştırmak olağan hâle geliyor ve araçlar buna göre gelişti. Geliştirme akışının gözden kaçan parçası ise veritabanı. Her agent’ın kod yazması, şema değişikliği uygulaması ve test çalıştırması gerekiyor; paylaşılan tek bir geliştirme veritabanında agent’lar şema değişikliklerinde çakışıyor, birbirinin verisini bozuyor ya da gerçeği yansıtmayan mock’lara dönüyor. Kod tarafında çözüm git worktree: her agent’a kendi dizini ve dalı. Lakebase aynı yalıtımı veritabanına getiriyor: copy-on-write ile bütün veritabanı, boyutundan bağımsız olarak bir saniyenin altında dalla</description>
     </item>
     <item>
-      <title>Önce kanıtı kod toplasın, sonra model yorumlasın: Cloudflare’in çok ajanlı güvenlik hattı</title>
+      <title>Önce kanıtı kod toplasın, sonra model yorumlasın: Cloudflare’in multi-agent güvenlik hattı</title>
       <link>https://erenulutas.com/sayi/2026-10-07/#efc47ac2f82e</link>
       <guid isPermaLink="false">efc47ac2f82e</guid>
       <pubDate>Wed, 07 Oct 2026 08:00:00 +0000</pubDate>
       <category>Cloudflare Blog</category>
-      <description>Güvenlik uyarıları nadiren tek tek gelir. Bir uyarı ortamda bir dalga yaratır ve bir analistin hangilerinin ilişkili olduğuna, ne anlama geldiklerine karar vermesi gerekir. Cloudflare, Managed Defense ekibi için bu işin büyük kısmını üstlenen çok ajanlı bir düzenek kurdu ve ilk denemenin neden başarısız olduğunu açıkça anlatıyor. Tek ajan neden başarısız oldu? İlk prototipte tüm soruşturma tek bir genel amaçlı ajana verildi. Faydalı analiz üretti ama kanıtın desteklemediği iddialar da uydurdu. Telemetri, dedektör açıklamaları, politikalar ve tehdit istihbaratı tek bir prompta ezilince rolleri </description>
+      <description>Güvenlik uyarıları nadiren tek tek gelir. Bir uyarı ortamda bir dalga yaratır ve bir analistin hangilerinin ilişkili olduğuna, ne anlama geldiklerine karar vermesi gerekir. Cloudflare, Managed Defense ekibi için bu işin büyük kısmını üstlenen multi-agent bir düzenek kurdu ve ilk denemenin neden başarısız olduğunu açıkça anlatıyor. Tek agent neden başarısız oldu? İlk prototipte tüm soruşturma tek bir genel amaçlı agent’a verildi. Faydalı analiz üretti ama kanıtın desteklemediği iddialar da uydurdu. Telemetri, dedektör açıklamaları, politikalar ve tehdit istihbaratı tek bir prompta ezilince roll</description>
     </item>
     <item>
       <title>Bulutta yüksek frekanslı alım-satım: gecikme değil, gecikmenin tutarlılığı</title>
@@ -166,7 +270,7 @@
       <description>Meta’nın herkese açık zaman servisi artık nts.meta.com üzerinden NTS (Network Time Security, RFC 8915) konuşuyor. Paketler kimlik doğrulamalı: cihaz, zamanın gerçekten Meta’dan geldiğini ve yolda değiştirilmediğini doğrulayabiliyor. Protokol, sunucu ve istemci açık kaynak. Neden önemli? NTP 1985’ten beri doğrulamasız: istemci 48 bayt gönderir, bir şey 48 bayt geri gönderir ve istemci buna inanır. İmza yok, kimlik yok. Oysa zaman, diğer bütün güvenlik kararlarının ölçüldüğü girdi: sertifika doğrulama (notBefore ve notAfter yerel saatle karşılaştırılır), token süresi (‘15 dakika geçerli’ bir saa</description>
     </item>
     <item>
-      <title>Hibrit aramada puanları değil sıraları birleştir: Reciprocal Rank Fusion</title>
+      <title>Hybrid search’ta puanları değil sıraları birleştir: Reciprocal Rank Fusion</title>
       <link>https://erenulutas.com/sayi/2026-10-06/#50e1a96cc3ea</link>
       <guid isPermaLink="false">50e1a96cc3ea</guid>
       <pubDate>Tue, 06 Oct 2026 08:00:00 +0000</pubDate>
@@ -179,7 +283,7 @@
       <guid isPermaLink="false">1424f8a74fdc</guid>
       <pubDate>Tue, 06 Oct 2026 08:00:00 +0000</pubDate>
       <category>Cloudflare Blog</category>
-      <description>11 Ekim 2026’da DNS kökü, anahtar imzalama anahtarını (KSK) tarihinde yalnızca ikinci kez değiştirecek. Bu anahtar DNSSEC güven zincirinin başlangıcı. Zincir şöyle işliyor: her üst alan, alt alanın açık anahtarının parmak izini bir DS kaydıyla yayımlıyor (kök .com için, .com da cloudflare.com için). Kökün ise üstü yok; bu yüzden doğrulayan çözümleyici kök açık anahtarına baştan güvenmek zorunda. Buna güven çapası (trust anchor) deniyor. Yeni anahtar KSK-2024, eskisi KSK-2017’nin yerini alıyor. Doğrulayan çözümleyiciler değişimden önce yeni anahtara güvenmiyorsa, sağlıklı siteler erişilemez hâl</description>
+      <description>11 Ekim 2026’da DNS kökü, anahtar imzalama anahtarını (KSK) tarihinde yalnızca ikinci kez değiştirecek. Bu anahtar DNSSEC güven zincirinin başlangıcı. Zincir şöyle işliyor: her üst alan, alt alanın açık anahtarının parmak izini bir DS kaydıyla yayımlıyor (kök .com için, .com da cloudflare.com için). Kökün ise üstü yok; bu yüzden doğrulayan çözümleyici kök açık anahtarına baştan güvenmek zorunda. Buna trust anchor (trust anchor) deniyor. Yeni anahtar KSK-2024, eskisi KSK-2017’nin yerini alıyor. Doğrulayan çözümleyiciler değişimden önce yeni anahtara güvenmiyorsa, sağlıklı siteler erişilemez hâl</description>
     </item>
     <item>
       <title>Gizlilik bir izin kutusu değil, bağlama uygun bilgi akışıdır: agent’lar için Contextual Integrity</title>
@@ -203,7 +307,7 @@
       <guid isPermaLink="false">423bae1fbafd</guid>
       <pubDate>Fri, 02 Oct 2026 08:00:00 +0000</pubDate>
       <category>Cloudflare Blog</category>
-      <description>Cloudflare, loglarını, izlerini (trace), analizlerini, uyarılarını, panolarını ve dışa aktarmayı tek bir gözlemlenebilirlik platformunda birleştiren sekiz güncelleme duyurdu. Gerekçe şu: 5xx artışı bir Worker’dan, kaynak sunucudan ya da Cloudflare’in kaynağa bağlanamamasından gelebilir ve bugün hangi sinyalin hangi ürüne ait olduğunu bilmek gerekiyor. Öne çıkanlar: Logs artık Workers Observability ile Log Explorer’ı birleştiriyor (HTTP, güvenlik duvarı, Workers, R2, AI Gateway gibi veri kümeleri aynı arayüzde); Cloudflare Traces açık beta’da, isteğin güvenlik kuralları, önbellek kararları, yön</description>
+      <description>Cloudflare, loglarını, izlerini (trace), analizlerini, uyarılarını, panolarını ve dışa aktarmayı tek bir observability platformunda birleştiren sekiz güncelleme duyurdu. Gerekçe şu: 5xx artışı bir Worker’dan, origin server’dan ya da Cloudflare’in kaynağa bağlanamamasından gelebilir ve bugün hangi sinyalin hangi ürüne ait olduğunu bilmek gerekiyor. Öne çıkanlar: Logs artık Workers Observability ile Log Explorer’ı birleştiriyor (HTTP, güvenlik duvarı, Workers, R2, AI Gateway gibi veri kümeleri aynı arayüzde); Cloudflare Traces açık beta’da, isteğin güvenlik kuralları, cache kararları, yönlendirm</description>
     </item>
     <item>
       <title>Karar vermek için sohbet modeli gerekmez: Cloudflare Clef</title>
@@ -211,7 +315,7 @@
       <guid isPermaLink="false">ebb2d7850d0e</guid>
       <pubDate>Thu, 01 Oct 2026 08:00:00 +0000</pubDate>
       <category>Cloudflare Blog</category>
-      <description>Cloudflare, Clef adlı bir karar modeli (decision model) ailesini açık kaynak (Apache 2.0) olarak yayımladı. Karar modeli, serbest metin üretmek yerine önceden tanımlı seçenekler arasından seçim yapan bir model: örneğin bir isteğin etki şiddetini ‘etki yok / küçük / büyük / kritik’ olarak puanlamak ya da bir alan adını sınıflandırmak. Çıktı katı biçimde tiplenmiş (strictly typed) olduğundan sonucu ayrıştırmak için metin işlemek gerekmiyor. Clef’in öne çıkan özellikleri: görselleri sınıflandırabilen bir görü kodlayıcısı, 64k bağlam penceresi (Cloudflare’in önceki modeli Jev’de 32k) ve Jev ile AP</description>
+      <description>Cloudflare, Clef adlı bir decision model (decision model) ailesini açık kaynak (Apache 2.0) olarak yayımladı. Decision model, serbest metin üretmek yerine önceden tanımlı seçenekler arasından seçim yapan bir model: örneğin bir isteğin etki şiddetini ‘etki yok / küçük / büyük / kritik’ olarak puanlamak ya da bir alan adını sınıflandırmak. Çıktı katı biçimde tiplenmiş (strictly typed) olduğundan sonucu ayrıştırmak için metin işlemek gerekmiyor. Clef’in öne çıkan özellikleri: görselleri sınıflandırabilen bir görü kodlayıcısı, 64k context window (Cloudflare’in önceki modeli Jev’de 32k) ve Jev ile </description>
     </item>
     <item>
       <title>100 TB’lık veritabanını saniyeler içinde geri almak: dal tabanlı restore</title>
@@ -219,7 +323,7 @@
       <guid isPermaLink="false">e79eb7ef5d76</guid>
       <pubDate>Thu, 01 Oct 2026 08:00:00 +0000</pubDate>
       <category>Databricks Engineering</category>
-      <description>Geleneksel yönetilen Postgres’te zamana göre geri yükleme (PITR) üç adımdan oluşur: yeni bir örnek ayağa kaldırmak, anlık görüntüyü (snapshot) nesne depolamadan diske çekmek ve WAL kayıtlarını hedef ana kadar yeniden oynatmak. Veritabanı büyüdükçe bunlar saatler sürer. Bir kopya (replica) donanım arızasında kurtarır, ama kötü bir yazma kopyaya da yansımışsa yalnızca geri yükleme çözer. Lakebase hesaplamayı ve depolamayı ayırıyor; veritabanı geçmişi zaten nesne depolamada referans verilebilir durumda tutuluyor. Bu yüzden geri yükleme veri kopyalamıyor, belirli bir zaman damgasında bir dal (bran</description>
+      <description>Geleneksel yönetilen Postgres’te point-in-time recovery (PITR) (PITR) üç adımdan oluşur: yeni bir örnek ayağa kaldırmak, snapshot’u (snapshot) nesne depolamadan diske çekmek ve WAL kayıtlarını hedef ana kadar yeniden oynatmak. Veritabanı büyüdükçe bunlar saatler sürer. Bir kopya (replica) donanım arızasında kurtarır, ama kötü bir yazma kopyaya da yansımışsa yalnızca geri yükleme çözer. Lakebase hesaplamayı ve depolamayı ayırıyor; veritabanı geçmişi zaten nesne depolamada referans verilebilir durumda tutuluyor. Bu yüzden geri yükleme veri kopyalamıyor, belirli bir timestamp’ta bir dal (branch) </description>
     </item>
     <item>
       <title>Bir Availability Zone’u günlerce boşaltmak: ARC Zonal Shift ile N-1 tatbikatı</title>
@@ -227,7 +331,7 @@
       <guid isPermaLink="false">50645052eb72</guid>
       <pubDate>Wed, 30 Sep 2026 08:00:00 +0000</pubDate>
       <category>AWS Architecture Blog</category>
-      <description>‘Bir AZ düşerse ayakta kalırız’ cümlesi, bunu gerçekten denemedikçe bir varsayımdır. AWS’nin yazısı, bir Availability Zone’u 48-72 saat boyunca trafikten çıkarıp sistemi N-1 kapasiteyle (bir zone eksik) çalıştıran tatbikatları anlatıyor. Kısa bir tatbikat anlık sorunları yakalar; günlerce süren tatbikat ise zamanla ortaya çıkan sorunları yakalar. Tatbikatların açığa çıkardığı hata türleri öğretici: otomatik ölçekleme (kapasite kalan zone’larda yeterince hızlı büyüyor mu), eski DNS kayıtları (istemciler boşaltılmış zone’a hâlâ gidiyor mu), nöbet ve rotasyon süreçleri (insanlar ve runbook’lar ço</description>
+      <description>‘Bir AZ düşerse ayakta kalırız’ cümlesi, bunu gerçekten denemedikçe bir varsayımdır. AWS’nin yazısı, bir Availability Zone’u 48-72 saat boyunca trafikten çıkarıp sistemi N-1 kapasiteyle (bir zone eksik) çalıştıran tatbikatları anlatıyor. Kısa bir tatbikat anlık sorunları yakalar; günlerce süren tatbikat ise zamanla ortaya çıkan sorunları yakalar. Tatbikatların açığa çıkardığı hata türleri öğretici: autoscaling (kapasite kalan zone’larda yeterince hızlı büyüyor mu), eski DNS kayıtları (istemciler boşaltılmış zone’a hâlâ gidiyor mu), nöbet ve rotasyon süreçleri (insanlar ve runbook’lar çok günlü</description>
     </item>
     <item>
       <title>Spanner artık her yerde: Spanner Omni genel kullanıma açıldı</title>
@@ -235,23 +339,23 @@
       <guid isPermaLink="false">dd21387175d6</guid>
       <pubDate>Wed, 30 Sep 2026 08:00:00 +0000</pubDate>
       <category>Google Cloud Blog</category>
-      <description>Google, Spanner’ın istediğin yere kurulabilen sürümü Spanner Omni’yi genel kullanıma açtı. Yazıya göre ürün yaklaşık 2 milyon kez indirilmiş; mimaride iş yapan worker düğümleri var ve denemek için ücretsiz bir geliştirici sürümü sunuluyor. Böylece Spanner’ın dağıtık, güçlü tutarlı veritabanı modelini yalnızca Google Cloud’da değil, kendi ortamında da denemek mümkün.</description>
+      <description>Google, Spanner’ın istediğin yere kurulabilen sürümü Spanner Omni’yi genel kullanıma açtı. Yazıya göre ürün yaklaşık 2 milyon kez indirilmiş; mimaride iş yapan worker node’ları var ve denemek için ücretsiz bir geliştirici sürümü sunuluyor. Böylece Spanner’ın dağıtık, güçlü tutarlı veritabanı modelini yalnızca Google Cloud’da değil, kendi ortamında da denemek mümkün.</description>
     </item>
     <item>
-      <title>Postgres’te maliyeti düşüren üç ayar: paylaşımlı dallar, otomatik ölçekleme, sıfıra inme</title>
+      <title>Postgres’te maliyeti düşüren üç ayar: paylaşımlı dallar, autoscaling, sıfıra inme</title>
       <link>https://erenulutas.com/sayi/2026-09-30/#412a615366dd</link>
       <guid isPermaLink="false">412a615366dd</guid>
       <pubDate>Wed, 30 Sep 2026 08:00:00 +0000</pubDate>
       <category>Databricks Engineering</category>
-      <description>Databricks’in Lakebase rehberi maliyeti üç yerden kısmayı öneriyor. Dallar (branch) depolamayı paylaşıyor, yani bir geliştirme ya da test kopyası verinin tamamını ikinci kez saklamıyor. Otomatik ölçekleme ve sıfıra inme (scale to zero) boşta kalan hesaplama maliyetini azaltıyor. Veri senkronizasyonunda da üç mod var: snapshot, triggered ve continuous; ne kadar taze veri gerektiğine göre seçilince gereksiz sürekli senkronizasyon maliyeti önleniyor.</description>
+      <description>Databricks’in Lakebase rehberi maliyeti üç yerden kısmayı öneriyor. Dallar (branch) depolamayı paylaşıyor, yani bir geliştirme ya da test kopyası verinin tamamını ikinci kez saklamıyor. Autoscaling ve sıfıra inme (scale to zero) boşta kalan hesaplama maliyetini azaltıyor. Veri senkronizasyonunda da üç mod var: snapshot, triggered ve continuous; ne kadar taze veri gerektiğine göre seçilince gereksiz sürekli senkronizasyon maliyeti önleniyor.</description>
     </item>
     <item>
-      <title>GPU boşta bekliyor çünkü sandbox geç açılıyor: ısıtılmış havuz ve pod geri dönüşümü</title>
+      <title>GPU boşta bekliyor çünkü sandbox geç açılıyor: warm pool ve pod geri dönüşümü</title>
       <link>https://erenulutas.com/sayi/2026-09-29/#1c5df4cdcf62</link>
       <guid isPermaLink="false">1c5df4cdcf62</guid>
       <pubDate>Tue, 29 Sep 2026 08:00:00 +0000</pubDate>
       <category>Google Cloud Blog</category>
-      <description>Agent&#x27;ları pekiştirmeli öğrenmeyle (RL) eğitmek ve değerlendirmek için büyük ölçekli paralel rollout&#x27;lar çalıştırınca öncü laboratuvarlar hep aynı darboğaza çarpıyor: pahalı GPU kümeleri, CPU sandbox&#x27;ların soğuk başlangıcını dakikalarca bekliyor. Üstüne binlerce, her biri çok gigabaytlık SWE-bench tarzı imaj çekimi ve zamanlama birikimleri geliyor. Tipik bir agentic RL döngüsünde GPU&#x27;daki LLM politikası kod parçası gibi eylemler üretiyor ve bunlar yalıtılmış CPU sandbox&#x27;larda çalıştırılıp bir ödül sinyali gözleniyor. On binlerce paralel rollout&#x27;a ölçeklenince üç darboğaz çıkıyor. Kuyruk gecikm</description>
+      <description>Agent&#x27;ları reinforcement learning’le (RL) eğitmek ve değerlendirmek için büyük ölçekli paralel rollout&#x27;lar çalıştırınca öncü laboratuvarlar hep aynı darboğaza çarpıyor: pahalı GPU kümeleri, CPU sandbox&#x27;ların soğuk başlangıcını dakikalarca bekliyor. Üstüne binlerce, her biri çok gigabaytlık SWE-bench tarzı imaj çekimi ve zamanlama birikimleri geliyor. Tipik bir agentic RL döngüsünde GPU&#x27;daki LLM politikası kod parçası gibi eylemler üretiyor ve bunlar yalıtılmış CPU sandbox&#x27;larda çalıştırılıp bir ödül sinyali gözleniyor. On binlerce paralel rollout&#x27;a ölçeklenince üç darboğaz çıkıyor. Consumer la</description>
     </item>
     <item>
       <title>Çıktısı değişken olan yapay zekâya sabit arayüz yetmez: AG-UI protokolü</title>
@@ -260,78 +364,6 @@
       <pubDate>Tue, 29 Sep 2026 08:00:00 +0000</pubDate>
       <category>AWS Architecture Blog</category>
       <description>Üretken yapay zekâ uygulamaları her çalıştırmada farklı sonuç üretir: bir röntgen tek bir kırık gösterirken diğeri uzman incelemesi gerektiren yirmi belirsiz bölge çıkarabilir. Sabit yerleşim, önceden belirlenmiş kontroller ve statik veri bağlama, çıktı uzayının bilinen olduğu yerde (ödeme sayfası gibi) iyidir; ama yapay zekâ dinamik keşfettiği yerde bir uçta eksik, diğer uçta boş panellerle karışık kalır. Yazının önerisi üç parça: AG-UI (agent-to-UI) protokolü, agent ile arayüz arasındaki iletişimi standartlaştırılmış akışla çözüyor (öncesinde her çerçeve için özel WebSocket biçimleri ve yokl</description>
-    </item>
-    <item>
-      <title>Güvenlik vakası (safety case): eğitime devam etmeden önce kanıtla</title>
-      <link>https://erenulutas.com/sayi/2026-09-28/#cf468ec39dd6</link>
-      <guid isPermaLink="false">cf468ec39dd6</guid>
-      <pubDate>Mon, 28 Sep 2026 08:00:00 +0000</pubDate>
-      <category>OpenAI Research</category>
-      <description>OpenAI, yeni bir dönemde olduğumuzu savunuyor: öncü pekiştirmeli öğrenme (RL) eğitim koşularına devam etmeden önce yapılandırılmış güvenlik dokümantasyonu zorunlu olmalı. İdeal hedef, havacılık ve nükleer gibi güvenlik açısından kritik sektörlerde kullanılan güvenlik vakası (safety case): risk hakkında kapsamlı, yapılandırılmış ve kanıta dayalı argüman. Şirket bunu bir ‘kuzey yıldızı’ olarak görüyor ve yapay zekâ modelleri için havacılık kadar sıkı olmasının zorluğunu kabul ediyor; kuralları sistematikleştirecek bir çerçeve üzerinde çalışıyor. Rehber üç teknik katmanı kapsıyor: hizalama eğitim</description>
-    </item>
-    <item>
-      <title>Bulut kimliğini kendi kimliğine çevirmek: iki ayrı kanıtla iş yükü doğrulaması</title>
-      <link>https://erenulutas.com/sayi/2026-09-25/#eecffbfebcab</link>
-      <guid isPermaLink="false">eecffbfebcab</guid>
-      <pubDate>Fri, 25 Sep 2026 08:00:00 +0000</pubDate>
-      <category>Netflix Tech Blog</category>
-      <description>Yıllardır var olan kurumlar genelde iki kimlik sistemi işletir: biri bulut sağlayıcısının (IAM rolleri, yürütme rolleri), diğeri kendilerinin; iç servisler bir isteğe cevap verirken asıl bu ikinciye bakar. Kendi kurduğun altyapıda kimliği istediğin gibi başlatabilirsin. Yönetilen hesaplamada ise sağlayıcı sürecine bir bulut kimliği verir ve başka bir şey vermez. Yazı bu boşluğu Amazon EMR üzerindeki Spark iş yükleri için nasıl kapattıklarını anlatıyor; ama ‘anlatılanların çok azı Spark’a ya da EMR’a özgü’. Netflix&#x27;te servisler arası kimlik doğrulama Metatron adlı özel bir PKI üzerinde çalışıyo</description>
-    </item>
-    <item>
-      <title>Bulutta bile okuyamadığın veri: Meta AI gözlükleri için Private Processing</title>
-      <link>https://erenulutas.com/sayi/2026-09-24/#fa8200b619bb</link>
-      <guid isPermaLink="false">fa8200b619bb</guid>
-      <pubDate>Thu, 24 Sep 2026 08:00:00 +0000</pubDate>
-      <category>Meta Engineering</category>
-      <description>Gözlükler yapay zekâ için çok uygun bir form: kullanıcının bağlamını diğer cihazlardan daha iyi anlıyor ve telefona uzanmadan yardım ediyor. Çağrı yapmak ya da mesajı sesli cevaplamak gibi işler cihazın içinde bitiyor; ama daha gelişmiş özellikler, gözlüğe sığmayacak kadar büyük modeller gerektiriyor. Üstelik bir asistanın gerçekten faydalı olması için durum tutması ve günler ya da haftalar boyunca bağlam kurması, arka planda çalışması lazım. Yani iş buluta taşınmak zorunda ve asıl soru şu: kullanıcıyı derinden tanıyan kişiselleştirilmiş bir yapay zekâyı, gelişmiş gizlilikle nasıl kurarsın? Me</description>
-    </item>
-    <item>
-      <title>Eğitimde gördüğünü üretimde görmemek: Uber’in özellik loglama çerçevesi</title>
-      <link>https://erenulutas.com/sayi/2026-09-22/#b694e4263171</link>
-      <guid isPermaLink="false">b694e4263171</guid>
-      <pubDate>Tue, 22 Sep 2026 08:00:00 +0000</pubDate>
-      <category>Uber Engineering</category>
-      <description>Uber&#x27;in hedefi net: çıkarım anında kullanılan özellikler, bir sonraki model yinelemesini eğitirken kullanılan özelliklerle aynı olsun. Tek doğruluk kaynağı, daha güçlü model performansı ve sorunların daha hızlı tespiti demek. Problem sinsi: çevrimiçi ve çevrimdışı hatlar özellikleri farklı hesaplayıp tüketebiliyor. Model eğitimde sabit bir sözlükten öğreniyor (örneğin dil kodları en-US, fr-FR), ama servis anında aynı özellik en olarak gelebiliyor. Çevrimdışı hat da biçim farkı üretebiliyor (jp_JA ile jp-JA). Sonuç: model, servis sırasında hiç görünmeyen kategorilerden öğrenmiş oluyor ve güçlü </description>
-    </item>
-    <item>
-      <title>Önbelleği bozmadan akıl yürütme çabasını değiştirmek: GPT-6 için prompt cache kılavuzu</title>
-      <link>https://erenulutas.com/sayi/2026-09-22/#b6b1e4118cdb</link>
-      <guid isPermaLink="false">b6b1e4118cdb</guid>
-      <pubDate>Tue, 22 Sep 2026 08:00:00 +0000</pubDate>
-      <category>OpenAI Research</category>
-      <description>Kalıcı agent&#x27;lar saatlerce çalışırken art arda API istekleri atıyor ve her istek öncekilerin talimatını, araç tanımlarını ve bağlamını taşıyor. OpenAI bu ortak bağlamı önbelleğe alıp hesabı yeniden kullanıyor: yanıt süresi düşüyor, önbellekten gelen girdi token&#x27;larında %90&#x27;a kadar indirim var. GPT-6 ailesiyle birlikte önbellek sistemi iyileştirildi: uygun ortak önekler 30 dakikalık pencerede yeniden kullanıldığında indirim veriliyor. Yeni araçlar pratik: bir kontrol paneli önbellekten gelen girdi oranını zaman içinde gösteriyor, bir teşhis aracı beklenmedik bir kaçırmada isteği son yanıtla kar</description>
-    </item>
-    <item>
-      <title>Problemi tarif etmek ile çözmek ayrı iştir: Meta’nın açık kaynak atama çözücüsü Rebalancer</title>
-      <link>https://erenulutas.com/sayi/2026-09-21/#ea09cb7761e4</link>
-      <guid isPermaLink="false">ea09cb7761e4</guid>
-      <pubDate>Mon, 21 Sep 2026 08:00:00 +0000</pubDate>
-      <category>Meta Engineering</category>
-      <description>Elinde bir nesne kümesi ve bir kutu (bin) kümesi var; nesneleri, belirli kısıtları sağlayarak ve bazı hedefleri optimize ederek kutulara nasıl atarsın? Bu soru Meta&#x27;nın altyapı yığınının her katmanında çıkıyor: donanım yerleşimi (rafları elektrik arıza alanlarına yaymak), servis yerleşimi (sunucuları servislere atamak), görev yerleşimi (görevleri sunuculara atamak) ve trafik yönlendirme (milyarlarca kullanıcının trafiğini coğrafi olarak dağılmış veri merkezlerine yollamak). Yeniden kullanılabilir bir çerçevenin iki zorluğu var: kullanılabilirlik (pratisyenler gerçek hayat politikalarını biçims</description>
-    </item>
-    <item>
-      <title>Namespace bir güvenlik sınırı değildir: çok kiracılı Kubernetes’te dört duvar</title>
-      <link>https://erenulutas.com/sayi/2026-09-18/#fc89e79c8664</link>
-      <guid isPermaLink="false">fc89e79c8664</guid>
-      <pubDate>Fri, 18 Sep 2026 08:00:00 +0000</pubDate>
-      <category>AWS Architecture Blog</category>
-      <description>ReadyOn, Fortune 100 şirketlerine iş gücü yönetimi sunan, bordro verisi, organizasyon hiyerarşisi ve operasyonel analitik gibi çok hassas veri işleyen bir platformu Amazon EKS üzerinde çok kiracılı olarak işletiyor. Yazının çıkış noktası şu tespit: varsayılan bir Kubernetes kurulumu kutudan güvenli çıkmaz (anonim isteklerin API sunucusuna ulaşabilmesi, pod’ların varsayılan olarak root çalışması, ağ politikalarının sen yazana kadar olmaması). Çok kiracılılık tehdit modelini değiştiriyor: soru artık ‘yetkisiz biri kümeye ulaşabilir mi?’ değil, ‘Kiracı A, Kiracı B’nin verisine erişebilir mi?’ Çoğ</description>
-    </item>
-    <item>
-      <title>Java’yı komut satırında yeniden düşünmek: modül tanımı proje tanımıdır</title>
-      <link>https://erenulutas.com/sayi/2026-09-18/#21c9cba24a38</link>
-      <guid isPermaLink="false">21c9cba24a38</guid>
-      <pubDate>Fri, 18 Sep 2026 08:00:00 +0000</pubDate>
-      <category>Netflix Tech Blog</category>
-      <description>Netflix JVM ekibi, Java Modül Sistemi üzerine kurulu ve birleştirilebilir komut satırı araçlarından oluşan ja ailesini önizlemeye açtı. Fikir: modül tanımı (module-info) projenin eksiksiz bir tanımı olsun, bağımlılık sürümleri requires satırlarının yanında dursun (requires com.example.framework; // @1.2.3). Gerekçeleri ilginç: Java geliştiricileri yıllarca grafik araçlarla (IDE) çok iyi hizmet aldığı için küçük, birleştirilebilir komut satırı araçlarına az ihtiyaç duydu. Ama kodlama agent’ları Java ile çalışınca bu boşluk hemen göze çarpıyor: agent’lar bağımlılıkları, dokümantasyonu ve kaynakl</description>
-    </item>
-    <item>
-      <title>Veritabanı kurmadan genom sorgulamak: ayda yaklaşık 0,40 dolar</title>
-      <link>https://erenulutas.com/sayi/2026-09-18/#f3494b0099d2</link>
-      <guid isPermaLink="false">f3494b0099d2</guid>
-      <pubDate>Fri, 18 Sep 2026 08:00:00 +0000</pubDate>
-      <category>AWS Architecture Blog</category>
-      <description>Avustralya’nın ulusal bilim kurumu CSIRO, genomik varyant verisini güvenle sorgulamak için sBeacon adlı sunucusuz bir çözüm kurmuş (GA4GH Beacon standardının üretime hazır bir uygulaması). Yapı taşları S3, Lambda, DynamoDB ve Athena. İddialar somut: yüz milyonlarca kişiyi ve milyarlarca genomik konumu kapsayan veri kümelerine ölçekleniyor; 1000 Genomes boyutundaki bir veri kümesi için aylık yaklaşık 0,40 dolara çalışıyor; gerçek sorgular yaklaşık 5 saniyede dönüyor. En dikkat çekici tasarım kararı: standart VCF dosyalarını doğrudan tüketiyor, veritabanına yükleme ve dönüştürme gerekmiyor. Merk</description>
     </item>
   </channel>
 </rss>

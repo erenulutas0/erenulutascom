@@ -88,7 +88,7 @@
   </h2>
   <p class="original-title">GenRec: Towards LLM-Native Recommendation at Netflix · Netflix Technology Blog</p>
 
-  <div class="prose"><p>Netflix&#x27;in üretimdeki öneri modelleri <strong>binlerce elle üretilmiş özellik</strong> (hand-crafted feature) üzerine kurulu: kullanıcılar, içerikler ve etkileşimler için tasarlanmış özellikler, artı dizi modelleme, özellik etkileşimleri ve çok-görevli hedefler için özelleşmiş mimariler. Yıllar içinde olgunlaşmış bir yığın — ama karmaşıklığı yüzünden yeni bir kullanım senaryosunu eklemek pahalı. Yeni bir içerik türü ya da yeni bir ekran eklemek ciddi özellik mühendisliği, mimari değişiklik, altyapı işi ve deney gerektiriyor.</p><p>GenRec bu problemi tersten çözüyor. Netflix kendi temel dil modelini kendi verisiyle <strong>post-training</strong>&#x27;den geçirip bir sıralama (ranking) modeline dönüştürmüş. Yaklaşımın adımları şöyle: kullanıcı geçmişini, içerik metadata&#x27;sını ve bağlamı <strong>metne çeviriyor</strong> (verbalize); Netflix&#x27;e uyarlanmış temel modeli sıralama için post-train ediyor; üstüne katalog-farkında bir skorlama başlığı ekliyor; ödül sinyalleriyle uzun vadeli üye değerine hizalıyor.</p><p>Sonuç dikkat çekici: geniş ölçekli bir A/B testinde, iyi ayarlanmış üretim modeline karşı hem kısa hem uzun vadeli metriklerde istatistiksel olarak anlamlı iyileşme sağlamış — ve bunu etiketli verinin ve girdi sinyallerinin <strong>küçük bir kısmıyla</strong> yapmış. Maliyet tarafında ise Netflix&#x27;in LLM sunum yığınında <strong>prefill-only</strong> modda çalışıyor.</p></div>
+  <div class="prose"><p>Netflix&#x27;in üretimdeki öneri modelleri <strong>binlerce elle üretilmiş özellik</strong> (hand-crafted feature) üzerine kurulu: kullanıcılar, içerikler ve etkileşimler için tasarlanmış özellikler, artı sequence modeling, özellik etkileşimleri ve çok-görevli hedefler için özelleşmiş mimariler. Yıllar içinde olgunlaşmış bir yığın — ama karmaşıklığı yüzünden yeni bir kullanım senaryosunu eklemek pahalı. Yeni bir içerik türü ya da yeni bir ekran eklemek ciddi feature engineering, mimari değişiklik, altyapı işi ve deney gerektiriyor.</p><p>GenRec bu problemi tersten çözüyor. Netflix kendi temel dil modelini kendi verisiyle <strong>post-training</strong>&#x27;den geçirip bir sıralama (ranking) modeline dönüştürmüş. Yaklaşımın adımları şöyle: kullanıcı geçmişini, içerik metadata&#x27;sını ve bağlamı <strong>metne çeviriyor</strong> (verbalize); Netflix&#x27;e uyarlanmış foundation model’i sıralama için post-train ediyor; üstüne katalog-farkında bir skorlama başlığı ekliyor; ödül sinyalleriyle uzun vadeli üye değerine hizalıyor.</p><p>Sonuç dikkat çekici: geniş ölçekli bir A/B testinde, iyi ayarlanmış üretim modeline karşı hem kısa hem uzun vadeli metriklerde istatistiksel olarak anlamlı iyileşme sağlamış — ve bunu etiketli verinin ve girdi sinyallerinin <strong>küçük bir kısmıyla</strong> yapmış. Maliyet tarafında ise Netflix&#x27;in LLM sunum yığınında <strong>prefill-only</strong> modda çalışıyor.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
@@ -99,11 +99,11 @@
   <div class="callouts">
     <div class="callout callout-why">
       <h3 class="label">Neden önemli?</h3>
-      <p>Öneri sistemleri on yıldır özellik mühendisliğiyle ilerliyordu; her iyileşme yeni bir sinyal, yeni bir kolon, yeni bir pipeline demekti. Bu yazı o yaklaşımın sonuna işaret ediyor. Daha genel dersi ise şu: olgun bir sistemin asıl maliyeti çalıştırmak değil, <strong>değiştirebilmek</strong>. Yeni bir gereksinim geldiğinde ne kadar iş çıkıyorsa, mimarinin gerçek fiyatı odur.</p>
+      <p>Öneri sistemleri on yıldır feature engineering’le ilerliyordu; her iyileşme yeni bir sinyal, yeni bir kolon, yeni bir pipeline demekti. Bu yazı o yaklaşımın sonuna işaret ediyor. Daha genel dersi ise şu: olgun bir sistemin asıl maliyeti çalıştırmak değil, <strong>değiştirebilmek</strong>. Yeni bir gereksinim geldiğinde ne kadar iş çıkıyorsa, mimarinin gerçek fiyatı odur.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Tradebot&#x27;ta özellik mühendisliği yaptıysan bu yazı doğrudan sana. Muhtemelen fiyat, hacim, volatilite üzerinden onlarca gösterge hesapladın; her yeni fikir yeni bir kolon ve yeni bir pipeline demekti. GenRec&#x27;in sorduğu soru şu: bu sinyalleri elle üretmek yerine ham geçmişi metne çevirip modele versen ne olurdu? Küçük ölçekte bunu deneyebilirsin — ama asıl alacağın ders &quot;LLM kullan&quot; değil, <strong>bakım maliyetini bir metrik olarak ölçmek</strong>. &quot;Yeni bir varlık eklemek kaç saatimi alıyor?&quot; sorusunun cevabı, mimarinin sağlık göstergesidir.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Zaman serisi ya da finansal verilerle feature engineering yaptıysan bu yazı doğrudan ilgili. Muhtemelen fiyat, hacim ve volatilite üzerinden onlarca gösterge hesapladın; her yeni fikir yeni bir kolon ve yeni bir pipeline demekti. GenRec’in sorduğu soru şu: bu sinyalleri elle üretmek yerine ham geçmişi metne çevirip modele versen ne olurdu? Küçük ölçekte deneyebilirsin ama asıl ders ‘LLM kullan’ değil, <strong>bakım maliyetini bir metrik olarak ölçmek</strong>. ‘Yeni bir varlık eklemek kaç saatimi alıyor?’ sorusunun cevabı mimarinin sağlık göstergesidir.</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">feature engineering</span> <span class="term-tr">özellik mühendisliği</span></dt>
+      <dt><span class="term-en">feature engineering</span></dt>
       <dd>Ham veriden modelin kullanacağı anlamlı sinyalleri elle tasarlama ve hesaplama işi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">post-training</span> <span class="term-tr">sonradan eğitim</span></dt>
-      <dd>Önceden eğitilmiş bir temel modeli, belirli bir görev ve veri kümesi için ek eğitimden geçirme.</dd>
+      <dt><span class="term-en">post-training</span></dt>
+      <dd>Önceden eğitilmiş bir foundation model’i, belirli bir görev ve veri kümesi için ek eğitimden geçirme.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">ranker</span> <span class="term-tr">sıralama modeli</span></dt>
+      <dt><span class="term-en">ranker</span></dt>
       <dd>Aday içerikleri kullanıcıya uygunluk sırasına dizen model.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">prefill-only</span> <span class="term-tr">yalnızca ön-doldurma</span></dt>
+      <dt><span class="term-en">prefill-only</span></dt>
       <dd>Modelin yeni token üretmeden sadece girdiyi işleyip bir skor çıkarması; üretim aşaması olmadığı için çok daha ucuz.</dd>
     </div>
   </dl>
@@ -132,10 +132,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/oneri-sistemleri/">#öneri sistemleri</a></li>
+  <li><a href="/etiket/recommender-systems/">#recommender systems</a></li>
   <li><a href="/etiket/llm/">#LLM</a></li>
-  <li><a href="/etiket/ml-altyapisi/">#ML altyapısı</a></li>
-  <li><a href="/etiket/mimari/">#mimari</a></li>
+  <li><a href="/etiket/ml-infrastructure/">#ML infrastructure</a></li>
+  <li><a href="/etiket/architecture/">#architecture</a></li>
 </ul>
 
   <a class="readmore" href="https://netflixtechblog.com/genrec-towards-llm-native-recommendation-at-netflix-f20be6f643e3?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">
@@ -170,8 +170,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>&quot;Kullanıcı kodu çalıştırmak&quot; ihtiyacı bir gün karşına çıkarsa (ör. KlioAI&#x27;da kullanıcıya kod alıştırması yaptırmak), ilk refleks Docker konteyneri olacaktır. Bu yazının hatırlattığı şey Docker&#x27;ın <strong>güvenlik sınırı değil paketleme sınırı</strong> olduğu: aynı çekirdeği paylaşırlar. Güvenilmeyen kod için gVisor ya da microVM gerekir, ve onun da bir bedeli vardır. Daha genel ders: bir kaynağın kullanılmadığı sürede de para ödüyorsan, mimarinin ölçek ekonomisi bozuktur — boşta duran her şeyin faturasını hesapla.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>‘Kullanıcı kodu çalıştırmak’ ihtiyacı bir gün karşına çıkarsa (örneğin kullanıcıya kod alıştırması yaptırmak) ilk refleks Docker container’ı olacaktır. Bu yazının hatırlattığı şey Docker’ın <strong>güvenlik sınırı değil paketleme sınırı</strong> olduğu: aynı kernel’i paylaşırlar. Güvenilmeyen kod için gVisor ya da microVM gerekir ve onun da bir bedeli vardır. Daha genel ders: bir kaynak kullanılmadığı sürede de para ödüyorsan mimarinin ölçek ekonomisi bozuktur; boşta duran her şeyin faturasını hesapla.</p>
     </div>
   </div>
 
@@ -179,11 +179,11 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">bursty workload</span> <span class="term-tr">dalgalı iş yükü</span></dt>
+      <dt><span class="term-en">bursty workload</span></dt>
       <dd>Kısa yoğun aktivite dönemleriyle uzun boşluk dönemlerinin birbirini izlediği kullanım deseni.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">microVM</span> <span class="term-tr">mikro sanal makine</span></dt>
+      <dt><span class="term-en">microVM</span></dt>
       <dd>Hafifletilmiş bir sanal makine; konteynerden güçlü ama kendi işletim sistemini taşıdığı için maliyetli izolasyon sağlar.</dd>
     </div>
   </dl>
@@ -193,9 +193,9 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/kubernetes/">#Kubernetes</a></li>
-  <li><a href="/etiket/izolasyon/">#izolasyon</a></li>
-  <li><a href="/etiket/maliyet/">#maliyet</a></li>
-  <li><a href="/etiket/altyapi/">#altyapı</a></li>
+  <li><a href="/etiket/isolation/">#isolation</a></li>
+  <li><a href="/etiket/cost/">#cost</a></li>
+  <li><a href="/etiket/infrastructure/">#infrastructure</a></li>
 </ul>
 
   <a class="readmore" href="https://cloud.google.com/blog/products/containers-kubernetes/reduce-your-agents-costs-with-gke-agent-sandbox/" rel="noopener nofollow" target="_blank">
@@ -222,12 +222,12 @@
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
     <ol>
-<li><span>Cazip kaçamak: tüm uygulamayı tek bir güçlü servis hesabıyla çalıştırmak. Bedeli, risk yüzeyinin büyümesi ve denetim izinin kaybolması.</span></li><li><span>Sorun kimlik doğrulamanın kendisi değil, <strong>kimlik yaşam döngüsünün</strong> veritabanından ayrı yönetilmesi.</span></li>    </ol>
+<li><span>Cazip kaçamak: tüm uygulamayı tek bir güçlü service account’la çalıştırmak. Bedeli, risk yüzeyinin büyümesi ve denetim izinin kaybolması.</span></li><li><span>Sorun kimlik doğrulamanın kendisi değil, <strong>kimlik yaşam döngüsünün</strong> veritabanından ayrı yönetilmesi.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
+      <h4 class="label">Pratikte</h4>
       <p>Küçük projelerde herkes <code>.env</code> dosyasındaki tek bir Postgres parolasını paylaşır — sen de büyük ihtimalle öyle yapıyorsun, ve o ölçekte sorun değil. Ama şu iki soruyu sorabilir olman lazım: bir ekip arkadaşı ayrıldığında parolayı değiştirmen mi gerekiyor, ve loglara baktığında &quot;bu sorguyu kim attı&quot; sorusuna cevap verebiliyor musun? İkisine de &quot;hayır&quot; diyorsan, paylaşılan tek kimlik hem güvenlik hem denetim borcudur. Mülakatta bu farkındalık, IAM&#x27;i ezberlemekten daha değerli.</p>
     </div>
   </div>
@@ -236,15 +236,15 @@
     <summary class="label">Sözlük · 3 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">IAM (Identity and Access Management)</span> <span class="term-tr">kimlik ve erişim yönetimi</span></dt>
+      <dt><span class="term-en">IAM (Identity and Access Management)</span></dt>
       <dd>Kimin hangi kaynağa erişebileceğini merkezî olarak tanımlayan sistem.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">policy drift</span> <span class="term-tr">politika kayması</span></dt>
+      <dt><span class="term-en">policy drift</span></dt>
       <dd>Aynı olması gereken ortamların (dev/staging/prod) izinlerinin zamanla birbirinden ayrışması.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">audit log</span> <span class="term-tr">denetim kaydı</span></dt>
+      <dt><span class="term-en">audit log</span></dt>
       <dd>Hangi kimliğin ne zaman hangi işlemi yaptığını tutan, sonradan incelenebilir kayıt.</dd>
     </div>
   </dl>
@@ -253,9 +253,9 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/veritabani/">#veritabanı</a></li>
-  <li><a href="/etiket/guvenlik/">#güvenlik</a></li>
-  <li><a href="/etiket/kimlik-dogrulama/">#kimlik doğrulama</a></li>
+  <li><a href="/etiket/database/">#database</a></li>
+  <li><a href="/etiket/security/">#security</a></li>
+  <li><a href="/etiket/authentication/">#authentication</a></li>
   <li><a href="/etiket/postgresql/">#PostgreSQL</a></li>
 </ul>
 
@@ -278,7 +278,7 @@
     <a href="https://www.databricks.com/blog/convert-proprietary-code-open-ansi-sql-genie-code" rel="noopener nofollow" target="_blank">Eski veri ambarı göçü: karmaşıklık puanı ve bağımlılık grafiği</a>
   </h3>
   <p class="original-title">Convert proprietary code to open ANSI SQL with Genie Code</p>
-  <div class="prose prose-sm"><p>Databricks, eski veri ambarlarındaki tescilli SQL lehçelerini (T-SQL, Snowflake, Redshift, Oracle, BigQuery, Teradata) açık ANSI SQL&#x27;e çeviren bir agent duyuruyor. Ürün duyurusu olmasına rağmen içindeki iki fikir her göç projesinde işe yarar.</p><p>Birincisi <strong>karmaşıklık puanlaması</strong>: agent her dosyayı analiz edip puanlıyor; yalnızca ANSI SQL&#x27;e temiz eşlenen özellikler içeren bir dosya &quot;düşük karmaşıklık&quot; alıyor. İkincisi <strong>soy ağacı (lineage)</strong> çıkarımı: eski sistemdeki tablolar, görünümler ve saklı yordamlar arasındaki tüm ilişkiler haritalanıyor. Grafik iki dosyanın ortak bağımlılığı olmadığını gösteriyorsa, o ikisi bağımsız taşınabilir.</p></div>
+  <div class="prose prose-sm"><p>Databricks, eski veri ambarlarındaki tescilli SQL lehçelerini (T-SQL, Snowflake, Redshift, Oracle, BigQuery, Teradata) açık ANSI SQL&#x27;e çeviren bir agent duyuruyor. Ürün duyurusu olmasına rağmen içindeki iki fikir her göç projesinde işe yarar.</p><p>Birincisi <strong>karmaşıklık puanlaması</strong>: agent her dosyayı analiz edip puanlıyor; yalnızca ANSI SQL&#x27;e temiz eşlenen özellikler içeren bir dosya &quot;düşük karmaşıklık&quot; alıyor. İkincisi <strong>soy ağacı (lineage)</strong> inference’ı: eski sistemdeki tablolar, görünümler ve stored procedure’lar arasındaki tüm ilişkiler haritalanıyor. Grafik iki dosyanın ortak bağımlılığı olmadığını gösteriyorsa, o ikisi bağımsız taşınabilir.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
@@ -288,7 +288,7 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
+      <h4 class="label">Pratikte</h4>
       <p>Büyük bir göç işine girdiğinde ilk yapman gereken şey kod yazmak değil, <strong>envanter ve bağımlılık haritası</strong> çıkarmak — bu yazının asıl dersi bu. Aynı yaklaşımı çok daha küçük ölçekte de kullanabilirsin: bir refactor öncesi hangi modülün neye bağlı olduğunu çıkarıp bağımsız parçaları önce taşımak, riski ciddi düşürür. Python&#x27;da <code>ast</code> modülüyle import grafiği çıkarmak yarım saatlik bir iş, ama planı tamamen değiştirir.</p>
     </div>
   </div>
@@ -297,11 +297,11 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">data lineage</span> <span class="term-tr">veri soy ağacı</span></dt>
+      <dt><span class="term-en">data lineage</span></dt>
       <dd>Bir verinin hangi kaynaktan çıkıp hangi dönüşümlerden geçtiğini gösteren bağımlılık haritası.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">stored procedure</span> <span class="term-tr">saklı yordam</span></dt>
+      <dt><span class="term-en">stored procedure</span></dt>
       <dd>Veritabanının içinde saklanan ve orada çalışan, iş mantığı barındıran SQL programı.</dd>
     </div>
   </dl>
@@ -311,8 +311,8 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/sql/">#SQL</a></li>
-  <li><a href="/etiket/goc/">#göç</a></li>
-  <li><a href="/etiket/veri-muhendisligi/">#veri mühendisliği</a></li>
+  <li><a href="/etiket/migration/">#migration</a></li>
+  <li><a href="/etiket/data-engineering/">#data engineering</a></li>
   <li><a href="/etiket/agent/">#agent</a></li>
 </ul>
 
@@ -392,7 +392,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

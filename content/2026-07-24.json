@@ -19,28 +19,28 @@
         "Etki teorik değil: eşitlik durumunda yol seçimini bu alan belirliyor."
       ],
       "why_it_matters": "Bu yazı bir mühendislik alışkanlığı öğretiyor: **spesifikasyonun ne dediğine değil, sistemin ne yaptığına bak.** Cloudflare'in avantajı özel bir zekâ değil, ölçüm yapabildiği bir konum — internetin geniş bir kesitini görebiliyorlar ve bu kesite bakmayı akıl ettiler. Kendi sistemlerinde de en değerli bulgular genelde \"herkesin doğru varsaydığı şeyi ölçtüm\" cümlesiyle başlar.",
-      "for_you": "Doğrudan BGP ile çalışmayacaksın, ama iki şey işine yarar. Birincisi kavram: internet trafiğinin yolu tek bir otoritenin kararı değil, binlerce bağımsız sistemin tercihlerinin bileşimi — \"neden bu sunucuya gecikme yüksek?\" sorusunun cevabı bazen senin kodunda değil burada. İkincisi yöntem: Tradebot'ta bir varsayımın (\"borsa verisi her zaman sıralı gelir\", \"timestamp'ler hep artan\") doğru olduğunu test etmeden kabul ediyorsan, Cloudflare'in yaptığını küçük ölçekte yap — ölç ve dağılıma bak. Sistemlerdeki en pahalı hatalar, doğrulanmamış varsayımlardan çıkar.",
+      "for_you": "Doğrudan BGP ile çalışmayacaksın ama iki şey işine yarar. Birincisi kavram: internet trafiğinin yolu tek bir otoritenin kararı değil, binlerce bağımsız sistemin tercihlerinin bileşimi; ‘neden bu sunucuya gecikme yüksek?’ sorusunun cevabı bazen senin kodunda değil burada. İkincisi yöntem: ‘veri her zaman sıralı gelir’, ‘timestamp’ler hep artan’ gibi bir varsayımı test etmeden kabul ediyorsan, Cloudflare’in yaptığını küçük ölçekte yap: ölç ve dağılıma bak. Sistemlerdeki en pahalı hatalar doğrulanmamış varsayımlardan çıkar.",
       "terms": [
         {
           "en": "BGP (Border Gateway Protocol)",
-          "tr": "sınır ağ geçidi protokolü",
+          "tr": "BGP (Border Gateway Protocol)",
           "definition": "İnternetteki bağımsız ağların birbirine hangi yolların üzerinden ulaşılacağını duyurduğu yönlendirme protokolü."
         },
         {
           "en": "Autonomous System (AS)",
-          "tr": "otonom sistem",
+          "tr": "Autonomous System (AS)",
           "definition": "Tek bir kurumun yönettiği, kendi yönlendirme politikası olan ağ; internet bunların birleşimidir."
         },
         {
           "en": "path attribute",
-          "tr": "yol niteliği",
+          "tr": "path attribute",
           "definition": "Bir BGP duyurusuna eklenen ve yol seçimini etkileyen metadata alanı."
         }
       ],
       "tags": [
-        "ağ",
-        "internet altyapısı",
-        "protokol"
+        "networking",
+        "internet infrastructure",
+        "protocol"
       ],
       "difficulty": "ileri",
       "read_minutes": 10,
@@ -64,8 +64,8 @@
         "Çözüm yığını istenen boyutta önceden ayırmak (preallocation) — tekrarlanan kopyalamayı ortadan kaldırıyor.",
         "Ölçek argümanı net: %1 verimlilik = milyonlarca dolar. Optimizasyonun değeri her zaman ölçeğe bağlı."
       ],
-      "why_it_matters": "Bu yazı \"çalışma zamanı sana bir varsayılan verir ve o varsayılan senin iş yükün için yanlış olabilir\" dersinin ders kitabı örneği. Aynı desen JVM'de heap ve GC ayarlarında, Python'da GIL ve süreç havuzlarında, PostgreSQL'de `work_mem` ve bağlantı havuzunda karşına çıkar. Varsayılanlar genel amaçlıdır; senin yük profilin genel değildir.",
-      "for_you": "Java tarafında bunun birebir karşılığı var ve senin işine daha yakın: JVM'de thread stack boyutu (`-Xss`), heap boyutu ve GC seçimi de aynı türden varsayılanlardır. Spring Boot uygulaman ölçeklenmeye başladığında \"neden bu kadar CPU yiyor?\" sorusunun cevabı kodda değil, çalışma zamanı ayarlarında olabilir. Ama yazının asıl dersi sıralama: Uber önce **profilledi**, sonra optimize etti. Sen de `async-profiler` ya da JFR ile alev grafiği (flame graph) çıkarmadan hiçbir şeyi optimize etme — tahminle yapılan optimizasyon genelde yanlış yeri düzeltir.",
+      "why_it_matters": "Bu yazı \"çalışma zamanı sana bir varsayılan verir ve o varsayılan senin iş yükün için yanlış olabilir\" dersinin ders kitabı örneği. Aynı desen JVM'de heap ve GC ayarlarında, Python'da GIL ve süreç havuzlarında, PostgreSQL'de `work_mem` ve connection pool’da karşına çıkar. Varsayılanlar genel amaçlıdır; senin yük profilin genel değildir.",
+      "for_you": "Java tarafında bunun birebir karşılığı var ve senin işine daha yakın: JVM'de thread stack boyutu (`-Xss`), heap boyutu ve GC seçimi de aynı türden varsayılanlardır. Spring Boot uygulaman ölçeklenmeye başladığında \"neden bu kadar CPU yiyor?\" sorusunun cevabı kodda değil, çalışma zamanı ayarlarında olabilir. Ama yazının asıl dersi sıralama: Uber önce **profilledi**, sonra optimize etti. Sen de `async-profiler` ya da JFR ile flame graph (flame graph) çıkarmadan hiçbir şeyi optimize etme — tahminle yapılan optimizasyon genelde yanlış yeri düzeltir.",
       "terms": [
         {
           "en": "goroutine",
@@ -74,25 +74,25 @@
         },
         {
           "en": "stack growth",
-          "tr": "yığın büyümesi",
+          "tr": "stack growth",
           "definition": "Fonksiyon çağrı yığını ayrılan alanı aşınca daha büyük bir alan ayrılıp içeriğin kopyalanması."
         },
         {
           "en": "preallocation",
-          "tr": "önceden ayırma",
+          "tr": "preallocation",
           "definition": "İhtiyaç duyulacak alanı baştan ayırarak sonradan büyütme maliyetinden kaçınma."
         },
         {
           "en": "flame graph",
-          "tr": "alev grafiği",
+          "tr": "flame graph",
           "definition": "CPU zamanının hangi fonksiyonlarda geçtiğini gösteren, profilleme çıktısını görselleştiren grafik."
         }
       ],
       "tags": [
-        "performans",
+        "performance",
         "Go",
         "profilleme",
-        "maliyet"
+        "cost"
       ],
       "difficulty": "ileri",
       "read_minutes": 8,

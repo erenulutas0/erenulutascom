@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>6 Ekim 2026 — Eren&#39;in Mühendislik Gazetesi</title>
-<meta name="description" content="Bugünün üç yazısı da ‘zaten çalışıyor’ sanılan temel katmanlarla ilgili. Sertifikalar, token’lar ve imzalar saate göre doğrulanır, ama saatin kendisi 1985’ten beri kimliği doğrulanmadan gelir. Meta bunu düzeltiyor. Yanında hibrit aramanın en kırılgan adımını kaldıran bir yöntem ve DNS’in kök anahtarının değişimi var.">
+<meta name="description" content="Bugünün üç yazısı da ‘zaten çalışıyor’ sanılan temel katmanlarla ilgili. Sertifikalar, token’lar ve imzalar saate göre doğrulanır, ama saatin kendisi 1985’ten beri kimliği doğrulanmadan gelir. Meta bunu düzeltiyor. Yanında hybrid search’ın en kırılgan adımını kaldıran bir yöntem ve DNS’in kök anahtarının değişimi var.">
 <meta name="author" content="Eren Ulutaş">
 <meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#131310" media="(prefers-color-scheme: dark)">
 <meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
 <meta property="og:title" content="6 Ekim 2026 — Eren&#39;in Mühendislik Gazetesi">
-<meta property="og:description" content="Bugünün üç yazısı da ‘zaten çalışıyor’ sanılan temel katmanlarla ilgili. Sertifikalar, token’lar ve imzalar saate göre doğrulanır, ama saatin kendisi 1985’ten beri kimliği doğrulanmadan gelir. Meta bunu düzeltiyor. Yanında hibrit aramanın en kırılgan adımını kaldıran bir yöntem ve DNS’in kök anahtarının değişimi var.">
+<meta property="og:description" content="Bugünün üç yazısı da ‘zaten çalışıyor’ sanılan temel katmanlarla ilgili. Sertifikalar, token’lar ve imzalar saate göre doğrulanır, ama saatin kendisi 1985’ten beri kimliği doğrulanmadan gelir. Meta bunu düzeltiyor. Yanında hybrid search’ın en kırılgan adımını kaldıran bir yöntem ve DNS’in kök anahtarının değişimi var.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:url" content="https://erenulutas.com/sayi/2026-10-06/">
@@ -69,7 +69,7 @@
 <a href="/sayi/2026-10-05/" rel="prev"><span aria-hidden="true">←</span> 5 Ekim 2026</a><a href="/sayi/2026-10-07/" rel="next">7 Ekim 2026 <span aria-hidden="true">→</span></a>
     </nav>
   </div>
-<p class="lede">Bugünün üç yazısı da ‘zaten çalışıyor’ sanılan temel katmanlarla ilgili. Sertifikalar, token’lar ve imzalar saate göre doğrulanır, ama saatin kendisi 1985’ten beri kimliği doğrulanmadan gelir. Meta bunu düzeltiyor. Yanında hibrit aramanın en kırılgan adımını kaldıran bir yöntem ve DNS’in kök anahtarının değişimi var.</p></header>
+<p class="lede">Bugünün üç yazısı da ‘zaten çalışıyor’ sanılan temel katmanlarla ilgili. Sertifikalar, token’lar ve imzalar saate göre doğrulanır, ama saatin kendisi 1985’ten beri kimliği doğrulanmadan gelir. Meta bunu düzeltiyor. Yanında hybrid search’ın en kırılgan adımını kaldıran bir yöntem ve DNS’in kök anahtarının değişimi var.</p></header>
 
 
   <div class="layout">
@@ -88,7 +88,7 @@
   </h2>
   <p class="original-title">NTS: Authenticated Time at Meta</p>
 
-  <div class="prose"><p>Meta’nın herkese açık zaman servisi artık <code>nts.meta.com</code> üzerinden <strong>NTS</strong> (Network Time Security, RFC 8915) konuşuyor. Paketler kimlik doğrulamalı: cihaz, zamanın gerçekten Meta’dan geldiğini ve yolda değiştirilmediğini doğrulayabiliyor. Protokol, sunucu ve istemci açık kaynak.</p><p>Neden önemli? NTP 1985’ten beri doğrulamasız: istemci 48 bayt gönderir, bir şey 48 bayt geri gönderir ve istemci buna inanır. İmza yok, kimlik yok. Oysa zaman, diğer bütün güvenlik kararlarının ölçüldüğü girdi: <strong>sertifika doğrulama</strong> (<code>notBefore</code> ve <code>notAfter</code> yerel saatle karşılaştırılır), <strong>token süresi</strong> (‘15 dakika geçerli’ bir saat iddiasıdır), <strong>tekrar saldırısı pencereleri</strong> ve <strong>log sıralaması</strong>. Üstelik döngüsel bir sorun var: saati bilmeden sertifika süresini doğrulayamazsın. Yaygın iki çözüm de kötü: saat ayarlanana kadar doğrulamayı atlamak ya da iki tarafın birbirinin saat hatasını tahmin ederek pay bırakması.</p><p>Bu, sertifikalar 398 gün yaşarken idare edilebiliyordu. CA/Browser Forum kararıyla TLS sertifikalarının azami ömrü Mart 2026’da 200 güne indi, Mart 2027’de 100, Mart 2029’da <strong>47 güne</strong> inecek. 47 günde elle yönetim mümkün değil; yenileme ACME ile gözetimsiz yapılıyor. Saati kaymış bir makinede otomatik yenileme döngüsü bilet açmaz; kimsenin bakmadığı bir takvimde sessizce başarısız olur.</p><p>NTS iki aşamalı. <strong>Anahtar kurulumu (NTS-KE):</strong> TCP/4460 üzerinde TLS 1.3; istemci ve sunucu bir AEAD algoritmasında anlaşıp oturum anahtarlarını doğrudan TLS oturumundan türetiyor. <strong>Doğrulanmış NTP:</strong> UDP/123 üzerinde standart NTPv4; istek benzersiz bir kimlik, bir <strong>çerez</strong> ve bir doğrulayıcı taşıyor. Doğrulayıcı hiçbir şeyi şifrelemiyor, yalnızca imzalıyor. Sahte paket doğrulamadan geçemeyip düşürülüyor ve sunucu hata cevabı göndermiyor; böylece başarısızlık paket kaybından ayırt edilemiyor ve istemciyi yeni bir anahtar değişimine zorlamak için kullanılamıyor.</p><p>En zarif kısım <strong>durumsuz çerezler</strong>. Çerez, sunucu durumunun istemciye emanet edilmiş hâli: oturum anahtarlarını yalnızca sunucunun açabileceği biçimde mühürlü taşıyor. Bariz uygulama her sunucuya çoğaltılan bir anahtarlık olurdu ve zaman servisini bir dağıtık durum problemine çevirirdi. Meta anahtar çoğaltmıyor: her sunucu mühür anahtarını ortak bir ana sırdan ve <strong>günün numarasından</strong> HKDF ile türetiyor. Gün, Unix epoch’tan beri geçen tam 24 saatlik dilim; saat dilimi ve yaz saati yok, her makine aynı an için aynı tamsayıyı hesaplıyor. Sonuç: anahtarlık yok, çoğaltma yok, oturum tablosu yok, saldırganın tüketebileceği bir kaynak yok.</p></div>
+  <div class="prose"><p>Meta’nın herkese açık zaman servisi artık <code>nts.meta.com</code> üzerinden <strong>NTS</strong> (Network Time Security, RFC 8915) konuşuyor. Paketler kimlik doğrulamalı: cihaz, zamanın gerçekten Meta’dan geldiğini ve yolda değiştirilmediğini doğrulayabiliyor. Protokol, sunucu ve istemci açık kaynak.</p><p>Neden önemli? NTP 1985’ten beri doğrulamasız: istemci 48 bayt gönderir, bir şey 48 bayt geri gönderir ve istemci buna inanır. İmza yok, kimlik yok. Oysa zaman, diğer bütün güvenlik kararlarının ölçüldüğü girdi: <strong>sertifika doğrulama</strong> (<code>notBefore</code> ve <code>notAfter</code> yerel saatle karşılaştırılır), <strong>token süresi</strong> (‘15 dakika geçerli’ bir saat iddiasıdır), <strong>tekrar saldırısı pencereleri</strong> ve <strong>log sıralaması</strong>. Üstelik döngüsel bir sorun var: saati bilmeden sertifika süresini doğrulayamazsın. Yaygın iki çözüm de kötü: saat ayarlanana kadar doğrulamayı atlamak ya da iki tarafın birbirinin saat hatasını tahmin ederek pay bırakması.</p><p>Bu, sertifikalar 398 gün yaşarken idare edilebiliyordu. CA/Browser Forum kararıyla TLS sertifikalarının azami ömrü Mart 2026’da 200 güne indi, Mart 2027’de 100, Mart 2029’da <strong>47 güne</strong> inecek. 47 günde elle yönetim mümkün değil; yenileme ACME ile gözetimsiz yapılıyor. Saati kaymış bir makinede otomatik yenileme döngüsü bilet açmaz; kimsenin bakmadığı bir takvimde sessizce başarısız olur.</p><p>NTS iki aşamalı. <strong>Anahtar kurulumu (NTS-KE):</strong> TCP/4460 üzerinde TLS 1.3; istemci ve sunucu bir AEAD algoritmasında anlaşıp oturum anahtarlarını doğrudan TLS oturumundan türetiyor. <strong>Doğrulanmış NTP:</strong> UDP/123 üzerinde standart NTPv4; istek benzersiz bir kimlik, bir <strong>çerez</strong> ve bir doğrulayıcı taşıyor. Doğrulayıcı hiçbir şeyi şifrelemiyor, yalnızca imzalıyor. Sahte paket doğrulamadan geçemeyip düşürülüyor ve sunucu hata cevabı göndermiyor; böylece başarısızlık paket kaybından ayırt edilemiyor ve istemciyi yeni bir key rollover’a zorlamak için kullanılamıyor.</p><p>En zarif kısım <strong>durumsuz çerezler</strong>. Çerez, sunucu durumunun istemciye emanet edilmiş hâli: oturum anahtarlarını yalnızca sunucunun açabileceği biçimde mühürlü taşıyor. Bariz uygulama her sunucuya çoğaltılan bir anahtarlık olurdu ve zaman servisini bir dağıtık durum problemine çevirirdi. Meta anahtar çoğaltmıyor: her sunucu mühür anahtarını ortak bir ana sırdan ve <strong>günün numarasından</strong> HKDF ile türetiyor. Gün, Unix epoch’tan beri geçen tam 24 saatlik dilim; saat dilimi ve yaz saati yok, her makine aynı an için aynı tamsayıyı hesaplıyor. Sonuç: anahtarlık yok, çoğaltma yok, oturum tablosu yok, saldırganın tüketebileceği bir kaynak yok.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
@@ -102,8 +102,8 @@
       <p>‘Durumu istemciye emanet et, anahtarı türet’ deseni yalnızca zaman servisine özgü değil; yatay ölçeklenen her kimlik doğrulama servisinde aynı problem çıkar. Yazı ayrıca saat senkronizasyonunun operasyonel bir ayrıntı değil, güvenlik bağımlılığı olduğunu hatırlatıyor.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>İki somut karşılığı var. <strong>JWT:</strong> KlioAI’da token doğrularken <code>exp</code> ve <code>nbf</code> alanlarını sunucu saatiyle karşılaştırıyorsun; birkaç saniyelik saat farkı için küçük bir tolerans (<code>clockSkew</code>, örneğin 30 sn) tanımla ve sunucularında NTP’nin çalıştığını doğrula (<code>chronyc tracking</code>). <strong>Durumsuz oturum:</strong> NTS çerezi ile imzalı JWT aynı fikir; sunucu oturum tablosu tutmaz, istemci mühürlü durumu taşır. Anahtar döndürmeyi de buradan öğren: anahtar kimliğini (<code>kid</code>) token’ın içine açık yaz ki sunucu hangi anahtarla doğrulayacağını bilsin.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>İki somut karşılığı var. <strong>JWT:</strong> token doğrularken <code>exp</code> ve <code>nbf</code> alanlarını sunucu saatiyle karşılaştırıyorsun; birkaç saniyelik saat farkı için küçük bir tolerans (<code>clockSkew</code>, örneğin 30 sn) tanımla ve sunucularında NTP’nin çalıştığını doğrula (<code>chronyc tracking</code>). <strong>Stateless session:</strong> NTS cookie’si ile imzalı JWT aynı fikir; sunucu session tablosu tutmaz, istemci mühürlü state’i taşır. Key rotation’ı da buradan öğren: anahtar kimliğini (<code>kid</code>) token’ın içine açık yaz ki sunucu hangi anahtarla doğrulayacağını bilsin.</p>
     </div>
   </div>
 
@@ -111,23 +111,23 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">NTS (Network Time Security)</span> <span class="term-tr">ağ zaman güvenliği</span></dt>
+      <dt><span class="term-en">NTS (Network Time Security)</span></dt>
       <dd>NTP paketlerine kimlik doğrulama ekleyen standart (RFC 8915).</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">AEAD</span> <span class="term-tr">kimlik doğrulamalı şifreleme</span></dt>
+      <dt><span class="term-en">AEAD</span></dt>
       <dd>Veriyi şifrelerken aynı anda bütünlüğünü de doğrulayan şifreleme türü.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">HKDF</span> <span class="term-tr">anahtar türetme fonksiyonu</span></dt>
+      <dt><span class="term-en">HKDF</span></dt>
       <dd>Bir ana sırdan, farklı amaçlar için bağımsız anahtarlar türeten standart yöntem.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">stateless server</span> <span class="term-tr">durumsuz sunucu</span></dt>
+      <dt><span class="term-en">stateless server</span></dt>
       <dd>İstekler arasında istemciye özgü veri saklamayan sunucu; her istek kendi başına işlenebilir.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">ACME</span> <span class="term-tr">ACME</span></dt>
+      <dt><span class="term-en">ACME</span></dt>
       <dd>TLS sertifikalarının otomatik alınıp yenilenmesini sağlayan protokol.</dd>
     </div>
   </dl>
@@ -136,10 +136,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/guvenlik/">#güvenlik</a></li>
-  <li><a href="/etiket/ag/">#ağ</a></li>
-  <li><a href="/etiket/protokol/">#protokol</a></li>
-  <li><a href="/etiket/kriptografi/">#kriptografi</a></li>
+  <li><a href="/etiket/security/">#security</a></li>
+  <li><a href="/etiket/networking/">#networking</a></li>
+  <li><a href="/etiket/protocol/">#protocol</a></li>
+  <li><a href="/etiket/cryptography/">#cryptography</a></li>
 </ul>
 
   <a class="readmore" href="https://engineering.fb.com/2026/10/06/production-engineering/nts-authenticated-time-at-meta/" rel="noopener nofollow" target="_blank">
@@ -161,7 +161,7 @@
 </div>
 
   <h3 class="brief-title">
-    <a href="https://cloud.google.com/blog/products/databases/simplify-ai-search-with-alloydb-hybrid-search-and-rrf/" rel="noopener nofollow" target="_blank">Hibrit aramada puanları değil sıraları birleştir: Reciprocal Rank Fusion</a>
+    <a href="https://cloud.google.com/blog/products/databases/simplify-ai-search-with-alloydb-hybrid-search-and-rrf/" rel="noopener nofollow" target="_blank">Hybrid search’ta puanları değil sıraları birleştir: Reciprocal Rank Fusion</a>
   </h3>
   <p class="original-title">Simplify AI search with AlloyDB hybrid search and RRF</p>
   <div class="prose prose-sm"><p>RAG uygulamalarında iyi sonuç için en az iki teknik gerekiyor: anlam için <strong>vektör araması</strong>, anahtar kelime kesinliği için <strong>tam metin araması (FTS)</strong>. Zor olan aramaları çalıştırmak değil, iki sonuç kümesini birleştirmek. Vektör sorgusu mesafe puanı, FTS alaka puanı üretiyor; ikisini ortak bir ölçeğe taşımak için yazılan <strong>normalizasyon</strong> mantığı, veri dağılımı değişince bozulan kırılgan adım.</p><p>Google’ın AlloyDB’de sunduğu çözüm <strong>Reciprocal Rank Fusion (RRF)</strong>: puanlara değil sıralara baktığı için normalizasyonu tümüyle atlıyor. Tek bir <code>hybrid_search()</code> SQL fonksiyonu her bileşen için bir CTE üretip sonuçlara <code>ROW_NUMBER()</code> ile sıra veriyor, bunları belge kimliği üzerinden <code>FULL OUTER JOIN</code> ile birleştiriyor ve RRF puanını hesaplıyor. Yazı ayrıca kelime konumlarını indekste tutan RUM eklentisini, yerleşik BM25 indeksini ve Elasticsearch gibi dış kümeleri sorgulayan bir FDW’yi duyuruyor.</p></div>
@@ -174,8 +174,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Bu, Mobit’teki doküman aramasına doğrudan uygulanabilir ve AlloyDB gerektirmez. Düz Postgres’te <code>pgvector</code> ile ilk 20 sonucu, <code>tsvector</code> ile ilk 20 sonucu al; her belgeye <code>1 / (60 + sıra)</code> puanını ver ve iki listedeki puanları topla. Birkaç satırlık SQL ya da Python. Ürün kodu ya da ihale numarası gibi tam eşleşme gereken sorgularda vektör aramasının kaçırdığını FTS yakalar.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Bu, bir doküman aramaya doğrudan uygulanabilir ve AlloyDB gerektirmez. Düz Postgres’te <code>pgvector</code> ile ilk 20 sonucu, <code>tsvector</code> ile ilk 20 sonucu al; her belgeye <code>1 / (60 + sıra)</code> puanını ver ve iki listedeki puanları topla. Birkaç satırlık SQL ya da Python. Ürün kodu ya da ihale numarası gibi tam eşleşme gereken sorgularda vector search’ün kaçırdığını full-text search yakalar.</p>
     </div>
   </div>
 
@@ -183,15 +183,15 @@
     <summary class="label">Sözlük · 3 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">Reciprocal Rank Fusion (RRF)</span> <span class="term-tr">karşılıklı sıra birleştirme</span></dt>
+      <dt><span class="term-en">Reciprocal Rank Fusion (RRF)</span></dt>
       <dd>Birden çok sıralı listeyi, her öğenin sırasının tersini toplayarak birleştiren yöntem.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">hybrid search</span> <span class="term-tr">hibrit arama</span></dt>
+      <dt><span class="term-en">hybrid search</span></dt>
       <dd>Vektör (anlamsal) ve anahtar kelime aramasını birlikte kullanan arama.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">BM25</span> <span class="term-tr">BM25</span></dt>
+      <dt><span class="term-en">BM25</span></dt>
       <dd>Kelime sıklığı ve belge uzunluğuna dayanan yaygın anahtar kelime alaka puanı.</dd>
     </div>
   </dl>
@@ -200,10 +200,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/arama/">#arama</a></li>
+  <li><a href="/etiket/search/">#search</a></li>
   <li><a href="/etiket/rag/">#RAG</a></li>
   <li><a href="/etiket/postgres/">#Postgres</a></li>
-  <li><a href="/etiket/veritabani/">#veritabanı</a></li>
+  <li><a href="/etiket/database/">#database</a></li>
 </ul>
 
   <a class="readmore" href="https://cloud.google.com/blog/products/databases/simplify-ai-search-with-alloydb-hybrid-search-and-rrf/" rel="noopener nofollow" target="_blank">
@@ -225,7 +225,7 @@
     <a href="https://blog.cloudflare.com/root-ksk-2024-rollover/" rel="noopener nofollow" target="_blank">İnternetin anahtarı tarihte ikinci kez değişiyor: DNS kök KSK değişimi</a>
   </h3>
   <p class="original-title">The keys to the Internet change on October 11, 2026. Are you ready?</p>
-  <div class="prose prose-sm"><p>11 Ekim 2026’da DNS kökü, anahtar imzalama anahtarını (KSK) tarihinde yalnızca ikinci kez değiştirecek. Bu anahtar <strong>DNSSEC güven zincirinin</strong> başlangıcı. Zincir şöyle işliyor: her üst alan, alt alanın açık anahtarının parmak izini bir DS kaydıyla yayımlıyor (kök <code>.com</code> için, <code>.com</code> da <code>cloudflare.com</code> için). Kökün ise üstü yok; bu yüzden doğrulayan çözümleyici kök açık anahtarına baştan güvenmek zorunda. Buna <strong>güven çapası</strong> (trust anchor) deniyor.</p><p>Yeni anahtar KSK-2024, eskisi KSK-2017’nin yerini alıyor. Doğrulayan çözümleyiciler değişimden önce yeni anahtara güvenmiyorsa, sağlıklı siteler erişilemez hâle gelir. Cloudflare, 2018’deki ilk değişimde çözümleyicilerin yazılım güncellemesi ya da makine taşıması sırasında öğrendikleri güveni kaybettiğini gördüğünü yazıyor. Çoğu site sahibinin bir şey yapması gerekmiyor; kendi DNSSEC doğrulayan çözümleyicisini işletenler yeni anahtarın yüklü olduğunu kontrol etmeli.</p></div>
+  <div class="prose prose-sm"><p>11 Ekim 2026’da DNS kökü, anahtar imzalama anahtarını (KSK) tarihinde yalnızca ikinci kez değiştirecek. Bu anahtar <strong>DNSSEC güven zincirinin</strong> başlangıcı. Zincir şöyle işliyor: her üst alan, alt alanın açık anahtarının parmak izini bir DS kaydıyla yayımlıyor (kök <code>.com</code> için, <code>.com</code> da <code>cloudflare.com</code> için). Kökün ise üstü yok; bu yüzden doğrulayan çözümleyici kök açık anahtarına baştan güvenmek zorunda. Buna <strong>trust anchor</strong> (trust anchor) deniyor.</p><p>Yeni anahtar KSK-2024, eskisi KSK-2017’nin yerini alıyor. Doğrulayan çözümleyiciler değişimden önce yeni anahtara güvenmiyorsa, sağlıklı siteler erişilemez hâle gelir. Cloudflare, 2018’deki ilk değişimde çözümleyicilerin yazılım güncellemesi ya da makine taşıması sırasında öğrendikleri güveni kaybettiğini gördüğünü yazıyor. Çoğu site sahibinin bir şey yapması gerekmiyor; kendi DNSSEC doğrulayan çözümleyicisini işletenler yeni anahtarın yüklü olduğunu kontrol etmeli.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
@@ -235,8 +235,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Aynı desen kendi sistemlerinde: JWT imzalama anahtarını ya da bir API sırrını değiştirirken eskiyi hemen silme. Önce yeni anahtarı yayımla (JWKS’e ekle), bir süre ikisini de kabul et, sonra eskisini kaldır. Bu üç adımlı döndürme, kesintisiz anahtar değişiminin standart yolu.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Aynı desen kendi sistemlerinde: JWT imzalama anahtarını ya da bir API sırrını değiştirirken eskiyi hemen silme. Önce yeni anahtarı yayımla (JWKS’e ekle), bir süre ikisini de kabul et, sonra eskisini kaldır. Bu üç adımlı döndürme, kesintisiz key rollover’ın standart yolu.</p>
     </div>
   </div>
 
@@ -244,15 +244,15 @@
     <summary class="label">Sözlük · 3 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">DNSSEC</span> <span class="term-tr">DNSSEC</span></dt>
+      <dt><span class="term-en">DNSSEC</span></dt>
       <dd>DNS cevaplarının sahte olmadığını dijital imzayla doğrulamayı sağlayan uzantı.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">trust anchor</span> <span class="term-tr">güven çapası</span></dt>
+      <dt><span class="term-en">trust anchor</span></dt>
       <dd>Bir güven zincirinin, doğrulanmadan baştan güvenilen başlangıç anahtarı.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">key rollover</span> <span class="term-tr">anahtar değişimi</span></dt>
+      <dt><span class="term-en">key rollover</span></dt>
       <dd>Kullanımdaki kriptografik anahtarın planlı biçimde yenisiyle değiştirilmesi.</dd>
     </div>
   </dl>
@@ -262,9 +262,9 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/dns/">#DNS</a></li>
-  <li><a href="/etiket/guvenlik/">#güvenlik</a></li>
-  <li><a href="/etiket/kriptografi/">#kriptografi</a></li>
-  <li><a href="/etiket/ag/">#ağ</a></li>
+  <li><a href="/etiket/security/">#security</a></li>
+  <li><a href="/etiket/cryptography/">#cryptography</a></li>
+  <li><a href="/etiket/networking/">#networking</a></li>
 </ul>
 
   <a class="readmore" href="https://blog.cloudflare.com/root-ksk-2024-rollover/" rel="noopener nofollow" target="_blank">
@@ -288,7 +288,7 @@
       </li>
       <li>
         <a href="#50e1a96cc3ea">
-          <span class="toc-title">Hibrit aramada puanları değil sıraları birleştir: Reciprocal Rank Fusion</span>
+          <span class="toc-title">Hybrid search’ta puanları değil sıraları birleştir: Reciprocal Rank Fusion</span>
           <span class="toc-meta">Google Cloud Blog · 8 dk</span>
         </a>
       </li>
@@ -320,7 +320,7 @@
     </a>
     <a class="pager-link pager-next" href="/sayi/2026-10-07/" rel="next">
       <span class="pager-label">Sonraki sayı · 7 Ekim 2026 →</span>
-      <span class="pager-title">Önce kanıtı kod toplasın, sonra model yorumlasın: Cloudflare’in çok ajanlı güvenlik hattı</span>
+      <span class="pager-title">Önce kanıtı kod toplasın, sonra model yorumlasın: Cloudflare’in multi-agent güvenlik hattı</span>
     </a>
   </nav>
 
@@ -337,7 +337,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

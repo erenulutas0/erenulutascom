@@ -99,11 +99,11 @@
   <div class="callouts">
     <div class="callout callout-why">
       <h3 class="label">Neden önemli?</h3>
-      <p>Otomatik ölçekleme kararı, beslendiği metrik kadar iyidir. Bu yazı, “CPU %40, demek ki rahatız” varsayımının ne zaman yalan söylediğini gösteriyor: iş doluyken CPU boş görünebilir. Doğru metrik, sistemin gerçekte neyi beklediğini ölçen metriktir.</p>
+      <p>Autoscaling kararı, beslendiği metrik kadar iyidir. Bu yazı, “CPU %40, demek ki rahatız” varsayımının ne zaman yalan söylediğini gösteriyor: iş doluyken CPU boş görünebilir. Doğru metrik, sistemin gerçekte neyi beklediğini ölçen metriktir.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Kendi servislerinde de kuyruğa bağlı bir tüketici çalıştırırsan aynı tuzak var: CPU&#x27;ya göre ölçekleme yapma, <strong>kuyruk gecikmesine</strong> (consumer lag) göre yap. Spring Boot tüketicin CPU&#x27;da %20 görünürken kuyruk büyüyorsa, iş bir dış çağrıyı bekliyordur. İkinci ders “build vs buy” için: bu gazetenin <code>fetch.py</code> içindeki RSS ayrıştırıcısı gibi küçük şeyleri kendin yazmak sorun değil; ama olgun bir kütüphane varsa onu benimseme zamanını bilmek de beceridir.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Kuyruğa bağlı bir consumer çalıştırırsan aynı tuzak var: CPU’ya göre ölçekleme yapma, <strong>consumer lag</strong>’e göre yap. Spring Boot consumer’ın CPU’da yüzde 20 görünürken kuyruk büyüyorsa iş bir dış çağrıyı bekliyordur. İkinci ders ‘build vs buy’ için: küçük şeyleri (örneğin bir RSS parser’ı) kendin yazmak sorun değil; ama olgun bir kütüphane varsa onu benimseme zamanını bilmek de beceridir.</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">autoscaler</span> <span class="term-tr">otomatik ölçekleyici</span></dt>
+      <dt><span class="term-en">autoscaler</span></dt>
       <dd>Yüke göre kaynak miktarını insan müdahalesi olmadan artıran ya da azaltan bileşen.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">backpressure</span> <span class="term-tr">geri basınç</span></dt>
+      <dt><span class="term-en">backpressure</span></dt>
       <dd>Aşağı akıştaki bir bileşen yetişemediğinde, yukarıdaki üreticinin yavaşlatılması.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">savepoint</span> <span class="term-tr">kayıt noktası</span></dt>
-      <dd>Flink işinin durumunun tutarlı bir anlık görüntüsü; durdurup yeniden başlatırken veri kaybını önler.</dd>
+      <dt><span class="term-en">savepoint</span></dt>
+      <dd>Flink işinin durumunun tutarlı bir snapshot’u; durdurup yeniden başlatırken veri kaybını önler.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">true processing rate (TPR)</span> <span class="term-tr">gerçek işleme hızı</span></dt>
+      <dt><span class="term-en">true processing rate (TPR)</span></dt>
       <dd>Bir operatörün tamamen meşgul olsa sürdürebileceği teorik verim.</dd>
     </div>
   </dl>
@@ -133,7 +133,7 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/flink/">#Flink</a></li>
-  <li><a href="/etiket/otomatik-olcekleme/">#otomatik ölçekleme</a></li>
+  <li><a href="/etiket/autoscaling/">#autoscaling</a></li>
   <li><a href="/etiket/stream-processing/">#stream processing</a></li>
   <li><a href="/etiket/build-vs-buy/">#build vs buy</a></li>
 </ul>
@@ -160,18 +160,18 @@
     <a href="https://research.google/blog/how-mobility-gives-language-models-a-deeper-understanding-of-place/" rel="noopener nofollow" target="_blank">Bir mekânın kimliği ile işlevi aynı şey değil: hareketlilikle zenginleşmiş embedding</a>
   </h3>
   <p class="original-title">How mobility gives language models a deeper understanding of place</p>
-  <div class="prose prose-sm"><p>Dil modelleri mekânları (market, park, kafe gibi POI&#x27;ler) genelde adres, kategori ve metin açıklaması gibi <strong>statik metadata</strong> ile temsil eder. Google&#x27;ın önerdiği <strong>ME-POIs</strong> çerçevesi, mekânın iki imzasını ayırıyor: kâğıttaki kimliği (ad ve kategori) ve gerçek işlevsel ritmi (toplulaştırılmış ziyaret izi).</p><p>Ziyaretlerin varış pencereleri, ayrılış eğilimleri ve tipik kalış süreleri bir zamansal kodlayıcıyla vektöre çevriliyor. “Uzun kuyruk” problemi de ele alınmış: ünlü yerlerin çok verisi var, küçük mahalle işletmelerinin çok az. Çözüm <strong>mekânsal çok ölçekli ziyaret yayılımı</strong>: bölgesel olarak benzer yerlerin davranışsal özelliklerini paylaşması. Sonuç, çalışma saati, fiyat seviyesi ve yoğunluk tahminlerinde iyileşme.</p></div>
+  <div class="prose prose-sm"><p>Dil modelleri mekânları (market, park, kafe gibi POI&#x27;ler) genelde adres, kategori ve metin açıklaması gibi <strong>statik metadata</strong> ile temsil eder. Google&#x27;ın önerdiği <strong>ME-POIs</strong> çerçevesi, mekânın iki imzasını ayırıyor: kâğıttaki kimliği (ad ve kategori) ve gerçek işlevsel ritmi (toplulaştırılmış ziyaret izi).</p><p>Ziyaretlerin varış pencereleri, ayrılış eğilimleri ve tipik kalış süreleri bir zamansal kodlayıcıyla vektöre çevriliyor. “Long tail” problemi de ele alınmış: ünlü yerlerin çok verisi var, küçük mahalle işletmelerinin çok az. Çözüm <strong>mekânsal çok ölçekli ziyaret yayılımı</strong>: bölgesel olarak benzer yerlerin davranışsal özelliklerini paylaşması. Sonuç, çalışma saati, fiyat seviyesi ve yoğunluk tahminlerinde iyileşme.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
     <ol>
-<li><span>Statik metadata kimliği, davranış verisi işlevi anlatır; birleşince temsil zenginleşir.</span></li><li><span>Az veriye sahip varlıklar için komşu varlıklardan bilgi ödünç almak, uzun kuyruk problemine pratik bir çözüm.</span></li>    </ol>
+<li><span>Statik metadata kimliği, davranış verisi işlevi anlatır; birleşince temsil zenginleşir.</span></li><li><span>Az veriye sahip varlıklar için komşu varlıklardan bilgi ödünç almak, long tail problemine pratik bir çözüm.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Mobit&#x27;teki doküman arama için bir fikir: belgeleri yalnızca içeriğiyle embedding&#x27;leme; kullanım sinyalini de ekle (hangi belge hangi sorgularda açıldı, hangisi sık paylaşıldı). Metin “bu belge ne hakkında” der, kullanım “bu belge ne işe yarıyor” der. Yeni eklenen belgelerde veri azdır; aynı firmaya ait komşu belgelerden başlangıç sinyali almak burada anlatılan uzun kuyruk çözümünün küçük bir uyarlaması.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Doküman arama için bir fikir: belgeleri yalnızca içeriğiyle embedding’leme; kullanım sinyalini de ekle (hangi belge hangi sorgularda açıldı, hangisi sık paylaşıldı). Metin ‘bu belge ne hakkında’ der, kullanım ‘bu belge ne işe yarıyor’ der. Yeni eklenen belgelerde veri azdır; aynı gruba ait komşu belgelerden başlangıç sinyali almak, burada anlatılan long-tail çözümünün küçük bir uyarlaması.</p>
     </div>
   </div>
 
@@ -179,11 +179,11 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">point of interest (POI)</span> <span class="term-tr">ilgi noktası</span></dt>
+      <dt><span class="term-en">point of interest (POI)</span></dt>
       <dd>Haritada bir işletmeyi, parkı ya da simge yapıyı temsil eden kayıt.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">long tail</span> <span class="term-tr">uzun kuyruk</span></dt>
+      <dt><span class="term-en">long tail</span></dt>
       <dd>Az sayıda yaygın öğenin yanında, her biri çok az veriye sahip çok sayıda nadir öğe.</dd>
     </div>
   </dl>
@@ -193,8 +193,8 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/embedding/">#embedding</a></li>
-  <li><a href="/etiket/arastirma/">#araştırma</a></li>
-  <li><a href="/etiket/cografi-veri/">#coğrafi veri</a></li>
+  <li><a href="/etiket/research/">#research</a></li>
+  <li><a href="/etiket/geospatial-data/">#geospatial data</a></li>
 </ul>
 
   <a class="readmore" href="https://research.google/blog/how-mobility-gives-language-models-a-deeper-understanding-of-place/" rel="noopener nofollow" target="_blank">
@@ -261,7 +261,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

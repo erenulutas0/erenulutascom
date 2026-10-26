@@ -11,20 +11,20 @@
       "title_tr": "\"Yerelde mükemmel çalıştı\": Netflix'in servis haritası üretimde nasıl kırıldı",
       "url": "https://netflixtechblog.com/building-service-topology-at-scale-architecture-challenges-and-lessons-learned-f4b792f3f0d8?source=rss----2615bd06b42e---4",
       "published": "2026-07-13",
-      "summary": "Netflix'in mühendisleri servis bağımlılıklarının gerçek zamanlı ve birleşik bir görünümüne ihtiyaç duyuyordu: sorunları daha hızlı gidermek, bir arızanın **etki yarıçapını** (blast radius) anlamak ve dağıtık mimaride yol bulmak için. Çözüm çok kaynaklı: eBPF ağ akışları, IPC metrikleri ve dağıtık izleme (tracing) verileri, birbirinden fiziksel olarak ayrı grafik katmanlarında toplanıp ayrı ayrı ya da birleşik sorgulanabiliyor.\n\nAma yazının değeri mimaride değil, itirafta. Kendi cümleleriyle: **ilk sürüm yerel ortamda kusursuz çalıştı. Üretim başka bir hikâyeydi.** Sonra sayıyorlar: Kafka tüketicileri geride kaldı. Örnekler bellek yetersizliğine düştü. Bazı düğümler diğerlerinin **100 katı** trafik aldı. Çöp toplama (GC) duraklamaları, asıl iş mantığından daha fazla CPU tüketti.\n\nMimarideki temel karar **akış-öncelikli** (streaming-first) olmak. Geleneksel servis topolojisi sistemleri toplu işleme kullanır: veriyi saatlik ya da günlük toplar, sonra tam anlık görüntüleri saklar. Orta ölçekte çalışır ama temel bir sorunu vardır — veriyi gördüğünde zaten eskimiştir. Bir üretim arızası sırasında bu işe yaramaz. Netflix bunun yerine çok-bölgeli Kafka akışlarından akış kayıtlarını ve Sunucu Gönderimli Olaylar (SSE) üzerinden IPC metriklerini sürekli alıp reaktif pipeline'lardan geçiriyor.",
+      "summary": "Netflix'in mühendisleri servis bağımlılıklarının gerçek zamanlı ve birleşik bir görünümüne ihtiyaç duyuyordu: sorunları daha hızlı gidermek, bir arızanın **blast radius’u** (blast radius) anlamak ve dağıtık mimaride yol bulmak için. Çözüm çok kaynaklı: eBPF ağ akışları, IPC metrikleri ve distributed tracing (tracing) verileri, birbirinden fiziksel olarak ayrı grafik katmanlarında toplanıp ayrı ayrı ya da birleşik sorgulanabiliyor.\n\nAma yazının değeri mimaride değil, itirafta. Kendi cümleleriyle: **ilk sürüm yerel ortamda kusursuz çalıştı. Üretim başka bir hikâyeydi.** Sonra sayıyorlar: Kafka consumer’ları geride kaldı. Örnekler bellek yetersizliğine düştü. Bazı node’lar diğerlerinin **100 katı** trafik aldı. Çöp toplama (GC) duraklamaları, asıl iş mantığından daha fazla CPU tüketti.\n\nMimarideki temel karar **akış-öncelikli** (streaming-first) olmak. Geleneksel servis topolojisi sistemleri toplu işleme kullanır: veriyi saatlik ya da günlük toplar, sonra tam snapshot’ları saklar. Orta ölçekte çalışır ama temel bir sorunu vardır — veriyi gördüğünde zaten eskimiştir. Bir üretim arızası sırasında bu işe yaramaz. Netflix bunun yerine çok-bölgeli Kafka akışlarından akış kayıtlarını ve Sunucu Gönderimli Olaylar (SSE) üzerinden IPC metriklerini sürekli alıp reaktif pipeline'lardan geçiriyor.",
       "key_points": [
-        "\"Bazı düğümler 100 kat trafik aldı\" — dağıtık sistemlerde en sinsi problem **sıcak nokta** (hot partition): ortalama iyi görünür, birkaç düğüm yanar.",
+        "\"Bazı node’lar 100 kat trafik aldı\" — dağıtık sistemlerde en sinsi problem **sıcak nokta** (hot partition): ortalama iyi görünür, birkaç node yanar.",
         "GC duraklamalarının iş mantığından fazla CPU yemesi, JVM tabanlı yüksek hacimli sistemlerin klasik tuzağı.",
         "Toplu işleme yerine akış: arıza anında saatlik özet işe yaramaz, gerçek zamanlı gerekir.",
         "Katmanları fiziksel olarak ayırmak, her veri kaynağının bağımsız ölçeklenmesini ve sorgulanmasını sağlıyor.",
         "Yazı bir başarı hikâyesi değil, açıkça bir **öğrenme yolculuğu** olarak sunuluyor."
       ],
       "why_it_matters": "Yeni mezun bir mühendisin en zor öğrendiği şey, \"çalışıyor\" ile \"ölçekte çalışıyor\" arasındaki farktır. Bu yazı o farkı listeleyerek gösteriyor: aynı kod, aynı mantık — ama veri hacmi ve eşzamanlılık değişince tamamen farklı bir sistem. Bu tür açık sözlü yazılar, yıllarca üretim deneyimi olmadan öğrenilemeyecek şeyleri öğretir.",
-      "for_you": "Bu yazıyı iki kere oku ve şu üç şeyi not al. **Bir:** sıcak nokta problemi — Tradebot'ta veriyi sembole göre bölümlediysen, işlem hacminin %60'ı BTC'deyse o bölüm diğerlerinin katbekat yükünü taşır. Bölümleme anahtarını seçerken dağılıma bak, isme değil. **İki:** tüketici geride kalması (consumer lag) — bir kuyruk sisteminde en kritik metrik budur ve mutlaka alarma bağlanmalıdır; Redis Streams ya da Kafka fark etmez. **Üç:** GC — Java tarafında yüksek hacimli bir servis yazıyorsan, GC log'larını açıp duraklama sürelerine bakmayı öğren. \"Uygulama yavaş\" şikâyetlerinin şaşırtıcı bir kısmının cevabı orada.",
+      "for_you": "Bu yazıyı iki kere oku ve şu üç şeyi not al. **Bir:** hot partition problemi: veriyi anahtara göre bölümlediysen ve trafiğin yüzde 60’ı tek bir anahtardaysa o bölüm diğerlerinin katbekat yükünü taşır. Partition key seçerken dağılıma bak, isme değil. **İki:** consumer lag: bir kuyruk sisteminde en kritik metrik budur ve mutlaka alarma bağlanmalıdır; Redis Streams ya da Kafka fark etmez. **Üç:** GC: Java tarafında yüksek hacimli bir servis yazıyorsan GC log’larını açıp pause sürelerine bakmayı öğren. ‘Uygulama yavaş’ şikâyetlerinin şaşırtıcı bir kısmının cevabı orada.",
       "terms": [
         {
           "en": "blast radius",
-          "tr": "etki yarıçapı",
+          "tr": "blast radius",
           "definition": "Bir bileşen arızalandığında etkilenen diğer bileşenlerin kapsamı."
         },
         {
@@ -34,25 +34,25 @@
         },
         {
           "en": "consumer lag",
-          "tr": "tüketici gecikmesi",
-          "definition": "Bir kuyruk tüketicisinin, üretilen mesajların ne kadar gerisinde kaldığı; kuyruk sistemlerinin en kritik sağlık metriği."
+          "tr": "consumer lag",
+          "definition": "Bir kuyruk consumer’ının, üretilen mesajların ne kadar gerisinde kaldığı; kuyruk sistemlerinin en kritik sağlık metriği."
         },
         {
           "en": "hot partition",
-          "tr": "sıcak bölüm",
-          "definition": "Yükün dengesiz dağılması sonucu diğerlerinden kat kat fazla trafik alan bölüm ya da düğüm."
+          "tr": "hot partition",
+          "definition": "Yükün dengesiz dağılması sonucu diğerlerinden kat kat fazla trafik alan bölüm ya da node."
         },
         {
           "en": "garbage collection (GC) pause",
-          "tr": "çöp toplama duraklaması",
+          "tr": "garbage collection (GC) pause",
           "definition": "JVM'in kullanılmayan belleği temizlerken uygulamayı kısa süre durdurması; sık olursa gecikmeyi ciddi bozar."
         }
       ],
       "tags": [
-        "dağıtık sistemler",
-        "gözlemlenebilirlik",
+        "distributed systems",
+        "observability",
         "Kafka",
-        "performans"
+        "performance"
       ],
       "difficulty": "ileri",
       "read_minutes": 23,
@@ -66,7 +66,7 @@
       "source_key": "meta",
       "source_name": "Meta Engineering",
       "title": "Modernizing the Meta Ads Service With an Open-Source Kernel Scheduler",
-      "title_tr": "Çekirdek zamanlayıcısını değiştirerek p99 gecikmesinde %28 kazanç",
+      "title_tr": "Çekirdek zamanlayıcısını değiştirerek p99 latency’de %28 kazanç",
       "url": "https://engineering.fb.com/2026/07/13/ml-applications/modernizing-the-meta-ads-service-with-an-open-source-kernel-scheduler/",
       "published": "2026-07-13",
       "summary": "Meta'nın reklam sunum filosu saniyede ortalama **5 milyondan fazla** istek işliyor — günde 400 milyarın üzerinde. Bu ölçekte birkaç milisaniyelik gecikme bozulması ciddi iş etkisi yaratıyor.\n\nProblem bir Linux çekirdek yükseltmesiyle çıkmış: v6.6'da gelen **EEVDF** zamanlayıcısı, reklam sunumunda gecikme regresyonuna ve sıralanan reklam sayısında düşüşe yol açmış. Çözüm için **sched_ext**'e gitmişler — çekirdek v6.12'de resmen giren, BPF tabanlı genişletilebilir zamanlayıcı çerçevesi. Yani zamanlama politikasını bir BPF programı olarak yazıp iş yüküne özel hâle getiriyorsun; çekirdek olaylar üzerinden bu programa çağrı yapıyor (thread uyanması, kuyruğa alma, dağıtım).\n\nSonuçlar somut: reklam getirme aşamasında **p99 gecikmede %28 azalma**, **3,28 megawatt** güç tasarrufu ve sıralanan reklam sayısında %1,1 artış.",
@@ -76,16 +76,16 @@
         "Güç tasarrufunun metrik olarak raporlanması, ölçekte performansın aynı zamanda bir enerji meselesi olduğunu gösteriyor."
       ],
       "why_it_matters": "",
-      "for_you": "Çekirdek zamanlayıcısı yazmayacaksın, ama iki fikri al. Birincisi **p99 kavramı**: ortalama gecikme yalan söyler, kullanıcı deneyimini belirleyen kuyruk gecikmesidir. Kendi API'nde ortalama değil p95/p99 ölç — Spring Boot Actuator + Micrometer ile birkaç satırda çıkar. İkincisi: bir bağımlılığı yükselttiğinde performansın **iyileşeceğini varsayma**. Meta gibi ölç. Küçük ölçekte bile bir kütüphane sürümü yükseltmesinden sonra temel bir benchmark koşturmak, seni ileride günlerce hata avından kurtarır.",
+      "for_you": "Çekirdek zamanlayıcısı yazmayacaksın, ama iki fikri al. Birincisi **p99 kavramı**: ortalama gecikme yalan söyler, kullanıcı deneyimini belirleyen consumer lag’dır. Kendi API'nde ortalama değil p95/p99 ölç — Spring Boot Actuator + Micrometer ile birkaç satırda çıkar. İkincisi: bir bağımlılığı yükselttiğinde performansın **iyileşeceğini varsayma**. Meta gibi ölç. Küçük ölçekte bile bir kütüphane sürümü yükseltmesinden sonra temel bir benchmark koşturmak, seni ileride günlerce hata avından kurtarır.",
       "terms": [
         {
           "en": "p99 latency",
-          "tr": "p99 gecikmesi",
+          "tr": "p99 latency",
           "definition": "İsteklerin %99'unun altında kaldığı süre; en yavaş %1'i temsil eder ve kullanıcı deneyimini ortalamadan çok daha iyi anlatır."
         },
         {
           "en": "scheduler",
-          "tr": "zamanlayıcı",
+          "tr": "scheduler",
           "definition": "İşletim sisteminde hangi işin hangi CPU'da ne zaman çalışacağına karar veren çekirdek bileşeni."
         },
         {
@@ -96,9 +96,9 @@
       ],
       "tags": [
         "Linux",
-        "performans",
-        "gecikme",
-        "altyapı"
+        "performance",
+        "latency",
+        "infrastructure"
       ],
       "difficulty": "ileri",
       "read_minutes": 5,
@@ -119,23 +119,23 @@
         "Tek bir ana bakmak yerine tüm oturumu değerlendirmek, her karara çok daha fazla sinyal katıyor."
       ],
       "why_it_matters": "",
-      "for_you": "Buradaki düşünce biçimi genel: **sahtesi yapılması zor olan sinyali seç.** Kendi sistemlerinde de aynı soruyu sor — KlioAI'da abonelik doğrulamasını istemciden gelen bir bayrağa mı bakarak yapıyorsun? O taklit edilebilir. Sunucu tarafında mağaza makbuzunu doğrulamak taklit edilemez. Genel kural: güvenlik kararını, saldırganın kontrol ettiği bir veriye dayandırma. Bir de gizlilik tarafına dikkat et — davranışsal sinyal toplamak güçlü bir araç ama toplanan verinin kapsamı ve saklama süresi açıkça tanımlanmalı.",
+      "for_you": "Buradaki düşünce biçimi genel: **sahtesi yapılması zor olan sinyali seç.** Kendi sistemlerinde de aynı soruyu sor: abonelik doğrulamasını istemciden gelen bir bayrağa bakarak mı yapıyorsun? O taklit edilebilir. Sunucu tarafında mağaza makbuzunu (receipt) doğrulamak taklit edilemez. Genel kural: güvenlik kararını, saldırganın kontrol ettiği bir veriye dayandırma. Bir de privacy tarafına dikkat et: davranışsal sinyal toplamak güçlü bir araç ama toplanan verinin kapsamı ve saklama süresi açıkça tanımlanmalı.",
       "terms": [
         {
           "en": "behavioral signal",
-          "tr": "davranışsal sinyal",
+          "tr": "behavioral signal",
           "definition": "Kullanıcının etkileşim biçiminden (hareket, zamanlama, sıra) çıkarılan, kimlik doğrulamaya yardımcı veri."
         },
         {
           "en": "bot mitigation",
-          "tr": "bot azaltma",
+          "tr": "bot mitigation",
           "definition": "Otomatik istemcileri tespit edip engelleme ya da sürtünme ekleme pratiği."
         }
       ],
       "tags": [
-        "güvenlik",
+        "security",
         "bot tespiti",
-        "sinyal tasarımı"
+        "signal design"
       ],
       "difficulty": "orta",
       "read_minutes": 6,
@@ -159,24 +159,24 @@
         "Göç bir \"ya hep ya hiç\" kararı değil — en pahalı ve en az erişilen dilimle başlamak en yüksek getiriyi verir."
       ],
       "why_it_matters": "",
-      "for_you": "Depolama katmanlama (storage tiering) fikrini küçük projelerinde de kullan. Tradebot'taki 1 TB geçmiş veri muhtemelen tek bir yerde duruyor; ama son 3 ayın verisiyle 2 yıl önceki veriye erişim sıklığın aynı değil. Eski veriyi sıkıştırılmış Parquet olarak ucuz depolamaya, sıcak veriyi hızlı diskte tutmak hem maliyeti hem sorgu süresini düşürür. Aynı mantık PostgreSQL'de tablo bölümleme (partitioning) ile de kurulabilir — eski bölümleri ayrı tablespace'e alabilirsin.",
+      "for_you": "Storage tiering fikrini küçük projelerde de kullan. Geçmiş verin muhtemelen tek bir yerde duruyor ama son 3 ayın verisine erişim sıklığın ile 2 yıl önceki veriye erişim sıklığın aynı değil. Eski veriyi sıkıştırılmış Parquet olarak ucuz depolamada, sıcak veriyi hızlı diskte tutmak hem maliyeti hem sorgu süresini düşürür. Aynı mantık PostgreSQL’de table partitioning ile de kurulabilir: eski partition’ları ayrı bir tablespace’e alabilirsin.",
       "terms": [
         {
           "en": "storage tiering",
-          "tr": "depolama katmanlama",
+          "tr": "storage tiering",
           "definition": "Veriyi erişim sıklığına göre farklı maliyet/hız seviyelerindeki depolama katmanlarına yerleştirme."
         },
         {
           "en": "cold storage",
-          "tr": "soğuk depolama",
+          "tr": "cold storage",
           "definition": "Nadiren erişilen veri için kullanılan, çok ucuz ama erişimi yavaş depolama sınıfı."
         }
       ],
       "tags": [
-        "depolama",
-        "maliyet",
-        "bulut",
-        "mimari"
+        "storage",
+        "cost",
+        "cloud",
+        "architecture"
       ],
       "difficulty": "başlangıç",
       "read_minutes": 7,

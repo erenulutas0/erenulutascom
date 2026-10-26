@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>22 Eylül 2026 — Eren&#39;in Mühendislik Gazetesi</title>
-<meta name="description" content="İki yazı da aynı tema: tekrar eden işi bir kez yap ve sakla. Uber, modelin eğitimde gördüğü özelliklerle üretimde gördüklerinin farklı çıktığı sinsi hatayı, özellikleri çıkarım anında loglayarak çözüyor. OpenAI ise prompt önbelleği için pratik bir kullanım kılavuzu yayımlamış.">
+<meta name="description" content="İki yazı da aynı tema: tekrar eden işi bir kez yap ve sakla. Uber, modelin eğitimde gördüğü özelliklerle üretimde gördüklerinin farklı çıktığı sinsi hatayı, özellikleri inference anında loglayarak çözüyor. OpenAI ise prompt cache’i için pratik bir kullanım kılavuzu yayımlamış.">
 <meta name="author" content="Eren Ulutaş">
 <meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#131310" media="(prefers-color-scheme: dark)">
 <meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
 <meta property="og:title" content="22 Eylül 2026 — Eren&#39;in Mühendislik Gazetesi">
-<meta property="og:description" content="İki yazı da aynı tema: tekrar eden işi bir kez yap ve sakla. Uber, modelin eğitimde gördüğü özelliklerle üretimde gördüklerinin farklı çıktığı sinsi hatayı, özellikleri çıkarım anında loglayarak çözüyor. OpenAI ise prompt önbelleği için pratik bir kullanım kılavuzu yayımlamış.">
+<meta property="og:description" content="İki yazı da aynı tema: tekrar eden işi bir kez yap ve sakla. Uber, modelin eğitimde gördüğü özelliklerle üretimde gördüklerinin farklı çıktığı sinsi hatayı, özellikleri inference anında loglayarak çözüyor. OpenAI ise prompt cache’i için pratik bir kullanım kılavuzu yayımlamış.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:url" content="https://erenulutas.com/sayi/2026-09-22/">
@@ -69,7 +69,7 @@
 <a href="/sayi/2026-09-21/" rel="prev"><span aria-hidden="true">←</span> 21 Eylül 2026</a><a href="/sayi/2026-09-24/" rel="next">24 Eylül 2026 <span aria-hidden="true">→</span></a>
     </nav>
   </div>
-<p class="lede">İki yazı da aynı tema: tekrar eden işi bir kez yap ve sakla. Uber, modelin eğitimde gördüğü özelliklerle üretimde gördüklerinin farklı çıktığı sinsi hatayı, özellikleri çıkarım anında loglayarak çözüyor. OpenAI ise prompt önbelleği için pratik bir kullanım kılavuzu yayımlamış.</p></header>
+<p class="lede">İki yazı da aynı tema: tekrar eden işi bir kez yap ve sakla. Uber, modelin eğitimde gördüğü özelliklerle üretimde gördüklerinin farklı çıktığı sinsi hatayı, özellikleri inference anında loglayarak çözüyor. OpenAI ise prompt cache’i için pratik bir kullanım kılavuzu yayımlamış.</p></header>
 
 
   <div class="layout">
@@ -88,7 +88,7 @@
   </h2>
   <p class="original-title">Taming the ML Firehose: Scaling Feature Consistency</p>
 
-  <div class="prose"><p>Uber&#x27;in hedefi net: <strong>çıkarım anında kullanılan özellikler, bir sonraki model yinelemesini eğitirken kullanılan özelliklerle aynı olsun.</strong> Tek doğruluk kaynağı, daha güçlü model performansı ve sorunların daha hızlı tespiti demek.</p><p>Problem sinsi: çevrimiçi ve çevrimdışı hatlar özellikleri farklı hesaplayıp tüketebiliyor. Model eğitimde sabit bir sözlükten öğreniyor (örneğin dil kodları <code>en-US</code>, <code>fr-FR</code>), ama servis anında aynı özellik <code>en</code> olarak gelebiliyor. Çevrimdışı hat da biçim farkı üretebiliyor (<code>jp_JA</code> ile <code>jp-JA</code>). Sonuç: model, servis sırasında hiç görünmeyen kategorilerden öğrenmiş oluyor ve güçlü sinyaller <strong>sessizce</strong> bozuluyor. Dağılımlar kayıyor, tahmin kararlılığı düşüyor ve görünür hiçbir hata yok. Ek sorunlar: birbirine bağımlı ETL işlerinden oluşan kırılgan veri hatları (eksik bölümler, sessizce bozulan eğitim verisi), çok günlük tazelik gecikmeleri ve geliştiricilerin sorunları anlamak için haftalar harcaması.</p><p>Çözüm <strong>özellik loglama</strong>: çıkarım anında modele giden gerçek özellikleri kaydedip eğitimde onları kullanmak. Ölçek ise başlı başına sorun. Transformer tabanlı öneri sistemleri saniyede 8 milyon sorguya ulaşıyor; her tahminin özelliklerini loglamak günde yüz milyarlarca kayıt, ayda 5 trilyon satır ve günde yaklaşık 1,7 PB demek. Restoran öneri modeli için tüm özellikleri yollamak saniyede yaklaşık 9,3 GiB ve mevcut Kafka kümelerinin çok üstünde.</p><p>Çevrimiçi mimarideki çözümler: <strong>özellik izin listesi</strong> (modelin kullanmadığı özellikleri loglamamak) yük boyutunu 4-5 kat düşürüyor; <strong>özellik adı takma adları</strong>: uzun adlar (<code>store_unique_identifier_operational_meal_period_context_key</code>) serileştirmede kompakt tamsayı kimliklere çevriliyor; <strong>gösterim filtreleme</strong>: sıralamaya giren adayların yalnızca yaklaşık %40&#x27;ı filtre sonrası kalıyor ve onların da yalnızca %5&#x27;i gerçekten gösterime dönüşüyor, o yüzden Flink&#x27;te tahminler istemci olaylarıyla zaman pencereli olarak birleştirilip yalnızca gerçekten gösterilenler tutuluyor.</p><p>Flink işini ölçeklemek de öğreticiydi. Paralelliği körü körüne artırmak işe yaramadı: her operatör ayrı profillendi ve birleştirme öncesi operatörlere 512, birleştirmeye 768 paralellik (Uber&#x27;in en büyük Flink dağıtımı) verildi. Varsayılan RocksDB kontrol noktası saatte 12 TB&#x27;ı aşarak bulut yazmalarını başarısız kıldı; çözüm özel durum yönetimi: yalnızca gerekli metadata&#x27;yı tutmak, birleştirmeden hemen sonra kayıtları atmak ve tekrarları silmek. Nesne yeniden kullanımı, tipli yükler, yapılandırma önbelleği ve daha az serileştirme gibi küçük iyileştirmeler tepe tüketici gecikmesini yaklaşık %70 düşürdü.</p></div>
+  <div class="prose"><p>Uber&#x27;in hedefi net: <strong>inference anında kullanılan özellikler, bir sonraki model yinelemesini eğitirken kullanılan özelliklerle aynı olsun.</strong> Tek doğruluk kaynağı, daha güçlü model performansı ve sorunların daha hızlı tespiti demek.</p><p>Problem sinsi: çevrimiçi ve çevrimdışı hatlar özellikleri farklı hesaplayıp tüketebiliyor. Model eğitimde sabit bir sözlükten öğreniyor (örneğin dil kodları <code>en-US</code>, <code>fr-FR</code>), ama servis anında aynı özellik <code>en</code> olarak gelebiliyor. Çevrimdışı hat da biçim farkı üretebiliyor (<code>jp_JA</code> ile <code>jp-JA</code>). Sonuç: model, servis sırasında hiç görünmeyen kategorilerden öğrenmiş oluyor ve güçlü sinyaller <strong>sessizce</strong> bozuluyor. Dağılımlar kayıyor, tahmin kararlılığı düşüyor ve görünür hiçbir hata yok. Ek sorunlar: birbirine bağımlı ETL işlerinden oluşan kırılgan veri hatları (eksik bölümler, sessizce bozulan eğitim verisi), çok günlük tazelik gecikmeleri ve geliştiricilerin sorunları anlamak için haftalar harcaması.</p><p>Çözüm <strong>özellik loglama</strong>: inference anında modele giden gerçek özellikleri kaydedip eğitimde onları kullanmak. Ölçek ise başlı başına sorun. Transformer tabanlı öneri sistemleri saniyede 8 milyon sorguya ulaşıyor; her tahminin özelliklerini loglamak günde yüz milyarlarca kayıt, ayda 5 trilyon satır ve günde yaklaşık 1,7 PB demek. Restoran öneri modeli için tüm özellikleri yollamak saniyede yaklaşık 9,3 GiB ve mevcut Kafka kümelerinin çok üstünde.</p><p>Çevrimiçi mimarideki çözümler: <strong>özellik allowlist</strong> (modelin kullanmadığı özellikleri loglamamak) yük boyutunu 4-5 kat düşürüyor; <strong>özellik adı takma adları</strong>: uzun adlar (<code>store_unique_identifier_operational_meal_period_context_key</code>) serileştirmede kompakt tamsayı kimliklere çevriliyor; <strong>gösterim filtreleme</strong>: sıralamaya giren adayların yalnızca yaklaşık %40&#x27;ı filtre sonrası kalıyor ve onların da yalnızca %5&#x27;i gerçekten gösterime dönüşüyor, o yüzden Flink&#x27;te tahminler istemci olaylarıyla zaman pencereli olarak birleştirilip yalnızca gerçekten gösterilenler tutuluyor.</p><p>Flink işini ölçeklemek de öğreticiydi. Paralelliği körü körüne artırmak işe yaramadı: her operatör ayrı profillendi ve birleştirme öncesi operatörlere 512, birleştirmeye 768 paralellik (Uber&#x27;in en büyük Flink dağıtımı) verildi. Varsayılan RocksDB kontrol noktası saatte 12 TB&#x27;ı aşarak bulut yazmalarını başarısız kıldı; çözüm özel durum yönetimi: yalnızca gerekli metadata&#x27;yı tutmak, birleştirmeden hemen sonra kayıtları atmak ve tekrarları silmek. Nesne yeniden kullanımı, tipli yükler, yapılandırma cache’i ve daha az serileştirme gibi küçük iyileştirmeler tepe consumer gecikmesini yaklaşık %70 düşürdü.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
@@ -102,8 +102,8 @@
       <p>ML sistemlerinin üretimde en sık kırıldığı yer model değil, modelin besleme hattıdır. Hata genelde ‘kod çalışıyor ama değerler farklı’ biçiminde gelir ve aylarca fark edilmez. Çözüm, eğitim verisini servisten elde etmek: iki ayrı hesaplamayı birbirine denk tutmaya çalışmak yerine tek hesaplamayı iki yerde kullanmak.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Bu, Tradebot’un en kritik sorusu: <strong>backtest’te kullandığın özellikler canlıda hesapladıklarınla birebir aynı mı?</strong> Backtest için toplu (Pandas) bir kod, canlı için ayrı bir akış kodu yazdıysan, iki kodun farklı yuvarlama, farklı zaman penceresi ya da farklı eksik veri davranışı vardır. Paper/shadow execution’ın değeri de burada: canlıda karar anında hesaplanan özellikleri <strong>logla</strong> ve sonraki backtest’i o loglarla yap. Aynısı DBH’daki gibi kategori kodlayan her LLM hattında geçerli: eğitimde gördüğün <code>&#x27;Fuel&#x27;</code> ile üretimde gelen <code>&#x27;fuel &#x27;</code> farklı kategoridir; girdileri normalize edip şemayla doğrula.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Bu, ML sistemlerinin en kritik sorusu: <strong>backtest ya da eğitimde kullandığın feature’lar canlıda hesapladıklarınla birebir aynı mı?</strong> Eğitim için toplu (Pandas) bir kod, canlı için ayrı bir stream kodu yazdıysan, iki kodun farklı yuvarlama, farklı zaman penceresi ya da farklı eksik veri davranışı vardır. Paper/shadow execution’ın değeri de burada: canlıda karar anında hesaplanan feature’ları <strong>logla</strong> ve sonraki eğitimi o log’larla yap. Aynısı kategori kodlayan her LLM hattında geçerli: eğitimde gördüğün <code>&#x27;Fuel&#x27;</code> ile production’da gelen <code>&#x27;fuel &#x27;</code> farklı kategoridir; girdileri normalize edip şemayla doğrula.</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">training-serving skew</span> <span class="term-tr">eğitim-servis uyumsuzluğu</span></dt>
+      <dt><span class="term-en">training-serving skew</span></dt>
       <dd>Modelin eğitimde gördüğü özelliklerle üretimde gördüklerinin farklı hesaplanması; sessiz kalite kaybına yol açar.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">feature store</span> <span class="term-tr">özellik deposu</span></dt>
+      <dt><span class="term-en">feature store</span></dt>
       <dd>Model özelliklerinin tutarlı biçimde saklandığı ve hem eğitime hem servise sunulduğu merkezî katman.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">allow list</span> <span class="term-tr">izin listesi</span></dt>
+      <dt><span class="term-en">allow list</span></dt>
       <dd>Yalnızca açıkça listelenen öğelerin kabul edildiği filtreleme yaklaşımı.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">windowed join</span> <span class="term-tr">pencereli birleştirme</span></dt>
+      <dt><span class="term-en">windowed join</span></dt>
       <dd>Akış verilerini, belirli bir zaman penceresi içinde gelen karşılıklarıyla eşleştirme.</dd>
     </div>
   </dl>
@@ -132,8 +132,8 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/ml-altyapisi/">#ML altyapısı</a></li>
-  <li><a href="/etiket/veri-muhendisligi/">#veri mühendisliği</a></li>
+  <li><a href="/etiket/ml-infrastructure/">#ML infrastructure</a></li>
+  <li><a href="/etiket/data-engineering/">#data engineering</a></li>
   <li><a href="/etiket/flink/">#Flink</a></li>
   <li><a href="/etiket/training-serving-skew/">#training-serving skew</a></li>
 </ul>
@@ -157,21 +157,21 @@
 </div>
 
   <h3 class="brief-title">
-    <a href="https://openai.com/index/better-prompt-caching-for-gpt-6" rel="noopener nofollow" target="_blank">Önbelleği bozmadan akıl yürütme çabasını değiştirmek: GPT-6 için prompt cache kılavuzu</a>
+    <a href="https://openai.com/index/better-prompt-caching-for-gpt-6" rel="noopener nofollow" target="_blank">Cache’i bozmadan reasoning effort’u değiştirmek: GPT-6 için prompt cache kılavuzu</a>
   </h3>
   <p class="original-title">Better prompt caching for GPT-6</p>
-  <div class="prose prose-sm"><p>Kalıcı agent&#x27;lar saatlerce çalışırken art arda API istekleri atıyor ve her istek öncekilerin talimatını, araç tanımlarını ve bağlamını taşıyor. OpenAI bu ortak bağlamı önbelleğe alıp hesabı yeniden kullanıyor: yanıt süresi düşüyor, önbellekten gelen girdi token&#x27;larında <strong>%90&#x27;a kadar indirim</strong> var. GPT-6 ailesiyle birlikte önbellek sistemi iyileştirildi: uygun ortak önekler <strong>30 dakikalık pencerede</strong> yeniden kullanıldığında indirim veriliyor.</p><p>Yeni araçlar pratik: bir <strong>kontrol paneli</strong> önbellekten gelen girdi oranını zaman içinde gösteriyor, bir <strong>teşhis aracı</strong> beklenmedik bir kaçırmada isteği son yanıtla karşılaştırıp model, araç, ayar ya da girdideki hangi değişikliğin yeniden kullanımı engellediğini söylüyor. Ayrıca açık <strong>önbellek kesme noktaları</strong>, önbelleğe alınacak öneki sen seçiyorsun.</p><p>İlginç kısım önbelleği korumak için verilen kurallar: (1) akıl yürütme çabasını yanıtlar arasında <strong><code>configuration_update</code> ekleyerek</strong> değiştir, istek düzeyindeki ayarı değil; (2) araç tanımlarını ve sıralarını sabit tut, araç kaldırmak yerine <code>allowed_tools</code> ile yalnızca ilgilileri çağrılabilir yap ya da araç gerekmiyorsa <code>tool_choice: none</code> kullan; (3) yeni talimatları bağlamın sonuna yeni geliştirici mesajı olarak ekle; (4) bilinen bağlamı açılışta <strong>önceden ısıt</strong> (prewarm), böylece işlem kullanıcının bekleme süresinin dışına çıkar.</p></div>
+  <div class="prose prose-sm"><p>Kalıcı agent&#x27;lar saatlerce çalışırken art arda API istekleri atıyor ve her istek öncekilerin talimatını, araç tanımlarını ve bağlamını taşıyor. OpenAI bu ortak bağlamı cache’e alıp hesabı yeniden kullanıyor: yanıt süresi düşüyor, cache’ten gelen girdi token&#x27;larında <strong>%90&#x27;a kadar indirim</strong> var. GPT-6 ailesiyle birlikte cache sistemi iyileştirildi: uygun ortak önekler <strong>30 dakikalık pencerede</strong> yeniden kullanıldığında indirim veriliyor.</p><p>Yeni araçlar pratik: bir <strong>kontrol paneli</strong> cache’ten gelen girdi oranını zaman içinde gösteriyor, bir <strong>teşhis aracı</strong> beklenmedik bir kaçırmada isteği son yanıtla karşılaştırıp model, araç, ayar ya da girdideki hangi değişikliğin yeniden kullanımı engellediğini söylüyor. Ayrıca açık <strong>cache kesme noktaları</strong>, cache’e alınacak öneki sen seçiyorsun.</p><p>İlginç kısım cache’i korumak için verilen kurallar: (1) reasoning effort’u yanıtlar arasında <strong><code>configuration_update</code> ekleyerek</strong> değiştir, istek düzeyindeki ayarı değil; (2) araç tanımlarını ve sıralarını sabit tut, araç kaldırmak yerine <code>allowed_tools</code> ile yalnızca ilgilileri çağrılabilir yap ya da araç gerekmiyorsa <code>tool_choice: none</code> kullan; (3) yeni talimatları bağlamın sonuna yeni geliştirici mesajı olarak ekle; (4) bilinen bağlamı açılışta <strong>önceden ısıt</strong> (prewarm), böylece işlem kullanıcının bekleme süresinin dışına çıkar.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
     <ol>
-<li><span>Önbellek bir önek eşleşmesidir: önekte olan her değişiklik sonrasındaki her şeyi geçersiz kılar.</span></li><li><span>Sabit olması gerekenler: araç tanımları, şemalar, sıralama. Değişken olanlar sona eklenir.</span></li><li><span>Değişimi ‘kaldır’ yerine ‘gizle’ ile yap (<code>allowed_tools</code>): tanım yerinde kalır.</span></li><li><span>Önbellek kaçırmalarını görünür kılmak (panel, teşhis) optimizasyonun ön koşulu.</span></li>    </ol>
+<li><span>Cache bir önek eşleşmesidir: önekte olan her değişiklik sonrasındaki her şeyi geçersiz kılar.</span></li><li><span>Sabit olması gerekenler: araç tanımları, şemalar, sıralama. Değişken olanlar sona eklenir.</span></li><li><span>Değişimi ‘kaldır’ yerine ‘gizle’ ile yap (<code>allowed_tools</code>): tanım yerinde kalır.</span></li><li><span>Cache kaçırmalarını görünür kılmak (panel, teşhis) optimizasyonun ön koşulu.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Bu, Anthropic ve OpenAI için ortak bir kural olduğundan öğrenmeye değer: sistem promptunu ve araç listesini <strong>sabit tut</strong>, tarih ya da kullanıcı adı gibi değişkenleri promptun başına koyma, sona koy. Bu gazetenin kendi <code>summarize.py</code> dosyasında sistem promptu zaten sabit ve önbelleğe alınabilir yapıda. KlioAI’da kullanıcı adını sistem promptunun içine enjekte ediyorsan, her kullanıcı için ayrı bir önbellek girdisi yaratıyorsun; adı kullanıcı mesajına taşırsan ortak önek tüm kullanıcılar için paylaşılır. API cevabındaki <code>cache_read_input_tokens</code> gibi alanlara bak: sıfırsa önbelleğin çalışmıyor.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Bu, Anthropic ve OpenAI için ortak bir kural olduğundan öğrenmeye değer: system prompt’u ve tool listesini <strong>sabit tut</strong>, tarih ya da kullanıcı adı gibi değişkenleri prompt’un başına koyma, sona koy. Kullanıcı adını system prompt’un içine enjekte ediyorsan, her kullanıcı için ayrı bir cache girdisi yaratıyorsun; adı kullanıcı mesajına taşırsan ortak prefix tüm kullanıcılar için paylaşılır. API cevabındaki <code>cache_read_input_tokens</code> gibi alanlara bak: sıfırsa cache’in çalışmıyor.</p>
     </div>
   </div>
 
@@ -179,16 +179,16 @@
     <summary class="label">Sözlük · 3 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">prompt caching</span> <span class="term-tr">prompt önbellekleme</span></dt>
-      <dd>Tekrar eden prompt önekini yeniden işlemek yerine önbellekten okuyarak maliyet ve gecikmeyi düşürme.</dd>
+      <dt><span class="term-en">prompt caching</span></dt>
+      <dd>Tekrar eden prompt önekini yeniden işlemek yerine cache’ten okuyarak maliyet ve gecikmeyi düşürme.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">cache breakpoint</span> <span class="term-tr">önbellek kesme noktası</span></dt>
-      <dd>Promptun hangi noktaya kadarının önbelleğe alınacağını belirten işaret.</dd>
+      <dt><span class="term-en">cache breakpoint</span></dt>
+      <dd>Promptun hangi noktaya kadarının cache’e alınacağını belirten işaret.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">prewarming</span> <span class="term-tr">önceden ısıtma</span></dt>
-      <dd>Bilinen bağlamı kullanıcı isteği gelmeden önce işleyip önbelleğe koyma.</dd>
+      <dt><span class="term-en">prewarming</span></dt>
+      <dd>Bilinen bağlamı kullanıcı isteği gelmeden önce işleyip cache’e koyma.</dd>
     </div>
   </dl>
 
@@ -197,7 +197,7 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/prompt-caching/">#prompt caching</a></li>
-  <li><a href="/etiket/maliyet/">#maliyet</a></li>
+  <li><a href="/etiket/cost/">#cost</a></li>
   <li><a href="/etiket/agent/">#agent</a></li>
   <li><a href="/etiket/llm/">#LLM</a></li>
 </ul>
@@ -223,7 +223,7 @@
       </li>
       <li>
         <a href="#b6b1e4118cdb">
-          <span class="toc-title">Önbelleği bozmadan akıl yürütme çabasını değiştirmek: GPT-6 için prompt cache kılavuzu</span>
+          <span class="toc-title">Cache’i bozmadan reasoning effort’u değiştirmek: GPT-6 için prompt cache kılavuzu</span>
           <span class="toc-meta">OpenAI Research · 2 dk</span>
         </a>
       </li>
@@ -266,7 +266,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

@@ -84,16 +84,16 @@
 </div>
 
   <h2 class="cover-title">
-    <a href="https://research.google/blog/advancing-amie-towards-expert-level-audio-visual-clinical-consultations/" rel="noopener nofollow" target="_blank">Konuşma hızında düşünmek: AMIE&#39;nin eşzamansız çoklu ajan mimarisi</a>
+    <a href="https://research.google/blog/advancing-amie-towards-expert-level-audio-visual-clinical-consultations/" rel="noopener nofollow" target="_blank">Konuşma hızında düşünmek: AMIE&#39;nin eşzamansız multi-agent architecture</a>
   </h2>
   <p class="original-title">Advancing AMIE towards expert-level audio-visual clinical consultations</p>
 
-  <div class="prose"><p>Google Research, tıbbi akıl yürütme ve diyalog için geliştirdiği araştırma sistemi AMIE&#x27;nin <strong>gerçek zamanlı video görüşmesi</strong> yapan sürümünü (AMIE Video) tanıttı. Gemini ve Project Astra üzerine kurulu sistem, simüle edilmiş görüşmelerle yapılan rastgele kontrollü bir çalışmada uzman düzeyinde performans gösterdi.</p><p>Motivasyon basit: metin tabanlı arayüz, muayenenin görsel ve işitsel boyutunu (yürüyüş, rahatsızlık işaretleri, nefes, muayene manevraları) çöpe atıyor. Hasta karmaşık fiziksel belirtileri yazıya dökmek zorunda kalıyor.</p><p>Mühendislik problemi ise iki çelişen talep: sistem hastaya <strong>doğal konuşma hızında</strong> cevap verirken aynı anda <strong>dikkatli klinik akıl yürütme</strong> yapmalı. Çözüm, işi üç özelleşmiş ajan arasında bölen <strong>eşzamansız çoklu ajan mimarisi</strong>; ajanlar sürekli ve paralel çalışıyor. Yani konuşan katman, düşünen katmanı beklemiyor.</p></div>
+  <div class="prose"><p>Google Research, tıbbi reasoning ve diyalog için geliştirdiği araştırma sistemi AMIE&#x27;nin <strong>gerçek zamanlı video görüşmesi</strong> yapan sürümünü (AMIE Video) tanıttı. Gemini ve Project Astra üzerine kurulu sistem, simüle edilmiş görüşmelerle yapılan rastgele kontrollü bir çalışmada uzman düzeyinde performans gösterdi.</p><p>Motivasyon basit: metin tabanlı arayüz, muayenenin görsel ve işitsel boyutunu (yürüyüş, rahatsızlık işaretleri, nefes, muayene manevraları) çöpe atıyor. Hasta karmaşık fiziksel belirtileri yazıya dökmek zorunda kalıyor.</p><p>Mühendislik problemi ise iki çelişen talep: sistem hastaya <strong>doğal konuşma hızında</strong> cevap verirken aynı anda <strong>dikkatli klinik reasoning</strong> yapmalı. Çözüm, işi üç özelleşmiş agent arasında bölen <strong>eşzamansız multi-agent architecture</strong>; agent’lar sürekli ve paralel çalışıyor. Yani konuşan katman, düşünen katmanı beklemiyor.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Hızlı yanıt ile derin akıl yürütme aynı ajanın işi olmaktan çıkarılıp ayrı ajanlara bölünüyor.</span></li><li><span>Eşzamansız çalışma, konuşmanın akışını yavaş düşünce adımlarından yalıtıyor.</span></li><li><span>Değerlendirme, rastgele atanmış simüle görüşmelerle yapılmış: kontrollü bir deney tasarımı.</span></li>    </ol>
+<li><span>Hızlı yanıt ile derin reasoning aynı agent’ın işi olmaktan çıkarılıp ayrı agent’lara bölünüyor.</span></li><li><span>Eşzamansız çalışma, konuşmanın akışını yavaş düşünce adımlarından yalıtıyor.</span></li><li><span>Değerlendirme, rastgele atanmış simüle görüşmelerle yapılmış: kontrollü bir deney tasarımı.</span></li>    </ol>
   </div>
 
   <div class="callouts">
@@ -102,8 +102,8 @@
       <p>Bu, 3 Ağustos&#x27;taki OpenAI ses sisteminin aynı dersi: gecikmeye duyarlı yolu ağır işten ayır. Gerçek zamanlı AI ürünlerinde mimari karar çoğu kez model seçiminden önce gelir.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>KlioAI&#x27;daki konuşma pratiği özelliğinde “anlık geri bildirim” ile “derin değerlendirme” farklı işler: ilkini hızlı ve kısa bir yanıt olarak, ikincisini oturum bittikten sonra arka planda üretmek tam bu desen. İkisini aynı çağrıya sıkıştırırsan kullanıcı ya bekler ya da yüzeysel cevap alır.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Bir konuşma uygulamasında ‘anlık geri bildirim’ ile ‘derin değerlendirme’ farklı işler: ilkini hızlı ve kısa bir cevap olarak, ikincisini oturum bittikten sonra arka planda üretmek tam bu desen. İkisini aynı çağrıya sıkıştırırsan kullanıcı ya bekler ya da yüzeysel cevap alır.</p>
     </div>
   </div>
 
@@ -111,11 +111,11 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">multi-agent architecture</span> <span class="term-tr">çoklu ajan mimarisi</span></dt>
-      <dd>İşi birden fazla özelleşmiş ajan arasında bölüştüren sistem tasarımı.</dd>
+      <dt><span class="term-en">multi-agent architecture</span></dt>
+      <dd>İşi birden fazla özelleşmiş agent arasında bölüştüren sistem tasarımı.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">randomized controlled study</span> <span class="term-tr">rastgele kontrollü çalışma</span></dt>
+      <dt><span class="term-en">randomized controlled study</span></dt>
       <dd>Katılımcıların koşullara rastgele atandığı, nedenselliği ölçebilen deney türü.</dd>
     </div>
   </dl>
@@ -125,9 +125,9 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/agent/">#agent</a></li>
-  <li><a href="/etiket/cok-kipli/">#çok kipli</a></li>
-  <li><a href="/etiket/arastirma/">#araştırma</a></li>
-  <li><a href="/etiket/gercek-zamanli-sistemler/">#gerçek zamanlı sistemler</a></li>
+  <li><a href="/etiket/multimodal/">#multimodal</a></li>
+  <li><a href="/etiket/research/">#research</a></li>
+  <li><a href="/etiket/real-time-systems/">#real-time systems</a></li>
 </ul>
 
   <a class="readmore" href="https://research.google/blog/advancing-amie-towards-expert-level-audio-visual-clinical-consultations/" rel="noopener nofollow" target="_blank">
@@ -147,7 +147,7 @@
     <ol class="toc" id="toc">
       <li>
         <a href="#605e3ba5201c">
-          <span class="toc-title">Konuşma hızında düşünmek: AMIE&#39;nin eşzamansız çoklu ajan mimarisi</span>
+          <span class="toc-title">Konuşma hızında düşünmek: AMIE&#39;nin eşzamansız multi-agent architecture</span>
           <span class="toc-meta">Google Research · 7 dk</span>
         </a>
       </li>
@@ -190,7 +190,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

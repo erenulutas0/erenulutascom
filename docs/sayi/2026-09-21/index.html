@@ -88,22 +88,22 @@
   </h2>
   <p class="original-title">Open-Sourcing Rebalancer: A Generic, High-Performance Library for Solving Assignment Problems</p>
 
-  <div class="prose"><p>Elinde bir nesne kümesi ve bir kutu (bin) kümesi var; nesneleri, belirli kısıtları sağlayarak ve bazı hedefleri optimize ederek kutulara nasıl atarsın? Bu soru Meta&#x27;nın altyapı yığınının her katmanında çıkıyor: donanım yerleşimi (rafları elektrik arıza alanlarına yaymak), servis yerleşimi (sunucuları servislere atamak), görev yerleşimi (görevleri sunuculara atamak) ve trafik yönlendirme (milyarlarca kullanıcının trafiğini coğrafi olarak dağılmış veri merkezlerine yollamak).</p><p>Yeniden kullanılabilir bir çerçevenin iki zorluğu var: <strong>kullanılabilirlik</strong> (pratisyenler gerçek hayat politikalarını biçimsel optimizasyonun gerektirdiği kesin formüllere çevirmekte zorlanıyor) ve <strong>ölçeklenebilirlik</strong> (NP-zor problemleri ticari çözücüler verimli çözemiyor). <strong>Rebalancer</strong>, problemin <strong>belirtimini çözümünden ayırarak</strong> ikisini birden ele alıyor. Problem; nesneler, kutular, kısıtlar ve hedeflerle tanımlanıyor, sonra bir <strong>ifade grafiğine</strong> (yönlü döngüsüz graf) çevriliyor. Çözücü bu grafikten yararlanarak ya yerel arama sezgiseli tasarlıyor ya da ticari (FICO Xpress, Gurobi) veya açık kaynak (HiGHS) bir çözücüyle çözülebilen karma tamsayılı programlama (MIP) modeli kuruyor.</p><p>Belirtim dili üç adımda soyutlama seviyesini yükseltiyor: temel modelleme yapıları (boyutlar, bölümler, kapsamlar, kullanım), bu yapılar üzerinde yaygın ifadeler (SUM, MAX gibi toplulaştırmalar) ve düzinelerce hazır hedef ve kısıtı sunan üst düzey ‘spec’ API’si (‘her rafta tek iş tipi olsun’ için <code>GroupCountSpec</code>, dengeli dağılım için <code>BalanceSpec</code> gibi). Spec’ler, yeniden kullanılabilen hazır tarifler.</p><p>İki çözüm tekniği var. <strong>Optimal çözücü</strong> ifade grafiğini MIP çözücülere verir; ama her nesne için bir ikili karar değişkeni gerektirdiğinden model boyutu en kötü durumda O(nesne × kutu) ile <strong>ikinci dereceden</strong> büyür ve en büyük problemler hiçbir MIP çözücüye sığmaz. <strong>Yerel arama çözücüsü</strong> doğrudan ifade grafiği üzerinde çalışır: mevcut atamanın çevresindeki komşulukta bazı nesneleri başka kutuya taşıyıp en çok iyileşen kısıt ihlal etmeyen hamleyi uygular. Komşuluk büyüklüğü en kötü durumda O(nesne + kutu), yani bellek sorunu olmadan çok büyük problemleri modelleyebilir; saniyede milyonlarca değerlendirme yapılabiliyor.</p></div>
+  <div class="prose"><p>Elinde bir nesne kümesi ve bir kutu (bin) kümesi var; nesneleri, belirli kısıtları sağlayarak ve bazı hedefleri optimize ederek kutulara nasıl atarsın? Bu soru Meta&#x27;nın altyapı yığınının her katmanında çıkıyor: donanım yerleşimi (rafları elektrik arıza alanlarına yaymak), servis yerleşimi (sunucuları servislere atamak), görev yerleşimi (görevleri sunuculara atamak) ve trafik yönlendirme (milyarlarca kullanıcının trafiğini coğrafi olarak dağılmış veri merkezlerine yollamak).</p><p>Yeniden kullanılabilir bir çerçevenin iki zorluğu var: <strong>kullanılabilirlik</strong> (pratisyenler gerçek hayat politikalarını biçimsel optimizasyonun gerektirdiği kesin formüllere çevirmekte zorlanıyor) ve <strong>ölçeklenebilirlik</strong> (NP-zor problemleri ticari çözücüler verimli çözemiyor). <strong>Rebalancer</strong>, problemin <strong>belirtimini çözümünden ayırarak</strong> ikisini birden ele alıyor. Problem; nesneler, kutular, kısıtlar ve hedeflerle tanımlanıyor, sonra bir <strong>ifade grafiğine</strong> (yönlü döngüsüz graf) çevriliyor. Çözücü bu grafikten yararlanarak ya local search sezgiseli tasarlıyor ya da ticari (FICO Xpress, Gurobi) veya açık kaynak (HiGHS) bir çözücüyle çözülebilen karma tamsayılı programlama (MIP) modeli kuruyor.</p><p>Belirtim dili üç adımda soyutlama seviyesini yükseltiyor: temel modelleme yapıları (boyutlar, bölümler, kapsamlar, kullanım), bu yapılar üzerinde yaygın ifadeler (SUM, MAX gibi toplulaştırmalar) ve düzinelerce hazır hedef ve kısıtı sunan üst düzey ‘spec’ API’si (‘her rafta tek iş tipi olsun’ için <code>GroupCountSpec</code>, dengeli dağılım için <code>BalanceSpec</code> gibi). Spec’ler, yeniden kullanılabilen hazır tarifler.</p><p>İki çözüm tekniği var. <strong>Optimal çözücü</strong> ifade grafiğini MIP çözücülere verir; ama her nesne için bir ikili karar değişkeni gerektirdiğinden model boyutu en kötü durumda O(nesne × kutu) ile <strong>ikinci dereceden</strong> büyür ve en büyük problemler hiçbir MIP çözücüye sığmaz. <strong>Local search çözücüsü</strong> doğrudan ifade grafiği üzerinde çalışır: mevcut atamanın çevresindeki komşulukta bazı nesneleri başka kutuya taşıyıp en çok iyileşen kısıt ihlal etmeyen hamleyi uygular. Komşuluk büyüklüğü en kötü durumda O(nesne + kutu), yani bellek sorunu olmadan çok büyük problemleri modelleyebilir; saniyede milyonlarca değerlendirme yapılabiliyor.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Belirtim (ne istiyorum?) ile çözüm (nasıl bulurum?) ayrılınca aynı problem farklı çözücülerle çözülebilir.</span></li><li><span>Hazır ‘spec’ler domain bilgisini yeniden kullanılabilir hâle getiriyor: her ekip aynı kısıtı yeniden yazmıyor.</span></li><li><span>Kesin çözüm ile ölçek arasında takas: optimal çözücü küçük/orta, yerel arama çok büyük problemler için.</span></li><li><span>Önce başlangıç ataması ve durma koşulu verilir; çözücü ‘yeterince iyi’ bir çözüme zamana bağlı yaklaşır.</span></li>    </ol>
+<li><span>Belirtim (ne istiyorum?) ile çözüm (nasıl bulurum?) ayrılınca aynı problem farklı çözücülerle çözülebilir.</span></li><li><span>Hazır ‘spec’ler domain bilgisini yeniden kullanılabilir hâle getiriyor: her ekip aynı kısıtı yeniden yazmıyor.</span></li><li><span>Kesin çözüm ile ölçek arasında takas: optimal çözücü küçük/orta, local search çok büyük problemler için.</span></li><li><span>Önce başlangıç ataması ve durma koşulu verilir; çözücü ‘yeterince iyi’ bir çözüme zamana bağlı yaklaşır.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-why">
       <h3 class="label">Neden önemli?</h3>
-      <p>Birçok altyapı sorunu (iş zamanlama, yük dengeleme, kapasite planı) aslında atama problemidir ama ad hoc kodla çözülür. Problemi deklaratif tarif edip çözücüyü değiştirebilmek, SQL’in veri sorgularına getirdiği şeyin optimizasyondaki karşılığı.</p>
+      <p>Birçok altyapı sorunu (iş zamanlama, yük dengeleme, kapasite planı) aslında assignment problem’dir ama ad hoc kodla çözülür. Problemi deklaratif tarif edip çözücüyü değiştirebilmek, SQL’in veri sorgularına getirdiği şeyin optimizasyondaki karşılığı.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Hemen deneyebileceğin yer: <code>scipy.optimize.milp</code> (arka planda HiGHS kullanır) ile küçük bir atama problemi çözmek. Örneğin Tradebot’ta sermayeyi belirli kısıtlarla (varlık başına tavan, toplam risk limiti) varlıklara dağıtmak ya da Mobit’te zamanlanmış işleri çalışanlara eşit yükle dağıtmak. Daha önemlisi tasarım dersi: kısıtları kodun içine ‘if’ olarak gömmek yerine, bildirimsel bir listede (‘her sunucuda en fazla 3 iş’, ‘iki kopya aynı rafta olmasın’) tutarsan hem testi hem değişimi kolaylaşır.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Hemen deneyebileceğin yer: <code>scipy.optimize.milp</code> (arka planda HiGHS kullanır) ile küçük bir assignment problemi çözmek. Örneğin sermayeyi belirli kısıtlarla (varlık başına tavan, toplam risk limiti) varlıklara dağıtmak ya da zamanlanmış işleri çalışanlara eşit yükle dağıtmak. Daha önemlisi tasarım dersi: kısıtları kodun içine ‘if’ olarak gömmek yerine, bildirimsel bir listede (‘her sunucuda en fazla 3 iş’, ‘iki kopya aynı rafta olmasın’) tutarsan hem test hem değişiklik kolaylaşır.</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">assignment problem</span> <span class="term-tr">atama problemi</span></dt>
+      <dt><span class="term-en">assignment problem</span></dt>
       <dd>Nesneleri kısıtlar altında, bir hedefi optimize edecek şekilde kutulara yerleştirme problemi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">mixed integer program (MIP)</span> <span class="term-tr">karma tamsayılı program</span></dt>
+      <dt><span class="term-en">mixed integer program (MIP)</span></dt>
       <dd>Bazı değişkenlerin tam sayı olmak zorunda olduğu doğrusal optimizasyon problemi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">local search</span> <span class="term-tr">yerel arama</span></dt>
+      <dt><span class="term-en">local search</span></dt>
       <dd>Mevcut çözümü küçük değişikliklerle iyileştirerek ilerleyen sezgisel arama.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">fault domain</span> <span class="term-tr">arıza alanı</span></dt>
+      <dt><span class="term-en">fault domain</span></dt>
       <dd>Tek bir arızanın birlikte etkileyebileceği bileşenler grubu (aynı raf, aynı elektrik hattı gibi).</dd>
     </div>
   </dl>
@@ -133,9 +133,9 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/optimizasyon/">#optimizasyon</a></li>
-  <li><a href="/etiket/kaynak-atamasi/">#kaynak ataması</a></li>
-  <li><a href="/etiket/acik-kaynak/">#açık kaynak</a></li>
-  <li><a href="/etiket/tasarim/">#tasarım</a></li>
+  <li><a href="/etiket/resource-allocation/">#resource allocation</a></li>
+  <li><a href="/etiket/open-source/">#open source</a></li>
+  <li><a href="/etiket/design/">#design</a></li>
 </ul>
 
   <a class="readmore" href="https://engineering.fb.com/2026/09/21/open-source/rebalancer-generic-high-performance-library-assignment-problems/" rel="noopener nofollow" target="_blank">
@@ -177,7 +177,7 @@
   <nav class="pager" aria-label="Sayılar arası gezinme">
     <a class="pager-link pager-prev" href="/sayi/2026-09-18/" rel="prev">
       <span class="pager-label">← Önceki sayı · 18 Eylül 2026</span>
-      <span class="pager-title">Namespace bir güvenlik sınırı değildir: çok kiracılı Kubernetes’te dört duvar</span>
+      <span class="pager-title">Namespace bir güvenlik sınırı değildir: multi-tenant Kubernetes’te dört duvar</span>
     </a>
     <a class="pager-link pager-next" href="/sayi/2026-09-22/" rel="next">
       <span class="pager-label">Sonraki sayı · 22 Eylül 2026 →</span>
@@ -198,7 +198,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

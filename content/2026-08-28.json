@@ -19,34 +19,34 @@
         "Bir embedding'i tam entegrasyondan önce ucuz bir testle elemek, A/B testi bütçesini koruyor."
       ],
       "why_it_matters": "Cold-start, öneri sistemlerinin en yaygın acısıdır: yeni kullanıcı, yeni ürün, yeni belge. Çözümün ortak fikri, varlığı yalnızca geçmişte ne yaptığıyla değil **kendi içeriğiyle** tanımlamak.",
-      "for_you": "Mobit'teki doküman aramada bu doğrudan işine yarar. Yeni yüklenen bir belge için henüz kimse arama yapmadı, tıklama verisi yok; ama belgenin içeriğinden üretilmiş embedding ilk günden aranabilir kılıyor, tam olarak Netflix'in yaptığı gibi. Bunu pgvector ile PostgreSQL'de yapabilirsin. Ayrıca “ID yerine içerik” fikrini KlioAI'da kullan: bir alıştırmayı yalnızca kimlik numarasıyla değil, konusunun embedding'iyle tanımla; yeni eklenen alıştırmalar ilk günden benzer alıştırmaların başarı verisinden yararlanır.",
+      "for_you": "Doküman arama için bu doğrudan işe yarar. Yeni yüklenen bir belge için henüz kimse arama yapmadı, tıklama verisi yok; ama belgenin içeriğinden üretilmiş embedding ilk günden aranabilir kılıyor, tam olarak Netflix’in yaptığı gibi. Bunu pgvector ile PostgreSQL’de yapabilirsin. Ayrıca ‘ID yerine içerik’ fikrini kullan: bir öğeyi yalnızca kimlik numarasıyla değil, konusunun embedding’iyle tanımla; yeni eklenen öğeler ilk günden benzerlerinin başarı verisinden yararlanır (cold-start çözümü).",
       "terms": [
         {
           "en": "cold-start",
-          "tr": "soğuk başlangıç",
+          "tr": "cold-start",
           "definition": "Yeni bir kullanıcı ya da öğe için henüz etkileşim verisi olmadığından öneri yapılamama durumu."
         },
         {
           "en": "CLIP",
           "tr": "CLIP",
-          "definition": "Görselleri ve metinleri aynı vektör uzayına gömen, önceden eğitilmiş çok kipli model."
+          "definition": "Görselleri ve metinleri aynı vektör uzayına gömen, önceden eğitilmiş multimodal model."
         },
         {
           "en": "model consolidation",
-          "tr": "model birleştirme",
+          "tr": "model consolidation",
           "definition": "Birbirine benzer işleri yapan birden çok modeli tek bir modele indirme."
         },
         {
           "en": "opaque ID",
-          "tr": "opak kimlik",
+          "tr": "opaque ID",
           "definition": "İçeriği hakkında hiçbir bilgi taşımayan, yalnızca ayırt etmeye yarayan tanımlayıcı."
         }
       ],
       "tags": [
         "embedding",
-        "öneri sistemleri",
+        "recommender systems",
         "cold-start",
-        "kişiselleştirme"
+        "personalization"
       ],
       "difficulty": "ileri",
       "read_minutes": 14,

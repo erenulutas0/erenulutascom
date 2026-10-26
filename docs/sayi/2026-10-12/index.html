@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>12 Ekim 2026 — Eren&#39;in Mühendislik Gazetesi</title>
-<meta name="description" content="Canlı bir sistemin altındaki protokolü değiştirmek, protokolün kendisinden çok geçişin nasıl yapıldığıyla ilgilidir. Meta, Instagram Live’ın yükleme protokolünü kimse fark etmeden değiştirdi ve nasıl yaptığını anlatıyor. Yanında boşta duran çıkarım kapasitesini işe koşan bir sistem ve logları yola çıkmadan süzmek var.">
+<meta name="description" content="Canlı bir sistemin altındaki protokolü değiştirmek, protokolün kendisinden çok geçişin nasıl yapıldığıyla ilgilidir. Meta, Instagram Live’ın yükleme protokolünü kimse fark etmeden değiştirdi ve nasıl yaptığını anlatıyor. Yanında boşta duran inference kapasitesini işe koşan bir sistem ve logları yola çıkmadan süzmek var.">
 <meta name="author" content="Eren Ulutaş">
 <meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#131310" media="(prefers-color-scheme: dark)">
 <meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
 <meta property="og:title" content="12 Ekim 2026 — Eren&#39;in Mühendislik Gazetesi">
-<meta property="og:description" content="Canlı bir sistemin altındaki protokolü değiştirmek, protokolün kendisinden çok geçişin nasıl yapıldığıyla ilgilidir. Meta, Instagram Live’ın yükleme protokolünü kimse fark etmeden değiştirdi ve nasıl yaptığını anlatıyor. Yanında boşta duran çıkarım kapasitesini işe koşan bir sistem ve logları yola çıkmadan süzmek var.">
+<meta property="og:description" content="Canlı bir sistemin altındaki protokolü değiştirmek, protokolün kendisinden çok geçişin nasıl yapıldığıyla ilgilidir. Meta, Instagram Live’ın yükleme protokolünü kimse fark etmeden değiştirdi ve nasıl yaptığını anlatıyor. Yanında boşta duran inference kapasitesini işe koşan bir sistem ve logları yola çıkmadan süzmek var.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:url" content="https://erenulutas.com/sayi/2026-10-12/">
@@ -69,7 +69,7 @@
 <a href="/sayi/2026-10-09/" rel="prev"><span aria-hidden="true">←</span> 9 Ekim 2026</a><a href="/sayi/2026-10-13/" rel="next">13 Ekim 2026 <span aria-hidden="true">→</span></a>
     </nav>
   </div>
-<p class="lede">Canlı bir sistemin altındaki protokolü değiştirmek, protokolün kendisinden çok geçişin nasıl yapıldığıyla ilgilidir. Meta, Instagram Live’ın yükleme protokolünü kimse fark etmeden değiştirdi ve nasıl yaptığını anlatıyor. Yanında boşta duran çıkarım kapasitesini işe koşan bir sistem ve logları yola çıkmadan süzmek var.</p></header>
+<p class="lede">Canlı bir sistemin altındaki protokolü değiştirmek, protokolün kendisinden çok geçişin nasıl yapıldığıyla ilgilidir. Meta, Instagram Live’ın yükleme protokolünü kimse fark etmeden değiştirdi ve nasıl yaptığını anlatıyor. Yanında boşta duran inference kapasitesini işe koşan bir sistem ve logları yola çıkmadan süzmek var.</p></header>
 
 
   <div class="layout">
@@ -88,12 +88,12 @@
   </h2>
   <p class="original-title">Shipping Media Over QUIC at Meta Scale for Instagram Live Ingest</p>
 
-  <div class="prose"><p>Instagram Live artık iOS ve Android’de canlı video yüklemesi (ingest) için açık standart <strong>Media over QUIC (MoQ)</strong> kullanıyor. İnternet yıllar içinde her biri kendi sorununa göre biçimlenmiş bir protokol yığını biriktirdi: yükleme için RTMP, oynatma için HLS ve DASH, gerçek zamanlı aramalar için WebRTC. Meta’da canlı yayın başlatıp aynı uygulamada sesli arama yapan biri <strong>üç ayrı protokol yığınına</strong> dokunuyor; her birinin kendi sunucu altyapısı, izlemesi ve uzmanlığı var. MoQ’un vaadi, yükleme, dağıtım ve oynatma için tek bir taşıma katmanı.</p><p><strong>MoQ nasıl çalışır?</strong> IETF’te Meta, Google, Akamai, Cisco, Cloudflare ve akademinin katılımıyla geliştirilen bir standart. Temel soyutlama <strong>Track</strong>: yayıncıların ittiği, abonelerin bir <strong>aktarıcı (relay)</strong> ağı üzerinden aldığı adreslenebilir medya nesnesi akışı. Aktarıcılar nesneleri medya içeriğini çözümlemeden önbelleğe alıp iletiyor. Öne çıkan özellikler: QUIC sayesinde akışlar arası TCP tarzı sıra başı tıkanması yok; önbellekleme ve çoğaltma protokolün içinde; aynı Track’in iki abonesi aynı anda <strong>farklı gecikmelerde</strong> çalışabiliyor (etkileşimli katılımcı için yaklaşık 100 ms, arşiv için birkaç saniye); aktarıcılar tıkanıklıkta nesneleri metadata’ya göre düşürüp önceliklendirebiliyor; QUIC engellendiğinde standart bir TCP geri dönüşü var.</p><p><strong>Geçiş nasıl yapıldı?</strong> Canlı yükleme yaklaşık on yıldır Meta’nın kendi QUIC tabanlı protokolü RUSH üzerindeydi. Yazının itirafı şu: canlı bir sistemde taşıma protokolünü değiştirmenin zorluğu protokolle pek ilgili değil. Üç kısıtlı probleme böldüler. <strong>İstemci:</strong> açık kaynak MoQ kütüphaneleri moxygen üzerine kurulu bir yayıncı; tek bir yapılandırma parametresi yayın başına MoQ ya da RUSH seçiyor. <strong>Arka ucu yeniden yazmak yerine uçta çeviri:</strong> MoQ bağlantıları özel uç noktalarda sonlanıyor ve bir çeviri katmanı MoQ çerçevelerini arka ucun zaten anladığı RUSH biçimine dönüştürüyor. Aşağı akışta hiçbir şey değişmiyor; çevirici geçici bir iskele. <strong>Sunucu taraflı yönlendirme:</strong> yayın URL’si üretilirken deney grubuna göre MoQ uç noktası seçiliyor; böylece yayılım uygulama sürümünün benimsenmesine bağlı değil ve deney dakikalar içinde büyütülüp küçültülebiliyor.</p><p><strong>Operasyonel engeller.</strong> Taslak standart geliştirme sürerken değişti: belirli taslak sürümlerine sabitlendiler ve eski istemciler için uyumluluk katmanları tuttular. UDP/443 kurumsal ve operatör ağlarının azımsanmayacak bir bölümünde engelli: yayın başında TCP ve QUIC el sıkışmaları yarıştırılıyor, kazanan oturum boyunca kullanılıyor. QUIC şifrelemesi çerçeveleri kendi paket yakalamalarından da gizlediği için uca MoQ’u tanıyan izleme eklediler.</p><p><strong>Sonuç:</strong> aylarca süren deneyin ardından MoQ yolu, kalite ve güvenilirlik göstergelerinde RUSH ile <strong>eşit</strong> çıktı. Bu aşamanın hedefi iyileşme değil eşitlikti: üretimdeki bir taşıma katmanını kimseyi rahatsız etmeden değiştirebildiklerini gösterdi ve sonraki adımlar için temiz bir taban verdi.</p></div>
+  <div class="prose"><p>Instagram Live artık iOS ve Android’de canlı video yüklemesi (ingest) için açık standart <strong>Media over QUIC (MoQ)</strong> kullanıyor. İnternet yıllar içinde her biri kendi sorununa göre biçimlenmiş bir protokol yığını biriktirdi: yükleme için RTMP, oynatma için HLS ve DASH, gerçek zamanlı aramalar için WebRTC. Meta’da canlı yayın başlatıp aynı uygulamada sesli arama yapan biri <strong>üç ayrı protokol yığınına</strong> dokunuyor; her birinin kendi sunucu altyapısı, izlemesi ve uzmanlığı var. MoQ’un vaadi, yükleme, dağıtım ve oynatma için tek bir taşıma katmanı.</p><p><strong>MoQ nasıl çalışır?</strong> IETF’te Meta, Google, Akamai, Cisco, Cloudflare ve akademinin katılımıyla geliştirilen bir standart. Temel soyutlama <strong>Track</strong>: yayıncıların ittiği, abonelerin bir <strong>relay (relay)</strong> ağı üzerinden aldığı adreslenebilir medya nesnesi akışı. Relay’ler nesneleri medya içeriğini çözümlemeden cache’e alıp iletiyor. Öne çıkan özellikler: QUIC sayesinde akışlar arası TCP tarzı head-of-line blocking yok; caching ve çoğaltma protokolün içinde; aynı Track’in iki abonesi aynı anda <strong>farklı gecikmelerde</strong> çalışabiliyor (etkileşimli katılımcı için yaklaşık 100 ms, arşiv için birkaç saniye); relay’ler tıkanıklıkta nesneleri metadata’ya göre düşürüp önceliklendirebiliyor; QUIC engellendiğinde standart bir TCP geri dönüşü var.</p><p><strong>Geçiş nasıl yapıldı?</strong> Canlı yükleme yaklaşık on yıldır Meta’nın kendi QUIC tabanlı protokolü RUSH üzerindeydi. Yazının itirafı şu: canlı bir sistemde taşıma protokolünü değiştirmenin zorluğu protokolle pek ilgili değil. Üç kısıtlı probleme böldüler. <strong>İstemci:</strong> açık kaynak MoQ kütüphaneleri moxygen üzerine kurulu bir yayıncı; tek bir yapılandırma parametresi yayın başına MoQ ya da RUSH seçiyor. <strong>Arka ucu yeniden yazmak yerine uçta çeviri:</strong> MoQ bağlantıları özel uç noktalarda sonlanıyor ve bir çeviri katmanı MoQ çerçevelerini arka ucun zaten anladığı RUSH biçimine dönüştürüyor. Aşağı akışta hiçbir şey değişmiyor; çevirici geçici bir iskele. <strong>Sunucu taraflı yönlendirme:</strong> yayın URL’si üretilirken deney grubuna göre MoQ uç noktası seçiliyor; böylece yayılım uygulama sürümünün benimsenmesine bağlı değil ve deney dakikalar içinde büyütülüp küçültülebiliyor.</p><p><strong>Operasyonel engeller.</strong> Taslak standart geliştirme sürerken değişti: belirli taslak sürümlerine sabitlendiler ve eski istemciler için uyumluluk katmanları tuttular. UDP/443 kurumsal ve operatör ağlarının azımsanmayacak bir bölümünde engelli: yayın başında TCP ve QUIC handshake’leri yarıştırılıyor, kazanan oturum boyunca kullanılıyor. QUIC şifrelemesi çerçeveleri kendi paket yakalamalarından da gizlediği için uca MoQ’u tanıyan izleme eklediler.</p><p><strong>Sonuç:</strong> aylarca süren deneyin ardından MoQ yolu, kalite ve güvenilirlik göstergelerinde RUSH ile <strong>eşit</strong> çıktı. Bu aşamanın hedefi iyileşme değil eşitlikti: üretimdeki bir taşıma katmanını kimseyi rahatsız etmeden değiştirebildiklerini gösterdi ve sonraki adımlar için temiz bir taban verdi.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Büyük bir geçişte ilk hedef iyileşme değil eşitliktir; eşitlik sonraki her adımın tabanıdır.</span></li><li><span>Geçici bir çeviri katmanı, istemci ve arka uç değişikliklerini birbirinden ayırır.</span></li><li><span>Yayılımı istemci sürümüne değil sunucu taraflı yönlendirmeye bağlamak, saniyeler içinde geri almayı sağlar.</span></li><li><span>Yeni protokol her ağda çalışmaz; geri dönüş yolu tasarımın parçası olmalı.</span></li><li><span>Şifreli protokolde hata ayıklama için gözlemlenebilirliği uç noktaya kendin koymalısın.</span></li>    </ol>
+<li><span>Büyük bir geçişte ilk hedef iyileşme değil eşitliktir; eşitlik sonraki her adımın tabanıdır.</span></li><li><span>Geçici bir çeviri katmanı, istemci ve arka uç değişikliklerini birbirinden ayırır.</span></li><li><span>Yayılımı istemci sürümüne değil sunucu taraflı yönlendirmeye bağlamak, saniyeler içinde rollback’ı sağlar.</span></li><li><span>Yeni protokol her ağda çalışmaz; geri dönüş yolu tasarımın parçası olmalı.</span></li><li><span>Şifreli protokolde debugging için gözlemlenebilirliği uç noktaya kendin koymalısın.</span></li>    </ol>
   </div>
 
   <div class="callouts">
@@ -102,8 +102,8 @@
       <p>Çalışan bir sistemin temel bileşenini değiştirmek, mühendisliğin en riskli işlerinden biri. Bu yazıdaki üçlü (bayrakla seçilebilir yeni yol, geçici çeviri katmanı, sunucu taraflı yayılım) protokolden bağımsız, her büyük geçişe uyan bir kalıp.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Bu kalıbı bir sonraki büyük değişikliğinde uygula; örneğin Mobit’te mesajlaşmayı polling’den WebSocket’e ya da bir kütüphaneyi diğerine taşırken. <strong>Bir:</strong> yeni yolu bir özellik bayrağının arkasına koy ve eski yolu silme. <strong>İki:</strong> yeni istemciyi eski arka uca bağlayan ince bir uyarlayıcı (adapter) yaz; iki tarafı aynı anda değiştirme. <strong>Üç:</strong> bayrağı sunucuda tut ki uygulama güncellemesi beklemeden kapatabilesin. <strong>Dört:</strong> başarı ölçütünü baştan yaz: ‘hata oranı ve p95 gecikme eskisiyle aynı’. WebSocket için de aynı ders geçerli: bazı ağlar bağlantıyı keser, uzun yoklamaya (long polling) geri dönüş yolunu baştan tasarla.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Bu kalıbı bir sonraki büyük değişikliğinde uygula; örneğin mesajlaşmayı polling’den WebSocket’e ya da bir kütüphaneyi diğerine taşırken. <strong>Bir:</strong> yeni yolu bir feature flag’in arkasına koy ve eski yolu silme. <strong>İki:</strong> yeni istemciyi eski backend’e bağlayan ince bir adapter yaz; iki tarafı aynı anda değiştirme. <strong>Üç:</strong> flag’i sunucuda tut ki uygulama güncellemesi beklemeden kapatabilesin. <strong>Dört:</strong> başarı ölçütünü baştan yaz: ‘hata oranı ve p95 gecikme eskisiyle aynı’. WebSocket için de aynı ders geçerli: bazı ağlar bağlantıyı keser, long polling’e geri dönüş yolunu baştan tasarla.</p>
     </div>
   </div>
 
@@ -111,23 +111,23 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">Media over QUIC (MoQ)</span> <span class="term-tr">QUIC üzerinden medya</span></dt>
+      <dt><span class="term-en">Media over QUIC (MoQ)</span></dt>
       <dd>Canlı yayın ve gerçek zamanlı iletişim için QUIC üzerinde çalışan, IETF’te geliştirilen medya taşıma protokolü.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">ingest</span> <span class="term-tr">yayın yükleme</span></dt>
+      <dt><span class="term-en">ingest</span></dt>
       <dd>Yayıncının cihazından sunucuya giden canlı video akışı.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">head-of-line blocking</span> <span class="term-tr">sıra başı tıkanması</span></dt>
+      <dt><span class="term-en">head-of-line blocking</span></dt>
       <dd>Kaybolan tek bir paketin, arkasındaki ilgisiz verilerin de beklemesine yol açması.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">relay</span> <span class="term-tr">aktarıcı</span></dt>
-      <dd>Medya nesnelerini içeriğini çözmeden önbelleğe alıp abonelere ileten ara sunucu.</dd>
+      <dt><span class="term-en">relay</span></dt>
+      <dd>Medya nesnelerini içeriğini çözmeden cache’e alıp abonelere ileten ara sunucu.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">feature flag</span> <span class="term-tr">özellik bayrağı</span></dt>
+      <dt><span class="term-en">feature flag</span></dt>
       <dd>Bir özelliği kod dağıtmadan açıp kapatmayı sağlayan yapılandırma anahtarı.</dd>
     </div>
   </dl>
@@ -136,10 +136,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/ag/">#ağ</a></li>
-  <li><a href="/etiket/protokol/">#protokol</a></li>
+  <li><a href="/etiket/networking/">#networking</a></li>
+  <li><a href="/etiket/protocol/">#protocol</a></li>
   <li><a href="/etiket/video/">#video</a></li>
-  <li><a href="/etiket/gecis/">#geçiş</a></li>
+  <li><a href="/etiket/migration/">#migration</a></li>
 </ul>
 
   <a class="readmore" href="https://engineering.fb.com/2026/10/12/video-engineering/shipping-media-over-quic-at-meta-scale-for-instagram-live-ingest/" rel="noopener nofollow" target="_blank">
@@ -161,10 +161,10 @@
 </div>
 
   <h3 class="brief-title">
-    <a href="https://engineering.fb.com/2026/10/12/ml-applications/turning-opportunistic-ai-inference-capacity-into-better-ads-recommendations/" rel="noopener nofollow" target="_blank">Küresel olarak kıt, yerel olarak boşta: Meta atıl çıkarım kapasitesini nasıl kullanıyor</a>
+    <a href="https://engineering.fb.com/2026/10/12/ml-applications/turning-opportunistic-ai-inference-capacity-into-better-ads-recommendations/" rel="noopener nofollow" target="_blank">Küresel olarak kıt, yerel olarak boşta: Meta atıl inference kapasitesini nasıl kullanıyor</a>
   </h3>
   <p class="original-title">Turning Opportunistic AI Inference Capacity Into Better Ads Recommendations</p>
-  <div class="prose prose-sm"><p>Çıkarım filolarında bir paradoks var: kapasite küresel olarak kısıtlıyken yerel olarak anlamlı miktarda boşta kalabiliyor. Nedenleri tanıdık: filo tepe talebe göre kuruluyor ama trafik gün içinde değişiyor; donanım tedarik zincirinin takvimiyle, modeller ise başka bir takvimle geliyor. Meta bu boş cepleri ortak bir <strong>fırsatçı kapasite havuzunda</strong> toplayıp daha iyi reklam önerisine çeviriyor. Zorluk şu: bu kapasite ekiplere, bölgelere ve hızlandırıcı türlerine dağılmış ve çok kısa bir uyarıyla geri alınabiliyor.</p><p>Sistem iki esneklik koluyla çalışıyor. <strong>Rank More Ads (RMA):</strong> sıralama aşamalarının değerlendirdiği aday sayısını artırıyor; ek adaylar getirme ve özellik işleme aşamalarından da geçtiği için hem CPU hem hızlandırıcı fazlası gerektiriyor. <strong>Serve Better Models (SBM):</strong> aday sayısını sabit tutup isteklerin daha büyük bir bölümünü daha güçlü bir modele yönlendiriyor; yalnızca hızlandırıcı fazlasını kullanabiliyor ve en çok fayda görecek istekleri değer sinyaliyle önceliklendiriyor. İkisi farklı kaynak bileşimleri tükettiği için birlikte daha geniş bir boşluğu dolduruyor. Temel iş yükünün kapasitesi fiziksel ve mantıksal yalıtımla korunuyor; kapasite çekilince <strong>değere duyarlı yük atma</strong> sistemi zarifçe geriletiyor.</p></div>
+  <div class="prose prose-sm"><p>Inference filolarında bir paradoks var: kapasite küresel olarak kısıtlıyken yerel olarak anlamlı miktarda boşta kalabiliyor. Nedenleri tanıdık: filo tepe talebe göre kuruluyor ama trafik gün içinde değişiyor; donanım tedarik zincirinin takvimiyle, modeller ise başka bir takvimle geliyor. Meta bu boş cepleri ortak bir <strong>opportunistic capacity havuzunda</strong> toplayıp daha iyi reklam önerisine çeviriyor. Zorluk şu: bu kapasite ekiplere, bölgelere ve hızlandırıcı türlerine dağılmış ve çok kısa bir uyarıyla geri alınabiliyor.</p><p>Sistem iki esneklik koluyla çalışıyor. <strong>Rank More Ads (RMA):</strong> sıralama aşamalarının değerlendirdiği aday sayısını artırıyor; ek adaylar getirme ve özellik işleme aşamalarından da geçtiği için hem CPU hem hızlandırıcı fazlası gerektiriyor. <strong>Serve Better Models (SBM):</strong> aday sayısını sabit tutup isteklerin daha büyük bir bölümünü daha güçlü bir modele yönlendiriyor; yalnızca hızlandırıcı fazlasını kullanabiliyor ve en çok fayda görecek istekleri değer sinyaliyle önceliklendiriyor. İkisi farklı kaynak bileşimleri tükettiği için birlikte daha geniş bir boşluğu dolduruyor. Temel iş yükünün kapasitesi fiziksel ve mantıksal yalıtımla korunuyor; kapasite çekilince <strong>değere duyarlı load shedding</strong> sistemi zarifçe geriletiyor.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
@@ -174,8 +174,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Küçük ölçekte aynı fikir: KlioAI’da zorunlu işi (kullanıcıya cevap) ve isteğe bağlı işi (daha ayrıntılı geri bildirim, ikinci bir model geçişi) ayır. Sistem rahatken isteğe bağlı işi çalıştır, kuyruk uzayınca ilk onu kapat. Bunun adı zarif bozulma (graceful degradation) ve bir <code>if (queueDepth &gt; N)</code> kadar basit başlayabilir.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Küçük ölçekte aynı fikir: zorunlu işi (kullanıcıya cevap) ve isteğe bağlı işi (daha ayrıntılı geri bildirim, ikinci bir model geçişi) ayır. Sistem rahatken isteğe bağlı işi çalıştır, kuyruk uzayınca ilk onu kapat. Bunun adı graceful degradation ve bir <code>if (queueDepth &gt; N)</code> kadar basit başlayabilir.</p>
     </div>
   </div>
 
@@ -183,15 +183,15 @@
     <summary class="label">Sözlük · 3 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">opportunistic capacity</span> <span class="term-tr">fırsatçı kapasite</span></dt>
+      <dt><span class="term-en">opportunistic capacity</span></dt>
       <dd>O an boşta olan ama her an geri alınabilecek hesaplama kapasitesi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">load shedding</span> <span class="term-tr">yük atma</span></dt>
+      <dt><span class="term-en">load shedding</span></dt>
       <dd>Aşırı yük altında sistemi ayakta tutmak için bazı istekleri bilerek reddetme ya da basitleştirme.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">graceful degradation</span> <span class="term-tr">zarif bozulma</span></dt>
+      <dt><span class="term-en">graceful degradation</span></dt>
       <dd>Kaynak azaldığında sistemin tümüyle çökmek yerine kaliteyi kademeli düşürmesi.</dd>
     </div>
   </dl>
@@ -200,10 +200,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/ml-altyapisi/">#ML altyapısı</a></li>
-  <li><a href="/etiket/kapasite/">#kapasite</a></li>
-  <li><a href="/etiket/oneri-sistemleri/">#öneri sistemleri</a></li>
-  <li><a href="/etiket/dayaniklilik/">#dayanıklılık</a></li>
+  <li><a href="/etiket/ml-infrastructure/">#ML infrastructure</a></li>
+  <li><a href="/etiket/capacity/">#capacity</a></li>
+  <li><a href="/etiket/recommender-systems/">#recommender systems</a></li>
+  <li><a href="/etiket/resilience/">#resilience</a></li>
 </ul>
 
   <a class="readmore" href="https://engineering.fb.com/2026/10/12/ml-applications/turning-opportunistic-ai-inference-capacity-into-better-ads-recommendations/" rel="noopener nofollow" target="_blank">
@@ -235,7 +235,7 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
+      <h4 class="label">Pratikte</h4>
       <p>Spring Boot’ta aynı ilke: <code>/actuator/health</code> isteklerini erişim loguna yazma ve e-posta, token, TC kimlik no gibi alanları log satırına hiç koyma (Logback’te bir maskeleme dönüştürücüsü ya da log öncesi bir DTO). Logu sonradan temizlemek yerine baştan temiz yazmak hem ucuz hem güvenli.</p>
     </div>
   </div>
@@ -244,11 +244,11 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">redaction</span> <span class="term-tr">karartma</span></dt>
+      <dt><span class="term-en">redaction</span></dt>
       <dd>Hassas verinin kayıttan çıkarılması ya da maskelenmesi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">NDJSON</span> <span class="term-tr">satır ayrımlı JSON</span></dt>
+      <dt><span class="term-en">NDJSON</span></dt>
       <dd>Her satırın bağımsız bir JSON nesnesi olduğu metin biçimi; log aktarımında yaygın.</dd>
     </div>
   </dl>
@@ -258,9 +258,9 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/loglama/">#loglama</a></li>
-  <li><a href="/etiket/gozlemlenebilirlik/">#gözlemlenebilirlik</a></li>
-  <li><a href="/etiket/maliyet/">#maliyet</a></li>
-  <li><a href="/etiket/gizlilik/">#gizlilik</a></li>
+  <li><a href="/etiket/observability/">#observability</a></li>
+  <li><a href="/etiket/cost/">#cost</a></li>
+  <li><a href="/etiket/privacy/">#privacy</a></li>
 </ul>
 
   <a class="readmore" href="https://blog.cloudflare.com/transformers-on-logpush/" rel="noopener nofollow" target="_blank">
@@ -284,7 +284,7 @@
       </li>
       <li>
         <a href="#edc939989dc9">
-          <span class="toc-title">Küresel olarak kıt, yerel olarak boşta: Meta atıl çıkarım kapasitesini nasıl kullanıyor</span>
+          <span class="toc-title">Küresel olarak kıt, yerel olarak boşta: Meta atıl inference kapasitesini nasıl kullanıyor</span>
           <span class="toc-meta">Meta Engineering · 10 dk</span>
         </a>
       </li>
@@ -333,7 +333,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

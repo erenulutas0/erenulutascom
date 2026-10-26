@@ -88,12 +88,12 @@
   </h2>
   <p class="original-title">Running multi-day AZ evacuation drills with ARC Zonal Shift · Antoine Boucherie</p>
 
-  <div class="prose"><p>‘Bir AZ düşerse ayakta kalırız’ cümlesi, bunu gerçekten denemedikçe bir varsayımdır. AWS’nin yazısı, bir Availability Zone’u <strong>48-72 saat boyunca</strong> trafikten çıkarıp sistemi <strong>N-1</strong> kapasiteyle (bir zone eksik) çalıştıran tatbikatları anlatıyor. Kısa bir tatbikat anlık sorunları yakalar; günlerce süren tatbikat ise zamanla ortaya çıkan sorunları yakalar.</p><p>Tatbikatların açığa çıkardığı hata türleri öğretici: <strong>otomatik ölçekleme</strong> (kapasite kalan zone’larda yeterince hızlı büyüyor mu), <strong>eski DNS kayıtları</strong> (istemciler boşaltılmış zone’a hâlâ gidiyor mu), <strong>nöbet ve rotasyon süreçleri</strong> (insanlar ve runbook’lar çok günlük bir durumu kaldırıyor mu) ve <strong>sabitlenmiş veritabanı bağlantıları</strong> (bağlantılar eski zone’daki örneğe yapışık kalıyor).</p><p>Mekanizma tarafında ARC Zonal Shift, Kubernetes (EKS) üzerinde ilgili zone’daki düğümleri yeni pod’lara kapatıyor (cordon) ve o zone’daki uç noktaları EndpointSlice’tan çıkarıyor; böylece trafik kalan zone’lara akıyor.</p></div>
+  <div class="prose"><p>‘Bir AZ düşerse ayakta kalırız’ cümlesi, bunu gerçekten denemedikçe bir varsayımdır. AWS’nin yazısı, bir Availability Zone’u <strong>48-72 saat boyunca</strong> trafikten çıkarıp sistemi <strong>N-1</strong> kapasiteyle (bir zone eksik) çalıştıran tatbikatları anlatıyor. Kısa bir tatbikat anlık sorunları yakalar; günlerce süren tatbikat ise zamanla ortaya çıkan sorunları yakalar.</p><p>Tatbikatların açığa çıkardığı hata türleri öğretici: <strong>autoscaling</strong> (kapasite kalan zone’larda yeterince hızlı büyüyor mu), <strong>eski DNS kayıtları</strong> (istemciler boşaltılmış zone’a hâlâ gidiyor mu), <strong>nöbet ve rotasyon süreçleri</strong> (insanlar ve runbook’lar çok günlük bir durumu kaldırıyor mu) ve <strong>sabitlenmiş veritabanı bağlantıları</strong> (bağlantılar eski zone’daki örneğe yapışık kalıyor).</p><p>Mekanizma tarafında ARC Zonal Shift, Kubernetes (EKS) üzerinde ilgili zone’daki node’ları yeni pod’lara kapatıyor (cordon) ve o zone’daki uç noktaları EndpointSlice’tan çıkarıyor; böylece trafik kalan zone’lara akıyor.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Yedekliliği test etmeyen sistem, yedekliliği olduğunu varsayan sistemdir.</span></li><li><span>Günlerce süren tatbikat, saatlik tatbikatın göremediği zamanla biriken sorunları gösterir.</span></li><li><span>Sorunların çoğu kodda değil çevrede: DNS, bağlantı havuzu, ölçekleme ve insan süreçleri.</span></li><li><span>N-1 kapasite planı, kalan zone’ların tüm yükü kaldırabildiğini ölçmeden anlamsızdır.</span></li>    </ol>
+<li><span>Yedekliliği test etmeyen sistem, yedekliliği olduğunu varsayan sistemdir.</span></li><li><span>Günlerce süren tatbikat, saatlik tatbikatın göremediği zamanla biriken sorunları gösterir.</span></li><li><span>Sorunların çoğu kodda değil çevrede: DNS, connection pool, ölçekleme ve insan süreçleri.</span></li><li><span>N-1 kapasite planı, kalan zone’ların tüm yükü kaldırabildiğini ölçmeden anlamsızdır.</span></li>    </ol>
   </div>
 
   <div class="callouts">
@@ -102,8 +102,8 @@
       <p>Çok-AZ mimari çizmek kolay, çalıştığını kanıtlamak zor. Tatbikat, ‘olursa ne olur’ sorusunu planlı bir deneye çevirir ve gerçek kesintiden önce hataları ucuza bulur.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Bu desenin küçük ölçekli hâli bugün senin elinde: Tradebot ya da Mobit’i docker-compose ile çalıştırıyorsan, veritabanı konteynerini bilerek durdur ve uygulamanın ne kadar sürede toparlandığına bak. Bağlantı havuzun (HikariCP) ölü bağlantıyı tespit edip yeniden bağlanıyor mu? <code>maxLifetime</code> ve <code>connectionTimeout</code> ayarlarının anlamı tam burada ortaya çıkar. Sonucu bir <code>RESILIENCE.md</code> dosyasına ‘ne denedim, ne bozuldu, ne düzelttim’ diye yaz: mülakatta ‘dayanıklılığı test ettim’ diyebilmenin somut kanıtı.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Bu desenin küçük ölçekli hâli bugün senin elinde: bir uygulamayı docker-compose ile çalıştırıyorsan, veritabanı container’ını bilerek durdur ve uygulamanın ne kadar sürede toparlandığına bak. Connection pool’un (HikariCP) ölü bağlantıyı tespit edip yeniden bağlanıyor mu? <code>maxLifetime</code> ve <code>connectionTimeout</code> ayarlarının anlamı tam burada ortaya çıkar. Sonucu bir <code>RESILIENCE.md</code> dosyasına ‘ne denedim, ne bozuldu, ne düzelttim’ diye yaz: mülakatta ‘resilience’ı test ettim’ diyebilmenin somut kanıtı.</p>
     </div>
   </div>
 
@@ -111,20 +111,20 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">Availability Zone (AZ)</span> <span class="term-tr">erişilebilirlik bölgesi</span></dt>
+      <dt><span class="term-en">Availability Zone (AZ)</span></dt>
       <dd>Bir bulut bölgesi içinde fiziksel olarak ayrı, bağımsız arızalanabilen veri merkezi grubu.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">zonal shift</span> <span class="term-tr">zone kaydırma</span></dt>
+      <dt><span class="term-en">zonal shift</span></dt>
       <dd>Trafiği sorunlu ya da boşaltılan bir zone’dan diğer zone’lara yönlendirme.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">N-1</span> <span class="term-tr">N-1 kapasite</span></dt>
+      <dt><span class="term-en">N-1</span></dt>
       <dd>Bir bileşen (örneğin bir zone) kaybedilse bile yükü taşıyabilecek kapasite planı.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">cordon</span> <span class="term-tr">düğümü kapatma</span></dt>
-      <dd>Kubernetes’te bir düğüme yeni pod atanmasını engelleme.</dd>
+      <dt><span class="term-en">cordon</span></dt>
+      <dd>Kubernetes’te bir node’a yeni pod atanmasını engelleme.</dd>
     </div>
   </dl>
 
@@ -132,10 +132,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/dayaniklilik/">#dayanıklılık</a></li>
+  <li><a href="/etiket/resilience/">#resilience</a></li>
   <li><a href="/etiket/aws/">#AWS</a></li>
   <li><a href="/etiket/kubernetes/">#Kubernetes</a></li>
-  <li><a href="/etiket/tatbikat/">#tatbikat</a></li>
+  <li><a href="/etiket/drills/">#drills</a></li>
 </ul>
 
   <a class="readmore" href="https://aws.amazon.com/blogs/architecture/running-multi-day-az-evacuation-drills-with-arc-zonal-shift/" rel="noopener nofollow" target="_blank">
@@ -160,7 +160,7 @@
     <a href="https://cloud.google.com/blog/products/databases/spanner-omni-deploy-anywhere-version-of-spanner-is-now-ga/" rel="noopener nofollow" target="_blank">Spanner artık her yerde: Spanner Omni genel kullanıma açıldı</a>
   </h3>
   <p class="original-title">Spanner Omni, deploy-anywhere version of Spanner, is now GA</p>
-  <div class="prose prose-sm"><p>Google, Spanner’ın <strong>istediğin yere kurulabilen</strong> sürümü Spanner Omni’yi genel kullanıma açtı. Yazıya göre ürün yaklaşık 2 milyon kez indirilmiş; mimaride iş yapan <strong>worker düğümleri</strong> var ve denemek için ücretsiz bir geliştirici sürümü sunuluyor. Böylece Spanner’ın dağıtık, güçlü tutarlı veritabanı modelini yalnızca Google Cloud’da değil, kendi ortamında da denemek mümkün.</p></div>
+  <div class="prose prose-sm"><p>Google, Spanner’ın <strong>istediğin yere kurulabilen</strong> sürümü Spanner Omni’yi genel kullanıma açtı. Yazıya göre ürün yaklaşık 2 milyon kez indirilmiş; mimaride iş yapan <strong>worker node’ları</strong> var ve denemek için ücretsiz bir geliştirici sürümü sunuluyor. Böylece Spanner’ın dağıtık, güçlü tutarlı veritabanı modelini yalnızca Google Cloud’da değil, kendi ortamında da denemek mümkün.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
@@ -170,8 +170,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Dağıtık veritabanı kavramlarını (güçlü tutarlılık, dağıtık işlem) öğrenmek için ücretsiz geliştirici sürümünü yerel makinede dene; bu gazetenin 2 Ekim sayısındaki Spanner queues yazısını da aynı ortamda deneyebilirsin.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Dağıtık veritabanı kavramlarını (strong consistency, distributed transaction) öğrenmek için ücretsiz geliştirici sürümünü yerel makinede dene; bu gazetenin 2 Ekim sayısındaki Spanner queues yazısını da aynı ortamda deneyebilirsin.</p>
     </div>
   </div>
 
@@ -179,7 +179,7 @@
     <summary class="label">Sözlük · 1 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">strong consistency</span> <span class="term-tr">güçlü tutarlılık</span></dt>
+      <dt><span class="term-en">strong consistency</span></dt>
       <dd>Her okumanın en son yazılan değeri görmesini garanti eden tutarlılık modeli.</dd>
     </div>
   </dl>
@@ -188,9 +188,9 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/veritabani/">#veritabanı</a></li>
+  <li><a href="/etiket/database/">#database</a></li>
   <li><a href="/etiket/spanner/">#Spanner</a></li>
-  <li><a href="/etiket/dagitik-sistemler/">#dağıtık sistemler</a></li>
+  <li><a href="/etiket/distributed-systems/">#distributed systems</a></li>
 </ul>
 
   <a class="readmore" href="https://cloud.google.com/blog/products/databases/spanner-omni-deploy-anywhere-version-of-spanner-is-now-ga/" rel="noopener nofollow" target="_blank">
@@ -209,10 +209,10 @@
 </div>
 
   <h3 class="brief-title">
-    <a href="https://www.databricks.com/blog/practical-guide-cost-optimization-lakebase-postgres" rel="noopener nofollow" target="_blank">Postgres’te maliyeti düşüren üç ayar: paylaşımlı dallar, otomatik ölçekleme, sıfıra inme</a>
+    <a href="https://www.databricks.com/blog/practical-guide-cost-optimization-lakebase-postgres" rel="noopener nofollow" target="_blank">Postgres’te maliyeti düşüren üç ayar: paylaşımlı dallar, autoscaling, sıfıra inme</a>
   </h3>
   <p class="original-title">A practical guide to cost optimization with Lakebase Postgres</p>
-  <div class="prose prose-sm"><p>Databricks’in Lakebase rehberi maliyeti üç yerden kısmayı öneriyor. <strong>Dallar (branch) depolamayı paylaşıyor</strong>, yani bir geliştirme ya da test kopyası verinin tamamını ikinci kez saklamıyor. <strong>Otomatik ölçekleme</strong> ve <strong>sıfıra inme (scale to zero)</strong> boşta kalan hesaplama maliyetini azaltıyor. Veri senkronizasyonunda da üç mod var: <strong>snapshot</strong>, <strong>triggered</strong> ve <strong>continuous</strong>; ne kadar taze veri gerektiğine göre seçilince gereksiz sürekli senkronizasyon maliyeti önleniyor.</p></div>
+  <div class="prose prose-sm"><p>Databricks’in Lakebase rehberi maliyeti üç yerden kısmayı öneriyor. <strong>Dallar (branch) depolamayı paylaşıyor</strong>, yani bir geliştirme ya da test kopyası verinin tamamını ikinci kez saklamıyor. <strong>Autoscaling</strong> ve <strong>sıfıra inme (scale to zero)</strong> boşta kalan hesaplama maliyetini azaltıyor. Veri senkronizasyonunda da üç mod var: <strong>snapshot</strong>, <strong>triggered</strong> ve <strong>continuous</strong>; ne kadar taze veri gerektiğine göre seçilince gereksiz sürekli senkronizasyon maliyeti önleniyor.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
@@ -222,8 +222,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Aynı mantık kendi geliştirme ortamında da geçerli: Mobit için yalnızca ihtiyaç anında açılan bir test veritabanı kullan. Neon gibi dal destekli bir Postgres sağlayıcısı ile ücretsiz katmanda ‘her pull request için bir veritabanı dalı’ deseni denenebilir.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Aynı mantık kendi geliştirme ortamında da geçerli: yalnızca ihtiyaç anında açılan bir test veritabanı kullan. Neon gibi branching destekli bir Postgres sağlayıcısı ile ücretsiz katmanda ‘her pull request için bir database branch’ deseni denenebilir.</p>
     </div>
   </div>
 
@@ -231,11 +231,11 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">scale to zero</span> <span class="term-tr">sıfıra ölçekleme</span></dt>
+      <dt><span class="term-en">scale to zero</span></dt>
       <dd>Kullanılmayan hesaplama kaynağını tamamen kapatıp istek gelince yeniden açma.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">database branching</span> <span class="term-tr">veritabanı dallandırma</span></dt>
+      <dt><span class="term-en">database branching</span></dt>
       <dd>Bir veritabanının kopyasını veriyi çoğaltmadan, sadece değişenleri saklayarak oluşturma.</dd>
     </div>
   </dl>
@@ -245,7 +245,7 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/postgres/">#Postgres</a></li>
-  <li><a href="/etiket/maliyet/">#maliyet</a></li>
+  <li><a href="/etiket/cost/">#cost</a></li>
   <li><a href="/etiket/lakebase/">#Lakebase</a></li>
 </ul>
 
@@ -276,7 +276,7 @@
       </li>
       <li>
         <a href="#412a615366dd">
-          <span class="toc-title">Postgres’te maliyeti düşüren üç ayar: paylaşımlı dallar, otomatik ölçekleme, sıfıra inme</span>
+          <span class="toc-title">Postgres’te maliyeti düşüren üç ayar: paylaşımlı dallar, autoscaling, sıfıra inme</span>
           <span class="toc-meta">Databricks Engineering · 10 dk</span>
         </a>
       </li>
@@ -298,7 +298,7 @@
   <nav class="pager" aria-label="Sayılar arası gezinme">
     <a class="pager-link pager-prev" href="/sayi/2026-09-29/" rel="prev">
       <span class="pager-label">← Önceki sayı · 29 Eylül 2026</span>
-      <span class="pager-title">GPU boşta bekliyor çünkü sandbox geç açılıyor: ısıtılmış havuz ve pod geri dönüşümü</span>
+      <span class="pager-title">GPU boşta bekliyor çünkü sandbox geç açılıyor: warm pool ve pod geri dönüşümü</span>
     </a>
     <a class="pager-link pager-next" href="/sayi/2026-10-01/" rel="next">
       <span class="pager-label">Sonraki sayı · 1 Ekim 2026 →</span>
@@ -319,7 +319,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

@@ -84,16 +84,16 @@
 </div>
 
   <h2 class="cover-title">
-    <a href="https://blog.cloudflare.com/agentic-security-operations/" rel="noopener nofollow" target="_blank">Önce kanıtı kod toplasın, sonra model yorumlasın: Cloudflare’in çok ajanlı güvenlik hattı</a>
+    <a href="https://blog.cloudflare.com/agentic-security-operations/" rel="noopener nofollow" target="_blank">Önce kanıtı kod toplasın, sonra model yorumlasın: Cloudflare’in multi-agent güvenlik hattı</a>
   </h2>
   <p class="original-title">Building an evidence-grounded agentic security operations harness on Cloudflare · Deanna Tran, Javier Castro</p>
 
-  <div class="prose"><p>Güvenlik uyarıları nadiren tek tek gelir. Bir uyarı ortamda bir dalga yaratır ve bir analistin hangilerinin ilişkili olduğuna, ne anlama geldiklerine karar vermesi gerekir. Cloudflare, Managed Defense ekibi için bu işin büyük kısmını üstlenen çok ajanlı bir düzenek kurdu ve ilk denemenin neden başarısız olduğunu açıkça anlatıyor.</p><p><strong>Tek ajan neden başarısız oldu?</strong> İlk prototipte tüm soruşturma tek bir genel amaçlı ajana verildi. Faydalı analiz üretti ama kanıtın desteklemediği iddialar da uydurdu. Telemetri, dedektör açıklamaları, politikalar ve tehdit istihbaratı tek bir prompta ezilince rolleri birbirine karıştı. Üç tekrar eden sorun: <strong>(1) Bağlam otoriteye dönüştü:</strong> bir tespit, saldırının gerçekleştiğinin kanıtı değil bir hipotezdir; geniş bir ajan bu ayrımı bulandırır. <strong>(2) Kapsam kaydı:</strong> ajan yanlış hesabı, zaman aralığını ya da kaynağı sorgulayabilir; bir prompta sınır olarak güvenemezsin. <strong>(3) Hata kayboldu:</strong> bir sorgu zaman aşımına uğrarsa sonuç ‘bakılmadı’ ile ‘bakıldı ve bulunamadı’yı ayırt etmeyebilir.</p><p><strong>Önce keşif, sonra çıkarım.</strong> Çözüm, kanıt toplamayı ve kapsam denetimini model analizinden önce uygulama koduna taşımak. Düzeneğin ön yarısında ajan yok: deterministik kod, sürümlü API çağrılarıyla sabit bir keşif iş akışı çalıştırıp müşteri kimliğini, tespit geçmişini, trafik tabanını, uygulanan aksiyonun sonucunu ve ağ gözlemlerini topluyor. Bu sabit anlık görüntü değerlendirmeyi de <strong>tekrarlanabilir</strong> yapıyor: ajanlar veriyi kendileri çekerse iki koşu girdileri değiştiği için farklı sonuç verebilir; aynı görüntü yeniden oynatılınca farklar yalnızca yorumdan gelir.</p><p><strong>Gürültüyü erken ele.</strong> Uyarıların çoğu olay değil. Bilinen yüksek hacimli gürültü geldiği anda deterministik olarak pasif sınıflanıyor. Geri kalan için hafif bir triyaj modeli (Cloudflare’in açık kaynak karar modeli Clef) her uyarıyı keşif verisiyle karşılaştırıyor: bu daha önce görüldü mü, analistler ne karar verdi?</p><p><strong>Uzman ajanlar.</strong> Derin inceleme gereken uyarılarda bir koordinatör dört uzman ajanı paralel çalıştırıyor: trafik analizi, müşteri bağlamı, küresel telemetri ve tehdit istihbaratı. Bir sentez ajanı onların <strong>tipli bulgularını</strong> tek bir tavsiyede birleştiriyor; yeni kanıt çekemiyor ve onaylı sözlüğün dışında bir sınıflandırma seçemiyor. Her görevi dar tutmak, desteksiz iddiaları yakalamayı ve tavsiyeleri denetlemeyi kolaylaştırıyor.</p></div>
+  <div class="prose"><p>Güvenlik uyarıları nadiren tek tek gelir. Bir uyarı ortamda bir dalga yaratır ve bir analistin hangilerinin ilişkili olduğuna, ne anlama geldiklerine karar vermesi gerekir. Cloudflare, Managed Defense ekibi için bu işin büyük kısmını üstlenen multi-agent bir düzenek kurdu ve ilk denemenin neden başarısız olduğunu açıkça anlatıyor.</p><p><strong>Tek agent neden başarısız oldu?</strong> İlk prototipte tüm soruşturma tek bir genel amaçlı agent’a verildi. Faydalı analiz üretti ama kanıtın desteklemediği iddialar da uydurdu. Telemetri, dedektör açıklamaları, politikalar ve tehdit istihbaratı tek bir prompta ezilince rolleri birbirine karıştı. Üç tekrar eden sorun: <strong>(1) Bağlam otoriteye dönüştü:</strong> bir tespit, saldırının gerçekleştiğinin kanıtı değil bir hipotezdir; geniş bir agent bu ayrımı bulandırır. <strong>(2) Kapsam kaydı:</strong> agent yanlış hesabı, zaman aralığını ya da kaynağı sorgulayabilir; bir prompta sınır olarak güvenemezsin. <strong>(3) Hata kayboldu:</strong> bir sorgu zaman aşımına uğrarsa sonuç ‘bakılmadı’ ile ‘bakıldı ve bulunamadı’yı ayırt etmeyebilir.</p><p><strong>Önce keşif, sonra inference.</strong> Çözüm, kanıt toplamayı ve kapsam denetimini model analizinden önce uygulama koduna taşımak. Düzeneğin ön yarısında agent yok: deterministik kod, sürümlü API çağrılarıyla sabit bir keşif workflow çalıştırıp müşteri kimliğini, tespit geçmişini, trafik tabanını, uygulanan aksiyonun sonucunu ve ağ gözlemlerini topluyor. Bu sabit snapshot değerlendirmeyi de <strong>tekrarlanabilir</strong> yapıyor: agent’lar veriyi kendileri çekerse iki koşu girdileri değiştiği için farklı sonuç verebilir; aynı görüntü yeniden oynatılınca farklar yalnızca yorumdan gelir.</p><p><strong>Gürültüyü erken ele.</strong> Uyarıların çoğu olay değil. Bilinen yüksek hacimli gürültü geldiği anda deterministik olarak pasif sınıflanıyor. Geri kalan için hafif bir triage modeli (Cloudflare’in açık kaynak decision model Clef) her uyarıyı keşif verisiyle karşılaştırıyor: bu daha önce görüldü mü, analistler ne karar verdi?</p><p><strong>Uzman agent’lar.</strong> Derin inceleme gereken uyarılarda bir koordinatör dört uzman agent’ı paralel çalıştırıyor: trafik analizi, müşteri bağlamı, küresel telemetri ve tehdit istihbaratı. Bir sentez agent’ı onların <strong>tipli bulgularını</strong> tek bir tavsiyede birleştiriyor; yeni kanıt çekemiyor ve onaylı sözlüğün dışında bir sınıflandırma seçemiyor. Her görevi dar tutmak, desteksiz iddiaları yakalamayı ve tavsiyeleri denetlemeyi kolaylaştırıyor.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Prompt bir güvenlik sınırı değildir; kapsamı kod zorlar.</span></li><li><span>‘Bakılmadı’ ile ‘bakıldı, bulunamadı’ farklı sonuçlardır ve ayrı temsil edilmelidir.</span></li><li><span>Veriyi model değil deterministik kod toplarsa değerlendirme tekrarlanabilir olur.</span></li><li><span>Ucuz ve hızlı bir model önce gürültüyü eler; pahalı model yalnızca gerekene bakar.</span></li><li><span>Dar görevli uzman ajanlar + yeni veri çekemeyen sentez ajanı, uydurmayı yapısal olarak sınırlar.</span></li>    </ol>
+<li><span>Prompt bir güvenlik sınırı değildir; kapsamı kod zorlar.</span></li><li><span>‘Bakılmadı’ ile ‘bakıldı, bulunamadı’ farklı sonuçlardır ve ayrı temsil edilmelidir.</span></li><li><span>Veriyi model değil deterministik kod toplarsa değerlendirme tekrarlanabilir olur.</span></li><li><span>Ucuz ve hızlı bir model önce gürültüyü eler; pahalı model yalnızca gerekene bakar.</span></li><li><span>Dar görevli uzman agent’lar + yeni veri çekemeyen sentez agent’ı, uydurmayı yapısal olarak sınırlar.</span></li>    </ol>
   </div>
 
   <div class="callouts">
@@ -102,8 +102,8 @@
       <p>Agent sistemlerinde hatanın kaynağı çoğu zaman model değil, modele bırakılan sorumluluğun genişliğidir. Bu yazı ‘ne kadarını koda, ne kadarını modele vermeli’ sorusuna üretimden gelen net bir cevap: veri toplama, kapsam ve sözlük kodda; yorum modelde.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>DBH’daki LLM hattına ve Mobit’in arama asistanına aynı üç kural uyar. <strong>Bir:</strong> modelin araç çağırarak veri çekmesine izin vermeden önce, ihtiyaç duyacağı veriyi kodla çek ve prompta hazır ver; hangi kaydın hangi kullanıcıya ait olduğunu SQL’deki <code>WHERE</code> belirlesin, prompt değil. <strong>İki:</strong> her araç sonucuna açık bir durum alanı ekle: <code>ok</code>, <code>empty</code>, <code>error</code>. Boş liste ile hata aynı görünürse model ‘bulunamadı’ diye uydurur. <strong>Üç:</strong> çıktıyı serbest metin yerine sabit bir sözlükle (<code>enum</code>) sınırla. Bu üç değişiklik, daha büyük bir modele geçmekten çoğu zaman daha fazla hata azaltır.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Bir LLM hattına ve arama asistanına aynı üç kural uyar. <strong>Bir:</strong> modelin tool çağırarak veri çekmesine izin vermeden önce, ihtiyaç duyacağı veriyi kodla çek ve prompt’a hazır ver; hangi kaydın hangi kullanıcıya ait olduğunu SQL’deki <code>WHERE</code> belirlesin, prompt değil. <strong>İki:</strong> her tool sonucuna açık bir durum alanı ekle: <code>ok</code>, <code>empty</code>, <code>error</code>. Boş liste ile hata aynı görünürse model ‘bulunamadı’ diye uydurur. <strong>Üç:</strong> çıktıyı serbest metin yerine sabit bir sözlükle (<code>enum</code>) sınırla. Bu üç değişiklik, daha büyük bir modele geçmekten çoğu zaman daha fazla hata azaltır.</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">SIEM</span> <span class="term-tr">güvenlik bilgi ve olay yönetimi</span></dt>
+      <dt><span class="term-en">SIEM</span></dt>
       <dd>Güvenlik kayıtlarını toplayıp ilişkilendiren ve uyarı üreten sistem.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">triage</span> <span class="term-tr">triyaj</span></dt>
+      <dt><span class="term-en">triage</span></dt>
       <dd>Gelen uyarıları önem ve aciliyete göre hızlıca sınıflandırıp önceliklendirme.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">hallucination</span> <span class="term-tr">uydurma</span></dt>
+      <dt><span class="term-en">hallucination</span></dt>
       <dd>Modelin girdideki kanıtla desteklenmeyen bir bilgiyi doğruymuş gibi üretmesi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">typed output</span> <span class="term-tr">tipli çıktı</span></dt>
+      <dt><span class="term-en">typed output</span></dt>
       <dd>Biçimi ve izin verilen değerleri önceden şemayla sabitlenmiş model çıktısı.</dd>
     </div>
   </dl>
@@ -133,8 +133,8 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/agent/">#agent</a></li>
-  <li><a href="/etiket/guvenlik/">#güvenlik</a></li>
-  <li><a href="/etiket/mimari/">#mimari</a></li>
+  <li><a href="/etiket/security/">#security</a></li>
+  <li><a href="/etiket/architecture/">#architecture</a></li>
   <li><a href="/etiket/llm/">#LLM</a></li>
 </ul>
 
@@ -160,7 +160,7 @@
     <a href="https://cloud.google.com/blog/topics/financial-services/ultra-low-latency-solution-with-u4-enables-high-velocity-trading/" rel="noopener nofollow" target="_blank">Bulutta yüksek frekanslı alım-satım: gecikme değil, gecikmenin tutarlılığı</a>
   </h3>
   <p class="original-title">Ultra Low Latency Solution with U4 enables high-velocity trading</p>
-  <div class="prose prose-sm"><p>Sermaye piyasalarında paket zamanlamasındaki küçük oynamalar bile kuyruk önceliğini ve emrin gerçekleşmesini değiştirir. Google Cloud, <strong>Ultra Low Latency (ULL)</strong> çözümünü ve yeni U4 makine ailesini genel kullanıma açtı. Hedef yalnızca düşük gecikme değil, <strong>determinizm</strong>: kritik işlemin her seferinde aynı sürede bitmesi.</p><p>Teknik parçalar öğretici: sanallaştırma kaynaklı titremeyi (jitter) azaltan <strong>bare metal</strong> makineler; yedekli A/B <strong>multicast</strong> piyasa veri akışlarının iki bağımsız ağ bağdaştırıcısından alınması, telemetri ve yönetimin üçüncü bir bağdaştırıcıya ayrılması; çekirdeği atlayan kullanıcı alanı ağ yığınları (<strong>OpenOnload, DPDK</strong>); ve ağ düzeyinde 10 nanosaniyenin altında zaman damgası sağlayan saat senkronizasyonu.</p></div>
+  <div class="prose prose-sm"><p>Sermaye piyasalarında paket zamanlamasındaki küçük oynamalar bile kuyruk önceliğini ve emrin gerçekleşmesini değiştirir. Google Cloud, <strong>Ultra Low Latency (ULL)</strong> çözümünü ve yeni U4 makine ailesini genel kullanıma açtı. Hedef yalnızca düşük gecikme değil, <strong>determinizm</strong>: kritik işlemin her seferinde aynı sürede bitmesi.</p><p>Teknik parçalar öğretici: sanallaştırma kaynaklı titremeyi (jitter) azaltan <strong>bare metal</strong> makineler; yedekli A/B <strong>multicast</strong> piyasa veri akışlarının iki bağımsız ağ bağdaştırıcısından alınması, telemetri ve yönetimin üçüncü bir bağdaştırıcıya ayrılması; çekirdeği atlayan kullanıcı alanı ağ yığınları (<strong>OpenOnload, DPDK</strong>); ve ağ düzeyinde 10 nanosaniyenin altında timestamp sağlayan saat senkronizasyonu.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
@@ -170,8 +170,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Tradebot bu ölçekte değil ama aynı ilke geçerli: stratejinin tepki süresini ölçerken ortalamaya değil <strong>p99 ve en kötü duruma</strong> bak, çünkü kayıp emirler oradan gelir. Her piyasa olayına geliş zamanı ve karar zamanı damgası koyup farkın dağılımını çıkar. Garbage collection duraksamaları ya da log yazımı gibi kaynakları, kritik karar yolundan ayrı bir iş parçacığına almak da aynı ‘yolu ayır’ fikrinin küçük hâli.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Bu ölçekte değilsin ama aynı ilke geçerli: bir stratejinin tepki süresini ölçerken ortalamaya değil <strong>p99 ve en kötü duruma</strong> bak, çünkü kayıp emirler oradan gelir. Her piyasa olayına geliş zamanı ve karar zamanı damgası koy, farkın dağılımını çıkar. Garbage collection pause’ları ya da log yazımı gibi kaynakları, kritik karar yolundan ayrı bir thread’e almak da aynı ‘yolu ayır’ fikrinin küçük hâli.</p>
     </div>
   </div>
 
@@ -179,15 +179,15 @@
     <summary class="label">Sözlük · 3 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">jitter</span> <span class="term-tr">titreme</span></dt>
+      <dt><span class="term-en">jitter</span></dt>
       <dd>Gecikmenin bir istekten diğerine gösterdiği değişkenlik.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">kernel bypass</span> <span class="term-tr">çekirdek atlama</span></dt>
+      <dt><span class="term-en">kernel bypass</span></dt>
       <dd>Ağ paketlerini işletim sistemi çekirdeğine uğramadan doğrudan uygulamada işleme.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">multicast</span> <span class="term-tr">çoklu yayın</span></dt>
+      <dt><span class="term-en">multicast</span></dt>
       <dd>Tek bir göndericinin aynı veriyi bir grup alıcıya aynı anda iletmesi.</dd>
     </div>
   </dl>
@@ -196,10 +196,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/gecikme/">#gecikme</a></li>
-  <li><a href="/etiket/ag/">#ağ</a></li>
-  <li><a href="/etiket/finans/">#finans</a></li>
-  <li><a href="/etiket/altyapi/">#altyapı</a></li>
+  <li><a href="/etiket/latency/">#latency</a></li>
+  <li><a href="/etiket/networking/">#networking</a></li>
+  <li><a href="/etiket/finance/">#finance</a></li>
+  <li><a href="/etiket/infrastructure/">#infrastructure</a></li>
 </ul>
 
   <a class="readmore" href="https://cloud.google.com/blog/topics/financial-services/ultra-low-latency-solution-with-u4-enables-high-velocity-trading/" rel="noopener nofollow" target="_blank">
@@ -217,7 +217,7 @@
     <ol class="toc" id="toc">
       <li>
         <a href="#efc47ac2f82e">
-          <span class="toc-title">Önce kanıtı kod toplasın, sonra model yorumlasın: Cloudflare’in çok ajanlı güvenlik hattı</span>
+          <span class="toc-title">Önce kanıtı kod toplasın, sonra model yorumlasın: Cloudflare’in multi-agent güvenlik hattı</span>
           <span class="toc-meta">Cloudflare Blog · 8 dk</span>
         </a>
       </li>
@@ -266,7 +266,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

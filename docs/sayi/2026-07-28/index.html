@@ -88,7 +88,7 @@
   </h2>
   <p class="original-title">Natural disasters and government interference: examining Q2 2026’s major Internet disruption events · Lai Yi Ohlsen</p>
 
-  <div class="prose"><p>Cloudflare&#x27;in çeyreklik kesinti özeti, iyi bir açılış cümlesiyle başlıyor: çoğu altyapı gibi, internetin kırılganlığını da göz ardı etmek kolay — <strong>çalıştığı sürece</strong>. Bozulduğunda karmaşıklığı tüm çıplaklığıyla görünüyor.</p><p>2026&#x27;nın ikinci çeyreğindeki bulgular üç farklı kesinti türünü gösteriyor. <strong>Doğa olayları:</strong> Guam&#x27;ın hemen kuzeyinden geçen Süper Tayfun Sinlaku, çeyreğin en uzun kesintisine yol açmış — ada doğrudan darbe almasa da tropik fırtına gücündeki rüzgârlar altyapıyı düşürmüş. Venezuela ve Tanzanya&#x27;daki kesintiler ise elektrik kaynaklı. <strong>Devlet müdahalesi:</strong> en sık görülen kesintiler Sudan&#x27;da sınav dönemlerindeki devlet kaynaklı kapatmalar. <strong>Geri dönüş:</strong> İran, uzun bir aradan sonra ulusal internet erişimini yeniden açmış.</p><p>Metodolojik olarak da öğretici: Cloudflare bu kesintileri kendi ağındaki trafik verisiyle tespit edip Cloudflare Radar üzerinde işaretliyor — yani gözlem, tek bir ağın kendi konumundan yapılan bir çıkarım.</p></div>
+  <div class="prose"><p>Cloudflare&#x27;in çeyreklik kesinti özeti, iyi bir açılış cümlesiyle başlıyor: çoğu altyapı gibi, internetin kırılganlığını da göz ardı etmek kolay — <strong>çalıştığı sürece</strong>. Bozulduğunda karmaşıklığı tüm çıplaklığıyla görünüyor.</p><p>2026&#x27;nın ikinci çeyreğindeki bulgular üç farklı kesinti türünü gösteriyor. <strong>Doğa olayları:</strong> Guam&#x27;ın hemen kuzeyinden geçen Süper Tayfun Sinlaku, çeyreğin en uzun kesintisine yol açmış — ada doğrudan darbe almasa da tropik fırtına gücündeki rüzgârlar altyapıyı düşürmüş. Venezuela ve Tanzanya&#x27;daki kesintiler ise elektrik kaynaklı. <strong>Devlet müdahalesi:</strong> en sık görülen kesintiler Sudan&#x27;da sınav dönemlerindeki devlet kaynaklı kapatmalar. <strong>Geri dönüş:</strong> İran, uzun bir aradan sonra ulusal internet erişimini yeniden açmış.</p><p>Metodolojik olarak da öğretici: Cloudflare bu kesintileri kendi ağındaki trafik verisiyle tespit edip Cloudflare Radar üzerinde işaretliyor — yani gözlem, tek bir ağın kendi konumundan yapılan bir inference.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
@@ -102,8 +102,8 @@
       <p>Bulutta çalışan bir mühendis olarak varsayımın &quot;internet var&quot; olur. Bu rapor o varsayımın bazı coğrafyalarda ne kadar zayıf olduğunu gösteriyor. Küresel kullanıcıya hizmet veren bir ürün tasarlıyorsan, bağlantı kalitesi bir özellik değil bir kısıttır.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>KlioAI&#x27;nın kullanıcıları Türkiye&#x27;de ve bağlantı kalitesi şehirden şehre değişiyor. Bu yazının pratik karşılığı: uygulamanı kötü ağ koşullarında test et. Chrome DevTools&#x27;ta ağ kısıtlaması (network throttling), Android&#x27;de ise geliştirici seçenekleriyle yavaş ağ simülasyonu var. Test ederken şunlara bak — istek zaman aşımı ne kadar, yeniden deneme var mı ve <strong>üstel geri çekilme</strong> (exponential backoff) uygulanıyor mu, bağlantı yokken kullanıcıya ne gösteriliyor? Bu üç sorunun cevabı, uygulamanın kötü ağda kullanılabilir olup olmadığını belirler.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Kullanıcılarının bağlantı kalitesi şehirden şehre değişiyorsa bu yazının pratik karşılığı şu: uygulamanı kötü ağ koşullarında test et. Chrome DevTools’ta network throttling, Android’de geliştirici seçenekleriyle yavaş ağ simülasyonu var. Test ederken şunlara bak: istek timeout’u ne kadar, retry var mı ve <strong>exponential backoff</strong> uygulanıyor mu, bağlantı yokken kullanıcıya ne gösteriliyor? Bu üç sorunun cevabı, uygulamanın kötü ağda kullanılabilir olup olmadığını belirler.</p>
     </div>
   </div>
 
@@ -111,11 +111,11 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">internet shutdown</span> <span class="term-tr">internet kapatma</span></dt>
+      <dt><span class="term-en">internet shutdown</span></dt>
       <dd>Bir devletin belirli bir bölgede ya da ülke genelinde internet erişimini kasten kesmesi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">exponential backoff</span> <span class="term-tr">üstel geri çekilme</span></dt>
+      <dt><span class="term-en">exponential backoff</span></dt>
       <dd>Başarısız isteği yeniden denerken bekleme süresini kademeli artırma; sunucuyu yeniden deneme seliyle boğmayı önler.</dd>
     </div>
   </dl>
@@ -124,9 +124,9 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/internet-altyapisi/">#internet altyapısı</a></li>
-  <li><a href="/etiket/ag/">#ağ</a></li>
-  <li><a href="/etiket/gozlemlenebilirlik/">#gözlemlenebilirlik</a></li>
+  <li><a href="/etiket/internet-infrastructure/">#internet infrastructure</a></li>
+  <li><a href="/etiket/networking/">#networking</a></li>
+  <li><a href="/etiket/observability/">#observability</a></li>
 </ul>
 
   <a class="readmore" href="https://blog.cloudflare.com/q2-2026-internet-disruption-summary/" rel="noopener nofollow" target="_blank">
@@ -161,8 +161,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Bu yazıdaki gözlem senin kendi projelerine de uyar. Tradebot ve KlioAI&#x27;da yazdığın araştırma/deney kodu muhtemelen üretim kodundan farklı standartta — bu normal ve doğru. Ama ikisi arasındaki sınırı <strong>bilinçli</strong> çiz: <code>notebooks/</code> altındaki keşif kodu ile <code>src/</code> altındaki üretim kodunu ayır, ve bir şey deneysellikten çıkıp kalıcı hâle geldiğinde taşırken test yaz. Bilimsel yazılımın düştüğü tuzak tam olarak bu sınırın hiç çizilmemesidir: bir gün prototip olan şey, üç yıl sonra kimsenin dokunmaya cesaret edemediği kritik altyapı olur.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Bu yazıdaki gözlem kendi projelerine de uyar. Araştırma ve deney kodu muhtemelen production kodundan farklı standartta; bu normal ve doğru. Ama ikisi arasındaki sınırı <strong>bilinçli</strong> çiz: <code>notebooks/</code> altındaki keşif kodu ile <code>src/</code> altındaki production kodunu ayır ve bir şey deneysellikten çıkıp kalıcı hâle geldiğinde taşırken test yaz. Bilimsel yazılımın düştüğü tuzak tam olarak bu sınırın hiç çizilmemesidir: bir gün prototip olan şey, üç yıl sonra kimsenin dokunmaya cesaret edemediği kritik altyapı olur.</p>
     </div>
   </div>
 
@@ -170,11 +170,11 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">research code</span> <span class="term-tr">araştırma kodu</span></dt>
+      <dt><span class="term-en">research code</span></dt>
       <dd>Bir fikri denemek için hızla yazılan, kalıcılık ve bakım hedefi olmayan kod.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">technical debt</span> <span class="term-tr">teknik borç</span></dt>
+      <dt><span class="term-en">technical debt</span></dt>
       <dd>Hızlı ilerlemek için ertelenen kalite işinin, ilerleyen zamanda faiziyle ödenmesi.</dd>
     </div>
   </dl>
@@ -183,8 +183,8 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/yazilim-kalitesi/">#yazılım kalitesi</a></li>
-  <li><a href="/etiket/arastirma/">#araştırma</a></li>
+  <li><a href="/etiket/software-quality/">#software quality</a></li>
+  <li><a href="/etiket/research/">#research</a></li>
   <li><a href="/etiket/agent/">#agent</a></li>
 </ul>
 
@@ -204,7 +204,7 @@
 </div>
 
   <h3 class="brief-title">
-    <a href="https://cloud.google.com/blog/topics/retail/best-buy-scales-secure-ai-access-with-workforce-identity-federation/" rel="noopener nofollow" target="_blank">Kullanıcı senkronizasyon pipeline&#39;ını silmek: doğrudan federasyon</a>
+    <a href="https://cloud.google.com/blog/topics/retail/best-buy-scales-secure-ai-access-with-workforce-identity-federation/" rel="noopener nofollow" target="_blank">Kullanıcı senkronizasyon pipeline&#39;ını silmek: doğrudan federation</a>
   </h3>
   <p class="original-title">Best Buy scales secure AI access with Workforce Identity Federation</p>
   <div class="prose prose-sm"><p>Best Buy, Google Cloud kullanımını genişletirken iki ölçekleme sorunuyla karşılaşmış: binlerce kullanıcıyı Microsoft Entra ID&#x27;den senkronize ederken riski azaltmak ve idari sürtünmeyi yönetmek.</p><p>Eski durum tanıdık: kullanıcıları Entra ID&#x27;den Google Cloud&#x27;a kopyalayan karmaşık senkronizasyon pipeline&#x27;ları. Çözüm ise pipeline&#x27;ı iyileştirmek değil <strong>ortadan kaldırmak</strong> — Workforce Identity Federation ile geliştiriciler ayrı bir kimlik deposu olmadan, mevcut Microsoft kimlikleriyle doğrudan bulut kaynaklarına erişiyor.</p><p>Yazıdaki en iyi cümle, eski desen hakkında: <strong>&quot;Bu desen küçük ölçekte çalışabilir, ama ekibin büyüdükçe sessizce bir yükümlülüğe dönüşür.&quot;</strong></p></div>
@@ -212,12 +212,12 @@
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
     <ol>
-<li><span>Senkronizasyon pipeline&#x27;ları her zaman bir gecikme ve tutarsızlık kaynağıdır — kaldırılabiliyorsa kaldırmak en iyi optimizasyondur.</span></li><li><span>Servis hesaplarını doğrudan federasyonla değiştirmek, hem denetimi hem iptal etmeyi (revocation) basitleştiriyor.</span></li>    </ol>
+<li><span>Senkronizasyon pipeline&#x27;ları her zaman bir gecikme ve tutarsızlık kaynağıdır — kaldırılabiliyorsa kaldırmak en iyi optimizasyondur.</span></li><li><span>Servis hesaplarını doğrudan federation’la değiştirmek, hem denetimi hem iptal etmeyi (revocation) basitleştiriyor.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
+      <h4 class="label">Pratikte</h4>
       <p>&quot;Küçük ölçekte çalışır, büyüdükçe sessizce yükümlülüğe dönüşür&quot; cümlesini bir kontrol sorusuna çevir: şu an yaptığım şey 10 kat büyüsem de çalışır mı? Kimlik yönetiminde bunun somut hâli şu — projelerinde paylaşılan servis hesapları ve elle dağıtılan anahtarlar varsa, bunlar ekip büyüdüğünde ilk kırılacak yerdir. Öğrenilecek kavram <strong>OIDC</strong>: kendi kullanıcı deposunu tutmak yerine kimliği bir sağlayıcıya devretmek. Spring Security ile kurmak yarım günlük iş ve hem güvenliği hem de &quot;şifremi unuttum&quot; akışını sana yazdırmaktan kurtarır.</p>
     </div>
   </div>
@@ -226,15 +226,15 @@
     <summary class="label">Sözlük · 3 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">identity federation</span> <span class="term-tr">kimlik federasyonu</span></dt>
+      <dt><span class="term-en">identity federation</span></dt>
       <dd>Kullanıcıları kopyalamadan, başka bir sistemin kimlik doğrulamasına güvenerek erişim verme.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">OIDC (OpenID Connect)</span> <span class="term-tr">OpenID Connect</span></dt>
+      <dt><span class="term-en">OIDC (OpenID Connect)</span></dt>
       <dd>OAuth 2.0 üzerine kurulu, kimlik doğrulamayı standartlaştıran protokol.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">service account</span> <span class="term-tr">servis hesabı</span></dt>
+      <dt><span class="term-en">service account</span></dt>
       <dd>İnsan değil bir uygulama adına kimlik doğrulayan hesap; paylaşıldığında denetim izi kaybolur.</dd>
     </div>
   </dl>
@@ -243,9 +243,9 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/kimlik-dogrulama/">#kimlik doğrulama</a></li>
-  <li><a href="/etiket/guvenlik/">#güvenlik</a></li>
-  <li><a href="/etiket/bulut/">#bulut</a></li>
+  <li><a href="/etiket/authentication/">#authentication</a></li>
+  <li><a href="/etiket/security/">#security</a></li>
+  <li><a href="/etiket/cloud/">#cloud</a></li>
   <li><a href="/etiket/operasyon/">#operasyon</a></li>
 </ul>
 
@@ -276,7 +276,7 @@
       </li>
       <li>
         <a href="#f67636e3d753">
-          <span class="toc-title">Kullanıcı senkronizasyon pipeline&#39;ını silmek: doğrudan federasyon</span>
+          <span class="toc-title">Kullanıcı senkronizasyon pipeline&#39;ını silmek: doğrudan federation</span>
           <span class="toc-meta">Google Cloud Blog · 4 dk</span>
         </a>
       </li>
@@ -319,7 +319,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

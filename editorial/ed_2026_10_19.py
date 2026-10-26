@@ -1,0 +1,99 @@
+"""19 Ekim 2026 sayısı."""
+
+from pipeline.compose import save_edition
+
+DATE = "2026-10-19"
+
+INTRO = "İki yazı, agent sistemlerinde aynı sorunu iki uçtan anlatıyor: fazla şeyi tek yere yüklemek. Cloudflare’in code review agent’ı maliyetini yüzde 68 düşürürken büyük kısmını prompt cache’i doğru kurarak kazandı. Meta ise tek ‘her şeyi bilen’ agent yerine bilgisiz ama disiplinli bir router seçti."
+
+DRAFTS = [
+    {
+        "url": "https://blog.cloudflare.com/obsessive-inference-optimization/",
+        "slot": "cover",
+        "title_tr": "Token’lar nereye gidiyor? Cloudflare AI code reviewer maliyetini yüzde 68 nasıl düşürdü",
+        "difficulty": "orta",
+        "tags": [
+            "LLM",
+            "cost",
+            "prompt caching",
+            "agent"
+        ],
+        "summary": "Cloudflare’in AI code reviewer’ı nisan ayında ortalama 1,19 dolara bir review yapıyordu; ağustos sonunda bu rakam yaklaşık 2,46 dolara çıktı. Mimaride önemli bir değişiklik yoktu: aynı coordinator, aynı specialist reviewer’lar, aynı risk tier’ları. Eylül ortasında agent’lara ‘token’lar nereye gidiyor, agresif biçimde kes’ görevi verildi. Sonuç: kod kalitesi yüksek efor seviyesinde kalarak ortalama review maliyeti en pahalı iki haftanın ortalaması olan 2,43 dolardan 0,77 dolara (yüzde 68) indi; medyan süre 4 dk 09 sn’den 1 dk 32 sn’ye düştü. Tasarrufun yaklaşık yüzde 40’ı reviewer kodundaki değişikliklerden, kalanı hangi modelin ne kadar efor harcadığını denemekten geldi.\n\n**Maliyet neden ikiye katlandı?** Review başına maliyet mart 1,22 dolardan ağustos 2,32 dolara tırmandı. Küçük bir kısmı en pahalı tier’a (full review) düşen review oranının yüzde 59’dan yüzde 65’e çıkmasıydı (mühendisler daha büyük değişiklikler yapıyor). Asıl artış model değişikliklerinden geldi: ağustos başında tüm reviewer’lar Anthropic modellerine taşındı (eval’lerde bu iş yükünde daha iyi çıktığı için) ve job başına maliyet 1,38 dolardan 2,03 dolara yükseldi. Internal standards reviewer Claude Opus 4.7’ye geçince review başına 0,25 dolardan 0,88 dolara çıktı; coordinator’dan bile pahalı oldu. Cache hit rate yüzde 85,7’den yüzde 97’ye yükseldi ama review başına token sayısı 0,91 milyondan 2,99 milyona çıktığı için ucuz cache read bile toplamı artırdı.\n\n**Para nereye gidiyor?** Optimizasyondan önce harcama şöyle bölünüyordu: output token’ları yüzde 23, cache write’lar yüzde 43, cache read’ler yüzde 34. Yani paranın çoğu model zaten görmüş ya da tekrar görecek bağlama gidiyordu. Bunun nedeni her LLM çağrısının tüm konuşmayı bağlam olarak yeniden göndermesi: code quality reviewer review başına ortalama 16,6 çağrı yapıyor, 72 bin token cache’e yazıyor ve 1,08 milyon token geri okuyor. Maliyet hem çağrı sayısıyla hem bağlam boyutuyla büyüyor. İki hedef belli oldu: her session’ın ilk isteği cache’e yazmak yerine cache’ten okusun, ve session daha az çağrı yapsın.\n\n**1. Cache’lenmiş prefix’i repository’ler arasında paylaşmak.** Her session aynı tool tanımlarıyla ve aynı agent prompt’uyla başlıyor (11-21 bin token, tüm repository’lerde özdeş). Yine de ilk isteğin cache’lenmiş bir prefix bulma oranı yalnızca yüzde 14-26 çıktı. Neden: OpenCode v1 system prompt’u tek blok olarak kuruyordu (agent prompt’u, ardından çalışma dizini ve tarihi içeren bir environment bölümü) ve tek cache breakpoint’ini bloğun sonuna koyuyordu. Çalışma dizini ve tarih her job’da farklı olduğundan, ortak kısım hiç cache’lenemiyordu. Çözüm: her agent prompt’unun sonuna bir marker koymak ve bloğu bu marker’dan ikiye bölen bir plugin hook’u eklemek; birinci yarı her job’da aynı baytlarla bitiyor ve kendi breakpoint’ini alıyor. Standards reviewer’ın referans index’i de prompt’a taşındı (daha önce her session ilk üç turunu dosya okuyarak harcıyordu). Birlikte review başına 2,47 dolardan 2,02 dolara düşürdü.\n\n**2. Daha az çağrı.** Üç küçük değişiklik birlikte review başına yaklaşık 0,20 dolar kazandırdı. Reviewer’ların kullanamadığı bir tool’u (final yorumu gönderen tool) görmemesi sağlandı: sub-reviewer’lar session’ların yüzde 57-76’sında bu tool’u çağırıp sunucu tarafında reddediliyor ve toparlanmak için bir çağrı daha harcıyordu. Dosyalar paralel okundu: code quality reviewer’ın turlarının yüzde 64’ünde model tam bir tool call yapıyordu (genelde tek dosya okumak), artık ortak bağlam ve patch’lerin hepsi ilk yanıtta okunuyor. Re-review’larda gereksiz reviewer’lar atlandı: job’ların yaklaşık üçte ikisi aynı merge request’in ikinci ya da sonraki review’ı ve çoğu zaman üç reviewer’ın bakacak yeni bir şeyi yok.\n\n**Güvenli geçiş.** Reviewer OpenCode v2’ye taşındı. Hepsi tek seferde geçirilmeden önce her canary repository’de her review hem v1 hem v2 ile shadow mode’da çalıştırıldı; test edilen merge request’lerin yüzde 98’inde onay kararı aynı çıktı. Aynı modellerle full-tier review’lar v2’de yaklaşık yüzde 13 daha hızlı bitti.",
+        "key_points": [
+            "LLM maliyetini çoğu zaman output değil tekrar gönderilen bağlam (cache write ve read) belirler.",
+            "Prompt cache bir prefix eşleşmesidir: prefix’e giren her değişken (tarih, çalışma dizini) cache’i bozar.",
+            "Sabit olanı prompt’un başına, değişkeni sonuna koy; cache breakpoint’i ortak kısmın sonuna yerleştir.",
+            "Agent’ın kullanamayacağı tool’u ona gösterme: reddedilen çağrı da para ve zaman harcar.",
+            "Yeni sistemi eskisiyle shadow mode’da yan yana çalıştırmak, geçişi güvenli yapar."
+        ],
+        "why_it_matters": "Agent maliyetleri sessizce büyür: model değişir, bağlam büyür, çağrı sayısı artar ve kimse tek bir kalemi suçlayamaz. Bu yazı ‘önce ölç, sonra kes’ yaklaşımının somut örneği: harcamayı kalemlere ayırıp her kalem için ayrı bir düzeltme yapmışlar.",
+        "for_you": "Kendi LLM çağrılarında hemen yapabileceğin üç şey var. **(1)** API cevabındaki usage alanlarına (`cache_creation_input_tokens`, `cache_read_input_tokens`) bak; cache read sıfırsa cache çalışmıyordur. **(2)** System prompt’a tarih, kullanıcı adı, çalışma dizini gibi değişkenleri koyuyorsan en sona taşı ya da kullanıcı mesajına al; sabit kısım bir cache breakpoint ile ayrılsın. **(3)** Agent’a verdiğin tool listesini gözden geçir: o adımda çağıramayacağı tool’u listeden çıkar. Sonra bir haftalık çağrıyı token cinsinden üç kalemde (output, cache write, cache read) ayır; hangisi büyükse önce onu hedefle.",
+        "terms": [
+            {
+                "en": "prompt caching",
+                "tr": "prompt caching",
+                "definition": "Tekrar eden prompt prefix’ini yeniden işlemek yerine cache’ten okuyarak maliyet ve gecikmeyi düşürme."
+            },
+            {
+                "en": "cache breakpoint",
+                "tr": "cache breakpoint",
+                "definition": "Prompt’un hangi noktaya kadar olan kısmının cache’leneceğini belirten işaret."
+            },
+            {
+                "en": "shadow mode",
+                "tr": "shadow mode",
+                "definition": "Yeni sistemi gerçek trafikte eskisiyle yan yana çalıştırıp kararlarını etkisiz biçimde karşılaştırma."
+            },
+            {
+                "en": "canary",
+                "tr": "canary",
+                "definition": "Bir değişikliği önce küçük bir kullanıcı ya da repository grubunda deneme."
+            },
+            {
+                "en": "tool call",
+                "tr": "tool call",
+                "definition": "Bir LLM agent’ının dış bir araç ya da fonksiyonu çağırması."
+            }
+        ]
+    },
+    {
+        "url": "https://engineering.fb.com/2026/10/19/ml-applications/thin-orchestrator-ai-agent-architecture/",
+        "slot": "brief",
+        "title_tr": "Router’a daha az iş ver, agent daha güvenilir olsun: Meta’nın thin orchestrator deseni",
+        "difficulty": "orta",
+        "tags": [
+            "agent",
+            "architecture",
+            "LLM",
+            "reliability"
+        ],
+        "summary": "Meta, öneri sistemlerindeki data column onboarding işini otomatikleştirmek için önce her şeyi bilen tek bir agent kurdu: konfigürasyon şemaları, kod üretim kuralları, pipeline yönlendirme, doğrulama ve 10’dan fazla veri kaynağı için doldurma kalıpları. Demoda çalıştı, production’da hallucination başladı. Belirli bir bağlam eşiğinden sonra ek bilgi sonucu iyileştirmek yerine bozuyordu: agent kavramları karıştırıyor, bir alt sistemin isimlendirme kuralını diğerine uyguluyordu. Manuel prompt engineering ile bile başarı oranı yüzde 70-80’di; elle hazırlanmış prompt olmadan yüzde 10-20’ye düşüyordu. Yazının tespiti: bu bir prompt sorunu değil, mimari bir sorundu.\n\nÇözüm **thin orchestrator**: 1.300 satırlık deterministik bir router, 20’den fazla workflow’u 14 specialist agent’a yönlendiriyor ve kendisi hiçbir domain işi yapmıyor. Her istek için sabit 7 adımlı bir protokol izliyor: ilgili agent’ın talimat dosyasını oku, hedef zaten var mı kontrol et, eksik alanları kullanıcıdan topla, çıkarılabilenleri otomatik keşfet, reliability gate’i kontrol et, specialist’e delege et, sonucu işle. Bu adımlardan yalnızca biri (delegasyon) LLM reasoning’i içeriyor ve o da yalnızca kendi domain bilgisi yüklü, izole bir subagent içinde oluyor.\n\nYeni bir kullanım senaryosu (pipeline migration) için yeni agent yazmak yerine mevcut agent’ları farklı sırayla dizen bir **workflow template** yazılmış: şablonlar LLM’in karar alanını daraltan deterministik state machine’ler. Bilgi dosyaları (25’ten fazla) orchestrator’a gömülmüyor, subagent çalışırken ihtiyaç anında yükleniyor. Sonuç: bir yeni column için konfigürasyon hazırlığı elle üç dört gün, önceki config-driven sistemle yaklaşık bir gün sürerken şimdi bir saatin altında; değişikliklerin yaklaşık üçte ikisi önemli bir insan düzeltmesi olmadan giriyor.",
+        "key_points": [
+            "Belirli bir noktadan sonra agent’a daha fazla bağlam vermek sonucu kötüleştirir.",
+            "‘Hangi agent bu işi yapar?’ bir routing kararıdır; LLM ile çözülmemeli.",
+            "Yeni senaryo için yeni agent yazmak yerine mevcut agent’ları farklı sırayla dizen bir workflow template yaz.",
+            "Bilgiyi başta toptan yükleme; subagent çalışırken ihtiyaç duyduğunu yüklesin."
+        ],
+        "for_you": "Bir LLM uygulamasında prompt uzadıkça sonuçlar kötüleşiyorsa önce prompt’u kısaltmayı değil görevi bölmeyi dene. Basit bir başlangıç: ilk adımda küçük, ucuz bir sınıflandırma çağrısıyla isteğin türünü belirle (kod ile bir `switch`), sonra her tür için yalnızca o türün talimatını içeren ayrı bir prompt çağır. Routing’i LLM’e bırakma; kuralla yapabildiğin her kararı kodla yap.",
+        "terms": [
+            {
+                "en": "orchestrator",
+                "tr": "orchestrator",
+                "definition": "İşleri sıralayıp doğru bileşene yönlendiren, kendisi iş yapmayan koordinatör katman."
+            },
+            {
+                "en": "subagent",
+                "tr": "subagent",
+                "definition": "Belirli bir alanda uzmanlaşmış, kendi izole bağlamıyla çalışan agent."
+            },
+            {
+                "en": "workflow template",
+                "tr": "workflow template",
+                "definition": "Adımların sırasını sabitleyen, LLM’in karar alanını daraltan deterministik workflow şablonu."
+            }
+        ]
+    }
+]
+
+if __name__ == "__main__":
+    save_edition(DATE, INTRO, DRAFTS)

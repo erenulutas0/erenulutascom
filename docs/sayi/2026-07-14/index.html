@@ -88,12 +88,12 @@
   </h2>
   <p class="original-title">A broken DNSSEC rollover took down .AL. Now 1.1.1.1 tells you when validation is bypassed · Sebastiaan Neuteboom</p>
 
-  <div class="prose"><p>3 Temmuz 2026&#x27;da Arnavutluk&#x27;un iletişim otoritesi AKEP, <code>.al</code> üst düzey alan adı için bir <strong>DNSSEC anahtar devri</strong> (key rollover) denemiş. Bir şeyler ters gitmiş ve DNSSEC doğrulaması başarısız olmaya başlamış. Spesifikasyon gereği, bu imzaları alan her doğrulayıcı DNS çözümleyici bunları reddetmek ve istemciye hata döndürmek zorunda — Cloudflare&#x27;in 1.1.1.1&#x27;i dahil.</p><p>Sonuç: <code>.al</code> altındaki Arnavut devlet servisleri, bankaları ve medya siteleri, nerede barındırıldıklarından bağımsız olarak erişilemez hâle gelmiş.</p><p>Sadece iki ay önce Almanya&#x27;nın <code>.de</code> alan adında benzer bir olay yaşanmış. O zamanki müdahale bir <strong>Negative Trust Anchor (NTA)</strong> kurmak olmuş: 1.1.1.1&#x27;de DNSSEC doğrulamasını geçici olarak askıya alıp alan adlarını erişilebilir tutmak.</p><p>Ama burada asıl mühendislik problemi başlıyor. NTA çözümlemeyi geri getirir — <strong>ama sessizce.</strong> NTA altında cevap alan bir istemcinin, yalnızca cevaba bakarak DNSSEC doğrulamasının atlandığını anlamasının hiçbir yolu yok. Yani meşru bir cevabı sahte bir cevaptan ayırt edemiyor. Cloudflare&#x27;in bu olaydaki katkısı tam olarak bu boşluğu kapatmak: artık <strong>Extended DNS Error 33</strong> ile istemciye doğrulamanın atlandığı açıkça bildiriliyor.</p></div>
+  <div class="prose"><p>3 Temmuz 2026&#x27;da Arnavutluk&#x27;un iletişim otoritesi AKEP, <code>.al</code> üst düzey alan adı için bir <strong>DNSSEC key rollover</strong> (key rollover) denemiş. Bir şeyler ters gitmiş ve DNSSEC doğrulaması başarısız olmaya başlamış. Spesifikasyon gereği, bu imzaları alan her doğrulayıcı DNS çözümleyici bunları reddetmek ve istemciye hata döndürmek zorunda — Cloudflare&#x27;in 1.1.1.1&#x27;i dahil.</p><p>Sonuç: <code>.al</code> altındaki Arnavut devlet servisleri, bankaları ve medya siteleri, nerede barındırıldıklarından bağımsız olarak erişilemez hâle gelmiş.</p><p>Sadece iki ay önce Almanya&#x27;nın <code>.de</code> alan adında benzer bir olay yaşanmış. O zamanki müdahale bir <strong>Negative Trust Anchor (NTA)</strong> kurmak olmuş: 1.1.1.1&#x27;de DNSSEC doğrulamasını geçici olarak askıya alıp alan adlarını erişilebilir tutmak.</p><p>Ama burada asıl mühendislik problemi başlıyor. NTA çözümlemeyi geri getirir — <strong>ama sessizce.</strong> NTA altında cevap alan bir istemcinin, yalnızca cevaba bakarak DNSSEC doğrulamasının atlandığını anlamasının hiçbir yolu yok. Yani meşru bir cevabı sahte bir cevaptan ayırt edemiyor. Cloudflare&#x27;in bu olaydaki katkısı tam olarak bu boşluğu kapatmak: artık <strong>Extended DNS Error 33</strong> ile istemciye doğrulamanın atlandığı açıkça bildiriliyor.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Tek bir anahtar devri hatası, bir ülkenin tüm alan adlarını erişilemez yapabiliyor — merkezi bileşenlerin etki yarıçapı çok geniş.</span></li><li><span>Kurtarma müdahalesi (NTA) bir güvenlik kontrolünü kapatıyor; bu bir takas ve takasın kendisi görünür olmalı.</span></li><li><span>Eklenen çözüm yeni bir mekanizma değil, <strong>görünürlük</strong>: istemci artık hangi garantiyle cevap aldığını biliyor.</span></li>    </ol>
+<li><span>Tek bir key rollover hatası, bir ülkenin tüm alan adlarını erişilemez yapabiliyor — merkezi bileşenlerin blast radius çok geniş.</span></li><li><span>Kurtarma müdahalesi (NTA) bir güvenlik kontrolünü kapatıyor; bu bir takas ve takasın kendisi görünür olmalı.</span></li><li><span>Eklenen çözüm yeni bir mekanizma değil, <strong>görünürlük</strong>: istemci artık hangi garantiyle cevap aldığını biliyor.</span></li>    </ol>
   </div>
 
   <div class="callouts">
@@ -102,8 +102,8 @@
       <p>Bir sistemi ayakta tutmak için bir güvenlik kontrolünü geçici olarak gevşetmek meşru bir karardır. Sessizce yapmak değildir. Bu ayrım her yerde geçerli: sertifika doğrulamasını atlayan bir istemci, hata durumunda kimlik kontrolünü geçen bir servis, dolu olduğu için kontrolü atlayan bir kuyruk — hepsi savunulabilir olabilir, ama hepsi loglanmalı ve görünür olmalıdır.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Bunu koduna doğrudan çevirebilirsin: her <code>try/except</code> bloğunda &quot;bu hatayı yutuyorum&quot; kararı veriyorsun demektir. Sessizce yutma. En azından logla, tercihen bir metriğe say. Mobit&#x27;teki doküman işleme akışında bir dosya ayrıştırılamadığında ne oluyor — atlanıyor mu, ve atlandığı bir yerde görünüyor mu? Aynı şekilde &quot;fail-open&quot; kararları: yetkilendirme servisi cevap vermezse isteği geçiriyor musun? Geçiriyorsan bu bilinçli bir karar olmalı ve alarma bağlı olmalı. Sessiz düşüşler (silent failures), en pahalı hata sınıfıdır çünkü aylarca fark edilmezler.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Bunu koduna doğrudan çevirebilirsin: her <code>try/except</code> bloğunda ‘bu hatayı yutuyorum’ kararı veriyorsun demektir. Sessizce yutma; en azından logla, tercihen bir metriğe say. Bir dosya parse edilemediğinde sistemin ne yaptığına bak: atlanıyor mu ve atlandığı bir yerde görünüyor mu? Aynı şekilde <strong>fail-open</strong> kararları: yetkilendirme servisi cevap vermezse isteği geçiriyor musun? Geçiriyorsan bu bilinçli bir karar olmalı ve alarma bağlı olmalı. Silent failure’lar en pahalı hata sınıfıdır çünkü aylarca fark edilmezler.</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">DNSSEC</span> <span class="term-tr">DNSSEC</span></dt>
+      <dt><span class="term-en">DNSSEC</span></dt>
       <dd>DNS cevaplarını kriptografik imzayla doğrulayarak sahte cevapları engelleyen uzantı.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">key rollover</span> <span class="term-tr">anahtar devri</span></dt>
+      <dt><span class="term-en">key rollover</span></dt>
       <dd>Kriptografik anahtarın yenisiyle değiştirilmesi; yanlış yapılırsa doğrulama toptan bozulur.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">Negative Trust Anchor (NTA)</span> <span class="term-tr">olumsuz güven çıpası</span></dt>
+      <dt><span class="term-en">Negative Trust Anchor (NTA)</span></dt>
       <dd>Bir alan adı için DNSSEC doğrulamasını geçici olarak askıya alan acil durum mekanizması.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">silent failure</span> <span class="term-tr">sessiz hata</span></dt>
+      <dt><span class="term-en">silent failure</span></dt>
       <dd>Sistemin hata verdiğini belli etmeden yanlış ya da eksik davranması; tespiti en zor hata türü.</dd>
     </div>
   </dl>
@@ -133,9 +133,9 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/dns/">#DNS</a></li>
-  <li><a href="/etiket/guvenlik/">#güvenlik</a></li>
+  <li><a href="/etiket/security/">#security</a></li>
   <li><a href="/etiket/olay-incelemesi/">#olay incelemesi</a></li>
-  <li><a href="/etiket/ag/">#ağ</a></li>
+  <li><a href="/etiket/networking/">#networking</a></li>
 </ul>
 
   <a class="readmore" href="https://blog.cloudflare.com/dnssec-nta-ede-33/" rel="noopener nofollow" target="_blank">
@@ -170,8 +170,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Bu, PostgreSQL bilgin üzerine kurabileceğin bir beceri. &quot;İlişkileri ara&quot; sorusu SQL&#x27;de <strong>recursive CTE</strong> ile çözülür: bir noktadan başlayıp bağlantıları adım adım takip edersin. <code>WITH RECURSIVE</code> sözdizimini öğrenmek yarım günlük iş ama sana bir kapı açar — ağaç yapıları, organizasyon şemaları, bağlantı zincirleri, hepsi aynı desen. Mobit&#x27;teki ihale doküman sisteminde de karşılığı var: &quot;bu firmayla ilişkili tüm belgeler&quot; sorusu, tablo birleştirmelerinden çok bir graf gezinmesidir. Bunu bilerek modellemek, sonradan sorguyla çözmeye çalışmaktan iyidir.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Bu, PostgreSQL bilgin üzerine kurabileceğin bir beceri. ‘İlişkileri ara’ sorusu SQL’de <strong>recursive CTE</strong> ile çözülür: bir noktadan başlayıp bağlantıları adım adım takip edersin. <code>WITH RECURSIVE</code> sözdizimini öğrenmek yarım günlük iş ama bir kapı açar: ağaç yapıları, organizasyon şemaları, bağlantı zincirleri, hepsi aynı desen. ‘Bu firmayla ilişkili tüm belgeler’ gibi sorular tablo birleştirmelerinden çok bir graph traversal’dır; bunu baştan bilerek modellemek, sonradan sorguyla çözmeye çalışmaktan iyidir.</p>
     </div>
   </div>
 
@@ -179,15 +179,15 @@
     <summary class="label">Sözlük · 3 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">fraud ring</span> <span class="term-tr">dolandırıcılık halkası</span></dt>
+      <dt><span class="term-en">fraud ring</span></dt>
       <dd>Tek tek meşru görünen ama birbirine bağlı kişiler/varlıklar üzerinden yürütülen organize dolandırıcılık.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">recursive CTE</span> <span class="term-tr">özyinelemeli ortak tablo ifadesi</span></dt>
+      <dt><span class="term-en">recursive CTE</span></dt>
       <dd>SQL&#39;de kendini çağıran sorgu yapısı; ağaç ve graf gezinmelerini tek sorguda yapmayı sağlar.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">serverless Spark</span> <span class="term-tr">sunucusuz Spark</span></dt>
+      <dt><span class="term-en">serverless Spark</span></dt>
       <dd>Küme yönetmeden, yalnızca çalıştığı sürede ücretlendirilen Spark iş yükü çalıştırma modeli.</dd>
     </div>
   </dl>
@@ -196,9 +196,9 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/veri-muhendisligi/">#veri mühendisliği</a></li>
+  <li><a href="/etiket/data-engineering/">#data engineering</a></li>
   <li><a href="/etiket/graph/">#graph</a></li>
-  <li><a href="/etiket/dolandiricilik-tespiti/">#dolandırıcılık tespiti</a></li>
+  <li><a href="/etiket/fraud-detection/">#fraud detection</a></li>
   <li><a href="/etiket/spark/">#Spark</a></li>
 </ul>
 
@@ -221,7 +221,7 @@
     <a href="https://openai.com/index/managing-ai-investments-in-agentic-era" rel="noopener nofollow" target="_blank">Token fiyatı %97 düştü ama fatura büyüyor: farklı irtifalardan bakmak</a>
   </h3>
   <p class="original-title">How to manage AI investments in the agentic era</p>
-  <div class="prose prose-sm"><p>Rakamlar çarpıcı: GPT-4&#x27;ten GPT-5.4&#x27;e milyon token başına fiyat <strong>%97</strong> düşmüş. GPT-5.6 ise kodlama ajanı endeksinde daha iyi performansı %54 daha az çıktı token&#x27;ı ve görev başına %57 daha az zamanla veriyor.</p><p>Ama yazının asıl tezi şu: token fiyatı tek başına değer yaratılıp yaratılmadığını göstermez. Bakılması gereken <strong>dolar başına faydalı iş</strong>: tamamlanan görevler, kazanılan zaman, iyileşen kararlar.</p><p>Pratik kısım, kullanımı üç farklı <strong>irtifadan</strong> izlemek: çalışma alanı seviyesinde (benimseme ile harcama birlikte mi hareket ediyor?), ekip ve kullanıcı seviyesinde (talep nerede büyüyor, kimin desteğe ihtiyacı var?), ürün ve model seviyesinde (daha pahalı zekâ nerede kullanılıyor ve bu talep kalıcı mı?).</p></div>
+  <div class="prose prose-sm"><p>Rakamlar çarpıcı: GPT-4&#x27;ten GPT-5.4&#x27;e milyon token başına fiyat <strong>%97</strong> düşmüş. GPT-5.6 ise kodlama agent’ı endeksinde daha iyi performansı %54 daha az çıktı token&#x27;ı ve görev başına %57 daha az zamanla veriyor.</p><p>Ama yazının asıl tezi şu: token fiyatı tek başına değer yaratılıp yaratılmadığını göstermez. Bakılması gereken <strong>dolar başına faydalı iş</strong>: tamamlanan görevler, kazanılan zaman, iyileşen kararlar.</p><p>Pratik kısım, kullanımı üç farklı <strong>irtifadan</strong> izlemek: çalışma alanı seviyesinde (benimseme ile harcama birlikte mi hareket ediyor?), ekip ve kullanıcı seviyesinde (talep nerede büyüyor, kimin desteğe ihtiyacı var?), ürün ve model seviyesinde (daha pahalı zekâ nerede kullanılıyor ve bu talep kalıcı mı?).</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
@@ -231,8 +231,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Bu gazete için doğrudan kurabileceğin bir alışkanlık: her koşuda harcanan token&#x27;ı kaydet ve gün başına, makale başına, model başına kır. <code>usage.input_tokens</code> ve <code>usage.output_tokens</code> her API cevabında geliyor — bunları bir CSV&#x27;ye yazmak beş satırlık iş. Bir ay sonra &quot;en pahalı gün hangisiydi ve neden?&quot; sorusunu cevaplayabilirsin. Aynı disiplin KlioAI&#x27;da da geçerli: kullanıcı başına LLM maliyeti, abonelik fiyatının ne kadarını yiyor? Bu sayıyı bilmeyen bir ürün, farkında olmadan zarar edebilir.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Bir alışkanlık olarak şunu kur: her LLM çağrısında harcanan token’ı kaydet ve gün, özellik ve model bazında kır. <code>usage.input_tokens</code> ve <code>usage.output_tokens</code> her API cevabında geliyor; bunları bir CSV’ye yazmak beş satırlık iş. Bir ay sonra ‘en pahalı gün hangisiydi ve neden?’ sorusunu cevaplayabilirsin. Aynı disiplin ürün için de geçerli: kullanıcı başına LLM maliyeti, abonelik fiyatının ne kadarını yiyor? Bu sayıyı bilmeyen bir ürün, farkında olmadan zarar edebilir.</p>
     </div>
   </div>
 
@@ -240,7 +240,7 @@
     <summary class="label">Sözlük · 1 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">unit economics</span> <span class="term-tr">birim ekonomisi</span></dt>
+      <dt><span class="term-en">unit economics</span></dt>
       <dd>Bir kullanıcı ya da işlem başına gelir ile maliyetin karşılaştırılması; ürünün sürdürülebilirliğinin ölçüsü.</dd>
     </div>
   </dl>
@@ -249,9 +249,9 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/maliyet/">#maliyet</a></li>
+  <li><a href="/etiket/cost/">#cost</a></li>
   <li><a href="/etiket/llm/">#LLM</a></li>
-  <li><a href="/etiket/olcum/">#ölçüm</a></li>
+  <li><a href="/etiket/measurement/">#measurement</a></li>
 </ul>
 
   <a class="readmore" href="https://openai.com/index/managing-ai-investments-in-agentic-era" rel="noopener nofollow" target="_blank">
@@ -324,7 +324,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

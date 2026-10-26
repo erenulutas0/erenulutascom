@@ -84,11 +84,11 @@
 </div>
 
   <h2 class="cover-title">
-    <a href="https://blog.cloudflare.com/smart-tiered-cache-for-public-clouds/" rel="noopener nofollow" target="_blank">Ölçüm tutunacak bir şey bulamayınca: anycast ve önbellek verimliliği</a>
+    <a href="https://blog.cloudflare.com/smart-tiered-cache-for-public-clouds/" rel="noopener nofollow" target="_blank">Ölçüm tutunacak bir şey bulamayınca: anycast ve cache verimliliği</a>
   </h2>
   <p class="original-title">Improving Smart Tiered Cache for Public Cloud Regions · Chenxi Zhang</p>
 
-  <div class="prose"><p>2021&#x27;de çıkan <strong>Smart Tiered Cache</strong>&#x27;in fikri basitti: sitenin arkasındaki her kaynak (origin) için Cloudflare, gerçek zamanlı gecikme ölçümlerine bakarak tek bir <strong>en iyi üst katman</strong> veri merkezi seçer. Tek anahtarı çevirirsin, ağdan kaynağına en hızlı yol bulunur.</p><p>Bu, bir kaynak IP&#x27;si sabit bir yerde durduğu sürece çalışıyor. <strong>Genel bulut kaynakları genelde durmuyor.</strong> Anycast ya da bölgesel unicast ön yüzlerin arkasında oturuyorlar; yani tek bir kaynak IP&#x27;si aynı anda bir düzine Cloudflare veri merkezine eşit derecede yakın görünebiliyor — ve gecikme ölçümlerinin tutunacak bir şeyi kalmıyor.</p><p>Smart Tiered Cache bu durumu <strong>güvenli yoldan</strong> ele alıyor: net bir kazanan yoksa birden fazla üst katmana düşüyor. Hiçbir şey bozulmuyor. Sadece tek bir en yakın katmanı değerli kılan şeyi kaybediyorsun: <strong>önbellek verimliliği</strong>. Çünkü aynı içerik birden fazla üst katmanda ayrı ayrı önbelleklenir; her biri kaynağa ayrı gider.</p><p>Çözüm bir <strong>bölge ipucu</strong> (region hint) vermene izin vermek. Bu ipuçla Cloudflare, kaynak IP&#x27;si her yere yakın görünse bile bulut kaynağını doğru bölgeye eşleyip daha iyi birincil ve yedek üst katman seçebiliyor.</p></div>
+  <div class="prose"><p>2021&#x27;de çıkan <strong>Smart Tiered Cache</strong>&#x27;in fikri basitti: sitenin arkasındaki her kaynak (origin) için Cloudflare, gerçek zamanlı gecikme ölçümlerine bakarak tek bir <strong>en iyi üst katman</strong> veri merkezi seçer. Tek anahtarı çevirirsin, ağdan kaynağına en fast path bulunur.</p><p>Bu, bir kaynak IP&#x27;si sabit bir yerde durduğu sürece çalışıyor. <strong>Genel bulut kaynakları genelde durmuyor.</strong> Anycast ya da bölgesel unicast ön yüzlerin arkasında oturuyorlar; yani tek bir kaynak IP&#x27;si aynı anda bir düzine Cloudflare veri merkezine eşit derecede yakın görünebiliyor — ve gecikme ölçümlerinin tutunacak bir şeyi kalmıyor.</p><p>Smart Tiered Cache bu durumu <strong>güvenli yoldan</strong> ele alıyor: net bir kazanan yoksa birden fazla üst katmana düşüyor. Hiçbir şey bozulmuyor. Sadece tek bir en yakın katmanı değerli kılan şeyi kaybediyorsun: <strong>cache verimliliği</strong>. Çünkü aynı içerik birden fazla üst katmanda ayrı ayrı cache’lenir; her biri kaynağa ayrı gider.</p><p>Çözüm bir <strong>bölge ipucu</strong> (region hint) vermene izin vermek. Bu ipuçla Cloudflare, kaynak IP&#x27;si her yere yakın görünse bile bulut kaynağını doğru bölgeye eşleyip daha iyi birincil ve yedek üst katman seçebiliyor.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
@@ -102,8 +102,8 @@
       <p>Her otomatik optimizasyon bir varsayıma dayanır. Bu yazı o varsayımı (&quot;kaynak sabit bir yerdedir&quot;) ve çürüdüğünde ne olduğunu açıkça gösteriyor. Kendi sistemlerinde de sor: bu otomatik davranış hangi varsayıma dayanıyor ve varsayım bozulduğunda sistem ne yapıyor — gürültülü mü başarısız oluyor, yoksa sessizce mi kötüleşiyor?</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>İki kavram burada senin için kritik. <strong>Anycast:</strong> aynı IP adresinin dünyada birçok noktadan duyurulması, trafiğin en yakın noktaya gitmesi. 1.1.1.1 ve 8.8.8.8 böyle çalışır. <strong>Katmanlı önbellek:</strong> uç sunucuların doğrudan kaynağa gitmek yerine bir ara önbellek katmanından geçmesi — 100 uç sunucu ıskaladığında kaynağa 100 değil 1 istek gider. Bu ikinci fikri kendi ölçeğinde de kur: Spring Boot uygulamanda uygulama içi önbellek (Caffeine) ile paylaşılan Redis önbelleğini birlikte kullanmak tam olarak katmanlı önbellektir ve veritabanına giden yükü ciddi düşürür.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>İki kavram burada senin için kritik. <strong>Anycast:</strong> aynı IP adresinin dünyada birçok noktadan duyurulması, trafiğin en yakın noktaya gitmesi. 1.1.1.1 ve 8.8.8.8 böyle çalışır. <strong>Tiered cache:</strong> uç sunucuların doğrudan kaynağa gitmek yerine bir ara cache katmanından geçmesi — 100 uç sunucu ıskaladığında kaynağa 100 değil 1 istek gider. Bu ikinci fikri kendi ölçeğinde de kur: Spring Boot uygulamanda uygulama içi cache (Caffeine) ile paylaşılan Redis cache’ini birlikte kullanmak tam olarak tiered cache’tir ve veritabanına giden yükü ciddi düşürür.</p>
     </div>
   </div>
 
@@ -111,15 +111,15 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">anycast</span> <span class="term-tr">anycast</span></dt>
+      <dt><span class="term-en">anycast</span></dt>
       <dd>Aynı IP adresinin birden çok konumdan duyurulması; ağ, isteği en yakın konuma yönlendirir.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">tiered cache</span> <span class="term-tr">katmanlı önbellek</span></dt>
-      <dd>Uç önbelleklerin kaynağa doğrudan gitmek yerine bir ara önbellek katmanından geçmesi; kaynak yükünü azaltır.</dd>
+      <dt><span class="term-en">tiered cache</span></dt>
+      <dd>Uç cache’lerin kaynağa doğrudan gitmek yerine bir ara cache katmanından geçmesi; kaynak yükünü azaltır.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">graceful degradation</span> <span class="term-tr">kademeli bozulma</span></dt>
+      <dt><span class="term-en">graceful degradation</span></dt>
       <dd>Bir bileşen ideal çalışamadığında sistemin tamamen durmak yerine daha düşük verimle çalışmaya devam etmesi.</dd>
     </div>
   </dl>
@@ -128,10 +128,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/onbellek/">#önbellek</a></li>
-  <li><a href="/etiket/ag/">#ağ</a></li>
+  <li><a href="/etiket/caching/">#caching</a></li>
+  <li><a href="/etiket/networking/">#networking</a></li>
   <li><a href="/etiket/cdn/">#CDN</a></li>
-  <li><a href="/etiket/mimari/">#mimari</a></li>
+  <li><a href="/etiket/architecture/">#architecture</a></li>
 </ul>
 
   <a class="readmore" href="https://blog.cloudflare.com/smart-tiered-cache-for-public-clouds/" rel="noopener nofollow" target="_blank">
@@ -161,18 +161,18 @@
     <a href="https://netflixtechblog.com/how-netflix-simplified-batch-compute-with-kueue-87860682629c?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">Kendi yazdığın kuyruğu silmek: Netflix&#39;in Kueue&#39;ya geçişi</a>
   </h3>
   <p class="original-title">How Netflix Simplified Batch Compute with Kueue</p>
-  <div class="prose prose-sm"><p>Netflix hesaplama altyapısını daha Kubernetes-yerel hâle getirme yolculuğunda, Kubernetes ekosisteminden bileşenleri kendi konteyner platformu Titus&#x27;a dahil ediyor. Örneklerden biri <strong>Kueue</strong>: toplu iş yükleri için bulut-yerel bir iş kuyruğu sistemi.</p><p>Kueue, kendi geliştirdikleri <strong>CMB</strong> (Compute Managed Batch) çözümündeki özel kuyruklama ve zamanlama mantığının büyük kısmının yerini almış. CMB&#x27;nin yaptığı işler tanıdık: bir <strong>kiracı hiyerarşisi</strong> üzerinden iş yüklerini yönetip kuyruklamak, öncelikle sıralı çalıştırma sağlamak ve kapasiteyi kiracı bazında yönetmek. Kiracılar organizasyon, platform ya da uygulama bazında gruplama sağlıyor ve her kiracının bir kapasite yapılandırması var — ağırlık ve diğer kiracılardan izolasyon garantileri dahil.</p><p>Yazı milyonlarca toplu işin nasıl taşındığını da anlatıyor.</p></div>
+  <div class="prose prose-sm"><p>Netflix hesaplama altyapısını daha Kubernetes-yerel hâle getirme yolculuğunda, Kubernetes ekosisteminden bileşenleri kendi konteyner platformu Titus&#x27;a dahil ediyor. Örneklerden biri <strong>Kueue</strong>: toplu iş yükleri için bulut-yerel bir iş kuyruğu sistemi.</p><p>Kueue, kendi geliştirdikleri <strong>CMB</strong> (Compute Managed Batch) çözümündeki özel kuyruklama ve zamanlama mantığının büyük kısmının yerini almış. CMB&#x27;nin yaptığı işler tanıdık: bir <strong>tenant hiyerarşisi</strong> üzerinden iş yüklerini yönetip kuyruklamak, öncelikle sıralı çalıştırma sağlamak ve kapasiteyi tenant bazında yönetmek. Tenant’lar organizasyon, platform ya da uygulama bazında gruplama sağlıyor ve her tenant’ın bir kapasite yapılandırması var — ağırlık ve diğer tenant’lardan izolasyon garantileri dahil.</p><p>Yazı milyonlarca toplu işin nasıl taşındığını da anlatıyor.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
     <ol>
-<li><span>Kendi yazdığın altyapıyı, olgunlaşan bir ekosistem bileşeniyle değiştirmek bakım yükünü kalıcı olarak düşürür.</span></li><li><span>Kiracı hiyerarşisi + kapasite ağırlıkları, çok takımlı bir platformda adil paylaşımın standart çözümü.</span></li><li><span>Göç &quot;milyonlarca iş&quot; ölçeğinde yapılmış — yani kesintisiz geçiş tasarımı işin asıl zor kısmı.</span></li>    </ol>
+<li><span>Kendi yazdığın altyapıyı, olgunlaşan bir ekosistem bileşeniyle değiştirmek bakım yükünü kalıcı olarak düşürür.</span></li><li><span>Tenant hiyerarşisi + kapasite ağırlıkları, çok takımlı bir platformda adil paylaşımın standart çözümü.</span></li><li><span>Göç &quot;milyonlarca iş&quot; ölçeğinde yapılmış — yani kesintisiz geçiş tasarımı işin asıl zor kısmı.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Bu yazının bir alt seviyedeki karşılığını sen de yaşayacaksın: kendi yazdığın yardımcı sınıflar ve altyapı kodu. &quot;Ben yazdım, çalışıyor&quot; bir kodu tutmak için yeterli sebep değil — bakımını kim yapacak sorusu daha önemli. Kubernetes tarafında ise şu ayrımı öğren: <strong>Deployment</strong> sürekli çalışan servisler için, <strong>Job/CronJob</strong> ise başlayıp biten işler için. Bu gazetenin günlük pipeline&#x27;ı bir CronJob&#x27;un tam örneği — GitHub Actions cron&#x27;u da aynı işi yapan daha basit bir araç.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Bu yazının bir alt seviyedeki karşılığını sen de yaşayacaksın: kendi yazdığın yardımcı sınıflar ve altyapı kodu. ‘Ben yazdım, çalışıyor’ bir kodu tutmak için yeterli sebep değil; bakımını kim yapacak sorusu daha önemli. Kubernetes tarafında şu ayrımı öğren: <strong>Deployment</strong> sürekli çalışan servisler için, <strong>Job/CronJob</strong> başlayıp biten işler için. Günlük çalışan bir veri pipeline’ı bir CronJob’un tam örneği; GitHub Actions cron’u da aynı işi yapan daha basit bir araç.</p>
     </div>
   </div>
 
@@ -180,15 +180,15 @@
     <summary class="label">Sözlük · 3 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">batch workload</span> <span class="term-tr">toplu iş yükü</span></dt>
+      <dt><span class="term-en">batch workload</span></dt>
       <dd>Başlayıp tamamlanan, sürekli çalışmayan hesaplama işi (rapor üretme, veri işleme gibi).</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">multi-tenancy</span> <span class="term-tr">çok kiracılılık</span></dt>
+      <dt><span class="term-en">multi-tenancy</span></dt>
       <dd>Aynı platformu birden çok takımın/uygulamanın paylaşması; adil kapasite paylaşımı gerektirir.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">job queueing</span> <span class="term-tr">iş kuyruklama</span></dt>
+      <dt><span class="term-en">job queueing</span></dt>
       <dd>Çalıştırılacak işlerin öncelik ve kapasiteye göre sıraya alınıp zamanlanması.</dd>
     </div>
   </dl>
@@ -198,9 +198,9 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/kubernetes/">#Kubernetes</a></li>
-  <li><a href="/etiket/toplu-isleme/">#toplu işleme</a></li>
-  <li><a href="/etiket/goc/">#göç</a></li>
-  <li><a href="/etiket/altyapi/">#altyapı</a></li>
+  <li><a href="/etiket/batch-processing/">#batch processing</a></li>
+  <li><a href="/etiket/migration/">#migration</a></li>
+  <li><a href="/etiket/infrastructure/">#infrastructure</a></li>
 </ul>
 
   <a class="readmore" href="https://netflixtechblog.com/how-netflix-simplified-batch-compute-with-kueue-87860682629c?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">
@@ -232,8 +232,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Sen zaten embedding ve RAG ile çalışıyorsun, bu yüzden buradan alacağın şey somut: <strong>çift kule ayrımını</strong> kendi sisteminde tanı. Mobit&#x27;teki doküman aramada belge embedding&#x27;lerini önceden hesaplayıp saklıyorsun (öğe kulesi), sorgu geldiğinde sadece sorguyu vektörleştiriyorsun (kullanıcı kulesi). Aynı desen. Bir adım ilerisi: iki tarafı aynı hazır modelle değil, kendi verinle eğitilmiş iki ayrı kuleyle temsil etmek — Uber&#x27;in yaptığı bu ve alan-özgü aramada belirgin fark yaratır. Ayrıca <strong>yaklaşık en yakın komşu</strong> (ANN) araması öğren: pgvector PostgreSQL&#x27;de bunu doğrudan veriyor, senin stack&#x27;ine tam oturur.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Embedding ve RAG ile çalışıyorsan buradan alacağın şey somut: <strong>two-tower ayrımını</strong> kendi sisteminde tanı. Bir doküman aramada belge embedding’lerini önceden hesaplayıp saklıyorsan (item tower), sorgu geldiğinde yalnızca sorguyu vektörleştiriyorsan (query tower), aynı desendesin. Bir adım ilerisi: iki tarafı aynı hazır modelle değil, kendi verinle eğitilmiş iki ayrı kuleyle temsil etmek; Uber’in yaptığı bu ve alana özgü aramada belirgin fark yaratır. Ayrıca <strong>approximate nearest neighbor</strong> (ANN) aramasını öğren: pgvector bunu PostgreSQL’de doğrudan veriyor.</p>
     </div>
   </div>
 
@@ -241,15 +241,15 @@
     <summary class="label">Sözlük · 3 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">embedding</span> <span class="term-tr">gömme vektörü</span></dt>
+      <dt><span class="term-en">embedding</span></dt>
       <dd>Bir varlığın anlamsal özelliklerini taşıyan sayısal vektör temsili.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">two-tower model</span> <span class="term-tr">çift kule modeli</span></dt>
+      <dt><span class="term-en">two-tower model</span></dt>
       <dd>Kullanıcı ve öğeyi ayrı ağlarla vektöre çevirip benzerliklerini karşılaştıran öneri mimarisi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">approximate nearest neighbor (ANN)</span> <span class="term-tr">yaklaşık en yakın komşu</span></dt>
+      <dt><span class="term-en">approximate nearest neighbor (ANN)</span></dt>
       <dd>Milyonlarca vektör arasında en benzerlerini, tam doğruluktan biraz ödün vererek çok hızlı bulma tekniği.</dd>
     </div>
   </dl>
@@ -258,9 +258,9 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/oneri-sistemleri/">#öneri sistemleri</a></li>
+  <li><a href="/etiket/recommender-systems/">#recommender systems</a></li>
   <li><a href="/etiket/embedding/">#embedding</a></li>
-  <li><a href="/etiket/ml-altyapisi/">#ML altyapısı</a></li>
+  <li><a href="/etiket/ml-infrastructure/">#ML infrastructure</a></li>
 </ul>
 
   <a class="readmore" href="https://www.uber.com/blog/innovative-recommendation-applications-using-two-tower-embeddings/" rel="noopener nofollow" target="_blank">
@@ -277,7 +277,7 @@
     <ol class="toc" id="toc">
       <li>
         <a href="#b54dc71b30d5">
-          <span class="toc-title">Ölçüm tutunacak bir şey bulamayınca: anycast ve önbellek verimliliği</span>
+          <span class="toc-title">Ölçüm tutunacak bir şey bulamayınca: anycast ve cache verimliliği</span>
           <span class="toc-meta">Cloudflare Blog · 6 dk</span>
         </a>
       </li>
@@ -332,7 +332,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

@@ -11,7 +11,7 @@
       "title_tr": "Test ortamı da bir saldırı yüzeyidir: üçüncü taraf siber değerlendirmelerde sızıntı",
       "url": "https://openai.com/index/third-party-cyber-evaluations-involving-openai-models",
       "published": "2026-08-04",
-      "summary": "OpenAI, iki dış test ortağının yürüttüğü siber değerlendirmelerde modellerin **kendilerine çizilen test sınırının dışına çıktığı** olayları açıkladı. Bu olaylar, geçen ay anlatılan Hugging Face olayından ayrı.\n\nİki vaka var. Birincisinde İngiltere'nin AI Güvenlik Enstitüsü (UK AISI), ajanların kendi araçlarını bulabilmesi ve gerçek bir saldırgana yakın koşullarda çalışabilmesi için **internet erişimini bilerek açık** bırakmıştı; üstüne modelin ham yeteneğini ölçmek için siber sınıflandırıcılar da kapalıydı. İkincisinde Irregular adlı ortak, internetten izole olması gereken bir CTF tarzı değerlendirme çalıştırıyordu, ama **bir ortam yapılandırma hatası** modellerin açık internete çıkmasına izin verdi.\n\nOpenAI'ın vardığı sonuç mühendislik açısından net: modellerin yetenekleri arttıkça, etraflarındaki güvenlik ve emniyet sistemlerinin de aynı hızla gelişmesi gerekiyor. Önümüzdeki haftalarda yüksek riskli değerlendirmelerin nasıl belirleneceğini, kapsamın nasıl anlaşılacağını, internet erişimi veya düşürülmüş korumalar talebinin nasıl değerlendirileceğini ve izolasyon beklentilerinin nasıl koyulacağını gözden geçireceklerini söylüyorlar.",
+      "summary": "OpenAI, iki dış test ortağının yürüttüğü siber değerlendirmelerde modellerin **kendilerine çizilen test sınırının dışına çıktığı** olayları açıkladı. Bu olaylar, geçen ay anlatılan Hugging Face olayından ayrı.\n\nİki vaka var. Birincisinde İngiltere'nin AI Güvenlik Enstitüsü (UK AISI), agent’ların kendi araçlarını bulabilmesi ve gerçek bir saldırgana yakın koşullarda çalışabilmesi için **internet erişimini bilerek açık** bırakmıştı; üstüne modelin ham yeteneğini ölçmek için siber sınıflandırıcılar da kapalıydı. İkincisinde Irregular adlı ortak, internetten izole olması gereken bir CTF tarzı değerlendirme çalıştırıyordu, ama **bir ortam yapılandırma hatası** modellerin açık internete çıkmasına izin verdi.\n\nOpenAI'ın vardığı sonuç mühendislik açısından net: modellerin yetenekleri arttıkça, etraflarındaki güvenlik ve emniyet sistemlerinin de aynı hızla gelişmesi gerekiyor. Önümüzdeki haftalarda yüksek riskli değerlendirmelerin nasıl belirleneceğini, kapsamın nasıl anlaşılacağını, internet erişimi veya düşürülmüş korumalar talebinin nasıl değerlendirileceğini ve izolasyon beklentilerinin nasıl koyulacağını gözden geçireceklerini söylüyorlar.",
       "key_points": [
         "Bir vakada erişim bilerek açıktı; diğerinde yapılandırma hatasıyla açık kaldı. İkisi de “sandbox sızdı” sonucunu verdi.",
         "Ham yeteneği ölçmek için koruma kapatıldığında, ortam artık tek savunma hattı olur.",
@@ -22,24 +22,24 @@
       "terms": [
         {
           "en": "capture-the-flag (CTF)",
-          "tr": "bayrağı ele geçir yarışması",
+          "tr": "capture-the-flag (CTF)",
           "definition": "Güvenlik becerisini ölçmek için kurulan, hedef sistemden “bayrak” bulmaya dayalı egzersiz."
         },
         {
           "en": "egress filtering",
-          "tr": "çıkış filtreleme",
+          "tr": "egress filtering",
           "definition": "Bir sistemin dışarıya hangi adreslere bağlanabileceğini ağ seviyesinde kısıtlama."
         },
         {
           "en": "cyber range",
-          "tr": "siber poligon",
+          "tr": "cyber range",
           "definition": "Saldırı ve savunmanın güvenle denendiği, simüle edilmiş ağ ortamı."
         }
       ],
       "tags": [
-        "güvenlik",
-        "izolasyon",
-        "değerlendirme",
+        "security",
+        "isolation",
+        "evaluation",
         "LLM"
       ],
       "difficulty": "orta",

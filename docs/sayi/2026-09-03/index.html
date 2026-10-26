@@ -88,12 +88,12 @@
   </h2>
   <p class="original-title">ZGateway: Learnings from Putting a Proxy in Front of ZippyDB</p>
 
-  <div class="prose"><p>ZippyDB, Meta&#x27;da en yaygın kullanılan anahtar-değer deposu: ürün metadata&#x27;sı, sayaçlar ve yapılandırma için kullanılıyor ve küresel dağıtık bir filo üzerinde saniyede milyarlarca işlem sunabiliyor. <strong>ZGateway</strong>, ZippyDB istemci trafiğini birleştirmek için kullanılan proxy katmanı. Değeri yapısal çıktı: bir istemci, kısa sürede değiştirilemeyecek, yüzlerce ekibin sahip olduğu <strong>bir milyondan fazla ana makinenin</strong> biri olabilir. Proxy ise aynı anda çok sayıda istemcinin yolunda durduğu için hiçbir tek istemcinin yapamadığını yapabiliyor.</p><p>Doğrudan erişim modelinde her istemci ihtiyaç duyduğu her veritabanı sunucusuna bağlanıyor. Tek bir istemci kısa sürede on binlerce farklı shard&#x27;a dokunabiliyor; bu shard&#x27;lar yüz binlerce sunucuya yayılmış. Sonuç <strong>savurgan ve kırılgan bir ağ</strong>: her açık bağlantı iki uçta da bellek, CPU ve dosya tanıtıcısı tüketiyor (çoğu boşta), gelen bağlantı sayısı istemci nüfusuyla büyüyor, yani <strong>her yeni istemci grubu her veritabanı sunucusunu kötüleştiriyor</strong>. En kritiği: yeniden bağlanma fırtınası felakete dönüşebiliyor. Bir olayda bir yönlendirme hatası her istemcinin shard başına bir bağlantı açmasına yol açtı, sunucular dosya tanıtıcısı sınırını aştı ve filo çöktü.</p><p>ZGateway durumsuz bir proxy katmanı: saniyede <strong>1 milyardan fazla işlem</strong> taşıyabiliyor, ZippyDB trafiğinin yaklaşık %40&#x27;ını taşıyor (%60&#x27;ın üzerine çıkması öngörülüyor) ve ortalama bir kullanım için yalnızca yaklaşık %6 hesaplama yükü ekliyor. Bağlantı sayılarının asimetrisi anahtar özellik: her istemci yalnızca bölgesel ZGateway sunucularına yapışkan bir havuza ihtiyaç duyuyor; her veritabanı sunucusu yalnızca boyutunu kontrol ettikleri ZGateway filosundan bağlantı görüyor. Yazıdaki örnek rakamlarla toplam kalıcı bağlantı yaklaşık <strong>19 kat</strong> azalıyor. Ama asıl mesele tek seferlik azalma değil, ölçekleme davranışı: doğrudan modelde veritabanı sunucusundaki gelen bağlantı istemci nüfusuyla doğrusal artarken, ZGateway ile istemci nüfusu denklemden çıkıyor.</p><p>İkinci kazanım <strong>istek akışını daraltmak</strong>: proxy, ilgisiz çağıranlardan gelen istekleri shard başına gruplayıp tek bir arka uç RPC&#x27;sine birleştiriyor (batching) ve aynı anda aynı anahtarı isteyen çağıranlar için anahtarı bir kez çekip sonucu herkese dağıtıyor (coalescing). İstemci tarafındaki bir toplayıcı yalnızca kendi sürecinin isteklerini birleştirebilir.</p></div>
+  <div class="prose"><p>ZippyDB, Meta&#x27;da en yaygın kullanılan anahtar-değer deposu: ürün metadata&#x27;sı, sayaçlar ve yapılandırma için kullanılıyor ve küresel dağıtık bir filo üzerinde saniyede milyarlarca işlem sunabiliyor. <strong>ZGateway</strong>, ZippyDB istemci trafiğini birleştirmek için kullanılan proxy katmanı. Değeri yapısal çıktı: bir istemci, kısa sürede değiştirilemeyecek, yüzlerce ekibin sahip olduğu <strong>bir milyondan fazla ana makinenin</strong> biri olabilir. Proxy ise aynı anda çok sayıda istemcinin yolunda durduğu için hiçbir tek istemcinin yapamadığını yapabiliyor.</p><p>Doğrudan erişim modelinde her istemci ihtiyaç duyduğu her veritabanı sunucusuna bağlanıyor. Tek bir istemci kısa sürede on binlerce farklı shard&#x27;a dokunabiliyor; bu shard&#x27;lar yüz binlerce sunucuya yayılmış. Sonuç <strong>savurgan ve kırılgan bir ağ</strong>: her açık bağlantı iki uçta da bellek, CPU ve dosya tanıtıcısı tüketiyor (çoğu boşta), gelen bağlantı sayısı istemci nüfusuyla büyüyor, yani <strong>her yeni istemci grubu her veritabanı sunucusunu kötüleştiriyor</strong>. En kritiği: reconnection storm felakete dönüşebiliyor. Bir olayda bir yönlendirme hatası her istemcinin shard başına bir bağlantı açmasına yol açtı, sunucular dosya tanıtıcısı sınırını aştı ve filo çöktü.</p><p>ZGateway durumsuz bir proxy katmanı: saniyede <strong>1 milyardan fazla işlem</strong> taşıyabiliyor, ZippyDB trafiğinin yaklaşık %40&#x27;ını taşıyor (%60&#x27;ın üzerine çıkması öngörülüyor) ve ortalama bir kullanım için yalnızca yaklaşık %6 hesaplama yükü ekliyor. Bağlantı sayılarının asimetrisi anahtar özellik: her istemci yalnızca bölgesel ZGateway sunucularına yapışkan bir havuza ihtiyaç duyuyor; her veritabanı sunucusu yalnızca boyutunu kontrol ettikleri ZGateway filosundan bağlantı görüyor. Yazıdaki örnek rakamlarla toplam kalıcı bağlantı yaklaşık <strong>19 kat</strong> azalıyor. Ama asıl mesele tek seferlik azalma değil, ölçekleme davranışı: doğrudan modelde veritabanı sunucusundaki gelen bağlantı istemci nüfusuyla doğrusal artarken, ZGateway ile istemci nüfusu denklemden çıkıyor.</p><p>İkinci kazanım <strong>istek akışını daraltmak</strong>: proxy, ilgisiz çağıranlardan gelen istekleri shard başına gruplayıp tek bir arka uç RPC&#x27;sine birleştiriyor (batching) ve aynı anda aynı anahtarı isteyen çağıranlar için anahtarı bir kez çekip sonucu herkese dağıtıyor (coalescing). İstemci tarafındaki bir toplayıcı yalnızca kendi sürecinin isteklerini birleştirebilir.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Doğrudan erişim, istemci nüfusuyla doğrusal büyüyen bağlantı yükü demek; proxy bu sayıyı sahibi olduğun bir sayıya çevirir.</span></li><li><span>Proxy’nin iki bedeli var: ek bir atlama ve işletilecek bir katman daha. Kazanç, istemci nüfusu büyük, çeşitli ve senin değiştiremeyeceğin ölçüdeyse çıkıyor.</span></li><li><span>Batching (aynı hedefe giden istekleri birleştir) ve coalescing (aynı anahtarı bir kez getir) ancak birçok çağıranı gören bir noktada yapılabilir.</span></li><li><span>Yeniden bağlanma fırtınası, doğrudan bağlantı mimarisinin en tehlikeli arıza modu.</span></li><li><span>Sorumlulukları bilinçli bölmüşler: TLS, shard bulma ve kopya seçimi yerinde kalıyor; ZGateway yalnızca trafik yönetimini üstleniyor.</span></li>    </ol>
+<li><span>Doğrudan erişim, istemci nüfusuyla doğrusal büyüyen bağlantı yükü demek; proxy bu sayıyı sahibi olduğun bir sayıya çevirir.</span></li><li><span>Proxy’nin iki bedeli var: ek bir atlama ve işletilecek bir katman daha. Kazanç, istemci nüfusu büyük, çeşitli ve senin değiştiremeyeceğin ölçüdeyse çıkıyor.</span></li><li><span>Batching (aynı hedefe giden istekleri birleştir) ve coalescing (aynı anahtarı bir kez getir) ancak birçok çağıranı gören bir noktada yapılabilir.</span></li><li><span>Reconnection storm, doğrudan bağlantı mimarisinin en tehlikeli arıza modu.</span></li><li><span>Sorumlulukları bilinçli bölmüşler: TLS, shard bulma ve kopya seçimi yerinde kalıyor; ZGateway yalnızca trafik yönetimini üstleniyor.</span></li>    </ol>
   </div>
 
   <div class="callouts">
@@ -102,8 +102,8 @@
       <p>“Her istemci her sunucuya bağlanır” tasarımı küçükken kusursuz, büyüyünce sistemi öldüren bir tasarımdır; çünkü maliyeti kimsenin sahip olmadığı bir sayı (istemci nüfusu) belirler. Tasarımın ölçekleme sınırını belirleyen değişkeni kendi kontrolüne almak, ölçekli sistem mühendisliğinin ana hamlelerinden biri.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Bunu bugün kendi stack&#x27;inde ölç: PostgreSQL&#x27;in <code>max_connections</code> değeri düşüktür (varsayılan 100) ve her Spring Boot örneği kendi bağlantı havuzunu açar. 10 örnek × 20 bağlantı = 200 bağlantı, veritabanı ayakta kalmaz. Çözümün adı <strong>PgBouncer</strong>, yani bu yazıdaki proxy’nin küçük hâli. Mobit’te birden fazla servis aynı veritabanına bağlanıyorsa toplam bağlantı sayısını <code>SELECT count(*) FROM pg_stat_activity</code> ile bak. HikariCP’de <code>maximumPoolSize</code> değerini ‘ne kadar büyük olursa o kadar iyi’ diye ayarlama; havuz büyüdükçe veritabanı yavaşlar.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Bunu bugün kendi stack’inde ölç: PostgreSQL’in <code>max_connections</code> değeri düşüktür (varsayılan 100) ve her Spring Boot instance’ı kendi connection pool’unu açar. 10 instance × 20 bağlantı = 200 bağlantı, veritabanı ayakta kalmaz. Çözümün adı <strong>PgBouncer</strong>, yani bu yazıdaki proxy’nin küçük hâli. Birden fazla servis aynı veritabanına bağlanıyorsa toplam bağlantı sayısına <code>SELECT count(*) FROM pg_stat_activity</code> ile bak. HikariCP’de <code>maximumPoolSize</code> değerini ‘ne kadar büyük olursa o kadar iyi’ diye ayarlama; havuz büyüdükçe veritabanı yavaşlar.</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">connection fan-in</span> <span class="term-tr">bağlantı toplanması</span></dt>
+      <dt><span class="term-en">connection fan-in</span></dt>
       <dd>Bir sunucunun, kendisine bağlanan istemci sayısıyla büyüyen gelen bağlantı yükü.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">request coalescing</span> <span class="term-tr">istek birleştirme</span></dt>
+      <dt><span class="term-en">request coalescing</span></dt>
       <dd>Aynı anda aynı veriyi isteyen birden çok çağıran için veriyi bir kez getirip herkese dağıtma.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">reconnection storm</span> <span class="term-tr">yeniden bağlanma fırtınası</span></dt>
+      <dt><span class="term-en">reconnection storm</span></dt>
       <dd>Çok sayıda istemcinin aynı anda yeniden bağlanmaya çalışarak sistemi daha da yüklemesi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">connection pooler</span> <span class="term-tr">bağlantı havuzlayıcı</span></dt>
+      <dt><span class="term-en">connection pooler</span></dt>
       <dd>Çok sayıda istemci bağlantısını az sayıda gerçek veritabanı bağlantısına çoğullayan ara katman (örn. PgBouncer).</dd>
     </div>
   </dl>
@@ -133,9 +133,9 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/proxy/">#proxy</a></li>
-  <li><a href="/etiket/dagitik-sistemler/">#dağıtık sistemler</a></li>
-  <li><a href="/etiket/baglanti-yonetimi/">#bağlantı yönetimi</a></li>
-  <li><a href="/etiket/dayaniklilik/">#dayanıklılık</a></li>
+  <li><a href="/etiket/distributed-systems/">#distributed systems</a></li>
+  <li><a href="/etiket/connection-management/">#connection management</a></li>
+  <li><a href="/etiket/resilience/">#resilience</a></li>
 </ul>
 
   <a class="readmore" href="https://engineering.fb.com/2026/09/03/core-infra/zgateway-proxy-zippydb-meta/" rel="noopener nofollow" target="_blank">
@@ -181,7 +181,7 @@
     </a>
     <a class="pager-link pager-next" href="/sayi/2026-09-09/" rel="next">
       <span class="pager-label">Sonraki sayı · 9 Eylül 2026 →</span>
-      <span class="pager-title">Kuyruk çökerse uygulaman ne yapar? Hipotezli bir dayanıklılık deneyi kurmak</span>
+      <span class="pager-title">Kuyruk çökerse uygulaman ne yapar? Hipotezli bir resilience deneyi kurmak</span>
     </a>
   </nav>
 
@@ -198,7 +198,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

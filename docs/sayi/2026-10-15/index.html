@@ -88,22 +88,22 @@
   </h2>
   <p class="original-title">2026 World Cup: Breaking Records, Spiky Charts and Reliability at Scale</p>
 
-  <div class="prose"><p>Her dört yılda bir Dünya Kupası, Meta’nın altyapısı için planlı en büyük stres testi. 2026’da mesajlaşma, video, öneri ve ağ aynı anda rekor kırdı: WhatsApp 19 Temmuz’daki finalde saniyede 30 milyondan fazla mesaj (rekor, bir önceki rekor 12 gün önce 29 milyonla kırılmıştı); Messenger, Threads ve Instagram Direct dakikada 49 milyon mesaj; Instagram öneri trafiği haftalık bazda yüzde 80’e kadar yüksek; canlı video izleme süresi Instagram’da yüzde 90, Facebook’ta yüzde 242 arttı.</p><p><strong>Asıl bulgu: trafik molaları izledi.</strong> Maç olaylarını küresel çıkış trafiğiyle hizalayınca, paylaşımın büyük ölçüde molalarda (su molası, devre arası, uzatma, son düdük, ödül töreni) patladığı görüldü. Finalde normal sürenin bitişinde trafik yaklaşık dört dakikada yüzde 46, son düdükte yaklaşık 15 dakikada yüzde 57 yükseldi; turnuvanın en büyük tepesi normal süre bitiş düdüğüydü. Yazının cümlesi: grafikleri oyun değil, oyundan sonraki sohbetler oynattı. ‘Bütün kapasite kararları o tek örüntüden çıkıyor.’</p><p><strong>Katmanlı sistemler, elle müdahale yok.</strong> Yükü Taiji veri merkezleri arasında dengeledi, Katran ve Proxygen L4/L7 trafiği dağıttı, küresel yük dengeleme kullanıcıları en uygun uca yönlendirdi ve otomatik ölçekleme kapasiteyi talebe göre sağladı. Ağ ekipleri aylar önceden ISS ortaklarıyla çalışıp yükseltmeleri en çok fayda sağlayacak yerlere yaptı; bu ön yatırım kalıcı kapasite olarak kalıyor.</p><p><strong>Instagram: 39 ardışık gün tepe.</strong> Dört ayak: <strong>kapasite tamponları</strong> (tepeler otomatik ölçeklemeyi beklemesin diye önceden fazladan ayırma); <strong>ülke düzeyinde zarif bozulma</strong> (yüksek riskli maçlarda en yoğun ülkelerde kritik olmayan arka plan yükünü atmak); <strong>zincirleme yayılmayı önleme</strong> (ön yüzdeki tepe alttaki veri sistemlerine sıçramasın); ve <strong>erken uyarı sinyalleri</strong> (eşiğe yaklaşırken, aşınca değil). Hepsi 2028 Olimpiyatları gibi sonraki büyük olaylar için tekrar kullanılabilir bir çalışma kılavuzuna dönüştü. WhatsApp’ın en yoğun beş dakikalık penceresinde yaklaşık 8,4 milyar mesaj kesintisiz iletildi; 100’den fazla iç servis önceden yük testinden geçirilip boyutlandırıldı, eleme turları ilerledikçe yeniden test edildi.</p><p><strong>Bu sefer yapmadıkları iki şey.</strong> Birincisi <strong>bölgeler arası yük kaydırma</strong>: geçmiş büyük olaylarda varsayılan, talebi birçok bölgeye yaymak ve sakin bölgelerin kapasitesinin tepeyi emmesiydi. Yılbaşı gibi tepelerin saatler arayla geldiği durumda işe yarıyor; bu sefer <strong>her bölge aynı anda tepe yaptığı için ödünç alınacak boş kapasite yoktu</strong>. Bunun yerine her bölgenin tepesi küresel bir çarpan yerine kendi başına tahmin edildi. İkincisi <strong>dağıtım dondurma</strong>: büyük olaylarda sürekli dağıtımı durdurmak standart hamledir; yıllardır süren güvenilirlik çalışmasına güvenip hiç dondurmadılar, ekipler tepe anı dahil normal ritimde yayın yaptı.</p></div>
+  <div class="prose"><p>Her dört yılda bir Dünya Kupası, Meta’nın altyapısı için planlı en büyük stres testi. 2026’da mesajlaşma, video, öneri ve ağ aynı anda rekor kırdı: WhatsApp 19 Temmuz’daki finalde saniyede 30 milyondan fazla mesaj (rekor, bir önceki rekor 12 gün önce 29 milyonla kırılmıştı); Messenger, Threads ve Instagram Direct dakikada 49 milyon mesaj; Instagram öneri trafiği haftalık bazda yüzde 80’e kadar yüksek; canlı video izleme süresi Instagram’da yüzde 90, Facebook’ta yüzde 242 arttı.</p><p><strong>Asıl bulgu: trafik molaları izledi.</strong> Maç olaylarını küresel çıkış trafiğiyle hizalayınca, paylaşımın büyük ölçüde molalarda (su molası, devre arası, uzatma, son düdük, ödül töreni) patladığı görüldü. Finalde normal sürenin bitişinde trafik yaklaşık dört dakikada yüzde 46, son düdükte yaklaşık 15 dakikada yüzde 57 yükseldi; turnuvanın en büyük tepesi normal süre bitiş düdüğüydü. Yazının cümlesi: grafikleri oyun değil, oyundan sonraki sohbetler oynattı. ‘Bütün kapasite kararları o tek örüntüden çıkıyor.’</p><p><strong>Katmanlı sistemler, elle müdahale yok.</strong> Yükü Taiji veri merkezleri arasında dengeledi, Katran ve Proxygen L4/L7 trafiği dağıttı, küresel yük dengeleme kullanıcıları en uygun uca yönlendirdi ve autoscaling kapasiteyi talebe göre sağladı. Ağ ekipleri aylar önceden ISS ortaklarıyla çalışıp yükseltmeleri en çok fayda sağlayacak yerlere yaptı; bu ön yatırım kalıcı kapasite olarak kalıyor.</p><p><strong>Instagram: 39 ardışık gün tepe.</strong> Dört ayak: <strong>kapasite tamponları</strong> (tepeler autoscaling’i beklemesin diye önceden fazladan ayırma); <strong>ülke düzeyinde graceful degradation</strong> (yüksek riskli maçlarda en yoğun ülkelerde kritik olmayan arka plan yükünü atmak); <strong>zincirleme yayılmayı önleme</strong> (ön yüzdeki tepe alttaki veri sistemlerine sıçramasın); ve <strong>erken uyarı sinyalleri</strong> (eşiğe yaklaşırken, aşınca değil). Hepsi 2028 Olimpiyatları gibi sonraki büyük olaylar için tekrar kullanılabilir bir runbook’a dönüştü. WhatsApp’ın en yoğun beş dakikalık penceresinde yaklaşık 8,4 milyar mesaj kesintisiz iletildi; 100’den fazla iç servis önceden load testing’den geçirilip boyutlandırıldı, eleme turları ilerledikçe yeniden test edildi.</p><p><strong>Bu sefer yapmadıkları iki şey.</strong> Birincisi <strong>bölgeler arası yük kaydırma</strong>: geçmiş büyük olaylarda varsayılan, talebi birçok bölgeye yaymak ve sakin bölgelerin kapasitesinin tepeyi emmesiydi. Yılbaşı gibi tepelerin saatler arayla geldiği durumda işe yarıyor; bu sefer <strong>her bölge aynı anda tepe yaptığı için ödünç alınacak boş kapasite yoktu</strong>. Bunun yerine her bölgenin tepesi küresel bir çarpan yerine kendi başına tahmin edildi. İkincisi <strong>dağıtım dondurma</strong>: büyük olaylarda sürekli dağıtımı durdurmak standart hamledir; yıllardır süren güvenilirlik çalışmasına güvenip hiç dondurmadılar, ekipler tepe anı dahil normal ritimde yayın yaptı.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Kapasite kararından önce talebin ne zaman ve neden geldiğini ölç: tetikleyici beklediğin şey olmayabilir.</span></li><li><span>Tepe anında ölçekleme beklememek için kapasiteyi önceden ayır.</span></li><li><span>Zarif bozulma planı önceden yazılmalı: hangi yük, hangi ülkede, hangi koşulda atılır.</span></li><li><span>Tüm bölgeler aynı anda tepe yapıyorsa ‘başka bölgeden ödünç al’ stratejisi çalışmaz; bölgeyi bağımsız tahmin et.</span></li><li><span>Dağıtımı dondurmadan büyük olayı geçmek, yalnızca güvenilir bir dağıtım hattıyla mümkündür.</span></li>    </ol>
+<li><span>Kapasite kararından önce talebin ne zaman ve neden geldiğini ölç: tetikleyici beklediğin şey olmayabilir.</span></li><li><span>Tepe anında ölçekleme beklememek için kapasiteyi önceden ayır.</span></li><li><span>Graceful degradation planı önceden yazılmalı: hangi yük, hangi ülkede, hangi koşulda atılır.</span></li><li><span>Tüm bölgeler aynı anda tepe yapıyorsa ‘başka bölgeden ödünç al’ stratejisi çalışmaz; bölgeyi bağımsız tahmin et.</span></li><li><span>Dağıtımı dondurmadan büyük olayı geçmek, yalnızca güvenilir bir dağıtım hattıyla mümkündür.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-why">
       <h3 class="label">Neden önemli?</h3>
-      <p>Bu yazı ‘ölçeklenme’yi sihir değil, bir dizi sıkıcı ve ölçülmüş karar olarak gösteriyor: önce örüntüyü bul, sonra kapasite tamponu, zarif bozulma ve erken uyarıyla koru. Hepsi bir çalışma kılavuzu olarak yazıldığı için bir sonraki olayda tekrar kullanılabilir.</p>
+      <p>Bu yazı ‘ölçeklenme’yi sihir değil, bir dizi sıkıcı ve ölçülmüş karar olarak gösteriyor: önce örüntüyü bul, sonra kapasite tamponu, graceful degradation ve erken uyarıyla koru. Hepsi bir runbook olarak yazıldığı için bir sonraki olayda tekrar kullanılabilir.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Bunu kendi ölçeğinde şöyle uygularsın. <strong>Önce ölç:</strong> KlioAI’da kullanıcı isteklerini saat bazında günlüğe al ve ‘yük ne zaman artıyor’ grafiğini çiz; beklediğinden farklı bir örüntü çıkabilir (örneğin ders saatleri ya da sınav öncesi). <strong>Sonra sınır koy:</strong> yük arttığında önce kritik olmayan işleri (analitik, ikinci model geçişi) kapatan bir bayrak ekle. <strong>Mülakatta kullanılacak vokabüler:</strong> tampon kapasite (headroom), zarif bozulma, zincirleme çöküşü önleme, erken uyarı. Bir de ayrıntı: yük testini ortalamaya değil beklenen tepe değerine göre yap; <code>k6</code> ya da <code>locust</code> ile birkaç dakikalık bir tepe senaryosu yazmak yeterli bir başlangıç.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Bunu kendi ölçeğinde şöyle uygularsın. <strong>Önce ölç:</strong> kullanıcı isteklerini saat bazında logla ve ‘yük ne zaman artıyor’ grafiğini çiz; beklediğinden farklı bir örüntü çıkabilir (örneğin ders saatleri ya da sınav öncesi). <strong>Sonra sınır koy:</strong> yük arttığında önce kritik olmayan işleri (analytics, ikinci model geçişi) kapatan bir flag ekle. <strong>Mülakat vokabüleri:</strong> headroom, graceful degradation, cascade failure önleme, erken uyarı. Bir de ayrıntı: load testing’i ortalamaya değil beklenen tepe değerine göre yap; <code>k6</code> ya da <code>locust</code> ile birkaç dakikalık bir tepe senaryosu yazmak yeterli bir başlangıç.</p>
     </div>
   </div>
 
@@ -111,23 +111,23 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">graceful degradation</span> <span class="term-tr">zarif bozulma</span></dt>
+      <dt><span class="term-en">graceful degradation</span></dt>
       <dd>Aşırı yükte sistemi tümüyle düşürmek yerine kritik olmayan işleri kapatarak ayakta tutma.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">capacity buffer (headroom)</span> <span class="term-tr">kapasite tamponu</span></dt>
+      <dt><span class="term-en">capacity buffer (headroom)</span></dt>
       <dd>Beklenen tepe yükün üzerinde, önceden ayrılmış yedek kapasite.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">cascade failure</span> <span class="term-tr">zincirleme çöküş</span></dt>
+      <dt><span class="term-en">cascade failure</span></dt>
       <dd>Bir bileşendeki aşırı yükün bağlı bileşenlere yayılarak onları da devirmesi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">load testing</span> <span class="term-tr">yük testi</span></dt>
+      <dt><span class="term-en">load testing</span></dt>
       <dd>Sistemi beklenen ya da üstü yük altında önceden deneme.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">runbook</span> <span class="term-tr">çalışma kılavuzu</span></dt>
+      <dt><span class="term-en">runbook</span></dt>
       <dd>Bir olay ya da operasyon sırasında izlenecek adımların yazılı hâli.</dd>
     </div>
   </dl>
@@ -136,9 +136,9 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/olceklenme/">#ölçeklenme</a></li>
-  <li><a href="/etiket/dayaniklilik/">#dayanıklılık</a></li>
-  <li><a href="/etiket/kapasite-planlama/">#kapasite planlama</a></li>
+  <li><a href="/etiket/scaling/">#scaling</a></li>
+  <li><a href="/etiket/resilience/">#resilience</a></li>
+  <li><a href="/etiket/capacity-planning/">#capacity planning</a></li>
   <li><a href="/etiket/meta/">#Meta</a></li>
 </ul>
 
@@ -174,7 +174,7 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
+      <h4 class="label">Pratikte</h4>
       <p>Bunu bugün Claude Code ya da benzeri bir araçla kendi projelerinde uygula. <strong>(1)</strong> Repo köküne bir <code>CLAUDE.md</code> yaz: derleme ve test komutları, proje kuralları. Agent aynı hatayı iki kez yaparsa düzeltmeyi oraya ekle. <strong>(2)</strong> Agent’ın ‘bitti’ demesini testin geçmesine bağla; testi olmayan bir görevi agent’a verme. <strong>(3)</strong> Agent’a ‘bu ekran şöyle’ diye anlatmak yerine, ekran çıktısını ya da API cevabını okuyabileceği bir komut ver.</p>
     </div>
   </div>
@@ -183,11 +183,11 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">human-on-the-loop</span> <span class="term-tr">döngünün üstündeki insan</span></dt>
+      <dt><span class="term-en">human-on-the-loop</span></dt>
       <dd>İşi agent’ın yürüttüğü, insanın hedefi koyup izlediği ve onayladığı çalışma biçimi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">build flavor</span> <span class="term-tr">derleme türü</span></dt>
+      <dt><span class="term-en">build flavor</span></dt>
       <dd>Aynı koddan farklı yapılandırmayla üretilen ayrı uygulama sürümü (örneğin prototip ve üretim).</dd>
     </div>
   </dl>
@@ -197,9 +197,9 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/agent/">#agent</a></li>
-  <li><a href="/etiket/gelistirici-deneyimi/">#geliştirici deneyimi</a></li>
-  <li><a href="/etiket/test/">#test</a></li>
-  <li><a href="/etiket/yapay-zek-ile-gelistirme/">#yapay zekâ ile geliştirme</a></li>
+  <li><a href="/etiket/developer-experience/">#developer experience</a></li>
+  <li><a href="/etiket/testing/">#testing</a></li>
+  <li><a href="/etiket/ai-assisted-development/">#AI-assisted development</a></li>
 </ul>
 
   <a class="readmore" href="https://engineering.fb.com/2026/10/15/ml-applications/how-meta-built-forum-ai-native-engineering/" rel="noopener nofollow" target="_blank">
@@ -266,7 +266,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

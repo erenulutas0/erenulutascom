@@ -1,0 +1,103 @@
+"""20 Ekim 2026 sayısı."""
+
+from pipeline.compose import save_edition
+
+DATE = "2026-10-20"
+
+INTRO = "Agent’lara memory eklemek kulağa kolay gelir: her şeyi sakla, lazım olunca ver. Databricks’in yazısı tam tersini savunuyor: daha fazla geçmiş daha iyi memory demek değil. Yanında agent trafiği için sıfırdan tasarlanmış bir LLM serving stack’i var."
+
+DRAFTS = [
+    {
+        "url": "https://www.databricks.com/blog/memcurrent-designing-persistent-memory-production-agents",
+        "slot": "cover",
+        "title_tr": "Agent’ın hafızası: neyi saklayacağına karar vermek ve ‘dreaming’ pipeline’ı (MemCurrent)",
+        "difficulty": "orta",
+        "tags": [
+            "agent",
+            "memory",
+            "LLM",
+            "architecture"
+        ],
+        "summary": "Production agent’ı yazmak ve sürdürmek, ‘vibe coding’ ile bir agent çıkarmaktan çok daha zor. Geliştiriciler çoğunlukla kalite (özellikle long-tail görevlerde doğru cevap) ile verimlilik (maliyet ve gecikme) arasında takas yapmak zorunda kalıyor. Memory ikisini birden iyileştirebilecek az sayıdaki yöntemden biri: kullanıcı tercihleri, önceki düzeltmeler, metrik tanımları ve işe yarayan workflow’lar görevler arasında taşınabilir. Ama yazının temel uyarısı şu: daha fazla geçmiş daha iyi memory demek değil; her etkileşimi vermek hem pahalı hem de eski, çelişen ya da alakasız bağlam sokabilir. Asıl mesele neyi tutacağına, nasıl güncel tutacağına ve yararını nasıl ölçeceğine karar vermek.\n\nDatabricks’in **MemCurrent** adlı mimarisi artık Agent Bricks Memory ve Genie’yi çalıştırıyor. Kendi iç benchmark’larında memory’siz agent’a göre pass rate’i üçe katlıyor, token’ı yüzde 31 azaltıyor ve yüzde 26 daha hızlı çalışıyor. Memory’yi agent’a bağlamanın üç yolu var: **plugin** (oturumda sabit noktalarda otomatik okuma ve yazma), **tool** (agent ne zaman neyi okuyup yazacağına kendi karar verir) ve **offline pipeline** (arka planda zamanlanmış ya da tetiklenmiş güncelleme). MemCurrent üçünü de kullanıyor, her biri en uygun olduğu yerde.\n\n**İki tür memory.** *Episodic memory* ham oturum izlerini saklıyor; append-only, bir plugin oturum ilerledikçe her adımı kaydediyor. *Derived memory* bu izlerden damıtılmış öğrenimler; hiyerarşik bir dosya sistemini taklit eden değiştirilebilir bir tabloda, yapılandırılmış bir knowledge base olarak duruyor ve en üstte otomatik üretilen bir `memory.md` index’i dosya yapısını ve her dosyanın içeriğini anlatıyor. İkisi de çok kullanıcıya ölçeklenebilen, düşük gecikmeli bir production veritabanında.\n\n**Yazma.** Açık talepler (‘`/tmp` dizininde asla script yazma’ gibi) agent tool’larıyla (`add_memory`, `update_memory`, `delete_memory`) yazılıyor. Geri kalanı **offline ‘dreaming’ pipeline’ı** yakalıyor: her yeni oturumdan örtük öğrenimleri ilgili dosyalara damıtıyor ve tüm depoyu temizliyor; büyük dosyaları bölüyor, tekrarları birleştiriyor, çelişkileri çözüyor. **Okuma** katmanlı: oturum başında bir plugin memory index’ini enjekte ediyor, böylece agent daha başlamadan neyi bildiğini biliyor; oturum sırasında iki tool var: `search_memory` (bir sorgu için en iyi eşleşmeleri döndürür) ve `fetch_memory` (kimliğine göre tam kaydı getirir).\n\n**Nasıl ölçtüler?** Üç açık benchmark (LoCoMo, LongMemEval, ConvoMem) kullanıldı ama bunlar simüle edilmiş kişilerin sohbetlerinde geçmişte söylenen bir bilgiyi hatırlamayı test ediyor. Ekip buna ek olarak gerçek Genie konuşmalarından bir **Internal Memory Benchmark** kurdu: 12 binden fazla oturumdan ‘memory’ye değer sinyali taşıyan 3 bin aday seçildi. Farkları üç noktada: kurumsal domain (tablo semantiği, metrik tanımları, workflow’lar), memory’nin cevap değil **eylem** beslemesi (doğru dizeyi bulmak yetmez, agent bilgiyi çok adımlı bir görevde uygulamalı) ve çeşitlilik (5 memory türü, 11 senaryo; güncelliğini yitirmiş bilgi ve memory gerektirmeyen sorular dahil). Mem0, PropMem ve OpenClaw memory ile aynı LLM üzerinde karşılaştırıldı; Databricks MemCurrent’in pass rate ve token kullanımında Pareto frontier’da olduğunu bildiriyor.\n\nPratik bir örnek: bir kullanıcı ürünün en aktif 20 kullanıcısını sormuş; agent doğru SQL yazmış ama çalıştırma sonuçlarının kaydedildiği dosyayı hiç okumamış. Memory bu tür ara sıra görülen hallucination hatalarını önlemiş.",
+        "key_points": [
+            "Daha fazla geçmiş daha iyi memory değildir; eski, çelişen ya da alakasız bağlam kaliteyi düşürür.",
+            "Ham izleri (episodic) ve damıtılmış öğrenimleri (derived) ayrı tut.",
+            "Açık talepleri tool ile, örtük öğrenimleri arka plandaki bir pipeline ile yaz.",
+            "Memory’nin başarısı hatırlamayla değil, hatırlanan bilgiyle doğru eylem yapmakla ölçülür.",
+            "Oturum başında memory index’ini vermek, agent’ın ne bildiğini baştan bilmesini sağlar."
+        ],
+        "why_it_matters": "Agent memory çoğu zaman ‘vektör veritabanına at’ olarak uygulanıyor. Bu yazı, memory’yi bakım gerektiren bir veri ürünü olarak ele alıyor: tekrarları birleştiriyor, çelişkileri çözüyor, yararını bir benchmark ile ölçüyor.",
+        "for_you": "Basit bir agent’a memory eklemek istersen küçük başla: kullanıcıya özel bir `memory.md` dosyası tut, oturum başında prompt’a ekle ve oturum sonunda bir LLM çağrısıyla ‘bu oturumdan kalıcı olarak öğrenilmesi gereken şeyler’ çıkarıp dosyaya ekle. Haftada bir ikinci bir çağrıyla dosyayı sadeleştir: tekrarları birleştir, çelişenleri çöz. Değerlendirmek için önce ‘memory’siz ve ‘memory’li aynı 20 görevi çalıştırıp pass rate’i karşılaştır; ölçmeden memory’nin işe yaradığını varsayma.",
+        "terms": [
+            {
+                "en": "episodic memory",
+                "tr": "episodic memory",
+                "definition": "Agent’ın geçmiş oturumlarının ham, sıralı kaydı."
+            },
+            {
+                "en": "derived memory",
+                "tr": "derived memory",
+                "definition": "Ham izlerden damıtılıp yapılandırılmış biçimde saklanan kalıcı öğrenimler."
+            },
+            {
+                "en": "Pareto frontier",
+                "tr": "Pareto frontier",
+                "definition": "Bir ölçütte kötüleşmeden diğerinde iyileşmenin mümkün olmadığı en iyi dengeler kümesi."
+            },
+            {
+                "en": "hallucination",
+                "tr": "hallucination",
+                "definition": "Modelin girdideki kanıtla desteklenmeyen bilgiyi doğruymuş gibi üretmesi."
+            },
+            {
+                "en": "pass rate",
+                "tr": "pass rate",
+                "definition": "Bir değerlendirmede başarıyla geçilen görevlerin oranı."
+            }
+        ]
+    },
+    {
+        "url": "https://cloud.google.com/blog/topics/ai-infrastructure/llm-d-1-0-an-open-source-stack-for-distributed-inference/",
+        "slot": "brief",
+        "title_tr": "Round-robin yetmiyor: llm-d 1.0 ile agent trafiği için cache-aware routing",
+        "difficulty": "ileri",
+        "tags": [
+            "inference",
+            "Kubernetes",
+            "LLM",
+            "infrastructure"
+        ],
+        "summary": "Google, Red Hat, IBM ve diğerleriyle birlikte kurduğu **llm-d**’nin 1.0 sürümünü PyTorch Conference’ta yayımladı: CNCF Sandbox projesi, Kubernetes-native, dağıtık LLM inference için açık kaynak bir stack (500’den fazla katkıcı, 25 kuruluş). Gerekçe: bir yıl önce inference trafiğinin çoğu chat’ti (bir prompt, bir cevap). Bugün multi-step agent’lar ve reinforcement learning rollout’ları araçlara dağılıyor, uzun prefix’leri paylaşıyor ve burst’lerle geliyor. Böyle yükü tek makinede ya da generic round-robin load balancer arkasında sunmak hızla çöküyor: replica’lar aynı prompt’ları yeniden hesaplıyor, accelerator belleği tekrar eden state ile doluyor ve tek bir bursty agent döngüsü etkileşimli kullanıcıları durdurabiliyor.\n\nllm-d model sunucularından oluşan bir kümeyi koordineli bir serving havuzuna çeviriyor. Önceki sürümlerde prefix-aware ve load-aware routing, KV cache offloading, prefill/decode disaggregation ve wide expert parallelism vardı. 1.0’la gelenler: **flow control** ile öncelik ve adalet gözeten multi-tenant QoS (gecikmeye duyarlı istekler ile bursty agent iş yükleri birbirini aç bırakmadan aynı filoyu paylaşır), kararlı v1 API’ler, router high availability ve zero-downtime güncelleme, ve agent’a özel serving: session-aware routing, turn-priority scheduling. Keynote demosunda 1.000 sandbox’lı agent tek bir llm-d endpoint’ine vurdu; cache-aware routing her agent’ın adımlarını bağlamını tutan replica’larda tuttu, flow control ise bursty döngüleri kuyruğa alarak etkileşimli istekleri hızlı bıraktı.",
+        "key_points": [
+            "Agent trafiği uzun, paylaşılan prefix’lerle gelir; load balancer bunu görmezse aynı hesabı tekrar tekrar yapar.",
+            "Routing kararını replica’nın cache’inde ne olduğuna göre vermek (cache-aware routing) aynı işi yeniden yapmayı engeller.",
+            "Bursty agent döngüleri ile etkileşimli kullanıcıları ayrı önceliklendirmek gerekir."
+        ],
+        "for_you": "Kendi modelini ya da açık bir modeli (vLLM gibi) sunuyorsan, prefix cache hit rate’i ve ‘ilk token’a kadar süre’yi (TTFT) ölçmeye başla. Aynı kullanıcının ardışık isteklerini aynı replica’ya yönlendirmek (sticky routing) çoğu zaman ilk ve en ucuz iyileştirmedir.",
+        "terms": [
+            {
+                "en": "KV cache",
+                "tr": "KV cache",
+                "definition": "Transformer’ın daha önce işlediği token’lar için tuttuğu key/value tensörleri; yeniden hesaplamayı önler."
+            },
+            {
+                "en": "prefill/decode disaggregation",
+                "tr": "prefill/decode disaggregation",
+                "definition": "Prompt’u işleme (prefill) ve token üretme (decode) aşamalarını farklı donanımlarda çalıştırma."
+            },
+            {
+                "en": "TTFT",
+                "tr": "TTFT",
+                "definition": "Time to first token: isteğin gönderilmesinden ilk çıktı token’ının gelmesine kadar geçen süre."
+            },
+            {
+                "en": "QoS",
+                "tr": "QoS",
+                "definition": "Quality of service: farklı iş yüklerine öncelik ve kaynak garantisi veren hizmet kalitesi politikası."
+            }
+        ]
+    }
+]
+
+if __name__ == "__main__":
+    save_edition(DATE, INTRO, DRAFTS)

@@ -102,8 +102,8 @@
       <p>Cold-start, öneri sistemlerinin en yaygın acısıdır: yeni kullanıcı, yeni ürün, yeni belge. Çözümün ortak fikri, varlığı yalnızca geçmişte ne yaptığıyla değil <strong>kendi içeriğiyle</strong> tanımlamak.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Mobit&#x27;teki doküman aramada bu doğrudan işine yarar. Yeni yüklenen bir belge için henüz kimse arama yapmadı, tıklama verisi yok; ama belgenin içeriğinden üretilmiş embedding ilk günden aranabilir kılıyor, tam olarak Netflix&#x27;in yaptığı gibi. Bunu pgvector ile PostgreSQL&#x27;de yapabilirsin. Ayrıca “ID yerine içerik” fikrini KlioAI&#x27;da kullan: bir alıştırmayı yalnızca kimlik numarasıyla değil, konusunun embedding&#x27;iyle tanımla; yeni eklenen alıştırmalar ilk günden benzer alıştırmaların başarı verisinden yararlanır.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Doküman arama için bu doğrudan işe yarar. Yeni yüklenen bir belge için henüz kimse arama yapmadı, tıklama verisi yok; ama belgenin içeriğinden üretilmiş embedding ilk günden aranabilir kılıyor, tam olarak Netflix’in yaptığı gibi. Bunu pgvector ile PostgreSQL’de yapabilirsin. Ayrıca ‘ID yerine içerik’ fikrini kullan: bir öğeyi yalnızca kimlik numarasıyla değil, konusunun embedding’iyle tanımla; yeni eklenen öğeler ilk günden benzerlerinin başarı verisinden yararlanır (cold-start çözümü).</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">cold-start</span> <span class="term-tr">soğuk başlangıç</span></dt>
+      <dt><span class="term-en">cold-start</span></dt>
       <dd>Yeni bir kullanıcı ya da öğe için henüz etkileşim verisi olmadığından öneri yapılamama durumu.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">CLIP</span> <span class="term-tr">CLIP</span></dt>
-      <dd>Görselleri ve metinleri aynı vektör uzayına gömen, önceden eğitilmiş çok kipli model.</dd>
+      <dt><span class="term-en">CLIP</span></dt>
+      <dd>Görselleri ve metinleri aynı vektör uzayına gömen, önceden eğitilmiş multimodal model.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">model consolidation</span> <span class="term-tr">model birleştirme</span></dt>
+      <dt><span class="term-en">model consolidation</span></dt>
       <dd>Birbirine benzer işleri yapan birden çok modeli tek bir modele indirme.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">opaque ID</span> <span class="term-tr">opak kimlik</span></dt>
+      <dt><span class="term-en">opaque ID</span></dt>
       <dd>İçeriği hakkında hiçbir bilgi taşımayan, yalnızca ayırt etmeye yarayan tanımlayıcı.</dd>
     </div>
   </dl>
@@ -133,9 +133,9 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/embedding/">#embedding</a></li>
-  <li><a href="/etiket/oneri-sistemleri/">#öneri sistemleri</a></li>
+  <li><a href="/etiket/recommender-systems/">#recommender systems</a></li>
   <li><a href="/etiket/cold-start/">#cold-start</a></li>
-  <li><a href="/etiket/kisisellestirme/">#kişiselleştirme</a></li>
+  <li><a href="/etiket/personalization/">#personalization</a></li>
 </ul>
 
   <a class="readmore" href="https://netflixtechblog.com/maps-netflixs-multimodal-asset-personalization-at-scale-32f96320785e?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">
@@ -198,7 +198,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

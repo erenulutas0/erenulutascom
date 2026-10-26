@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>26 Ekim 2026 — Eren&#39;in Mühendislik Gazetesi</title>
+<meta name="description" content="Netflix’te pik günlerde yaklaşık 100.000 workload başarısız oluyor ve debugging bir kez daha insanların zamanını yiyor. Çözüm ‘LLM’e logları ver’ değil, LLM’i deterministik bir sistemin etrafına sarmak oldu. Yanında OpenAI mühendislerinin incident’larda hızı nasıl kullandığına dair kısa bir iç örnek.">
+<meta name="author" content="Eren Ulutaş">
+<meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131310" media="(prefers-color-scheme: dark)">
+<meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:title" content="26 Ekim 2026 — Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:description" content="Netflix’te pik günlerde yaklaşık 100.000 workload başarısız oluyor ve debugging bir kez daha insanların zamanını yiyor. Çözüm ‘LLM’e logları ver’ değil, LLM’i deterministik bir sistemin etrafına sarmak oldu. Yanında OpenAI mühendislerinin incident’larda hızı nasıl kullandığına dair kısa bir iç örnek.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:url" content="https://erenulutas.com/sayi/2026-10-26/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://erenulutas.com/sayi/2026-10-26/">
+<link rel="alternate" type="application/rss+xml" title="Eren&#39;in Mühendislik Gazetesi" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
+<link rel="stylesheet" href="/static/style.css?v=eae14b0f">
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+<script>
+  // Tema tercihini ilk boyamadan önce uygula (flash olmasın)
+  (function () {
+    try {
+      var t = localStorage.getItem('tema');
+      if (t) document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip" href="#icerik">İçeriğe geç</a>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <a href="/" class="logo">
+      <span class="logo-mark">EU</span>
+      <span class="logo-text">
+        <strong>Eren&#39;in Mühendislik Gazetesi</strong>
+        <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
+      </span>
+    </a>
+    <nav class="masthead-nav" aria-label="Ana menü">
+      <a href="/">Bugün</a>
+      <a href="/arsiv/" aria-current="page">Arşiv</a>
+      <a href="/ara/">Ara</a>
+      <a href="/hakkinda/">Hakkında</a>
+      <button id="tema" class="tema" type="button" aria-label="Açık/koyu temayı değiştir" title="Açık/koyu tema">
+        <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/></g></svg>
+        <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg>
+      </button>
+    </nav>
+  </div>
+  <div class="progress" id="ilerleme" aria-hidden="true"></div>
+</header>
+
+<main id="icerik">
+<div class="wrap">
+
+  <header class="edition-head">
+  <div class="edition-bar">
+    <span class="edition-no">Sayı 67</span>
+    <h1 class="edition-date"><time datetime="2026-10-26">26 Ekim 2026, Pazartesi</time></h1>
+    <nav class="edition-nav" aria-label="Sayılar arası gezinme">
+<a href="/sayi/2026-10-23/" rel="prev"><span aria-hidden="true">←</span> 23 Ekim 2026</a><span>En güncel sayı</span>    </nav>
+  </div>
+<p class="lede">Netflix’te pik günlerde yaklaşık 100.000 workload başarısız oluyor ve debugging bir kez daha insanların zamanını yiyor. Çözüm ‘LLM’e logları ver’ değil, LLM’i deterministik bir sistemin etrafına sarmak oldu. Yanında OpenAI mühendislerinin incident’larda hızı nasıl kullandığına dair kısa bir iç örnek.</p></header>
+
+
+  <div class="layout">
+    <div class="layout-main">
+          <article class="story cover" id="97a0aa466cd0">
+  <div class="meta">
+<span class="kicker">Günün kapağı</span>    <a class="badge" href="/kaynak/netflix/"
+     style="--brand: #E50914">Netflix Tech Blog</a>
+
+  <span class="meta-item">26 Ekim 2026</span>
+<span class="meta-item">15 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
+</div>
+
+  <h2 class="cover-title">
+    <a href="https://netflixtechblog.com/making-failure-diagnosis-reliable-with-pensive-ai-6b0811a1c015?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">Log’u LLM’e vermek yetmez: Netflix Pensive AI’da deterministik sistemin etrafına AI sarmak</a>
+  </h2>
+  <p class="original-title">Making Failure Diagnosis Reliable with Pensive AI · Netflix Technology Blog</p>
+
+  <div class="prose"><p>Netflix’te data ve ML kullanıcıları her gün milyonlarca workload çalıştırıyor (Titus, Spark, Trino, Druid gibi motorlarda) ve pik günlerde yaklaşık 100.000 tanesi başarısız oluyor. Başarısızlık yalnızca başlangıç: birinin birkaç log arasında faydalı sinyali bulması, sebebin kendi kodunda mı platformda mı olduğuna karar vermesi ve yeniden deneme, yeniden yapılandırma ya da yükseltme kararı vermesi gerekiyor. İlk çözüm <strong>Pensive</strong> idi: başarısız workload loglarını toplayıp regex ve elle yazılmış Java kurallarıyla hataları çıkaran ve sınıflandıran, yeniden deneme ya da düzeltme önerisini Maestro gibi ürünlere ileten bir auto-diagnosis sistemi. Başarısızlıkların yaklaşık yüzde 50’sini self-service ve bazen otomatik yaptı. Ama kurallar yalnızca bilinen kalıplarda çalışıyor: kapsam, birinin yeni bir hata kalıbını fark edip kural yazması ve engine ile log formatları değiştikçe güncel tutmasıyla büyüyor. Üç aylık bir dönemde Pensive yaklaşık yedi milyon sınıflandırma yaptı ve yarısı ‘unknown’ kovasına düştü.</p><p><strong>Pensive AI</strong>’nın hedefi, modeli logların önüne koymak değil; kapsamı deterministik parçaları bırakmadan genişletmek. Yazının tasarım ilkesi: <strong>AI’ı deterministik süreçlerin etrafına sarmak</strong>, bu da geniş kapsam, düşük gecikme, kontrollü maliyet ve yazılım yaşam döngüsü boyunca kolay bakım sağlıyor. İki yol var ve birbirini tamamlıyor: <strong>error extraction</strong> her başarısızlıkta otomatik çalışıyor (hızlı ilk bakış, düşük maliyet) ve <strong>on-demand debugging</strong> kullanıcı istediğinde loglardaki semptomlara bakıp LLM’in kendi bilgisi ve reasoning’iyle daha derin kök neden analizi yapıyor (biraz daha yüksek gecikme ve maliyet).</p><p><strong>Bölüm 1: faydalı hatayı bulmak.</strong> Eski kurallar kesin ama her biri belirli bir log şeklini yakalıyor (ör. bir Spark container’ın bellek sınırını aşması için bir regex). Pensive AI kuralı olmayan hataları da buluyor ve bir platform yükseltmesinden sonra şekli değişen tanıdık hatalara uyum sağlıyor. Mühendislik açısından öğretici bir karar: çıktı token’ı üretmek girdi token’ı okumaktan çok daha yavaş olduğundan, uzun hata mesajlarını model yeniden yazarsa pahalı ve yavaş olurdu. Bu yüzden her logun <strong>satırları numaralandırılıyor</strong> ve modele <code>{lineNumber, text}</code> kayıtları veriliyor; model metni kopyalamak yerine hangi satırların hata olduğunu döndürüyor. Log kaynağı başına çağrılar paralel çalışıyor ve hepsi Maestro’nun timeout’unun içinde belirlenmiş tek bir deadline’ı paylaşıyor; süreyi kaçıran çağrı sonuçtan çıkarılıyor ve hepsi beklenmiyor. Veri sözleşmesi de yeniden tasarlandı: eski model tek bir düz hata string’iydi, yenisi her log kaynağı için bir hata listesi ve kaynağa derin bağlantılar döndürüyor.</p><p><strong>Bölüm 2: tam teşhis ve ürün deneyimi.</strong> Pensive AI Debugging, başarısız bir step attempt’i analiz edip kök neden ve önerilen düzeltmeleri sunuyor; programatik API’lerden, MCP’den ve ürün arayüzünden (Data Portal) erişiliyor. Üretimi onlarca saniye ile bir dakika arası sürebildiğinden isteğe bağlı çalıştırılıyor. Bu seçim cache için sağlam bir birim yaratıyor: her debugging cevabı <strong>step attempt’e göre cache’leniyor</strong>; ikinci istek yeni bir AI çağrısı değil bir key-value okuması. Cache’lenmiş cevabı oku, yoksa üret ya da var olanı yeniden üretip üzerine yaz şeklinde üç başlatma biçimi var; arayüz ve programatik kullanım için farklı ihtiyaçları karşılıyor.</p><p><strong>Erken sonuçlar.</strong> AI error extraction artık başarısızlıkların yüzde 100’ünü kapsıyor (eski Pensive’in unknown dediği hatalar dahil). Pensive AI’ı kullanmayan başarısız step attempt’lerde, kullananlara göre ortalama yüzde 321 daha fazla manuel debug-log inceleme eylemi görüldü; yazı bunun nedensel bir iddia değil gözlemsel bir karşılaştırma olduğunu özellikle belirtiyor. Göç hâlâ sürüyor: yeni AI hata alanını şimdilik Data Portal’ın başarısız Maestro step arayüzü okuyor, diğer yüzeyler sırada.</p></div>
+
+  <div class="keypoints">
+    <h3 class="label">Öne çıkanlar</h3>
+    <ol>
+<li><span>LLM’i deterministik sistemin yerine değil, onun kapsamını genişletmek için etrafına koy.</span></li><li><span>Output token’ı pahalıdır: modele metni kopyalatmak yerine satır numarası döndürt.</span></li><li><span>Paralel çağrıları ortak bir deadline’a bağla; geç kalanı sonuçtan çıkar, hepsini bekleme.</span></li><li><span>Pahalı analizi isteğe bağlı yap, sonucunu cache’le; ucuz ilk bakışı her hatada otomatik çalıştır.</span></li><li><span>Kendi sonucunu abartma: gözlemsel karşılaştırmayı nedensel gibi sunma.</span></li>    </ol>
+  </div>
+
+  <div class="callouts">
+    <div class="callout callout-why">
+      <h3 class="label">Neden önemli?</h3>
+      <p>‘Logu LLM’e ver, cevap versin’ demo’da çalışır, ölçekte maliyet, gecikme ve tutarsızlıkla patlar. Bu yazı bir LLM özelliğini production’da sürdürülebilir kılan mühendislik kararlarını gösteriyor: sınırlı çıktı, deadline, cache, ve eski sistemle yan yana çalışan bir göç.</p>
+    </div>
+    <div class="callout callout-you">
+      <h3 class="label">Pratikte</h3>
+      <p>Bir log analizi ya da debugging asistanı yazarsan üç kuralı baştan uygula. <strong>(1)</strong> Logu satır numarasıyla modele ver ve modelden yalnızca ilgili satır numaralarını ve kısa bir açıklamayı JSON olarak iste; metni modele yeniden yazdırma. <strong>(2)</strong> Hata imzasını (örneğin istisna sınıfı ve ilk stack frame) anahtar yapıp sonucu cache’le: aynı hata ikinci kez gelince LLM çağırma. <strong>(3)</strong> Bilinen sık hataları regex ile çöz, LLM’i yalnızca ‘unknown’ kovasına çağır ve kovanın oranını izle; bu oran düşüyorsa sistem işe yarıyor demektir.</p>
+    </div>
+  </div>
+
+  <div class="terms">
+    <h3 class="label">Sözlük</h3>
+      <dl>
+    <div class="term">
+      <dt><span class="term-en">error extraction</span></dt>
+      <dd>Uzun bir log içinden hatayı açıklayan satırları ayıklayıp çıkarma.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">deadline</span></dt>
+      <dd>Bir işlemin tamamlanması gereken, sonrasında sonucun beklenmediği süre sınırı.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">root cause analysis</span></dt>
+      <dd>Bir arızanın görünen belirtisinden değil asıl nedeninden başlayarak çözümleme.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">self-service</span></dt>
+      <dd>Kullanıcının başka bir ekibe başvurmadan sorunu kendi başına çözebilmesi.</dd>
+    </div>
+  </dl>
+
+  </div>
+
+  <div class="article-foot">
+  <ul class="tags">
+  <li><a href="/etiket/llm/">#LLM</a></li>
+  <li><a href="/etiket/observability/">#observability</a></li>
+  <li><a href="/etiket/debugging/">#debugging</a></li>
+  <li><a href="/etiket/data-platform/">#data platform</a></li>
+</ul>
+
+  <a class="readmore" href="https://netflixtechblog.com/making-failure-diagnosis-reliable-with-pensive-ai-6b0811a1c015?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">
+    Orijinali oku <span aria-hidden="true">↗</span>
+  </a>
+</div>
+
+</article>
+
+
+    <h2 class="subhead">Kısa kısa</h2>
+<article class="story brief" id="8f2f08b6e197">
+  <div class="meta">
+    <a class="badge" href="/kaynak/openai/"
+     style="--brand: #000000">OpenAI Research</a>
+
+  <span class="meta-item">26 Ekim 2026</span>
+<span class="meta-item">4 dk okuma</span>  <span class="meta-item level level-baslangic">başlangıç</span>
+</div>
+
+  <h3 class="brief-title">
+    <a href="https://openai.com/index/openai-cut-incident-investigation" rel="noopener nofollow" target="_blank">Incident’ta 30 saniye eşiği: OpenAI mühendisleri hızlı bir kodlama agent’ını nasıl kullanıyor</a>
+  </h3>
+  <p class="original-title">How Ultrafast cut incident investigation from hours to minutes at OpenAI</p>
+  <div class="prose prose-sm"><p>OpenAI, Codex’in yüksek hızlı modu Ultrafast’i iç kullanım örneği olarak anlatıyor (kendi ürününü anlatan bir yazı; abartı payı olabilir). Mühendisler için incident response’ta varsayılan olmuş: bir şey bozulduğunda dakikalarca cevap beklemek sorunu büyütüyor. Bir mühendis incident için bir Slack kanalı açıp Codex’i olayı izlemesi, araştırması ve gelen soruları yanıtlaması için görevlendiriyor ve ‘birçok olası nedeni aynı anda arayabildiğini’ söylüyor. Bir güvenlik mimarı, yapılandırılmış ve yapılandırılmamış veriyi toplayıp normalleştirme ve bağlam verme işinin bir iki saatten 10-15 dakikaya, bazen neredeyse gerçek zamana indiğini aktarıyor.</p><p>Yazının asıl gözlemi hız eşiği: bir mühendis bir AI cevabı 30 saniyeden uzun sürerse Slack’e bakıp bir iş arkadaşına sorduğunu, ama işlerinin çoğunun artık bu eşiğin altında kaldığını söylüyor. Başka bir mühendis eskiden Codex’e bir şey sorup aynı anda kendisi de bakmak zorunda kaldığını, artık odağını bölmeden beklediğini anlatıyor. Bu tür testler iç kullanıcı anlatılarına dayanıyor; bağımsız ölçüm değil.</p></div>
+
+  <div class="keypoints keypoints-sm">
+    <h4 class="label">Öne çıkanlar</h4>
+    <ol>
+<li><span>Yanıt süresi bir eşiğin altına inince insanlar aracı beklemek yerine kullanır; eşik yaklaşık 30 saniye olarak anlatılıyor.</span></li><li><span>Incident’ta birden çok hipotezi aynı anda aramak, tek tek denemekten hızlıdır.</span></li><li><span>İç kullanıcı anlatıları değerli ipuçlarıdır ama ölçüm değildir.</span></li>    </ol>
+  </div>
+
+  <div class="callouts">
+    <div class="callout callout-you">
+      <h4 class="label">Pratikte</h4>
+      <p>Incident ya da debugging için bir araç yazarsan ‘ilk anlamlı cevap’ süresini ölç ve 30 saniyenin altını hedefle. Hız için model boyutunu küçültmeden önce bağlamı kısalt ve aramaları paralelleştir: aynı soruyu log, metrik ve son deploy’lar için eşzamanlı sormak çoğu zaman en büyük kazanç.</p>
+    </div>
+  </div>
+
+  <details class="terms">
+    <summary class="label">Sözlük · 2 terim</summary>
+      <dl>
+    <div class="term">
+      <dt><span class="term-en">incident response</span></dt>
+      <dd>Üretimdeki bir arızayı tespit etme, teşhis etme ve giderme süreci.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">latency</span></dt>
+      <dd>Bir isteğin gönderilmesi ile cevabın gelmesi arasındaki süre.</dd>
+    </div>
+  </dl>
+
+  </details>
+
+  <div class="article-foot">
+  <ul class="tags">
+  <li><a href="/etiket/incident-response/">#incident response</a></li>
+  <li><a href="/etiket/agent/">#agent</a></li>
+  <li><a href="/etiket/developer-experience/">#developer experience</a></li>
+  <li><a href="/etiket/openai/">#OpenAI</a></li>
+</ul>
+
+  <a class="readmore" href="https://openai.com/index/openai-cut-incident-investigation" rel="noopener nofollow" target="_blank">
+    Orijinali oku <span aria-hidden="true">↗</span>
+  </a>
+</div>
+
+</article>
+
+
+    </div>
+    <aside class="layout-aside" aria-label="Bu sayıda">
+  <div class="aside-block">
+    <h2 class="label">Bu sayıda</h2>
+    <ol class="toc" id="toc">
+      <li>
+        <a href="#97a0aa466cd0">
+          <span class="toc-title">Log’u LLM’e vermek yetmez: Netflix Pensive AI’da deterministik sistemin etrafına AI sarmak</span>
+          <span class="toc-meta">Netflix Tech Blog · 15 dk</span>
+        </a>
+      </li>
+      <li>
+        <a href="#8f2f08b6e197">
+          <span class="toc-title">Incident’ta 30 saniye eşiği: OpenAI mühendisleri hızlı bir kodlama agent’ını nasıl kullanıyor</span>
+          <span class="toc-meta">OpenAI Research · 4 dk</span>
+        </a>
+      </li>
+    </ol>
+  </div>
+  <div class="aside-block aside-facts">
+    <h2 class="label">Künye</h2>
+    <dl class="facts">
+      <div><dt>yazı</dt><dd>2</dd></div>
+      <div><dt>dk okuma</dt><dd>19</dd></div>
+      <div><dt>kaynak</dt><dd>2</dd></div>
+      <div><dt>terim</dt><dd>6</dd></div>
+    </dl>
+  </div>
+</aside>
+
+  </div>
+
+  <nav class="pager" aria-label="Sayılar arası gezinme">
+    <a class="pager-link pager-prev" href="/sayi/2026-10-23/" rel="prev">
+      <span class="pager-label">← Önceki sayı · 23 Ekim 2026</span>
+      <span class="pager-title">Önce her ekibe ayrı container, sonra geri dönüş: OpenAI Habitat’ın Cosmos DB’de multi-tenancy yolculuğu</span>
+    </a>
+  </nav>
+
+</div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-col">
+      <p class="footer-brand">Eren&#39;in Mühendislik Gazetesi</p>
+      <p class="muted">
+        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını derleyip
+        Türkçe özetleyen kişisel bir gazete. Özetler yeni mezun bir mühendisin
+        anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
+      </p>
+      <p class="muted small num">
+        149 özet · 67 sayı ·
+        11 kaynak
+      </p>
+    </div>
+    <div class="footer-col">
+      <h3>Kaynaklar</h3>
+      <ul class="footer-sources">
+        <li><a href="https://www.uber.com/blog/engineering/" rel="noopener nofollow" target="_blank">Uber Engineering</a></li>
+        <li><a href="https://netflixtechblog.com" rel="noopener nofollow" target="_blank">Netflix Tech Blog</a></li>
+        <li><a href="https://aws.amazon.com/blogs/architecture/" rel="noopener nofollow" target="_blank">AWS Architecture Blog</a></li>
+        <li><a href="https://blog.cloudflare.com" rel="noopener nofollow" target="_blank">Cloudflare Blog</a></li>
+        <li><a href="https://stripe.com/blog" rel="noopener nofollow" target="_blank">Stripe Engineering</a></li>
+        <li><a href="https://www.databricks.com/blog" rel="noopener nofollow" target="_blank">Databricks Engineering</a></li>
+        <li><a href="https://engineering.fb.com" rel="noopener nofollow" target="_blank">Meta Engineering</a></li>
+        <li><a href="https://openai.com/news/" rel="noopener nofollow" target="_blank">OpenAI Research</a></li>
+        <li><a href="https://www.anthropic.com/engineering" rel="noopener nofollow" target="_blank">Anthropic Engineering</a></li>
+        <li><a href="https://research.google/blog/" rel="noopener nofollow" target="_blank">Google Research</a></li>
+        <li><a href="https://cloud.google.com/blog/" rel="noopener nofollow" target="_blank">Google Cloud Blog</a></li>
+        <li><a href="https://devblogs.microsoft.com/engineering-at-microsoft/" rel="noopener nofollow" target="_blank">Microsoft Engineering</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Eren Ulutaş</h3>
+      <ul class="footer-links">
+        <li><a href="https://github.com/erenulutas0" rel="me noopener" target="_blank">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/eren-u-55918a2a0" rel="me noopener" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:eerenulutass@gmail.com">E-posta</a></li>
+        <li><a href="/feed.xml">RSS</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-legal">
+    <p class="muted small">
+      Tüm özetler kaynak makalelere bağlıdır; telif orijinal yazarlara aittir.
+      Bu site yalnızca özet ve yönlendirme sunar. © 2026 Eren Ulutaş.
+    </p>
+  </div>
+</footer>
+
+<script src="/static/app.js?v=eae14b0f" defer></script>
+</body>
+</html>

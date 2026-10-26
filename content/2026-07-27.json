@@ -1,6 +1,6 @@
 {
   "date": "2026-07-27",
-  "intro": "Pazar günü iki yazı: biri \"hata ayıklaması zor bir protokolü nasıl yaklaşılabilir hâle getirdik\", diğeri işin kendisinin nasıl değiştiğine dair veri. Arşivden de 600.000 testi otomatik taşıyan bir göç hikâyesi ekledim — Java yazan herkesin okuması gereken cinsten.",
+  "intro": "Pazar günü iki yazı: biri \"debugging’i zor bir protokolü nasıl yaklaşılabilir hâle getirdik\", diğeri işin kendisinin nasıl değiştiğine dair veri. Arşivden de 600.000 testi otomatik taşıyan bir göç hikâyesi ekledim — Java yazan herkesin okuması gereken cinsten.",
   "articles": [
     {
       "id": "7f45816e52f5",
@@ -18,29 +18,29 @@
         "Aracın kaynağı gerçek operasyon deneyimi — saniyede milyonlarca istek."
       ],
       "why_it_matters": "Bir teknolojinin benimsenmesini belirleyen şey çoğu zaman teknolojinin kendisi değil, etrafındaki araçlardır. Hata ayıklanamayan bir sistem, ne kadar iyi tasarlanmış olursa olsun üretimde kullanılmaz. \"Bu sistemde bir şey ters gittiğinde nasıl anlarım?\" sorusu, tasarımın kendisi kadar tasarımın parçasıdır.",
-      "for_you": "Bu yazıdaki alışkanlığı kendi projelerine taşı: kurduğun her karmaşık akış için küçük bir teşhis aracı yaz. Mobit'teki doküman arama mimarisi için bir CLI düşün — bir sorgu ver, hangi belgelerin getirildiğini, benzerlik skorlarını ve modele giden nihai prompt'u bassın. Python'da `argparse` ile yarım saatlik bir iş, ama RAG sisteminde \"neden bu cevabı verdi?\" sorusunu dakikalar yerine saniyeler içinde cevaplatır. Ayrıca mülakatta göstereceğin şey de bu tür araçlardır: sistemi yazmak kadar sistemi anlaşılır kılmak da mühendislik.",
+      "for_you": "Bu yazıdaki alışkanlığı kendi projelerine taşı: kurduğun her karmaşık akış için küçük bir teşhis aracı yaz. Bir RAG sistemi için bir CLI düşün: bir sorgu ver, hangi belgelerin getirildiğini, similarity skorlarını ve modele giden nihai prompt’u bassın. Python’da `argparse` ile yarım saatlik bir iş ama ‘neden bu cevabı verdi?’ sorusunu dakikalar yerine saniyeler içinde cevaplatır. Mülakatta göstereceğin şey de bu tür araçlardır: sistemi yazmak kadar sistemi anlaşılır kılmak da mühendislik.",
       "terms": [
         {
           "en": "Oblivious HTTP (OHTTP)",
-          "tr": "gizli HTTP",
+          "tr": "Oblivious HTTP (OHTTP)",
           "definition": "İsteği gönderen ile hedef sunucu arasına aracılar koyarak, hiçbir tarafın hem kimliği hem içeriği görememesini sağlayan protokol."
         },
         {
           "en": "relay / gateway",
-          "tr": "röle / geçit",
-          "definition": "OHTTP'de aracılar: röle kimin istediğini bilir ama içeriği göremez; geçit içeriği görür ama kimin istediğini bilmez."
+          "tr": "relay / gateway",
+          "definition": "OHTTP'de aracılar: relay kimin istediğini bilir ama içeriği göremez; geçit içeriği görür ama kimin istediğini bilmez."
         },
         {
           "en": "RFC draft",
-          "tr": "taslak RFC",
+          "tr": "RFC draft",
           "definition": "Henüz standart hâline gelmemiş, üzerinde çalışılan internet protokol belgesi."
         }
       ],
       "tags": [
-        "gizlilik",
-        "araçlar",
-        "protokol",
-        "açık kaynak"
+        "privacy",
+        "tooling",
+        "protocol",
+        "open source"
       ],
       "difficulty": "orta",
       "read_minutes": 8,
@@ -55,27 +55,27 @@
       "source_key": "openai",
       "source_name": "OpenAI Research",
       "title": "How AI is expanding what people do at work",
-      "title_tr": "Görev geçişkenliği: işler değil, işi kimin yaptığı değişiyor",
+      "title_tr": "Task crossover: işler değil, işi kimin yaptığı değişiyor",
       "url": "https://openai.com/index/how-ai-is-expanding-what-people-do-at-work",
       "published": "2026-07-27",
-      "summary": "OpenAI'ın ekonomi araştırması 800.000'den fazla ABD kullanıcı mesajını incelemiş. Bulgu: işle ilgili mesajların **%16,8'i** ve mesleğe özgü mesajların **%43,5'i** başka bir meslekle ilişkilendirilen görevlerle ilgili.\n\nBuna **görev geçişkenliği** (task crossover) diyorlar: tarihsel olarak bir mesleğe ait olan işin, başka bir meslekten insanın AI kullanımında görünmesi. Küçük işletme sahibi metin yazıyor, sözleşme inceliyor, temel finansal analiz yapıyor. Satışçı, eskiden analiste gidecek bir veri setini kendisi keşfediyor. Pazarlamacı, geliştiriciyi beklemeden web sitesindeki sorunu çözüyor.\n\nYazının kendi vurgusu şu: AI ile ilgili çoğu çalışma sabit bir görev listesiyle başlayıp \"model bunu yapabilir mi?\" diye soruyor. Bu araştırma farklı bir şeye işaret ediyor — AI **kimin hangi görevi üstlendiğini** de değiştiriyor.",
+      "summary": "OpenAI'ın ekonomi araştırması 800.000'den fazla ABD kullanıcı mesajını incelemiş. Bulgu: işle ilgili mesajların **%16,8'i** ve mesleğe özgü mesajların **%43,5'i** başka bir meslekle ilişkilendirilen görevlerle ilgili.\n\nBuna **task crossover** (task crossover) diyorlar: tarihsel olarak bir mesleğe ait olan işin, başka bir meslekten insanın AI kullanımında görünmesi. Küçük işletme sahibi metin yazıyor, sözleşme inceliyor, temel finansal analiz yapıyor. Satışçı, eskiden analiste gidecek bir veri setini kendisi keşfediyor. Pazarlamacı, geliştiriciyi beklemeden web sitesindeki sorunu çözüyor.\n\nYazının kendi vurgusu şu: AI ile ilgili çoğu çalışma sabit bir görev listesiyle başlayıp \"model bunu yapabilir mi?\" diye soruyor. Bu araştırma farklı bir şeye işaret ediyor — AI **kimin hangi görevi üstlendiğini** de değiştiriyor.",
       "key_points": [
         "Değişim \"işler yok oluyor\" değil, iş sınırları bulanıklaşıyor biçiminde görünüyor.",
         "Bu, yeni mezun bir mühendis için hem fırsat hem risk: senin işine başkaları girebilir, sen de başkalarının işine girebilirsin."
       ],
       "why_it_matters": "",
-      "for_you": "Kariyer açısından buradan çıkan ders net: bir aracı kullanabilmek artık ayırt edici değil — kimin ne yapabildiği hızla eşitleniyor. Ayırt edici olan **derinlik**. Herkes bir LLM'e sorgu yazabiliyorsa, senin değerin bir sistemin neden yavaşladığını bulabilmen, bir veritabanı indeksinin nasıl seçileceğini bilmen, bir dağıtık sistemde hangi tutarlılık garantisinin gerektiğini kestirebilmen olacak. Bu gazeteyi okumanın sebebi de tam olarak bu: yüzeyde kalmamak.",
+      "for_you": "Kariyer açısından buradan çıkan ders net: bir aracı kullanabilmek artık ayırt edici değil; kimin ne yapabildiği hızla eşitleniyor. Ayırt edici olan **derinlik**. Herkes bir LLM’e sorgu yazabiliyorsa değerin bir sistemin neden yavaşladığını bulabilmen, bir veritabanı index’inin nasıl seçileceğini bilmen, bir distributed system’de hangi consistency garantisinin gerektiğini kestirebilmen olacak. Bu gazeteyi okumanın sebebi de tam olarak bu: yüzeyde kalmamak.",
       "terms": [
         {
           "en": "task crossover",
-          "tr": "görev geçişkenliği",
+          "tr": "task crossover",
           "definition": "Bir mesleğe ait sayılan işin, başka meslekten kişiler tarafından yapılmaya başlanması."
         }
       ],
       "tags": [
         "kariyer",
         "LLM",
-        "araştırma"
+        "research"
       ],
       "difficulty": "başlangıç",
       "read_minutes": 4,
@@ -101,7 +101,7 @@
       "terms": [
         {
           "en": "monorepo",
-          "tr": "tek depo",
+          "tr": "monorepo",
           "definition": "Bir şirketin tüm projelerini tek bir sürüm kontrol deposunda tutması."
         },
         {
@@ -111,14 +111,14 @@
         },
         {
           "en": "codemod",
-          "tr": "otomatik kod dönüşümü",
+          "tr": "codemod",
           "definition": "Kaynak kodu programatik olarak analiz edip toplu şekilde değiştiren betik ya da araç."
         }
       ],
       "tags": [
         "Java",
-        "test",
-        "göç",
+        "testing",
+        "migration",
         "otomasyon"
       ],
       "difficulty": "orta",

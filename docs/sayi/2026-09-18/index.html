@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>18 Eylül 2026 — Eren&#39;in Mühendislik Gazetesi</title>
-<meta name="description" content="Bugünün ortak teması ‘doğru araçla doğru sınırı çekmek’. ReadyOn çok kiracılı güvenlikte tek duvara güvenmiyor, dört duvar örüyor. Netflix Java’yı komut satırında agent’lara ve insanlara kolaylaştırıyor. CSIRO ise ayda 40 sentlik bir genom sorgu servisi kurmuş.">
+<meta name="description" content="Bugünün ortak teması ‘doğru araçla doğru sınırı çekmek’. ReadyOn multi-tenant güvenlikte tek duvara güvenmiyor, dört duvar örüyor. Netflix Java’yı komut satırında agent’lara ve insanlara kolaylaştırıyor. CSIRO ise ayda 40 sentlik bir genom sorgu servisi kurmuş.">
 <meta name="author" content="Eren Ulutaş">
 <meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#131310" media="(prefers-color-scheme: dark)">
 <meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
 <meta property="og:title" content="18 Eylül 2026 — Eren&#39;in Mühendislik Gazetesi">
-<meta property="og:description" content="Bugünün ortak teması ‘doğru araçla doğru sınırı çekmek’. ReadyOn çok kiracılı güvenlikte tek duvara güvenmiyor, dört duvar örüyor. Netflix Java’yı komut satırında agent’lara ve insanlara kolaylaştırıyor. CSIRO ise ayda 40 sentlik bir genom sorgu servisi kurmuş.">
+<meta property="og:description" content="Bugünün ortak teması ‘doğru araçla doğru sınırı çekmek’. ReadyOn multi-tenant güvenlikte tek duvara güvenmiyor, dört duvar örüyor. Netflix Java’yı komut satırında agent’lara ve insanlara kolaylaştırıyor. CSIRO ise ayda 40 sentlik bir genom sorgu servisi kurmuş.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:url" content="https://erenulutas.com/sayi/2026-09-18/">
@@ -69,7 +69,7 @@
 <a href="/sayi/2026-09-15/" rel="prev"><span aria-hidden="true">←</span> 15 Eylül 2026</a><a href="/sayi/2026-09-21/" rel="next">21 Eylül 2026 <span aria-hidden="true">→</span></a>
     </nav>
   </div>
-<p class="lede">Bugünün ortak teması ‘doğru araçla doğru sınırı çekmek’. ReadyOn çok kiracılı güvenlikte tek duvara güvenmiyor, dört duvar örüyor. Netflix Java’yı komut satırında agent’lara ve insanlara kolaylaştırıyor. CSIRO ise ayda 40 sentlik bir genom sorgu servisi kurmuş.</p></header>
+<p class="lede">Bugünün ortak teması ‘doğru araçla doğru sınırı çekmek’. ReadyOn multi-tenant güvenlikte tek duvara güvenmiyor, dört duvar örüyor. Netflix Java’yı komut satırında agent’lara ve insanlara kolaylaştırıyor. CSIRO ise ayda 40 sentlik bir genom sorgu servisi kurmuş.</p></header>
 
 
   <div class="layout">
@@ -84,26 +84,26 @@
 </div>
 
   <h2 class="cover-title">
-    <a href="https://aws.amazon.com/blogs/architecture/readyons-four-walls-of-tenant-isolation-on-amazon-eks/" rel="noopener nofollow" target="_blank">Namespace bir güvenlik sınırı değildir: çok kiracılı Kubernetes’te dört duvar</a>
+    <a href="https://aws.amazon.com/blogs/architecture/readyons-four-walls-of-tenant-isolation-on-amazon-eks/" rel="noopener nofollow" target="_blank">Namespace bir güvenlik sınırı değildir: multi-tenant Kubernetes’te dört duvar</a>
   </h2>
   <p class="original-title">ReadyOn’s Four Walls of tenant isolation on Amazon EKS · Roshan Daneshvaran</p>
 
-  <div class="prose"><p>ReadyOn, Fortune 100 şirketlerine iş gücü yönetimi sunan, bordro verisi, organizasyon hiyerarşisi ve operasyonel analitik gibi çok hassas veri işleyen bir platformu Amazon EKS üzerinde çok kiracılı olarak işletiyor. Yazının çıkış noktası şu tespit: varsayılan bir Kubernetes kurulumu kutudan güvenli çıkmaz (anonim isteklerin API sunucusuna ulaşabilmesi, pod’ların varsayılan olarak root çalışması, ağ politikalarının sen yazana kadar olmaması).</p><p>Çok kiracılılık tehdit modelini değiştiriyor: soru artık ‘yetkisiz biri kümeye ulaşabilir mi?’ değil, <strong>‘Kiracı A, Kiracı B’nin verisine erişebilir mi?’</strong> Çoğu platform tek bir yalıtım mekanizmasına, namespace’e dayanıyor; oysa Kubernetes tasarımcıları namespace’leri hiçbir zaman bir güvenlik sınırı olarak düşünmedi.</p><p>ReadyOn’ın <strong>Dört Duvar</strong> modeli bağımsız dört katmanı birleştiriyor. <strong>Duvar 1, namespace:</strong> kiracı başına namespace, sıkı RBAC, kaynak kotaları ve admission kontrolü; hepsi bir Argo CD ApplicationSet’iyle üretiliyor, her kiracı özdeş yapılandırma alıyor. <strong>Duvar 2, hesaplama:</strong> Karpenter, kiracı başına ayrı otomatik ölçeklenen düğüm havuzları açıyor ve <strong>çift taint</strong> stratejisi kullanıyor: her düğüm hem kiracıyı hem iş yükü tipini belirten taint taşıyor, pod’un ikisini de tolere etmesi gerekiyor. <strong>Duvar 3, ağ:</strong> kiracı başına VPC güvenlik grupları veritabanı erişimini yalnızca o kiracının düğüm havuzuna kısıtlıyor; Kubernetes ağ politikaları namespace’ler arası varsayılan reddi uyguluyor; küme API sunucusu özel. <strong>Duvar 4, veri:</strong> kiracı başına ayrı Aurora kümesi ve kiracıya özgü Secrets Manager sırları; iş yükleri IRSA ile kısa ömürlü kimlik bilgisi kullanıyor.</p><p>Mantık bileşik savunma: sınırı aşmak için yetkisiz bir kullanıcının Kubernetes API’sini, düğüm zamanlayıcısını, AWS’in yazılım tanımlı ağını ve veri katmanını <strong>aynı anda</strong> aşması gerekiyor.</p></div>
+  <div class="prose"><p>ReadyOn, Fortune 100 şirketlerine iş gücü yönetimi sunan, bordro verisi, organizasyon hiyerarşisi ve operasyonel analitik gibi çok hassas veri işleyen bir platformu Amazon EKS üzerinde multi-tenant olarak işletiyor. Yazının çıkış noktası şu tespit: varsayılan bir Kubernetes kurulumu kutudan güvenli çıkmaz (anonim isteklerin API sunucusuna ulaşabilmesi, pod’ların varsayılan olarak root çalışması, ağ politikalarının sen yazana kadar olmaması).</p><p>Multi-tenancy tehdit modelini değiştiriyor: soru artık ‘yetkisiz biri kümeye ulaşabilir mi?’ değil, <strong>‘Tenant A, Tenant B’nin verisine erişebilir mi?’</strong> Çoğu platform tek bir yalıtım mekanizmasına, namespace’e dayanıyor; oysa Kubernetes tasarımcıları namespace’leri hiçbir zaman bir güvenlik sınırı olarak düşünmedi.</p><p>ReadyOn’ın <strong>Dört Duvar</strong> modeli bağımsız dört katmanı birleştiriyor. <strong>Duvar 1, namespace:</strong> tenant başına namespace, sıkı RBAC, kaynak kotaları ve admission kontrolü; hepsi bir Argo CD ApplicationSet’iyle üretiliyor, her tenant özdeş yapılandırma alıyor. <strong>Duvar 2, hesaplama:</strong> Karpenter, tenant başına ayrı otomatik ölçeklenen node havuzları açıyor ve <strong>çift taint</strong> stratejisi kullanıyor: her node hem tenant’ı hem iş yükü tipini belirten taint taşıyor, pod’un ikisini de tolere etmesi gerekiyor. <strong>Duvar 3, ağ:</strong> tenant başına VPC güvenlik grupları veritabanı erişimini yalnızca o tenant’ın node havuzuna kısıtlıyor; Kubernetes ağ politikaları namespace’ler arası varsayılan reddi uyguluyor; küme API sunucusu özel. <strong>Duvar 4, veri:</strong> tenant başına ayrı Aurora kümesi ve tenant’a özgü Secrets Manager sırları; iş yükleri IRSA ile kısa ömürlü kimlik bilgisi kullanıyor.</p><p>Mantık bileşik savunma: sınırı aşmak için yetkisiz bir kullanıcının Kubernetes API’sini, node zamanlayıcısını, AWS’in yazılım tanımlı ağını ve veri katmanını <strong>aynı anda</strong> aşması gerekiyor.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Namespace mantıksal bir gruplamadır; kernel, düğüm ve ağ düzeyinde yalıtım sağlamaz.</span></li><li><span>Her duvar farklı bir teknik gerektirdiği için tek bir açık tüm yalıtımı bozmaz (derinlemesine savunma).</span></li><li><span>Kiracı kaynaklarının tamamı şablondan (ApplicationSet) üretiliyor: elle yapılandırma sapmaya yol açar.</span></li><li><span>En güçlü yalıtım veri katmanında: kiracı başına ayrı veritabanı, ayrı sır, kısa ömürlü kimlik bilgisi.</span></li><li><span>Maliyet bu güvenliğin fiyatı: yalıtım derecesi arttıkça kaynak paylaşımı ve verimlilik azalır.</span></li>    </ol>
+<li><span>Namespace mantıksal bir gruplamadır; kernel, node ve ağ düzeyinde yalıtım sağlamaz.</span></li><li><span>Her duvar farklı bir teknik gerektirdiği için tek bir açık tüm yalıtımı bozmaz (derinlemesine savunma).</span></li><li><span>Tenant kaynaklarının tamamı şablondan (ApplicationSet) üretiliyor: elle yapılandırma sapmaya yol açar.</span></li><li><span>En güçlü yalıtım veri katmanında: tenant başına ayrı veritabanı, ayrı sır, kısa ömürlü kimlik bilgisi.</span></li><li><span>Maliyet bu güvenliğin fiyatı: yalıtım derecesi arttıkça kaynak paylaşımı ve verimlilik azalır.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-why">
       <h3 class="label">Neden önemli?</h3>
-      <p>Çok kiracılı sistemde gerçek risk dışarıdan saldırgan değil, bir kiracının bir hata ya da açık yüzünden başkasının verisini görmesidir. Yalıtım düzeyi, ne kadar hassas veri taşıdığına göre seçilen bir mimari karardır: ucuz ve paylaşımlı ile pahalı ve yalıtık arasında bir skala var.</p>
+      <p>Multi-tenant sistemde gerçek risk dışarıdan saldırgan değil, bir tenant’ın bir hata ya da açık yüzünden başkasının verisini görmesidir. Yalıtım düzeyi, ne kadar hassas veri taşıdığına göre seçilen bir mimari karardır: ucuz ve paylaşımlı ile pahalı ve yalıtık arasında bir skala var.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Mobit’teki ERP uygulaması şirket bazlı doküman düzenlemesi yapıyor, yani sen de çok kiracılısın. En önemli soru: kiracı yalıtımını <strong>uygulama kodunda</strong> (<code>WHERE company_id = ?</code>) mı sağlıyorsun? O tek duvardır ve bir sorguda unutulan filtre başka şirketin verisini sızdırır. PostgreSQL’in <strong>Row Level Security</strong> özelliği ikinci bir duvar ekler: kural veritabanında durur ve unutulan bir filtreyi bile yakalar. Her kiracıya ayrı veritabanı vermek en güçlüsü ama pahalı; RLS çoğu proje için en iyi denge.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Şirket ya da müşteri bazlı veri tutan her uygulama multi-tenant’tır. En önemli soru: tenant isolation’ı <strong>uygulama kodunda</strong> (<code>WHERE company_id = ?</code>) mı sağlıyorsun? O tek duvardır ve bir sorguda unutulan filtre başka şirketin verisini sızdırır. PostgreSQL’in <strong>Row Level Security</strong> özelliği ikinci bir duvar ekler: kural veritabanında durur ve unutulan bir filtreyi bile yakalar. Her tenant’a ayrı veritabanı vermek en güçlüsü ama pahalı; RLS çoğu proje için en iyi denge.</p>
     </div>
   </div>
 
@@ -111,23 +111,23 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">multi-tenancy</span> <span class="term-tr">çok kiracılılık</span></dt>
-      <dd>Aynı altyapıyı birbirinden bağımsız birden fazla müşterinin (kiracı) paylaşması.</dd>
+      <dt><span class="term-en">multi-tenancy</span></dt>
+      <dd>Aynı altyapıyı birbirinden bağımsız birden fazla müşterinin (tenant) paylaşması.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">taint / toleration</span> <span class="term-tr">leke / tolerans</span></dt>
-      <dd>Kubernetes’te belirli düğümlere yalnızca ilgili tolerasyonu taşıyan pod’ların yerleşmesini sağlayan mekanizma.</dd>
+      <dt><span class="term-en">taint / toleration</span></dt>
+      <dd>Kubernetes’te belirli node’lara yalnızca ilgili tolerasyonu taşıyan pod’ların yerleşmesini sağlayan mekanizma.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">RBAC</span> <span class="term-tr">rol tabanlı erişim denetimi</span></dt>
+      <dt><span class="term-en">RBAC</span></dt>
       <dd>İzinlerin kullanıcıya değil role bağlanıp rollerin kullanıcılara atandığı yetkilendirme modeli.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">row level security (RLS)</span> <span class="term-tr">satır düzeyi güvenlik</span></dt>
+      <dt><span class="term-en">row level security (RLS)</span></dt>
       <dd>Veritabanında hangi kullanıcının hangi satırları görebileceğini tanımlayan, sorgudan bağımsız kurallar.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">IRSA</span> <span class="term-tr">servis hesapları için IAM rolleri</span></dt>
+      <dt><span class="term-en">IRSA</span></dt>
       <dd>Kubernetes pod’larına, uzun ömürlü anahtar olmadan kısa ömürlü AWS yetkisi veren mekanizma.</dd>
     </div>
   </dl>
@@ -136,10 +136,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/guvenlik/">#güvenlik</a></li>
+  <li><a href="/etiket/security/">#security</a></li>
   <li><a href="/etiket/kubernetes/">#Kubernetes</a></li>
-  <li><a href="/etiket/cok-kiracililik/">#çok kiracılılık</a></li>
-  <li><a href="/etiket/izolasyon/">#izolasyon</a></li>
+  <li><a href="/etiket/multi-tenancy/">#multi-tenancy</a></li>
+  <li><a href="/etiket/isolation/">#isolation</a></li>
 </ul>
 
   <a class="readmore" href="https://aws.amazon.com/blogs/architecture/readyons-four-walls-of-tenant-isolation-on-amazon-eks/" rel="noopener nofollow" target="_blank">
@@ -174,8 +174,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Java ana dilin, o yüzden buradaki ders doğrudan senin: bir aracı hem insana hem agent’a kolay yapan şey, <strong>keşfedilebilir ve birleştirilebilir</strong> olmasıdır. Kendi CLI’ını (bu gazetenin <code>python -m pipeline.cli</code> komutları gibi) yazarken her komutun tek iş yapmasını, çıktısının başka araçlara girdi olabilmesini ve <code>--help</code> metninin gerçekten açıklayıcı olmasını sağla.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Java biliyorsan buradaki ders doğrudan senin: bir aracı hem insana hem agent’a kolay yapan şey, <strong>keşfedilebilir ve birleştirilebilir</strong> olmasıdır. Kendi CLI’ını yazarken her komutun tek iş yapmasını, çıktısının başka araçlara girdi olabilmesini ve <code>--help</code> metninin gerçekten açıklayıcı olmasını sağla.</p>
     </div>
   </div>
 
@@ -183,11 +183,11 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">Java Module System</span> <span class="term-tr">Java Modül Sistemi</span></dt>
+      <dt><span class="term-en">Java Module System</span></dt>
       <dd>Java 9 ile gelen, paketleri modüllere ve bağımlılıkları açık tanımlara bağlayan sistem.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">composable tool</span> <span class="term-tr">birleştirilebilir araç</span></dt>
+      <dt><span class="term-en">composable tool</span></dt>
       <dd>Tek iş yapan ve çıktısı başka araçlara girdi olabilen küçük komut satırı aracı.</dd>
     </div>
   </dl>
@@ -197,9 +197,9 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/java/">#Java</a></li>
-  <li><a href="/etiket/araclar/">#araçlar</a></li>
+  <li><a href="/etiket/tooling/">#tooling</a></li>
   <li><a href="/etiket/agent/">#agent</a></li>
-  <li><a href="/etiket/gelistirici-deneyimi/">#geliştirici deneyimi</a></li>
+  <li><a href="/etiket/developer-experience/">#developer experience</a></li>
 </ul>
 
   <a class="readmore" href="https://netflixtechblog.com/leave-the-class-path-in-the-rearview-mirror-67a85b15b6be?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">
@@ -221,7 +221,7 @@
     <a href="https://aws.amazon.com/blogs/architecture/how-csiro-built-scalable-cost-optimized-genomic-variant-querying-on-aws/" rel="noopener nofollow" target="_blank">Veritabanı kurmadan genom sorgulamak: ayda yaklaşık 0,40 dolar</a>
   </h3>
   <p class="original-title">How CSIRO built scalable, cost-optimized genomic variant querying on AWS</p>
-  <div class="prose prose-sm"><p>Avustralya’nın ulusal bilim kurumu CSIRO, genomik varyant verisini güvenle sorgulamak için <strong>sBeacon</strong> adlı sunucusuz bir çözüm kurmuş (GA4GH Beacon standardının üretime hazır bir uygulaması). Yapı taşları S3, Lambda, DynamoDB ve Athena.</p><p>İddialar somut: yüz milyonlarca kişiyi ve milyarlarca genomik konumu kapsayan veri kümelerine ölçekleniyor; 1000 Genomes boyutundaki bir veri kümesi için aylık <strong>yaklaşık 0,40 dolara</strong> çalışıyor; gerçek sorgular yaklaşık 5 saniyede dönüyor. En dikkat çekici tasarım kararı: standart VCF dosyalarını <strong>doğrudan tüketiyor</strong>, veritabanına yükleme ve dönüştürme gerekmiyor. Merkezî veritabanı olmadığı için veri sahibinin elinde kalıyor, bu da gizlilik ve federasyon için avantaj.</p></div>
+  <div class="prose prose-sm"><p>Avustralya’nın ulusal bilim kurumu CSIRO, genomik varyant verisini güvenle sorgulamak için <strong>sBeacon</strong> adlı serverless bir çözüm kurmuş (GA4GH Beacon standardının üretime hazır bir uygulaması). Yapı taşları S3, Lambda, DynamoDB ve Athena.</p><p>İddialar somut: yüz milyonlarca kişiyi ve milyarlarca genomik konumu kapsayan veri kümelerine ölçekleniyor; 1000 Genomes boyutundaki bir veri kümesi için aylık <strong>yaklaşık 0,40 dolara</strong> çalışıyor; gerçek sorgular yaklaşık 5 saniyede dönüyor. En dikkat çekici tasarım kararı: standart VCF dosyalarını <strong>doğrudan tüketiyor</strong>, veritabanına yükleme ve dönüştürme gerekmiyor. Merkezî veritabanı olmadığı için veri sahibinin elinde kalıyor, bu da gizlilik ve federation için avantaj.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
@@ -231,8 +231,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Tradebot’taki 1 TB’lık geçmiş veri için bu deseni düşün: veriyi Parquet olarak nesne depolamada tut, ihtiyaç anında DuckDB (yerelde) ya da Athena (bulutta) ile sorgula. Sürekli çalışan bir veritabanı ödemezsin, yalnızca sorguladığın veri kadar ödersin. DuckDB özellikle denemeye değer: <code>pip install duckdb</code> ile Parquet dosyalarını doğrudan SQL ile sorgulayabilirsin, sunucu kurmadan.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Büyük bir geçmiş veri seti için bu deseni düşün: veriyi Parquet olarak nesne depolamada tut, ihtiyaç anında DuckDB (yerelde) ya da Athena (bulutta) ile sorgula. Sürekli çalışan bir veritabanı ödemezsin, yalnızca sorguladığın veri kadar ödersin. DuckDB özellikle denemeye değer: <code>pip install duckdb</code> ile Parquet dosyalarını doğrudan SQL ile sorgulayabilirsin, sunucu kurmadan.</p>
     </div>
   </div>
 
@@ -240,15 +240,15 @@
     <summary class="label">Sözlük · 3 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">serverless</span> <span class="term-tr">sunucusuz</span></dt>
+      <dt><span class="term-en">serverless</span></dt>
       <dd>Sunucu yönetmeden, yalnızca çalıştığı süre kadar ücretlendirilen çalışma modeli.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">VCF (variant call format)</span> <span class="term-tr">varyant çağrı biçimi</span></dt>
+      <dt><span class="term-en">VCF (variant call format)</span></dt>
       <dd>Genomik varyantları saklayan standart metin tabanlı dosya biçimi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">Parquet</span> <span class="term-tr">Parquet</span></dt>
+      <dt><span class="term-en">Parquet</span></dt>
       <dd>Analitik sorgular için optimize edilmiş sütun tabanlı dosya biçimi.</dd>
     </div>
   </dl>
@@ -258,8 +258,8 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/serverless/">#serverless</a></li>
-  <li><a href="/etiket/maliyet/">#maliyet</a></li>
-  <li><a href="/etiket/veri-muhendisligi/">#veri mühendisliği</a></li>
+  <li><a href="/etiket/cost/">#cost</a></li>
+  <li><a href="/etiket/data-engineering/">#data engineering</a></li>
   <li><a href="/etiket/athena/">#Athena</a></li>
 </ul>
 
@@ -278,7 +278,7 @@
     <ol class="toc" id="toc">
       <li>
         <a href="#fc89e79c8664">
-          <span class="toc-title">Namespace bir güvenlik sınırı değildir: çok kiracılı Kubernetes’te dört duvar</span>
+          <span class="toc-title">Namespace bir güvenlik sınırı değildir: multi-tenant Kubernetes’te dört duvar</span>
           <span class="toc-meta">AWS Architecture Blog · 10 dk</span>
         </a>
       </li>
@@ -333,7 +333,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

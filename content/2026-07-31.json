@@ -11,42 +11,42 @@
       "title_tr": "MoQ: canlı video, görüntülü arama ve mesajlaşmayı tek protokole indirmek",
       "url": "https://blog.cloudflare.com/moq-relays/",
       "published": "2026-07-31",
-      "summary": "**MoQ** (Media over QUIC), IETF'te geliştirilen açık bir protokol — HTTP, TLS ve QUIC'i de standartlaştıran kurum. Cloudflare geçen yıl MoQ'yu tüm sunucularında açmıştı; şimdi eksik olan parçayı ekliyor: izolasyon ve erişim kontrolü. Yeni sağlama API'siyle uygulamana özel bir röle (relay) oluşturup yayıncılar ve aboneler için ayrı kimlik bilgileri verebiliyorsun.\n\nProtokolün modeli basit ve öğretici: bir **yayınla/abone ol** (publish/subscribe) sistemi. Yayıncı isimlendirilmiş veri akışları gönderir, aboneler o akışları isimle ister. Aralarında röleler durur — bunlar sadece her akışı isteyen herkese kopyalayan CDN sunucuları. Kritik nokta: **röle verinin içine hiç bakmaz.**\n\nBu tek tasarım kararı büyük bir sonuç doğuruyor. Röleler içeriği umursamadığı için, eskiden her biri ayrı bir sistem gerektiren şeyler — canlı video, görüntülü arama, düşük gecikmeli mesajlaşma — aynı protokolün üstünde taşınabiliyor. Altta HTTP/3'ün taşıma katmanı olan QUIC var; gecikmeyi düşük tutan da o.\n\nPratik sonuç: kendi özel sunucu filonu kurup işletmene gerek kalmıyor. Tek bir API üzerinden bir CDN'e yayın yapıyor, hem düşük gecikme hem büyük ölçeği çok daha ucuza alıyorsun.",
+      "summary": "**MoQ** (Media over QUIC), IETF'te geliştirilen açık bir protokol — HTTP, TLS ve QUIC'i de standartlaştıran kurum. Cloudflare geçen yıl MoQ'yu tüm sunucularında açmıştı; şimdi eksik olan parçayı ekliyor: izolasyon ve erişim kontrolü. Yeni sağlama API'siyle uygulamana özel bir relay (relay) oluşturup yayıncılar ve aboneler için ayrı kimlik bilgileri verebiliyorsun.\n\nProtokolün modeli basit ve öğretici: bir **publish/subscribe** (publish/subscribe) sistemi. Yayıncı isimlendirilmiş veri akışları gönderir, aboneler o akışları isimle ister. Aralarında relay’ler durur — bunlar sadece her akışı isteyen herkese kopyalayan CDN sunucuları. Kritik nokta: **relay verinin içine hiç bakmaz.**\n\nBu tek tasarım kararı büyük bir sonuç doğuruyor. Relay’ler içeriği umursamadığı için, eskiden her biri ayrı bir sistem gerektiren şeyler — canlı video, görüntülü arama, düşük gecikmeli mesajlaşma — aynı protokolün üstünde taşınabiliyor. Altta HTTP/3'ün taşıma katmanı olan QUIC var; gecikmeyi düşük tutan da o.\n\nPratik sonuç: kendi özel sunucu filonu kurup işletmene gerek kalmıyor. Tek bir API üzerinden bir CDN'e yayın yapıyor, hem düşük gecikme hem büyük ölçeği çok daha ucuza alıyorsun.",
       "key_points": [
-        "Röle içeriğe bakmaz — bu \"aptal ara katman\" kararı, protokolün genel amaçlı olmasını sağlayan şey.",
-        "Yayınla/abone ol modeli isimlendirilmiş akışlar üzerinden çalışıyor; abone akışı adıyla istiyor.",
-        "QUIC üstünde çalışıyor: TCP'nin baş-hat tıkanması (head-of-line blocking) sorunu olmadan düşük gecikme.",
+        "Relay içeriğe bakmaz — bu \"aptal ara katman\" kararı, protokolün genel amaçlı olmasını sağlayan şey.",
+        "Publish/subscribe modeli isimlendirilmiş akışlar üzerinden çalışıyor; abone akışı adıyla istiyor.",
+        "QUIC üstünde çalışıyor: TCP'nin head-of-line blocking (head-of-line blocking) sorunu olmadan düşük gecikme.",
         "Şu an beta ve ücretsiz; draft-14 ve draft-16 sürümleri destekleniyor — yani protokol hâlâ hareket hâlinde."
       ],
-      "why_it_matters": "\"Ara katman veriyi anlamasın\" ilkesi, dayanıklı sistem tasarımının en güçlü kurallarından biri. İçeriği anlamayan bir bileşen, içerik değiştiğinde bozulmaz; genel amaçlı kalır ve ölçeklemesi kolaylaşır. Aynı ilkeyi mesaj kuyruklarında, yük dengeleyicilerde ve proxy'lerde de görürsün — MoQ bunun canlı medyaya uygulanmış hâli.",
-      "for_you": "Mobit'teki mesajlaşma uygulamasında muhtemelen WebSocket kullandın. Bu yazı sana o kararı sorgulatacak bir karşılaştırma veriyor: WebSocket TCP üstünde tek bir akıştır, bir paket kaybolduğunda arkasındaki her şey bekler (head-of-line blocking). QUIC bunu bağımsız akışlarla çözer. Ayrıca yayınla/abone ol modelini kendi sistemine taşıyabilirsin: mesajları doğrudan alıcıya itmek yerine kanal adına yayınlamak, grup mesajlaşmasını ve çoklu cihaz senkronizasyonunu ciddi şekilde basitleştirir — Redis Pub/Sub ile aynı deseni bugün deneyebilirsin.",
+      "why_it_matters": "\"Ara katman veriyi anlamasın\" ilkesi, dayanıklı sistem tasarımının en güçlü kurallarından biri. İçeriği anlamayan bir bileşen, içerik değiştiğinde bozulmaz; genel amaçlı kalır ve ölçeklemesi kolaylaşır. Aynı ilkeyi mesaj kuyruklarında, load balancer’larda ve proxy'lerde de görürsün — MoQ bunun canlı medyaya uygulanmış hâli.",
+      "for_you": "Bir mesajlaşma uygulamasında muhtemelen WebSocket kullandın. Bu yazı o kararı sorgulatacak bir karşılaştırma veriyor: WebSocket TCP üstünde tek bir akıştır, bir paket kaybolduğunda arkasındaki her şey bekler (head-of-line blocking). QUIC bunu bağımsız akışlarla çözer. Ayrıca publish/subscribe modelini kendi sistemine taşıyabilirsin: mesajları doğrudan alıcıya itmek yerine bir kanala yayınlamak, grup mesajlaşmasını ve çoklu cihaz senkronizasyonunu ciddi şekilde basitleştirir. Redis Pub/Sub ile aynı deseni bugün deneyebilirsin.",
       "terms": [
         {
           "en": "publish/subscribe (pub/sub)",
-          "tr": "yayınla/abone ol",
+          "tr": "publish/subscribe (pub/sub)",
           "definition": "Göndericinin alıcıyı bilmediği, mesajların isimlendirilmiş kanallara yayınlandığı iletişim modeli."
         },
         {
           "en": "relay",
-          "tr": "röle",
+          "tr": "relay",
           "definition": "Veriyi kaynaktan alıp isteyen herkese kopyalayan ara sunucu; içeriği yorumlamaz."
         },
         {
           "en": "QUIC",
           "tr": "QUIC",
-          "definition": "UDP üstünde çalışan, HTTP/3'ün taşıma katmanı olan protokol; bağımsız akışlarla baş-hat tıkanmasını önler."
+          "definition": "UDP üstünde çalışan, HTTP/3'ün taşıma katmanı olan protokol; bağımsız akışlarla head-of-line blocking’i önler."
         },
         {
           "en": "head-of-line blocking",
-          "tr": "baş-hat tıkanması",
+          "tr": "head-of-line blocking",
           "definition": "Sıradaki ilk paket geciktiğinde arkasındaki tüm paketlerin beklemek zorunda kalması."
         }
       ],
       "tags": [
-        "ağ",
-        "protokol",
-        "gerçek zamanlı sistemler",
-        "gecikme"
+        "networking",
+        "protocol",
+        "real-time systems",
+        "latency"
       ],
       "difficulty": "orta",
       "read_minutes": 7,
@@ -70,24 +70,24 @@
         "Ürün dokümantasyonunda nadir görülen bir dürüstlük: geçici çözümün yarattığı bakım borcu açıkça yazılmış."
       ],
       "why_it_matters": "",
-      "for_you": "\"İşletim veritabanına analitik sorgu atmak\" sorusu her projede çıkar. Tradebot'ta canlı veri yazan tabloya ağır bir analiz sorgusu attığında yazma gecikmesinin nasıl bozulduğunu muhtemelen gördün. PostgreSQL'de bunun karşılığı bir **read replica** kurup analitik sorguları oraya yöneltmek. Yazının ikinci dersi ise daha genel: bir entegrasyonu kurmak için ikinci bir kimlik doğrulama yolu açmak zorunda kalıyorsan, bu geçici çözümü kodun içine gömme — belgelendir, çünkü bir yıl sonra \"bu rol niye var?\" diye soran sen olacaksın.",
+      "for_you": "‘Operasyonel veritabanına analitik sorgu atmak’ sorusu her projede çıkar. Canlı veri yazan tabloya ağır bir analiz sorgusu attığında yazma gecikmesinin nasıl bozulduğunu muhtemelen gördün. PostgreSQL’de bunun karşılığı bir **read replica** kurup analitik sorguları oraya yöneltmek. Yazının ikinci dersi daha genel: bir entegrasyonu kurmak için ikinci bir authentication yolu açmak zorunda kalıyorsan bu geçici çözümü kodun içine gömme; belgele, çünkü bir yıl sonra ‘bu rol niye var?’ diye soran sen olacaksın.",
       "terms": [
         {
           "en": "federation",
-          "tr": "federasyon",
+          "tr": "federation",
           "definition": "Farklı sistemlerdeki veriyi taşımadan, tek bir sorgu arayüzünden birlikte sorgulama."
         },
         {
           "en": "read replica",
-          "tr": "okuma kopyası",
+          "tr": "read replica",
           "definition": "Ana veritabanının salt-okunur kopyası; ağır okuma sorgularını asıl sistemden ayırmak için kullanılır."
         }
       ],
       "tags": [
-        "veritabanı",
+        "database",
         "PostgreSQL",
-        "kimlik doğrulama",
-        "veri mühendisliği"
+        "authentication",
+        "data engineering"
       ],
       "difficulty": "orta",
       "read_minutes": 5,
@@ -108,23 +108,23 @@
         "Yetenek verisiyle feature flag'leri birleştirmek, özelliğin ne kadar yayıldığını (feature penetration) ölçmeyi mümkün kılıyor."
       ],
       "why_it_matters": "",
-      "for_you": "Kısa bir yazı ama içindeki desen çok kullanışlı: **mevcut durum tablosu** ile **zaman içinde toplulaştırılmış tablo**yu ayırmak. KlioAI'da \"bu kullanıcının aboneliği aktif mi?\" ile \"son 28 günde kaç kullanıcı konuşma pratiği yaptı?\" sorularını aynı tablodan cevaplamaya çalışırsan ikisi de yavaşlar. Birincisi indeksli tekil okuma, ikincisi ise önceden toplulaştırılmış bir özet tablo ister. Bu ayrım OLTP/OLAP ayrımının en küçük ve en pratik hâli.",
+      "for_you": "Kısa bir yazı ama içindeki desen çok kullanışlı: **mevcut durum tablosu** ile **zaman içinde aggregate edilmiş tabloyu** ayırmak. ‘Bu kullanıcının aboneliği aktif mi?’ ile ‘son 28 günde kaç kullanıcı pratik yaptı?’ sorularını aynı tablodan cevaplamaya çalışırsan ikisi de yavaşlar. Birincisi index’li tekil okuma, ikincisi önceden aggregate edilmiş bir özet tablo ister. Bu ayrım OLTP/OLAP ayrımının en küçük ve en pratik hâli.",
       "terms": [
         {
           "en": "cumulative table",
-          "tr": "kümülatif tablo",
+          "tr": "cumulative table",
           "definition": "Her varlığın en güncel durumunu tutan, sürekli güncellenen tablo."
         },
         {
           "en": "feature flag",
-          "tr": "özellik anahtarı",
+          "tr": "feature flag",
           "definition": "Bir özelliği kod dağıtmadan açıp kapatmayı sağlayan konfigürasyon anahtarı."
         }
       ],
       "tags": [
         "veri modelleme",
         "analitik",
-        "veri mühendisliği"
+        "data engineering"
       ],
       "difficulty": "başlangıç",
       "read_minutes": 2,
@@ -147,18 +147,18 @@
         "Model seçimi bir mimari karar değil, iş yükü başına verilen bir maliyet-gecikme-kalite kararı."
       ],
       "why_it_matters": "",
-      "for_you": "Bu tam olarak senin gazete pipeline'ında vereceğin karar. Aynı sistemde farklı işler farklı model ister: makaleyi puanlayıp elemek ucuz ve hızlı bir model işi, kapak yazısını özetlemek ise en iyi modeli hak ediyor. KlioAI'da da aynısı geçerli — gramer düzeltmesi ile konuşma değerlendirmesi aynı modeli gerektirmiyor. Tek bir model seçip her yere koymak, ya kaliteden ya paradan kaybettirir.",
+      "for_you": "Bu tam olarak bir LLM pipeline’ında vereceğin karar. Aynı sistemde farklı işler farklı model ister: bir girdiyi puanlayıp elemek ucuz ve hızlı bir model işi, ana çıktıyı üretmek ise en iyi modeli hak ediyor. Gramer düzeltmesi ile konuşma değerlendirmesi de aynı modeli gerektirmiyor. Tek bir model seçip her yere koymak ya kaliteden ya paradan kaybettirir.",
       "terms": [
         {
           "en": "input/output token pricing",
-          "tr": "girdi/çıktı token fiyatlandırması",
+          "tr": "input/output token pricing",
           "definition": "LLM maliyetinin, gönderilen ve üretilen token sayısına göre ayrı ayrı hesaplanması."
         }
       ],
       "tags": [
         "LLM",
-        "maliyet",
-        "ürün"
+        "cost",
+        "product"
       ],
       "difficulty": "başlangıç",
       "read_minutes": 5,

@@ -66,7 +66,8 @@
     <span class="edition-no">Sayı 61</span>
     <h1 class="edition-date"><time datetime="2026-10-16">16 Ekim 2026, Cuma</time></h1>
     <nav class="edition-nav" aria-label="Sayılar arası gezinme">
-<a href="/sayi/2026-10-15/" rel="prev"><span aria-hidden="true">←</span> 15 Ekim 2026</a><span>En güncel sayı</span>    </nav>
+<a href="/sayi/2026-10-15/" rel="prev"><span aria-hidden="true">←</span> 15 Ekim 2026</a><a href="/sayi/2026-10-19/" rel="next">19 Ekim 2026 <span aria-hidden="true">→</span></a>
+    </nav>
   </div>
 <p class="lede">Bir agent’ın kaç kez doğru cevap verdiğini ölçmek, onu inşa etmekten zor. Google’ın değerlendirme (eval) dersleri tam bu açığı kapatıyor. Yanında Netflix’in ‘aynı şeye üç araçta üç ad veriyoruz’ sorununu bir ontolojiyle çözmesi ve npm’deki kötü amaçlı ikili dosyaları yakalamaya çalışan bir LLM hattı var.</p></header>
 
@@ -87,12 +88,12 @@
   </h2>
   <p class="original-title">Four eval engineering lessons</p>
 
-  <div class="prose"><p>Yazının tezi: agent’lı bir sistemin asıl zorluğu inşası değil ölçümü. Yazar, Google’da yıllardır değerlendirme mühendisliği yürütüyor ve yeni Google Cloud Developer eklentisini bu ilkeleri gerçek geliştirici iş akışlarında denemek için bir test yatağı olarak kullanmış. Çıkan dört ders:</p><p><strong>1. Özeti değil yürütme adımlarını notla.</strong> İlk değerlendirmede agent’ın son metin cevabını bir LLM hakemi (LLM-as-judge) kontrol listesine göre puanlıyordu. 11 istemlik ilk sette otomatik hakem üç istemi başarısız saydı; ham araç çağrısı kayıtları okununca eklentinin üçünü de geçtiği görüldü. Örnek: rubrik, hiçbir şeyi çalıştırmadan önce komut sözdizimini kontrol etmeyi istiyordu; agent ilk adımda <code>gcloud help run services list</code> çalıştırmıştı, ama son mesajı kalıcı veri kaybı uyarısına odaklandığı için bunu anmamıştı. Hakem, doğru işi yaptığı hâlde bunu övünerek söylemediği için agent’ı cezalandırdı. Hakem yalnızca agent’ın ne yazdığını görüyor, ne yaptığını değil. Ders: agent’ı kapanış konuşmasıyla değil, ham yürütme izleriyle puanla.</p><p><strong>2. Eşzamansız işlemler için tasarla.</strong> Telemetriyi düz, sıralı bir olay listesine indirmek eşzamanlı araç çağrılarını gizler ve davranış hatalarının kritik nedenlerinden biri bu. Güncel agent altyapıları birden çok araç çağrısını tek bir turda toplu gönderiyor. Yazıdaki örnekte bir ortamı inceleyip belge arayan agent’ta beceri yükleme çağrısı ve iki belge araması aynı <code>tool_calls</code> yükünde eşzamanlı gitti; beceri çok adımlı bir yönerge olduğu hâlde ona kendi turu verilmedi, yönergesi agent’ın eylemlerini hiç etkilemedi. Telemetri tur yapısını atarsa mühendisler agent’ın açık yönergeyi neden yok saydığını günlerce arar. Ders: telemetri çıkarıcıda tur yapısını koru.</p><p><strong>3. Canlı koşu ve ‘kuru koşu’yu yan yana test et.</strong> Canlı koşular genellikle ikinci adımda beklenmedik bir izin hatasına çarpıp denemek istediğin davranışa varmadan kesiliyor. Bu yüzden kimlik bilgileri çıkarılmış, agent’tan ne yapacağını anlatmasının istendiği bir sadece-plan koşusu da gerekiyor. En önemli bulguların yaklaşık yarısı iki koşu arasındaki farktan çıktı. Örnek: bir karşılama isteminde canlı koşu hemen proje listesi çağrısında takıldı; sadece-plan koşusu 8.000 karakterlik bir plan üretti ve kuruluş politikalarını, yönetici onaylarını ve yönetişimi tümüyle yok saydı. Canlı koşu büyük bir akıl yürütme kusurunu maskelemişti.</p><p><strong>4. ‘Altın kümeleri’ kalıcı referans yap.</strong> Model mimarileri birkaç ayda bir, agent altyapıları ve eklenti standartları sürekli değişiyor. Değerlendirmeyi, deterministik olmayan ortamlar için sürekli entegrasyon testi gibi ele alıp altyapı, canlı model ve araçları birlikte gerçekçi görevlerde sına. Tüm yörüngeyi (ne düşündü, hangi komutu çalıştırdı, bir şeyi bozmadan çözdü mü) yakala ve ideal yolu bilen insan uzmanların hazırladığı altın kümelerle puanla. Yazar ‘tek seferlik demo’yu (bir istemle koca bir oyun yazdırıp değerlendirme saymak) bir gösteriş metriği olarak nitelendiriyor: gerçek iş çok adımlı etkileşimleri, izinleri ve yıkıcı sonuçlardan kaçınmayı ölçmek demek, örneğin ‘maliyet tasarrufu fırsatı bul’ denince yanlışlıkla projeyi silmemek.</p></div>
+  <div class="prose"><p>Yazının tezi: agent’lı bir sistemin asıl zorluğu inşası değil ölçümü. Yazar, Google’da yıllardır değerlendirme mühendisliği yürütüyor ve yeni Google Cloud Developer eklentisini bu ilkeleri gerçek geliştirici iş akışlarında denemek için bir test yatağı olarak kullanmış. Çıkan dört ders:</p><p><strong>1. Özeti değil yürütme adımlarını notla.</strong> İlk değerlendirmede agent’ın son metin cevabını bir LLM hakemi (LLM-as-judge) kontrol listesine göre puanlıyordu. 11 istemlik ilk sette otomatik hakem üç istemi başarısız saydı; ham araç çağrısı kayıtları okununca eklentinin üçünü de geçtiği görüldü. Örnek: rubrik, hiçbir şeyi çalıştırmadan önce komut sözdizimini kontrol etmeyi istiyordu; agent ilk adımda <code>gcloud help run services list</code> çalıştırmıştı, ama son mesajı kalıcı veri kaybı uyarısına odaklandığı için bunu anmamıştı. Hakem, doğru işi yaptığı hâlde bunu övünerek söylemediği için agent’ı cezalandırdı. Hakem yalnızca agent’ın ne yazdığını görüyor, ne yaptığını değil. Ders: agent’ı kapanış konuşmasıyla değil, ham yürütme izleriyle puanla.</p><p><strong>2. Eşzamansız işlemler için tasarla.</strong> Telemetriyi düz, sıralı bir olay listesine indirmek eşzamanlı araç çağrılarını gizler ve davranış hatalarının kritik nedenlerinden biri bu. Güncel agent altyapıları birden çok araç çağrısını tek bir turda toplu gönderiyor. Yazıdaki örnekte bir ortamı inceleyip belge arayan agent’ta beceri yükleme çağrısı ve iki belge araması aynı <code>tool_calls</code> yükünde eşzamanlı gitti; beceri çok adımlı bir yönerge olduğu hâlde ona kendi turu verilmedi, yönergesi agent’ın eylemlerini hiç etkilemedi. Telemetri tur yapısını atarsa mühendisler agent’ın açık yönergeyi neden yok saydığını günlerce arar. Ders: telemetri çıkarıcıda tur yapısını koru.</p><p><strong>3. Canlı koşu ve ‘dry run’yu yan yana test et.</strong> Canlı koşular genellikle ikinci adımda beklenmedik bir izin hatasına çarpıp denemek istediğin davranışa varmadan kesiliyor. Bu yüzden kimlik bilgileri çıkarılmış, agent’tan ne yapacağını anlatmasının istendiği bir sadece-plan koşusu da gerekiyor. En önemli bulguların yaklaşık yarısı iki koşu arasındaki farktan çıktı. Örnek: bir karşılama isteminde canlı koşu hemen proje listesi çağrısında takıldı; sadece-plan koşusu 8.000 karakterlik bir plan üretti ve kuruluş politikalarını, yönetici onaylarını ve yönetişimi tümüyle yok saydı. Canlı koşu büyük bir reasoning kusurunu maskelemişti.</p><p><strong>4. ‘Golden set’leri’ kalıcı referans yap.</strong> Model mimarileri birkaç ayda bir, agent altyapıları ve eklenti standartları sürekli değişiyor. Değerlendirmeyi, deterministik olmayan ortamlar için sürekli entegrasyon testi gibi ele alıp altyapı, canlı model ve araçları birlikte gerçekçi görevlerde sına. Tüm trajectory’i (ne düşündü, hangi komutu çalıştırdı, bir şeyi bozmadan çözdü mü) yakala ve ideal yolu bilen insan uzmanların hazırladığı golden set’lerle puanla. Yazar ‘tek seferlik demo’yu (bir istemle koca bir oyun yazdırıp değerlendirme saymak) bir gösteriş metriği olarak nitelendiriyor: gerçek iş çok adımlı etkileşimleri, izinleri ve yıkıcı sonuçlardan kaçınmayı ölçmek demek, örneğin ‘maliyet tasarrufu fırsatı bul’ denince yanlışlıkla projeyi silmemek.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Agent’ı son mesajına göre değil, gerçekte ne çalıştırdığına göre değerlendir.</span></li><li><span>Telemetrinde tur yapısını koru: eşzamanlı araç çağrıları yönergenin etkisini sessizce yok edebilir.</span></li><li><span>Canlı ve sadece-plan koşularını yan yana çalıştır; ikisi arasındaki fark en önemli bulguları verir.</span></li><li><span>Altın kümeleri uzmanlar hazırlasın; model değişince bile referans kalsın.</span></li><li><span>Tek seferlik demo değerlendirme değildir; değerlendirme paketi gerekir.</span></li>    </ol>
+<li><span>Agent’ı son mesajına göre değil, gerçekte ne çalıştırdığına göre değerlendir.</span></li><li><span>Telemetrinde tur yapısını koru: eşzamanlı araç çağrıları yönergenin etkisini sessizce yok edebilir.</span></li><li><span>Canlı ve sadece-plan koşularını yan yana çalıştır; ikisi arasındaki fark en önemli bulguları verir.</span></li><li><span>Golden set’leri uzmanlar hazırlasın; model değişince bile referans kalsın.</span></li><li><span>Tek seferlik demo değerlendirme değildir; değerlendirme paketi gerekir.</span></li>    </ol>
   </div>
 
   <div class="callouts">
@@ -101,8 +102,8 @@
       <p>Agent’lar yazıyla nitelendirilen ama eylemle sonuç veren sistemler. Değerlendirmeyi yalnızca çıktı metnine bakarak yaparsan hem iyi agent’ı cezalandırır hem de kötü agent’ı geçirirsin. Bu dört ders, o açığı kapatan en pratik kurallar.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Bunu DBH’daki LLM hattına ve ileride yapacağın agent özelliklerine doğrudan uygulayabilirsin. <strong>(1) Altın küme:</strong> elle doğruladığın 30-50 kayıtlık bir CSV tut (girdi, beklenen çıktı). Prompt ya da modeli her değiştirdiğinde bu kümeyi çalıştırıp doğruluğu karşılaştır; ‘daha iyi hissettiriyor’ yerine sayı gör. <strong>(2) Yürütme izi:</strong> bir agent yazarsan her araç çağrısını (ad, argüman, sonuç, tur numarası) bir JSON satırı olarak kaydet ve testi bu kayıtlara karşı yaz: ‘silmeden önce listeledi mi?’. <strong>(3) Kuru koşu:</strong> yıkıcı bir araç varsa agent’a bir <code>dry_run=True</code> modu ver ve önce onu değerlendir. Bu, hem güvenli hem de ucuz.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Bunu kendi LLM hattına ve ileride yapacağın agent özelliklerine doğrudan uygulayabilirsin. <strong>(1) Golden set:</strong> elle doğruladığın 30-50 kayıtlık bir CSV tut (girdi, beklenen çıktı). Prompt ya da modeli her değiştirdiğinde bu kümeyi çalıştırıp doğruluğu karşılaştır; ‘daha iyi hissettiriyor’ yerine sayı gör. <strong>(2) Trajectory:</strong> bir agent yazarsan her tool call’ı (ad, argüman, sonuç, tur numarası) bir JSON satırı olarak kaydet ve testi bu kayıtlara karşı yaz: ‘silmeden önce listeledi mi?’. <strong>(3) Dry run:</strong> yıkıcı bir tool varsa agent’a bir <code>dry_run=True</code> modu ver ve önce onu değerlendir. Bu hem güvenli hem de ucuz.</p>
     </div>
   </div>
 
@@ -110,23 +111,23 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">eval (evaluation)</span> <span class="term-tr">değerlendirme</span></dt>
+      <dt><span class="term-en">eval (evaluation)</span></dt>
       <dd>Bir modelin ya da agent’ın davranışını tekrarlanabilir testlerle ölçme.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">LLM-as-judge</span> <span class="term-tr">hakem olarak LLM</span></dt>
+      <dt><span class="term-en">LLM-as-judge</span></dt>
       <dd>Bir modelin çıktısını başka bir LLM’e puanlatma yöntemi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">trajectory</span> <span class="term-tr">yörünge</span></dt>
+      <dt><span class="term-en">trajectory</span></dt>
       <dd>Bir agent’ın görevi çözerken attığı adımların ve araç çağrılarının tam kaydı.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">golden set</span> <span class="term-tr">altın küme</span></dt>
+      <dt><span class="term-en">golden set</span></dt>
       <dd>Doğru cevabı uzmanlarca belirlenmiş, referans olarak kullanılan test örnekleri.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">dry run</span> <span class="term-tr">kuru koşu</span></dt>
+      <dt><span class="term-en">dry run</span></dt>
       <dd>Gerçek etki yaratmadan bir işlemin ne yapacağını gösteren deneme.</dd>
     </div>
   </dl>
@@ -136,8 +137,8 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/agent/">#agent</a></li>
-  <li><a href="/etiket/degerlendirme/">#değerlendirme</a></li>
-  <li><a href="/etiket/test/">#test</a></li>
+  <li><a href="/etiket/evaluation/">#evaluation</a></li>
+  <li><a href="/etiket/testing/">#testing</a></li>
   <li><a href="/etiket/llm/">#LLM</a></li>
 </ul>
 
@@ -160,21 +161,21 @@
 </div>
 
   <h3 class="brief-title">
-    <a href="https://netflixtechblog.com/ontology-driven-observability-building-an-end-to-end-knowledge-graph-at-netflix-scale-421392cf5adf?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">Aynı şeye üç araçta üç ad: Netflix’in gözlemlenebilirlik ontolojisi</a>
+    <a href="https://netflixtechblog.com/ontology-driven-observability-building-an-end-to-end-knowledge-graph-at-netflix-scale-421392cf5adf?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">Aynı şeye üç araçta üç ad: Netflix’in observability ontolojisi</a>
   </h3>
   <p class="original-title">Ontology-Driven Observability: Building an End-to-End Knowledge Graph at Netflix Scale</p>
-  <div class="prose prose-sm"><p>Netflix’te ana ekran 1,5 saniye yavaşlıyor, alarm çalıyor, ve nedeni bulmak dört saat sürüyor. Zamanın çoğu zor bir hesaba değil, gözlem sistemlerinin zaten bildiği ama hiçbir yerde okunabilir biçimde yazılmamış ilişkileri yeniden kurmaya gidiyor. Her sistem kendi içinde tutarlı, dışarıya kapalı: bir şey bir sistemde ‘uygulama’, ötekinde ‘servis’, üçüncüsünde ‘küme’ oluyor; adları bir ek, bir büyük harf ya da bir yeniden adlandırma ayırıyor. Eksik olan, operasyonel dünyadaki varlıklar üzerine açık ve makinece okunabilir bir anlaşma.</p><p>Çözüm bir <strong>ontoloji</strong>: türlerin, özelliklerin ve ilişkilerin biçimsel tanımı; birimi <strong>üçlü</strong> (özne, yüklem, nesne). Örneğin <code>api-gateway ownedBy Team Bedrock</code> ya da <code>INC-5377 affects api-gateway</code>. Böylece ‘Team Bedrock’ın sahip olduğu uygulamaları etkileyen olaylar’ gibi üç araçta aranan bir soru tek sorguya iniyor. W3C yığınıyla kurulmuş (RDF, OWL, SHACL, SPARQL) ve verisi Netflix’in kendi RDF veritabanı QuipuDB’de.</p><p>İki karar öğretici: <strong>genel bir ‘Service’ türünü reddettiler</strong> (araçlarda dört farklı anlama geliyor); her uygulama tek bir türe çözülüyor ve yaklaşık 49.000 kayıtlı yazılım kataloğuna karşı doğrulanmadan oluşturulmuyor, ayrıca bağımlılık kenarlarına sınır konuyor. İkincisi, <strong>olay Slack kanallarındaki akıl yürütmeyi modellemek</strong>: denenip bırakılan hipotezler, işe yarayan hafifletme, kim neyi neden bildi. Kanal sessizleşince bu bilgi buharlaşıyor; 200 mesajlık, 50 kişilik bir olay kanalı sıralı üçlülere dönüşüyor.</p><p>En ilginç fikir <strong>belirsizlikten determinizm</strong>: LLM’ler özetliyor, bulanık eşleştirme servis adlarını çözüyor, olasılıksal bir motor nedensel zincir öneriyor; hiçbiri aynı çıktıyı iki kez garanti etmez. Ama ontoloji çıktı uzayını öyle sıkı daraltıyor ki (LLM serbest metin yazabilir ama tür sistemini bozan bir üçlü yayamaz; kategori önceden verilmiş bir listeden seçilir) sonuç, her seferinde aynı SPARQL cevabını veren deterministik bir grafik.</p></div>
+  <div class="prose prose-sm"><p>Netflix’te ana ekran 1,5 saniye yavaşlıyor, alarm çalıyor, ve nedeni bulmak dört saat sürüyor. Zamanın çoğu zor bir hesaba değil, gözlem sistemlerinin zaten bildiği ama hiçbir yerde okunabilir biçimde yazılmamış ilişkileri yeniden kurmaya gidiyor. Her sistem kendi içinde tutarlı, dışarıya kapalı: bir şey bir sistemde ‘uygulama’, ötekinde ‘servis’, üçüncüsünde ‘küme’ oluyor; adları bir ek, bir büyük harf ya da bir yeniden adlandırma ayırıyor. Eksik olan, operasyonel dünyadaki varlıklar üzerine açık ve makinece okunabilir bir anlaşma.</p><p>Çözüm bir <strong>ontoloji</strong>: türlerin, özelliklerin ve ilişkilerin biçimsel tanımı; birimi <strong>üçlü</strong> (özne, yüklem, nesne). Örneğin <code>api-gateway ownedBy Team Bedrock</code> ya da <code>INC-5377 affects api-gateway</code>. Böylece ‘Team Bedrock’ın sahip olduğu uygulamaları etkileyen olaylar’ gibi üç araçta aranan bir soru tek sorguya iniyor. W3C yığınıyla kurulmuş (RDF, OWL, SHACL, SPARQL) ve verisi Netflix’in kendi RDF veritabanı QuipuDB’de.</p><p>İki karar öğretici: <strong>genel bir ‘Service’ türünü reddettiler</strong> (araçlarda dört farklı anlama geliyor); her uygulama tek bir türe çözülüyor ve yaklaşık 49.000 kayıtlı yazılım kataloğuna karşı doğrulanmadan oluşturulmuyor, ayrıca bağımlılık kenarlarına sınır konuyor. İkincisi, <strong>olay Slack kanallarındaki reasoning’i modellemek</strong>: denenip bırakılan hipotezler, işe yarayan hafifletme, kim neyi neden bildi. Kanal sessizleşince bu bilgi buharlaşıyor; 200 mesajlık, 50 kişilik bir olay kanalı sıralı üçlülere dönüşüyor.</p><p>En ilginç fikir <strong>belirsizlikten determinizm</strong>: LLM’ler özetliyor, bulanık eşleştirme servis adlarını çözüyor, olasılıksal bir motor nedensel zincir öneriyor; hiçbiri aynı çıktıyı iki kez garanti etmez. Ama ontoloji çıktı uzayını öyle sıkı daraltıyor ki (LLM serbest metin yazabilir ama tür sistemini bozan bir üçlü yayamaz; kategori önceden verilmiş bir listeden seçilir) sonuç, her seferinde aynı SPARQL cevabını veren deterministik bir grafik.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
     <ol>
-<li><span>Olayı çözmenin yavaş kısmı çoğu zaman hesaplama değil, sistemler arası adlandırma farklarını eşleştirmektir.</span></li><li><span>Ortak bir veri modeli (ontoloji), aynı varlığın farklı adlarını tek kimliğe indirir.</span></li><li><span>LLM çıktısını şemayla kısıtlamak, rastgele bir süreci tutarlı bir sözleşmeye çevirir.</span></li><li><span>Olay kanallarındaki akıl yürütme belgelenmezse kaybolur.</span></li>    </ol>
+<li><span>Olayı çözmenin yavaş kısmı çoğu zaman hesaplama değil, sistemler arası adlandırma farklarını eşleştirmektir.</span></li><li><span>Ortak bir veri modeli (ontoloji), aynı varlığın farklı adlarını tek kimliğe indirir.</span></li><li><span>LLM çıktısını şemayla kısıtlamak, rastgele bir süreci tutarlı bir sözleşmeye çevirir.</span></li><li><span>Olay kanallarındaki reasoning belgelenmezse kaybolur.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Küçük bir ölçekte aynı sorunu kendi projelerinde de yaşarsın: aynı müşteri bir tabloda <code>musteri_id</code>, bir logda <code>customerId</code>, bir ekranda adı ile geçer. Bir kimlik sözlüğü tutmak ve her veri girişini ona karşı doğrulamak, DBH’daki kategori kodlarında yaptığın normalizasyonun genelleştirilmiş hâli. Modelden JSON isterken <code>enum</code> ile izin verilen değerleri sabitlemek ise burada anlatılan ‘çıktı uzayını daralt’ fikrinin en basit biçimi.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Küçük bir ölçekte aynı sorunu kendi projelerinde de yaşarsın: aynı müşteri bir tabloda <code>musteri_id</code>, bir log’da <code>customerId</code>, bir ekranda adı ile geçer. Bir kimlik sözlüğü tutmak ve her veri girişini ona karşı doğrulamak, kategori kodlarında yaptığın normalizasyonun genelleştirilmiş hâli. Modelden JSON isterken <code>enum</code> ile izin verilen değerleri sabitlemek ise burada anlatılan ‘çıktı uzayını daralt’ fikrinin en basit biçimi.</p>
     </div>
   </div>
 
@@ -182,19 +183,19 @@
     <summary class="label">Sözlük · 4 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">ontology</span> <span class="term-tr">ontoloji</span></dt>
+      <dt><span class="term-en">ontology</span></dt>
       <dd>Bir alandaki varlık türlerinin, özelliklerinin ve aralarındaki ilişkilerin biçimsel tanımı.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">triple (RDF)</span> <span class="term-tr">üçlü</span></dt>
+      <dt><span class="term-en">triple (RDF)</span></dt>
       <dd>Bir olguyu özne-yüklem-nesne biçiminde ifade eden en küçük bilgi birimi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">knowledge graph</span> <span class="term-tr">bilgi grafı</span></dt>
-      <dd>Varlıkları ve aralarındaki ilişkileri düğüm ve kenarlarla tutan veri yapısı.</dd>
+      <dt><span class="term-en">knowledge graph</span></dt>
+      <dd>Varlıkları ve aralarındaki ilişkileri node ve kenarlarla tutan veri yapısı.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">MELT</span> <span class="term-tr">MELT</span></dt>
+      <dt><span class="term-en">MELT</span></dt>
       <dd>Metrics, Events, Logs, Traces: gözlemlenebilirliğin dört temel veri türü.</dd>
     </div>
   </dl>
@@ -203,8 +204,8 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/gozlemlenebilirlik/">#gözlemlenebilirlik</a></li>
-  <li><a href="/etiket/bilgi-grafi/">#bilgi grafı</a></li>
+  <li><a href="/etiket/observability/">#observability</a></li>
+  <li><a href="/etiket/knowledge-graph/">#knowledge graph</a></li>
   <li><a href="/etiket/agent/">#agent</a></li>
   <li><a href="/etiket/netflix/">#Netflix</a></li>
 </ul>
@@ -233,13 +234,13 @@
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
     <ol>
-<li><span>Nadir ama opak girdi (derlenmiş ikili dosya), LLM’in en kolay yanıldığı yerdir.</span></li><li><span>Önce klasik statik araçlar (YARA, Semgrep), sonra LLM: model tek başına yeterli değil.</span></li><li><span>Alan bilgisini istemde vermek, kapalı modellerde ince ayara gerek bırakmadan işe yarar.</span></li>    </ol>
+<li><span>Nadir ama opak girdi (derlenmiş ikili dosya), LLM’in en kolay yanıldığı yerdir.</span></li><li><span>Önce klasik statik araçlar (YARA, Semgrep), sonra LLM: model tek başına yeterli değil.</span></li><li><span>Alan bilgisini istemde vermek, kapalı modellerde fine-tuning gerek bırakmadan işe yarar.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Güvenlik tarafında somut bir alışkanlık: bir bağımlılık eklemeden önce <code>npm audit</code> ya da <code>pip-audit</code> çalıştır, kilit dosyasını (<code>package-lock.json</code>) depoya koy ve CI’de sürümü sabitle. LLM tarafında ders şu: modelin zayıf olduğu girdi türü için istemin içine kısa bir ‘nasıl bakılır’ rehberi koymak (örneğin DBH’da belirsiz bir kategori için karar kuralları), çoğu zaman ince ayardan ucuz ve hızlı bir ilk adımdır.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Güvenlik tarafında somut bir alışkanlık: bir dependency eklemeden önce <code>npm audit</code> ya da <code>pip-audit</code> çalıştır, lock dosyasını (<code>package-lock.json</code>) repoya koy ve CI’de sürümü sabitle. LLM tarafında ders şu: modelin zayıf olduğu girdi türü için prompt’un içine kısa bir ‘nasıl bakılır’ rehberi koymak (örneğin belirsiz bir kategori için karar kuralları), çoğu zaman fine-tuning’den ucuz ve hızlı bir ilk adımdır.</p>
     </div>
   </div>
 
@@ -247,15 +248,15 @@
     <summary class="label">Sözlük · 3 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">supply chain attack</span> <span class="term-tr">tedarik zinciri saldırısı</span></dt>
+      <dt><span class="term-en">supply chain attack</span></dt>
       <dd>Hedefi doğrudan değil, kullandığı bağımlılığı ya da paketi ele geçirerek vurma.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">YARA</span> <span class="term-tr">YARA</span></dt>
+      <dt><span class="term-en">YARA</span></dt>
       <dd>Dosyalarda kötü amaçlı yazılım örüntülerini kural tabanlı arayan araç.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">triage</span> <span class="term-tr">triyaj</span></dt>
+      <dt><span class="term-en">triage</span></dt>
       <dd>Şüpheli öğeleri önem ve risk derecesine göre hızlıca sınıflandırma.</dd>
     </div>
   </dl>
@@ -264,8 +265,8 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/guvenlik/">#güvenlik</a></li>
-  <li><a href="/etiket/tedarik-zinciri/">#tedarik zinciri</a></li>
+  <li><a href="/etiket/security/">#security</a></li>
+  <li><a href="/etiket/supply-chain/">#supply chain</a></li>
   <li><a href="/etiket/llm/">#LLM</a></li>
   <li><a href="/etiket/npm/">#npm</a></li>
 </ul>
@@ -291,7 +292,7 @@
       </li>
       <li>
         <a href="#1b11483a2cf8">
-          <span class="toc-title">Aynı şeye üç araçta üç ad: Netflix’in gözlemlenebilirlik ontolojisi</span>
+          <span class="toc-title">Aynı şeye üç araçta üç ad: Netflix’in observability ontolojisi</span>
           <span class="toc-meta">Netflix Tech Blog · 13 dk</span>
         </a>
       </li>
@@ -321,6 +322,10 @@
       <span class="pager-label">← Önceki sayı · 15 Ekim 2026</span>
       <span class="pager-title">Trafik topu değil molayı izledi: Meta Dünya Kupası’nda rekor yükü nasıl taşıdı</span>
     </a>
+    <a class="pager-link pager-next" href="/sayi/2026-10-19/" rel="next">
+      <span class="pager-label">Sonraki sayı · 19 Ekim 2026 →</span>
+      <span class="pager-title">Token’lar nereye gidiyor? Cloudflare AI code reviewer maliyetini yüzde 68 nasıl düşürdü</span>
+    </a>
   </nav>
 
 </div>
@@ -336,7 +341,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

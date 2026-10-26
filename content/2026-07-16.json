@@ -1,6 +1,6 @@
 {
   "date": "2026-07-16",
-  "intro": "Bugünün kapağı, mühendislikte az konuşulan ama herkesin yaşadığı bir problemi ele alıyor: alarm yorgunluğu. Her bildirimi acil sayarsan boğulursun, saymazsan önemli olanı kaçırırsın. Çözüm şaşırtıcı derecede basit ve her sisteme uygulanabilir.",
+  "intro": "Bugünün kapağı, mühendislikte az konuşulan ama herkesin yaşadığı bir problemi ele alıyor: alert fatigue. Her bildirimi acil sayarsan boğulursun, saymazsan önemli olanı kaçırırsın. Çözüm şaşırtıcı derecede basit ve her sisteme uygulanabilir.",
   "articles": [
     {
       "id": "f587278bbc2e",
@@ -8,40 +8,40 @@
       "source_key": "aws-architecture",
       "source_name": "AWS Architecture Blog",
       "title": "Prioritize your AWS Health alerts using AWS User Notifications",
-      "title_tr": "Alarm yorgunluğunu çözmek: önce filtrele, sonra önceliklendir",
+      "title_tr": "Alert fatigue’i çözmek: önce filtrele, sonra önceliklendir",
       "url": "https://aws.amazon.com/blogs/architecture/prioritize-your-aws-health-alerts-using-aws-user-notifications/",
       "published": "2026-07-16",
-      "summary": "AWS Health her servis, her hesap ve her bölge için olay üretiyor: devam eden sorunlar, planlı değişiklikler, hesap bildirimleri ve kullanımdan kaldırma uyarıları — hepsi **tek bir ayrışmamış akışta**. Bir operasyon ekibi için bu tanıdık bir problem yaratıyor.\n\nYazının problem tanımı çok net: ya her bildirimi acil sayarsın ve istenmeyen bir triyaj gürültüsüyle boğulursun, ya da onları görmezden gelmeye başlarsın ve önemli olanı kaçırma riskini alırsın. **Her iki yol da daha yavaş tepki süresine ve istenmeyen eskalasyonlara çıkıyor.**\n\nSorunun kökeni önem derecelerinin farklı olması değil, hepsinin **aynı kanaldan** gelmesi. Bir operasyonel arıza, bir planlı bakım penceresi ve gelen kutusunda kaybolmuş bir kullanımdan kaldırma uyarısı çok farklı sonuçlar doğurur — ama aynı görünürler.\n\nÇözümün tasarım ilkesi bir cümlede özetlenmiş: **önce filtrele, sonra önceliğe göre ayır.** İlk katman gürültüyü eliyor — olay kuralları yalnızca kurumun bağımlı olduğu servisler için eşleşiyor, geri kalan her şey gelen kutusuna ulaşmadan susturuluyor. İkinci katman kalanları aciliyete göre ayrı yapılandırmalara bölüyor.",
+      "summary": "AWS Health her servis, her hesap ve her bölge için olay üretiyor: devam eden sorunlar, planlı değişiklikler, hesap bildirimleri ve kullanımdan kaldırma uyarıları — hepsi **tek bir ayrışmamış akışta**. Bir operasyon ekibi için bu tanıdık bir problem yaratıyor.\n\nYazının problem tanımı çok net: ya her bildirimi acil sayarsın ve istenmeyen bir triage gürültüsüyle boğulursun, ya da onları görmezden gelmeye başlarsın ve önemli olanı kaçırma riskini alırsın. **Her iki yol da daha yavaş tepki süresine ve istenmeyen eskalasyonlara çıkıyor.**\n\nSorunun kökeni önem derecelerinin farklı olması değil, hepsinin **aynı kanaldan** gelmesi. Bir operasyonel arıza, bir planlı bakım penceresi ve gelen kutusunda kaybolmuş bir kullanımdan kaldırma uyarısı çok farklı sonuçlar doğurur — ama aynı görünürler.\n\nÇözümün tasarım ilkesi bir cümlede özetlenmiş: **önce filtrele, sonra önceliğe göre ayır.** İlk katman gürültüyü eliyor — olay kuralları yalnızca kurumun bağımlı olduğu servisler için eşleşiyor, geri kalan her şey gelen kutusuna ulaşmadan susturuluyor. İkinci katman kalanları aciliyete göre ayrı yapılandırmalara bölüyor.",
       "key_points": [
-        "Alarm yorgunluğu bir kişilik zaafı değil, bir tasarım kusurudur — çözümü de tasarımdadır.",
+        "Alert fatigue bir kişilik zaafı değil, bir tasarım kusurudur — çözümü de tasarımdadır.",
         "İki katmanın sırası önemli: filtrelemeden önceliklendirmeye geçersen, gürültüyü de sınıflandırmakla uğraşırsın.",
         "\"Sessize alma\" bilinçli bir karar olarak tasarlanmış; kazara görmezden gelmekle aynı şey değil.",
         "Farklı öncelikler farklı teslim kanallarına gidiyor — acil olan e-postaya değil çağrıya düşmeli."
       ],
       "why_it_matters": "Bir alarm sisteminin başarısı, ürettiği alarm sayısıyla değil, **alarma verilen tepki oranıyla** ölçülür. Kimsenin bakmadığı bir gösterge paneli ya da herkesin sustuğu bir kanal, hiç olmamasından daha kötüdür: koruma yanılsaması yaratır. Bu yazının verdiği iki katmanlı desen, her izleme sisteminde uygulanabilir.",
-      "for_you": "Bu prensibi kendi projelerinde bugün uygulayabilirsin. Bir alarm kurarken şu soruyu sor: **bu tetiklendiğinde gece 3'te kalkar mıyım?** Cevap hayırsa bu bir alarm değil, bir metriktir — panele koy, bildirime bağlama. KlioAI'da hata izleme kurduysan (Sentry vb.), muhtemelen zaten gürültüden bunalmışsındır; çözüm daha az hata yakalamak değil, hataları sınıflandırmak: kullanıcıyı engelleyenler ayrı kanala, geri kalanı haftalık özete. Aynı disiplin CI/CD için de geçerli — sürekli kırmızı yanan bir test paketi, hiç test olmamasıyla aynı bilgiyi taşır.",
+      "for_you": "Bu prensibi bugün uygulayabilirsin. Bir alarm kurarken şunu sor: **bu tetiklendiğinde gece 3’te kalkar mıyım?** Cevap hayırsa bu bir alarm değil, bir metriktir; panele koy, bildirime bağlama. Hata izleme kurduysan (Sentry vb.), muhtemelen gürültüden bunalmışsındır; çözüm daha az hata yakalamak değil, hataları sınıflandırmak: kullanıcıyı engelleyenler ayrı kanala, geri kalanı haftalık özete. Aynı disiplin CI/CD için de geçerli: sürekli kırmızı yanan bir test paketi, hiç test olmamasıyla aynı bilgiyi taşır.",
       "terms": [
         {
           "en": "alert fatigue",
-          "tr": "alarm yorgunluğu",
+          "tr": "alert fatigue",
           "definition": "Çok fazla bildirim yüzünden ekiplerin alarmlara duyarsızlaşması; kritik uyarıların kaçırılmasına yol açar."
         },
         {
           "en": "triage",
-          "tr": "triyaj",
+          "tr": "triage",
           "definition": "Gelen olayları aciliyet ve etkiye göre sınıflandırıp önceliklendirme."
         },
         {
           "en": "escalation",
-          "tr": "eskalasyon",
+          "tr": "escalation",
           "definition": "Çözülemeyen bir olayın daha üst yetki ya da uzmanlığa aktarılması."
         }
       ],
       "tags": [
         "operasyon",
-        "gözlemlenebilirlik",
-        "bulut",
-        "tasarım"
+        "observability",
+        "cloud",
+        "design"
       ],
       "difficulty": "orta",
       "read_minutes": 12,
@@ -55,33 +55,33 @@
       "source_key": "openai",
       "source_name": "OpenAI Research",
       "title": "How Cars24 scales conversations and builds faster with OpenAI",
-      "title_tr": "Tek oturumda bitmeyen süreçler: Cars24'ün sesli ajan mimarisi",
+      "title_tr": "Tek oturumda bitmeyen süreçler: Cars24'ün sesli agent mimarisi",
       "url": "https://openai.com/index/cars24",
       "published": "2026-07-16",
-      "summary": "Cars24, Hindistan merkezli büyük bir çevrimiçi araç alım-satım platformu. Problem tanımı ilginç: geleneksel e-ticaretin aksine Hindistan'da araç alıp satmak nadiren tek bir oturumda oluyor. Sürecin büyük kısmı uygulamanın dışında geçiyor — telefon görüşmeleri, belge kontrolleri, günler hatta haftalar süren takipler.\n\nÖlçek büyüdükçe temel zorluk şu hâle gelmiş: operasyon ekiplerini sürekli büyütmeden, milyonlarca etkileşimde tutarlı ve kaliteli deneyim nasıl verilir?\n\nÇözüm: alım, satım, finansman, takip ve destek için sesli ve yazılı ajanlar. Paylaşılan sonuçlar somut — ayda 1 milyondan fazla konuşma dakikası, destek çözüm oranlarında %50 artış, kilit süreçlerde %80 daha kısa dönüş süresi ve daha önce kaybedilen satıcı adaylarının %12'sinin geri kazanılması.",
+      "summary": "Cars24, Hindistan merkezli büyük bir çevrimiçi araç alım-satım platformu. Problem tanımı ilginç: geleneksel e-ticaretin aksine Hindistan'da araç alıp satmak nadiren tek bir oturumda oluyor. Sürecin büyük kısmı uygulamanın dışında geçiyor — telefon görüşmeleri, belge kontrolleri, günler hatta haftalar süren takipler.\n\nÖlçek büyüdükçe temel zorluk şu hâle gelmiş: operasyon ekiplerini sürekli büyütmeden, milyonlarca etkileşimde tutarlı ve kaliteli deneyim nasıl verilir?\n\nÇözüm: alım, satım, finansman, takip ve destek için sesli ve yazılı agent’lar. Paylaşılan sonuçlar somut — ayda 1 milyondan fazla konuşma dakikası, destek çözüm oranlarında %50 artış, kilit süreçlerde %80 daha kısa dönüş süresi ve daha önce kaybedilen satıcı adaylarının %12'sinin geri kazanılması.",
       "key_points": [
-        "Sistem tasarımı iş sürecinin şeklini takip ediyor: süreç günlere yayılıyorsa, ajan da oturumlar arası durumu taşımak zorunda.",
+        "Sistem tasarımı iş sürecinin şeklini takip ediyor: süreç günlere yayılıyorsa, agent da oturumlar arası durumu taşımak zorunda.",
         "Metrikler girdi değil sonuç odaklı: çözüm oranı, dönüş süresi, geri kazanılan adaylar."
       ],
       "why_it_matters": "",
-      "for_you": "Buradaki asıl mimari ders **uzun süreli durum yönetimi**. Bir kullanıcı bugün konuşup üç gün sonra geri döndüğünde, sistem önceki bağlamı nasıl hatırlıyor? Bu, konuşma geçmişini bir veritabanında tutmak kadar basit değil — geçmiş büyüdükçe bağlam penceresine sığmaz, özetlemen gerekir. KlioAI'da kullanıcının öğrenme geçmişini modele verirken aynı problemi yaşayacaksın. Pratik çözüm: ham geçmişi değil, **damıtılmış bir profil** tut — \"kullanıcı geniş zamanda zorlanıyor, telaffuzda iyi\" gibi. Hem ucuz hem de modele daha kullanışlı.",
+      "for_you": "Buradaki asıl mimari ders **uzun süreli state yönetimi**. Bir kullanıcı bugün konuşup üç gün sonra geri döndüğünde sistem önceki bağlamı nasıl hatırlıyor? Bu, konuşma geçmişini bir veritabanında tutmak kadar basit değil: geçmiş büyüdükçe context window’a sığmaz, özetlemen gerekir. Bir öğrenme ya da asistan ürününde kullanıcının geçmişini modele verirken aynı problemi yaşarsın. Pratik çözüm: ham geçmişi değil, **damıtılmış bir profil** tut: ‘kullanıcı geniş zamanda zorlanıyor, telaffuzda iyi’ gibi. Hem ucuz hem de modele daha kullanışlı.",
       "terms": [
         {
           "en": "conversion funnel",
-          "tr": "dönüşüm hunisi",
+          "tr": "conversion funnel",
           "definition": "Kullanıcının ilgiden satın almaya kadar geçtiği aşamalar; her aşamada bir kısmı ayrılır."
         },
         {
           "en": "session state",
-          "tr": "oturum durumu",
+          "tr": "session state",
           "definition": "Bir kullanıcı etkileşiminin, sonraki etkileşimlerde de gereken bilgisi."
         }
       ],
       "tags": [
         "LLM",
-        "ürün",
+        "product",
         "agent",
-        "ölçüm"
+        "measurement"
       ],
       "difficulty": "başlangıç",
       "read_minutes": 4,
@@ -102,18 +102,18 @@
         "\"Sadece geliştiriciler için\" varsayımı, aracın gerçek kullanım alanını daraltan bir önyargı."
       ],
       "why_it_matters": "",
-      "for_you": "Bu gözlemi kendi araçlarına uygula. Bir LLM özelliğinin kalitesini belirleyen şey genelde model değil, modele verdiğin bağlamdır. Mobit'teki doküman aramada modele sadece soruyu değil — kullanıcının rolünü, hangi firmayla çalıştığını, hangi ihale sürecinde olduğunu da verirsen cevap niteliksel olarak değişir. Bu ücretsiz değil elbette: her ek bağlam token demek. O yüzden doğru soru şu — **hangi bağlam cevabı gerçekten değiştiriyor?** Bunu test etmenin yolu, bağlamı tek tek çıkarıp çıktının bozulup bozulmadığına bakmak.",
+      "for_you": "Bu gözlemi kendi araçlarına uygula. Bir LLM özelliğinin kalitesini belirleyen şey genelde model değil, modele verdiğin bağlamdır. Bir doküman aramada modele yalnızca soruyu değil kullanıcının rolünü ve içinde bulunduğu süreci de verirsen cevap niteliksel olarak değişir. Bu ücretsiz değil: her ek bağlam token demek. O yüzden doğru soru şu: **hangi bağlam cevabı gerçekten değiştiriyor?** Bunu test etmenin yolu bağlamı tek tek çıkarıp çıktının bozulup bozulmadığına bakmak (ablation).",
       "terms": [
         {
           "en": "context",
-          "tr": "bağlam",
+          "tr": "context",
           "definition": "Modele görevle birlikte verilen çevresel bilgi; çıktı kalitesini model seçiminden çok etkileyebilir."
         }
       ],
       "tags": [
-        "araçlar",
+        "tooling",
         "LLM",
-        "iş akışı"
+        "workflow"
       ],
       "difficulty": "başlangıç",
       "read_minutes": 3,

@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Eren&#39;in Mühendislik Gazetesi — 16 Ekim 2026</title>
-<meta name="description" content="Bir agent’ın kaç kez doğru cevap verdiğini ölçmek, onu inşa etmekten zor. Google’ın değerlendirme (eval) dersleri tam bu açığı kapatıyor. Yanında Netflix’in ‘aynı şeye üç araçta üç ad veriyoruz’ sorununu bir ontolojiyle çözmesi ve npm’deki kötü amaçlı ikili dosyaları yakalamaya çalışan bir LLM hattı var.">
+<title>Eren&#39;in Mühendislik Gazetesi — 26 Ekim 2026</title>
+<meta name="description" content="Netflix’te pik günlerde yaklaşık 100.000 workload başarısız oluyor ve debugging bir kez daha insanların zamanını yiyor. Çözüm ‘LLM’e logları ver’ değil, LLM’i deterministik bir sistemin etrafına sarmak oldu. Yanında OpenAI mühendislerinin incident’larda hızı nasıl kullandığına dair kısa bir iç örnek.">
 <meta name="author" content="Eren Ulutaş">
 <meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#131310" media="(prefers-color-scheme: dark)">
 <meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
-<meta property="og:title" content="Eren&#39;in Mühendislik Gazetesi — 16 Ekim 2026">
-<meta property="og:description" content="Bir agent’ın kaç kez doğru cevap verdiğini ölçmek, onu inşa etmekten zor. Google’ın değerlendirme (eval) dersleri tam bu açığı kapatıyor. Yanında Netflix’in ‘aynı şeye üç araçta üç ad veriyoruz’ sorununu bir ontolojiyle çözmesi ve npm’deki kötü amaçlı ikili dosyaları yakalamaya çalışan bir LLM hattı var.">
+<meta property="og:title" content="Eren&#39;in Mühendislik Gazetesi — 26 Ekim 2026">
+<meta property="og:description" content="Netflix’te pik günlerde yaklaşık 100.000 workload başarısız oluyor ve debugging bir kez daha insanların zamanını yiyor. Çözüm ‘LLM’e logları ver’ değil, LLM’i deterministik bir sistemin etrafına sarmak oldu. Yanında OpenAI mühendislerinin incident’larda hızı nasıl kullandığına dair kısa bir iç örnek.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:url" content="https://erenulutas.com/">
@@ -63,46 +63,46 @@
 
   <header class="edition-head">
   <div class="edition-bar">
-    <span class="edition-no">Sayı 61</span>
-    <h1 class="edition-date"><time datetime="2026-10-16">16 Ekim 2026, Cuma</time></h1>
+    <span class="edition-no">Sayı 67</span>
+    <h1 class="edition-date"><time datetime="2026-10-26">26 Ekim 2026, Pazartesi</time></h1>
     <nav class="edition-nav" aria-label="Sayılar arası gezinme">
-<a href="/sayi/2026-10-15/" rel="prev"><span aria-hidden="true">←</span> 15 Ekim 2026</a><span>En güncel sayı</span>    </nav>
+<a href="/sayi/2026-10-23/" rel="prev"><span aria-hidden="true">←</span> 23 Ekim 2026</a><span>En güncel sayı</span>    </nav>
   </div>
-<p class="lede">Bir agent’ın kaç kez doğru cevap verdiğini ölçmek, onu inşa etmekten zor. Google’ın değerlendirme (eval) dersleri tam bu açığı kapatıyor. Yanında Netflix’in ‘aynı şeye üç araçta üç ad veriyoruz’ sorununu bir ontolojiyle çözmesi ve npm’deki kötü amaçlı ikili dosyaları yakalamaya çalışan bir LLM hattı var.</p></header>
+<p class="lede">Netflix’te pik günlerde yaklaşık 100.000 workload başarısız oluyor ve debugging bir kez daha insanların zamanını yiyor. Çözüm ‘LLM’e logları ver’ değil, LLM’i deterministik bir sistemin etrafına sarmak oldu. Yanında OpenAI mühendislerinin incident’larda hızı nasıl kullandığına dair kısa bir iç örnek.</p></header>
 
 
   <div class="layout">
     <div class="layout-main">
-          <article class="story cover" id="debbc6d22d5f">
+          <article class="story cover" id="97a0aa466cd0">
   <div class="meta">
-<span class="kicker">Günün kapağı</span>    <a class="badge" href="/kaynak/google-cloud/"
-     style="--brand: #34A853">Google Cloud Blog</a>
+<span class="kicker">Günün kapağı</span>    <a class="badge" href="/kaynak/netflix/"
+     style="--brand: #E50914">Netflix Tech Blog</a>
 
-  <span class="meta-item">16 Ekim 2026</span>
-<span class="meta-item">5 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
+  <span class="meta-item">26 Ekim 2026</span>
+<span class="meta-item">15 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
 </div>
 
   <h2 class="cover-title">
-    <a href="https://cloud.google.com/blog/topics/developers-practitioners/four-eval-engineering-lessons/" rel="noopener nofollow" target="_blank">Agent’ı kapanış cümlesine göre notlama: dört eval mühendisliği dersi</a>
+    <a href="https://netflixtechblog.com/making-failure-diagnosis-reliable-with-pensive-ai-6b0811a1c015?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">Log’u LLM’e vermek yetmez: Netflix Pensive AI’da deterministik sistemin etrafına AI sarmak</a>
   </h2>
-  <p class="original-title">Four eval engineering lessons</p>
+  <p class="original-title">Making Failure Diagnosis Reliable with Pensive AI · Netflix Technology Blog</p>
 
-  <div class="prose"><p>Yazının tezi: agent’lı bir sistemin asıl zorluğu inşası değil ölçümü. Yazar, Google’da yıllardır değerlendirme mühendisliği yürütüyor ve yeni Google Cloud Developer eklentisini bu ilkeleri gerçek geliştirici iş akışlarında denemek için bir test yatağı olarak kullanmış. Çıkan dört ders:</p><p><strong>1. Özeti değil yürütme adımlarını notla.</strong> İlk değerlendirmede agent’ın son metin cevabını bir LLM hakemi (LLM-as-judge) kontrol listesine göre puanlıyordu. 11 istemlik ilk sette otomatik hakem üç istemi başarısız saydı; ham araç çağrısı kayıtları okununca eklentinin üçünü de geçtiği görüldü. Örnek: rubrik, hiçbir şeyi çalıştırmadan önce komut sözdizimini kontrol etmeyi istiyordu; agent ilk adımda <code>gcloud help run services list</code> çalıştırmıştı, ama son mesajı kalıcı veri kaybı uyarısına odaklandığı için bunu anmamıştı. Hakem, doğru işi yaptığı hâlde bunu övünerek söylemediği için agent’ı cezalandırdı. Hakem yalnızca agent’ın ne yazdığını görüyor, ne yaptığını değil. Ders: agent’ı kapanış konuşmasıyla değil, ham yürütme izleriyle puanla.</p><p><strong>2. Eşzamansız işlemler için tasarla.</strong> Telemetriyi düz, sıralı bir olay listesine indirmek eşzamanlı araç çağrılarını gizler ve davranış hatalarının kritik nedenlerinden biri bu. Güncel agent altyapıları birden çok araç çağrısını tek bir turda toplu gönderiyor. Yazıdaki örnekte bir ortamı inceleyip belge arayan agent’ta beceri yükleme çağrısı ve iki belge araması aynı <code>tool_calls</code> yükünde eşzamanlı gitti; beceri çok adımlı bir yönerge olduğu hâlde ona kendi turu verilmedi, yönergesi agent’ın eylemlerini hiç etkilemedi. Telemetri tur yapısını atarsa mühendisler agent’ın açık yönergeyi neden yok saydığını günlerce arar. Ders: telemetri çıkarıcıda tur yapısını koru.</p><p><strong>3. Canlı koşu ve ‘kuru koşu’yu yan yana test et.</strong> Canlı koşular genellikle ikinci adımda beklenmedik bir izin hatasına çarpıp denemek istediğin davranışa varmadan kesiliyor. Bu yüzden kimlik bilgileri çıkarılmış, agent’tan ne yapacağını anlatmasının istendiği bir sadece-plan koşusu da gerekiyor. En önemli bulguların yaklaşık yarısı iki koşu arasındaki farktan çıktı. Örnek: bir karşılama isteminde canlı koşu hemen proje listesi çağrısında takıldı; sadece-plan koşusu 8.000 karakterlik bir plan üretti ve kuruluş politikalarını, yönetici onaylarını ve yönetişimi tümüyle yok saydı. Canlı koşu büyük bir akıl yürütme kusurunu maskelemişti.</p><p><strong>4. ‘Altın kümeleri’ kalıcı referans yap.</strong> Model mimarileri birkaç ayda bir, agent altyapıları ve eklenti standartları sürekli değişiyor. Değerlendirmeyi, deterministik olmayan ortamlar için sürekli entegrasyon testi gibi ele alıp altyapı, canlı model ve araçları birlikte gerçekçi görevlerde sına. Tüm yörüngeyi (ne düşündü, hangi komutu çalıştırdı, bir şeyi bozmadan çözdü mü) yakala ve ideal yolu bilen insan uzmanların hazırladığı altın kümelerle puanla. Yazar ‘tek seferlik demo’yu (bir istemle koca bir oyun yazdırıp değerlendirme saymak) bir gösteriş metriği olarak nitelendiriyor: gerçek iş çok adımlı etkileşimleri, izinleri ve yıkıcı sonuçlardan kaçınmayı ölçmek demek, örneğin ‘maliyet tasarrufu fırsatı bul’ denince yanlışlıkla projeyi silmemek.</p></div>
+  <div class="prose"><p>Netflix’te data ve ML kullanıcıları her gün milyonlarca workload çalıştırıyor (Titus, Spark, Trino, Druid gibi motorlarda) ve pik günlerde yaklaşık 100.000 tanesi başarısız oluyor. Başarısızlık yalnızca başlangıç: birinin birkaç log arasında faydalı sinyali bulması, sebebin kendi kodunda mı platformda mı olduğuna karar vermesi ve yeniden deneme, yeniden yapılandırma ya da yükseltme kararı vermesi gerekiyor. İlk çözüm <strong>Pensive</strong> idi: başarısız workload loglarını toplayıp regex ve elle yazılmış Java kurallarıyla hataları çıkaran ve sınıflandıran, yeniden deneme ya da düzeltme önerisini Maestro gibi ürünlere ileten bir auto-diagnosis sistemi. Başarısızlıkların yaklaşık yüzde 50’sini self-service ve bazen otomatik yaptı. Ama kurallar yalnızca bilinen kalıplarda çalışıyor: kapsam, birinin yeni bir hata kalıbını fark edip kural yazması ve engine ile log formatları değiştikçe güncel tutmasıyla büyüyor. Üç aylık bir dönemde Pensive yaklaşık yedi milyon sınıflandırma yaptı ve yarısı ‘unknown’ kovasına düştü.</p><p><strong>Pensive AI</strong>’nın hedefi, modeli logların önüne koymak değil; kapsamı deterministik parçaları bırakmadan genişletmek. Yazının tasarım ilkesi: <strong>AI’ı deterministik süreçlerin etrafına sarmak</strong>, bu da geniş kapsam, düşük gecikme, kontrollü maliyet ve yazılım yaşam döngüsü boyunca kolay bakım sağlıyor. İki yol var ve birbirini tamamlıyor: <strong>error extraction</strong> her başarısızlıkta otomatik çalışıyor (hızlı ilk bakış, düşük maliyet) ve <strong>on-demand debugging</strong> kullanıcı istediğinde loglardaki semptomlara bakıp LLM’in kendi bilgisi ve reasoning’iyle daha derin kök neden analizi yapıyor (biraz daha yüksek gecikme ve maliyet).</p><p><strong>Bölüm 1: faydalı hatayı bulmak.</strong> Eski kurallar kesin ama her biri belirli bir log şeklini yakalıyor (ör. bir Spark container’ın bellek sınırını aşması için bir regex). Pensive AI kuralı olmayan hataları da buluyor ve bir platform yükseltmesinden sonra şekli değişen tanıdık hatalara uyum sağlıyor. Mühendislik açısından öğretici bir karar: çıktı token’ı üretmek girdi token’ı okumaktan çok daha yavaş olduğundan, uzun hata mesajlarını model yeniden yazarsa pahalı ve yavaş olurdu. Bu yüzden her logun <strong>satırları numaralandırılıyor</strong> ve modele <code>{lineNumber, text}</code> kayıtları veriliyor; model metni kopyalamak yerine hangi satırların hata olduğunu döndürüyor. Log kaynağı başına çağrılar paralel çalışıyor ve hepsi Maestro’nun timeout’unun içinde belirlenmiş tek bir deadline’ı paylaşıyor; süreyi kaçıran çağrı sonuçtan çıkarılıyor ve hepsi beklenmiyor. Veri sözleşmesi de yeniden tasarlandı: eski model tek bir düz hata string’iydi, yenisi her log kaynağı için bir hata listesi ve kaynağa derin bağlantılar döndürüyor.</p><p><strong>Bölüm 2: tam teşhis ve ürün deneyimi.</strong> Pensive AI Debugging, başarısız bir step attempt’i analiz edip kök neden ve önerilen düzeltmeleri sunuyor; programatik API’lerden, MCP’den ve ürün arayüzünden (Data Portal) erişiliyor. Üretimi onlarca saniye ile bir dakika arası sürebildiğinden isteğe bağlı çalıştırılıyor. Bu seçim cache için sağlam bir birim yaratıyor: her debugging cevabı <strong>step attempt’e göre cache’leniyor</strong>; ikinci istek yeni bir AI çağrısı değil bir key-value okuması. Cache’lenmiş cevabı oku, yoksa üret ya da var olanı yeniden üretip üzerine yaz şeklinde üç başlatma biçimi var; arayüz ve programatik kullanım için farklı ihtiyaçları karşılıyor.</p><p><strong>Erken sonuçlar.</strong> AI error extraction artık başarısızlıkların yüzde 100’ünü kapsıyor (eski Pensive’in unknown dediği hatalar dahil). Pensive AI’ı kullanmayan başarısız step attempt’lerde, kullananlara göre ortalama yüzde 321 daha fazla manuel debug-log inceleme eylemi görüldü; yazı bunun nedensel bir iddia değil gözlemsel bir karşılaştırma olduğunu özellikle belirtiyor. Göç hâlâ sürüyor: yeni AI hata alanını şimdilik Data Portal’ın başarısız Maestro step arayüzü okuyor, diğer yüzeyler sırada.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Agent’ı son mesajına göre değil, gerçekte ne çalıştırdığına göre değerlendir.</span></li><li><span>Telemetrinde tur yapısını koru: eşzamanlı araç çağrıları yönergenin etkisini sessizce yok edebilir.</span></li><li><span>Canlı ve sadece-plan koşularını yan yana çalıştır; ikisi arasındaki fark en önemli bulguları verir.</span></li><li><span>Altın kümeleri uzmanlar hazırlasın; model değişince bile referans kalsın.</span></li><li><span>Tek seferlik demo değerlendirme değildir; değerlendirme paketi gerekir.</span></li>    </ol>
+<li><span>LLM’i deterministik sistemin yerine değil, onun kapsamını genişletmek için etrafına koy.</span></li><li><span>Output token’ı pahalıdır: modele metni kopyalatmak yerine satır numarası döndürt.</span></li><li><span>Paralel çağrıları ortak bir deadline’a bağla; geç kalanı sonuçtan çıkar, hepsini bekleme.</span></li><li><span>Pahalı analizi isteğe bağlı yap, sonucunu cache’le; ucuz ilk bakışı her hatada otomatik çalıştır.</span></li><li><span>Kendi sonucunu abartma: gözlemsel karşılaştırmayı nedensel gibi sunma.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-why">
       <h3 class="label">Neden önemli?</h3>
-      <p>Agent’lar yazıyla nitelendirilen ama eylemle sonuç veren sistemler. Değerlendirmeyi yalnızca çıktı metnine bakarak yaparsan hem iyi agent’ı cezalandırır hem de kötü agent’ı geçirirsin. Bu dört ders, o açığı kapatan en pratik kurallar.</p>
+      <p>‘Logu LLM’e ver, cevap versin’ demo’da çalışır, ölçekte maliyet, gecikme ve tutarsızlıkla patlar. Bu yazı bir LLM özelliğini production’da sürdürülebilir kılan mühendislik kararlarını gösteriyor: sınırlı çıktı, deadline, cache, ve eski sistemle yan yana çalışan bir göç.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Bunu DBH’daki LLM hattına ve ileride yapacağın agent özelliklerine doğrudan uygulayabilirsin. <strong>(1) Altın küme:</strong> elle doğruladığın 30-50 kayıtlık bir CSV tut (girdi, beklenen çıktı). Prompt ya da modeli her değiştirdiğinde bu kümeyi çalıştırıp doğruluğu karşılaştır; ‘daha iyi hissettiriyor’ yerine sayı gör. <strong>(2) Yürütme izi:</strong> bir agent yazarsan her araç çağrısını (ad, argüman, sonuç, tur numarası) bir JSON satırı olarak kaydet ve testi bu kayıtlara karşı yaz: ‘silmeden önce listeledi mi?’. <strong>(3) Kuru koşu:</strong> yıkıcı bir araç varsa agent’a bir <code>dry_run=True</code> modu ver ve önce onu değerlendir. Bu, hem güvenli hem de ucuz.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Bir log analizi ya da debugging asistanı yazarsan üç kuralı baştan uygula. <strong>(1)</strong> Logu satır numarasıyla modele ver ve modelden yalnızca ilgili satır numaralarını ve kısa bir açıklamayı JSON olarak iste; metni modele yeniden yazdırma. <strong>(2)</strong> Hata imzasını (örneğin istisna sınıfı ve ilk stack frame) anahtar yapıp sonucu cache’le: aynı hata ikinci kez gelince LLM çağırma. <strong>(3)</strong> Bilinen sık hataları regex ile çöz, LLM’i yalnızca ‘unknown’ kovasına çağır ve kovanın oranını izle; bu oran düşüyorsa sistem işe yarıyor demektir.</p>
     </div>
   </div>
 
@@ -110,24 +110,20 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">eval (evaluation)</span> <span class="term-tr">değerlendirme</span></dt>
-      <dd>Bir modelin ya da agent’ın davranışını tekrarlanabilir testlerle ölçme.</dd>
+      <dt><span class="term-en">error extraction</span></dt>
+      <dd>Uzun bir log içinden hatayı açıklayan satırları ayıklayıp çıkarma.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">LLM-as-judge</span> <span class="term-tr">hakem olarak LLM</span></dt>
-      <dd>Bir modelin çıktısını başka bir LLM’e puanlatma yöntemi.</dd>
+      <dt><span class="term-en">deadline</span></dt>
+      <dd>Bir işlemin tamamlanması gereken, sonrasında sonucun beklenmediği süre sınırı.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">trajectory</span> <span class="term-tr">yörünge</span></dt>
-      <dd>Bir agent’ın görevi çözerken attığı adımların ve araç çağrılarının tam kaydı.</dd>
+      <dt><span class="term-en">root cause analysis</span></dt>
+      <dd>Bir arızanın görünen belirtisinden değil asıl nedeninden başlayarak çözümleme.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">golden set</span> <span class="term-tr">altın küme</span></dt>
-      <dd>Doğru cevabı uzmanlarca belirlenmiş, referans olarak kullanılan test örnekleri.</dd>
-    </div>
-    <div class="term">
-      <dt><span class="term-en">dry run</span> <span class="term-tr">kuru koşu</span></dt>
-      <dd>Gerçek etki yaratmadan bir işlemin ne yapacağını gösteren deneme.</dd>
+      <dt><span class="term-en">self-service</span></dt>
+      <dd>Kullanıcının başka bir ekibe başvurmadan sorunu kendi başına çözebilmesi.</dd>
     </div>
   </dl>
 
@@ -135,13 +131,13 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/agent/">#agent</a></li>
-  <li><a href="/etiket/degerlendirme/">#değerlendirme</a></li>
-  <li><a href="/etiket/test/">#test</a></li>
   <li><a href="/etiket/llm/">#LLM</a></li>
+  <li><a href="/etiket/observability/">#observability</a></li>
+  <li><a href="/etiket/debugging/">#debugging</a></li>
+  <li><a href="/etiket/data-platform/">#data platform</a></li>
 </ul>
 
-  <a class="readmore" href="https://cloud.google.com/blog/topics/developers-practitioners/four-eval-engineering-lessons/" rel="noopener nofollow" target="_blank">
+  <a class="readmore" href="https://netflixtechblog.com/making-failure-diagnosis-reliable-with-pensive-ai-6b0811a1c015?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">
     Orijinali oku <span aria-hidden="true">↗</span>
   </a>
 </div>
@@ -150,52 +146,44 @@
 
 
     <h2 class="subhead">Kısa kısa</h2>
-<article class="story brief" id="1b11483a2cf8">
+<article class="story brief" id="8f2f08b6e197">
   <div class="meta">
-    <a class="badge" href="/kaynak/netflix/"
-     style="--brand: #E50914">Netflix Tech Blog</a>
+    <a class="badge" href="/kaynak/openai/"
+     style="--brand: #000000">OpenAI Research</a>
 
-  <span class="meta-item">16 Ekim 2026</span>
-<span class="meta-item">13 dk okuma</span>  <span class="meta-item level level-ileri">ileri</span>
+  <span class="meta-item">26 Ekim 2026</span>
+<span class="meta-item">4 dk okuma</span>  <span class="meta-item level level-baslangic">başlangıç</span>
 </div>
 
   <h3 class="brief-title">
-    <a href="https://netflixtechblog.com/ontology-driven-observability-building-an-end-to-end-knowledge-graph-at-netflix-scale-421392cf5adf?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">Aynı şeye üç araçta üç ad: Netflix’in gözlemlenebilirlik ontolojisi</a>
+    <a href="https://openai.com/index/openai-cut-incident-investigation" rel="noopener nofollow" target="_blank">Incident’ta 30 saniye eşiği: OpenAI mühendisleri hızlı bir kodlama agent’ını nasıl kullanıyor</a>
   </h3>
-  <p class="original-title">Ontology-Driven Observability: Building an End-to-End Knowledge Graph at Netflix Scale</p>
-  <div class="prose prose-sm"><p>Netflix’te ana ekran 1,5 saniye yavaşlıyor, alarm çalıyor, ve nedeni bulmak dört saat sürüyor. Zamanın çoğu zor bir hesaba değil, gözlem sistemlerinin zaten bildiği ama hiçbir yerde okunabilir biçimde yazılmamış ilişkileri yeniden kurmaya gidiyor. Her sistem kendi içinde tutarlı, dışarıya kapalı: bir şey bir sistemde ‘uygulama’, ötekinde ‘servis’, üçüncüsünde ‘küme’ oluyor; adları bir ek, bir büyük harf ya da bir yeniden adlandırma ayırıyor. Eksik olan, operasyonel dünyadaki varlıklar üzerine açık ve makinece okunabilir bir anlaşma.</p><p>Çözüm bir <strong>ontoloji</strong>: türlerin, özelliklerin ve ilişkilerin biçimsel tanımı; birimi <strong>üçlü</strong> (özne, yüklem, nesne). Örneğin <code>api-gateway ownedBy Team Bedrock</code> ya da <code>INC-5377 affects api-gateway</code>. Böylece ‘Team Bedrock’ın sahip olduğu uygulamaları etkileyen olaylar’ gibi üç araçta aranan bir soru tek sorguya iniyor. W3C yığınıyla kurulmuş (RDF, OWL, SHACL, SPARQL) ve verisi Netflix’in kendi RDF veritabanı QuipuDB’de.</p><p>İki karar öğretici: <strong>genel bir ‘Service’ türünü reddettiler</strong> (araçlarda dört farklı anlama geliyor); her uygulama tek bir türe çözülüyor ve yaklaşık 49.000 kayıtlı yazılım kataloğuna karşı doğrulanmadan oluşturulmuyor, ayrıca bağımlılık kenarlarına sınır konuyor. İkincisi, <strong>olay Slack kanallarındaki akıl yürütmeyi modellemek</strong>: denenip bırakılan hipotezler, işe yarayan hafifletme, kim neyi neden bildi. Kanal sessizleşince bu bilgi buharlaşıyor; 200 mesajlık, 50 kişilik bir olay kanalı sıralı üçlülere dönüşüyor.</p><p>En ilginç fikir <strong>belirsizlikten determinizm</strong>: LLM’ler özetliyor, bulanık eşleştirme servis adlarını çözüyor, olasılıksal bir motor nedensel zincir öneriyor; hiçbiri aynı çıktıyı iki kez garanti etmez. Ama ontoloji çıktı uzayını öyle sıkı daraltıyor ki (LLM serbest metin yazabilir ama tür sistemini bozan bir üçlü yayamaz; kategori önceden verilmiş bir listeden seçilir) sonuç, her seferinde aynı SPARQL cevabını veren deterministik bir grafik.</p></div>
+  <p class="original-title">How Ultrafast cut incident investigation from hours to minutes at OpenAI</p>
+  <div class="prose prose-sm"><p>OpenAI, Codex’in yüksek hızlı modu Ultrafast’i iç kullanım örneği olarak anlatıyor (kendi ürününü anlatan bir yazı; abartı payı olabilir). Mühendisler için incident response’ta varsayılan olmuş: bir şey bozulduğunda dakikalarca cevap beklemek sorunu büyütüyor. Bir mühendis incident için bir Slack kanalı açıp Codex’i olayı izlemesi, araştırması ve gelen soruları yanıtlaması için görevlendiriyor ve ‘birçok olası nedeni aynı anda arayabildiğini’ söylüyor. Bir güvenlik mimarı, yapılandırılmış ve yapılandırılmamış veriyi toplayıp normalleştirme ve bağlam verme işinin bir iki saatten 10-15 dakikaya, bazen neredeyse gerçek zamana indiğini aktarıyor.</p><p>Yazının asıl gözlemi hız eşiği: bir mühendis bir AI cevabı 30 saniyeden uzun sürerse Slack’e bakıp bir iş arkadaşına sorduğunu, ama işlerinin çoğunun artık bu eşiğin altında kaldığını söylüyor. Başka bir mühendis eskiden Codex’e bir şey sorup aynı anda kendisi de bakmak zorunda kaldığını, artık odağını bölmeden beklediğini anlatıyor. Bu tür testler iç kullanıcı anlatılarına dayanıyor; bağımsız ölçüm değil.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
     <ol>
-<li><span>Olayı çözmenin yavaş kısmı çoğu zaman hesaplama değil, sistemler arası adlandırma farklarını eşleştirmektir.</span></li><li><span>Ortak bir veri modeli (ontoloji), aynı varlığın farklı adlarını tek kimliğe indirir.</span></li><li><span>LLM çıktısını şemayla kısıtlamak, rastgele bir süreci tutarlı bir sözleşmeye çevirir.</span></li><li><span>Olay kanallarındaki akıl yürütme belgelenmezse kaybolur.</span></li>    </ol>
+<li><span>Yanıt süresi bir eşiğin altına inince insanlar aracı beklemek yerine kullanır; eşik yaklaşık 30 saniye olarak anlatılıyor.</span></li><li><span>Incident’ta birden çok hipotezi aynı anda aramak, tek tek denemekten hızlıdır.</span></li><li><span>İç kullanıcı anlatıları değerli ipuçlarıdır ama ölçüm değildir.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Küçük bir ölçekte aynı sorunu kendi projelerinde de yaşarsın: aynı müşteri bir tabloda <code>musteri_id</code>, bir logda <code>customerId</code>, bir ekranda adı ile geçer. Bir kimlik sözlüğü tutmak ve her veri girişini ona karşı doğrulamak, DBH’daki kategori kodlarında yaptığın normalizasyonun genelleştirilmiş hâli. Modelden JSON isterken <code>enum</code> ile izin verilen değerleri sabitlemek ise burada anlatılan ‘çıktı uzayını daralt’ fikrinin en basit biçimi.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Incident ya da debugging için bir araç yazarsan ‘ilk anlamlı cevap’ süresini ölç ve 30 saniyenin altını hedefle. Hız için model boyutunu küçültmeden önce bağlamı kısalt ve aramaları paralelleştir: aynı soruyu log, metrik ve son deploy’lar için eşzamanlı sormak çoğu zaman en büyük kazanç.</p>
     </div>
   </div>
 
   <details class="terms">
-    <summary class="label">Sözlük · 4 terim</summary>
+    <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">ontology</span> <span class="term-tr">ontoloji</span></dt>
-      <dd>Bir alandaki varlık türlerinin, özelliklerinin ve aralarındaki ilişkilerin biçimsel tanımı.</dd>
+      <dt><span class="term-en">incident response</span></dt>
+      <dd>Üretimdeki bir arızayı tespit etme, teşhis etme ve giderme süreci.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">triple (RDF)</span> <span class="term-tr">üçlü</span></dt>
-      <dd>Bir olguyu özne-yüklem-nesne biçiminde ifade eden en küçük bilgi birimi.</dd>
-    </div>
-    <div class="term">
-      <dt><span class="term-en">knowledge graph</span> <span class="term-tr">bilgi grafı</span></dt>
-      <dd>Varlıkları ve aralarındaki ilişkileri düğüm ve kenarlarla tutan veri yapısı.</dd>
-    </div>
-    <div class="term">
-      <dt><span class="term-en">MELT</span> <span class="term-tr">MELT</span></dt>
-      <dd>Metrics, Events, Logs, Traces: gözlemlenebilirliğin dört temel veri türü.</dd>
+      <dt><span class="term-en">latency</span></dt>
+      <dd>Bir isteğin gönderilmesi ile cevabın gelmesi arasındaki süre.</dd>
     </div>
   </dl>
 
@@ -203,74 +191,13 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/gozlemlenebilirlik/">#gözlemlenebilirlik</a></li>
-  <li><a href="/etiket/bilgi-grafi/">#bilgi grafı</a></li>
+  <li><a href="/etiket/incident-response/">#incident response</a></li>
   <li><a href="/etiket/agent/">#agent</a></li>
-  <li><a href="/etiket/netflix/">#Netflix</a></li>
+  <li><a href="/etiket/developer-experience/">#developer experience</a></li>
+  <li><a href="/etiket/openai/">#OpenAI</a></li>
 </ul>
 
-  <a class="readmore" href="https://netflixtechblog.com/ontology-driven-observability-building-an-end-to-end-knowledge-graph-at-netflix-scale-421392cf5adf?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">
-    Orijinali oku <span aria-hidden="true">↗</span>
-  </a>
-</div>
-
-</article>
-<article class="story brief" id="2552bec412d6">
-  <div class="meta">
-    <a class="badge" href="/kaynak/databricks/"
-     style="--brand: #FF3621">Databricks Engineering</a>
-
-  <span class="meta-item">16 Ekim 2026</span>
-<span class="meta-item">19 dk okuma</span>  <span class="meta-item level level-ileri">ileri</span>
-</div>
-
-  <h3 class="brief-title">
-    <a href="https://www.databricks.com/blog/closing-binary-blind-spot-domain-knowledge-injection-llm-malware-triage-npm-packages" rel="noopener nofollow" target="_blank">npm’deki gizli ikili dosya: LLM’e alan bilgisini prompt’la enjekte etmek</a>
-  </h3>
-  <p class="original-title">Closing the Binary Blind Spot: Domain-Knowledge Injection for LLM Malware Triage in npm Packages</p>
-  <div class="prose prose-sm"><p>Databricks, kasım 2025’ten beri npm kayıt defterindeki kötü amaçlı paketleri topluyor. OSV tavsiyeleriyle doğrulanmış 11.413 paket sürümünün yüzde 96,2’sinde kötü amaçlı kod kaynakta saklı ya da harici bir sunucudan indiriliyor. Kalan yüzde 3,8’i (432 sürüm) ikili dosya gömüyor. Az ama tehlikeli: temiz görünen kaynak ve metadata arasına yerleştirilmiş, sembolleri silinmiş opak bir ikili dosya, LLM’i ‘zararsız’ kararına kaydırabiliyor. İkili dosyalı paketler, yalnızca kaynaklılara göre iki kattan fazla sıklıkla kesin bir ‘kötü amaçlı’ karara ulaşamıyor (yüzde 14,4 ve yüzde 6,2).</p><p>Ekibin hattı: npm kaydını gerçek zamanlı izleyen bir tarayıcı; önce YARA, Semgrep ve npm API ile statik aşama, sonra derlenmiş dosya için bir ikili analiz modülü; çıktılar yapılandırılmış bir prompt’a toplanıyor ve LLM gerekçeli bir karar veriyor, gerekirse en çok üç turda ek dosya isteyebiliyor. Çalışma, farklı gizleme düzeylerinde yapay ikili yükler (kimlik bilgisi hırsızı, dropper, ters kabuk vb.) üretip LLM’lerin bunları nasıl yorumladığını ölçüyor, hataların sistematik olup olmadığına bakıyor ve boşluğu amaca yönelik, ucuz bir <strong>alan bilgisi kodlamasıyla</strong> kapatıyor; yazarlar bunun hem ucuz hem de üst düzey modeller için tespiti iyileştirdiğini bildiriyor. Yaklaşım, uzman verisiyle açık modelleri ince ayarlamanın tersi: bilgiyi ağırlıklara gömmek yerine istemde veriyor; böylece kapalı modellere de uygulanabiliyor ve tehdit manzarası değişince yeniden eğitim gerekmiyor.</p></div>
-
-  <div class="keypoints keypoints-sm">
-    <h4 class="label">Öne çıkanlar</h4>
-    <ol>
-<li><span>Nadir ama opak girdi (derlenmiş ikili dosya), LLM’in en kolay yanıldığı yerdir.</span></li><li><span>Önce klasik statik araçlar (YARA, Semgrep), sonra LLM: model tek başına yeterli değil.</span></li><li><span>Alan bilgisini istemde vermek, kapalı modellerde ince ayara gerek bırakmadan işe yarar.</span></li>    </ol>
-  </div>
-
-  <div class="callouts">
-    <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Güvenlik tarafında somut bir alışkanlık: bir bağımlılık eklemeden önce <code>npm audit</code> ya da <code>pip-audit</code> çalıştır, kilit dosyasını (<code>package-lock.json</code>) depoya koy ve CI’de sürümü sabitle. LLM tarafında ders şu: modelin zayıf olduğu girdi türü için istemin içine kısa bir ‘nasıl bakılır’ rehberi koymak (örneğin DBH’da belirsiz bir kategori için karar kuralları), çoğu zaman ince ayardan ucuz ve hızlı bir ilk adımdır.</p>
-    </div>
-  </div>
-
-  <details class="terms">
-    <summary class="label">Sözlük · 3 terim</summary>
-      <dl>
-    <div class="term">
-      <dt><span class="term-en">supply chain attack</span> <span class="term-tr">tedarik zinciri saldırısı</span></dt>
-      <dd>Hedefi doğrudan değil, kullandığı bağımlılığı ya da paketi ele geçirerek vurma.</dd>
-    </div>
-    <div class="term">
-      <dt><span class="term-en">YARA</span> <span class="term-tr">YARA</span></dt>
-      <dd>Dosyalarda kötü amaçlı yazılım örüntülerini kural tabanlı arayan araç.</dd>
-    </div>
-    <div class="term">
-      <dt><span class="term-en">triage</span> <span class="term-tr">triyaj</span></dt>
-      <dd>Şüpheli öğeleri önem ve risk derecesine göre hızlıca sınıflandırma.</dd>
-    </div>
-  </dl>
-
-  </details>
-
-  <div class="article-foot">
-  <ul class="tags">
-  <li><a href="/etiket/guvenlik/">#güvenlik</a></li>
-  <li><a href="/etiket/tedarik-zinciri/">#tedarik zinciri</a></li>
-  <li><a href="/etiket/llm/">#LLM</a></li>
-  <li><a href="/etiket/npm/">#npm</a></li>
-</ul>
-
-  <a class="readmore" href="https://www.databricks.com/blog/closing-binary-blind-spot-domain-knowledge-injection-llm-malware-triage-npm-packages" rel="noopener nofollow" target="_blank">
+  <a class="readmore" href="https://openai.com/index/openai-cut-incident-investigation" rel="noopener nofollow" target="_blank">
     Orijinali oku <span aria-hidden="true">↗</span>
   </a>
 </div>
@@ -284,21 +211,15 @@
     <h2 class="label">Bu sayıda</h2>
     <ol class="toc" id="toc">
       <li>
-        <a href="#debbc6d22d5f">
-          <span class="toc-title">Agent’ı kapanış cümlesine göre notlama: dört eval mühendisliği dersi</span>
-          <span class="toc-meta">Google Cloud Blog · 5 dk</span>
+        <a href="#97a0aa466cd0">
+          <span class="toc-title">Log’u LLM’e vermek yetmez: Netflix Pensive AI’da deterministik sistemin etrafına AI sarmak</span>
+          <span class="toc-meta">Netflix Tech Blog · 15 dk</span>
         </a>
       </li>
       <li>
-        <a href="#1b11483a2cf8">
-          <span class="toc-title">Aynı şeye üç araçta üç ad: Netflix’in gözlemlenebilirlik ontolojisi</span>
-          <span class="toc-meta">Netflix Tech Blog · 13 dk</span>
-        </a>
-      </li>
-      <li>
-        <a href="#2552bec412d6">
-          <span class="toc-title">npm’deki gizli ikili dosya: LLM’e alan bilgisini prompt’la enjekte etmek</span>
-          <span class="toc-meta">Databricks Engineering · 19 dk</span>
+        <a href="#8f2f08b6e197">
+          <span class="toc-title">Incident’ta 30 saniye eşiği: OpenAI mühendisleri hızlı bir kodlama agent’ını nasıl kullanıyor</span>
+          <span class="toc-meta">OpenAI Research · 4 dk</span>
         </a>
       </li>
     </ol>
@@ -306,10 +227,10 @@
   <div class="aside-block aside-facts">
     <h2 class="label">Künye</h2>
     <dl class="facts">
-      <div><dt>yazı</dt><dd>3</dd></div>
-      <div><dt>dk okuma</dt><dd>37</dd></div>
-      <div><dt>kaynak</dt><dd>3</dd></div>
-      <div><dt>terim</dt><dd>12</dd></div>
+      <div><dt>yazı</dt><dd>2</dd></div>
+      <div><dt>dk okuma</dt><dd>19</dd></div>
+      <div><dt>kaynak</dt><dd>2</dd></div>
+      <div><dt>terim</dt><dd>6</dd></div>
     </dl>
   </div>
 </aside>
@@ -319,9 +240,39 @@
   <section class="section">
     <div class="section-head">
       <h2 class="section-title">Önceki sayılar</h2>
-      <a class="section-more" href="/arsiv/">Tüm arşiv (61) →</a>
+      <a class="section-more" href="/arsiv/">Tüm arşiv (67) →</a>
     </div>
     <div class="prev-grid">
+      <a class="prev-card" href="/sayi/2026-10-23/">
+        <span class="prev-date"><b>№ 66</b>23 Ekim 2026</span>
+        <span class="prev-title">Önce her ekibe ayrı container, sonra geri dönüş: OpenAI Habitat’ın Cosmos DB’de multi-tenancy yolculuğu</span>
+        <span class="prev-count">3 yazı · OpenAI Research, Netflix Tech Blog</span>
+      </a>
+      <a class="prev-card" href="/sayi/2026-10-22/">
+        <span class="prev-date"><b>№ 65</b>22 Ekim 2026</span>
+        <span class="prev-title">Noisy neighbor’ın cgroup’u yok: Netflix Titus’ta single-tenant VM isolation</span>
+        <span class="prev-count">2 yazı · Netflix Tech Blog, OpenAI Research</span>
+      </a>
+      <a class="prev-card" href="/sayi/2026-10-21/">
+        <span class="prev-date"><b>№ 64</b>21 Ekim 2026</span>
+        <span class="prev-title">Olay değil konuşma: ChatGPT’nin ad stack’i neden request-response değil, stateful session</span>
+        <span class="prev-count">2 yazı · OpenAI Research, Google Cloud Blog</span>
+      </a>
+      <a class="prev-card" href="/sayi/2026-10-20/">
+        <span class="prev-date"><b>№ 63</b>20 Ekim 2026</span>
+        <span class="prev-title">Agent’ın hafızası: neyi saklayacağına karar vermek ve ‘dreaming’ pipeline’ı (MemCurrent)</span>
+        <span class="prev-count">2 yazı · Databricks Engineering, Google Cloud Blog</span>
+      </a>
+      <a class="prev-card" href="/sayi/2026-10-19/">
+        <span class="prev-date"><b>№ 62</b>19 Ekim 2026</span>
+        <span class="prev-title">Token’lar nereye gidiyor? Cloudflare AI code reviewer maliyetini yüzde 68 nasıl düşürdü</span>
+        <span class="prev-count">2 yazı · Cloudflare Blog, Meta Engineering</span>
+      </a>
+      <a class="prev-card" href="/sayi/2026-10-16/">
+        <span class="prev-date"><b>№ 61</b>16 Ekim 2026</span>
+        <span class="prev-title">Agent’ı kapanış cümlesine göre notlama: dört eval mühendisliği dersi</span>
+        <span class="prev-count">3 yazı · Google Cloud Blog, Netflix Tech Blog, Databricks Engineering</span>
+      </a>
       <a class="prev-card" href="/sayi/2026-10-15/">
         <span class="prev-date"><b>№ 60</b>15 Ekim 2026</span>
         <span class="prev-title">Trafik topu değil molayı izledi: Meta Dünya Kupası’nda rekor yükü nasıl taşıdı</span>
@@ -332,36 +283,6 @@
         <span class="prev-title">Konteyner boyutunu makine ayarlasın: Netflix’in otomatik küçültme sistemi ve kendi hatasından dersi</span>
         <span class="prev-count">2 yazı · Netflix Tech Blog</span>
       </a>
-      <a class="prev-card" href="/sayi/2026-10-13/">
-        <span class="prev-date"><b>№ 58</b>13 Ekim 2026</span>
-        <span class="prev-title">Bir tabloyu silmeden önce maliyeti söyle: DynamoDB Bulk Executor’ı yazarken öğrenilenler</span>
-        <span class="prev-count">2 yazı · AWS Architecture Blog, Cloudflare Blog</span>
-      </a>
-      <a class="prev-card" href="/sayi/2026-10-12/">
-        <span class="prev-date"><b>№ 57</b>12 Ekim 2026</span>
-        <span class="prev-title">Canlı yayının altındaki protokolü değiştirmek: Instagram Live’da Media over QUIC</span>
-        <span class="prev-count">3 yazı · Meta Engineering, Cloudflare Blog</span>
-      </a>
-      <a class="prev-card" href="/sayi/2026-10-09/">
-        <span class="prev-date"><b>№ 56</b>9 Ekim 2026</span>
-        <span class="prev-title">Ses ve video için ayrı model zinciri kurma: Clef-omni ve arkasındaki eğitim tarifi</span>
-        <span class="prev-count">2 yazı · Cloudflare Blog</span>
-      </a>
-      <a class="prev-card" href="/sayi/2026-10-08/">
-        <span class="prev-date"><b>№ 55</b>8 Ekim 2026</span>
-        <span class="prev-title">RAG yetmedi, geri bildirim işe yaradı: Uber’in sözleşme agent’ı dört yinelemede nasıl olgunlaştı</span>
-        <span class="prev-count">3 yazı · Uber Engineering, Databricks Engineering</span>
-      </a>
-      <a class="prev-card" href="/sayi/2026-10-07/">
-        <span class="prev-date"><b>№ 54</b>7 Ekim 2026</span>
-        <span class="prev-title">Önce kanıtı kod toplasın, sonra model yorumlasın: Cloudflare’in çok ajanlı güvenlik hattı</span>
-        <span class="prev-count">2 yazı · Cloudflare Blog, Google Cloud Blog</span>
-      </a>
-      <a class="prev-card" href="/sayi/2026-10-06/">
-        <span class="prev-date"><b>№ 53</b>6 Ekim 2026</span>
-        <span class="prev-title">Saate güvenmeden hiçbir şeye güvenemezsin: Meta’da kimliği doğrulanmış zaman (NTS)</span>
-        <span class="prev-count">3 yazı · Meta Engineering, Google Cloud Blog, Cloudflare Blog</span>
-      </a>
     </div>
   </section>
 
@@ -371,22 +292,22 @@
       <a class="section-more" href="/ara/">Ara →</a>
     </div>
     <ul class="tagcloud">
-      <li><a href="/etiket/llm/">LLM <span class="count">34</span></a></li>
-      <li><a href="/etiket/agent/">agent <span class="count">26</span></a></li>
-      <li><a href="/etiket/mimari/">mimari <span class="count">26</span></a></li>
-      <li><a href="/etiket/guvenlik/">güvenlik <span class="count">24</span></a></li>
-      <li><a href="/etiket/maliyet/">maliyet <span class="count">18</span></a></li>
-      <li><a href="/etiket/ag/">ağ <span class="count">15</span></a></li>
-      <li><a href="/etiket/arastirma/">araştırma <span class="count">14</span></a></li>
-      <li><a href="/etiket/altyapi/">altyapı <span class="count">11</span></a></li>
-      <li><a href="/etiket/dayaniklilik/">dayanıklılık <span class="count">10</span></a></li>
-      <li><a href="/etiket/veritabani/">veritabanı <span class="count">10</span></a></li>
-      <li><a href="/etiket/veri-muhendisligi/">veri mühendisliği <span class="count">10</span></a></li>
-      <li><a href="/etiket/performans/">performans <span class="count">9</span></a></li>
-      <li><a href="/etiket/gozlemlenebilirlik/">gözlemlenebilirlik <span class="count">8</span></a></li>
-      <li><a href="/etiket/protokol/">protokol <span class="count">8</span></a></li>
-      <li><a href="/etiket/degerlendirme/">değerlendirme <span class="count">7</span></a></li>
-      <li><a href="/etiket/ml-altyapisi/">ML altyapısı <span class="count">7</span></a></li>
+      <li><a href="/etiket/llm/">LLM <span class="count">41</span></a></li>
+      <li><a href="/etiket/agent/">agent <span class="count">32</span></a></li>
+      <li><a href="/etiket/architecture/">architecture <span class="count">29</span></a></li>
+      <li><a href="/etiket/security/">security <span class="count">25</span></a></li>
+      <li><a href="/etiket/cost/">cost <span class="count">19</span></a></li>
+      <li><a href="/etiket/networking/">networking <span class="count">15</span></a></li>
+      <li><a href="/etiket/research/">research <span class="count">14</span></a></li>
+      <li><a href="/etiket/infrastructure/">infrastructure <span class="count">13</span></a></li>
+      <li><a href="/etiket/database/">database <span class="count">11</span></a></li>
+      <li><a href="/etiket/data-engineering/">data engineering <span class="count">11</span></a></li>
+      <li><a href="/etiket/performance/">performance <span class="count">10</span></a></li>
+      <li><a href="/etiket/resilience/">resilience <span class="count">10</span></a></li>
+      <li><a href="/etiket/observability/">observability <span class="count">9</span></a></li>
+      <li><a href="/etiket/protocol/">protocol <span class="count">8</span></a></li>
+      <li><a href="/etiket/isolation/">isolation <span class="count">7</span></a></li>
+      <li><a href="/etiket/evaluation/">evaluation <span class="count">7</span></a></li>
     </ul>
   </section>
 
@@ -403,7 +324,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

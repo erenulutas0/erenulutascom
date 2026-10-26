@@ -88,12 +88,12 @@
   </h2>
   <p class="original-title">Building resilient real-time streaming workers with Amazon DynamoDB leases · Siddhesh Tiwari</p>
 
-  <div class="prose"><p>500 eşzamanlı toplantıyı işleyen bir gerçek zamanlı transkripsiyon servisi düşün. Her toplantı için bir işçi, kaynağa giden ayrı bir WebSocket bağlantısı tutuyor. Bir işçi çökerse 100&#x27;den fazla bağlantı düşüyor ve operatör servisi elle yeniden başlatana kadar bağlantı başına 2-3 dakika veri kaybı oluyor.</p><p>Problemin özü: her bağlantıya <strong>tam olarak bir işçi</strong> sahip olmalı, ama işçiler birbirinden bağımsız çöküyor, yeniden dağıtılıyor ve ölçekleniyor. Zorluklar dört tane: işçi çökmesi, kayan dağıtımlar (yeni görev başlarken eskisi bağlantılarını bırakır), yatay ölçekleme (eklemek kolay, çıkarırken bağlantıları devretmek zor) ve en tehlikelisi <strong>çift sahiplenme</strong>: iki işçi aynı bağlantıyı sahiplenip aynı kaynağa bağlanırsa çift veri işleme ve protokol hataları çıkar.</p><p>Çözümün anahtar fikri tek cümlede: <strong>DynamoDB koşullu yazmaları (conditional write), ayrı bir koordinasyon servisine gerek bırakmadan dağıtık kilit işlevi görür.</strong> Her bağlantının bir <strong>kirası</strong> var: süresi sınırlı bir sahiplik iddiası. İşçiler kirayı sürekli yenilemek (heartbeat) zorunda; bir işçi aniden durursa kira dolar ve başka bir işçi devralır. Tablo tek öğede hem kira bilgisini (<code>lease_owner</code>, <code>lease_expires_at_ms</code>) hem bağlantı durumunu (<code>desired_state</code>, <code>ws_url</code>, <code>last_seq</code>) tutuyor. Sahipsiz bağlantıları bulmak için <code>desired_state</code> ve <code>lease_expires_at_ms</code> üzerinde bir GSI var. SQS yalnızca hızlı bildirim kanalı: sahipliğin sürekli bir durum olduğunu, SQS’in ise tek seferlik görev teslimi için tasarlandığını açıkça belirtiyorlar.</p><p>Dikkat çekici bir dürüst not: kira süresi dolma kontrolü, <strong>işçilerin yerel saatlerine</strong> dayanıyor; yani saatler makul ölçüde senkron olmalı. Varsayılan kira süresi 20 saniye, heartbeat aralığı 5 saniye; saat kayması bu güvenlik payının çok içinde kalıyor.</p></div>
+  <div class="prose"><p>500 eşzamanlı toplantıyı işleyen bir gerçek zamanlı transkripsiyon servisi düşün. Her toplantı için bir işçi, kaynağa giden ayrı bir WebSocket bağlantısı tutuyor. Bir işçi çökerse 100&#x27;den fazla bağlantı düşüyor ve operatör servisi elle yeniden başlatana kadar bağlantı başına 2-3 dakika veri kaybı oluyor.</p><p>Problemin özü: her bağlantıya <strong>tam olarak bir işçi</strong> sahip olmalı, ama işçiler birbirinden bağımsız çöküyor, yeniden dağıtılıyor ve ölçekleniyor. Zorluklar dört tane: işçi çökmesi, kayan dağıtımlar (yeni görev başlarken eskisi bağlantılarını bırakır), yatay ölçekleme (eklemek kolay, çıkarırken bağlantıları devretmek zor) ve en tehlikelisi <strong>çift sahiplenme</strong>: iki işçi aynı bağlantıyı sahiplenip aynı kaynağa bağlanırsa çift veri işleme ve protokol hataları çıkar.</p><p>Çözümün anahtar fikri tek cümlede: <strong>DynamoDB conditional write’leri (conditional write), ayrı bir koordinasyon servisine gerek bırakmadan dağıtık kilit işlevi görür.</strong> Her bağlantının bir <strong>kirası</strong> var: süresi sınırlı bir sahiplik iddiası. İşçiler kirayı sürekli yenilemek (heartbeat) zorunda; bir işçi aniden durursa kira dolar ve başka bir işçi devralır. Tablo tek öğede hem kira bilgisini (<code>lease_owner</code>, <code>lease_expires_at_ms</code>) hem bağlantı durumunu (<code>desired_state</code>, <code>ws_url</code>, <code>last_seq</code>) tutuyor. Sahipsiz bağlantıları bulmak için <code>desired_state</code> ve <code>lease_expires_at_ms</code> üzerinde bir GSI var. SQS yalnızca hızlı bildirim kanalı: sahipliğin sürekli bir durum olduğunu, SQS’in ise tek seferlik görev teslimi için tasarlandığını açıkça belirtiyorlar.</p><p>Dikkat çekici bir dürüst not: kira süresi dolma kontrolü, <strong>işçilerin yerel saatlerine</strong> dayanıyor; yani saatler makul ölçüde senkron olmalı. Varsayılan kira süresi 20 saniye, heartbeat aralığı 5 saniye; clock skew bu güvenlik payının çok içinde kalıyor.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Sahiplik bir görev değil sürekli bir durumdur; bu yüzden kuyruk değil süresi dolan bir kayıtla modellenir.</span></li><li><span>Koşullu yazma = atomik ‘şu koşulda yaz’ işlemi; ayrı kilit servisi olmadan dağıtık kilit sağlar.</span></li><li><span>Kira süresi ile heartbeat aralığı birlikte seçilir: süre, aralığın birkaç katı olmalı ki gecikmeler yanlış devralmaya yol açmasın.</span></li><li><span>Kira, saat doğruluğuna bağlı; senkronizasyonu varsaymak yerine kira süresini olası kaymayla payla.</span></li><li><span>Zarif kapatma (graceful shutdown) ile dağıtım sırasında bağlantılar kayıpsız devredilebilir.</span></li>    </ol>
+<li><span>Sahiplik bir görev değil sürekli bir durumdur; bu yüzden kuyruk değil süresi dolan bir kayıtla modellenir.</span></li><li><span>Conditional write = atomik ‘şu koşulda yaz’ işlemi; ayrı kilit servisi olmadan dağıtık kilit sağlar.</span></li><li><span>Kira süresi ile heartbeat aralığı birlikte seçilir: süre, aralığın birkaç katı olmalı ki gecikmeler yanlış devralmaya yol açmasın.</span></li><li><span>Kira, saat doğruluğuna bağlı; senkronizasyonu varsaymak yerine kira süresini olası kaymayla payla.</span></li><li><span>Graceful shutdown (graceful shutdown) ile dağıtım sırasında bağlantılar kayıpsız devredilebilir.</span></li>    </ol>
   </div>
 
   <div class="callouts">
@@ -102,8 +102,8 @@
       <p>‘Tam olarak bir sahip’ gereksinimi çıktığı her yerde (zamanlanmış iş, lider seçimi, bağlantı yönetimi) kira deseni yeniden karşına çıkar. Önemli olan sahipliğin süresiz değil sürekli yenilenen bir iddia olması: çöken sahibin kilidi sonsuza kadar tutmasını engelleyen tek şey bu.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Bunu PostgreSQL ile de kurabilirsin: <code>UPDATE jobs SET owner = :me, expires_at = now() + interval &#x27;20 seconds&#x27; WHERE id = :id AND (owner IS NULL OR expires_at &lt; now())</code> ve etkilenen satır sayısı 1 ise kira senin. Mobit’te zamanlanmış bir iş birden fazla örnekte çalışıyorsa (belge indeksleme, bildirim gönderme) aynı işi iki örneğin birden yapmadığından emin misin? ShedLock gibi Spring kütüphaneleri bu deseni hazır sunar. Tradebot’ta da bir borsa bağlantısını yalnızca bir sürecin tutması gerekiyorsa aynı kira mantığı çift işlem emri riskini önler.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Bunu PostgreSQL ile de kurabilirsin: <code>UPDATE jobs SET owner = :me, expires_at = now() + interval &#x27;20 seconds&#x27; WHERE id = :id AND (owner IS NULL OR expires_at &lt; now())</code> ve etkilenen satır sayısı 1 ise lease senin. Zamanlanmış bir iş birden fazla instance’ta çalışıyorsa (belge indeksleme, bildirim gönderme) aynı işi iki instance’ın birden yapmadığından emin misin? ShedLock gibi Spring kütüphaneleri bu deseni hazır sunar. Bir borsa bağlantısını yalnızca bir sürecin tutması gerekiyorsa aynı lease mantığı çift emir riskini önler.</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">lease</span> <span class="term-tr">kira (süreli sahiplik)</span></dt>
+      <dt><span class="term-en">lease</span></dt>
       <dd>Belirli bir süre için geçerli olan ve yenilenmezse kendiliğinden biten sahiplik iddiası.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">conditional write</span> <span class="term-tr">koşullu yazma</span></dt>
+      <dt><span class="term-en">conditional write</span></dt>
       <dd>Yalnızca belirtilen koşul doğruysa gerçekleşen atomik yazma işlemi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">heartbeat</span> <span class="term-tr">yaşam sinyali</span></dt>
+      <dt><span class="term-en">heartbeat</span></dt>
       <dd>Bir bileşenin hâlâ ayakta olduğunu belirtmek için düzenli aralıklarla gönderdiği sinyal.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">graceful shutdown</span> <span class="term-tr">zarif kapatma</span></dt>
+      <dt><span class="term-en">graceful shutdown</span></dt>
       <dd>Bir süreç kapanmadan önce işini ve bağlantılarını düzgünce devrederek bırakması.</dd>
     </div>
   </dl>
@@ -132,7 +132,7 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/dagitik-sistemler/">#dağıtık sistemler</a></li>
+  <li><a href="/etiket/distributed-systems/">#distributed systems</a></li>
   <li><a href="/etiket/websocket/">#WebSocket</a></li>
   <li><a href="/etiket/dynamodb/">#DynamoDB</a></li>
   <li><a href="/etiket/koordinasyon/">#koordinasyon</a></li>
@@ -160,7 +160,7 @@
     <a href="https://openai.com/index/introducing-the-agents-api" rel="noopener nofollow" target="_blank">Agent harness’ini barındırılan bir servis olarak sunmak: Agents API</a>
   </h3>
   <p class="original-title">Introducing the Agents API</p>
-  <div class="prose prose-sm"><p>OpenAI, Codex’i güçlendiren harness ve altyapıyı geliştiricilere <strong>Agents API</strong> adıyla halka açık betada sunuyor. Gerekçeleri tanıdık: uzun süre çalışan agent’ların iyi iş çıkarması için güçlü bir harness (bağlam yönetimi, verimli araç kullanımı, alt ajanların koordinasyonu) ve günlerce güvenilir çalışan bir altyapı gerekiyor.</p><p>Tek bir API çağrısıyla görev, model, araçlar ve ortam belirtilerek bulut agent’ı oluşturuluyor. Ortamı sen seçiyorsun: OpenAI’ın yönetilen sandbox’ı, kendi altyapın ya da bir sandbox ortağı. Harness’i OpenAI barındırıp sürümlüyor; uzun oturumlar için bağlam otomatik sıkıştırılıyor, araç arama ilgili araç tanımlarını gerektiğinde yükleyerek token ve maliyeti düşürüyor, alt ajanlar işi paralelleştiriyor.</p></div>
+  <div class="prose prose-sm"><p>OpenAI, Codex’i güçlendiren harness ve altyapıyı geliştiricilere <strong>Agents API</strong> adıyla halka açık betada sunuyor. Gerekçeleri tanıdık: uzun süre çalışan agent’ların iyi iş çıkarması için güçlü bir harness (bağlam yönetimi, verimli araç kullanımı, alt agent’ların koordinasyonu) ve günlerce güvenilir çalışan bir altyapı gerekiyor.</p><p>Tek bir API çağrısıyla görev, model, araçlar ve ortam belirtilerek bulut agent’ı oluşturuluyor. Ortamı sen seçiyorsun: OpenAI’ın yönetilen sandbox’ı, kendi altyapın ya da bir sandbox ortağı. Harness’i OpenAI barındırıp sürümlüyor; uzun oturumlar için bağlam otomatik sıkıştırılıyor, araç arama ilgili araç tanımlarını gerektiğinde yükleyerek token ve maliyeti düşürüyor, alt agent’lar işi paralelleştiriyor.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
@@ -170,7 +170,7 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
+      <h4 class="label">Pratikte</h4>
       <p>‘Kendim mi yazayım, yönetilen mi kullanayım?’ sorusunun iyi bir örneği. 21 Ağustos’taki Netflix autoscaler yazısındaki ders burada da geçerli: harness bir bakım yüküdür. Küçük bir agent için kendi döngünü yazmak öğreticidir, ama üretimde uzun süren, sandbox gerektiren agent’lar için yönetilen seçeneği değerlendir. Karar kriterin: ‘bu katmanı sürdürmek benim farkımı yaratıyor mu?’</p>
     </div>
   </div>
@@ -179,11 +179,11 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">agent harness</span> <span class="term-tr">agent koşum takımı</span></dt>
-      <dd>Modelin etrafındaki döngü, bağlam yönetimi, araç çağırma ve alt ajan koordinasyonu katmanı.</dd>
+      <dt><span class="term-en">agent harness</span></dt>
+      <dd>Modelin etrafındaki döngü, bağlam yönetimi, araç çağırma ve alt agent koordinasyonu katmanı.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">sandbox</span> <span class="term-tr">yalıtılmış ortam</span></dt>
+      <dt><span class="term-en">sandbox</span></dt>
       <dd>Agent’ın kod çalıştırıp dosyalarla çalıştığı, ana sistemden izole çalışma alanı.</dd>
     </div>
   </dl>
@@ -194,7 +194,7 @@
   <ul class="tags">
   <li><a href="/etiket/agent/">#agent</a></li>
   <li><a href="/etiket/api/">#API</a></li>
-  <li><a href="/etiket/mimari/">#mimari</a></li>
+  <li><a href="/etiket/architecture/">#architecture</a></li>
 </ul>
 
   <a class="readmore" href="https://openai.com/index/introducing-the-agents-api" rel="noopener nofollow" target="_blank">
@@ -240,7 +240,7 @@
   <nav class="pager" aria-label="Sayılar arası gezinme">
     <a class="pager-link pager-prev" href="/sayi/2026-09-09/" rel="prev">
       <span class="pager-label">← Önceki sayı · 9 Eylül 2026</span>
-      <span class="pager-title">Kuyruk çökerse uygulaman ne yapar? Hipotezli bir dayanıklılık deneyi kurmak</span>
+      <span class="pager-title">Kuyruk çökerse uygulaman ne yapar? Hipotezli bir resilience deneyi kurmak</span>
     </a>
     <a class="pager-link pager-next" href="/sayi/2026-09-11/" rel="next">
       <span class="pager-label">Sonraki sayı · 11 Eylül 2026 →</span>
@@ -261,7 +261,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

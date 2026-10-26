@@ -88,12 +88,12 @@
   </h2>
   <p class="original-title">Spanner queues provide native transactional messaging</p>
 
-  <div class="prose"><p>Yapay zekâ agent’ları iade başlatmak, stok yönetmek ya da alt agent’lara iş devretmek gibi eylemler yapıyor. Bunun için durumu bir operasyonel veritabanında tutuyor, eylemleri ise ayrı bir mesajlaşma ya da olay kuyruğuna gönderiyor. İki sistemin ayrı işlem noktaları olduğu için tutarsızlık kaçınılmaz: durum güncellenir ama mesaj gitmez (agent karar verir ama eylem olmaz), ya da mesaj gider ama durum işlemi geri alınır (agent geçersiz duruma göre hareket eder). Çözüm olarak geliştiriciler outbox deseni, idempotency katmanları ve uzlaştırma işçileri yazmak zorunda kalıyor.</p><p>Google <strong>Spanner queues</strong>’u genel kullanıma açtı: mesaj oluşturmak, aynı işlemin içinde sıradan bir yazma. Durum değişikliği ve niyet edilen eylem <strong>birlikte kesinleşir ya da birlikte başarısız olur</strong>. Özellikler arasında mesajı hemen ya da ileri bir zamana planlama (geciken yeniden denemeler, SLA zamanlayıcıları), agent işçileri için akışlı SQL okuma ve kuyruk tablolarını standart SQL ile inceleyerek gözlemleme var. Garanti <strong>en az bir kez teslimat</strong>; yani tüketici tarafı yine idempotent yazılmalı.</p><p>Yazı agent senaryosuna odaklansa da kuyruğun yalnızca agent’lar için olmadığını da belirtiyor: etkinlik akışları ve canlı güncellemeler gibi klasik olay tabanlı mimarilerde de kullanılabilir.</p></div>
+  <div class="prose"><p>Yapay zekâ agent’ları iade başlatmak, stok yönetmek ya da alt agent’lara iş devretmek gibi eylemler yapıyor. Bunun için durumu bir operasyonel veritabanında tutuyor, eylemleri ise ayrı bir mesajlaşma ya da olay kuyruğuna gönderiyor. İki sistemin ayrı işlem noktaları olduğu için tutarsızlık kaçınılmaz: durum güncellenir ama mesaj gitmez (agent karar verir ama eylem olmaz), ya da mesaj gider ama durum işlemi geri alınır (agent geçersiz duruma göre hareket eder). Çözüm olarak geliştiriciler outbox deseni, idempotency katmanları ve uzlaştırma işçileri yazmak zorunda kalıyor.</p><p>Google <strong>Spanner queues</strong>’u genel kullanıma açtı: mesaj oluşturmak, aynı işlemin içinde sıradan bir yazma. Durum değişikliği ve niyet edilen eylem <strong>birlikte kesinleşir ya da birlikte başarısız olur</strong>. Özellikler arasında mesajı hemen ya da ileri bir zamana planlama (geciken yeniden denemeler, SLA zamanlayıcıları), agent işçileri için akışlı SQL okuma ve kuyruk tablolarını standart SQL ile inceleyerek gözlemleme var. Garanti <strong>at-least-once delivery</strong>; yani consumer tarafı yine idempotent yazılmalı.</p><p>Yazı agent senaryosuna odaklansa da kuyruğun yalnızca agent’lar için olmadığını da belirtiyor: etkinlik akışları ve canlı güncellemeler gibi klasik olay tabanlı mimarilerde de kullanılabilir.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Veritabanı ve kuyruk ayrı sistemlerse ‘ikisi birden’ garantisi yoktur.</span></li><li><span>Mesajı işlemin parçası yapmak, outbox desenini platform özelliğine çevirir.</span></li><li><span>En az bir kez teslimat tüketicinin idempotent olmasını yine gerektirir.</span></li><li><span>Kuyruğu SQL ile sorgulayabilmek, takılan işi bulmayı kolaylaştırır.</span></li>    </ol>
+<li><span>Veritabanı ve kuyruk ayrı sistemlerse ‘ikisi birden’ garantisi yoktur.</span></li><li><span>Mesajı işlemin parçası yapmak, outbox desenini platform özelliğine çevirir.</span></li><li><span>At-least-once delivery consumer’ın idempotent olmasını yine gerektirir.</span></li><li><span>Kuyruğu SQL ile sorgulayabilmek, takılan işi bulmayı kolaylaştırır.</span></li>    </ol>
   </div>
 
   <div class="callouts">
@@ -102,8 +102,8 @@
       <p>‘Dual write’ sorunu (iki sisteme ayrı yazmak) dağıtık sistemlerin klasik hatasıdır. Çözümü ya veritabanının içine kuyruk almak ya da outbox deseni uygulamaktır; her iki yaklaşım da aynı fikri paylaşır.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Bunu Spring Boot’ta bugün <strong>transactional outbox</strong> ile uygulayabilirsin: iş verisini ve gönderilecek mesajı aynı Postgres işleminde <code>outbox</code> tablosuna yaz, ayrı bir işçi bu tabloyu okuyup mesajı gönderip satırı işaretlesin. Mobit’te bir doküman yüklendiğinde ‘indeksle’ işini bu yolla tetiklersen, yükleme kaydedilip indeksleme isteği kaybolmaz. Tüketici tarafında aynı mesajın iki kez gelme ihtimaline karşı bir <code>message_id</code> ile tekrarı yok say. Bu, mülakatlarda sık sorulan bir soru.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Bunu Spring Boot’ta bugün <strong>transactional outbox</strong> ile uygulayabilirsin: iş verisini ve gönderilecek mesajı aynı Postgres transaction’ında <code>outbox</code> tablosuna yaz, ayrı bir worker bu tabloyu okuyup mesajı gönderip satırı işaretlesin. Bir doküman yüklendiğinde ‘indeksle’ işini bu yolla tetiklersen, yükleme kaydedilip indeksleme isteği kaybolmaz. Consumer tarafında aynı mesajın iki kez gelme ihtimaline karşı bir <code>message_id</code> ile tekrarı yok say. Bu, mülakatlarda sık sorulan bir soru.</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">transactional outbox</span> <span class="term-tr">işlemsel gönderi kutusu</span></dt>
+      <dt><span class="term-en">transactional outbox</span></dt>
       <dd>Mesajı iş verisiyle aynı işlemde bir tabloya yazıp ayrı bir süreçle iletme deseni.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">dual write</span> <span class="term-tr">çift yazma</span></dt>
+      <dt><span class="term-en">dual write</span></dt>
       <dd>Aynı değişikliği iki ayrı sisteme ayrı ayrı yazmaya çalışmak; tutarsızlık riski taşır.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">at-least-once delivery</span> <span class="term-tr">en az bir kez teslimat</span></dt>
+      <dt><span class="term-en">at-least-once delivery</span></dt>
       <dd>Bir mesajın kaybolmaması ama ara sıra birden fazla kez iletilebilmesi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">idempotency</span> <span class="term-tr">idempotans</span></dt>
+      <dt><span class="term-en">idempotency</span></dt>
       <dd>Aynı işlemin birden fazla kez uygulanmasının sonucu değiştirmemesi.</dd>
     </div>
   </dl>
@@ -132,10 +132,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/veritabani/">#veritabanı</a></li>
-  <li><a href="/etiket/mesajlasma/">#mesajlaşma</a></li>
+  <li><a href="/etiket/database/">#database</a></li>
+  <li><a href="/etiket/messaging/">#messaging</a></li>
   <li><a href="/etiket/agent/">#agent</a></li>
-  <li><a href="/etiket/tutarlilik/">#tutarlılık</a></li>
+  <li><a href="/etiket/consistency/">#consistency</a></li>
 </ul>
 
   <a class="readmore" href="https://cloud.google.com/blog/products/databases/spanner-queues-provide-native-transactional-messaging/" rel="noopener nofollow" target="_blank">
@@ -160,7 +160,7 @@
     <a href="https://blog.cloudflare.com/one-observability-platform/" rel="noopener nofollow" target="_blank">Günlük, iz ve analiz tek yerde: Cloudflare Observability’de sekiz güncelleme</a>
   </h3>
   <p class="original-title">8 major updates to Cloudflare Observability</p>
-  <div class="prose prose-sm"><p>Cloudflare, loglarını, izlerini (trace), analizlerini, uyarılarını, panolarını ve dışa aktarmayı tek bir gözlemlenebilirlik platformunda birleştiren sekiz güncelleme duyurdu. Gerekçe şu: 5xx artışı bir Worker’dan, kaynak sunucudan ya da Cloudflare’in kaynağa bağlanamamasından gelebilir ve bugün hangi sinyalin hangi ürüne ait olduğunu bilmek gerekiyor.</p><p>Öne çıkanlar: <strong>Logs</strong> artık Workers Observability ile Log Explorer’ı birleştiriyor (HTTP, güvenlik duvarı, Workers, R2, AI Gateway gibi veri kümeleri aynı arayüzde); <strong>Cloudflare Traces</strong> açık beta’da, isteğin güvenlik kuralları, önbellek kararları, yönlendirme ve Workers adımlarını gösteriyor ve OpenTelemetry ile dışa aktarılıyor; agent’lar için birleşik bir <strong>SQL API</strong> beta’da; ve tüm kayıt ve iz saklama için yeni birleşik fiyatlandırma <strong>1 Aralık 2026</strong>’dan itibaren geçerli olacak.</p></div>
+  <div class="prose prose-sm"><p>Cloudflare, loglarını, izlerini (trace), analizlerini, uyarılarını, panolarını ve dışa aktarmayı tek bir observability platformunda birleştiren sekiz güncelleme duyurdu. Gerekçe şu: 5xx artışı bir Worker’dan, origin server’dan ya da Cloudflare’in kaynağa bağlanamamasından gelebilir ve bugün hangi sinyalin hangi ürüne ait olduğunu bilmek gerekiyor.</p><p>Öne çıkanlar: <strong>Logs</strong> artık Workers Observability ile Log Explorer’ı birleştiriyor (HTTP, güvenlik duvarı, Workers, R2, AI Gateway gibi veri kümeleri aynı arayüzde); <strong>Cloudflare Traces</strong> açık beta’da, isteğin güvenlik kuralları, cache kararları, yönlendirme ve Workers adımlarını gösteriyor ve OpenTelemetry ile dışa aktarılıyor; agent’lar için birleşik bir <strong>SQL API</strong> beta’da; ve tüm kayıt ve iz saklama için yeni birleşik fiyatlandırma <strong>1 Aralık 2026</strong>’dan itibaren geçerli olacak.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
@@ -170,7 +170,7 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
+      <h4 class="label">Pratikte</h4>
       <p>Spring Boot uygulamana Micrometer Tracing ve OpenTelemetry ekleyip her isteğe bir trace id ver, log satırlarına da bu kimliği yaz. Bir hata olduğunda tek bir kimlikle o isteğin tüm adımlarını bulabilmek, gözlemlenebilirliğin en temel kazanımı.</p>
     </div>
   </div>
@@ -179,11 +179,11 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">distributed tracing</span> <span class="term-tr">dağıtık izleme</span></dt>
+      <dt><span class="term-en">distributed tracing</span></dt>
       <dd>Bir isteğin birden çok servis boyunca izlediği yolu tek bir iz olarak kaydetme.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">OpenTelemetry</span> <span class="term-tr">OpenTelemetry</span></dt>
+      <dt><span class="term-en">OpenTelemetry</span></dt>
       <dd>Günlük, metrik ve izleri toplamak için kullanılan açık standart ve araç seti.</dd>
     </div>
   </dl>
@@ -192,7 +192,7 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/gozlemlenebilirlik/">#gözlemlenebilirlik</a></li>
+  <li><a href="/etiket/observability/">#observability</a></li>
   <li><a href="/etiket/opentelemetry/">#OpenTelemetry</a></li>
   <li><a href="/etiket/loglama/">#loglama</a></li>
 </ul>
@@ -261,7 +261,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

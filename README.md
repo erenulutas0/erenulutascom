@@ -21,7 +21,7 @@ anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
 3. **Küratörlük** — her yazı konu sinyalleri ve kaynak ağırlığına göre puanlanır;
    duyuru ve pazarlama yazıları elenir. Günde en fazla 6 yazı sayıya girer.
 4. **Özetleme** — seçilenler Türkçeye özetlenir. Her özette *Öne çıkanlar*,
-   *Neden önemli?*, *Sende karşılığı* ve bir terim sözlüğü bulunur.
+   *Neden önemli?*, *Pratikte* ve bir terim sözlüğü bulunur.
 5. **Yayın** — sonuç statik HTML olarak `docs/` altına üretilir, GitHub Pages yayınlar.
 
 ### Kaynaklar

@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>31 Ağustos 2026 — Eren&#39;in Mühendislik Gazetesi</title>
-<meta name="description" content="Ayın son günü, tek yazı: Google&#39;ın zaman serisi temel modeli TimesFM&#39;in üçüncü sürümü artık çok değişkenli. Zaman serisiyle çalışan herkes için, özellikle de piyasa verisiyle, “eğitmeden tahmin et” fikrinin ne vaat ettiğine bakmaya değer.">
+<meta name="description" content="Ayın son günü, tek yazı: Google&#39;ın zaman serisi foundation model’i TimesFM&#39;in üçüncü sürümü artık çok değişkenli. Zaman serisiyle çalışan herkes için, özellikle de piyasa verisiyle, “eğitmeden tahmin et” fikrinin ne vaat ettiğine bakmaya değer.">
 <meta name="author" content="Eren Ulutaş">
 <meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#131310" media="(prefers-color-scheme: dark)">
 <meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
 <meta property="og:title" content="31 Ağustos 2026 — Eren&#39;in Mühendislik Gazetesi">
-<meta property="og:description" content="Ayın son günü, tek yazı: Google&#39;ın zaman serisi temel modeli TimesFM&#39;in üçüncü sürümü artık çok değişkenli. Zaman serisiyle çalışan herkes için, özellikle de piyasa verisiyle, “eğitmeden tahmin et” fikrinin ne vaat ettiğine bakmaya değer.">
+<meta property="og:description" content="Ayın son günü, tek yazı: Google&#39;ın zaman serisi foundation model’i TimesFM&#39;in üçüncü sürümü artık çok değişkenli. Zaman serisiyle çalışan herkes için, özellikle de piyasa verisiyle, “eğitmeden tahmin et” fikrinin ne vaat ettiğine bakmaya değer.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:url" content="https://erenulutas.com/sayi/2026-08-31/">
@@ -69,7 +69,7 @@
 <a href="/sayi/2026-08-28/" rel="prev"><span aria-hidden="true">←</span> 28 Ağustos 2026</a><a href="/sayi/2026-09-01/" rel="next">1 Eylül 2026 <span aria-hidden="true">→</span></a>
     </nav>
   </div>
-<p class="lede">Ayın son günü, tek yazı: Google&#x27;ın zaman serisi temel modeli TimesFM&#x27;in üçüncü sürümü artık çok değişkenli. Zaman serisiyle çalışan herkes için, özellikle de piyasa verisiyle, “eğitmeden tahmin et” fikrinin ne vaat ettiğine bakmaya değer.</p></header>
+<p class="lede">Ayın son günü, tek yazı: Google&#x27;ın zaman serisi foundation model’i TimesFM&#x27;in üçüncü sürümü artık çok değişkenli. Zaman serisiyle çalışan herkes için, özellikle de piyasa verisiyle, “eğitmeden tahmin et” fikrinin ne vaat ettiğine bakmaya değer.</p></header>
 
 
   <div class="layout">
@@ -88,7 +88,7 @@
   </h2>
   <p class="original-title">TimesFM-3: A zero-shot foundation model for multivariate forecasting</p>
 
-  <div class="prose"><p>2024&#x27;te çıkan TimesFM&#x27;den bu yana zaman serisi temel modelleri perakende, finans, gözlemlenebilirlik, üretim ve sağlık gibi alanlarda gerçek tahmin görevlerinde kullanılıyor. TimesFM-2.5&#x27;e kadar (Eylül 2025) modeller yalnızca <strong>tek değişkenliydi</strong>: tek bir serinin geçmişine bakarak tahmin ediyordu. Oysa gerçek problemlerin çoğu çok değişkenli: dondurma satışını tahmin ederken yalnızca geçmiş satışlar yetmez; ilişkili ürünlerin satışı, mağaza trafiği, hava tahmini, promosyonlar ve tatiller de gerekir.</p><p><strong>TimesFM-3</strong>, 330 milyon parametreli ve 1 trilyondan fazla zaman noktası içeren gerçek ve sentetik bir külliyatla önceden eğitilmiş. Görev özel ince ayar gerektirmeden (<strong>sıfır atış</strong>, zero-shot) birlikte evrilen birden çok seriyi bir arada tahmin edip aralarındaki bağımlılıkları yakalıyor. Mimari, öncüllerinin yalnızca-kod-çözücü transformer&#x27;ı: ardışık 32 zaman adımı bir yama (patch) olarak gruplanıyor. Geçmiş-gelecek ortak değişkenler için “ileri bakış” stratejisi var: her token mevcut yamayı gelecek yamalarla birleştiriyor. Transformer yığını 2B bir ızgara olarak çalışıyor ve <strong>zamansal dikkat</strong> ile <strong>seriler arası dikkat</strong> katmanlar boyunca dönüşümlü uygulanıyor.</p><p>Bir diğer iyileştirme gecikme: önceki sürümler tahmini yama yama üretirken hata birikiyordu. TimesFM-3 <strong>Contiguous Patch Masking</strong> ile tüm tahmin ufkunu tek ileri geçişte üretiyor. Gift-Eval, FEV-Bench ve Time kıyaslamalarının üçünde de hem nokta hem olasılıksal tahmin metriklerinde en üst sırada.</p></div>
+  <div class="prose"><p>2024&#x27;te çıkan TimesFM&#x27;den bu yana zaman serisi foundation model’leri perakende, finans, observability, üretim ve sağlık gibi alanlarda gerçek tahmin görevlerinde kullanılıyor. TimesFM-2.5&#x27;e kadar (Eylül 2025) modeller yalnızca <strong>tek değişkenliydi</strong>: tek bir serinin geçmişine bakarak tahmin ediyordu. Oysa gerçek problemlerin çoğu çok değişkenli: dondurma satışını tahmin ederken yalnızca geçmiş satışlar yetmez; ilişkili ürünlerin satışı, mağaza trafiği, hava tahmini, promosyonlar ve tatiller de gerekir.</p><p><strong>TimesFM-3</strong>, 330 milyon parametreli ve 1 trilyondan fazla zaman noktası içeren gerçek ve sentetik bir külliyatla önceden eğitilmiş. Görev özel fine-tuning gerektirmeden (<strong>sıfır atış</strong>, zero-shot) birlikte evrilen birden çok seriyi bir arada tahmin edip aralarındaki bağımlılıkları yakalıyor. Mimari, öncüllerinin yalnızca-kod-çözücü transformer&#x27;ı: ardışık 32 zaman adımı bir yama (patch) olarak gruplanıyor. Geçmiş-gelecek ortak değişkenler için “ileri bakış” stratejisi var: her token mevcut yamayı gelecek yamalarla birleştiriyor. Transformer yığını 2B bir ızgara olarak çalışıyor ve <strong>zamansal dikkat</strong> ile <strong>seriler arası dikkat</strong> katmanlar boyunca dönüşümlü uygulanıyor.</p><p>Bir diğer iyileştirme gecikme: önceki sürümler tahmini yama yama üretirken hata birikiyordu. TimesFM-3 <strong>Contiguous Patch Masking</strong> ile tüm tahmin ufkunu tek ileri geçişte üretiyor. Gift-Eval, FEV-Bench ve Time kıyaslamalarının üçünde de hem nokta hem olasılıksal tahmin metriklerinde en üst sırada.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
@@ -99,11 +99,11 @@
   <div class="callouts">
     <div class="callout callout-why">
       <h3 class="label">Neden önemli?</h3>
-      <p>Zaman serisi tahmininde yıllarca her veri kümesi için ayrı model eğitmek norm oldu. Temel modeller bunu “önce hazır modeli dene” noktasına çekiyor: eğitim maliyeti olmadan makul bir taban çizgisi veriyor.</p>
+      <p>Zaman serisi tahmininde yıllarca her veri kümesi için ayrı model eğitmek norm oldu. Foundation model’ler bunu “önce hazır modeli dene” noktasına çekiyor: eğitim maliyeti olmadan makul bir baseline veriyor.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Tradebot&#x27;ta bunu <strong>taban çizgisi</strong> olarak kullanabilirsin, strateji olarak değil. Finansal getiri serilerinde sinyal/gürültü oranı çok düşüktür ve bir temel modelin kıyaslamalardaki başarısı piyasada kâr anlamına gelmez; önce bu modelin tahminini “yarınki değer bugünküyle aynı” gibi saf bir yöntemle (naive baseline) karşılaştır ve walk-forward doğrulamadan geçir. Daha güvenli kullanım alanı operasyonel veri: sistem metriklerinde, API gecikmelerinde ya da KlioAI kullanım sayılarında ileriye dönük kapasite tahmini. Orada kazandırdığı şey eğitim zahmetinin ortadan kalkması.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Finansal verilerde bunu <strong>baseline</strong> olarak kullanabilirsin, strateji olarak değil. Getiri serilerinde signal-to-noise oranı çok düşüktür ve bir foundation model’in kıyaslamalardaki başarısı piyasada kâr anlamına gelmez; önce modelin tahminini ‘yarınki değer bugünküyle aynı’ gibi saf bir yöntemle (naive baseline) karşılaştır ve walk-forward doğrulamadan geçir. Daha güvenli kullanım alanı operasyonel veri: sistem metriklerinde, API gecikmelerinde ya da kullanım sayılarında ileriye dönük kapasite tahmini. Orada kazandırdığı şey eğitim zahmetinin ortadan kalkması.</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">zero-shot forecasting</span> <span class="term-tr">sıfır atış tahmin</span></dt>
+      <dt><span class="term-en">zero-shot forecasting</span></dt>
       <dd>Modeli yeni veri kümesinde ayrıca eğitmeden doğrudan tahmin yaptırma.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">multivariate time series</span> <span class="term-tr">çok değişkenli zaman serisi</span></dt>
+      <dt><span class="term-en">multivariate time series</span></dt>
       <dd>Birbirini etkileyen birden fazla serinin birlikte ele alındığı zaman serisi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">covariate</span> <span class="term-tr">ortak değişken</span></dt>
+      <dt><span class="term-en">covariate</span></dt>
       <dd>Hedef seriyi etkileyen ama kendisi tahmin edilmeyen dış değişken (hava durumu, promosyon gibi).</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">naive baseline</span> <span class="term-tr">saf taban çizgisi</span></dt>
+      <dt><span class="term-en">naive baseline</span></dt>
       <dd>Karmaşık bir modelin değerini ölçmek için kullanılan en basit yöntem (örn. son değeri tekrar etmek).</dd>
     </div>
   </dl>
@@ -135,7 +135,7 @@
   <li><a href="/etiket/zaman-serisi/">#zaman serisi</a></li>
   <li><a href="/etiket/temel-model/">#temel model</a></li>
   <li><a href="/etiket/tahmin/">#tahmin</a></li>
-  <li><a href="/etiket/arastirma/">#araştırma</a></li>
+  <li><a href="/etiket/research/">#research</a></li>
 </ul>
 
   <a class="readmore" href="https://research.google/blog/timesfm-3-a-zero-shot-foundation-model-for-multivariate-forecasting/" rel="noopener nofollow" target="_blank">
@@ -181,7 +181,7 @@
     </a>
     <a class="pager-link pager-next" href="/sayi/2026-09-01/" rel="next">
       <span class="pager-label">Sonraki sayı · 1 Eylül 2026 →</span>
-      <span class="pager-title">MCP oturumsuz oldu: sticky session, oturum deposu ve yük dengeleyici ayarlarını silebilirsin</span>
+      <span class="pager-title">MCP stateless oldu: sticky session, oturum deposu ve load balancer ayarlarını silebilirsin</span>
     </a>
   </nav>
 
@@ -198,7 +198,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

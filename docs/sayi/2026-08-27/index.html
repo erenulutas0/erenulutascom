@@ -88,12 +88,12 @@
   </h2>
   <p class="original-title">Running a Software Factory Efficiently at Uber Scale</p>
 
-  <div class="prose"><p>Uber&#x27;de AI araçları yazılım geliştirmenin her aşamasına girmiş durumda: <strong>pull request&#x27;lerin %70&#x27;inden fazlası</strong> yerel ya da bulut agent&#x27;lara atfediliyor. Mühendisler yazılım yaşam döngüsü boyunca 3.600&#x27;ü aşkın agent becerisi (skill) yazmış ve günde 30 binin üzerinde beceri çalıştırılıyor. Oturumların artan bir kısmını insan değil, kod incelemesi, CI hatalarını kendi kendine onarma, görsel doğrulamalı uçtan uca PR&#x27;lar, nöbet alarmlarının triyajı ve hata ayıklama yapan <strong>otomatik yönetilen agent&#x27;lar</strong> başlatıyor. Şubat&#x27;tan Ağustos&#x27;a kadar haftalık aktif kullanıcılar 7, haftalık agent istekleri 9,4 kat arttı; toplam AI harcaması ise nisandan beri görece sabitlendi.</p><p>Bunu sağlayan şey maliyet denklemi: bir agent oturumunun maliyeti, ayrı ayrı ölçülüp optimize edilebilen terimlere ayrıştırılıyor. Kaldıraçlar da bu terimlere göre: <strong>token fiyatı</strong> için kıyaslama güdümlü, Pareto-optimal model seçimi ve model varsayılanları; <strong>istek başına token</strong> için 400K bağlam sınırı ve varsayılan orta akıl yürütme çabası, prompt önbellekleme, araç arama, CLI ile çözülen MCP çağrıları, araç çağrılarını toplu yapan “code mode” ve ağ geçidi üzerinden yönlendirilen SaaS MCP&#x27;leri.</p><p>Ölçüm tarafı haftalık ve aylık izlenen metrik katmanlarından oluşuyor: portföy (para nereye gidiyor), araç başına birim ekonomisi (araç ucuzluyor mu yoksa kullanım mı kayıyor), model ekonomisi (hangi model sürümü faturayı gerçekten değiştirdi), <strong>sürücü ayrıştırması</strong> (sayının neden değiştiği, açıklanmamış kalıntı bırakmadan) ve yönetilen agent çıktıları (değer başına maliyet düşüyor mu, model geçişlerinde kalite korunuyor mu). Uber, spesifik kazançların kendi ortamına özgü olduğunu, ama gerçek iş üzerinde kıyaslama yapıp doğruluk ve maliyeti optimize etme yönteminin evrensel olduğunu vurguluyor.</p></div>
+  <div class="prose"><p>Uber&#x27;de AI araçları yazılım geliştirmenin her aşamasına girmiş durumda: <strong>pull request&#x27;lerin %70&#x27;inden fazlası</strong> yerel ya da bulut agent&#x27;lara atfediliyor. Mühendisler yazılım yaşam döngüsü boyunca 3.600&#x27;ü aşkın agent becerisi (skill) yazmış ve günde 30 binin üzerinde beceri çalıştırılıyor. Oturumların artan bir kısmını insan değil, kod incelemesi, CI hatalarını kendi kendine onarma, görsel doğrulamalı uçtan uca PR&#x27;lar, nöbet alarmlarının triage’ı ve debugging yapan <strong>otomatik yönetilen agent&#x27;lar</strong> başlatıyor. Şubat&#x27;tan Ağustos&#x27;a kadar haftalık aktif kullanıcılar 7, haftalık agent istekleri 9,4 kat arttı; toplam AI harcaması ise nisandan beri görece sabitlendi.</p><p>Bunu sağlayan şey maliyet denklemi: bir agent oturumunun maliyeti, ayrı ayrı ölçülüp optimize edilebilen terimlere ayrıştırılıyor. Kaldıraçlar da bu terimlere göre: <strong>token fiyatı</strong> için kıyaslama güdümlü, Pareto-optimal model seçimi ve model varsayılanları; <strong>istek başına token</strong> için 400K bağlam sınırı ve varsayılan orta reasoning effort, prompt caching, araç arama, CLI ile çözülen MCP çağrıları, araç çağrılarını toplu yapan “code mode” ve ağ geçidi üzerinden yönlendirilen SaaS MCP&#x27;leri.</p><p>Ölçüm tarafı haftalık ve aylık izlenen metrik katmanlarından oluşuyor: portföy (para nereye gidiyor), araç başına unit economics (araç ucuzluyor mu yoksa kullanım mı kayıyor), model ekonomisi (hangi model sürümü faturayı gerçekten değiştirdi), <strong>sürücü ayrıştırması</strong> (sayının neden değiştiği, açıklanmamış kalıntı bırakmadan) ve yönetilen agent çıktıları (değer başına maliyet düşüyor mu, model geçişlerinde kalite korunuyor mu). Uber, spesifik kazançların kendi ortamına özgü olduğunu, ama gerçek iş üzerinde kıyaslama yapıp doğruluk ve maliyeti optimize etme yönteminin evrensel olduğunu vurguluyor.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Harcamayı kısmak için önce ölçmek gerekiyor: maliyet = fiyat × token × istek gibi bağımsız terimlere ayrılmış.</span></li><li><span>Sürücü ayrıştırması: değişimi ardışık olarak açıklayıp artık bırakmamak, “neden pahalandı?” sorusunu kesin yanıtlar.</span></li><li><span>Varsayılanlar büyük kaldıraç: 400K bağlam tavanı ve orta akıl yürütme çabası herkes için ayarlanmış başlangıç.</span></li><li><span>Kıyaslamayı kendi gerçek işin üzerinde yap; kamuya açık benchmark senin iş yükün değil.</span></li><li><span>Kullanımın 9 kat artması harcamanın artması anlamına gelmek zorunda değil.</span></li>    </ol>
+<li><span>Harcamayı kısmak için önce ölçmek gerekiyor: maliyet = fiyat × token × istek gibi bağımsız terimlere ayrılmış.</span></li><li><span>Sürücü ayrıştırması: değişimi ardışık olarak açıklayıp artık bırakmamak, “neden pahalandı?” sorusunu kesin yanıtlar.</span></li><li><span>Varsayılanlar büyük kaldıraç: 400K bağlam tavanı ve orta reasoning effort herkes için ayarlanmış başlangıç.</span></li><li><span>Kıyaslamayı kendi gerçek işin üzerinde yap; kamuya açık benchmark senin iş yükün değil.</span></li><li><span>Kullanımın 9 kat artması harcamanın artması anlamına gelmek zorunda değil.</span></li>    </ol>
   </div>
 
   <div class="callouts">
@@ -102,8 +102,8 @@
       <p>AI kullanımı yaygınlaştıkça asıl mühendislik problemi “çalışıyor mu” sorusundan “neye ne kadar mal oluyor ve daha ucuz yolu var mı” sorusuna kayıyor. Bu yazı, o sorunun pratikte nasıl yönetildiğinin ender somut örneklerinden.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Bu gazetenin kendi pipeline&#x27;ında uygulayabilirsin: her LLM çağrısında <code>usage</code> alanındaki girdi, çıktı ve önbellek token&#x27;larını bir CSV&#x27;ye yaz; maliyeti <code>token × fiyat × çağrı</code> diye ayır. Bir ay sonra “Haiku&#x27;ya geçince fatura ne kadar değişti?” sorusunu tahminle değil veriyle cevaplarsın. KlioAI&#x27;da da aynısı: kullanıcı başına LLM maliyetini ölç, abonelik fiyatıyla yan yana koy. Ve Uber&#x27;in üç basit kaldıracını hemen dene: sistem promptunu önbelleğe al, bağlama gereksiz veri koyma, akıl yürütme çabasını varsayılan olarak orta tut.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Kendi LLM pipeline’ında uygulayabilirsin: her çağrıda <code>usage</code> alanındaki input, output ve cache token’larını bir CSV’ye yaz; maliyeti <code>token × fiyat × çağrı</code> diye ayır. Bir ay sonra ‘daha küçük bir modele geçince fatura ne kadar değişti?’ sorusunu tahminle değil veriyle cevaplarsın. Kullanıcı başına LLM maliyetini ölç, abonelik fiyatıyla yan yana koy. Ve Uber’in üç basit kaldıracını hemen dene: system prompt’u cache’le, bağlama gereksiz veri koyma, reasoning effort’u varsayılan olarak orta tut.</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">Pareto-optimal</span> <span class="term-tr">Pareto-optimal</span></dt>
+      <dt><span class="term-en">Pareto-optimal</span></dt>
       <dd>Bir ölçütü (örn. maliyet) iyileştirmek için diğerinden (örn. kalite) ödün vermek gerekmeyen en iyi seçenekler kümesi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">agent skill</span> <span class="term-tr">agent becerisi</span></dt>
+      <dt><span class="term-en">agent skill</span></dt>
       <dd>Bir agent&#39;ın belirli bir iş için yeniden kullanabildiği, adlandırılmış talimat ve araç paketi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">prompt caching</span> <span class="term-tr">prompt önbellekleme</span></dt>
-      <dd>Tekrar eden prompt önekini yeniden işlemek yerine önbellekten okuyarak maliyet ve süreyi düşürme.</dd>
+      <dt><span class="term-en">prompt caching</span></dt>
+      <dd>Tekrar eden prompt önekini yeniden işlemek yerine cache’ten okuyarak maliyet ve süreyi düşürme.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">MCP (Model Context Protocol)</span> <span class="term-tr">model bağlam protokolü</span></dt>
+      <dt><span class="term-en">MCP (Model Context Protocol)</span></dt>
       <dd>Modellerin dış araç ve veri kaynaklarına standart bir arayüzle bağlanmasını sağlayan protokol.</dd>
     </div>
   </dl>
@@ -133,8 +133,8 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/agent/">#agent</a></li>
-  <li><a href="/etiket/maliyet/">#maliyet</a></li>
-  <li><a href="/etiket/olcum/">#ölçüm</a></li>
+  <li><a href="/etiket/cost/">#cost</a></li>
+  <li><a href="/etiket/measurement/">#measurement</a></li>
   <li><a href="/etiket/llm/">#LLM</a></li>
 </ul>
 
@@ -198,7 +198,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

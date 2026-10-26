@@ -84,16 +84,16 @@
 </div>
 
   <h2 class="cover-title">
-    <a href="https://engineering.fb.com/2026/08/05/ml-applications/from-user-sequences-to-scaling-laws-a-multi-stage-architecture-for-metas-ads-ranking/" rel="noopener nofollow" target="_blank">Kullanıcı dizilerinden ölçekleme yasalarına: ağır modelleme çevrimdışı, sıralama çevrimiçi</a>
+    <a href="https://engineering.fb.com/2026/08/05/ml-applications/from-user-sequences-to-scaling-laws-a-multi-stage-architecture-for-metas-ads-ranking/" rel="noopener nofollow" target="_blank">Kullanıcı dizilerinden scaling laws’a: ağır modelleme çevrimdışı, sıralama çevrimiçi</a>
   </h2>
   <p class="original-title">From User Sequences to Scaling Laws: A Multi-Stage Architecture for Meta’s Ads Ranking</p>
 
-  <div class="prose"><p>Meta&#x27;nın öneri platformları her gün milyarlarca etkileşim işliyor. Reklam sıralamada binlerce reklamı milisaniyeler içinde getirip sıralamak gerekiyor. Bu bütçe yüzünden birçok yaklaşım <strong>melez</strong> bir yapı kullanıyor: dizi modelini ve sıralama modelini birbirine bağlayan hibrit bir düzen.</p><p>Yazı bu düzenin üç bedelini sayıyor: bileşenler arası <strong>kayıplı bilgi aktarımı</strong>, hâlâ süren elle özellik mühendisliği ve sıralama ile dizi modeli birbirini kısıtladığı için <strong>ölçekleme tavanı</strong>. Çözüm iki parça: (1) ağır kullanıcı modellemesini hafif çevrimiçi sıralama işinden ayıran <strong>çok aşamalı dizi modeli</strong>, (2) özellik etkileşimlerini doğrudan veriden öğrenen <strong>yoğun tokenizasyon ve hedef-farkında dikkat</strong> tekniği.</p><p>Meta, bu gelişmelerin toplamda Instagram&#x27;da %6, Facebook&#x27;ta %3 dönüşüm artışı ve Facebook&#x27;ta %3,5 tıklama artışı sağladığını söylüyor. Mimari, şirketin GEM adlı üretken reklam öneri modelinin çekirdek parçası.</p></div>
+  <div class="prose"><p>Meta&#x27;nın öneri platformları her gün milyarlarca etkileşim işliyor. Reklam sıralamada binlerce reklamı milisaniyeler içinde getirip sıralamak gerekiyor. Bu bütçe yüzünden birçok yaklaşım <strong>melez</strong> bir yapı kullanıyor: dizi modelini ve sıralama modelini birbirine bağlayan hibrit bir düzen.</p><p>Yazı bu düzenin üç bedelini sayıyor: bileşenler arası <strong>kayıplı bilgi aktarımı</strong>, hâlâ süren elle feature engineering ve sıralama ile dizi modeli birbirini kısıtladığı için <strong>ölçekleme tavanı</strong>. Çözüm iki parça: (1) ağır kullanıcı modellemesini hafif çevrimiçi sıralama işinden ayıran <strong>çok aşamalı dizi modeli</strong>, (2) özellik etkileşimlerini doğrudan veriden öğrenen <strong>yoğun tokenizasyon ve hedef-farkında dikkat</strong> tekniği.</p><p>Meta, bu gelişmelerin toplamda Instagram&#x27;da %6, Facebook&#x27;ta %3 dönüşüm artışı ve Facebook&#x27;ta %3,5 tıklama artışı sağladığını söylüyor. Mimari, şirketin GEM adlı üretken reklam öneri modelinin çekirdek parçası.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Ağır modelleme (kullanıcı dizisi) çevrimdışı, hafif sıralama çevrimiçi: iki iş farklı gecikme bütçelerine sahip.</span></li><li><span>Hibrit düzenin kayıplı aktarımı ve ölçekleme tavanı, çok aşamalı ayrımla aşılıyor.</span></li><li><span>Hedef, LLM tarzı ve öngörülebilir ölçekleme yasaları olan bir üretim platformu.</span></li>    </ol>
+<li><span>Ağır modelleme (kullanıcı dizisi) çevrimdışı, hafif sıralama çevrimiçi: iki iş farklı gecikme bütçelerine sahip.</span></li><li><span>Hibrit düzenin kayıplı aktarımı ve ölçekleme tavanı, çok aşamalı ayrımla aşılıyor.</span></li><li><span>Hedef, LLM tarzı ve öngörülebilir scaling laws olan bir üretim platformu.</span></li>    </ol>
   </div>
 
   <div class="callouts">
@@ -102,8 +102,8 @@
       <p>“Pahalı hesabı istek anından çıkar” ilkesi, öneri sistemlerinde de arama sistemlerinde de temel bir mühendislik hamlesidir. Gecikme bütçesi dar ise model büyüklüğünü artırmanın yolu, büyük kısmı istek yolundan çıkarmaktır.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Mobit&#x27;teki doküman aramada aynı deseni zaten kullanıyorsun: belge embedding&#x27;lerini önceden hesaplayıp saklıyor, sorgu anında yalnızca sorguyu vektörleştiriyorsun. Bu yazı, o kararın büyük ölçekli hâli. KlioAI&#x27;da da kullanıcının öğrenme profilini her istekte modele yeniden hesaplatmak yerine arka planda güncellenen bir özet olarak tutabilirsin.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Bir doküman aramada belge embedding’lerini önceden hesaplayıp saklıyor, sorgu anında yalnızca sorguyu vektörleştiriyorsan bu deseni zaten kullanıyorsun. Bu yazı o kararın büyük ölçekli hâli. Bir kullanıcı profilini her istekte modele yeniden hesaplatmak yerine arka planda güncellenen bir özet olarak tutabilirsin.</p>
     </div>
   </div>
 
@@ -111,15 +111,15 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">sequence modeling</span> <span class="term-tr">dizi modelleme</span></dt>
+      <dt><span class="term-en">sequence modeling</span></dt>
       <dd>Kullanıcı eylemlerinin sırasını ve zamanlamasını girdi olarak kullanan modelleme yaklaşımı.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">scaling laws</span> <span class="term-tr">ölçekleme yasaları</span></dt>
+      <dt><span class="term-en">scaling laws</span></dt>
       <dd>Model, veri ve hesap büyüdükçe kalitenin ne ölçüde arttığını öngören ampirik ilişkiler.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">target-aware attention</span> <span class="term-tr">hedef-farkında dikkat</span></dt>
+      <dt><span class="term-en">target-aware attention</span></dt>
       <dd>Dikkat ağırlıklarını değerlendirilen reklama (hedefe) göre hesaplayan mekanizma.</dd>
     </div>
   </dl>
@@ -128,10 +128,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/oneri-sistemleri/">#öneri sistemleri</a></li>
-  <li><a href="/etiket/mimari/">#mimari</a></li>
-  <li><a href="/etiket/ml-altyapisi/">#ML altyapısı</a></li>
-  <li><a href="/etiket/gecikme/">#gecikme</a></li>
+  <li><a href="/etiket/recommender-systems/">#recommender systems</a></li>
+  <li><a href="/etiket/architecture/">#architecture</a></li>
+  <li><a href="/etiket/ml-infrastructure/">#ML infrastructure</a></li>
+  <li><a href="/etiket/latency/">#latency</a></li>
 </ul>
 
   <a class="readmore" href="https://engineering.fb.com/2026/08/05/ml-applications/from-user-sequences-to-scaling-laws-a-multi-stage-architecture-for-metas-ads-ranking/" rel="noopener nofollow" target="_blank">
@@ -151,7 +151,7 @@
     <ol class="toc" id="toc">
       <li>
         <a href="#47057f22524f">
-          <span class="toc-title">Kullanıcı dizilerinden ölçekleme yasalarına: ağır modelleme çevrimdışı, sıralama çevrimiçi</span>
+          <span class="toc-title">Kullanıcı dizilerinden scaling laws’a: ağır modelleme çevrimdışı, sıralama çevrimiçi</span>
           <span class="toc-meta">Meta Engineering · 7 dk</span>
         </a>
       </li>
@@ -194,7 +194,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

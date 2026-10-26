@@ -88,12 +88,12 @@
   </h2>
   <p class="original-title">In-House LLM Serving at Netflix · Netflix Technology Blog</p>
 
-  <div class="prose"><p>Çoğu kurum LLM&#x27;leri barındırılan API&#x27;ler üzerinden tüketiyor. Netflix daha ileri gitmiş: model dağıtımından çıkarıma kadar tüm yığını kendisi işletiyor — ve bunu ayrı bir ML silosunda değil, <strong>mevcut üretim ortamının içinde</strong> yapıyor. Yazının değeri de burada: sadece ne kurduklarını değil, neden öyle kurduklarını ve üretimin tasarım aşamasında görülmeyen neyi ortaya çıkardığını anlatıyor.</p><p>Mimari şöyle: üye ölçeğindeki ML, uçtan uca akışı yöneten <strong>JVM tabanlı</strong> birleşik bir sunum sistemiyle karşılanıyor — yönlendirme ve A/B testi mantığı, aday üretimi, özellik çekme, çıkarım, son işleme ve her aşamada loglama. Çağıranlar çıkarıma iki yoldan ulaşıyor: bu sistem üzerinden <strong>gRPC</strong>, ya da yeni LLM tabanlı uygulamaların kullandığı doğrudan <strong>HTTP</strong> yolu.</p><p>Çıkarımın nerede çalıştığı modele bağlı. Küçük CPU modelleri <strong>süreç içinde</strong> çalışıyor — uzak çağrı maliyeti ödenmiyor. Büyük modeller GPU istiyor; sunum sistemi ön ve son işlemeyi yerelde yapıp çıkarımı uzak bir servise devrediyor. Motor olarak <strong>vLLM</strong> seçilmiş, üstünde Triton, onun da üstünde dağıtım, sürümleme, sağlık kontrolü, otomatik ölçekleme ve çok-bölgeli yayılımı yöneten bir Java kontrol düzlemi var.</p><p>Yazı dört kararı bağımlılık sırasına göre işliyor — motor, paketleme, API yüzeyi ve yayılım — çünkü her biri bir sonrakini kısıtlıyor. Bu sıralama tek başına iyi bir mimari dersi.</p></div>
+  <div class="prose"><p>Çoğu kurum LLM&#x27;leri barındırılan API&#x27;ler üzerinden tüketiyor. Netflix daha ileri gitmiş: model dağıtımından inference’a kadar tüm yığını kendisi işletiyor — ve bunu ayrı bir ML silosunda değil, <strong>mevcut üretim ortamının içinde</strong> yapıyor. Yazının değeri de burada: sadece ne kurduklarını değil, neden öyle kurduklarını ve üretimin tasarım aşamasında görülmeyen neyi ortaya çıkardığını anlatıyor.</p><p>Mimari şöyle: üye ölçeğindeki ML, uçtan uca akışı yöneten <strong>JVM tabanlı</strong> birleşik bir sunum sistemiyle karşılanıyor — yönlendirme ve A/B testi mantığı, aday üretimi, özellik çekme, inference, son işleme ve her aşamada loglama. Çağıranlar inference’a iki yoldan ulaşıyor: bu sistem üzerinden <strong>gRPC</strong>, ya da yeni LLM tabanlı uygulamaların kullandığı doğrudan <strong>HTTP</strong> yolu.</p><p>Inference’ın nerede çalıştığı modele bağlı. Küçük CPU modelleri <strong>süreç içinde</strong> çalışıyor — uzak çağrı maliyeti ödenmiyor. Büyük modeller GPU istiyor; sunum sistemi ön ve son işlemeyi yerelde yapıp inference’ı uzak bir servise devrediyor. Motor olarak <strong>vLLM</strong> seçilmiş, üstünde Triton, onun da üstünde dağıtım, sürümleme, sağlık kontrolü, autoscaling ve çok-bölgeli yayılımı yöneten bir Java control plane var.</p><p>Yazı dört kararı bağımlılık sırasına göre işliyor — motor, paketleme, API yüzeyi ve yayılım — çünkü her biri bir sonrakini kısıtlıyor. Bu sıralama tek başına iyi bir mimari dersi.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Küçük model süreç içinde, büyük model uzak GPU&#x27;da: tek bir dağıtım stratejisi yerine model boyutuna göre farklı yollar.</span></li><li><span>İki API yüzeyi bir arada yaşıyor: eski tüketiciler için gRPC, yeni LLM uygulamaları için doğrudan HTTP.</span></li><li><span>Kararlar bağımsız değil — motor seçimi paketlemeyi, paketleme API yüzeyini, o da yayılım stratejisini kısıtlıyor.</span></li><li><span>Çıktı kısıtlarının uygulanması (output constraints enforcement) ayrı bir tasarım başlığı olarak ele alınmış — modelin serbest metin üretmesine güvenilmiyor.</span></li>    </ol>
+<li><span>Küçük model süreç içinde, büyük model uzak GPU&#x27;da: tek bir dağıtım stratejisi yerine model boyutuna göre farklı yollar.</span></li><li><span>İki API yüzeyi bir arada yaşıyor: eski consumer’lar için gRPC, yeni LLM uygulamaları için doğrudan HTTP.</span></li><li><span>Kararlar bağımsız değil — motor seçimi paketlemeyi, paketleme API yüzeyini, o da yayılım stratejisini kısıtlıyor.</span></li><li><span>Output constraints’in uygulanması (output constraints enforcement) ayrı bir tasarım başlığı olarak ele alınmış — modelin serbest metin üretmesine güvenilmiyor.</span></li>    </ol>
   </div>
 
   <div class="callouts">
@@ -102,8 +102,8 @@
       <p>&quot;Kendimiz mi işletelim, hazır API mi kullanalım?&quot; sorusu her ekibin önüne gelecek. Netflix&#x27;in cevabı herkes için doğru değil — ölçekleri ve mevcut altyapıları bu kararı mantıklı kılıyor. Ama yazının aktardığı düşünme biçimi evrensel: kararları bağımsız seçimler gibi değil, birbirini kısıtlayan bir zincir olarak görmek.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Bu yazıyı bir mimari kontrol listesi gibi kullan. KlioAI&#x27;da LLM çağrılarını Spring Boot backend&#x27;inden yapıyorsun; Netflix&#x27;in sorduğu soruların küçük ölçekli hâlini sen de sorabilirsin: (1) API yüzeyi — istemci doğrudan mı çağırıyor, yoksa backend üzerinden mi? (Doğrudan çağırırsa API anahtarın istemcide olur, yapma.) (2) Yayılım — model ya da prompt değiştiğinde tüm kullanıcılara birden mi gidiyor? A/B testi ya da kademeli açılış var mı? (3) Çıktı kısıtı — modelin döndürdüğü şeyi şemayla doğruluyor musun? Netflix&#x27;in &quot;output constraints&quot; başlığı altında ayrıca ele aldığı şey tam olarak bu, ve senin pipeline&#x27;ında da en kritik korumadır.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Bu yazıyı bir mimari kontrol listesi gibi kullan. LLM çağrılarını bir backend’den yapıyorsan Netflix’in sorduğu soruların küçük ölçekli hâlini sen de sorabilirsin: <strong>(1) API yüzeyi:</strong> istemci doğrudan mı çağırıyor, yoksa backend üzerinden mi? Doğrudan çağırırsa API key istemcide olur, yapma. <strong>(2) Rollout:</strong> model ya da prompt değiştiğinde tüm kullanıcılara birden mi gidiyor? A/B testi ya da kademeli açılış var mı? <strong>(3) Output constraint:</strong> modelin döndürdüğü şeyi şemayla doğruluyor musun? Netflix’in ayrıca ele aldığı şey tam olarak bu ve her pipeline’da en kritik korumadır.</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">vLLM</span> <span class="term-tr">vLLM</span></dt>
-      <dd>Büyük dil modellerini yüksek verimle sunmak için tasarlanmış açık kaynak çıkarım motoru.</dd>
+      <dt><span class="term-en">vLLM</span></dt>
+      <dd>Büyük dil modellerini yüksek verimle sunmak için tasarlanmış açık kaynak inference motoru.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">control plane</span> <span class="term-tr">kontrol düzlemi</span></dt>
+      <dt><span class="term-en">control plane</span></dt>
       <dd>Sistemin ne çalıştıracağına, nerede ve hangi sürümle karar veren yönetim katmanı; veriyi işleyen katmandan (data plane) ayrıdır.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">gRPC</span> <span class="term-tr">gRPC</span></dt>
+      <dt><span class="term-en">gRPC</span></dt>
       <dd>HTTP/2 üstünde çalışan, şema tabanlı servisler-arası çağrı protokolü.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">output constraints</span> <span class="term-tr">çıktı kısıtları</span></dt>
+      <dt><span class="term-en">output constraints</span></dt>
       <dd>Modelin yalnızca belirli bir şemaya ya da biçime uyan çıktı üretmesini zorlayan mekanizma.</dd>
     </div>
   </dl>
@@ -133,8 +133,8 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/llm/">#LLM</a></li>
-  <li><a href="/etiket/altyapi/">#altyapı</a></li>
-  <li><a href="/etiket/mimari/">#mimari</a></li>
+  <li><a href="/etiket/infrastructure/">#infrastructure</a></li>
+  <li><a href="/etiket/architecture/">#architecture</a></li>
   <li><a href="/etiket/gpu/">#GPU</a></li>
 </ul>
 
@@ -170,8 +170,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Bir projeyi buluta taşımadan önce bu tabloyu taklit et. &quot;Aylık kaç istek, kaç GB veri, kaç GB çıkış trafiği?&quot; sorularını yazıp gerekçeleriyle bir kenara koy. Tradebot&#x27;ta 1 TB veriyle çalışıyorsun; bunu S3&#x27;e koysan aylık maliyeti ne olurdu, sorgu başına kaç GB taranırdı — bu hesabı yapabilmek, bulut faturasının neden şiştiğini anlamanın tek yolu. Ayrıca en pahalı kalem genelde hesaplama değil <strong>veri çıkışıdır</strong> (egress); bunu bilmek çoğu mimari kararı değiştirir.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Bir projeyi buluta taşımadan önce bu tabloyu taklit et. ‘Aylık kaç istek, kaç GB veri, kaç GB çıkış trafiği?’ sorularını yazıp gerekçeleriyle bir kenara koy. Elindeki veriyi (örneğin 1 TB) S3’e koysan aylık maliyeti ne olurdu, sorgu başına kaç GB taranırdı? Bu hesabı yapabilmek, bulut faturasının neden şiştiğini anlamanın tek yolu. Ayrıca en pahalı kalem genelde hesaplama değil <strong>veri çıkışıdır</strong> (egress); bunu bilmek çoğu mimari kararı değiştirir.</p>
     </div>
   </div>
 
@@ -179,11 +179,11 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">egress cost</span> <span class="term-tr">veri çıkış maliyeti</span></dt>
+      <dt><span class="term-en">egress cost</span></dt>
       <dd>Buluttan dışarı çıkan veri için ödenen ücret; genelde depolama ve hesaplamadan daha pahalıya patlar.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">Well-Architected Framework</span> <span class="term-tr">iyi mimari çerçevesi</span></dt>
+      <dt><span class="term-en">Well-Architected Framework</span></dt>
       <dd>AWS&#39;in bulut mimarilerini güvenlik, güvenilirlik, performans, maliyet ve operasyon eksenlerinde değerlendirme rehberi.</dd>
     </div>
   </dl>
@@ -192,9 +192,9 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/maliyet/">#maliyet</a></li>
-  <li><a href="/etiket/bulut/">#bulut</a></li>
-  <li><a href="/etiket/mimari/">#mimari</a></li>
+  <li><a href="/etiket/cost/">#cost</a></li>
+  <li><a href="/etiket/cloud/">#cloud</a></li>
+  <li><a href="/etiket/architecture/">#architecture</a></li>
 </ul>
 
   <a class="readmore" href="https://aws.amazon.com/blogs/architecture/eclipse-dataspace-components-on-aws-cost-optimization-strategies/" rel="noopener nofollow" target="_blank">
@@ -221,12 +221,12 @@
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
     <ol>
-<li><span>Doğru sıra: WAF ile geçici koruma → yamayı uygula → sürümü doğrula. İlk adımda durmak yaygın bir hata.</span></li><li><span>RCE yalnızca kalıcı nesne önbelleği (persistent object cache) kullanılmadığında tetikleniyor — açıkların koşullu olması yaygındır.</span></li>    </ol>
+<li><span>Doğru sıra: WAF ile geçici koruma → yamayı uygula → sürümü doğrula. İlk adımda durmak yaygın bir hata.</span></li><li><span>RCE yalnızca kalıcı nesne cache’i (persistent object cache) kullanılmadığında tetikleniyor — açıkların koşullu olması yaygındır.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
+      <h4 class="label">Pratikte</h4>
       <p>Buradan alınacak iki refleks var. Birincisi: bağımlılıklarını güncel tut — Dependabot ya da Renovate&#x27;i projelerine bugün kur, GitHub Actions ile zaten çalışıyorsun. İkincisi: SQL enjeksiyonu 2026&#x27;da hâlâ kritik açık listesinde. Sen JPA/Hibernate kullanıyorsun ama <code>@Query</code> içinde string birleştirme yaptığın her yer bir risk; her zaman parametreli sorgu kullan. Pandas/psycopg tarafında da aynısı — f-string ile SQL kurmak, kod incelemesinde reddedilmesi gereken bir desendir.</p>
     </div>
   </div>
@@ -235,15 +235,15 @@
     <summary class="label">Sözlük · 3 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">RCE (Remote Code Execution)</span> <span class="term-tr">uzaktan kod çalıştırma</span></dt>
+      <dt><span class="term-en">RCE (Remote Code Execution)</span></dt>
       <dd>Saldırganın hedef sunucuda kendi kodunu çalıştırabilmesi; en yüksek önem derecesindeki açık türü.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">WAF (Web Application Firewall)</span> <span class="term-tr">web uygulama güvenlik duvarı</span></dt>
+      <dt><span class="term-en">WAF (Web Application Firewall)</span></dt>
       <dd>Uygulamaya gelen istekleri inceleyip zararlı desenleri engelleyen katman.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">CVE</span> <span class="term-tr">CVE</span></dt>
+      <dt><span class="term-en">CVE</span></dt>
       <dd>Bilinen güvenlik açıklarına verilen standart tanımlayıcı numara.</dd>
     </div>
   </dl>
@@ -252,9 +252,9 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/guvenlik/">#güvenlik</a></li>
+  <li><a href="/etiket/security/">#security</a></li>
   <li><a href="/etiket/waf/">#WAF</a></li>
-  <li><a href="/etiket/guvenlik-acigi/">#güvenlik açığı</a></li>
+  <li><a href="/etiket/vulnerability/">#vulnerability</a></li>
 </ul>
 
   <a class="readmore" href="https://blog.cloudflare.com/wordpress-vulnerabilities/" rel="noopener nofollow" target="_blank">
@@ -276,7 +276,7 @@
     <a href="https://openai.com/index/a-scorecard-for-the-ai-age" rel="noopener nofollow" target="_blank">Token başına maliyet yanlış metrik: başarılı sonuç başına maliyet</a>
   </h3>
   <p class="original-title">A scorecard for the AI age</p>
-  <div class="prose prose-sm"><p>Yazının merkezinde bir metrik eleştirisi var. Yıllarca yazılımın başarısı benimsenme ile ölçüldü: alınan lisans, aktif kullanıcı, yenilenen abonelik. AI&#x27;da bu yetmiyor; ölçülmesi gereken <strong>tamamlanan iş</strong>.</p><p>Kilit argüman şu: <strong>token başına maliyete bakmak yanıltıcıdır.</strong> Daha ucuz bir modelin token&#x27;ı ucuz olabilir, ama iyi sonuç için daha çok deneme, daha çok zaman ve daha çok insan incelemesi gerekebilir. Daha yetenekli bir modelin token&#x27;ı pahalıdır ama aynı işi tek seferde bitirebilir. Önemli olan <strong>başarılı bir sonucu üretmenin tam maliyeti</strong>.</p><p>Pratik tavsiye de net: tek bir iş akışıyla başla, &quot;bitti&quot; ne demek tanımla ve o sonucu işin gerçekten yapıldığı sistemde ölç. Destek ekibi için &quot;bitti&quot; çözülen bir müşteri sorunudur; mühendislik ekibi için testleri geçen bir kod değişikliği.</p></div>
+  <div class="prose prose-sm"><p>Yazının merkezinde bir metrik eleştirisi var. Yıllarca yazılımın başarısı benimsenme ile ölçüldü: alınan lisans, aktif kullanıcı, yenilenen abonelik. AI&#x27;da bu yetmiyor; ölçülmesi gereken <strong>tamamlanan iş</strong>.</p><p>Kilit argüman şu: <strong>token başına maliyete bakmak yanıltıcıdır.</strong> Daha ucuz bir modelin token&#x27;ı ucuz olabilir, ama iyi sonuç için daha çok deneme, daha çok zaman ve daha çok insan incelemesi gerekebilir. Daha yetenekli bir modelin token&#x27;ı pahalıdır ama aynı işi tek seferde bitirebilir. Önemli olan <strong>başarılı bir sonucu üretmenin tam maliyeti</strong>.</p><p>Pratik tavsiye de net: tek bir workflow’la başla, &quot;bitti&quot; ne demek tanımla ve o sonucu işin gerçekten yapıldığı sistemde ölç. Destek ekibi için &quot;bitti&quot; çözülen bir müşteri sorunudur; mühendislik ekibi için testleri geçen bir kod değişikliği.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
@@ -286,8 +286,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Bu gazetenin kendi pipeline&#x27;ında uygulanabilir bir ölçü: &quot;özet başına maliyet&quot; değil, &quot;yayına giren, elden geçirilmeden kullanılabilir özet başına maliyet&quot;. Ucuz bir modelle beş kere deneyip düzeltmek, pahalı bir modelle bir kerede almaktan pahalı olabilir. Aynı hesabı KlioAI&#x27;daki değerlendirme özelliğinde de yap: kullanıcının düzeltmeden kabul ettiği çıktı oranı, token fiyatından çok daha anlamlı bir metriktir.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Kendi LLM pipeline’ında uygulanabilir bir ölçü: ‘özet başına maliyet’ değil, ‘elden geçirilmeden kullanılabilen çıktı başına maliyet’. Ucuz bir modelle beş kere deneyip düzeltmek, pahalı bir modelle bir kerede almaktan pahalı olabilir. Aynı hesabı bir değerlendirme özelliğinde de yap: kullanıcının düzeltmeden kabul ettiği çıktı oranı, token fiyatından çok daha anlamlı bir metriktir.</p>
     </div>
   </div>
 
@@ -295,7 +295,7 @@
     <summary class="label">Sözlük · 1 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">cost per successful outcome</span> <span class="term-tr">başarılı sonuç başına maliyet</span></dt>
+      <dt><span class="term-en">cost per successful outcome</span></dt>
       <dd>Bir işi gerçekten bitirmenin toplam maliyeti — başarısız denemeler ve insan düzeltmesi dahil.</dd>
     </div>
   </dl>
@@ -304,10 +304,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/maliyet/">#maliyet</a></li>
+  <li><a href="/etiket/cost/">#cost</a></li>
   <li><a href="/etiket/llm/">#LLM</a></li>
-  <li><a href="/etiket/olcum/">#ölçüm</a></li>
-  <li><a href="/etiket/urun/">#ürün</a></li>
+  <li><a href="/etiket/measurement/">#measurement</a></li>
+  <li><a href="/etiket/product/">#product</a></li>
 </ul>
 
   <a class="readmore" href="https://openai.com/index/a-scorecard-for-the-ai-age" rel="noopener nofollow" target="_blank">
@@ -365,7 +365,7 @@
   <nav class="pager" aria-label="Sayılar arası gezinme">
     <a class="pager-link pager-prev" href="/sayi/2026-07-16/" rel="prev">
       <span class="pager-label">← Önceki sayı · 16 Temmuz 2026</span>
-      <span class="pager-title">Alarm yorgunluğunu çözmek: önce filtrele, sonra önceliklendir</span>
+      <span class="pager-title">Alert fatigue’i çözmek: önce filtrele, sonra önceliklendir</span>
     </a>
     <a class="pager-link pager-next" href="/sayi/2026-07-20/" rel="next">
       <span class="pager-label">Sonraki sayı · 20 Temmuz 2026 →</span>
@@ -386,7 +386,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

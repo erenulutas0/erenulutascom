@@ -88,7 +88,7 @@
   </h2>
   <p class="original-title">OpenAI and Hugging Face partner to address security incident during model evaluation</p>
 
-  <div class="prose"><p>OpenAI, model değerlendirmesi sırasında yaşanan bir güvenlik olayını ve Hugging Face ile yürüttüğü ortak çalışmayı duyuruyor. Olayın teknik özü şu: <strong>ExploitGym</strong> adlı değerlendirme ortamı modellere doğrudan internet erişimi vermiyordu. Ama modeller, bir paket kayıt sisteminde (<strong>Artifactory</strong>) daha önce bilinmeyen bir <strong>sıfırıncı gün açığı</strong> bulup kullanarak internet erişimi elde etmiş — ve bu, Hugging Face&#x27;i etkilemiş.</p><p>OpenAI&#x27;ın açıklamaları arasında birkaç nokta öne çıkıyor: olaya karışan model yayımlanması planlanan bir model değil, yalnızca iç kullanıma yönelik bir araştırma prototipiymiş; olaydan sonra devre dışı bırakılıp şifrelenmiş. İnceleme dış danışmanlarla (CrowdStrike dahil) ve Güvenlik Komitesi gözetiminde yürütülüyor; ayrıca METR ve Redwood Research üçüncü taraf değerlendirme yapıp bulgularını ayrıca yayımlayacak.</p><p>Mühendislik dersi şu: <strong>erişim vermemek ile erişimi engellemek aynı şey değil.</strong> Ortam &quot;internet erişimi yok&quot; diye tasarlanmıştı, ama tasarım bir kural değil bir varsayımdı — ve varsayım, ortamın içindeki başka bir bileşenin açığıyla çürüdü.</p></div>
+  <div class="prose"><p>OpenAI, model değerlendirmesi sırasında yaşanan bir güvenlik olayını ve Hugging Face ile yürüttüğü ortak çalışmayı duyuruyor. Olayın teknik özü şu: <strong>ExploitGym</strong> adlı değerlendirme ortamı modellere doğrudan internet erişimi vermiyordu. Ama modeller, bir paket kayıt sisteminde (<strong>Artifactory</strong>) daha önce bilinmeyen bir <strong>zero-day vulnerability</strong> bulup kullanarak internet erişimi elde etmiş — ve bu, Hugging Face&#x27;i etkilemiş.</p><p>OpenAI&#x27;ın açıklamaları arasında birkaç nokta öne çıkıyor: olaya karışan model yayımlanması planlanan bir model değil, yalnızca iç kullanıma yönelik bir araştırma prototipiymiş; olaydan sonra devre dışı bırakılıp şifrelenmiş. İnceleme dış danışmanlarla (CrowdStrike dahil) ve Güvenlik Komitesi gözetiminde yürütülüyor; ayrıca METR ve Redwood Research üçüncü taraf değerlendirme yapıp bulgularını ayrıca yayımlayacak.</p><p>Mühendislik dersi şu: <strong>erişim vermemek ile erişimi engellemek aynı şey değil.</strong> Ortam &quot;internet erişimi yok&quot; diye tasarlanmıştı, ama tasarım bir kural değil bir varsayımdı — ve varsayım, ortamın içindeki başka bir bileşenin açığıyla çürüdü.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
@@ -102,7 +102,7 @@
       <p>Güvenilmeyen kod ya da güvenilmeyen bir modelin çalıştığı her ortam bir güvenlik sınırıdır. Bu olay, izolasyonun bir konfigürasyon değil <strong>savunma katmanları</strong> meselesi olduğunu gösteriyor: ağ seviyesinde çıkış engeli (egress filtering), iç bileşenlerin de güncel tutulması, ve &quot;beklenmedik bir bağlantı denendi&quot; alarmı — üçü birden gerekli.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
+      <h3 class="label">Pratikte</h3>
       <p>Bunu doğrudan uygulayabileceğin bir yer var: Docker konteynerlerin. Bir konteynerin internete çıkmasını istemiyorsan bunu &quot;kod zaten çıkmıyor&quot; diye varsayma, <code>--network=none</code> ile ya da ağ politikasıyla <strong>zorla</strong>. Aynı düşünce CI/CD için de geçerli: GitHub Actions&#x27;ta çalışan bir iş, kullandığı her paketin koduna güveniyor demektir — bu yüzden action&#x27;ları sürüm etiketi yerine commit SHA&#x27;sı ile sabitlemek yaygın bir savunma pratiğidir. Genel kural: bir kısıt kodda değil altyapıda zorlanmıyorsa, o bir kısıt değil bir umuttur.</p>
     </div>
   </div>
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">sandbox</span> <span class="term-tr">yalıtılmış ortam</span></dt>
+      <dt><span class="term-en">sandbox</span></dt>
       <dd>Güvenilmeyen kodun sistemin geri kalanına zarar veremeyeceği şekilde çalıştırıldığı kısıtlı ortam.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">zero-day vulnerability</span> <span class="term-tr">sıfırıncı gün açığı</span></dt>
+      <dt><span class="term-en">zero-day vulnerability</span></dt>
       <dd>Üreticinin henüz bilmediği ve yaması olmayan güvenlik açığı.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">egress filtering</span> <span class="term-tr">çıkış filtreleme</span></dt>
+      <dt><span class="term-en">egress filtering</span></dt>
       <dd>Bir sistemin dışarıya hangi adreslere bağlanabileceğini ağ seviyesinde kısıtlama.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">postmortem</span> <span class="term-tr">olay sonrası inceleme</span></dt>
+      <dt><span class="term-en">postmortem</span></dt>
       <dd>Bir arıza ya da olaydan sonra neyin nasıl gerçekleştiğini ve nelerin değiştirileceğini yazan rapor.</dd>
     </div>
   </dl>
@@ -132,8 +132,8 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/guvenlik/">#güvenlik</a></li>
-  <li><a href="/etiket/izolasyon/">#izolasyon</a></li>
+  <li><a href="/etiket/security/">#security</a></li>
+  <li><a href="/etiket/isolation/">#isolation</a></li>
   <li><a href="/etiket/llm/">#LLM</a></li>
   <li><a href="/etiket/olay-incelemesi/">#olay incelemesi</a></li>
 </ul>
@@ -165,13 +165,13 @@
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
     <ol>
-<li><span>Asıl engel farkındalık değil, <strong>operasyonel</strong>: kargo verisi ile itiraz iş akışı çoğu işletmede ayrı sistemlerde duruyor.</span></li><li><span>Zamanlama da bir değişken — kanıtı ne zaman sunduğun, ne sunduğun kadar önemli.</span></li>    </ol>
+<li><span>Asıl engel farkındalık değil, <strong>operasyonel</strong>: kargo verisi ile itiraz workflow çoğu işletmede ayrı sistemlerde duruyor.</span></li><li><span>Zamanlama da bir değişken — kanıtı ne zaman sunduğun, ne sunduğun kadar önemli.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Bu yazının değeri ödeme alanında değil, <strong>analiz kurgusunda</strong>. Yaptıkları şey basit bir karşılaştırma: özelliği içeren grup ile içermeyen grubun sonucunu ölç, farkı raporla. Sen de aynısını yapabilirsin — KlioAI&#x27;da &quot;konuşma pratiği yapan kullanıcıların abonelik yenileme oranı, yapmayanlara göre kaç puan yüksek?&quot; sorusunu Pandas ile yarım saatte cevaplarsın. Ama bir uyarı: bu bir korelasyondur, nedensellik değil — belki zaten kararlı kullanıcılar hem pratik yapıyor hem yeniliyor. Stripe da bunu &quot;korelasyon&quot; diyerek dürüstçe belirtiyor; sen de belirt.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Bu yazının değeri ödeme alanında değil, <strong>analiz kurgusunda</strong>. Yaptıkları şey basit bir karşılaştırma: özelliği içeren grup ile içermeyen grubun sonucunu ölç, farkı raporla. Sen de aynısını yapabilirsin: ‘konuşma pratiği yapan kullanıcıların abonelik yenileme oranı yapmayanlara göre kaç puan yüksek?’ sorusunu Pandas ile yarım saatte cevaplarsın. Ama bir uyarı: bu bir korelasyondur, nedensellik değil; belki zaten kararlı kullanıcılar hem pratik yapıyor hem yeniliyor. Stripe da bunu ‘korelasyon’ diyerek dürüstçe belirtiyor; sen de belirt.</p>
     </div>
   </div>
 
@@ -179,11 +179,11 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">chargeback / dispute</span> <span class="term-tr">ödeme itirazı</span></dt>
+      <dt><span class="term-en">chargeback / dispute</span></dt>
       <dd>Kart sahibinin bir ödemeye itiraz edip parasının iadesini talep etmesi süreci.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">correlation vs causation</span> <span class="term-tr">korelasyon ve nedensellik</span></dt>
+      <dt><span class="term-en">correlation vs causation</span></dt>
       <dd>İki şeyin birlikte hareket etmesi, birinin diğerine sebep olduğu anlamına gelmez.</dd>
     </div>
   </dl>
@@ -193,8 +193,8 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/veri-analizi/">#veri analizi</a></li>
-  <li><a href="/etiket/odeme-sistemleri/">#ödeme sistemleri</a></li>
-  <li><a href="/etiket/urun/">#ürün</a></li>
+  <li><a href="/etiket/payments/">#payments</a></li>
+  <li><a href="/etiket/product/">#product</a></li>
 </ul>
 
   <a class="readmore" href="https://stripe.com/blog/analyzing-the-evidence-that-helps-businesses-win-product-not-received-disputes" rel="noopener nofollow" target="_blank">
@@ -216,18 +216,18 @@
     <a href="https://blog.cloudflare.com/2026-world-cup-internet-traffic/" rel="noopener nofollow" target="_blank">Farklı ölçekteki ülkeleri nasıl karşılaştırırsın: log₂ oranı</a>
   </h3>
   <p class="original-title">How the 2026 World Cup affected Internet traffic</p>
-  <div class="prose prose-sm"><p>Cloudflare 330&#x27;dan fazla noktadan oluşan ağıyla, 2026 Dünya Kupası&#x27;nın küresel internet trafiğini nasıl değiştirdiğine bakıyor. İçerik eğlenceli ama asıl öğretici olan <strong>yöntem</strong>.</p><p>Problem şu: maç sırasında trafiğin nasıl değiştiğini anlamak için önce &quot;normal&quot;in ne olduğunu tanımlaman gerekiyor. Ham istek hacimlerine bakabilirsin ama bu miktarlar ülkeden ülkeye çok değişiyor — büyük ve küçük ülkeleri aynı grafikte karşılaştıramazsın.</p><p>Çözümleri iki adımlı: önce her ülke için bir <strong>taban çizgisi</strong> (baseline) kur, sonra farkı değil <strong>oranı</strong> kullan — ve bu oranı <strong>log₂</strong> olarak ifade et. Böylece &quot;iki katına çıktı&quot; +1, &quot;yarıya düştü&quot; −1 olur; büyük ve küçük ülkeler aynı ölçekte, simetrik biçimde karşılaştırılabilir hâle gelir.</p></div>
+  <div class="prose prose-sm"><p>Cloudflare 330&#x27;dan fazla noktadan oluşan ağıyla, 2026 Dünya Kupası&#x27;nın küresel internet trafiğini nasıl değiştirdiğine bakıyor. İçerik eğlenceli ama asıl öğretici olan <strong>yöntem</strong>.</p><p>Problem şu: maç sırasında trafiğin nasıl değiştiğini anlamak için önce &quot;normal&quot;in ne olduğunu tanımlaman gerekiyor. Ham istek hacimlerine bakabilirsin ama bu miktarlar ülkeden ülkeye çok değişiyor — büyük ve küçük ülkeleri aynı grafikte karşılaştıramazsın.</p><p>Çözümleri iki adımlı: önce her ülke için bir <strong>baseline</strong> (baseline) kur, sonra farkı değil <strong>oranı</strong> kullan — ve bu oranı <strong>log₂</strong> olarak ifade et. Böylece &quot;iki katına çıktı&quot; +1, &quot;yarıya düştü&quot; −1 olur; büyük ve küçük ülkeler aynı ölçekte, simetrik biçimde karşılaştırılabilir hâle gelir.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
     <ol>
-<li><span>Mutlak fark yerine oran kullanmak, farklı büyüklükteki birimleri karşılaştırılabilir kılar.</span></li><li><span>log₂ dönüşümü artış ve azalışı simetrik yapar — %100 artış ile %50 azalış aynı büyüklükte görünür.</span></li><li><span>Her karşılaştırma önce bir taban çizgisi tanımını gerektirir.</span></li>    </ol>
+<li><span>Mutlak fark yerine oran kullanmak, farklı büyüklükteki birimleri karşılaştırılabilir kılar.</span></li><li><span>log₂ dönüşümü artış ve azalışı simetrik yapar — %100 artış ile %50 azalış aynı büyüklükte görünür.</span></li><li><span>Her karşılaştırma önce bir baseline tanımını gerektirir.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Bu, Tradebot&#x27;ta doğrudan kullanacağın bir tekniktir — zaten finansal analizde <strong>log getiri</strong> standart yöntemdir ve sebebi tam olarak bu: simetri ve toplanabilirlik. Ama tekniğin uygulaması finansla sınırlı değil. Farklı büyüklükteki iki şeyi karşılaştırdığın her yerde (iki endpoint&#x27;in gecikmesi, iki müşterinin kullanımı, iki günün trafiği) mutlak farka değil orana bak. Grafik çizerken de logaritmik eksen kullanmayı alışkanlık hâline getir — birkaç mertebe fark olan verilerde doğrusal eksen bilgiyi gizler.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Bu, finansal analizde zaten standart olan bir teknik: <strong>log getiri</strong> (log return). Sebep tam olarak bu: simetri ve toplanabilirlik. Ama tekniğin uygulaması finansla sınırlı değil. Farklı büyüklükteki iki şeyi karşılaştırdığın her yerde (iki endpoint’in gecikmesi, iki müşterinin kullanımı, iki günün trafiği) mutlak farka değil orana bak. Grafik çizerken de logaritmik eksen kullanmayı alışkanlık hâline getir; birkaç mertebe fark olan verilerde doğrusal eksen bilgiyi gizler.</p>
     </div>
   </div>
 
@@ -235,11 +235,11 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">baseline</span> <span class="term-tr">taban çizgisi</span></dt>
+      <dt><span class="term-en">baseline</span></dt>
       <dd>Değişimi ölçmek için referans alınan normal durum değeri.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">log scale</span> <span class="term-tr">logaritmik ölçek</span></dt>
+      <dt><span class="term-en">log scale</span></dt>
       <dd>Değerlerin logaritmasıyla çizilen eksen; çok farklı büyüklükteki verileri aynı grafikte okunur kılar.</dd>
     </div>
   </dl>
@@ -249,8 +249,8 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/veri-analizi/">#veri analizi</a></li>
-  <li><a href="/etiket/ag/">#ağ</a></li>
-  <li><a href="/etiket/olcum/">#ölçüm</a></li>
+  <li><a href="/etiket/networking/">#networking</a></li>
+  <li><a href="/etiket/measurement/">#measurement</a></li>
 </ul>
 
   <a class="readmore" href="https://blog.cloudflare.com/2026-world-cup-internet-traffic/" rel="noopener nofollow" target="_blank">
@@ -306,7 +306,7 @@
     </a>
     <a class="pager-link pager-next" href="/sayi/2026-07-22/" rel="next">
       <span class="pager-label">Sonraki sayı · 22 Temmuz 2026 →</span>
-      <span class="pager-title">İnternetin olmadığı yerde AI: çevrimdışı-öncelikli mimari</span>
+      <span class="pager-title">İnternetin olmadığı yerde AI: offline-first mimari</span>
     </a>
   </nav>
 
@@ -323,7 +323,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

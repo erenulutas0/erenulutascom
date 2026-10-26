@@ -4,11 +4,7 @@ from pipeline.compose import save_edition
 
 DATE = "2026-09-10"
 
-INTRO = (
-    "Dağıtık sistemlerin en eski sorusu: ‘bu işi tam olarak kim yapıyor?’ Bugünün kapağı, "
-    "kalıcı WebSocket bağlantılarının sahipliğini DynamoDB ile nasıl bir kira (lease) "
-    "mekanizmasına çevirdiklerini anlatıyor; yanında OpenAI’ın yönetilen agent API’si var."
-)
+INTRO = "Dağıtık sistemlerin en eski sorusu: ‘bu işi tam olarak kim yapıyor?’ Bugünün kapağı, kalıcı WebSocket bağlantılarının sahipliğini DynamoDB ile nasıl bir kira (lease) mekanizmasına çevirdiklerini anlatıyor; yanında OpenAI’ın yönetilen agent API’si var."
 
 DRAFTS = [
     {
@@ -16,94 +12,74 @@ DRAFTS = [
         "slot": "cover",
         "title_tr": "Bağlantının tek sahibi kim? DynamoDB ile dağıtık kira (lease) deseni",
         "difficulty": "ileri",
-        "tags": ["dağıtık sistemler", "WebSocket", "DynamoDB", "koordinasyon"],
-        "summary": (
-            "500 eşzamanlı toplantıyı işleyen bir gerçek zamanlı transkripsiyon servisi düşün. Her "
-            "toplantı için bir işçi, kaynağa giden ayrı bir WebSocket bağlantısı tutuyor. Bir işçi "
-            "çökerse 100'den fazla bağlantı düşüyor ve operatör servisi elle yeniden başlatana kadar "
-            "bağlantı başına 2-3 dakika veri kaybı oluyor.\n\n"
-            "Problemin özü: her bağlantıya **tam olarak bir işçi** sahip olmalı, ama işçiler "
-            "birbirinden bağımsız çöküyor, yeniden dağıtılıyor ve ölçekleniyor. Zorluklar dört tane: "
-            "işçi çökmesi, kayan dağıtımlar (yeni görev başlarken eskisi bağlantılarını bırakır), yatay "
-            "ölçekleme (eklemek kolay, çıkarırken bağlantıları devretmek zor) ve en tehlikelisi **çift "
-            "sahiplenme**: iki işçi aynı bağlantıyı sahiplenip aynı kaynağa bağlanırsa çift veri "
-            "işleme ve protokol hataları çıkar.\n\n"
-            "Çözümün anahtar fikri tek cümlede: **DynamoDB koşullu yazmaları (conditional write), "
-            "ayrı bir koordinasyon servisine gerek bırakmadan dağıtık kilit işlevi görür.** Her "
-            "bağlantının bir **kirası** var: süresi sınırlı bir sahiplik iddiası. İşçiler kirayı "
-            "sürekli yenilemek (heartbeat) zorunda; bir işçi aniden durursa kira dolar ve başka bir işçi "
-            "devralır. Tablo tek öğede hem kira bilgisini (`lease_owner`, `lease_expires_at_ms`) hem "
-            "bağlantı durumunu (`desired_state`, `ws_url`, `last_seq`) tutuyor. Sahipsiz bağlantıları "
-            "bulmak için `desired_state` ve `lease_expires_at_ms` üzerinde bir GSI var. SQS yalnızca "
-            "hızlı bildirim kanalı: sahipliğin sürekli bir durum olduğunu, SQS’in ise tek seferlik görev "
-            "teslimi için tasarlandığını açıkça belirtiyorlar.\n\n"
-            "Dikkat çekici bir dürüst not: kira süresi dolma kontrolü, **işçilerin yerel saatlerine** "
-            "dayanıyor; yani saatler makul ölçüde senkron olmalı. Varsayılan kira süresi 20 saniye, "
-            "heartbeat aralığı 5 saniye; saat kayması bu güvenlik payının çok içinde kalıyor."
-        ),
+        "tags": [
+            "distributed systems",
+            "WebSocket",
+            "DynamoDB",
+            "koordinasyon"
+        ],
+        "summary": "500 eşzamanlı toplantıyı işleyen bir gerçek zamanlı transkripsiyon servisi düşün. Her toplantı için bir işçi, kaynağa giden ayrı bir WebSocket bağlantısı tutuyor. Bir işçi çökerse 100'den fazla bağlantı düşüyor ve operatör servisi elle yeniden başlatana kadar bağlantı başına 2-3 dakika veri kaybı oluyor.\n\nProblemin özü: her bağlantıya **tam olarak bir işçi** sahip olmalı, ama işçiler birbirinden bağımsız çöküyor, yeniden dağıtılıyor ve ölçekleniyor. Zorluklar dört tane: işçi çökmesi, kayan dağıtımlar (yeni görev başlarken eskisi bağlantılarını bırakır), yatay ölçekleme (eklemek kolay, çıkarırken bağlantıları devretmek zor) ve en tehlikelisi **çift sahiplenme**: iki işçi aynı bağlantıyı sahiplenip aynı kaynağa bağlanırsa çift veri işleme ve protokol hataları çıkar.\n\nÇözümün anahtar fikri tek cümlede: **DynamoDB conditional write’leri (conditional write), ayrı bir koordinasyon servisine gerek bırakmadan dağıtık kilit işlevi görür.** Her bağlantının bir **kirası** var: süresi sınırlı bir sahiplik iddiası. İşçiler kirayı sürekli yenilemek (heartbeat) zorunda; bir işçi aniden durursa kira dolar ve başka bir işçi devralır. Tablo tek öğede hem kira bilgisini (`lease_owner`, `lease_expires_at_ms`) hem bağlantı durumunu (`desired_state`, `ws_url`, `last_seq`) tutuyor. Sahipsiz bağlantıları bulmak için `desired_state` ve `lease_expires_at_ms` üzerinde bir GSI var. SQS yalnızca hızlı bildirim kanalı: sahipliğin sürekli bir durum olduğunu, SQS’in ise tek seferlik görev teslimi için tasarlandığını açıkça belirtiyorlar.\n\nDikkat çekici bir dürüst not: kira süresi dolma kontrolü, **işçilerin yerel saatlerine** dayanıyor; yani saatler makul ölçüde senkron olmalı. Varsayılan kira süresi 20 saniye, heartbeat aralığı 5 saniye; clock skew bu güvenlik payının çok içinde kalıyor.",
         "key_points": [
             "Sahiplik bir görev değil sürekli bir durumdur; bu yüzden kuyruk değil süresi dolan bir kayıtla modellenir.",
-            "Koşullu yazma = atomik ‘şu koşulda yaz’ işlemi; ayrı kilit servisi olmadan dağıtık kilit sağlar.",
+            "Conditional write = atomik ‘şu koşulda yaz’ işlemi; ayrı kilit servisi olmadan dağıtık kilit sağlar.",
             "Kira süresi ile heartbeat aralığı birlikte seçilir: süre, aralığın birkaç katı olmalı ki gecikmeler yanlış devralmaya yol açmasın.",
             "Kira, saat doğruluğuna bağlı; senkronizasyonu varsaymak yerine kira süresini olası kaymayla payla.",
-            "Zarif kapatma (graceful shutdown) ile dağıtım sırasında bağlantılar kayıpsız devredilebilir.",
+            "Graceful shutdown (graceful shutdown) ile dağıtım sırasında bağlantılar kayıpsız devredilebilir."
         ],
-        "why_it_matters": (
-            "‘Tam olarak bir sahip’ gereksinimi çıktığı her yerde (zamanlanmış iş, lider seçimi, bağlantı "
-            "yönetimi) kira deseni yeniden karşına çıkar. Önemli olan sahipliğin süresiz değil "
-            "sürekli yenilenen bir iddia olması: çöken sahibin kilidi sonsuza kadar tutmasını "
-            "engelleyen tek şey bu."
-        ),
-        "for_you": (
-            "Bunu PostgreSQL ile de kurabilirsin: `UPDATE jobs SET owner = :me, expires_at = now() + "
-            "interval '20 seconds' WHERE id = :id AND (owner IS NULL OR expires_at < now())` ve "
-            "etkilenen satır sayısı 1 ise kira senin. Mobit’te zamanlanmış bir iş birden fazla "
-            "örnekte çalışıyorsa (belge indeksleme, bildirim gönderme) aynı işi iki örneğin birden "
-            "yapmadığından emin misin? ShedLock gibi Spring kütüphaneleri bu deseni hazır sunar. "
-            "Tradebot’ta da bir borsa bağlantısını yalnızca bir sürecin tutması gerekiyorsa aynı kira "
-            "mantığı çift işlem emri riskini önler."
-        ),
+        "why_it_matters": "‘Tam olarak bir sahip’ gereksinimi çıktığı her yerde (zamanlanmış iş, lider seçimi, bağlantı yönetimi) kira deseni yeniden karşına çıkar. Önemli olan sahipliğin süresiz değil sürekli yenilenen bir iddia olması: çöken sahibin kilidi sonsuza kadar tutmasını engelleyen tek şey bu.",
+        "for_you": "Bunu PostgreSQL ile de kurabilirsin: `UPDATE jobs SET owner = :me, expires_at = now() + interval '20 seconds' WHERE id = :id AND (owner IS NULL OR expires_at < now())` ve etkilenen satır sayısı 1 ise lease senin. Zamanlanmış bir iş birden fazla instance’ta çalışıyorsa (belge indeksleme, bildirim gönderme) aynı işi iki instance’ın birden yapmadığından emin misin? ShedLock gibi Spring kütüphaneleri bu deseni hazır sunar. Bir borsa bağlantısını yalnızca bir sürecin tutması gerekiyorsa aynı lease mantığı çift emir riskini önler.",
         "terms": [
-            {"en": "lease", "tr": "kira (süreli sahiplik)", "definition": "Belirli bir süre için geçerli olan ve yenilenmezse kendiliğinden biten sahiplik iddiası."},
-            {"en": "conditional write", "tr": "koşullu yazma", "definition": "Yalnızca belirtilen koşul doğruysa gerçekleşen atomik yazma işlemi."},
-            {"en": "heartbeat", "tr": "yaşam sinyali", "definition": "Bir bileşenin hâlâ ayakta olduğunu belirtmek için düzenli aralıklarla gönderdiği sinyal."},
-            {"en": "graceful shutdown", "tr": "zarif kapatma", "definition": "Bir süreç kapanmadan önce işini ve bağlantılarını düzgünce devrederek bırakması."},
-        ],
+            {
+                "en": "lease",
+                "tr": "lease",
+                "definition": "Belirli bir süre için geçerli olan ve yenilenmezse kendiliğinden biten sahiplik iddiası."
+            },
+            {
+                "en": "conditional write",
+                "tr": "conditional write",
+                "definition": "Yalnızca belirtilen koşul doğruysa gerçekleşen atomik yazma işlemi."
+            },
+            {
+                "en": "heartbeat",
+                "tr": "heartbeat",
+                "definition": "Bir bileşenin hâlâ ayakta olduğunu belirtmek için düzenli aralıklarla gönderdiği sinyal."
+            },
+            {
+                "en": "graceful shutdown",
+                "tr": "graceful shutdown",
+                "definition": "Bir süreç kapanmadan önce işini ve bağlantılarını düzgünce devrederek bırakması."
+            }
+        ]
     },
     {
         "url": "https://openai.com/index/introducing-the-agents-api",
         "slot": "brief",
         "title_tr": "Agent harness’ini barındırılan bir servis olarak sunmak: Agents API",
         "difficulty": "başlangıç",
-        "tags": ["agent", "API", "mimari"],
-        "summary": (
-            "OpenAI, Codex’i güçlendiren harness ve altyapıyı geliştiricilere **Agents API** adıyla "
-            "halka açık betada sunuyor. Gerekçeleri tanıdık: uzun süre çalışan agent’ların iyi iş "
-            "çıkarması için güçlü bir harness (bağlam yönetimi, verimli araç kullanımı, alt ajanların "
-            "koordinasyonu) ve günlerce güvenilir çalışan bir altyapı gerekiyor.\n\n"
-            "Tek bir API çağrısıyla görev, model, araçlar ve ortam belirtilerek bulut agent’ı "
-            "oluşturuluyor. Ortamı sen seçiyorsun: OpenAI’ın yönetilen sandbox’ı, kendi altyapın "
-            "ya da bir sandbox ortağı. Harness’i OpenAI barındırıp sürümlüyor; uzun oturumlar için "
-            "bağlam otomatik sıkıştırılıyor, araç arama ilgili araç tanımlarını gerektiğinde "
-            "yükleyerek token ve maliyeti düşürüyor, alt ajanlar işi paralelleştiriyor."
-        ),
+        "tags": [
+            "agent",
+            "API",
+            "architecture"
+        ],
+        "summary": "OpenAI, Codex’i güçlendiren harness ve altyapıyı geliştiricilere **Agents API** adıyla halka açık betada sunuyor. Gerekçeleri tanıdık: uzun süre çalışan agent’ların iyi iş çıkarması için güçlü bir harness (bağlam yönetimi, verimli araç kullanımı, alt agent’ların koordinasyonu) ve günlerce güvenilir çalışan bir altyapı gerekiyor.\n\nTek bir API çağrısıyla görev, model, araçlar ve ortam belirtilerek bulut agent’ı oluşturuluyor. Ortamı sen seçiyorsun: OpenAI’ın yönetilen sandbox’ı, kendi altyapın ya da bir sandbox ortağı. Harness’i OpenAI barındırıp sürümlüyor; uzun oturumlar için bağlam otomatik sıkıştırılıyor, araç arama ilgili araç tanımlarını gerektiğinde yükleyerek token ve maliyeti düşürüyor, alt agent’lar işi paralelleştiriyor.",
         "key_points": [
             "Harness’i kendin yazmak yerine yönetilen kullanmak: yeni model her çıktığında harness’i yeniden yazma işini devrediyor.",
-            "Ortam seçimi (barındırılan, kendi VPC’n, ortak) güvenlik ve maliyet kararı; agent mantığından ayrı.",
+            "Ortam seçimi (barındırılan, kendi VPC’n, ortak) güvenlik ve maliyet kararı; agent mantığından ayrı."
         ],
-        "for_you": (
-            "‘Kendim mi yazayım, yönetilen mi kullanayım?’ sorusunun iyi bir örneği. 21 Ağustos’taki "
-            "Netflix autoscaler yazısındaki ders burada da geçerli: harness bir bakım yüküdür. "
-            "Küçük bir agent için kendi döngünü yazmak öğreticidir, "
-            "ama üretimde uzun süren, sandbox gerektiren agent’lar için "
-            "yönetilen seçeneği değerlendir. Karar kriterin: ‘bu katmanı sürdürmek benim "
-            "farkımı yaratıyor mu?’"
-        ),
+        "for_you": "‘Kendim mi yazayım, yönetilen mi kullanayım?’ sorusunun iyi bir örneği. 21 Ağustos’taki Netflix autoscaler yazısındaki ders burada da geçerli: harness bir bakım yüküdür. Küçük bir agent için kendi döngünü yazmak öğreticidir, ama üretimde uzun süren, sandbox gerektiren agent’lar için yönetilen seçeneği değerlendir. Karar kriterin: ‘bu katmanı sürdürmek benim farkımı yaratıyor mu?’",
         "terms": [
-            {"en": "agent harness", "tr": "agent koşum takımı", "definition": "Modelin etrafındaki döngü, bağlam yönetimi, araç çağırma ve alt ajan koordinasyonu katmanı."},
-            {"en": "sandbox", "tr": "yalıtılmış ortam", "definition": "Agent’ın kod çalıştırıp dosyalarla çalıştığı, ana sistemden izole çalışma alanı."},
-        ],
-    },
+            {
+                "en": "agent harness",
+                "tr": "agent harness",
+                "definition": "Modelin etrafındaki döngü, bağlam yönetimi, araç çağırma ve alt agent koordinasyonu katmanı."
+            },
+            {
+                "en": "sandbox",
+                "tr": "sandbox",
+                "definition": "Agent’ın kod çalıştırıp dosyalarla çalıştığı, ana sistemden izole çalışma alanı."
+            }
+        ]
+    }
 ]
 
 if __name__ == "__main__":

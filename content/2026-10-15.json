@@ -11,47 +11,47 @@
       "title_tr": "Trafik topu değil molayı izledi: Meta Dünya Kupası’nda rekor yükü nasıl taşıdı",
       "url": "https://engineering.fb.com/2026/10/15/production-engineering/2026-world-cup-record-traffic-reliability-at-scale/",
       "published": "2026-10-15",
-      "summary": "Her dört yılda bir Dünya Kupası, Meta’nın altyapısı için planlı en büyük stres testi. 2026’da mesajlaşma, video, öneri ve ağ aynı anda rekor kırdı: WhatsApp 19 Temmuz’daki finalde saniyede 30 milyondan fazla mesaj (rekor, bir önceki rekor 12 gün önce 29 milyonla kırılmıştı); Messenger, Threads ve Instagram Direct dakikada 49 milyon mesaj; Instagram öneri trafiği haftalık bazda yüzde 80’e kadar yüksek; canlı video izleme süresi Instagram’da yüzde 90, Facebook’ta yüzde 242 arttı.\n\n**Asıl bulgu: trafik molaları izledi.** Maç olaylarını küresel çıkış trafiğiyle hizalayınca, paylaşımın büyük ölçüde molalarda (su molası, devre arası, uzatma, son düdük, ödül töreni) patladığı görüldü. Finalde normal sürenin bitişinde trafik yaklaşık dört dakikada yüzde 46, son düdükte yaklaşık 15 dakikada yüzde 57 yükseldi; turnuvanın en büyük tepesi normal süre bitiş düdüğüydü. Yazının cümlesi: grafikleri oyun değil, oyundan sonraki sohbetler oynattı. ‘Bütün kapasite kararları o tek örüntüden çıkıyor.’\n\n**Katmanlı sistemler, elle müdahale yok.** Yükü Taiji veri merkezleri arasında dengeledi, Katran ve Proxygen L4/L7 trafiği dağıttı, küresel yük dengeleme kullanıcıları en uygun uca yönlendirdi ve otomatik ölçekleme kapasiteyi talebe göre sağladı. Ağ ekipleri aylar önceden ISS ortaklarıyla çalışıp yükseltmeleri en çok fayda sağlayacak yerlere yaptı; bu ön yatırım kalıcı kapasite olarak kalıyor.\n\n**Instagram: 39 ardışık gün tepe.** Dört ayak: **kapasite tamponları** (tepeler otomatik ölçeklemeyi beklemesin diye önceden fazladan ayırma); **ülke düzeyinde zarif bozulma** (yüksek riskli maçlarda en yoğun ülkelerde kritik olmayan arka plan yükünü atmak); **zincirleme yayılmayı önleme** (ön yüzdeki tepe alttaki veri sistemlerine sıçramasın); ve **erken uyarı sinyalleri** (eşiğe yaklaşırken, aşınca değil). Hepsi 2028 Olimpiyatları gibi sonraki büyük olaylar için tekrar kullanılabilir bir çalışma kılavuzuna dönüştü. WhatsApp’ın en yoğun beş dakikalık penceresinde yaklaşık 8,4 milyar mesaj kesintisiz iletildi; 100’den fazla iç servis önceden yük testinden geçirilip boyutlandırıldı, eleme turları ilerledikçe yeniden test edildi.\n\n**Bu sefer yapmadıkları iki şey.** Birincisi **bölgeler arası yük kaydırma**: geçmiş büyük olaylarda varsayılan, talebi birçok bölgeye yaymak ve sakin bölgelerin kapasitesinin tepeyi emmesiydi. Yılbaşı gibi tepelerin saatler arayla geldiği durumda işe yarıyor; bu sefer **her bölge aynı anda tepe yaptığı için ödünç alınacak boş kapasite yoktu**. Bunun yerine her bölgenin tepesi küresel bir çarpan yerine kendi başına tahmin edildi. İkincisi **dağıtım dondurma**: büyük olaylarda sürekli dağıtımı durdurmak standart hamledir; yıllardır süren güvenilirlik çalışmasına güvenip hiç dondurmadılar, ekipler tepe anı dahil normal ritimde yayın yaptı.",
+      "summary": "Her dört yılda bir Dünya Kupası, Meta’nın altyapısı için planlı en büyük stres testi. 2026’da mesajlaşma, video, öneri ve ağ aynı anda rekor kırdı: WhatsApp 19 Temmuz’daki finalde saniyede 30 milyondan fazla mesaj (rekor, bir önceki rekor 12 gün önce 29 milyonla kırılmıştı); Messenger, Threads ve Instagram Direct dakikada 49 milyon mesaj; Instagram öneri trafiği haftalık bazda yüzde 80’e kadar yüksek; canlı video izleme süresi Instagram’da yüzde 90, Facebook’ta yüzde 242 arttı.\n\n**Asıl bulgu: trafik molaları izledi.** Maç olaylarını küresel çıkış trafiğiyle hizalayınca, paylaşımın büyük ölçüde molalarda (su molası, devre arası, uzatma, son düdük, ödül töreni) patladığı görüldü. Finalde normal sürenin bitişinde trafik yaklaşık dört dakikada yüzde 46, son düdükte yaklaşık 15 dakikada yüzde 57 yükseldi; turnuvanın en büyük tepesi normal süre bitiş düdüğüydü. Yazının cümlesi: grafikleri oyun değil, oyundan sonraki sohbetler oynattı. ‘Bütün kapasite kararları o tek örüntüden çıkıyor.’\n\n**Katmanlı sistemler, elle müdahale yok.** Yükü Taiji veri merkezleri arasında dengeledi, Katran ve Proxygen L4/L7 trafiği dağıttı, küresel yük dengeleme kullanıcıları en uygun uca yönlendirdi ve autoscaling kapasiteyi talebe göre sağladı. Ağ ekipleri aylar önceden ISS ortaklarıyla çalışıp yükseltmeleri en çok fayda sağlayacak yerlere yaptı; bu ön yatırım kalıcı kapasite olarak kalıyor.\n\n**Instagram: 39 ardışık gün tepe.** Dört ayak: **kapasite tamponları** (tepeler autoscaling’i beklemesin diye önceden fazladan ayırma); **ülke düzeyinde graceful degradation** (yüksek riskli maçlarda en yoğun ülkelerde kritik olmayan arka plan yükünü atmak); **zincirleme yayılmayı önleme** (ön yüzdeki tepe alttaki veri sistemlerine sıçramasın); ve **erken uyarı sinyalleri** (eşiğe yaklaşırken, aşınca değil). Hepsi 2028 Olimpiyatları gibi sonraki büyük olaylar için tekrar kullanılabilir bir runbook’a dönüştü. WhatsApp’ın en yoğun beş dakikalık penceresinde yaklaşık 8,4 milyar mesaj kesintisiz iletildi; 100’den fazla iç servis önceden load testing’den geçirilip boyutlandırıldı, eleme turları ilerledikçe yeniden test edildi.\n\n**Bu sefer yapmadıkları iki şey.** Birincisi **bölgeler arası yük kaydırma**: geçmiş büyük olaylarda varsayılan, talebi birçok bölgeye yaymak ve sakin bölgelerin kapasitesinin tepeyi emmesiydi. Yılbaşı gibi tepelerin saatler arayla geldiği durumda işe yarıyor; bu sefer **her bölge aynı anda tepe yaptığı için ödünç alınacak boş kapasite yoktu**. Bunun yerine her bölgenin tepesi küresel bir çarpan yerine kendi başına tahmin edildi. İkincisi **dağıtım dondurma**: büyük olaylarda sürekli dağıtımı durdurmak standart hamledir; yıllardır süren güvenilirlik çalışmasına güvenip hiç dondurmadılar, ekipler tepe anı dahil normal ritimde yayın yaptı.",
       "key_points": [
         "Kapasite kararından önce talebin ne zaman ve neden geldiğini ölç: tetikleyici beklediğin şey olmayabilir.",
         "Tepe anında ölçekleme beklememek için kapasiteyi önceden ayır.",
-        "Zarif bozulma planı önceden yazılmalı: hangi yük, hangi ülkede, hangi koşulda atılır.",
+        "Graceful degradation planı önceden yazılmalı: hangi yük, hangi ülkede, hangi koşulda atılır.",
         "Tüm bölgeler aynı anda tepe yapıyorsa ‘başka bölgeden ödünç al’ stratejisi çalışmaz; bölgeyi bağımsız tahmin et.",
         "Dağıtımı dondurmadan büyük olayı geçmek, yalnızca güvenilir bir dağıtım hattıyla mümkündür."
       ],
-      "why_it_matters": "Bu yazı ‘ölçeklenme’yi sihir değil, bir dizi sıkıcı ve ölçülmüş karar olarak gösteriyor: önce örüntüyü bul, sonra kapasite tamponu, zarif bozulma ve erken uyarıyla koru. Hepsi bir çalışma kılavuzu olarak yazıldığı için bir sonraki olayda tekrar kullanılabilir.",
-      "for_you": "Bunu kendi ölçeğinde şöyle uygularsın. **Önce ölç:** KlioAI’da kullanıcı isteklerini saat bazında günlüğe al ve ‘yük ne zaman artıyor’ grafiğini çiz; beklediğinden farklı bir örüntü çıkabilir (örneğin ders saatleri ya da sınav öncesi). **Sonra sınır koy:** yük arttığında önce kritik olmayan işleri (analitik, ikinci model geçişi) kapatan bir bayrak ekle. **Mülakatta kullanılacak vokabüler:** tampon kapasite (headroom), zarif bozulma, zincirleme çöküşü önleme, erken uyarı. Bir de ayrıntı: yük testini ortalamaya değil beklenen tepe değerine göre yap; `k6` ya da `locust` ile birkaç dakikalık bir tepe senaryosu yazmak yeterli bir başlangıç.",
+      "why_it_matters": "Bu yazı ‘ölçeklenme’yi sihir değil, bir dizi sıkıcı ve ölçülmüş karar olarak gösteriyor: önce örüntüyü bul, sonra kapasite tamponu, graceful degradation ve erken uyarıyla koru. Hepsi bir runbook olarak yazıldığı için bir sonraki olayda tekrar kullanılabilir.",
+      "for_you": "Bunu kendi ölçeğinde şöyle uygularsın. **Önce ölç:** kullanıcı isteklerini saat bazında logla ve ‘yük ne zaman artıyor’ grafiğini çiz; beklediğinden farklı bir örüntü çıkabilir (örneğin ders saatleri ya da sınav öncesi). **Sonra sınır koy:** yük arttığında önce kritik olmayan işleri (analytics, ikinci model geçişi) kapatan bir flag ekle. **Mülakat vokabüleri:** headroom, graceful degradation, cascade failure önleme, erken uyarı. Bir de ayrıntı: load testing’i ortalamaya değil beklenen tepe değerine göre yap; `k6` ya da `locust` ile birkaç dakikalık bir tepe senaryosu yazmak yeterli bir başlangıç.",
       "terms": [
         {
           "en": "graceful degradation",
-          "tr": "zarif bozulma",
+          "tr": "graceful degradation",
           "definition": "Aşırı yükte sistemi tümüyle düşürmek yerine kritik olmayan işleri kapatarak ayakta tutma."
         },
         {
           "en": "capacity buffer (headroom)",
-          "tr": "kapasite tamponu",
+          "tr": "capacity buffer (headroom)",
           "definition": "Beklenen tepe yükün üzerinde, önceden ayrılmış yedek kapasite."
         },
         {
           "en": "cascade failure",
-          "tr": "zincirleme çöküş",
+          "tr": "cascade failure",
           "definition": "Bir bileşendeki aşırı yükün bağlı bileşenlere yayılarak onları da devirmesi."
         },
         {
           "en": "load testing",
-          "tr": "yük testi",
+          "tr": "load testing",
           "definition": "Sistemi beklenen ya da üstü yük altında önceden deneme."
         },
         {
           "en": "runbook",
-          "tr": "çalışma kılavuzu",
+          "tr": "runbook",
           "definition": "Bir olay ya da operasyon sırasında izlenecek adımların yazılı hâli."
         }
       ],
       "tags": [
-        "ölçeklenme",
-        "dayanıklılık",
-        "kapasite planlama",
+        "scaling",
+        "resilience",
+        "capacity planning",
         "Meta"
       ],
       "difficulty": "orta",
@@ -79,20 +79,20 @@
       "terms": [
         {
           "en": "human-on-the-loop",
-          "tr": "döngünün üstündeki insan",
+          "tr": "human-on-the-loop",
           "definition": "İşi agent’ın yürüttüğü, insanın hedefi koyup izlediği ve onayladığı çalışma biçimi."
         },
         {
           "en": "build flavor",
-          "tr": "derleme türü",
+          "tr": "build flavor",
           "definition": "Aynı koddan farklı yapılandırmayla üretilen ayrı uygulama sürümü (örneğin prototip ve üretim)."
         }
       ],
       "tags": [
         "agent",
-        "geliştirici deneyimi",
-        "test",
-        "yapay zekâ ile geliştirme"
+        "developer experience",
+        "testing",
+        "AI-assisted development"
       ],
       "difficulty": "orta",
       "read_minutes": 8,

@@ -88,7 +88,7 @@
   </h2>
   <p class="original-title">An Organizational Second Brain: Building an AI That Learns From Experts</p>
 
-  <div class="prose"><p>Büyük kurumların ortak sorunu: uzman bilgisi ya hiç yazılmamış ya da belgelere dağılmış. Uyum alanında aynı soru tipleri yüzlerce ürün incelemesinde tekrar ediyor, uzman değerlendirmeleri günler sürüyor ve değerlendirmeler arası tutarsızlık gerçek bir risk yaratıyor. Uzmanlar zamanlarının büyük kısmını rutin sorulara harcıyor, yargılarının asıl gerektiği yeni ve belirsiz işe değil.</p><p>Meta, belirli bir uyum alanı için bir <strong>ikinci beyin</strong> ajanı kurmuş. Yeniliği iki katmanın birleşiminde: (1) <strong>bilmeyi muhakemeden ayıran yapılandırılmış ve denetlenebilir bir bilgi mimarisi</strong>, (2) uzman geri bildirimini <strong>modeli yeniden eğitmeden</strong>, doğrulanmış ve regresyon testinden geçmiş güncellemelere derleyen bir <strong>kendini geliştirme döngüsü</strong>. Sistemin dört katmanı var: bilgi sistemi, akıl yürütme katmanı, değerlendirme çerçevesi ve iyileştirme döngüsü. Biri çıkarılırsa diğerleri bozuluyor.</p><p>Temel tespit şu: bir ajan çıkarım anında belge parçaları getirirse, uzmanın muhakemesini her çalıştırmada ham kaynaklardan yeniden türetmek zorunda kalır; bu yavaş, hataya açık ve tutarsız. Bunun yerine uzun süren bir çevrimdışı süreç kaynak belgeleri üzerinde akıl yürütüp <strong>200&#x27;den fazla yapılandırılmış bilgi dosyasına</strong> damıtıyor: kurumun alanı nasıl yorumladığı, kısıtları, sınırları ve yönlendirme sonuçları makine tarafından okunur hâlde. Dosyalar sıkı bir sınıflandırmada: <strong>pozisyon dosyaları</strong> (kurumun otoriter duruşları), <strong>taksonomi ve sözlük dosyaları</strong> (tek doğruluk kaynağı), <strong>yönlendirme dizinleri</strong> (girdi özelliklerini ilgili pozisyonlara eşler; embedding benzerliğine tek başına dayanmadan, yani getirme belirlenimci ve denetlenebilir) ve <strong>geçit dosyaları</strong> (ajanın bir analiz alanına girmeden geçmesi gereken eşik testleri). Her dosya YAML başlığında <code>depends_on</code> ve <code>referenced_by</code> bildiriyor, böylece çift yönlü bağımlılık grafiği oluşuyor: bir dosya değişince nelerin etkilendiği izlenebiliyor.</p><p>Wiki ile RAG arasında bölme kararı da açık: <strong>yoğun ve sık kullanılan</strong> bilgi wiki&#x27;ye, seyrek ve duruma özgü kaynaklar anlamsal ya da sözcüksel aramaya (RAG) gidiyor.</p></div>
+  <div class="prose"><p>Büyük kurumların ortak sorunu: uzman bilgisi ya hiç yazılmamış ya da belgelere dağılmış. Uyum alanında aynı soru tipleri yüzlerce ürün incelemesinde tekrar ediyor, uzman değerlendirmeleri günler sürüyor ve değerlendirmeler arası tutarsızlık gerçek bir risk yaratıyor. Uzmanlar zamanlarının büyük kısmını rutin sorulara harcıyor, yargılarının asıl gerektiği yeni ve belirsiz işe değil.</p><p>Meta, belirli bir uyum alanı için bir <strong>ikinci beyin</strong> agent’ı kurmuş. Yeniliği iki katmanın birleşiminde: (1) <strong>bilmeyi muhakemeden ayıran yapılandırılmış ve denetlenebilir bir bilgi mimarisi</strong>, (2) uzman geri bildirimini <strong>modeli yeniden eğitmeden</strong>, doğrulanmış ve regression test’ten geçmiş güncellemelere derleyen bir <strong>kendini geliştirme döngüsü</strong>. Sistemin dört katmanı var: bilgi sistemi, reasoning katmanı, değerlendirme çerçevesi ve iyileştirme döngüsü. Biri çıkarılırsa diğerleri bozuluyor.</p><p>Temel tespit şu: bir agent inference anında belge parçaları getirirse, uzmanın muhakemesini her çalıştırmada ham kaynaklardan yeniden türetmek zorunda kalır; bu yavaş, hataya açık ve tutarsız. Bunun yerine uzun süren bir çevrimdışı süreç kaynak belgeleri üzerinde akıl yürütüp <strong>200&#x27;den fazla yapılandırılmış bilgi dosyasına</strong> damıtıyor: kurumun alanı nasıl yorumladığı, kısıtları, sınırları ve yönlendirme sonuçları makine tarafından okunur hâlde. Dosyalar sıkı bir sınıflandırmada: <strong>pozisyon dosyaları</strong> (kurumun otoriter duruşları), <strong>taksonomi ve sözlük dosyaları</strong> (tek doğruluk kaynağı), <strong>yönlendirme dizinleri</strong> (girdi özelliklerini ilgili pozisyonlara eşler; embedding benzerliğine tek başına dayanmadan, yani getirme belirlenimci ve denetlenebilir) ve <strong>geçit dosyaları</strong> (agent’ın bir analiz alanına girmeden geçmesi gereken eşik testleri). Her dosya YAML başlığında <code>depends_on</code> ve <code>referenced_by</code> bildiriyor, böylece çift yönlü bağımlılık grafiği oluşuyor: bir dosya değişince nelerin etkilendiği izlenebiliyor.</p><p>Wiki ile RAG arasında bölme kararı da açık: <strong>yoğun ve sık kullanılan</strong> bilgi wiki&#x27;ye, seyrek ve duruma özgü kaynaklar anlamsal ya da sözcüksel aramaya (RAG) gidiyor.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
@@ -99,11 +99,11 @@
   <div class="callouts">
     <div class="callout callout-why">
       <h3 class="label">Neden önemli?</h3>
-      <p>RAG&#x27;in yaygın zayıflığı her sorguda aynı muhakemenin yeniden ve biraz farklı biçimde kurulması. Bu yazı alternatifi gösteriyor: kritik bilgiyi bir kez damıt, sürümle, test et ve ajan yalnızca onu kullansın. Bu, bilgiyi koda yaklaştırmak: gözden geçirilebilir, geri alınabilir ve regresyon testli.</p>
+      <p>RAG&#x27;in yaygın zayıflığı her sorguda aynı muhakemenin yeniden ve biraz farklı biçimde kurulması. Bu yazı alternatifi gösteriyor: kritik bilgiyi bir kez damıt, sürümle, test et ve agent yalnızca onu kullansın. Bu, bilgiyi koda yaklaştırmak: gözden geçirilebilir, geri alınabilir ve regresyon testli.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Mobit&#x27;teki doküman arama mimarisine doğrudan bir soru: ihale belgelerinde tekrar eden soruların (“bu firmanın şartnamesinde X şartı var mı?”) cevaplarını her seferinde ham parçalardan mı türetiyorsun? Sık sorulan 20 soru için bir kez damıtılmış, sürümlenmiş bir “pozisyon” dosyası (Markdown + YAML) tutmayı dene; seyrek sorular RAG&#x27;e kalsın. Ve düzeltme akışı kur: kullanıcı bir cevabı düzelttiğinde bu düzeltme o dosyaya bir PR olarak gelsin, küçük bir test setinden geçsin. Modeli yeniden eğitmeden öğrenen bir sistem, hem ucuz hem de açıklanabilir.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Doküman arama gibi bir sistemde tekrar eden soruların cevaplarını her seferinde ham parçalardan mı türetiyorsun? Sık sorulan 20 soru için bir kez damıtılmış, versiyonlanan bir ‘pozisyon’ dosyası (Markdown + YAML) tutmayı dene; seyrek sorular RAG’e kalsın. Ve düzeltme akışı kur: kullanıcı bir cevabı düzelttiğinde bu düzeltme o dosyaya bir PR olarak gelsin, küçük bir test setinden geçsin. Modeli yeniden eğitmeden öğrenen bir sistem hem ucuz hem de açıklanabilir.</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">knowledge distillation (documents)</span> <span class="term-tr">bilgi damıtma</span></dt>
+      <dt><span class="term-en">knowledge distillation (documents)</span></dt>
       <dd>Çok sayıda ham belgeyi, yargıyı koruyarak az sayıda yapılandırılmış ve kullanıma hazır dosyaya indirgeme.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">routing index</span> <span class="term-tr">yönlendirme dizini</span></dt>
+      <dt><span class="term-en">routing index</span></dt>
       <dd>Girdinin özelliklerine göre hangi bilgi dosyalarının uygulanacağını belirleyen kural tablosu.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">regression test</span> <span class="term-tr">regresyon testi</span></dt>
+      <dt><span class="term-en">regression test</span></dt>
       <dd>Bir değişikliğin daha önce çalışan davranışları bozmadığını doğrulayan test.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">retrieval-augmented generation (RAG)</span> <span class="term-tr">getirme destekli üretim</span></dt>
+      <dt><span class="term-en">retrieval-augmented generation (RAG)</span></dt>
       <dd>Modele cevap üretmeden önce ilgili belgeleri getirip bağlam olarak verme yöntemi.</dd>
     </div>
   </dl>
@@ -134,8 +134,8 @@
   <ul class="tags">
   <li><a href="/etiket/rag/">#RAG</a></li>
   <li><a href="/etiket/agent/">#agent</a></li>
-  <li><a href="/etiket/bilgi-yonetimi/">#bilgi yönetimi</a></li>
-  <li><a href="/etiket/mimari/">#mimari</a></li>
+  <li><a href="/etiket/knowledge-management/">#knowledge management</a></li>
+  <li><a href="/etiket/architecture/">#architecture</a></li>
 </ul>
 
   <a class="readmore" href="https://engineering.fb.com/2026/09/02/ml-applications/organizational-second-brain-ai-learns-from-experts/" rel="noopener nofollow" target="_blank">
@@ -177,7 +177,7 @@
   <nav class="pager" aria-label="Sayılar arası gezinme">
     <a class="pager-link pager-prev" href="/sayi/2026-09-01/" rel="prev">
       <span class="pager-label">← Önceki sayı · 1 Eylül 2026</span>
-      <span class="pager-title">MCP oturumsuz oldu: sticky session, oturum deposu ve yük dengeleyici ayarlarını silebilirsin</span>
+      <span class="pager-title">MCP stateless oldu: sticky session, oturum deposu ve load balancer ayarlarını silebilirsin</span>
     </a>
     <a class="pager-link pager-next" href="/sayi/2026-09-03/" rel="next">
       <span class="pager-label">Sonraki sayı · 3 Eylül 2026 →</span>
@@ -198,7 +198,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

@@ -88,12 +88,12 @@
   </h2>
   <p class="original-title">Building Service Topology at Scale: Architecture, Challenges, and Lessons Learned · Netflix Technology Blog</p>
 
-  <div class="prose"><p>Netflix&#x27;in mühendisleri servis bağımlılıklarının gerçek zamanlı ve birleşik bir görünümüne ihtiyaç duyuyordu: sorunları daha hızlı gidermek, bir arızanın <strong>etki yarıçapını</strong> (blast radius) anlamak ve dağıtık mimaride yol bulmak için. Çözüm çok kaynaklı: eBPF ağ akışları, IPC metrikleri ve dağıtık izleme (tracing) verileri, birbirinden fiziksel olarak ayrı grafik katmanlarında toplanıp ayrı ayrı ya da birleşik sorgulanabiliyor.</p><p>Ama yazının değeri mimaride değil, itirafta. Kendi cümleleriyle: <strong>ilk sürüm yerel ortamda kusursuz çalıştı. Üretim başka bir hikâyeydi.</strong> Sonra sayıyorlar: Kafka tüketicileri geride kaldı. Örnekler bellek yetersizliğine düştü. Bazı düğümler diğerlerinin <strong>100 katı</strong> trafik aldı. Çöp toplama (GC) duraklamaları, asıl iş mantığından daha fazla CPU tüketti.</p><p>Mimarideki temel karar <strong>akış-öncelikli</strong> (streaming-first) olmak. Geleneksel servis topolojisi sistemleri toplu işleme kullanır: veriyi saatlik ya da günlük toplar, sonra tam anlık görüntüleri saklar. Orta ölçekte çalışır ama temel bir sorunu vardır — veriyi gördüğünde zaten eskimiştir. Bir üretim arızası sırasında bu işe yaramaz. Netflix bunun yerine çok-bölgeli Kafka akışlarından akış kayıtlarını ve Sunucu Gönderimli Olaylar (SSE) üzerinden IPC metriklerini sürekli alıp reaktif pipeline&#x27;lardan geçiriyor.</p></div>
+  <div class="prose"><p>Netflix&#x27;in mühendisleri servis bağımlılıklarının gerçek zamanlı ve birleşik bir görünümüne ihtiyaç duyuyordu: sorunları daha hızlı gidermek, bir arızanın <strong>blast radius’u</strong> (blast radius) anlamak ve dağıtık mimaride yol bulmak için. Çözüm çok kaynaklı: eBPF ağ akışları, IPC metrikleri ve distributed tracing (tracing) verileri, birbirinden fiziksel olarak ayrı grafik katmanlarında toplanıp ayrı ayrı ya da birleşik sorgulanabiliyor.</p><p>Ama yazının değeri mimaride değil, itirafta. Kendi cümleleriyle: <strong>ilk sürüm yerel ortamda kusursuz çalıştı. Üretim başka bir hikâyeydi.</strong> Sonra sayıyorlar: Kafka consumer’ları geride kaldı. Örnekler bellek yetersizliğine düştü. Bazı node’lar diğerlerinin <strong>100 katı</strong> trafik aldı. Çöp toplama (GC) duraklamaları, asıl iş mantığından daha fazla CPU tüketti.</p><p>Mimarideki temel karar <strong>akış-öncelikli</strong> (streaming-first) olmak. Geleneksel servis topolojisi sistemleri toplu işleme kullanır: veriyi saatlik ya da günlük toplar, sonra tam snapshot’ları saklar. Orta ölçekte çalışır ama temel bir sorunu vardır — veriyi gördüğünde zaten eskimiştir. Bir üretim arızası sırasında bu işe yaramaz. Netflix bunun yerine çok-bölgeli Kafka akışlarından akış kayıtlarını ve Sunucu Gönderimli Olaylar (SSE) üzerinden IPC metriklerini sürekli alıp reaktif pipeline&#x27;lardan geçiriyor.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>&quot;Bazı düğümler 100 kat trafik aldı&quot; — dağıtık sistemlerde en sinsi problem <strong>sıcak nokta</strong> (hot partition): ortalama iyi görünür, birkaç düğüm yanar.</span></li><li><span>GC duraklamalarının iş mantığından fazla CPU yemesi, JVM tabanlı yüksek hacimli sistemlerin klasik tuzağı.</span></li><li><span>Toplu işleme yerine akış: arıza anında saatlik özet işe yaramaz, gerçek zamanlı gerekir.</span></li><li><span>Katmanları fiziksel olarak ayırmak, her veri kaynağının bağımsız ölçeklenmesini ve sorgulanmasını sağlıyor.</span></li><li><span>Yazı bir başarı hikâyesi değil, açıkça bir <strong>öğrenme yolculuğu</strong> olarak sunuluyor.</span></li>    </ol>
+<li><span>&quot;Bazı node’lar 100 kat trafik aldı&quot; — dağıtık sistemlerde en sinsi problem <strong>sıcak nokta</strong> (hot partition): ortalama iyi görünür, birkaç node yanar.</span></li><li><span>GC duraklamalarının iş mantığından fazla CPU yemesi, JVM tabanlı yüksek hacimli sistemlerin klasik tuzağı.</span></li><li><span>Toplu işleme yerine akış: arıza anında saatlik özet işe yaramaz, gerçek zamanlı gerekir.</span></li><li><span>Katmanları fiziksel olarak ayırmak, her veri kaynağının bağımsız ölçeklenmesini ve sorgulanmasını sağlıyor.</span></li><li><span>Yazı bir başarı hikâyesi değil, açıkça bir <strong>öğrenme yolculuğu</strong> olarak sunuluyor.</span></li>    </ol>
   </div>
 
   <div class="callouts">
@@ -102,8 +102,8 @@
       <p>Yeni mezun bir mühendisin en zor öğrendiği şey, &quot;çalışıyor&quot; ile &quot;ölçekte çalışıyor&quot; arasındaki farktır. Bu yazı o farkı listeleyerek gösteriyor: aynı kod, aynı mantık — ama veri hacmi ve eşzamanlılık değişince tamamen farklı bir sistem. Bu tür açık sözlü yazılar, yıllarca üretim deneyimi olmadan öğrenilemeyecek şeyleri öğretir.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Bu yazıyı iki kere oku ve şu üç şeyi not al. <strong>Bir:</strong> sıcak nokta problemi — Tradebot&#x27;ta veriyi sembole göre bölümlediysen, işlem hacminin %60&#x27;ı BTC&#x27;deyse o bölüm diğerlerinin katbekat yükünü taşır. Bölümleme anahtarını seçerken dağılıma bak, isme değil. <strong>İki:</strong> tüketici geride kalması (consumer lag) — bir kuyruk sisteminde en kritik metrik budur ve mutlaka alarma bağlanmalıdır; Redis Streams ya da Kafka fark etmez. <strong>Üç:</strong> GC — Java tarafında yüksek hacimli bir servis yazıyorsan, GC log&#x27;larını açıp duraklama sürelerine bakmayı öğren. &quot;Uygulama yavaş&quot; şikâyetlerinin şaşırtıcı bir kısmının cevabı orada.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Bu yazıyı iki kere oku ve şu üç şeyi not al. <strong>Bir:</strong> hot partition problemi: veriyi anahtara göre bölümlediysen ve trafiğin yüzde 60’ı tek bir anahtardaysa o bölüm diğerlerinin katbekat yükünü taşır. Partition key seçerken dağılıma bak, isme değil. <strong>İki:</strong> consumer lag: bir kuyruk sisteminde en kritik metrik budur ve mutlaka alarma bağlanmalıdır; Redis Streams ya da Kafka fark etmez. <strong>Üç:</strong> GC: Java tarafında yüksek hacimli bir servis yazıyorsan GC log’larını açıp pause sürelerine bakmayı öğren. ‘Uygulama yavaş’ şikâyetlerinin şaşırtıcı bir kısmının cevabı orada.</p>
     </div>
   </div>
 
@@ -111,23 +111,23 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">blast radius</span> <span class="term-tr">etki yarıçapı</span></dt>
+      <dt><span class="term-en">blast radius</span></dt>
       <dd>Bir bileşen arızalandığında etkilenen diğer bileşenlerin kapsamı.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">eBPF</span> <span class="term-tr">eBPF</span></dt>
+      <dt><span class="term-en">eBPF</span></dt>
       <dd>Linux çekirdeğinde güvenli şekilde kod çalıştırıp ağ ve sistem olaylarını gözlemlemeyi sağlayan teknoloji.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">consumer lag</span> <span class="term-tr">tüketici gecikmesi</span></dt>
-      <dd>Bir kuyruk tüketicisinin, üretilen mesajların ne kadar gerisinde kaldığı; kuyruk sistemlerinin en kritik sağlık metriği.</dd>
+      <dt><span class="term-en">consumer lag</span></dt>
+      <dd>Bir kuyruk consumer’ının, üretilen mesajların ne kadar gerisinde kaldığı; kuyruk sistemlerinin en kritik sağlık metriği.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">hot partition</span> <span class="term-tr">sıcak bölüm</span></dt>
-      <dd>Yükün dengesiz dağılması sonucu diğerlerinden kat kat fazla trafik alan bölüm ya da düğüm.</dd>
+      <dt><span class="term-en">hot partition</span></dt>
+      <dd>Yükün dengesiz dağılması sonucu diğerlerinden kat kat fazla trafik alan bölüm ya da node.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">garbage collection (GC) pause</span> <span class="term-tr">çöp toplama duraklaması</span></dt>
+      <dt><span class="term-en">garbage collection (GC) pause</span></dt>
       <dd>JVM&#39;in kullanılmayan belleği temizlerken uygulamayı kısa süre durdurması; sık olursa gecikmeyi ciddi bozar.</dd>
     </div>
   </dl>
@@ -136,10 +136,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/dagitik-sistemler/">#dağıtık sistemler</a></li>
-  <li><a href="/etiket/gozlemlenebilirlik/">#gözlemlenebilirlik</a></li>
+  <li><a href="/etiket/distributed-systems/">#distributed systems</a></li>
+  <li><a href="/etiket/observability/">#observability</a></li>
   <li><a href="/etiket/kafka/">#Kafka</a></li>
-  <li><a href="/etiket/performans/">#performans</a></li>
+  <li><a href="/etiket/performance/">#performance</a></li>
 </ul>
 
   <a class="readmore" href="https://netflixtechblog.com/building-service-topology-at-scale-architecture-challenges-and-lessons-learned-f4b792f3f0d8?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">
@@ -161,7 +161,7 @@
 </div>
 
   <h3 class="brief-title">
-    <a href="https://engineering.fb.com/2026/07/13/ml-applications/modernizing-the-meta-ads-service-with-an-open-source-kernel-scheduler/" rel="noopener nofollow" target="_blank">Çekirdek zamanlayıcısını değiştirerek p99 gecikmesinde %28 kazanç</a>
+    <a href="https://engineering.fb.com/2026/07/13/ml-applications/modernizing-the-meta-ads-service-with-an-open-source-kernel-scheduler/" rel="noopener nofollow" target="_blank">Çekirdek zamanlayıcısını değiştirerek p99 latency’de %28 kazanç</a>
   </h3>
   <p class="original-title">Modernizing the Meta Ads Service With an Open-Source Kernel Scheduler</p>
   <div class="prose prose-sm"><p>Meta&#x27;nın reklam sunum filosu saniyede ortalama <strong>5 milyondan fazla</strong> istek işliyor — günde 400 milyarın üzerinde. Bu ölçekte birkaç milisaniyelik gecikme bozulması ciddi iş etkisi yaratıyor.</p><p>Problem bir Linux çekirdek yükseltmesiyle çıkmış: v6.6&#x27;da gelen <strong>EEVDF</strong> zamanlayıcısı, reklam sunumunda gecikme regresyonuna ve sıralanan reklam sayısında düşüşe yol açmış. Çözüm için <strong>sched_ext</strong>&#x27;e gitmişler — çekirdek v6.12&#x27;de resmen giren, BPF tabanlı genişletilebilir zamanlayıcı çerçevesi. Yani zamanlama politikasını bir BPF programı olarak yazıp iş yüküne özel hâle getiriyorsun; çekirdek olaylar üzerinden bu programa çağrı yapıyor (thread uyanması, kuyruğa alma, dağıtım).</p><p>Sonuçlar somut: reklam getirme aşamasında <strong>p99 gecikmede %28 azalma</strong>, <strong>3,28 megawatt</strong> güç tasarrufu ve sıralanan reklam sayısında %1,1 artış.</p></div>
@@ -174,8 +174,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Çekirdek zamanlayıcısı yazmayacaksın, ama iki fikri al. Birincisi <strong>p99 kavramı</strong>: ortalama gecikme yalan söyler, kullanıcı deneyimini belirleyen kuyruk gecikmesidir. Kendi API&#x27;nde ortalama değil p95/p99 ölç — Spring Boot Actuator + Micrometer ile birkaç satırda çıkar. İkincisi: bir bağımlılığı yükselttiğinde performansın <strong>iyileşeceğini varsayma</strong>. Meta gibi ölç. Küçük ölçekte bile bir kütüphane sürümü yükseltmesinden sonra temel bir benchmark koşturmak, seni ileride günlerce hata avından kurtarır.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Çekirdek zamanlayıcısı yazmayacaksın, ama iki fikri al. Birincisi <strong>p99 kavramı</strong>: ortalama gecikme yalan söyler, kullanıcı deneyimini belirleyen consumer lag’dır. Kendi API&#x27;nde ortalama değil p95/p99 ölç — Spring Boot Actuator + Micrometer ile birkaç satırda çıkar. İkincisi: bir bağımlılığı yükselttiğinde performansın <strong>iyileşeceğini varsayma</strong>. Meta gibi ölç. Küçük ölçekte bile bir kütüphane sürümü yükseltmesinden sonra temel bir benchmark koşturmak, seni ileride günlerce hata avından kurtarır.</p>
     </div>
   </div>
 
@@ -183,15 +183,15 @@
     <summary class="label">Sözlük · 3 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">p99 latency</span> <span class="term-tr">p99 gecikmesi</span></dt>
+      <dt><span class="term-en">p99 latency</span></dt>
       <dd>İsteklerin %99&#39;unun altında kaldığı süre; en yavaş %1&#39;i temsil eder ve kullanıcı deneyimini ortalamadan çok daha iyi anlatır.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">scheduler</span> <span class="term-tr">zamanlayıcı</span></dt>
+      <dt><span class="term-en">scheduler</span></dt>
       <dd>İşletim sisteminde hangi işin hangi CPU&#39;da ne zaman çalışacağına karar veren çekirdek bileşeni.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">BPF</span> <span class="term-tr">BPF</span></dt>
+      <dt><span class="term-en">BPF</span></dt>
       <dd>Çekirdek içinde güvenli, doğrulanmış küçük programlar çalıştırmayı sağlayan mekanizma.</dd>
     </div>
   </dl>
@@ -201,9 +201,9 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/linux/">#Linux</a></li>
-  <li><a href="/etiket/performans/">#performans</a></li>
-  <li><a href="/etiket/gecikme/">#gecikme</a></li>
-  <li><a href="/etiket/altyapi/">#altyapı</a></li>
+  <li><a href="/etiket/performance/">#performance</a></li>
+  <li><a href="/etiket/latency/">#latency</a></li>
+  <li><a href="/etiket/infrastructure/">#infrastructure</a></li>
 </ul>
 
   <a class="readmore" href="https://engineering.fb.com/2026/07/13/ml-applications/modernizing-the-meta-ads-service-with-an-open-source-kernel-scheduler/" rel="noopener nofollow" target="_blank">
@@ -235,8 +235,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Buradaki düşünce biçimi genel: <strong>sahtesi yapılması zor olan sinyali seç.</strong> Kendi sistemlerinde de aynı soruyu sor — KlioAI&#x27;da abonelik doğrulamasını istemciden gelen bir bayrağa mı bakarak yapıyorsun? O taklit edilebilir. Sunucu tarafında mağaza makbuzunu doğrulamak taklit edilemez. Genel kural: güvenlik kararını, saldırganın kontrol ettiği bir veriye dayandırma. Bir de gizlilik tarafına dikkat et — davranışsal sinyal toplamak güçlü bir araç ama toplanan verinin kapsamı ve saklama süresi açıkça tanımlanmalı.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Buradaki düşünce biçimi genel: <strong>sahtesi yapılması zor olan sinyali seç.</strong> Kendi sistemlerinde de aynı soruyu sor: abonelik doğrulamasını istemciden gelen bir bayrağa bakarak mı yapıyorsun? O taklit edilebilir. Sunucu tarafında mağaza makbuzunu (receipt) doğrulamak taklit edilemez. Genel kural: güvenlik kararını, saldırganın kontrol ettiği bir veriye dayandırma. Bir de privacy tarafına dikkat et: davranışsal sinyal toplamak güçlü bir araç ama toplanan verinin kapsamı ve saklama süresi açıkça tanımlanmalı.</p>
     </div>
   </div>
 
@@ -244,11 +244,11 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">behavioral signal</span> <span class="term-tr">davranışsal sinyal</span></dt>
+      <dt><span class="term-en">behavioral signal</span></dt>
       <dd>Kullanıcının etkileşim biçiminden (hareket, zamanlama, sıra) çıkarılan, kimlik doğrulamaya yardımcı veri.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">bot mitigation</span> <span class="term-tr">bot azaltma</span></dt>
+      <dt><span class="term-en">bot mitigation</span></dt>
       <dd>Otomatik istemcileri tespit edip engelleme ya da sürtünme ekleme pratiği.</dd>
     </div>
   </dl>
@@ -257,9 +257,9 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/guvenlik/">#güvenlik</a></li>
+  <li><a href="/etiket/security/">#security</a></li>
   <li><a href="/etiket/bot-tespiti/">#bot tespiti</a></li>
-  <li><a href="/etiket/sinyal-tasarimi/">#sinyal tasarımı</a></li>
+  <li><a href="/etiket/signal-design/">#signal design</a></li>
 </ul>
 
   <a class="readmore" href="https://blog.cloudflare.com/introducing-precursor/" rel="noopener nofollow" target="_blank">
@@ -291,8 +291,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Depolama katmanlama (storage tiering) fikrini küçük projelerinde de kullan. Tradebot&#x27;taki 1 TB geçmiş veri muhtemelen tek bir yerde duruyor; ama son 3 ayın verisiyle 2 yıl önceki veriye erişim sıklığın aynı değil. Eski veriyi sıkıştırılmış Parquet olarak ucuz depolamaya, sıcak veriyi hızlı diskte tutmak hem maliyeti hem sorgu süresini düşürür. Aynı mantık PostgreSQL&#x27;de tablo bölümleme (partitioning) ile de kurulabilir — eski bölümleri ayrı tablespace&#x27;e alabilirsin.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Storage tiering fikrini küçük projelerde de kullan. Geçmiş verin muhtemelen tek bir yerde duruyor ama son 3 ayın verisine erişim sıklığın ile 2 yıl önceki veriye erişim sıklığın aynı değil. Eski veriyi sıkıştırılmış Parquet olarak ucuz depolamada, sıcak veriyi hızlı diskte tutmak hem maliyeti hem sorgu süresini düşürür. Aynı mantık PostgreSQL’de table partitioning ile de kurulabilir: eski partition’ları ayrı bir tablespace’e alabilirsin.</p>
     </div>
   </div>
 
@@ -300,11 +300,11 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">storage tiering</span> <span class="term-tr">depolama katmanlama</span></dt>
+      <dt><span class="term-en">storage tiering</span></dt>
       <dd>Veriyi erişim sıklığına göre farklı maliyet/hız seviyelerindeki depolama katmanlarına yerleştirme.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">cold storage</span> <span class="term-tr">soğuk depolama</span></dt>
+      <dt><span class="term-en">cold storage</span></dt>
       <dd>Nadiren erişilen veri için kullanılan, çok ucuz ama erişimi yavaş depolama sınıfı.</dd>
     </div>
   </dl>
@@ -313,10 +313,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/depolama/">#depolama</a></li>
-  <li><a href="/etiket/maliyet/">#maliyet</a></li>
-  <li><a href="/etiket/bulut/">#bulut</a></li>
-  <li><a href="/etiket/mimari/">#mimari</a></li>
+  <li><a href="/etiket/storage/">#storage</a></li>
+  <li><a href="/etiket/cost/">#cost</a></li>
+  <li><a href="/etiket/cloud/">#cloud</a></li>
+  <li><a href="/etiket/architecture/">#architecture</a></li>
 </ul>
 
   <a class="readmore" href="https://aws.amazon.com/blogs/architecture/unlocking-the-future-of-video-data-march-networks-cloud-storage-on-aws/" rel="noopener nofollow" target="_blank">
@@ -340,7 +340,7 @@
       </li>
       <li>
         <a href="#8db57dc12acf">
-          <span class="toc-title">Çekirdek zamanlayıcısını değiştirerek p99 gecikmesinde %28 kazanç</span>
+          <span class="toc-title">Çekirdek zamanlayıcısını değiştirerek p99 latency’de %28 kazanç</span>
           <span class="toc-meta">Meta Engineering · 5 dk</span>
         </a>
       </li>
@@ -374,7 +374,7 @@
   <nav class="pager" aria-label="Sayılar arası gezinme">
     <a class="pager-link pager-prev" href="/sayi/2026-07-10/" rel="prev">
       <span class="pager-label">← Önceki sayı · 10 Temmuz 2026</span>
-      <span class="pager-title">Ölçüm tutunacak bir şey bulamayınca: anycast ve önbellek verimliliği</span>
+      <span class="pager-title">Ölçüm tutunacak bir şey bulamayınca: anycast ve cache verimliliği</span>
     </a>
     <a class="pager-link pager-next" href="/sayi/2026-07-14/" rel="next">
       <span class="pager-label">Sonraki sayı · 14 Temmuz 2026 →</span>
@@ -395,7 +395,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

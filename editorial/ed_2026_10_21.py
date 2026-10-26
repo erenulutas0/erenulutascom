@@ -1,0 +1,97 @@
+"""21 Ekim 2026 sayısı."""
+
+from pipeline.compose import save_edition
+
+DATE = "2026-10-21"
+
+INTRO = "Reklam sistemi klasik olarak bir olaya cevap verir: arama yapıldı, sayfa açıldı. Sohbette ise niyet birkaç turda ortaya çıkıyor ve değişiyor. OpenAI’ın ChatGPT için kurduğu ad stack’i, bunun mimariye ne yaptığını anlatıyor. Yazı OpenAI’ın kendi anlatımı; iddialar o gözle okunmalı. Yanında BigQuery’de yapılandırılmamış veriye yeni bir tip."
+
+DRAFTS = [
+    {
+        "url": "https://openai.com/index/building-chatgpt-ad-stack",
+        "slot": "cover",
+        "title_tr": "Olay değil konuşma: ChatGPT’nin ad stack’i neden request-response değil, stateful session",
+        "difficulty": "orta",
+        "tags": [
+            "architecture",
+            "LLM",
+            "agent",
+            "system design"
+        ],
+        "summary": "Geleneksel bir reklam sistemi iyi tanımlanmış bir olayla başlar: kullanıcı bir arama yapar ya da bir sayfa açar, sistem aday reklamları getirir, sıralar, bir açık artırma (auction) çalıştırır ve sonucu gösterir. ChatGPT’de böyle somut bir an yok: insanlar tek bir arama sorgusuyla değil hedeflerle geliyor (bir gezi planlamak, bir yazılım seçmek, ev döşemek) ve niyet birkaç turda, hatta birkaç oturumda netleşiyor. Yazıdaki örnek: bir konuşma koşuyla ilgili genel bir soruyla başlıyor, birkaç tur sonra ayakkabı sorusuna geliyor. İlk mesaja göre hareket eden bir sistem yanlış niyeti yakalayabilir.\n\nOpenAI’ın üç temel tasarım kararı var. **(1) Stateful ads session:** reklam sistemi her mesajı bağımsız bir istek saymıyor; uygun bir tur boyunca süren bir session tutuyor, bilgiyi turlar ve konuşmalar arasında hatırlıyor. Böylece niyeti fazla basite indirgeyip yanlış okuma, kullanıcının gerçek ihtiyacı netleşmeden reklam akışını erken başlatma ve istek her değiştiğinde akışı gereksiz yeniden çalıştırma riskleri azalıyor. **(2) Tool call mimarisiyle çalışan, post-training uygulanmış özel bir LLM:** konuşmanın bağlamını ve altındaki niyeti yorumlayıp retrieval, ranking, relevance ve auction araçlarını agentic bir döngüde çağırıyor. Önce konuşmayı kısa metin özetlerine ve semantic embedding’lere çeviriyor; tek bir sorgu yerine niyetin farklı yönlerini temsil eden birden çok sorgu üretebiliyor (bir gezi planı birden çok ticari niyet taşıyabilir). Konuşma ilerleyip bağlam güncellendikçe orchestrator yeni bir tool çağrı seti çalıştırıp daha iyi reklamları istemciye döndürebiliyor. **(3) Reklam seçimi cevap üretiminden ayrı bir servis:** ChatGPT’nin cevabının reklamlardan etkilenmemesi için seçim, kendi uygunluk ve kalite kurallarıyla konuşmayı tüketen ayrı bir sistemde çalışıyor. Yazıya göre ChatGPT’nin reklam sistemine bağımlılığı yok ve iki servis içerik üretim modelini paylaşmıyor.\n\nOpenAI orchestrator’un kullanıcı değeri ile reklamveren değerini dengelediğini ve ‘her zaman önce kullanıcıyı koyduğunu’ söylüyor; bu bir şirketin kendi beyanı, bağımsız bir doğrulama değil. Yazı ayrıca ChatGPT Ads’in lansmandan 200 günden az bir sürede yıllıklandırılmış 1 milyar dolar gelir seviyesine ulaştığını ve lansmandan beri 100 binden fazla reklamverenin reklam verdiğini belirtiyor.",
+        "key_points": [
+            "Sohbet gibi niyetin birkaç turda oluştuğu sistemlerde request-response yerine stateful session tasarla.",
+            "Gelir getiren bileşeni cevap üreten bileşenden ayrı bir servis yapmak, birbirine sızmayı yapısal olarak engeller.",
+            "Birden çok sorgu üretmek, tek bir niyetin farklı yönlerini yakalar.",
+            "LLM’i tek başına karar verici değil, retrieval/ranking/auction araçlarını çağıran bir orchestrator olarak kullan."
+        ],
+        "why_it_matters": "Yazı reklamdan bağımsız olarak önemli bir mimari soruyu gösteriyor: agentic bir ürünün yan sistemleri (öneri, reklam, arama) kullanıcı cevabından nasıl ayrılır ve konuşma bağlamını nasıl takip eder? Ayrım hem güveni hem de arıza yalıtımını sağlıyor.",
+        "for_you": "Chat tabanlı bir ürün yazarsan aynı ayrımı küçük ölçekte yapabilirsin: ana cevap üretimi ayrı, ikincil özellikler (öneri, ilgili içerik, analitik) ayrı bir servis ya da en azından ayrı bir modül olsun ve ikincisi çökünce birincisi etkilenmesin (timeout, circuit breaker). Konuşma bağlamını tek mesaja indirgemek yerine son birkaç turun kısa bir özetini tutup sorgularda onu kullan.",
+        "terms": [
+            {
+                "en": "stateful session",
+                "tr": "stateful session",
+                "definition": "Birden çok istek boyunca durum (state) tutan oturum; her istek bağımsız değildir."
+            },
+            {
+                "en": "request-response",
+                "tr": "request-response",
+                "definition": "Her isteğin tek başına işlenip bir cevap döndüğü klasik iletişim modeli."
+            },
+            {
+                "en": "post-training",
+                "tr": "post-training",
+                "definition": "Önceden eğitilmiş bir modelin belirli bir görev için ek eğitimle uyarlanması."
+            },
+            {
+                "en": "auction",
+                "tr": "auction",
+                "definition": "Reklam alanı için teklif veren adaylar arasından seçim ve fiyatlama yapan mekanizma."
+            },
+            {
+                "en": "circuit breaker",
+                "tr": "circuit breaker",
+                "definition": "Sürekli hata veren bir bağımlılığa çağrıyı geçici olarak kesen koruma deseni."
+            }
+        ]
+    },
+    {
+        "url": "https://cloud.google.com/blog/products/data-analytics/analyze-unstructured-data-in-bigquery-with-objectref/",
+        "slot": "brief",
+        "title_tr": "Dosyayı kopyalama, işaret et: BigQuery ObjectRef ile unstructured data",
+        "difficulty": "orta",
+        "tags": [
+            "data engineering",
+            "BigQuery",
+            "multimodal",
+            "SQL"
+        ],
+        "summary": "Görsel, video, ses ve doküman gibi yapılandırılmamış veriyi analiz etmek bugüne kadar yapılandırılmış ve yapılandırılmamış veri için ayrı pipeline’lar yönetmek demekti. Dosyalar Cloud Storage’da dursa bile inference için harici ML iş yükleri orkestre edilip sonuçlar tekrar veri ambarına dikilmek zorundaydı; bu da kırılgan bir adım. Google, **ObjectRef** ve multimodal veri analitiğini genel kullanıma açtı. ObjectRef, Cloud Storage’daki nesnelere işaret eden yerleşik bir `STRUCT` tipi: bu işaretçileri normal tablolarda diğer sütunların yanında tutuyorsun ve çok sütunlu, multimodal girdiyi tek bir SQL sorgusuyla Gemini modellerine verebiliyorsun.\n\nÖne çıkan özellikler: **zero-copy** (büyük medya dosyaları Cloud Storage’da kalır, veri çoğaltılmaz), **SQL ve Python birlikte çalışabilirliği** (ObjectRef’ler Python UDF’lerine geçirilip OpenCV gibi açık kaynak kütüphaneler veriye getirilebilir), **bağımsız yaşam döngüsü ve sürümleme** (ObjectRef GCS generation numarasını izler; dosya sonradan değişse bile satır yazıldığı andaki sürüme işaret eder, bu inference’ı tekrarlanabilir kılar) ve **birleşik governance** (yapılandırılmış sütunlar ve bağlı dosyalar için aynı güvenlik politikaları ve IAM).",
+        "key_points": [
+            "Dosyayı kopyalamak yerine ona versiyonlu bir işaretçi tutmak, hem maliyeti hem tutarsızlığı azaltır.",
+            "Nesne sürümünü (generation) kaydetmek, ML sonuçlarını sonradan yeniden üretilebilir yapar.",
+            "Yapılandırılmış ve yapılandırılmamış veriye aynı erişim politikasını uygulamak governance’ı basitleştirir."
+        ],
+        "for_you": "Aynı fikri kendi veritabanında uygulayabilirsin: görselleri ve PDF’leri tabloya gömmek yerine nesne depolamada tut, tabloda yalnızca yolunu, boyutunu ve sürüm kimliğini (ETag ya da version id) sakla. Bir model sonucunu kaydederken hangi sürümü işlediğini de yaz; dosya değişirse sonucun eski olduğunu bilirsin.",
+        "terms": [
+            {
+                "en": "zero-copy",
+                "tr": "zero-copy",
+                "definition": "Veriyi çoğaltmadan, yerinde okuyarak çalışma yaklaşımı."
+            },
+            {
+                "en": "unstructured data",
+                "tr": "unstructured data",
+                "definition": "Tablo biçiminde olmayan veri: görsel, ses, video, doküman."
+            },
+            {
+                "en": "data governance",
+                "tr": "data governance",
+                "definition": "Verinin kim tarafından, nasıl erişilip kullanılacağını belirleyen politika ve kontroller."
+            }
+        ]
+    }
+]
+
+if __name__ == "__main__":
+    save_edition(DATE, INTRO, DRAFTS)

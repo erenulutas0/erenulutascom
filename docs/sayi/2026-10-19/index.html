@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>19 Ekim 2026 — Eren&#39;in Mühendislik Gazetesi</title>
+<meta name="description" content="İki yazı, agent sistemlerinde aynı sorunu iki uçtan anlatıyor: fazla şeyi tek yere yüklemek. Cloudflare’in code review agent’ı maliyetini yüzde 68 düşürürken büyük kısmını prompt cache’i doğru kurarak kazandı. Meta ise tek ‘her şeyi bilen’ agent yerine bilgisiz ama disiplinli bir router seçti.">
+<meta name="author" content="Eren Ulutaş">
+<meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131310" media="(prefers-color-scheme: dark)">
+<meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:title" content="19 Ekim 2026 — Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:description" content="İki yazı, agent sistemlerinde aynı sorunu iki uçtan anlatıyor: fazla şeyi tek yere yüklemek. Cloudflare’in code review agent’ı maliyetini yüzde 68 düşürürken büyük kısmını prompt cache’i doğru kurarak kazandı. Meta ise tek ‘her şeyi bilen’ agent yerine bilgisiz ama disiplinli bir router seçti.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:url" content="https://erenulutas.com/sayi/2026-10-19/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://erenulutas.com/sayi/2026-10-19/">
+<link rel="alternate" type="application/rss+xml" title="Eren&#39;in Mühendislik Gazetesi" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
+<link rel="stylesheet" href="/static/style.css?v=eae14b0f">
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+<script>
+  // Tema tercihini ilk boyamadan önce uygula (flash olmasın)
+  (function () {
+    try {
+      var t = localStorage.getItem('tema');
+      if (t) document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip" href="#icerik">İçeriğe geç</a>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <a href="/" class="logo">
+      <span class="logo-mark">EU</span>
+      <span class="logo-text">
+        <strong>Eren&#39;in Mühendislik Gazetesi</strong>
+        <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
+      </span>
+    </a>
+    <nav class="masthead-nav" aria-label="Ana menü">
+      <a href="/">Bugün</a>
+      <a href="/arsiv/" aria-current="page">Arşiv</a>
+      <a href="/ara/">Ara</a>
+      <a href="/hakkinda/">Hakkında</a>
+      <button id="tema" class="tema" type="button" aria-label="Açık/koyu temayı değiştir" title="Açık/koyu tema">
+        <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/></g></svg>
+        <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg>
+      </button>
+    </nav>
+  </div>
+  <div class="progress" id="ilerleme" aria-hidden="true"></div>
+</header>
+
+<main id="icerik">
+<div class="wrap">
+
+  <header class="edition-head">
+  <div class="edition-bar">
+    <span class="edition-no">Sayı 62</span>
+    <h1 class="edition-date"><time datetime="2026-10-19">19 Ekim 2026, Pazartesi</time></h1>
+    <nav class="edition-nav" aria-label="Sayılar arası gezinme">
+<a href="/sayi/2026-10-16/" rel="prev"><span aria-hidden="true">←</span> 16 Ekim 2026</a><a href="/sayi/2026-10-20/" rel="next">20 Ekim 2026 <span aria-hidden="true">→</span></a>
+    </nav>
+  </div>
+<p class="lede">İki yazı, agent sistemlerinde aynı sorunu iki uçtan anlatıyor: fazla şeyi tek yere yüklemek. Cloudflare’in code review agent’ı maliyetini yüzde 68 düşürürken büyük kısmını prompt cache’i doğru kurarak kazandı. Meta ise tek ‘her şeyi bilen’ agent yerine bilgisiz ama disiplinli bir router seçti.</p></header>
+
+
+  <div class="layout">
+    <div class="layout-main">
+          <article class="story cover" id="a26c408d34d1">
+  <div class="meta">
+<span class="kicker">Günün kapağı</span>    <a class="badge" href="/kaynak/cloudflare/"
+     style="--brand: #F6821F">Cloudflare Blog</a>
+
+  <span class="meta-item">19 Ekim 2026</span>
+<span class="meta-item">14 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
+</div>
+
+  <h2 class="cover-title">
+    <a href="https://blog.cloudflare.com/obsessive-inference-optimization/" rel="noopener nofollow" target="_blank">Token’lar nereye gidiyor? Cloudflare AI code reviewer maliyetini yüzde 68 nasıl düşürdü</a>
+  </h2>
+  <p class="original-title">Cutting our inference bill by 68% by being obsessive about optimization · Ryan Skidmore</p>
+
+  <div class="prose"><p>Cloudflare’in AI code reviewer’ı nisan ayında ortalama 1,19 dolara bir review yapıyordu; ağustos sonunda bu rakam yaklaşık 2,46 dolara çıktı. Mimaride önemli bir değişiklik yoktu: aynı coordinator, aynı specialist reviewer’lar, aynı risk tier’ları. Eylül ortasında agent’lara ‘token’lar nereye gidiyor, agresif biçimde kes’ görevi verildi. Sonuç: kod kalitesi yüksek efor seviyesinde kalarak ortalama review maliyeti en pahalı iki haftanın ortalaması olan 2,43 dolardan 0,77 dolara (yüzde 68) indi; medyan süre 4 dk 09 sn’den 1 dk 32 sn’ye düştü. Tasarrufun yaklaşık yüzde 40’ı reviewer kodundaki değişikliklerden, kalanı hangi modelin ne kadar efor harcadığını denemekten geldi.</p><p><strong>Maliyet neden ikiye katlandı?</strong> Review başına maliyet mart 1,22 dolardan ağustos 2,32 dolara tırmandı. Küçük bir kısmı en pahalı tier’a (full review) düşen review oranının yüzde 59’dan yüzde 65’e çıkmasıydı (mühendisler daha büyük değişiklikler yapıyor). Asıl artış model değişikliklerinden geldi: ağustos başında tüm reviewer’lar Anthropic modellerine taşındı (eval’lerde bu iş yükünde daha iyi çıktığı için) ve job başına maliyet 1,38 dolardan 2,03 dolara yükseldi. Internal standards reviewer Claude Opus 4.7’ye geçince review başına 0,25 dolardan 0,88 dolara çıktı; coordinator’dan bile pahalı oldu. Cache hit rate yüzde 85,7’den yüzde 97’ye yükseldi ama review başına token sayısı 0,91 milyondan 2,99 milyona çıktığı için ucuz cache read bile toplamı artırdı.</p><p><strong>Para nereye gidiyor?</strong> Optimizasyondan önce harcama şöyle bölünüyordu: output token’ları yüzde 23, cache write’lar yüzde 43, cache read’ler yüzde 34. Yani paranın çoğu model zaten görmüş ya da tekrar görecek bağlama gidiyordu. Bunun nedeni her LLM çağrısının tüm konuşmayı bağlam olarak yeniden göndermesi: code quality reviewer review başına ortalama 16,6 çağrı yapıyor, 72 bin token cache’e yazıyor ve 1,08 milyon token geri okuyor. Maliyet hem çağrı sayısıyla hem bağlam boyutuyla büyüyor. İki hedef belli oldu: her session’ın ilk isteği cache’e yazmak yerine cache’ten okusun, ve session daha az çağrı yapsın.</p><p><strong>1. Cache’lenmiş prefix’i repository’ler arasında paylaşmak.</strong> Her session aynı tool tanımlarıyla ve aynı agent prompt’uyla başlıyor (11-21 bin token, tüm repository’lerde özdeş). Yine de ilk isteğin cache’lenmiş bir prefix bulma oranı yalnızca yüzde 14-26 çıktı. Neden: OpenCode v1 system prompt’u tek blok olarak kuruyordu (agent prompt’u, ardından çalışma dizini ve tarihi içeren bir environment bölümü) ve tek cache breakpoint’ini bloğun sonuna koyuyordu. Çalışma dizini ve tarih her job’da farklı olduğundan, ortak kısım hiç cache’lenemiyordu. Çözüm: her agent prompt’unun sonuna bir marker koymak ve bloğu bu marker’dan ikiye bölen bir plugin hook’u eklemek; birinci yarı her job’da aynı baytlarla bitiyor ve kendi breakpoint’ini alıyor. Standards reviewer’ın referans index’i de prompt’a taşındı (daha önce her session ilk üç turunu dosya okuyarak harcıyordu). Birlikte review başına 2,47 dolardan 2,02 dolara düşürdü.</p><p><strong>2. Daha az çağrı.</strong> Üç küçük değişiklik birlikte review başına yaklaşık 0,20 dolar kazandırdı. Reviewer’ların kullanamadığı bir tool’u (final yorumu gönderen tool) görmemesi sağlandı: sub-reviewer’lar session’ların yüzde 57-76’sında bu tool’u çağırıp sunucu tarafında reddediliyor ve toparlanmak için bir çağrı daha harcıyordu. Dosyalar paralel okundu: code quality reviewer’ın turlarının yüzde 64’ünde model tam bir tool call yapıyordu (genelde tek dosya okumak), artık ortak bağlam ve patch’lerin hepsi ilk yanıtta okunuyor. Re-review’larda gereksiz reviewer’lar atlandı: job’ların yaklaşık üçte ikisi aynı merge request’in ikinci ya da sonraki review’ı ve çoğu zaman üç reviewer’ın bakacak yeni bir şeyi yok.</p><p><strong>Güvenli geçiş.</strong> Reviewer OpenCode v2’ye taşındı. Hepsi tek seferde geçirilmeden önce her canary repository’de her review hem v1 hem v2 ile shadow mode’da çalıştırıldı; test edilen merge request’lerin yüzde 98’inde onay kararı aynı çıktı. Aynı modellerle full-tier review’lar v2’de yaklaşık yüzde 13 daha hızlı bitti.</p></div>
+
+  <div class="keypoints">
+    <h3 class="label">Öne çıkanlar</h3>
+    <ol>
+<li><span>LLM maliyetini çoğu zaman output değil tekrar gönderilen bağlam (cache write ve read) belirler.</span></li><li><span>Prompt cache bir prefix eşleşmesidir: prefix’e giren her değişken (tarih, çalışma dizini) cache’i bozar.</span></li><li><span>Sabit olanı prompt’un başına, değişkeni sonuna koy; cache breakpoint’i ortak kısmın sonuna yerleştir.</span></li><li><span>Agent’ın kullanamayacağı tool’u ona gösterme: reddedilen çağrı da para ve zaman harcar.</span></li><li><span>Yeni sistemi eskisiyle shadow mode’da yan yana çalıştırmak, geçişi güvenli yapar.</span></li>    </ol>
+  </div>
+
+  <div class="callouts">
+    <div class="callout callout-why">
+      <h3 class="label">Neden önemli?</h3>
+      <p>Agent maliyetleri sessizce büyür: model değişir, bağlam büyür, çağrı sayısı artar ve kimse tek bir kalemi suçlayamaz. Bu yazı ‘önce ölç, sonra kes’ yaklaşımının somut örneği: harcamayı kalemlere ayırıp her kalem için ayrı bir düzeltme yapmışlar.</p>
+    </div>
+    <div class="callout callout-you">
+      <h3 class="label">Pratikte</h3>
+      <p>Kendi LLM çağrılarında hemen yapabileceğin üç şey var. <strong>(1)</strong> API cevabındaki usage alanlarına (<code>cache_creation_input_tokens</code>, <code>cache_read_input_tokens</code>) bak; cache read sıfırsa cache çalışmıyordur. <strong>(2)</strong> System prompt’a tarih, kullanıcı adı, çalışma dizini gibi değişkenleri koyuyorsan en sona taşı ya da kullanıcı mesajına al; sabit kısım bir cache breakpoint ile ayrılsın. <strong>(3)</strong> Agent’a verdiğin tool listesini gözden geçir: o adımda çağıramayacağı tool’u listeden çıkar. Sonra bir haftalık çağrıyı token cinsinden üç kalemde (output, cache write, cache read) ayır; hangisi büyükse önce onu hedefle.</p>
+    </div>
+  </div>
+
+  <div class="terms">
+    <h3 class="label">Sözlük</h3>
+      <dl>
+    <div class="term">
+      <dt><span class="term-en">prompt caching</span></dt>
+      <dd>Tekrar eden prompt prefix’ini yeniden işlemek yerine cache’ten okuyarak maliyet ve gecikmeyi düşürme.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">cache breakpoint</span></dt>
+      <dd>Prompt’un hangi noktaya kadar olan kısmının cache’leneceğini belirten işaret.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">shadow mode</span></dt>
+      <dd>Yeni sistemi gerçek trafikte eskisiyle yan yana çalıştırıp kararlarını etkisiz biçimde karşılaştırma.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">canary</span></dt>
+      <dd>Bir değişikliği önce küçük bir kullanıcı ya da repository grubunda deneme.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">tool call</span></dt>
+      <dd>Bir LLM agent’ının dış bir araç ya da fonksiyonu çağırması.</dd>
+    </div>
+  </dl>
+
+  </div>
+
+  <div class="article-foot">
+  <ul class="tags">
+  <li><a href="/etiket/llm/">#LLM</a></li>
+  <li><a href="/etiket/cost/">#cost</a></li>
+  <li><a href="/etiket/prompt-caching/">#prompt caching</a></li>
+  <li><a href="/etiket/agent/">#agent</a></li>
+</ul>
+
+  <a class="readmore" href="https://blog.cloudflare.com/obsessive-inference-optimization/" rel="noopener nofollow" target="_blank">
+    Orijinali oku <span aria-hidden="true">↗</span>
+  </a>
+</div>
+
+</article>
+
+
+    <h2 class="subhead">Kısa kısa</h2>
+<article class="story brief" id="5641e45c2126">
+  <div class="meta">
+    <a class="badge" href="/kaynak/meta/"
+     style="--brand: #0866FF">Meta Engineering</a>
+
+  <span class="meta-item">19 Ekim 2026</span>
+<span class="meta-item">7 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
+</div>
+
+  <h3 class="brief-title">
+    <a href="https://engineering.fb.com/2026/10/19/ml-applications/thin-orchestrator-ai-agent-architecture/" rel="noopener nofollow" target="_blank">Router’a daha az iş ver, agent daha güvenilir olsun: Meta’nın thin orchestrator deseni</a>
+  </h3>
+  <p class="original-title">The Thin Orchestrator: How We Made Our AI Agents More Reliable by Giving the Router Less to Do</p>
+  <div class="prose prose-sm"><p>Meta, öneri sistemlerindeki data column onboarding işini otomatikleştirmek için önce her şeyi bilen tek bir agent kurdu: konfigürasyon şemaları, kod üretim kuralları, pipeline yönlendirme, doğrulama ve 10’dan fazla veri kaynağı için doldurma kalıpları. Demoda çalıştı, production’da hallucination başladı. Belirli bir bağlam eşiğinden sonra ek bilgi sonucu iyileştirmek yerine bozuyordu: agent kavramları karıştırıyor, bir alt sistemin isimlendirme kuralını diğerine uyguluyordu. Manuel prompt engineering ile bile başarı oranı yüzde 70-80’di; elle hazırlanmış prompt olmadan yüzde 10-20’ye düşüyordu. Yazının tespiti: bu bir prompt sorunu değil, mimari bir sorundu.</p><p>Çözüm <strong>thin orchestrator</strong>: 1.300 satırlık deterministik bir router, 20’den fazla workflow’u 14 specialist agent’a yönlendiriyor ve kendisi hiçbir domain işi yapmıyor. Her istek için sabit 7 adımlı bir protokol izliyor: ilgili agent’ın talimat dosyasını oku, hedef zaten var mı kontrol et, eksik alanları kullanıcıdan topla, çıkarılabilenleri otomatik keşfet, reliability gate’i kontrol et, specialist’e delege et, sonucu işle. Bu adımlardan yalnızca biri (delegasyon) LLM reasoning’i içeriyor ve o da yalnızca kendi domain bilgisi yüklü, izole bir subagent içinde oluyor.</p><p>Yeni bir kullanım senaryosu (pipeline migration) için yeni agent yazmak yerine mevcut agent’ları farklı sırayla dizen bir <strong>workflow template</strong> yazılmış: şablonlar LLM’in karar alanını daraltan deterministik state machine’ler. Bilgi dosyaları (25’ten fazla) orchestrator’a gömülmüyor, subagent çalışırken ihtiyaç anında yükleniyor. Sonuç: bir yeni column için konfigürasyon hazırlığı elle üç dört gün, önceki config-driven sistemle yaklaşık bir gün sürerken şimdi bir saatin altında; değişikliklerin yaklaşık üçte ikisi önemli bir insan düzeltmesi olmadan giriyor.</p></div>
+
+  <div class="keypoints keypoints-sm">
+    <h4 class="label">Öne çıkanlar</h4>
+    <ol>
+<li><span>Belirli bir noktadan sonra agent’a daha fazla bağlam vermek sonucu kötüleştirir.</span></li><li><span>‘Hangi agent bu işi yapar?’ bir routing kararıdır; LLM ile çözülmemeli.</span></li><li><span>Yeni senaryo için yeni agent yazmak yerine mevcut agent’ları farklı sırayla dizen bir workflow template yaz.</span></li><li><span>Bilgiyi başta toptan yükleme; subagent çalışırken ihtiyaç duyduğunu yüklesin.</span></li>    </ol>
+  </div>
+
+  <div class="callouts">
+    <div class="callout callout-you">
+      <h4 class="label">Pratikte</h4>
+      <p>Bir LLM uygulamasında prompt uzadıkça sonuçlar kötüleşiyorsa önce prompt’u kısaltmayı değil görevi bölmeyi dene. Basit bir başlangıç: ilk adımda küçük, ucuz bir sınıflandırma çağrısıyla isteğin türünü belirle (kod ile bir <code>switch</code>), sonra her tür için yalnızca o türün talimatını içeren ayrı bir prompt çağır. Routing’i LLM’e bırakma; kuralla yapabildiğin her kararı kodla yap.</p>
+    </div>
+  </div>
+
+  <details class="terms">
+    <summary class="label">Sözlük · 3 terim</summary>
+      <dl>
+    <div class="term">
+      <dt><span class="term-en">orchestrator</span></dt>
+      <dd>İşleri sıralayıp doğru bileşene yönlendiren, kendisi iş yapmayan koordinatör katman.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">subagent</span></dt>
+      <dd>Belirli bir alanda uzmanlaşmış, kendi izole bağlamıyla çalışan agent.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">workflow template</span></dt>
+      <dd>Adımların sırasını sabitleyen, LLM’in karar alanını daraltan deterministik workflow şablonu.</dd>
+    </div>
+  </dl>
+
+  </details>
+
+  <div class="article-foot">
+  <ul class="tags">
+  <li><a href="/etiket/agent/">#agent</a></li>
+  <li><a href="/etiket/architecture/">#architecture</a></li>
+  <li><a href="/etiket/llm/">#LLM</a></li>
+  <li><a href="/etiket/reliability/">#reliability</a></li>
+</ul>
+
+  <a class="readmore" href="https://engineering.fb.com/2026/10/19/ml-applications/thin-orchestrator-ai-agent-architecture/" rel="noopener nofollow" target="_blank">
+    Orijinali oku <span aria-hidden="true">↗</span>
+  </a>
+</div>
+
+</article>
+
+
+    </div>
+    <aside class="layout-aside" aria-label="Bu sayıda">
+  <div class="aside-block">
+    <h2 class="label">Bu sayıda</h2>
+    <ol class="toc" id="toc">
+      <li>
+        <a href="#a26c408d34d1">
+          <span class="toc-title">Token’lar nereye gidiyor? Cloudflare AI code reviewer maliyetini yüzde 68 nasıl düşürdü</span>
+          <span class="toc-meta">Cloudflare Blog · 14 dk</span>
+        </a>
+      </li>
+      <li>
+        <a href="#5641e45c2126">
+          <span class="toc-title">Router’a daha az iş ver, agent daha güvenilir olsun: Meta’nın thin orchestrator deseni</span>
+          <span class="toc-meta">Meta Engineering · 7 dk</span>
+        </a>
+      </li>
+    </ol>
+  </div>
+  <div class="aside-block aside-facts">
+    <h2 class="label">Künye</h2>
+    <dl class="facts">
+      <div><dt>yazı</dt><dd>2</dd></div>
+      <div><dt>dk okuma</dt><dd>21</dd></div>
+      <div><dt>kaynak</dt><dd>2</dd></div>
+      <div><dt>terim</dt><dd>8</dd></div>
+    </dl>
+  </div>
+</aside>
+
+  </div>
+
+  <nav class="pager" aria-label="Sayılar arası gezinme">
+    <a class="pager-link pager-prev" href="/sayi/2026-10-16/" rel="prev">
+      <span class="pager-label">← Önceki sayı · 16 Ekim 2026</span>
+      <span class="pager-title">Agent’ı kapanış cümlesine göre notlama: dört eval mühendisliği dersi</span>
+    </a>
+    <a class="pager-link pager-next" href="/sayi/2026-10-20/" rel="next">
+      <span class="pager-label">Sonraki sayı · 20 Ekim 2026 →</span>
+      <span class="pager-title">Agent’ın hafızası: neyi saklayacağına karar vermek ve ‘dreaming’ pipeline’ı (MemCurrent)</span>
+    </a>
+  </nav>
+
+</div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-col">
+      <p class="footer-brand">Eren&#39;in Mühendislik Gazetesi</p>
+      <p class="muted">
+        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını derleyip
+        Türkçe özetleyen kişisel bir gazete. Özetler yeni mezun bir mühendisin
+        anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
+      </p>
+      <p class="muted small num">
+        149 özet · 67 sayı ·
+        11 kaynak
+      </p>
+    </div>
+    <div class="footer-col">
+      <h3>Kaynaklar</h3>
+      <ul class="footer-sources">
+        <li><a href="https://www.uber.com/blog/engineering/" rel="noopener nofollow" target="_blank">Uber Engineering</a></li>
+        <li><a href="https://netflixtechblog.com" rel="noopener nofollow" target="_blank">Netflix Tech Blog</a></li>
+        <li><a href="https://aws.amazon.com/blogs/architecture/" rel="noopener nofollow" target="_blank">AWS Architecture Blog</a></li>
+        <li><a href="https://blog.cloudflare.com" rel="noopener nofollow" target="_blank">Cloudflare Blog</a></li>
+        <li><a href="https://stripe.com/blog" rel="noopener nofollow" target="_blank">Stripe Engineering</a></li>
+        <li><a href="https://www.databricks.com/blog" rel="noopener nofollow" target="_blank">Databricks Engineering</a></li>
+        <li><a href="https://engineering.fb.com" rel="noopener nofollow" target="_blank">Meta Engineering</a></li>
+        <li><a href="https://openai.com/news/" rel="noopener nofollow" target="_blank">OpenAI Research</a></li>
+        <li><a href="https://www.anthropic.com/engineering" rel="noopener nofollow" target="_blank">Anthropic Engineering</a></li>
+        <li><a href="https://research.google/blog/" rel="noopener nofollow" target="_blank">Google Research</a></li>
+        <li><a href="https://cloud.google.com/blog/" rel="noopener nofollow" target="_blank">Google Cloud Blog</a></li>
+        <li><a href="https://devblogs.microsoft.com/engineering-at-microsoft/" rel="noopener nofollow" target="_blank">Microsoft Engineering</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Eren Ulutaş</h3>
+      <ul class="footer-links">
+        <li><a href="https://github.com/erenulutas0" rel="me noopener" target="_blank">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/eren-u-55918a2a0" rel="me noopener" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:eerenulutass@gmail.com">E-posta</a></li>
+        <li><a href="/feed.xml">RSS</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-legal">
+    <p class="muted small">
+      Tüm özetler kaynak makalelere bağlıdır; telif orijinal yazarlara aittir.
+      Bu site yalnızca özet ve yönlendirme sunar. © 2026 Eren Ulutaş.
+    </p>
+  </div>
+</footer>
+
+<script src="/static/app.js?v=eae14b0f" defer></script>
+</body>
+</html>

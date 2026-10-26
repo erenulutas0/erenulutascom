@@ -88,12 +88,12 @@
   </h2>
   <p class="original-title">Rapidly scaling online storage to serve over 1 billion ChatGPT users</p>
 
-  <div class="prose"><p>Habitat, OpenAI ürünlerinin ihtiyaç duyduğu bilgiye hızlı ve güvenilir erişmesi için kurulan çevrimiçi depolama platformu. Bugün <strong>saniyede 70 milyondan fazla isteği</strong> işliyor, haftada 1 milyar kişinin kullandığı ürünleri destekliyor, yaklaşık 40 coğrafi bölgede çalışıyor ve <strong>500 petabayttan fazla veri</strong> sunuyor. Başlangıcı ise çok mütevazı: DevDay 2023’te GPT’ler için, tek bir veritabanına bağlanan basit bir <strong>Python istemci kütüphanesi</strong> olarak çıktı.</p><p>Kütüphane fikri işe yaradı: ürün mühendisleri şema arama, yönlendirme, yetkilendirme, şifreleme, serileştirme ve bağlantı havuzlamayı düşünmek zorunda değildi; hatta verinin Azure Cosmos DB’den mi, önbellekten mi geldiğini bile bilmiyorlardı. Yetenekler (istemci tarafı önbellek, sıkıştırma, şifreleme) paylaşılan kütüphaneye kolayca eklendi.</p><p>2025 ortasında istemci tarafı uygulama sınırına dayandı. Servis sayısı büyüyünce geriye uyumlu protokol değişikliği yapmak imkânsızlaştı. Yazıdaki örnek çok öğretici: en kritik veri kümelerinin bölge kesintisindeki etkisini azaltmak için bunları bölgesel dağıtık Cosmos DB hesaplarına taşımak istediler. Bu, istemciye yönlendirme mantığı eklemeyi (özellik bayrağı arkasında), tüm istemcilere yaymayı ve sonra bayrağı açmayı gerektirdi. Onlarca servisi koordine etmek <strong>günler</strong> sürdü; gölgeleme eklemek birkaç gün daha, bir hata düzeltmesi yine birkaç gün. Sonunda tam bayrağı açma aşamasında bir ekip kendi servisini ilgisiz bir sebeple hatalı eski istemciye geri aldı ve kaçınmaya çalıştıkları kesinti yaşandı.</p><p>Karar: Habitat’ı kendi <strong>servisine</strong> çıkarmak. Kazanç: dağıtım, gözlemlenebilirlik ve platform geliştirmeleri için tek kontrol noktası; erişim denetimi, denetim kaydı ve altta yatan depolamaya erişimi merkezî uygulamak için tek darboğaz (güvenlik açısından avantaj). Bilinçli bir seçim daha: <strong>servisi Python’da bıraktılar.</strong> Python’un yüksek verimli bir servis için ek ağ gecikmesi ve CPU/bellek maliyeti getireceğini, 100 kat ölçekte kabul edilemeyeceğini ve eninde sonunda yeniden yazılacağını biliyorlardı; ama bunu ‘stratejik bir teknik borç’ olarak gördüler: öncelik maliyet değil, ürün geliştiricileri engelden kurtarmak ve platform kararlılığıydı. Üstüne, kendi kodlama modellerinin ilerlemesinin gelecekte bu göçü kolaylaştıracağına dair hesaplı bir bahis de oynadılar. Bu, iki bölümlük serinin ilk yazısı.</p></div>
+  <div class="prose"><p>Habitat, OpenAI ürünlerinin ihtiyaç duyduğu bilgiye hızlı ve güvenilir erişmesi için kurulan çevrimiçi depolama platformu. Bugün <strong>saniyede 70 milyondan fazla isteği</strong> işliyor, haftada 1 milyar kişinin kullandığı ürünleri destekliyor, yaklaşık 40 coğrafi bölgede çalışıyor ve <strong>500 petabayttan fazla veri</strong> sunuyor. Başlangıcı ise çok mütevazı: DevDay 2023’te GPT’ler için, tek bir veritabanına bağlanan basit bir <strong>Python istemci kütüphanesi</strong> olarak çıktı.</p><p>Kütüphane fikri işe yaradı: ürün mühendisleri şema arama, yönlendirme, yetkilendirme, şifreleme, serileştirme ve bağlantı havuzlamayı düşünmek zorunda değildi; hatta verinin Azure Cosmos DB’den mi, cache’ten mi geldiğini bile bilmiyorlardı. Yetenekler (istemci tarafı cache, sıkıştırma, şifreleme) paylaşılan kütüphaneye kolayca eklendi.</p><p>2025 ortasında istemci tarafı uygulama sınırına dayandı. Servis sayısı büyüyünce geriye uyumlu protokol değişikliği yapmak imkânsızlaştı. Yazıdaki örnek çok öğretici: en kritik veri kümelerinin bölge kesintisindeki etkisini azaltmak için bunları bölgesel dağıtık Cosmos DB hesaplarına taşımak istediler. Bu, istemciye yönlendirme mantığı eklemeyi (feature flag arkasında), tüm istemcilere yaymayı ve sonra bayrağı açmayı gerektirdi. Onlarca servisi koordine etmek <strong>günler</strong> sürdü; gölgeleme eklemek birkaç gün daha, bir hata düzeltmesi yine birkaç gün. Sonunda tam bayrağı açma aşamasında bir ekip kendi servisini ilgisiz bir sebeple hatalı eski istemciye geri aldı ve kaçınmaya çalıştıkları kesinti yaşandı.</p><p>Karar: Habitat’ı kendi <strong>servisine</strong> çıkarmak. Kazanç: dağıtım, observability ve platform geliştirmeleri için tek kontrol noktası; erişim denetimi, audit log ve altta yatan depolamaya erişimi merkezî uygulamak için tek darboğaz (güvenlik açısından avantaj). Bilinçli bir seçim daha: <strong>servisi Python’da bıraktılar.</strong> Python’un yüksek verimli bir servis için ek ağ gecikmesi ve CPU/bellek maliyeti getireceğini, 100 kat ölçekte kabul edilemeyeceğini ve eninde sonunda yeniden yazılacağını biliyorlardı; ama bunu ‘stratejik bir technical debt’ olarak gördüler: öncelik maliyet değil, ürün geliştiricileri engelden kurtarmak ve platform kararlılığıydı. Üstüne, kendi kodlama modellerinin ilerlemesinin gelecekte bu göçü kolaylaştıracağına dair hesaplı bir bahis de oynadılar. Bu, iki bölümlük serinin ilk yazısı.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Kütüphane olarak dağıtılan altyapıda her değişiklik onlarca servisin dağıtım koordinasyonu demek; hata düzeltmesi bile günler alıyor.</span></li><li><span>Servise çıkarmak tek kontrol noktası verir: dağıtım, gözlemlenebilirlik, erişim denetimi ve denetim kaydı merkezileşir.</span></li><li><span>Teknik borç bilinçli alınabilir: öncelik ürün ekiplerini engelden kurtarmaksa yavaş dili geçici kabul etmek savunulabilir.</span></li><li><span>Kütüphane + özellik bayrağıyla yayılım, tek bir geride kalmış istemci yüzünden bütün planı bozabilir.</span></li>    </ol>
+<li><span>Kütüphane olarak dağıtılan altyapıda her değişiklik onlarca servisin dağıtım koordinasyonu demek; hata düzeltmesi bile günler alıyor.</span></li><li><span>Servise çıkarmak tek kontrol noktası verir: dağıtım, observability, erişim denetimi ve audit log merkezileşir.</span></li><li><span>Technical debt bilinçli alınabilir: öncelik ürün ekiplerini engelden kurtarmaksa yavaş dili geçici kabul etmek savunulabilir.</span></li><li><span>Kütüphane + feature flag’la yayılım, tek bir geride kalmış istemci yüzünden bütün planı bozabilir.</span></li>    </ol>
   </div>
 
   <div class="callouts">
@@ -102,8 +102,8 @@
       <p>‘Paylaşılan kütüphane mi, servis mi?’ sorusu her büyüyen sistemde çıkar. Kütüphane başlangıçta çok hızlıdır (ağ atlaması yok, tek dağıtım) ama sürümler dağılınca değişim maliyeti üstel artar. Servis ise başlangıçta yavaş ve pahalı, ölçekte ucuzdur.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Bu kararı küçük ölçekte yaşayacaksın: ortak bir ‘common’ modülü birden fazla projene kopyalıyorsan (Mobit, KlioAI ve Tradebot arasında paylaştığın yardımcı kod), her projede farklı sürümde kalır. İşaretleri tanı: ‘bir hata düzelttim ama üç yerde güncellemem gerekiyor’. Bunun iki ucu var: ortak kodu bir <strong>versiyonlanan paket</strong> yap ya da küçük bir <strong>servise</strong> çıkar. İkinci ders mülakat için altın değerinde: ‘Bilinçli teknik borç aldım, çünkü öncelik teslimat hızıydı, ve ödeme planı şuydu’ diyebilmek, her şeyi mükemmel yapmaya çalışmaktan daha olgun bir cevaptır.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Bu kararı küçük ölçekte yaşayacaksın: ortak bir ‘common’ modülünü birden fazla projeye kopyalıyorsan, her projede farklı sürümde kalır. İşaretleri tanı: ‘bir hata düzelttim ama üç yerde güncellemem gerekiyor’. Bunun iki ucu var: ortak kodu bir <strong>versiyonlanan paket</strong> yap ya da küçük bir <strong>servise</strong> çıkar. İkinci ders mülakat için altın değerinde: ‘Bilinçli technical debt aldım, çünkü öncelik teslimat hızıydı, ve ödeme planı şuydu’ diyebilmek, her şeyi mükemmel yapmaya çalışmaktan daha olgun bir cevaptır.</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">blast radius</span> <span class="term-tr">etki yarıçapı</span></dt>
+      <dt><span class="term-en">blast radius</span></dt>
       <dd>Bir arıza ya da hatanın etkileyebileceği bileşen ve kullanıcı kapsamı.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">shadowing</span> <span class="term-tr">gölgeleme</span></dt>
+      <dt><span class="term-en">shadowing</span></dt>
       <dd>Yeni mantığı gerçek trafikte çalıştırıp sonucunu etkisiz biçimde eskisiyle karşılaştırma.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">feature flag</span> <span class="term-tr">özellik bayrağı</span></dt>
+      <dt><span class="term-en">feature flag</span></dt>
       <dd>Bir davranışı kod dağıtmadan açıp kapatmayı sağlayan yapılandırma anahtarı.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">change data capture (CDC)</span> <span class="term-tr">değişiklik veri yakalama</span></dt>
+      <dt><span class="term-en">change data capture (CDC)</span></dt>
       <dd>Veritabanındaki değişiklikleri akış olarak diğer sistemlere aktarma tekniği.</dd>
     </div>
   </dl>
@@ -132,10 +132,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/depolama/">#depolama</a></li>
-  <li><a href="/etiket/mimari/">#mimari</a></li>
-  <li><a href="/etiket/teknik-borc/">#teknik borç</a></li>
-  <li><a href="/etiket/olcekleme/">#ölçekleme</a></li>
+  <li><a href="/etiket/storage/">#storage</a></li>
+  <li><a href="/etiket/architecture/">#architecture</a></li>
+  <li><a href="/etiket/technical-debt/">#technical debt</a></li>
+  <li><a href="/etiket/scaling/">#scaling</a></li>
 </ul>
 
   <a class="readmore" href="https://openai.com/index/scaling-storage-one-billion-users-part-one" rel="noopener nofollow" target="_blank">
@@ -198,7 +198,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

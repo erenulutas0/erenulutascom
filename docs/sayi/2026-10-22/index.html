@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>22 Ekim 2026 — Eren&#39;in Mühendislik Gazetesi</title>
+<meta name="description" content="Netflix’in container platformu Titus’ta yıllarca ‘iyi komşuluk’ kernel’in sağladığı araçlarla yönetildi. Bu yazı o araçların neden yetmediğini ve neden microVM ya da gVisor yerine düz bir EC2 VM seçtiklerini anlatıyor. Yanında, 1 Ekim’deki Clef’in OpenAI’daki karşılığı: sınırlı cevaplı küçük kararlar için bir API.">
+<meta name="author" content="Eren Ulutaş">
+<meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131310" media="(prefers-color-scheme: dark)">
+<meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:title" content="22 Ekim 2026 — Eren&#39;in Mühendislik Gazetesi">
+<meta property="og:description" content="Netflix’in container platformu Titus’ta yıllarca ‘iyi komşuluk’ kernel’in sağladığı araçlarla yönetildi. Bu yazı o araçların neden yetmediğini ve neden microVM ya da gVisor yerine düz bir EC2 VM seçtiklerini anlatıyor. Yanında, 1 Ekim’deki Clef’in OpenAI’daki karşılığı: sınırlı cevaplı küçük kararlar için bir API.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:url" content="https://erenulutas.com/sayi/2026-10-22/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://erenulutas.com/sayi/2026-10-22/">
+<link rel="alternate" type="application/rss+xml" title="Eren&#39;in Mühendislik Gazetesi" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
+<link rel="stylesheet" href="/static/style.css?v=eae14b0f">
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+<script>
+  // Tema tercihini ilk boyamadan önce uygula (flash olmasın)
+  (function () {
+    try {
+      var t = localStorage.getItem('tema');
+      if (t) document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip" href="#icerik">İçeriğe geç</a>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <a href="/" class="logo">
+      <span class="logo-mark">EU</span>
+      <span class="logo-text">
+        <strong>Eren&#39;in Mühendislik Gazetesi</strong>
+        <em>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</em>
+      </span>
+    </a>
+    <nav class="masthead-nav" aria-label="Ana menü">
+      <a href="/">Bugün</a>
+      <a href="/arsiv/" aria-current="page">Arşiv</a>
+      <a href="/ara/">Ara</a>
+      <a href="/hakkinda/">Hakkında</a>
+      <button id="tema" class="tema" type="button" aria-label="Açık/koyu temayı değiştir" title="Açık/koyu tema">
+        <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/></g></svg>
+        <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg>
+      </button>
+    </nav>
+  </div>
+  <div class="progress" id="ilerleme" aria-hidden="true"></div>
+</header>
+
+<main id="icerik">
+<div class="wrap">
+
+  <header class="edition-head">
+  <div class="edition-bar">
+    <span class="edition-no">Sayı 65</span>
+    <h1 class="edition-date"><time datetime="2026-10-22">22 Ekim 2026, Perşembe</time></h1>
+    <nav class="edition-nav" aria-label="Sayılar arası gezinme">
+<a href="/sayi/2026-10-21/" rel="prev"><span aria-hidden="true">←</span> 21 Ekim 2026</a><a href="/sayi/2026-10-23/" rel="next">23 Ekim 2026 <span aria-hidden="true">→</span></a>
+    </nav>
+  </div>
+<p class="lede">Netflix’in container platformu Titus’ta yıllarca ‘iyi komşuluk’ kernel’in sağladığı araçlarla yönetildi. Bu yazı o araçların neden yetmediğini ve neden microVM ya da gVisor yerine düz bir EC2 VM seçtiklerini anlatıyor. Yanında, 1 Ekim’deki Clef’in OpenAI’daki karşılığı: sınırlı cevaplı küçük kararlar için bir API.</p></header>
+
+
+  <div class="layout">
+    <div class="layout-main">
+          <article class="story cover" id="f04dfee991c9">
+  <div class="meta">
+<span class="kicker">Günün kapağı</span>    <a class="badge" href="/kaynak/netflix/"
+     style="--brand: #E50914">Netflix Tech Blog</a>
+
+  <span class="meta-item">22 Ekim 2026</span>
+<span class="meta-item">29 dk okuma</span>  <span class="meta-item level level-ileri">ileri</span>
+</div>
+
+  <h2 class="cover-title">
+    <a href="https://netflixtechblog.com/single-tenant-titus-vm-level-isolation-on-a-multi-tenant-container-platform-6d8b1909d163?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">Noisy neighbor’ın cgroup’u yok: Netflix Titus’ta single-tenant VM isolation</a>
+  </h2>
+  <p class="original-title">Single-tenant Titus: VM-level isolation on a multi-tenant container platform · Netflix Technology Blog</p>
+
+  <div class="prose"><p>Titus, Netflix’in Kubernetes tabanlı internal container platformu: hem control plane’i hem container host’larını Netflix güncel tutuyor, uygulama ekipleri host, cluster ya da kernel sahiplenmeden container veriyor. Haftada milyonlarca container on binlerce EC2 instance üzerinde çalışıyor ve varsayılan olarak multi-tenant: birçok ekibin container’ı aynı host’u paylaşıyor. Bu yoğunluk verimliliğin kaynağı. Ama bazı iş yükleri, en talepkâr gerçek zamanlı sistemler dahil, paylaşımlı host’ta iyi çalışmıyor.</p><p><strong>Neden iyi komşuluk yetmiyor?</strong> Titus kernel’in sağladığı araçlarla izolasyon yapıyor: cgroup’lar CPU, bellek ve disk’i sınırlıyor; namespace’ler her container’a kendi sistem görünümünü veriyor; seccomp ve AppArmor syscall’ları kısıtlıyor; CFS CPU zamanını bölüştürüyor; iocost disk IO’yu ölçüyor. Ama bunlar kernel’in bölebildiğini bölüyor. Donanımın paylaştığını bölemiyorlar: aynı çekirdek grubu last-level cache’i ve belleğe giden yolu paylaşıyor; ani büyük bellek okuması yapan bir container komşusunun cache satırlarını atıp onu yavaşlatıyor, <strong>ikisi de CPU limitinin içinde kalsa bile</strong>. Memory bandwidth ya da cache residency için cgroup yok; yavaşlama hiçbir quota aşımı olarak görünmüyor. Ağ, storage IOPS, softirq, NUMA trafiği, TLB shootdown, kernel global lock’ları gibi bir dizi başka eksen daha var. Netflix’in tecrübesinde en çok canını yakan ağ: container başına bandwidth shaping, her container’ın bayt ve paket muhasebesi için global bir lock ile serileştirilen HTB queueing discipline kullanıyor. En çok etkilenenler, bellekte state tutan ve sürekli büyük veri taşıyan stateful streaming job’lar; bunlar bozulunca toparlanmak ucuz değil.</p><p><strong>Seçenekler ve neden VM.</strong> Dört yol tartılmış. *Shared-kernel isolation’ı iyileştirmeye devam etmek* herkese yarıyor ve sürüyor, ama her tur farkı daraltıyor, kapatmıyor. *microVM’ler (Firecracker, Kata)* kâğıt üzerinde en çekici (yaklaşık 150 ms boot), fakat büyük ve özel bir yatırım ve risk gerektiriyor. *gVisor*, syscall’ları user space’te yakalayarak IO ağırlıklı yollarda (korunmak istenen tam o iş yükleri) ek yük getiriyor; açık kaynak proje de internal sürümün gerisinde ve fiilen tek bir şirket tarafından sürdürülüyor. *İş yükünü EC2’ye taşımak* ise uygulama ekibine Titus’un üstlendiği işi (instance seçimi, host patch’leme, filo boyutlama) geri veriyor ve Titus-EC2 geçişi tarihsel olarak tek yönlü bir kapı. Önemli bir ayrım: microVM ve gVisor, birbirine güvenmeyen tenant’lar arasındaki <strong>güvenlik izolasyonu</strong> için tasarlanmış; Netflix ekipleri arasında bu tehdit modeli fazla. Bu iş yüklerinin ihtiyacı <strong>kaynak ve performans izolasyonu</strong>: komşunun CPU’sunu, cache’ini, memory bandwidth’ini ya da ağını çalamayacağının garantisi. Bunu emüle etmemiz gerekmeyen donanım ve sandbox’lamamız gerekmeyen bir kernel ile tam adanmış bir EC2 VM sağlıyor.</p><p><strong>Single-tenant Titus nasıl çalışıyor?</strong> Bir single-tenant task, kendisine göre boyutlandırılmış kendi EC2 instance’ında, yanında başka hiçbir şey zamanlanmadan çalışıyor. Instance hâlâ Compute/Platform ekibinin sahip olduğu ve patch’lediği bir Titus container host’u; ekip aynı API’yi ve deployment yolunu kullanıyor. İş <strong>federation layer</strong>’da başlıyor (iş hangi cell’de, hangi kapasitede çalışacak kararını veren katman): (1) uygunluğa ve hangi instance family’lerinin kullanılabileceğine federation karar veriyor; uygunluk Compute/Platform ekibinin tuttuğu bir allowlist ile yönetiliyor. (2) Autoscaler bekleyen task’ın CPU, bellek ve GPU ihtiyacını karşılayan en küçük instance’ı tam zamanında açıyor. (3) Scheduler node başına tek task’ı zorluyor: pod anti-affinity, preemption’dan muaf priority class, taint ve defragmentation’ın kapatılması; böylece task’ın host’u ömrü boyunca ona ait kalıyor.</p><p><strong>İki bilinçli karar.</strong> Birincisi, single tenancy kasıtlı olarak <strong>allowlist</strong>’le: API’de serbest bir kutucuk olsaydı çoğu ekip işaretlerdi ve multi-tenancy’nin verimliliği filoda erirdi. İkincisi, job’un kaynak isteği sessizce node’u doldurmaya büyütülmüyor; job istediğini alıyor, bir node şekline yakın boyutlandırması öneriliyor ve iş yükü single-tenant modda ve değilken aynı çalışıyor, yani modu açıp kapamak yeniden yazma değil bir config değişikliği. Yazının ilginç gözlemi şu: <strong>birkaç suçlu, çok sayıda kurban</strong>. Gürültünün çoğunu küçük bir iş yükü grubu çıkarıyor (küçük paket seli, page cache karıştırma, memory bandwidth doyurma) ve bunların bir kısmı aynı zamanda en hassas olanlar. O yüzden herkese ayrı makine gerekmiyor; yalnızca suçluları ve en hassas kurbanları adanmış node’lara almak yetiyor. Geride kalan host’lar daha sessiz oluyor ve anti-affinity ile yarı boş tutulması gerekmediği için daha yoğun paketleniyor.</p><p><strong>Bedeli.</strong> Daha az büyük paylaşımlı instance yerine daha çok küçük adanmış instance demek: control plane’de takip edilecek node sayısı ve EC2 API’ye giden launch sayısı artıyor (özellikle en hızlı büyüdüğünüz regional failover anında). Titus zaten cell’lere bölünmüş federe bir sistem; kapasite cell ekleyerek büyütülüyor ve geçiş aşamalı yapılıyor. Kapasite yönetimi en çok değişen yer: node’lar talep geldikçe tam zamanında ve doğru boyutta açılıyor (node pool’lar belirli bir host AMI’sine bağlı, drift tabanlı patching ile çoğu güncelleme iş yükünü bozmadan geliyor). En büyük ticari takas <strong>launch latency</strong>: multi-tenant’ta çalışan bir host ve cache’lenmiş image layer’ları sayesinde task birkaç saniyede başlıyor; single-tenant’ta her task kendi makinesinin boot etmesini ve image’ı çekmesini bekliyor (yeni bir instance image pull başlamadan bile onlarca saniye alıyor). Warm pool burada daha zor: her task kendi boyutunda node istediğinden filo çok sayıda instance şekline yayılıyor ve boşta bekleyen bir r7i.2xlarge, m7a.8xlarge isteyen bir task’a yaramıyor.</p></div>
+
+  <div class="keypoints">
+    <h3 class="label">Öne çıkanlar</h3>
+    <ol>
+<li><span>cgroup’lar CPU ve belleği bölebilir; last-level cache ve memory bandwidth’i bölemez. Noisy neighbor bir quota aşımı olarak görünmez.</span></li><li><span>Hangi izolasyonun gerektiğini belirle: güvenlik izolasyonu (hostile tenant) ile performans izolasyonu (noisy neighbor) farklı problemlerdir.</span></li><li><span>Sorunun çoğu birkaç suçludan gelir; herkesi değil yalnızca onları ve en hassas kurbanları ayır.</span></li><li><span>Özel izolasyonu serbest bırakma, allowlist ile ver; yoksa verimlilik filoda erir.</span></li><li><span>Her task’a ayrı node, warm pool’u zorlaştırır: instance şekilleri çoğalır, hit rate düşer.</span></li>    </ol>
+  </div>
+
+  <div class="callouts">
+    <div class="callout callout-why">
+      <h3 class="label">Neden önemli?</h3>
+      <p>‘Container yeterli izolasyon sağlar’ varsayımı donanım düzeyinde doğru değil. Bu yazı, noisy neighbor’ı ölçmeyi, doğru izolasyon türünü seçmeyi ve çözümü yalnızca ihtiyacı olana vererek maliyeti kontrol etmeyi gösteriyor.</p>
+    </div>
+    <div class="callout callout-you">
+      <h3 class="label">Pratikte</h3>
+      <p>Docker’la birden çok servisi tek makinede koşturuyorsan aynı sorunun küçük hâlini yaşıyor olabilirsin: bir batch job çalışınca API’nin p99’u neden bozuluyor? Bunu görmek için <code>docker stats</code> yerine node düzeyinde <code>node_exporter</code> ya da <code>perf</code> ile CPU steal, run queue ve disk IO bekleme metriklerine bak. Çözüm ihtiyaç doğrulanınca gelir: kritik servisi ayrı bir makineye almak, yalnızca gürültücü olanı ayırmaktan daha pahalıdır. Önce kimin gürültü çıkardığını ölç.</p>
+    </div>
+  </div>
+
+  <div class="terms">
+    <h3 class="label">Sözlük</h3>
+      <dl>
+    <div class="term">
+      <dt><span class="term-en">noisy neighbor</span></dt>
+      <dd>Paylaşılan donanımı aşırı kullanarak aynı makinedeki diğer iş yüklerini yavaşlatan komşu iş yükü.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">multi-tenant</span></dt>
+      <dd>Birden çok müşterinin ya da ekibin aynı altyapıyı paylaştığı model.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">cgroup</span></dt>
+      <dd>Linux’ta süreç gruplarının CPU, bellek ve IO kullanımını sınırlayan kernel mekanizması.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">microVM</span></dt>
+      <dd>Çok az donanım emüle edip hızlı boot eden hafif sanal makine (Firecracker, Kata).</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">taint</span></dt>
+      <dd>Kubernetes’te bir node’a, yalnızca toleration taşıyan pod’ların yerleşebileceğini bildiren işaret.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">anti-affinity</span></dt>
+      <dd>Belirli pod’ların aynı node üzerine zamanlanmasını engelleyen scheduling kuralı.</dd>
+    </div>
+  </dl>
+
+  </div>
+
+  <div class="article-foot">
+  <ul class="tags">
+  <li><a href="/etiket/containers/">#containers</a></li>
+  <li><a href="/etiket/isolation/">#isolation</a></li>
+  <li><a href="/etiket/infrastructure/">#infrastructure</a></li>
+  <li><a href="/etiket/performance/">#performance</a></li>
+</ul>
+
+  <a class="readmore" href="https://netflixtechblog.com/single-tenant-titus-vm-level-isolation-on-a-multi-tenant-container-platform-6d8b1909d163?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">
+    Orijinali oku <span aria-hidden="true">↗</span>
+  </a>
+</div>
+
+</article>
+
+
+    <h2 class="subhead">Kısa kısa</h2>
+<article class="story brief" id="27825e300358">
+  <div class="meta">
+    <a class="badge" href="/kaynak/openai/"
+     style="--brand: #000000">OpenAI Research</a>
+
+  <span class="meta-item">22 Ekim 2026</span>
+<span class="meta-item">5 dk okuma</span>  <span class="meta-item level level-baslangic">başlangıç</span>
+</div>
+
+  <h3 class="brief-title">
+    <a href="https://openai.com/index/decisions-api" rel="noopener nofollow" target="_blank">Decisions API: sınırlı cevaplı küçük kararlar için hızlı ve ucuz çağrı</a>
+  </h3>
+  <p class="original-title">Build more responsive apps with the Decisions API</p>
+  <div class="prose prose-sm"><p>Uygulamalar ve agent’lar bir workflow’da çok sayıda küçük karar veriyor: bir girdiyi sınıflandırmak, isteği nereye yönlendireceğini seçmek, bir sonraki eylemi belirlemek. Tek tek basit, ölçekte gecikme ve maliyetleri birikiyor. OpenAI, <strong>Decisions API</strong>’yi genel kullanıma açtı: GPT-6 Luna ile kurulu, cevabı sınırlı sorulara odaklanan bu API metin, görsel ve yapılandırılmış girdiden Responses API üzerinden Luna’dan 10 kata kadar hızlı, neredeyse gerçek zamanlı karar veriyor. Sistemin tasarımı Cloudflare’in 1 Ekim’deki Clef karar modelleriyle aynı fikre dayanıyor: serbest metin üretme, seçenekler arasından seç.</p><p>Kullanım: bir soru ve izin verilen cevapları tanımlıyorsun, bağlamı metin, görsel ya da yerel JSON olarak veriyorsun. Üç cevap türü var: <strong>predicate</strong> (bir koşulun doğru olma olasılığı, 0-1), <strong>choice</strong> (verdiğin seçeneklerden biri; olasılık ve confidence da döner; örneğin agent devam mı etsin, tekrar mı denesin, açıklama mı istesin) ve <strong>score</strong> (sıralı seviyeli bir rubrikte puan; seviye indekslerinin olasılık ağırlıklı ortalaması). Bir istekte 400’e kadar soru sorulabiliyor, tekrar eden bağlam için prompt caching ve ABD/AB inference residency var.</p></div>
+
+  <div class="keypoints keypoints-sm">
+    <h4 class="label">Öne çıkanlar</h4>
+    <ol>
+<li><span>Karar problemini ‘serbest cevap’ değil ‘seçenekli soru’ olarak tanımlamak hız ve güvenilirlik kazandırır.</span></li><li><span>Olasılık ve confidence değerleri, eşik koyarak ‘emin değilse insana sor’ akışı kurmayı mümkün kılar.</span></li><li><span>Aynı bağlama birden çok soru sormak (batch) çağrı sayısını azaltır.</span></li>    </ol>
+  </div>
+
+  <div class="callouts">
+    <div class="callout callout-you">
+      <h4 class="label">Pratikte</h4>
+      <p>Bir sınıflandırma ya da routing adımında LLM kullanıyorsan çıktıyı <code>enum</code> ile sınırla ve cevaba olasılık ya da güven değeri ekle; güven eşiğin altındaki kayıtları otomatik işlemek yerine bir inceleme kuyruğuna at. Bu, hem hataları yakalar hem de insanın zamanını yalnızca zor vakalara harcatır.</p>
+    </div>
+  </div>
+
+  <details class="terms">
+    <summary class="label">Sözlük · 3 terim</summary>
+      <dl>
+    <div class="term">
+      <dt><span class="term-en">decision model</span></dt>
+      <dd>Serbest metin üretmek yerine verilen seçenekler arasından seçim yapan model ya da API.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">confidence</span></dt>
+      <dd>Modelin bir cevaba verdiği güven puanı ya da olasılığı.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">routing</span></dt>
+      <dd>Bir isteği içeriğine göre uygun bileşene ya da modele yönlendirme.</dd>
+    </div>
+  </dl>
+
+  </details>
+
+  <div class="article-foot">
+  <ul class="tags">
+  <li><a href="/etiket/llm/">#LLM</a></li>
+  <li><a href="/etiket/api/">#API</a></li>
+  <li><a href="/etiket/classification/">#classification</a></li>
+  <li><a href="/etiket/agent/">#agent</a></li>
+</ul>
+
+  <a class="readmore" href="https://openai.com/index/decisions-api" rel="noopener nofollow" target="_blank">
+    Orijinali oku <span aria-hidden="true">↗</span>
+  </a>
+</div>
+
+</article>
+
+
+    </div>
+    <aside class="layout-aside" aria-label="Bu sayıda">
+  <div class="aside-block">
+    <h2 class="label">Bu sayıda</h2>
+    <ol class="toc" id="toc">
+      <li>
+        <a href="#f04dfee991c9">
+          <span class="toc-title">Noisy neighbor’ın cgroup’u yok: Netflix Titus’ta single-tenant VM isolation</span>
+          <span class="toc-meta">Netflix Tech Blog · 29 dk</span>
+        </a>
+      </li>
+      <li>
+        <a href="#27825e300358">
+          <span class="toc-title">Decisions API: sınırlı cevaplı küçük kararlar için hızlı ve ucuz çağrı</span>
+          <span class="toc-meta">OpenAI Research · 5 dk</span>
+        </a>
+      </li>
+    </ol>
+  </div>
+  <div class="aside-block aside-facts">
+    <h2 class="label">Künye</h2>
+    <dl class="facts">
+      <div><dt>yazı</dt><dd>2</dd></div>
+      <div><dt>dk okuma</dt><dd>34</dd></div>
+      <div><dt>kaynak</dt><dd>2</dd></div>
+      <div><dt>terim</dt><dd>9</dd></div>
+    </dl>
+  </div>
+</aside>
+
+  </div>
+
+  <nav class="pager" aria-label="Sayılar arası gezinme">
+    <a class="pager-link pager-prev" href="/sayi/2026-10-21/" rel="prev">
+      <span class="pager-label">← Önceki sayı · 21 Ekim 2026</span>
+      <span class="pager-title">Olay değil konuşma: ChatGPT’nin ad stack’i neden request-response değil, stateful session</span>
+    </a>
+    <a class="pager-link pager-next" href="/sayi/2026-10-23/" rel="next">
+      <span class="pager-label">Sonraki sayı · 23 Ekim 2026 →</span>
+      <span class="pager-title">Önce her ekibe ayrı container, sonra geri dönüş: OpenAI Habitat’ın Cosmos DB’de multi-tenancy yolculuğu</span>
+    </a>
+  </nav>
+
+</div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-col">
+      <p class="footer-brand">Eren&#39;in Mühendislik Gazetesi</p>
+      <p class="muted">
+        Dünyanın en iyi mühendislik ekiplerinin blog yazılarını derleyip
+        Türkçe özetleyen kişisel bir gazete. Özetler yeni mezun bir mühendisin
+        anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
+      </p>
+      <p class="muted small num">
+        149 özet · 67 sayı ·
+        11 kaynak
+      </p>
+    </div>
+    <div class="footer-col">
+      <h3>Kaynaklar</h3>
+      <ul class="footer-sources">
+        <li><a href="https://www.uber.com/blog/engineering/" rel="noopener nofollow" target="_blank">Uber Engineering</a></li>
+        <li><a href="https://netflixtechblog.com" rel="noopener nofollow" target="_blank">Netflix Tech Blog</a></li>
+        <li><a href="https://aws.amazon.com/blogs/architecture/" rel="noopener nofollow" target="_blank">AWS Architecture Blog</a></li>
+        <li><a href="https://blog.cloudflare.com" rel="noopener nofollow" target="_blank">Cloudflare Blog</a></li>
+        <li><a href="https://stripe.com/blog" rel="noopener nofollow" target="_blank">Stripe Engineering</a></li>
+        <li><a href="https://www.databricks.com/blog" rel="noopener nofollow" target="_blank">Databricks Engineering</a></li>
+        <li><a href="https://engineering.fb.com" rel="noopener nofollow" target="_blank">Meta Engineering</a></li>
+        <li><a href="https://openai.com/news/" rel="noopener nofollow" target="_blank">OpenAI Research</a></li>
+        <li><a href="https://www.anthropic.com/engineering" rel="noopener nofollow" target="_blank">Anthropic Engineering</a></li>
+        <li><a href="https://research.google/blog/" rel="noopener nofollow" target="_blank">Google Research</a></li>
+        <li><a href="https://cloud.google.com/blog/" rel="noopener nofollow" target="_blank">Google Cloud Blog</a></li>
+        <li><a href="https://devblogs.microsoft.com/engineering-at-microsoft/" rel="noopener nofollow" target="_blank">Microsoft Engineering</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Eren Ulutaş</h3>
+      <ul class="footer-links">
+        <li><a href="https://github.com/erenulutas0" rel="me noopener" target="_blank">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/eren-u-55918a2a0" rel="me noopener" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:eerenulutass@gmail.com">E-posta</a></li>
+        <li><a href="/feed.xml">RSS</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-legal">
+    <p class="muted small">
+      Tüm özetler kaynak makalelere bağlıdır; telif orijinal yazarlara aittir.
+      Bu site yalnızca özet ve yönlendirme sunar. © 2026 Eren Ulutaş.
+    </p>
+  </div>
+</footer>
+
+<script src="/static/app.js?v=eae14b0f" defer></script>
+</body>
+</html>

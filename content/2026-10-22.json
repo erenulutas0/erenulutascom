@@ -1,0 +1,114 @@
+{
+  "date": "2026-10-22",
+  "intro": "Netflix’in container platformu Titus’ta yıllarca ‘iyi komşuluk’ kernel’in sağladığı araçlarla yönetildi. Bu yazı o araçların neden yetmediğini ve neden microVM ya da gVisor yerine düz bir EC2 VM seçtiklerini anlatıyor. Yanında, 1 Ekim’deki Clef’in OpenAI’daki karşılığı: sınırlı cevaplı küçük kararlar için bir API.",
+  "articles": [
+    {
+      "id": "f04dfee991c9",
+      "slot": "cover",
+      "source_key": "netflix",
+      "source_name": "Netflix Tech Blog",
+      "title": "Single-tenant Titus: VM-level isolation on a multi-tenant container platform",
+      "title_tr": "Noisy neighbor’ın cgroup’u yok: Netflix Titus’ta single-tenant VM isolation",
+      "url": "https://netflixtechblog.com/single-tenant-titus-vm-level-isolation-on-a-multi-tenant-container-platform-6d8b1909d163?source=rss----2615bd06b42e---4",
+      "published": "2026-10-22",
+      "summary": "Titus, Netflix’in Kubernetes tabanlı internal container platformu: hem control plane’i hem container host’larını Netflix güncel tutuyor, uygulama ekipleri host, cluster ya da kernel sahiplenmeden container veriyor. Haftada milyonlarca container on binlerce EC2 instance üzerinde çalışıyor ve varsayılan olarak multi-tenant: birçok ekibin container’ı aynı host’u paylaşıyor. Bu yoğunluk verimliliğin kaynağı. Ama bazı iş yükleri, en talepkâr gerçek zamanlı sistemler dahil, paylaşımlı host’ta iyi çalışmıyor.\n\n**Neden iyi komşuluk yetmiyor?** Titus kernel’in sağladığı araçlarla izolasyon yapıyor: cgroup’lar CPU, bellek ve disk’i sınırlıyor; namespace’ler her container’a kendi sistem görünümünü veriyor; seccomp ve AppArmor syscall’ları kısıtlıyor; CFS CPU zamanını bölüştürüyor; iocost disk IO’yu ölçüyor. Ama bunlar kernel’in bölebildiğini bölüyor. Donanımın paylaştığını bölemiyorlar: aynı çekirdek grubu last-level cache’i ve belleğe giden yolu paylaşıyor; ani büyük bellek okuması yapan bir container komşusunun cache satırlarını atıp onu yavaşlatıyor, **ikisi de CPU limitinin içinde kalsa bile**. Memory bandwidth ya da cache residency için cgroup yok; yavaşlama hiçbir quota aşımı olarak görünmüyor. Ağ, storage IOPS, softirq, NUMA trafiği, TLB shootdown, kernel global lock’ları gibi bir dizi başka eksen daha var. Netflix’in tecrübesinde en çok canını yakan ağ: container başına bandwidth shaping, her container’ın bayt ve paket muhasebesi için global bir lock ile serileştirilen HTB queueing discipline kullanıyor. En çok etkilenenler, bellekte state tutan ve sürekli büyük veri taşıyan stateful streaming job’lar; bunlar bozulunca toparlanmak ucuz değil.\n\n**Seçenekler ve neden VM.** Dört yol tartılmış. *Shared-kernel isolation’ı iyileştirmeye devam etmek* herkese yarıyor ve sürüyor, ama her tur farkı daraltıyor, kapatmıyor. *microVM’ler (Firecracker, Kata)* kâğıt üzerinde en çekici (yaklaşık 150 ms boot), fakat büyük ve özel bir yatırım ve risk gerektiriyor. *gVisor*, syscall’ları user space’te yakalayarak IO ağırlıklı yollarda (korunmak istenen tam o iş yükleri) ek yük getiriyor; açık kaynak proje de internal sürümün gerisinde ve fiilen tek bir şirket tarafından sürdürülüyor. *İş yükünü EC2’ye taşımak* ise uygulama ekibine Titus’un üstlendiği işi (instance seçimi, host patch’leme, filo boyutlama) geri veriyor ve Titus-EC2 geçişi tarihsel olarak tek yönlü bir kapı. Önemli bir ayrım: microVM ve gVisor, birbirine güvenmeyen tenant’lar arasındaki **güvenlik izolasyonu** için tasarlanmış; Netflix ekipleri arasında bu tehdit modeli fazla. Bu iş yüklerinin ihtiyacı **kaynak ve performans izolasyonu**: komşunun CPU’sunu, cache’ini, memory bandwidth’ini ya da ağını çalamayacağının garantisi. Bunu emüle etmemiz gerekmeyen donanım ve sandbox’lamamız gerekmeyen bir kernel ile tam adanmış bir EC2 VM sağlıyor.\n\n**Single-tenant Titus nasıl çalışıyor?** Bir single-tenant task, kendisine göre boyutlandırılmış kendi EC2 instance’ında, yanında başka hiçbir şey zamanlanmadan çalışıyor. Instance hâlâ Compute/Platform ekibinin sahip olduğu ve patch’lediği bir Titus container host’u; ekip aynı API’yi ve deployment yolunu kullanıyor. İş **federation layer**’da başlıyor (iş hangi cell’de, hangi kapasitede çalışacak kararını veren katman): (1) uygunluğa ve hangi instance family’lerinin kullanılabileceğine federation karar veriyor; uygunluk Compute/Platform ekibinin tuttuğu bir allowlist ile yönetiliyor. (2) Autoscaler bekleyen task’ın CPU, bellek ve GPU ihtiyacını karşılayan en küçük instance’ı tam zamanında açıyor. (3) Scheduler node başına tek task’ı zorluyor: pod anti-affinity, preemption’dan muaf priority class, taint ve defragmentation’ın kapatılması; böylece task’ın host’u ömrü boyunca ona ait kalıyor.\n\n**İki bilinçli karar.** Birincisi, single tenancy kasıtlı olarak **allowlist**’le: API’de serbest bir kutucuk olsaydı çoğu ekip işaretlerdi ve multi-tenancy’nin verimliliği filoda erirdi. İkincisi, job’un kaynak isteği sessizce node’u doldurmaya büyütülmüyor; job istediğini alıyor, bir node şekline yakın boyutlandırması öneriliyor ve iş yükü single-tenant modda ve değilken aynı çalışıyor, yani modu açıp kapamak yeniden yazma değil bir config değişikliği. Yazının ilginç gözlemi şu: **birkaç suçlu, çok sayıda kurban**. Gürültünün çoğunu küçük bir iş yükü grubu çıkarıyor (küçük paket seli, page cache karıştırma, memory bandwidth doyurma) ve bunların bir kısmı aynı zamanda en hassas olanlar. O yüzden herkese ayrı makine gerekmiyor; yalnızca suçluları ve en hassas kurbanları adanmış node’lara almak yetiyor. Geride kalan host’lar daha sessiz oluyor ve anti-affinity ile yarı boş tutulması gerekmediği için daha yoğun paketleniyor.\n\n**Bedeli.** Daha az büyük paylaşımlı instance yerine daha çok küçük adanmış instance demek: control plane’de takip edilecek node sayısı ve EC2 API’ye giden launch sayısı artıyor (özellikle en hızlı büyüdüğünüz regional failover anında). Titus zaten cell’lere bölünmüş federe bir sistem; kapasite cell ekleyerek büyütülüyor ve geçiş aşamalı yapılıyor. Kapasite yönetimi en çok değişen yer: node’lar talep geldikçe tam zamanında ve doğru boyutta açılıyor (node pool’lar belirli bir host AMI’sine bağlı, drift tabanlı patching ile çoğu güncelleme iş yükünü bozmadan geliyor). En büyük ticari takas **launch latency**: multi-tenant’ta çalışan bir host ve cache’lenmiş image layer’ları sayesinde task birkaç saniyede başlıyor; single-tenant’ta her task kendi makinesinin boot etmesini ve image’ı çekmesini bekliyor (yeni bir instance image pull başlamadan bile onlarca saniye alıyor). Warm pool burada daha zor: her task kendi boyutunda node istediğinden filo çok sayıda instance şekline yayılıyor ve boşta bekleyen bir r7i.2xlarge, m7a.8xlarge isteyen bir task’a yaramıyor.",
+      "key_points": [
+        "cgroup’lar CPU ve belleği bölebilir; last-level cache ve memory bandwidth’i bölemez. Noisy neighbor bir quota aşımı olarak görünmez.",
+        "Hangi izolasyonun gerektiğini belirle: güvenlik izolasyonu (hostile tenant) ile performans izolasyonu (noisy neighbor) farklı problemlerdir.",
+        "Sorunun çoğu birkaç suçludan gelir; herkesi değil yalnızca onları ve en hassas kurbanları ayır.",
+        "Özel izolasyonu serbest bırakma, allowlist ile ver; yoksa verimlilik filoda erir.",
+        "Her task’a ayrı node, warm pool’u zorlaştırır: instance şekilleri çoğalır, hit rate düşer."
+      ],
+      "why_it_matters": "‘Container yeterli izolasyon sağlar’ varsayımı donanım düzeyinde doğru değil. Bu yazı, noisy neighbor’ı ölçmeyi, doğru izolasyon türünü seçmeyi ve çözümü yalnızca ihtiyacı olana vererek maliyeti kontrol etmeyi gösteriyor.",
+      "for_you": "Docker’la birden çok servisi tek makinede koşturuyorsan aynı sorunun küçük hâlini yaşıyor olabilirsin: bir batch job çalışınca API’nin p99’u neden bozuluyor? Bunu görmek için `docker stats` yerine node düzeyinde `node_exporter` ya da `perf` ile CPU steal, run queue ve disk IO bekleme metriklerine bak. Çözüm ihtiyaç doğrulanınca gelir: kritik servisi ayrı bir makineye almak, yalnızca gürültücü olanı ayırmaktan daha pahalıdır. Önce kimin gürültü çıkardığını ölç.",
+      "terms": [
+        {
+          "en": "noisy neighbor",
+          "tr": "noisy neighbor",
+          "definition": "Paylaşılan donanımı aşırı kullanarak aynı makinedeki diğer iş yüklerini yavaşlatan komşu iş yükü."
+        },
+        {
+          "en": "multi-tenant",
+          "tr": "multi-tenant",
+          "definition": "Birden çok müşterinin ya da ekibin aynı altyapıyı paylaştığı model."
+        },
+        {
+          "en": "cgroup",
+          "tr": "cgroup",
+          "definition": "Linux’ta süreç gruplarının CPU, bellek ve IO kullanımını sınırlayan kernel mekanizması."
+        },
+        {
+          "en": "microVM",
+          "tr": "microVM",
+          "definition": "Çok az donanım emüle edip hızlı boot eden hafif sanal makine (Firecracker, Kata)."
+        },
+        {
+          "en": "taint",
+          "tr": "taint",
+          "definition": "Kubernetes’te bir node’a, yalnızca toleration taşıyan pod’ların yerleşebileceğini bildiren işaret."
+        },
+        {
+          "en": "anti-affinity",
+          "tr": "anti-affinity",
+          "definition": "Belirli pod’ların aynı node üzerine zamanlanmasını engelleyen scheduling kuralı."
+        }
+      ],
+      "tags": [
+        "containers",
+        "isolation",
+        "infrastructure",
+        "performance"
+      ],
+      "difficulty": "ileri",
+      "read_minutes": 29,
+      "authors": [
+        "Netflix Technology Blog"
+      ]
+    },
+    {
+      "id": "27825e300358",
+      "slot": "brief",
+      "source_key": "openai",
+      "source_name": "OpenAI Research",
+      "title": "Build more responsive apps with the Decisions API",
+      "title_tr": "Decisions API: sınırlı cevaplı küçük kararlar için hızlı ve ucuz çağrı",
+      "url": "https://openai.com/index/decisions-api",
+      "published": "2026-10-22",
+      "summary": "Uygulamalar ve agent’lar bir workflow’da çok sayıda küçük karar veriyor: bir girdiyi sınıflandırmak, isteği nereye yönlendireceğini seçmek, bir sonraki eylemi belirlemek. Tek tek basit, ölçekte gecikme ve maliyetleri birikiyor. OpenAI, **Decisions API**’yi genel kullanıma açtı: GPT-6 Luna ile kurulu, cevabı sınırlı sorulara odaklanan bu API metin, görsel ve yapılandırılmış girdiden Responses API üzerinden Luna’dan 10 kata kadar hızlı, neredeyse gerçek zamanlı karar veriyor. Sistemin tasarımı Cloudflare’in 1 Ekim’deki Clef karar modelleriyle aynı fikre dayanıyor: serbest metin üretme, seçenekler arasından seç.\n\nKullanım: bir soru ve izin verilen cevapları tanımlıyorsun, bağlamı metin, görsel ya da yerel JSON olarak veriyorsun. Üç cevap türü var: **predicate** (bir koşulun doğru olma olasılığı, 0-1), **choice** (verdiğin seçeneklerden biri; olasılık ve confidence da döner; örneğin agent devam mı etsin, tekrar mı denesin, açıklama mı istesin) ve **score** (sıralı seviyeli bir rubrikte puan; seviye indekslerinin olasılık ağırlıklı ortalaması). Bir istekte 400’e kadar soru sorulabiliyor, tekrar eden bağlam için prompt caching ve ABD/AB inference residency var.",
+      "key_points": [
+        "Karar problemini ‘serbest cevap’ değil ‘seçenekli soru’ olarak tanımlamak hız ve güvenilirlik kazandırır.",
+        "Olasılık ve confidence değerleri, eşik koyarak ‘emin değilse insana sor’ akışı kurmayı mümkün kılar.",
+        "Aynı bağlama birden çok soru sormak (batch) çağrı sayısını azaltır."
+      ],
+      "why_it_matters": "",
+      "for_you": "Bir sınıflandırma ya da routing adımında LLM kullanıyorsan çıktıyı `enum` ile sınırla ve cevaba olasılık ya da güven değeri ekle; güven eşiğin altındaki kayıtları otomatik işlemek yerine bir inceleme kuyruğuna at. Bu, hem hataları yakalar hem de insanın zamanını yalnızca zor vakalara harcatır.",
+      "terms": [
+        {
+          "en": "decision model",
+          "tr": "decision model",
+          "definition": "Serbest metin üretmek yerine verilen seçenekler arasından seçim yapan model ya da API."
+        },
+        {
+          "en": "confidence",
+          "tr": "confidence",
+          "definition": "Modelin bir cevaba verdiği güven puanı ya da olasılığı."
+        },
+        {
+          "en": "routing",
+          "tr": "routing",
+          "definition": "Bir isteği içeriğine göre uygun bileşene ya da modele yönlendirme."
+        }
+      ],
+      "tags": [
+        "LLM",
+        "API",
+        "classification",
+        "agent"
+      ],
+      "difficulty": "başlangıç",
+      "read_minutes": 5,
+      "authors": []
+    }
+  ],
+  "schema": 1
+}

@@ -102,8 +102,8 @@
       <p>Bir alanda ilerlemenin darboğazı &quot;fikir üretmek&quot; ise ve fikir üretmek ucuzluyorsa, darboğaz <strong>doğrulamaya</strong> kayar. Yazılımda da aynı şey oluyor: kod üretmek ucuzladıkça değerli olan şey kodu yazmak değil, doğru olduğunu ispatlayan test ve tip sistemlerini kurmak.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Buradan çıkaracağın pratik ders şu: LLM&#x27;i devreye soktuğun her yerde &quot;çıktıyı ne doğrulayacak?&quot; sorusunun bir cevabı olmalı. Tradebot&#x27;ta bir stratejiyi modelin önermesi kolay; onu backtest ve walk-forward doğrulamasından geçirmeden kabul etmek pahalı. Aynı şekilde LLM kategorizasyon pipeline&#x27;ında: modelin verdiği etiketi şema, enum ya da iş kuralı ile doğrulayabiliyorsan güvenebilirsin; doğrulayamıyorsan eline geçen şey yalnızca inandırıcı bir tahmin.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Buradan çıkaracağın pratik ders şu: LLM’i devreye soktuğun her yerde ‘çıktıyı ne doğrulayacak?’ sorusunun bir cevabı olmalı. Bir trading stratejisini modelin önermesi kolay; onu backtest ve walk-forward doğrulamasından geçirmeden kabul etmek pahalı. Aynı şekilde bir LLM sınıflandırma pipeline’ında: modelin verdiği etiketi schema, enum ya da iş kuralı ile doğrulayabiliyorsan güvenebilirsin; doğrulayamıyorsan eline geçen şey yalnızca inandırıcı bir tahmin.</p>
     </div>
   </div>
 
@@ -111,11 +111,11 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">open problem</span> <span class="term-tr">açık problem</span></dt>
+      <dt><span class="term-en">open problem</span></dt>
       <dd>Bir alanda uzun süredir çözülememiş, üzerinde çalışılan matematiksel soru.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">verifiability</span> <span class="term-tr">doğrulanabilirlik</span></dt>
+      <dt><span class="term-en">verifiability</span></dt>
       <dd>Bir çıktının doğru olup olmadığının bağımsız ve kesin biçimde kontrol edilebilmesi.</dd>
     </div>
   </dl>
@@ -125,8 +125,8 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/llm/">#LLM</a></li>
-  <li><a href="/etiket/arastirma/">#araştırma</a></li>
-  <li><a href="/etiket/maliyet/">#maliyet</a></li>
+  <li><a href="/etiket/research/">#research</a></li>
+  <li><a href="/etiket/cost/">#cost</a></li>
 </ul>
 
   <a class="readmore" href="https://openai.com/index/ten-advances-in-mathematics" rel="noopener nofollow" target="_blank">
@@ -166,8 +166,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Bu senin en çok işine yarayacak yazılardan biri. DBH&#x27;daki yakıt analizi uygulamasında veri ASIS&#x27;ten geliyordu — kaynak bir gün formatı değiştirseydi ya da bir alanı boş göndermeye başlasaydı, pipeline muhtemelen sessizce yanlış sonuç üretirdi. Uygulanabilir hâli şu: her ETL adımının sonuna ucuz <strong>invariant kontrolleri</strong> koy — satır sayısı bir önceki koşunun %20&#x27;sinden az mı, kritik kolonlarda null oranı sıçradı mı, kategori dağılımı tanınmayacak kadar kaydı mı. Pandas&#x27;ta bu birkaç <code>assert</code> satırı; ama arızayı üretime çıkmadan yakalamanın en ucuz yolu.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Bu en çok işine yarayacak yazılardan biri. Bir veri kaynağı bir gün formatı değiştirirse ya da bir alanı boş göndermeye başlarsa, pipeline muhtemelen sessizce yanlış sonuç üretir. Uygulanabilir hâli şu: her ETL adımının sonuna ucuz <strong>invariant kontrolleri</strong> koy: satır sayısı bir önceki koşunun yüzde 20’sinden az mı, kritik kolonlarda null oranı sıçradı mı, kategori dağılımı tanınmayacak kadar kaydı mı? Pandas’ta bu birkaç <code>assert</code> satırı ama arızayı production’a çıkmadan yakalamanın en ucuz yolu.</p>
     </div>
   </div>
 
@@ -175,15 +175,15 @@
     <summary class="label">Sözlük · 3 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">canary deployment</span> <span class="term-tr">kanarya dağıtımı</span></dt>
+      <dt><span class="term-en">canary deployment</span></dt>
       <dd>Yeni sürümü önce küçük bir trafik dilimine verip metrikleri izleyerek yaygınlaştırma yöntemi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">data canary</span> <span class="term-tr">veri kanaryası</span></dt>
+      <dt><span class="term-en">data canary</span></dt>
       <dd>Aynı fikrin veriye uygulanmışı: yeni üretilen veri kümesini yayımlamadan önce doğrulayıp bozuksa engelleme.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">manifest</span> <span class="term-tr">manifest</span></dt>
+      <dt><span class="term-en">manifest</span></dt>
       <dd>Video oynatıcısına hangi parçaların hangi kalitede nereden çekileceğini söyleyen tanım dosyası.</dd>
     </div>
   </dl>
@@ -192,9 +192,9 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/veri-muhendisligi/">#veri mühendisliği</a></li>
-  <li><a href="/etiket/dayaniklilik/">#dayanıklılık</a></li>
-  <li><a href="/etiket/gozlemlenebilirlik/">#gözlemlenebilirlik</a></li>
+  <li><a href="/etiket/data-engineering/">#data engineering</a></li>
+  <li><a href="/etiket/resilience/">#resilience</a></li>
+  <li><a href="/etiket/observability/">#observability</a></li>
   <li><a href="/etiket/pipeline/">#pipeline</a></li>
 </ul>
 
@@ -261,7 +261,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

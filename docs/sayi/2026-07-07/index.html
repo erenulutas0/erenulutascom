@@ -84,16 +84,16 @@
 </div>
 
   <h2 class="cover-title">
-    <a href="https://aws.amazon.com/blogs/architecture/sp-globals-innovative-disaster-recovery-strategy-using-amazon-fsx-for-netapp-ontap-snapshots/" rel="noopener nofollow" target="_blank">Felaket kurtarmada ara mod: salt-okunur devretme</a>
+    <a href="https://aws.amazon.com/blogs/architecture/sp-globals-innovative-disaster-recovery-strategy-using-amazon-fsx-for-netapp-ontap-snapshots/" rel="noopener nofollow" target="_blank">Felaket kurtarmada ara mod: salt-okunur failover</a>
   </h2>
   <p class="original-title">S&amp;P Global’s innovative disaster recovery strategy using Amazon FSx for NetApp ONTAP snapshots · Nishanth Charlakola</p>
 
-  <div class="prose"><p>Kuruluşların karmaşık SQL Server altyapıları için yüksek erişilebilirlik ve felaket kurtarma (HA/DR) çözümleri kurma zorunluluğu var — veri erişilebilirliğini ve bütünlüğünü korumak için. S&amp;P Global Market Intelligence, Capital IQ platformu için bunu Amazon FSx for NetApp ONTAP üzerine kurmuş.</p><p>Çözümün en öğretici kısmı ikili bir seçim yerine <strong>ara bir mod</strong> sunması: ikincil bölgede <strong>salt-okunur moda anında devretme</strong> (failover). Yani felaket anında sistem ya tamamen çalışıyor ya tamamen kapalı değil — okuma yapılabilen, yazma yapılamayan bir orta hâlde ayakta kalıyor.</p><p>Bu ayrım pratikte çok değerli. Çoğu iş yükünde okuma trafiği yazmadan kat kat fazladır; salt-okunur bir sistem kullanıcıların büyük kısmına hizmet vermeye devam eder. Ayrıca yazmayı kapatmak, bölünmüş beyin (split-brain) riskini ortadan kaldırır — iki bölge aynı anda yazarsa veriyi uzlaştırmak çok daha zor bir problemdir.</p><p>Yazı ayrıca bulut göçlerinde kavram kanıtının (POC) rolüne değiniyor: standart belirlemek, riski azaltmak ve hızı korurken iş ve teknik doğrulama yapmak.</p></div>
+  <div class="prose"><p>Kuruluşların karmaşık SQL Server altyapıları için yüksek erişilebilirlik ve felaket kurtarma (HA/DR) çözümleri kurma zorunluluğu var — veri erişilebilirliğini ve bütünlüğünü korumak için. S&amp;P Global Market Intelligence, Capital IQ platformu için bunu Amazon FSx for NetApp ONTAP üzerine kurmuş.</p><p>Çözümün en öğretici kısmı ikili bir seçim yerine <strong>ara bir mod</strong> sunması: ikincil bölgede <strong>salt-okunur moda anında failover</strong> (failover). Yani felaket anında sistem ya tamamen çalışıyor ya tamamen kapalı değil — okuma yapılabilen, yazma yapılamayan bir orta hâlde ayakta kalıyor.</p><p>Bu ayrım pratikte çok değerli. Çoğu iş yükünde okuma trafiği yazmadan kat kat fazladır; salt-okunur bir sistem kullanıcıların büyük kısmına hizmet vermeye devam eder. Ayrıca yazmayı kapatmak, split-brain (split-brain) riskini ortadan kaldırır — iki bölge aynı anda yazarsa veriyi uzlaştırmak çok daha zor bir problemdir.</p><p>Yazı ayrıca bulut göçlerinde kavram kanıtının (POC) rolüne değiniyor: standart belirlemek, riski azaltmak ve hızı korurken iş ve teknik doğrulama yapmak.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>&quot;Açık ya da kapalı&quot; yerine kademeli hizmet seviyeleri tasarlamak, dayanıklılığın en pratik biçimi.</span></li><li><span>Anlık görüntü (snapshot) tabanlı replikasyon, tam yedekten çok daha hızlı devretme sağlıyor.</span></li><li><span>Salt-okunur devretme, veri tutarlılığını koruma açısından da güvenli: çift yazma riski yok.</span></li>    </ol>
+<li><span>&quot;Açık ya da kapalı&quot; yerine kademeli hizmet seviyeleri tasarlamak, dayanıklılığın en pratik biçimi.</span></li><li><span>Snapshot (snapshot) tabanlı replikasyon, tam yedekten çok daha hızlı failover sağlıyor.</span></li><li><span>Salt-okunur failover, veri tutarlılığını koruma açısından da güvenli: çift yazma riski yok.</span></li>    </ol>
   </div>
 
   <div class="callouts">
@@ -102,8 +102,8 @@
       <p>Felaket kurtarma planı olmayan sistem, sadece henüz felaket yaşamamış sistemdir. Ama iyi bir DR planının işareti &quot;her şeyi yedekliyoruz&quot; değil, <strong>RTO ve RPO hedeflerinin açıkça tanımlanmış olmasıdır</strong>: ne kadar sürede ayağa kalkmalıyız ve en fazla ne kadar veri kaybını kabul ediyoruz? Bu iki sayı verilmeden yapılan yatırım, ya yetersiz ya da gereksiz pahalı olur.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Bu iki kısaltmayı ezberle, mülakatta çıkar: <strong>RTO</strong> (Recovery Time Objective) — kabul edilebilir kesinti süresi; <strong>RPO</strong> (Recovery Point Objective) — kabul edilebilir veri kaybı. KlioAI için sor: veritabanı bozulursa kaç saatlik kullanıcı verisini kaybetmeyi göze alabilirsin? Cevap &quot;hiç&quot; ise sürekli replikasyon gerekir; &quot;bir gün&quot; ise günlük yedek yeterlidir — ve maliyet farkı büyüktür. Bir de şunu yap: <strong>yedeğinden geri dönmeyi bir kere gerçekten dene.</strong> Test edilmemiş yedek, yedek değildir; bunu felaket anında öğrenmek en pahalı öğrenme biçimidir.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Bu iki kısaltmayı ezberle, mülakatta çıkar: <strong>RTO</strong> (Recovery Time Objective), kabul edilebilir kesinti süresi; <strong>RPO</strong> (Recovery Point Objective), kabul edilebilir veri kaybı. Kendi uygulaman için sor: veritabanı bozulursa kaç saatlik kullanıcı verisini kaybetmeyi göze alabilirsin? Cevap ‘hiç’ ise sürekli replication gerekir, ‘bir gün’ ise günlük backup yeterlidir ve maliyet farkı büyüktür. Bir de şunu yap: <strong>backup’tan geri dönmeyi bir kere gerçekten dene.</strong> Test edilmemiş backup, backup değildir; bunu felaket anında öğrenmek en pahalı öğrenme biçimidir.</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">failover</span> <span class="term-tr">devretme</span></dt>
+      <dt><span class="term-en">failover</span></dt>
       <dd>Ana sistem çalışamaz hâle geldiğinde hizmetin yedek sisteme geçirilmesi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">RTO / RPO</span> <span class="term-tr">kurtarma süresi / kurtarma noktası hedefi</span></dt>
+      <dt><span class="term-en">RTO / RPO</span></dt>
       <dd>RTO ne kadar sürede ayağa kalkılacağını, RPO en fazla ne kadar veri kaybının kabul edildiğini tanımlar.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">split-brain</span> <span class="term-tr">bölünmüş beyin</span></dt>
-      <dd>İki düğümün birbirini görmeyip ikisinin de kendini lider sanması; çelişkili yazmalar üretir.</dd>
+      <dt><span class="term-en">split-brain</span></dt>
+      <dd>İki node’un birbirini görmeyip ikisinin de kendini lider sanması; çelişkili yazmalar üretir.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">snapshot</span> <span class="term-tr">anlık görüntü</span></dt>
+      <dt><span class="term-en">snapshot</span></dt>
       <dd>Bir depolama biriminin belirli bir andaki durumunun hızlıca alınan kopyası.</dd>
     </div>
   </dl>
@@ -133,9 +133,9 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/felaket-kurtarma/">#felaket kurtarma</a></li>
-  <li><a href="/etiket/veritabani/">#veritabanı</a></li>
-  <li><a href="/etiket/mimari/">#mimari</a></li>
-  <li><a href="/etiket/dayaniklilik/">#dayanıklılık</a></li>
+  <li><a href="/etiket/database/">#database</a></li>
+  <li><a href="/etiket/architecture/">#architecture</a></li>
+  <li><a href="/etiket/resilience/">#resilience</a></li>
 </ul>
 
   <a class="readmore" href="https://aws.amazon.com/blogs/architecture/sp-globals-innovative-disaster-recovery-strategy-using-amazon-fsx-for-netapp-ontap-snapshots/" rel="noopener nofollow" target="_blank">
@@ -170,8 +170,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Bu, dağıtık sistemlerde doğrudan karşına çıkacak bir olgu. Klasik örnek: bir servis hata alınca hemen yeniden dener. Her istemci için makul olan bu davranış, hepsi aynı anda yaptığında zaten zorlanan sunucuyu tamamen düşürür — <strong>retry storm</strong>. Çözümler tam olarak &quot;koordinasyon&quot; fikrinden geliyor: üstel geri çekilme, rastgele <strong>jitter</strong> eklemek ve devre kesici (circuit breaker). Kod yazarken &quot;benim isteğim için en iyisi ne?&quot; yerine &quot;herkes bunu yaparsa ne olur?&quot; diye sormayı alışkanlık hâline getir — bu tek soru, ölçeklenebilir sistem tasarımının önemli bir kısmını kapsıyor.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Bu, dağıtık sistemlerde doğrudan karşına çıkacak bir olgu. Klasik örnek: bir servis hata alınca hemen yeniden dener. Her istemci için makul olan bu davranış, hepsi aynı anda yaptığında zaten zorlanan sunucuyu tamamen düşürür — <strong>retry storm</strong>. Çözümler tam olarak &quot;koordinasyon&quot; fikrinden geliyor: exponential backoff, rastgele <strong>jitter</strong> eklemek ve circuit breaker (circuit breaker). Kod yazarken &quot;benim isteğim için en iyisi ne?&quot; yerine &quot;herkes bunu yaparsa ne olur?&quot; diye sormayı alışkanlık hâline getir — bu tek soru, ölçeklenebilir sistem tasarımının önemli bir kısmını kapsıyor.</p>
     </div>
   </div>
 
@@ -179,15 +179,15 @@
     <summary class="label">Sözlük · 3 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">selfish routing</span> <span class="term-tr">bencil yönlendirme</span></dt>
+      <dt><span class="term-en">selfish routing</span></dt>
       <dd>Her aktörün yalnızca kendi maliyetini düşünerek yol seçmesi; toplam verimliliği düşürebilir.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">retry storm</span> <span class="term-tr">yeniden deneme fırtınası</span></dt>
+      <dt><span class="term-en">retry storm</span></dt>
       <dd>Çok sayıda istemcinin aynı anda yeniden denemesiyle zaten zorlanan sistemin tamamen çökmesi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">jitter</span> <span class="term-tr">rastgele sapma</span></dt>
+      <dt><span class="term-en">jitter</span></dt>
       <dd>Yeniden deneme sürelerine eklenen rastgelelik; istemcilerin aynı anda tekrar denemesini önler.</dd>
     </div>
   </dl>
@@ -197,8 +197,8 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/optimizasyon/">#optimizasyon</a></li>
-  <li><a href="/etiket/arastirma/">#araştırma</a></li>
-  <li><a href="/etiket/sistem-tasarimi/">#sistem tasarımı</a></li>
+  <li><a href="/etiket/research/">#research</a></li>
+  <li><a href="/etiket/system-design/">#system design</a></li>
 </ul>
 
   <a class="readmore" href="https://research.google/blog/the-power-of-collaboration-how-we-can-reduce-traffic-congestion/" rel="noopener nofollow" target="_blank">
@@ -217,21 +217,21 @@
 </div>
 
   <h3 class="brief-title">
-    <a href="https://openai.com/index/australian-payments-plus" rel="noopener nofollow" target="_blank">4 saatlik mutabakat incelemesi 30 dakikaya: log izinde zaman damgası tutarsızlığı</a>
+    <a href="https://openai.com/index/australian-payments-plus" rel="noopener nofollow" target="_blank">4 saatlik reconciliation incelemesi 30 dakikaya: log izinde timestamp tutarsızlığı</a>
   </h3>
   <p class="original-title">Australian Payments Plus moves faster with ChatGPT and Codex</p>
-  <div class="prose prose-sm"><p>Australian Payments Plus (AP+) Avustralya&#x27;da ödeme ve kimlik altyapısı işletiyor. Ekipleri şema kuralları, teknik spesifikasyonlar, üye yükümlülükleri, operasyonel süreçler, siber güvenlik ve düzenleyici beklentiler arasında çalışıyor — hızın önemli olduğu ama doğruluk ve hesap verebilirliğin daha önemli olduğu bir alan.</p><p>Paylaşılan en somut örnek bir hata ayıklama vakası: bir mutabakat (reconciliation) sorununda ekipler, sistem logları ve mutabakat verisi arasında <strong>ince bir zaman damgası tutarsızlığını</strong> izlemek için Codex kullanmış. Günlerce sürebilecek elle inceleme <strong>30 dakikaya</strong> inmiş — önceki süre 4 saat olarak veriliyor.</p><p>Diğer sayılar: çalışanların %77&#x27;si haftada 2+ saat tasarruf bildiriyor, %80&#x27;i yaratıcılık ya da iş kalitesinde iyileşme belirtiyor.</p></div>
+  <div class="prose prose-sm"><p>Australian Payments Plus (AP+) Avustralya&#x27;da ödeme ve kimlik altyapısı işletiyor. Ekipleri şema kuralları, teknik spesifikasyonlar, üye yükümlülükleri, operasyonel süreçler, siber güvenlik ve düzenleyici beklentiler arasında çalışıyor — hızın önemli olduğu ama doğruluk ve hesap verebilirliğin daha önemli olduğu bir alan.</p><p>Paylaşılan en somut örnek bir debugging vakası: bir reconciliation (reconciliation) sorununda ekipler, sistem logları ve reconciliation verisi arasında <strong>ince bir timestamp tutarsızlığını</strong> izlemek için Codex kullanmış. Günlerce sürebilecek elle inceleme <strong>30 dakikaya</strong> inmiş — önceki süre 4 saat olarak veriliyor.</p><p>Diğer sayılar: çalışanların %77&#x27;si haftada 2+ saat tasarruf bildiriyor, %80&#x27;i yaratıcılık ya da iş kalitesinde iyileşme belirtiyor.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
     <ol>
-<li><span>En değerli kullanım karmaşık yaratıcı iş değil, <strong>sıkıcı ve hacimli</strong> iş: çok sayıda log satırında bir tutarsızlık aramak.</span></li><li><span>Ödeme sistemlerinde zaman damgası tutarsızlıkları klasik bir hata kaynağı — saat dilimi, saat kayması, sıralama.</span></li>    </ol>
+<li><span>En değerli kullanım karmaşık yaratıcı iş değil, <strong>sıkıcı ve hacimli</strong> iş: çok sayıda log satırında bir tutarsızlık aramak.</span></li><li><span>Ödeme sistemlerinde timestamp tutarsızlıkları klasik bir hata kaynağı — saat dilimi, clock skew, sıralama.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Buradaki hata sınıfını tanı: <strong>zaman damgası tutarsızlığı</strong>. Tradebot&#x27;ta bunu mutlaka yaşamışsındır — borsa saati mi, sunucu saati mi, UTC mi? Kural basit ama sürekli ihlal edilir: <strong>her zaman damgasını UTC olarak sakla, yalnızca gösterirken yerel saate çevir.</strong> PostgreSQL&#x27;de <code>timestamptz</code> kullan, <code>timestamp</code> değil; Java&#x27;da <code>Instant</code> kullan, <code>LocalDateTime</code> değil. İkinci ders ise LLM kullanımıyla ilgili: modeli &quot;bana kod yaz&quot; için değil, &quot;bu 50.000 satır logda tutarsızlığı bul&quot; için kullanmak çok daha yüksek getirili. İnsanın sıkıldığı, makinenin sıkılmadığı işler.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Buradaki hata sınıfını tanı: <strong>timestamp tutarsızlığı</strong>. Borsa saati mi, sunucu saati mi, UTC mi? Kural basit ama sürekli ihlal edilir: <strong>her timestamp’i UTC olarak sakla, yalnızca gösterirken yerel saate çevir.</strong> PostgreSQL’de <code>timestamptz</code> kullan, <code>timestamp</code> değil; Java’da <code>Instant</code> kullan, <code>LocalDateTime</code> değil. İkinci ders LLM kullanımıyla ilgili: modeli ‘bana kod yaz’ için değil, ‘bu 50.000 satır logda tutarsızlığı bul’ için kullanmak çok daha yüksek getirili. İnsanın sıkıldığı, makinenin sıkılmadığı işler.</p>
     </div>
   </div>
 
@@ -239,15 +239,15 @@
     <summary class="label">Sözlük · 3 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">reconciliation</span> <span class="term-tr">mutabakat</span></dt>
+      <dt><span class="term-en">reconciliation</span></dt>
       <dd>İki ayrı sistemin kayıtlarının birbirini tutup tutmadığının karşılaştırılması (ör. banka kaydı ile iç kayıt).</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">clock skew</span> <span class="term-tr">saat kayması</span></dt>
+      <dt><span class="term-en">clock skew</span></dt>
       <dd>Farklı sunucuların saatlerinin birbirinden sapması; olayların yanlış sırada görünmesine yol açar.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">UTC</span> <span class="term-tr">UTC</span></dt>
+      <dt><span class="term-en">UTC</span></dt>
       <dd>Saat dilimlerinden bağımsız evrensel zaman standardı; veri saklamanın doğru birimi.</dd>
     </div>
   </dl>
@@ -256,9 +256,9 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/hata-ayiklama/">#hata ayıklama</a></li>
+  <li><a href="/etiket/debugging/">#debugging</a></li>
   <li><a href="/etiket/llm/">#LLM</a></li>
-  <li><a href="/etiket/odeme-sistemleri/">#ödeme sistemleri</a></li>
+  <li><a href="/etiket/payments/">#payments</a></li>
   <li><a href="/etiket/operasyon/">#operasyon</a></li>
 </ul>
 
@@ -277,7 +277,7 @@
     <ol class="toc" id="toc">
       <li>
         <a href="#809dfe9de096">
-          <span class="toc-title">Felaket kurtarmada ara mod: salt-okunur devretme</span>
+          <span class="toc-title">Felaket kurtarmada ara mod: salt-okunur failover</span>
           <span class="toc-meta">AWS Architecture Blog · 7 dk</span>
         </a>
       </li>
@@ -289,7 +289,7 @@
       </li>
       <li>
         <a href="#60d1b56766e3">
-          <span class="toc-title">4 saatlik mutabakat incelemesi 30 dakikaya: log izinde zaman damgası tutarsızlığı</span>
+          <span class="toc-title">4 saatlik reconciliation incelemesi 30 dakikaya: log izinde timestamp tutarsızlığı</span>
           <span class="toc-meta">OpenAI Research · 4 dk</span>
         </a>
       </li>
@@ -328,7 +328,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

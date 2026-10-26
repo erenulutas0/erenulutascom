@@ -88,22 +88,22 @@
   </h2>
   <p class="original-title">An API for MoQ: provision your own isolated relays · Jacob Curtis, Manish Pandit</p>
 
-  <div class="prose"><p><strong>MoQ</strong> (Media over QUIC), IETF&#x27;te geliştirilen açık bir protokol — HTTP, TLS ve QUIC&#x27;i de standartlaştıran kurum. Cloudflare geçen yıl MoQ&#x27;yu tüm sunucularında açmıştı; şimdi eksik olan parçayı ekliyor: izolasyon ve erişim kontrolü. Yeni sağlama API&#x27;siyle uygulamana özel bir röle (relay) oluşturup yayıncılar ve aboneler için ayrı kimlik bilgileri verebiliyorsun.</p><p>Protokolün modeli basit ve öğretici: bir <strong>yayınla/abone ol</strong> (publish/subscribe) sistemi. Yayıncı isimlendirilmiş veri akışları gönderir, aboneler o akışları isimle ister. Aralarında röleler durur — bunlar sadece her akışı isteyen herkese kopyalayan CDN sunucuları. Kritik nokta: <strong>röle verinin içine hiç bakmaz.</strong></p><p>Bu tek tasarım kararı büyük bir sonuç doğuruyor. Röleler içeriği umursamadığı için, eskiden her biri ayrı bir sistem gerektiren şeyler — canlı video, görüntülü arama, düşük gecikmeli mesajlaşma — aynı protokolün üstünde taşınabiliyor. Altta HTTP/3&#x27;ün taşıma katmanı olan QUIC var; gecikmeyi düşük tutan da o.</p><p>Pratik sonuç: kendi özel sunucu filonu kurup işletmene gerek kalmıyor. Tek bir API üzerinden bir CDN&#x27;e yayın yapıyor, hem düşük gecikme hem büyük ölçeği çok daha ucuza alıyorsun.</p></div>
+  <div class="prose"><p><strong>MoQ</strong> (Media over QUIC), IETF&#x27;te geliştirilen açık bir protokol — HTTP, TLS ve QUIC&#x27;i de standartlaştıran kurum. Cloudflare geçen yıl MoQ&#x27;yu tüm sunucularında açmıştı; şimdi eksik olan parçayı ekliyor: izolasyon ve erişim kontrolü. Yeni sağlama API&#x27;siyle uygulamana özel bir relay (relay) oluşturup yayıncılar ve aboneler için ayrı kimlik bilgileri verebiliyorsun.</p><p>Protokolün modeli basit ve öğretici: bir <strong>publish/subscribe</strong> (publish/subscribe) sistemi. Yayıncı isimlendirilmiş veri akışları gönderir, aboneler o akışları isimle ister. Aralarında relay’ler durur — bunlar sadece her akışı isteyen herkese kopyalayan CDN sunucuları. Kritik nokta: <strong>relay verinin içine hiç bakmaz.</strong></p><p>Bu tek tasarım kararı büyük bir sonuç doğuruyor. Relay’ler içeriği umursamadığı için, eskiden her biri ayrı bir sistem gerektiren şeyler — canlı video, görüntülü arama, düşük gecikmeli mesajlaşma — aynı protokolün üstünde taşınabiliyor. Altta HTTP/3&#x27;ün taşıma katmanı olan QUIC var; gecikmeyi düşük tutan da o.</p><p>Pratik sonuç: kendi özel sunucu filonu kurup işletmene gerek kalmıyor. Tek bir API üzerinden bir CDN&#x27;e yayın yapıyor, hem düşük gecikme hem büyük ölçeği çok daha ucuza alıyorsun.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Röle içeriğe bakmaz — bu &quot;aptal ara katman&quot; kararı, protokolün genel amaçlı olmasını sağlayan şey.</span></li><li><span>Yayınla/abone ol modeli isimlendirilmiş akışlar üzerinden çalışıyor; abone akışı adıyla istiyor.</span></li><li><span>QUIC üstünde çalışıyor: TCP&#x27;nin baş-hat tıkanması (head-of-line blocking) sorunu olmadan düşük gecikme.</span></li><li><span>Şu an beta ve ücretsiz; draft-14 ve draft-16 sürümleri destekleniyor — yani protokol hâlâ hareket hâlinde.</span></li>    </ol>
+<li><span>Relay içeriğe bakmaz — bu &quot;aptal ara katman&quot; kararı, protokolün genel amaçlı olmasını sağlayan şey.</span></li><li><span>Publish/subscribe modeli isimlendirilmiş akışlar üzerinden çalışıyor; abone akışı adıyla istiyor.</span></li><li><span>QUIC üstünde çalışıyor: TCP&#x27;nin head-of-line blocking (head-of-line blocking) sorunu olmadan düşük gecikme.</span></li><li><span>Şu an beta ve ücretsiz; draft-14 ve draft-16 sürümleri destekleniyor — yani protokol hâlâ hareket hâlinde.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-why">
       <h3 class="label">Neden önemli?</h3>
-      <p>&quot;Ara katman veriyi anlamasın&quot; ilkesi, dayanıklı sistem tasarımının en güçlü kurallarından biri. İçeriği anlamayan bir bileşen, içerik değiştiğinde bozulmaz; genel amaçlı kalır ve ölçeklemesi kolaylaşır. Aynı ilkeyi mesaj kuyruklarında, yük dengeleyicilerde ve proxy&#x27;lerde de görürsün — MoQ bunun canlı medyaya uygulanmış hâli.</p>
+      <p>&quot;Ara katman veriyi anlamasın&quot; ilkesi, dayanıklı sistem tasarımının en güçlü kurallarından biri. İçeriği anlamayan bir bileşen, içerik değiştiğinde bozulmaz; genel amaçlı kalır ve ölçeklemesi kolaylaşır. Aynı ilkeyi mesaj kuyruklarında, load balancer’larda ve proxy&#x27;lerde de görürsün — MoQ bunun canlı medyaya uygulanmış hâli.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Mobit&#x27;teki mesajlaşma uygulamasında muhtemelen WebSocket kullandın. Bu yazı sana o kararı sorgulatacak bir karşılaştırma veriyor: WebSocket TCP üstünde tek bir akıştır, bir paket kaybolduğunda arkasındaki her şey bekler (head-of-line blocking). QUIC bunu bağımsız akışlarla çözer. Ayrıca yayınla/abone ol modelini kendi sistemine taşıyabilirsin: mesajları doğrudan alıcıya itmek yerine kanal adına yayınlamak, grup mesajlaşmasını ve çoklu cihaz senkronizasyonunu ciddi şekilde basitleştirir — Redis Pub/Sub ile aynı deseni bugün deneyebilirsin.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Bir mesajlaşma uygulamasında muhtemelen WebSocket kullandın. Bu yazı o kararı sorgulatacak bir karşılaştırma veriyor: WebSocket TCP üstünde tek bir akıştır, bir paket kaybolduğunda arkasındaki her şey bekler (head-of-line blocking). QUIC bunu bağımsız akışlarla çözer. Ayrıca publish/subscribe modelini kendi sistemine taşıyabilirsin: mesajları doğrudan alıcıya itmek yerine bir kanala yayınlamak, grup mesajlaşmasını ve çoklu cihaz senkronizasyonunu ciddi şekilde basitleştirir. Redis Pub/Sub ile aynı deseni bugün deneyebilirsin.</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">publish/subscribe (pub/sub)</span> <span class="term-tr">yayınla/abone ol</span></dt>
+      <dt><span class="term-en">publish/subscribe (pub/sub)</span></dt>
       <dd>Göndericinin alıcıyı bilmediği, mesajların isimlendirilmiş kanallara yayınlandığı iletişim modeli.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">relay</span> <span class="term-tr">röle</span></dt>
+      <dt><span class="term-en">relay</span></dt>
       <dd>Veriyi kaynaktan alıp isteyen herkese kopyalayan ara sunucu; içeriği yorumlamaz.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">QUIC</span> <span class="term-tr">QUIC</span></dt>
-      <dd>UDP üstünde çalışan, HTTP/3&#39;ün taşıma katmanı olan protokol; bağımsız akışlarla baş-hat tıkanmasını önler.</dd>
+      <dt><span class="term-en">QUIC</span></dt>
+      <dd>UDP üstünde çalışan, HTTP/3&#39;ün taşıma katmanı olan protokol; bağımsız akışlarla head-of-line blocking’i önler.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">head-of-line blocking</span> <span class="term-tr">baş-hat tıkanması</span></dt>
+      <dt><span class="term-en">head-of-line blocking</span></dt>
       <dd>Sıradaki ilk paket geciktiğinde arkasındaki tüm paketlerin beklemek zorunda kalması.</dd>
     </div>
   </dl>
@@ -132,10 +132,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/ag/">#ağ</a></li>
-  <li><a href="/etiket/protokol/">#protokol</a></li>
-  <li><a href="/etiket/gercek-zamanli-sistemler/">#gerçek zamanlı sistemler</a></li>
-  <li><a href="/etiket/gecikme/">#gecikme</a></li>
+  <li><a href="/etiket/networking/">#networking</a></li>
+  <li><a href="/etiket/protocol/">#protocol</a></li>
+  <li><a href="/etiket/real-time-systems/">#real-time systems</a></li>
+  <li><a href="/etiket/latency/">#latency</a></li>
 </ul>
 
   <a class="readmore" href="https://blog.cloudflare.com/moq-relays/" rel="noopener nofollow" target="_blank">
@@ -170,8 +170,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>&quot;İşletim veritabanına analitik sorgu atmak&quot; sorusu her projede çıkar. Tradebot&#x27;ta canlı veri yazan tabloya ağır bir analiz sorgusu attığında yazma gecikmesinin nasıl bozulduğunu muhtemelen gördün. PostgreSQL&#x27;de bunun karşılığı bir <strong>read replica</strong> kurup analitik sorguları oraya yöneltmek. Yazının ikinci dersi ise daha genel: bir entegrasyonu kurmak için ikinci bir kimlik doğrulama yolu açmak zorunda kalıyorsan, bu geçici çözümü kodun içine gömme — belgelendir, çünkü bir yıl sonra &quot;bu rol niye var?&quot; diye soran sen olacaksın.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>‘Operasyonel veritabanına analitik sorgu atmak’ sorusu her projede çıkar. Canlı veri yazan tabloya ağır bir analiz sorgusu attığında yazma gecikmesinin nasıl bozulduğunu muhtemelen gördün. PostgreSQL’de bunun karşılığı bir <strong>read replica</strong> kurup analitik sorguları oraya yöneltmek. Yazının ikinci dersi daha genel: bir entegrasyonu kurmak için ikinci bir authentication yolu açmak zorunda kalıyorsan bu geçici çözümü kodun içine gömme; belgele, çünkü bir yıl sonra ‘bu rol niye var?’ diye soran sen olacaksın.</p>
     </div>
   </div>
 
@@ -179,11 +179,11 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">federation</span> <span class="term-tr">federasyon</span></dt>
+      <dt><span class="term-en">federation</span></dt>
       <dd>Farklı sistemlerdeki veriyi taşımadan, tek bir sorgu arayüzünden birlikte sorgulama.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">read replica</span> <span class="term-tr">okuma kopyası</span></dt>
+      <dt><span class="term-en">read replica</span></dt>
       <dd>Ana veritabanının salt-okunur kopyası; ağır okuma sorgularını asıl sistemden ayırmak için kullanılır.</dd>
     </div>
   </dl>
@@ -192,10 +192,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/veritabani/">#veritabanı</a></li>
+  <li><a href="/etiket/database/">#database</a></li>
   <li><a href="/etiket/postgresql/">#PostgreSQL</a></li>
-  <li><a href="/etiket/kimlik-dogrulama/">#kimlik doğrulama</a></li>
-  <li><a href="/etiket/veri-muhendisligi/">#veri mühendisliği</a></li>
+  <li><a href="/etiket/authentication/">#authentication</a></li>
+  <li><a href="/etiket/data-engineering/">#data engineering</a></li>
 </ul>
 
   <a class="readmore" href="https://www.databricks.com/blog/backstage-lakebase-part-3" rel="noopener nofollow" target="_blank">
@@ -227,8 +227,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Kısa bir yazı ama içindeki desen çok kullanışlı: <strong>mevcut durum tablosu</strong> ile <strong>zaman içinde toplulaştırılmış tablo</strong>yu ayırmak. KlioAI&#x27;da &quot;bu kullanıcının aboneliği aktif mi?&quot; ile &quot;son 28 günde kaç kullanıcı konuşma pratiği yaptı?&quot; sorularını aynı tablodan cevaplamaya çalışırsan ikisi de yavaşlar. Birincisi indeksli tekil okuma, ikincisi ise önceden toplulaştırılmış bir özet tablo ister. Bu ayrım OLTP/OLAP ayrımının en küçük ve en pratik hâli.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Kısa bir yazı ama içindeki desen çok kullanışlı: <strong>mevcut durum tablosu</strong> ile <strong>zaman içinde aggregate edilmiş tabloyu</strong> ayırmak. ‘Bu kullanıcının aboneliği aktif mi?’ ile ‘son 28 günde kaç kullanıcı pratik yaptı?’ sorularını aynı tablodan cevaplamaya çalışırsan ikisi de yavaşlar. Birincisi index’li tekil okuma, ikincisi önceden aggregate edilmiş bir özet tablo ister. Bu ayrım OLTP/OLAP ayrımının en küçük ve en pratik hâli.</p>
     </div>
   </div>
 
@@ -236,11 +236,11 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">cumulative table</span> <span class="term-tr">kümülatif tablo</span></dt>
+      <dt><span class="term-en">cumulative table</span></dt>
       <dd>Her varlığın en güncel durumunu tutan, sürekli güncellenen tablo.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">feature flag</span> <span class="term-tr">özellik anahtarı</span></dt>
+      <dt><span class="term-en">feature flag</span></dt>
       <dd>Bir özelliği kod dağıtmadan açıp kapatmayı sağlayan konfigürasyon anahtarı.</dd>
     </div>
   </dl>
@@ -251,7 +251,7 @@
   <ul class="tags">
   <li><a href="/etiket/veri-modelleme/">#veri modelleme</a></li>
   <li><a href="/etiket/analitik/">#analitik</a></li>
-  <li><a href="/etiket/veri-muhendisligi/">#veri mühendisliği</a></li>
+  <li><a href="/etiket/data-engineering/">#data engineering</a></li>
 </ul>
 
   <a class="readmore" href="https://netflixtechblog.com/modeling-device-capabilities-for-analytics-e7607acebde8?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">
@@ -283,8 +283,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Bu tam olarak senin gazete pipeline&#x27;ında vereceğin karar. Aynı sistemde farklı işler farklı model ister: makaleyi puanlayıp elemek ucuz ve hızlı bir model işi, kapak yazısını özetlemek ise en iyi modeli hak ediyor. KlioAI&#x27;da da aynısı geçerli — gramer düzeltmesi ile konuşma değerlendirmesi aynı modeli gerektirmiyor. Tek bir model seçip her yere koymak, ya kaliteden ya paradan kaybettirir.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Bu tam olarak bir LLM pipeline’ında vereceğin karar. Aynı sistemde farklı işler farklı model ister: bir girdiyi puanlayıp elemek ucuz ve hızlı bir model işi, ana çıktıyı üretmek ise en iyi modeli hak ediyor. Gramer düzeltmesi ile konuşma değerlendirmesi de aynı modeli gerektirmiyor. Tek bir model seçip her yere koymak ya kaliteden ya paradan kaybettirir.</p>
     </div>
   </div>
 
@@ -292,7 +292,7 @@
     <summary class="label">Sözlük · 1 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">input/output token pricing</span> <span class="term-tr">girdi/çıktı token fiyatlandırması</span></dt>
+      <dt><span class="term-en">input/output token pricing</span></dt>
       <dd>LLM maliyetinin, gönderilen ve üretilen token sayısına göre ayrı ayrı hesaplanması.</dd>
     </div>
   </dl>
@@ -302,8 +302,8 @@
   <div class="article-foot">
   <ul class="tags">
   <li><a href="/etiket/llm/">#LLM</a></li>
-  <li><a href="/etiket/maliyet/">#maliyet</a></li>
-  <li><a href="/etiket/urun/">#ürün</a></li>
+  <li><a href="/etiket/cost/">#cost</a></li>
+  <li><a href="/etiket/product/">#product</a></li>
 </ul>
 
   <a class="readmore" href="https://openai.com/index/building-abundant-intelligence" rel="noopener nofollow" target="_blank">
@@ -382,7 +382,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

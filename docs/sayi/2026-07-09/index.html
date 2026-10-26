@@ -88,12 +88,12 @@
   </h2>
   <p class="original-title">Why we cannot wait for better post-quantum signature algorithms · Bas Westerbaan, Christopher Patton</p>
 
-  <div class="prose"><p>Onlarca yıldır güvendiğimiz RSA ve ECC, yeterince gelişmiş kuantum bilgisayarların saldırısına karşı savunmasız. Böyle bilgisayarlar henüz yok, ama beklenenden erken geliyor gibi görünüyorlar. Neyse ki çözüm hazır: kuantum saldırısına dayanıklı olacak şekilde tasarlanmış <strong>ML-KEM</strong> şifrelemesi ve <strong>ML-DSA</strong> imzalarına geçmek. İkisi de NIST tarafından, sekiz yıllık açık uluslararası bir yarışmanın ardından 2024&#x27;te standartlaştırıldı.</p><p>Şifreleme tarafında geçiş çoktan başlamış: Cloudflare&#x27;in taşıdığı trafiğin çoğunluğu şimdiden ML-KEM kullanıyor ve böylece &quot;şimdi topla, sonra çöz&quot; saldırılarına karşı korunuyor.</p><p>İmza tarafı ise yazının asıl konusu ve dürüst bir takas anlatısı. ML-DSA bugün standartlaştırılmış en iyi genel amaçlı kuantum sonrası imza şeması — <strong>ama dezavantajları var</strong>: ağ üzerinde çok daha büyük yer kaplıyor ve RSA/ECC ile yapabildiğimiz birçok numara ML-DSA ile yapılamıyor. Daha iyi kuantum sonrası imza şemaları var ama henüz hazır değiller.</p><p>Sonuç, başlıktaki karar: daha iyisini bekleyemeyiz. Elimizdeki kusurlu araçla geçişe başlamak, mükemmel aracı beklerken savunmasız kalmaktan iyi.</p></div>
+  <div class="prose"><p>Onlarca yıldır güvendiğimiz RSA ve ECC, yeterince gelişmiş kuantum bilgisayarların saldırısına karşı savunmasız. Böyle bilgisayarlar henüz yok, ama beklenenden erken geliyor gibi görünüyorlar. Neyse ki çözüm hazır: kuantum saldırısına dayanıklı olacak şekilde tasarlanmış <strong>ML-KEM</strong> şifrelemesi ve <strong>ML-DSA</strong> imzalarına geçmek. İkisi de NIST tarafından, sekiz yıllık açık uluslararası bir yarışmanın ardından 2024&#x27;te standartlaştırıldı.</p><p>Şifreleme tarafında geçiş çoktan başlamış: Cloudflare&#x27;in taşıdığı trafiğin çoğunluğu şimdiden ML-KEM kullanıyor ve böylece &quot;harvest now, decrypt later&quot; saldırılarına karşı korunuyor.</p><p>İmza tarafı ise yazının asıl konusu ve dürüst bir takas anlatısı. ML-DSA bugün standartlaştırılmış en iyi genel amaçlı kuantum sonrası imza şeması — <strong>ama dezavantajları var</strong>: ağ üzerinde çok daha büyük yer kaplıyor ve RSA/ECC ile yapabildiğimiz birçok numara ML-DSA ile yapılamıyor. Daha iyi kuantum sonrası imza şemaları var ama henüz hazır değiller.</p><p>Sonuç, başlıktaki karar: daha iyisini bekleyemeyiz. Elimizdeki kusurlu araçla geçişe başlamak, mükemmel aracı beklerken savunmasız kalmaktan iyi.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Şifreleme ve imza farklı aciliyetlerde: şifrelenmiş veri bugün toplanıp yarın çözülebilir, imza ise ancak canlıyken kırılırsa işe yarar.</span></li><li><span>ML-DSA&#x27;nın maliyeti boyut: daha büyük imzalar, her TLS el sıkışmasında daha fazla bayt demek.</span></li><li><span>NIST&#x27;in sekiz yıllık açık yarışması, kriptografik standartların nasıl kurulduğunun iyi bir örneği — kapalı kapı ardında değil, kamuya açık.</span></li><li><span>Cloudflare bu konuda 2021&#x27;den beri düzenli yazıyor; teknolojinin olgunlaşmasını yıllar boyunca izlemek başlı başına bir yöntem.</span></li>    </ol>
+<li><span>Şifreleme ve imza farklı aciliyetlerde: şifrelenmiş veri bugün toplanıp yarın çözülebilir, imza ise ancak canlıyken kırılırsa işe yarar.</span></li><li><span>ML-DSA&#x27;nın maliyeti boyut: daha büyük imzalar, her TLS handshake’te daha fazla bayt demek.</span></li><li><span>NIST&#x27;in sekiz yıllık açık yarışması, kriptografik standartların nasıl kurulduğunun iyi bir örneği — kapalı kapı ardında değil, kamuya açık.</span></li><li><span>Cloudflare bu konuda 2021&#x27;den beri düzenli yazıyor; teknolojinin olgunlaşmasını yıllar boyunca izlemek başlı başına bir yöntem.</span></li>    </ol>
   </div>
 
   <div class="callouts">
@@ -102,8 +102,8 @@
       <p>Mühendislikte en sık verilen yanlış karar, mükemmel çözümü beklemektir. Bu yazı karşı örneği veriyor: kusurları açıkça sayıp yine de harekete geçmek. &quot;Şu anki en iyi seçenek nedir ve beklemenin maliyeti nedir?&quot; sorusu, teknoloji seçimlerinin çoğunda doğru sorudur.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Kuantum sonrası kriptografiyi bugün uygulamayacaksın, ama iki şeyi al. Birincisi karar çerçevesi: bir kütüphane ya da yaklaşım seçerken &quot;ideal mi?&quot; diye sorma, &quot;beklemenin maliyeti kabul edilebilir mi?&quot; diye sor. İkincisi somut: TLS el sıkışmasının maliyetini anlamak backend mühendisliğinin parçası. İmza boyutu büyürse el sıkışma paketleri büyür, mobil ağlarda bu ölçülebilir gecikme demektir. KlioAI mobil uygulamasında bağlantı kurma süresini ölçüyorsan, bu maliyetin nereden geldiğini bilmek işine yarar — ve bağlantı yeniden kullanımının (connection reuse) neden bu kadar önemli olduğunu açıklar.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Post-quantum cryptography’yi bugün uygulamayacaksın ama iki şeyi al. Birincisi karar çerçevesi: bir kütüphane ya da yaklaşım seçerken ‘ideal mi?’ diye sorma, ‘beklemenin maliyeti kabul edilebilir mi?’ diye sor. İkincisi somut: TLS handshake’in maliyetini anlamak backend mühendisliğinin parçası. İmza boyutu büyürse handshake paketleri büyür, mobil ağlarda bu ölçülebilir gecikme demektir. Bir mobil uygulamada bağlantı kurma süresini ölçüyorsan, bu maliyetin nereden geldiğini bilmek işine yarar ve connection reuse’un neden bu kadar önemli olduğunu açıklar.</p>
     </div>
   </div>
 
@@ -111,15 +111,15 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">ML-KEM / ML-DSA</span> <span class="term-tr">ML-KEM / ML-DSA</span></dt>
-      <dd>NIST tarafından standartlaştırılan kuantum sonrası anahtar değişimi ve dijital imza algoritmaları.</dd>
+      <dt><span class="term-en">ML-KEM / ML-DSA</span></dt>
+      <dd>NIST tarafından standartlaştırılan kuantum sonrası key rollover ve dijital imza algoritmaları.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">RSA / ECC</span> <span class="term-tr">RSA / ECC</span></dt>
+      <dt><span class="term-en">RSA / ECC</span></dt>
       <dd>Bugün yaygın kullanılan klasik açık anahtarlı kriptografi algoritmaları; yeterince güçlü kuantum bilgisayarlara karşı savunmasız.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">TLS handshake</span> <span class="term-tr">TLS el sıkışması</span></dt>
+      <dt><span class="term-en">TLS handshake</span></dt>
       <dd>İstemci ile sunucunun şifreli bağlantı kurmadan önce anahtar ve kimlik üzerinde anlaştığı ilk aşama.</dd>
     </div>
   </dl>
@@ -128,9 +128,9 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/kriptografi/">#kriptografi</a></li>
-  <li><a href="/etiket/guvenlik/">#güvenlik</a></li>
-  <li><a href="/etiket/protokol/">#protokol</a></li>
+  <li><a href="/etiket/cryptography/">#cryptography</a></li>
+  <li><a href="/etiket/security/">#security</a></li>
+  <li><a href="/etiket/protocol/">#protocol</a></li>
   <li><a href="/etiket/takas/">#takas</a></li>
 </ul>
 
@@ -156,7 +156,7 @@
     <a href="https://aws.amazon.com/blogs/architecture/specification-driven-composition-for-flexible-data-workflows/" rel="noopener nofollow" target="_blank">Niyeti mantıktan ayırmak: veri pipeline&#39;larında kopyala-yapıştır tuzağı</a>
   </h3>
   <p class="original-title">Specification-driven composition for flexible data workflows</p>
-  <div class="prose prose-sm"><p>Veri pipeline&#x27;ları genelde basit betikler olarak başlar. Büyüdükçe dönüşüm mantığını kopyalarsın ve küçük bir değişiklik birden çok iş akışına çığ gibi yayılır. Dönüşüm mantığını betikler arasında kopyalayıp değiştirmek, ölçekte yönetilemez iş akışları üretir.</p><p>Daha sinsi bir sonuç da var: her pipeline&#x27;ın ne yaptığını takip etmek zorlaşır çünkü <strong>iş akışının niyeti kodun içine gömülüdür</strong>. Bu görünürlük eksikliği, özellikle sağlık, finans ve yaşam bilimleri gibi düzenlemeye tabi alanlarda yönetişimi zorlaştırır.</p><p>Önerilen desen <strong>spesifikasyon-güdümlü kompozisyon</strong>: iş akışının niyetini işleme mantığından ayırmak. Mantığı betiğe gömmek yerine, ne yapılacağını bildirimsel bir spesifikasyonda tanımlıyorsun; işleme motoru bunu okuyup uyguluyor. Sonuç: daha az tekrar, yeni veri kümesini devreye almanın kısalması ve iş akışları arasında tutarlılık.</p></div>
+  <div class="prose prose-sm"><p>Veri pipeline&#x27;ları genelde basit betikler olarak başlar. Büyüdükçe dönüşüm mantığını kopyalarsın ve küçük bir değişiklik birden çok workflow’a çığ gibi yayılır. Dönüşüm mantığını betikler arasında kopyalayıp değiştirmek, ölçekte yönetilemez iş akışları üretir.</p><p>Daha sinsi bir sonuç da var: her pipeline&#x27;ın ne yaptığını takip etmek zorlaşır çünkü <strong>workflow’un niyeti kodun içine gömülüdür</strong>. Bu görünürlük eksikliği, özellikle sağlık, finans ve yaşam bilimleri gibi düzenlemeye tabi alanlarda yönetişimi zorlaştırır.</p><p>Önerilen desen <strong>spesifikasyon-güdümlü kompozisyon</strong>: workflow’un niyetini işleme mantığından ayırmak. Mantığı betiğe gömmek yerine, ne yapılacağını bildirimsel bir spesifikasyonda tanımlıyorsun; işleme motoru bunu okuyup uyguluyor. Sonuç: daha az tekrar, yeni veri kümesini devreye almanın kısalması ve iş akışları arasında tutarlılık.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
@@ -166,8 +166,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Bu deseni bu gazetenin pipeline&#x27;ında zaten görebilirsin: kaynak listesi <code>config.py</code> içinde bildirimsel olarak duruyor, çekme mantığı ise ayrı. Yeni bir kaynak eklemek için kod değil konfigürasyon değiştiriyorsun. Aynısını DBH&#x27;daki yakıt analizi tarzı bir işte de kur: hangi kolonun nasıl temizleneceğini koda gömmek yerine bir YAML/JSON şemasında tanımla. Bir avantajı daha var — spesifikasyon varsa doğrulamayı <strong>işlemeden önce</strong> yapabilirsin, yani hatayı veriyi işlemeye başlamadan yakalarsın.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Bu deseni kendi veri pipeline’larında kur: kaynak listesini bir config dosyasında bildirimsel olarak tut, işleme mantığını ayrı yaz. Yeni bir kaynak eklemek için kod değil konfigürasyon değiştirirsin. Veri temizleme işlerinde de hangi kolonun nasıl temizleneceğini koda gömmek yerine bir YAML ya da JSON şemasında tanımla. Bir avantajı daha var: spesifikasyon varsa doğrulamayı <strong>işlemeden önce</strong> yapabilirsin, yani hatayı veriyi işlemeye başlamadan yakalarsın.</p>
     </div>
   </div>
 
@@ -175,11 +175,11 @@
     <summary class="label">Sözlük · 2 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">declarative specification</span> <span class="term-tr">bildirimsel spesifikasyon</span></dt>
+      <dt><span class="term-en">declarative specification</span></dt>
       <dd>Nasıl yapılacağını değil ne istendiğini tarif eden yapılandırma; motor gerisini halleder.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">data governance</span> <span class="term-tr">veri yönetişimi</span></dt>
+      <dt><span class="term-en">data governance</span></dt>
       <dd>Verinin nereden geldiği, nasıl dönüştüğü ve kimin eriştiğinin izlenebilir olması.</dd>
     </div>
   </dl>
@@ -188,9 +188,9 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/veri-muhendisligi/">#veri mühendisliği</a></li>
-  <li><a href="/etiket/mimari/">#mimari</a></li>
-  <li><a href="/etiket/tasarim/">#tasarım</a></li>
+  <li><a href="/etiket/data-engineering/">#data engineering</a></li>
+  <li><a href="/etiket/architecture/">#architecture</a></li>
+  <li><a href="/etiket/design/">#design</a></li>
   <li><a href="/etiket/serverless/">#serverless</a></li>
 </ul>
 
@@ -210,21 +210,21 @@
 </div>
 
   <h3 class="brief-title">
-    <a href="https://research.google/blog/sensorfm-towards-a-general-intelligence-and-interface-for-wearable-health-data/" rel="noopener nofollow" target="_blank">Bir trilyon dakikalık sensör verisiyle eğitilen temel model</a>
+    <a href="https://research.google/blog/sensorfm-towards-a-general-intelligence-and-interface-for-wearable-health-data/" rel="noopener nofollow" target="_blank">Bir trilyon dakikalık sensör verisiyle eğitilen foundation model</a>
   </h3>
   <p class="original-title">SensorFM: Towards a general intelligence and interface for wearable health data</p>
-  <div class="prose prose-sm"><p>SensorFM, giyilebilir sağlık verisi için bir <strong>temel model</strong> (foundation model). Beş milyon kişiden gelen <strong>bir trilyon dakikadan fazla</strong> sensör verisiyle önceden eğitilmiş. Model boyutu ile veriyi birlikte ölçekleyerek insan fizyolojisinin genel amaçlı bir temsilini öğreniyor ve bu temsil 35 farklı sağlık tahmin görevine aktarılabiliyor.</p><p>Yaklaşımın farkı şu: etiketli veriyle görev görev eğitmek yerine, <strong>etiketsiz</strong> giyilebilir veriden nüfus ölçeğinde doğrudan öğreniyor. Sonuç, az etiketle uyarlanabilen ve eksik veriyi doldurabilen bir temsil.</p><p>Veri kümesi 100&#x27;den fazla ülkeden, Eylül 2024 – Eylül 2025 arası, verilerinin araştırmada kullanılmasına rıza göstermiş kişilerden kimliksizleştirilerek örneklenmiş.</p></div>
+  <div class="prose prose-sm"><p>SensorFM, giyilebilir sağlık verisi için bir <strong>foundation model</strong> (foundation model). Beş milyon kişiden gelen <strong>bir trilyon dakikadan fazla</strong> sensör verisiyle önceden eğitilmiş. Model boyutu ile veriyi birlikte ölçekleyerek insan fizyolojisinin genel amaçlı bir temsilini öğreniyor ve bu temsil 35 farklı sağlık tahmin görevine aktarılabiliyor.</p><p>Yaklaşımın farkı şu: etiketli veriyle görev görev eğitmek yerine, <strong>etiketsiz</strong> giyilebilir veriden nüfus ölçeğinde doğrudan öğreniyor. Sonuç, az etiketle uyarlanabilen ve eksik veriyi doldurabilen bir temsil.</p><p>Veri kümesi 100&#x27;den fazla ülkeden, Eylül 2024 – Eylül 2025 arası, verilerinin araştırmada kullanılmasına rıza göstermiş kişilerden kimliksizleştirilerek örneklenmiş.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
     <ol>
-<li><span>&quot;Temel model&quot; fikri metin ve görüntüden zaman serisine taşınıyor — aynı tarif: çok veri, öz-denetimli ön eğitim, sonra göreve uyarlama.</span></li><li><span>35 göreve transfer olması, temsilin göreve özel değil genel olduğunun kanıtı.</span></li>    </ol>
+<li><span>&quot;Foundation model&quot; fikri metin ve görüntüden zaman serisine taşınıyor — aynı tarif: çok veri, self-supervised pretraining, sonra göreve uyarlama.</span></li><li><span>35 göreve transfer olması, temsilin göreve özel değil genel olduğunun kanıtı.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Tradebot&#x27;ta zaman serisi verisiyle çalışıyorsun ve buradaki fikir doğrudan ilgili: <strong>öz-denetimli ön eğitim</strong>. Etiketli veri (&quot;bu noktada al&quot;) pahalı ve azdır; etiketsiz fiyat verisi ise bol. Modeli önce etiketsiz veriyle genel bir temsil öğrenmesi için eğitip (ör. maskelenmiş bölümü tahmin etme), sonra küçük etiketli setle uyarlamak, doğrudan etiketli veriyle eğitmekten genelde daha iyi sonuç verir. PyTorch&#x27;ta bunu denemek erişilebilir bir proje — ve portföyünde &quot;öz-denetimli ön eğitim uyguladım&quot; demek güçlü bir cümledir.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Zaman serisi verisiyle çalışıyorsan buradaki fikir doğrudan ilgili: <strong>self-supervised pretraining</strong>. Etiketli veri (‘bu noktada al’) pahalı ve azdır; etiketsiz fiyat ya da sensör verisi bol. Modeli önce etiketsiz veriyle genel bir temsil öğrenmesi için eğitip (örneğin maskelenmiş bölümü tahmin etme), sonra küçük etiketli setle uyarlamak, doğrudan etiketli veriyle eğitmekten genelde daha iyi sonuç verir. PyTorch’ta bunu denemek erişilebilir bir proje.</p>
     </div>
   </div>
 
@@ -232,15 +232,15 @@
     <summary class="label">Sözlük · 3 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">foundation model</span> <span class="term-tr">temel model</span></dt>
+      <dt><span class="term-en">foundation model</span></dt>
       <dd>Geniş ve etiketsiz veriyle önceden eğitilip birçok farklı göreve uyarlanabilen büyük model.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">self-supervised pre-training</span> <span class="term-tr">öz-denetimli ön eğitim</span></dt>
+      <dt><span class="term-en">self-supervised pre-training</span></dt>
       <dd>Etiket olmadan, verinin kendisinden türetilen görevlerle (ör. eksik parçayı tahmin) model eğitme.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">data infilling</span> <span class="term-tr">veri doldurma</span></dt>
+      <dt><span class="term-en">data infilling</span></dt>
       <dd>Eksik ya da kayıp ölçümlerin model tarafından makul biçimde tamamlanması.</dd>
     </div>
   </dl>
@@ -249,10 +249,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/makine-ogrenmesi/">#makine öğrenmesi</a></li>
+  <li><a href="/etiket/machine-learning/">#machine learning</a></li>
   <li><a href="/etiket/zaman-serisi/">#zaman serisi</a></li>
-  <li><a href="/etiket/arastirma/">#araştırma</a></li>
-  <li><a href="/etiket/saglik/">#sağlık</a></li>
+  <li><a href="/etiket/research/">#research</a></li>
+  <li><a href="/etiket/health/">#health</a></li>
 </ul>
 
   <a class="readmore" href="https://research.google/blog/sensorfm-towards-a-general-intelligence-and-interface-for-wearable-health-data/" rel="noopener nofollow" target="_blank">
@@ -282,7 +282,7 @@
       </li>
       <li>
         <a href="#85c988187048">
-          <span class="toc-title">Bir trilyon dakikalık sensör verisiyle eğitilen temel model</span>
+          <span class="toc-title">Bir trilyon dakikalık sensör verisiyle eğitilen foundation model</span>
           <span class="toc-meta">Google Research · 6 dk</span>
         </a>
       </li>
@@ -308,7 +308,7 @@
     </a>
     <a class="pager-link pager-next" href="/sayi/2026-07-10/" rel="next">
       <span class="pager-label">Sonraki sayı · 10 Temmuz 2026 →</span>
-      <span class="pager-title">Ölçüm tutunacak bir şey bulamayınca: anycast ve önbellek verimliliği</span>
+      <span class="pager-title">Ölçüm tutunacak bir şey bulamayınca: anycast ve cache verimliliği</span>
     </a>
   </nav>
 
@@ -325,7 +325,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

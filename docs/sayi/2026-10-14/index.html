@@ -88,12 +88,12 @@
   </h2>
   <p class="original-title">Netflix Stratum Media Processing: Automated Container Right-Sizing · Netflix Technology Blog</p>
 
-  <div class="prose"><p>Stratum, Netflix’in kodlama, paketleme, denetleme ve kalite puanlama gibi medya işlerini yürüten sunucusuz platformu; günde yüz binlerce konteyner yönetiyor. Fonksiyon sahipleri CPU, bellek, disk ve ağ sınırlarını YAML’la yazıyor. Pratikte yeni bir fonksiyonun yapılandırması başka bir fonksiyondan kopyalanıyor ya da en kötü senaryoya göre ayarlanıyor ve bir arıza çıkana kadar kimse dönüp bakmıyor. Altyapı ve codec’ler değiştikçe doğru değer sessizce kayıyor. Netflix ölçeğinde küçük bir fazlalık hızla çarpılıyor. Çözüm, çalışan konteynerleri insan olmadan güvenle küçülten <strong>Stratum Resource Tuner (SRT)</strong>; kullanımı tüm kaynak kullanımının yüzde 70-80’ini oluşturan, gecikmeye duyarlı olmayan yüksek hacimli işlerle başlanmış. Sistem her kaynak türü için fonksiyon sahibinin açıkça seçmesiyle devreye giriyor.</p><p><strong>Akış beş adım:</strong> metrik topla, öneri üret, deneylerle doğrula, uygula ya da reddet, uyguladıktan sonra izle. Metrikler sub-dakika çözünürlükle akıp kısa vadeli sorgular için Elasticsearch’e, aylarca geçmiş için Iceberg tablolarına yazılıyor. Günlük bir iş son ayın kullanımından öneri üretiyor ve kuralı kaynağın doğasına göre ayırıyor: <strong>CPU ve ağ, sıkıştırılabilir kaynaklar olduğu için p99’a boşluk bırakmadan hedefleniyor</strong> (sınıra ara sıra çarpan konteyner biraz yavaşlar). <strong>Bellek ve disk ise p99,9’a güvenlik payıyla hedefleniyor</strong>, çünkü tükenince OOM ve OOD gibi sert hatalar oluşuyor. Bir önerinin mutlak kazancı çok küçükse atılıyor; bellek ve disk için tek turda en fazla yüzde 15 küçültme sınırı da erken üretim koşularından öğrenilmiş bir emniyet. Örneğin bir kodlama fonksiyonunda 18.000 MB bellek 15.300 MB’a, 8 çekirdek 4’e önerilmiş.</p><p><strong>Emniyet ağı: daha büyük konteynerle yeniden dene.</strong> Öneriler geçmiş veriye dayandığı için hiç görülmemiş ağır bir istekle karşılaşabilir. Her ayarlanmış konteynerde bir izleyici, bellek kullanımı (önbelleksiz) yüzde 85’i ya da disk yüzde 95’i aşarsa yürütmeyi iptal edip işi 1,5 kat büyük konteynere kuyruğa yeniden koyuyor. Böylece günlük yapılandırma sıkı tutulabiliyor; nadir aykırı durumlar için baştan büyük ayırmak gerekmiyor. (Gerçek OOM olayını yakalamak mimari nedenlerle zor olduğundan eşik geçici bir çözüm olarak kullanılıyor.)</p><p><strong>Doğrulama iki aşamalı.</strong> Önce <strong>sentetik deney</strong>: üretim trafiğinden yalıtık bir ortamda iki küme (mevcut ve önerilen yapılandırma) aynı istek kümesini aynı anda işliyor, 1-2 saat sürüyor. Sonra <strong>üretim deneyi</strong>: gerçek trafiğin yaklaşık yüzde 90’ı ana kümede, yüzde 5’i mevcut yapılandırmalı bir temel kümede, yüzde 5’i önerilen yapılandırmalı deney kümesinde; bir günden bir haftaya sürebiliyor ve gerileme görünürse erken iptal ediliyor. Karşılaştırma ana küme ile değil benzer boyutlu temel küme ile yapılıyor ki trafik profilleri kıyaslanabilir olsun. İki kontrol var: yeniden deneme oranı (bellek ve disk küçültmede deney boyunca en fazla yüzde 1) ve ortanca çalışma süresi (iş yüküne göre en fazla yüzde 10-15 yavaşlama). Geçerse uygulanıyor, geçmezse mevcut yapılandırma korunuyor.</p><p><strong>Uygulamadan sonra izleme ve yaşanan hata.</strong> Doğrulamayı geçen bir öneri bile sonradan kırılabilir: kod, girdi parametreleri ya da altyapı değişebilir. Bu yüzden 90 gün izleniyor (30 dakikalık hızlı ve 24 saatlik yavaş pencere). Yazının en değerli kısmı bir olay: bir fonksiyonun belleğinde yüzde 50 küçültme tüm doğrulamaları geçmiş ve iki hafta kararlı çalışmış, sonra beklenmedik bir trafik değişimi yeniden deneme oranını yüzde 60’ın üstüne çıkarmış. O zaman otomatik geri alma yoktu, mühendisler elle müdahale etti. Dersler: <strong>otomatik geri alma</strong> (son 30 dakikada yüzde 3 yeniden deneme uyarı, yüzde 10 otomatik geri alma; 24 saatte yüzde 2’de ikisi birden) eski kararlı yapılandırmaya dönüyor, kasıtlı olarak akıllı bir ayar yerine basit tutulmuş; bellek ve disk küçültme <strong>yüzde 15’lik adımlarla</strong> ve her adımda kararlılık doğrulanarak yapılıyor; tüm fonksiyonlarda otomasyonu kapatan <strong>global bir acil anahtar</strong> eklendi; yeni deneyler arasında yaklaşık bir hafta bekleme süresi zorunlu.</p></div>
+  <div class="prose"><p>Stratum, Netflix’in kodlama, paketleme, denetleme ve kalite puanlama gibi medya işlerini yürüten serverless platformu; günde yüz binlerce konteyner yönetiyor. Fonksiyon sahipleri CPU, bellek, disk ve ağ sınırlarını YAML’la yazıyor. Pratikte yeni bir fonksiyonun yapılandırması başka bir fonksiyondan kopyalanıyor ya da en kötü senaryoya göre ayarlanıyor ve bir arıza çıkana kadar kimse dönüp bakmıyor. Altyapı ve codec’ler değiştikçe doğru değer sessizce kayıyor. Netflix ölçeğinde küçük bir fazlalık hızla çarpılıyor. Çözüm, çalışan konteynerleri insan olmadan güvenle küçülten <strong>Stratum Resource Tuner (SRT)</strong>; kullanımı tüm kaynak kullanımının yüzde 70-80’ini oluşturan, gecikmeye duyarlı olmayan yüksek hacimli işlerle başlanmış. Sistem her kaynak türü için fonksiyon sahibinin açıkça seçmesiyle devreye giriyor.</p><p><strong>Akış beş adım:</strong> metrik topla, öneri üret, deneylerle doğrula, uygula ya da reddet, uyguladıktan sonra izle. Metrikler sub-dakika çözünürlükle akıp kısa vadeli sorgular için Elasticsearch’e, aylarca geçmiş için Iceberg tablolarına yazılıyor. Günlük bir iş son ayın kullanımından öneri üretiyor ve kuralı kaynağın doğasına göre ayırıyor: <strong>CPU ve ağ, sıkıştırılabilir kaynaklar olduğu için p99’a boşluk bırakmadan hedefleniyor</strong> (sınıra ara sıra çarpan konteyner biraz yavaşlar). <strong>Bellek ve disk ise p99,9’a güvenlik payıyla hedefleniyor</strong>, çünkü tükenince OOM ve OOD gibi sert hatalar oluşuyor. Bir önerinin mutlak kazancı çok küçükse atılıyor; bellek ve disk için tek turda en fazla yüzde 15 küçültme sınırı da erken üretim koşularından öğrenilmiş bir emniyet. Örneğin bir kodlama fonksiyonunda 18.000 MB bellek 15.300 MB’a, 8 çekirdek 4’e önerilmiş.</p><p><strong>Emniyet ağı: daha büyük konteynerle yeniden dene.</strong> Öneriler geçmiş veriye dayandığı için hiç görülmemiş ağır bir istekle karşılaşabilir. Her ayarlanmış konteynerde bir izleyici, bellek kullanımı (cache’siz) yüzde 85’i ya da disk yüzde 95’i aşarsa yürütmeyi iptal edip işi 1,5 kat büyük konteynere kuyruğa yeniden koyuyor. Böylece günlük yapılandırma sıkı tutulabiliyor; nadir aykırı durumlar için baştan büyük ayırmak gerekmiyor. (Gerçek OOM olayını yakalamak mimari nedenlerle zor olduğundan eşik geçici bir çözüm olarak kullanılıyor.)</p><p><strong>Doğrulama iki aşamalı.</strong> Önce <strong>sentetik deney</strong>: üretim trafiğinden yalıtık bir ortamda iki küme (mevcut ve önerilen yapılandırma) aynı istek kümesini aynı anda işliyor, 1-2 saat sürüyor. Sonra <strong>üretim deneyi</strong>: gerçek trafiğin yaklaşık yüzde 90’ı ana kümede, yüzde 5’i mevcut yapılandırmalı bir temel kümede, yüzde 5’i önerilen yapılandırmalı deney kümesinde; bir günden bir haftaya sürebiliyor ve gerileme görünürse erken iptal ediliyor. Karşılaştırma ana küme ile değil benzer boyutlu temel küme ile yapılıyor ki trafik profilleri kıyaslanabilir olsun. İki kontrol var: yeniden deneme oranı (bellek ve disk küçültmede deney boyunca en fazla yüzde 1) ve ortanca çalışma süresi (iş yüküne göre en fazla yüzde 10-15 yavaşlama). Geçerse uygulanıyor, geçmezse mevcut yapılandırma korunuyor.</p><p><strong>Uygulamadan sonra izleme ve yaşanan hata.</strong> Doğrulamayı geçen bir öneri bile sonradan kırılabilir: kod, girdi parametreleri ya da altyapı değişebilir. Bu yüzden 90 gün izleniyor (30 dakikalık hızlı ve 24 saatlik yavaş pencere). Yazının en değerli kısmı bir olay: bir fonksiyonun belleğinde yüzde 50 küçültme tüm doğrulamaları geçmiş ve iki hafta kararlı çalışmış, sonra beklenmedik bir trafik değişimi yeniden deneme oranını yüzde 60’ın üstüne çıkarmış. O zaman otomatik rollback yoktu, mühendisler elle müdahale etti. Dersler: <strong>otomatik rollback</strong> (son 30 dakikada yüzde 3 yeniden deneme uyarı, yüzde 10 otomatik rollback; 24 saatte yüzde 2’de ikisi birden) eski kararlı yapılandırmaya dönüyor, kasıtlı olarak akıllı bir ayar yerine basit tutulmuş; bellek ve disk küçültme <strong>yüzde 15’lik adımlarla</strong> ve her adımda kararlılık doğrulanarak yapılıyor; tüm fonksiyonlarda otomasyonu kapatan <strong>global bir acil anahtar</strong> eklendi; yeni deneyler arasında yaklaşık bir hafta bekleme süresi zorunlu.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Sıkıştırılabilir kaynakta (CPU, ağ) agresif, sert hata veren kaynakta (bellek, disk) temkinli ol.</span></li><li><span>Küçültme önerisini üretimde canlı trafiğin küçük bir dilimiyle, mevcut yapılandırmayla yan yana denemek, tahminden güvenilirdir.</span></li><li><span>Nadir aykırı durumlar için ‘büyük konteynerle yeniden dene’ emniyeti, günlük yapılandırmayı sıkı tutmayı mümkün kılar.</span></li><li><span>Doğrulamayı geçen değişiklik de kırılabilir: izleme ve otomatik geri alma son güvenlik katmanıdır.</span></li><li><span>Büyük değişikliği tek hamlede değil küçük adımlarla yap ve her adımı doğrula.</span></li><li><span>Her otomasyonun bir acil kapatma anahtarı olmalı.</span></li>    </ol>
+<li><span>Sıkıştırılabilir kaynakta (CPU, ağ) agresif, sert hata veren kaynakta (bellek, disk) temkinli ol.</span></li><li><span>Küçültme önerisini üretimde canlı trafiğin küçük bir dilimiyle, mevcut yapılandırmayla yan yana denemek, tahminden güvenilirdir.</span></li><li><span>Nadir aykırı durumlar için ‘büyük konteynerle yeniden dene’ emniyeti, günlük yapılandırmayı sıkı tutmayı mümkün kılar.</span></li><li><span>Doğrulamayı geçen değişiklik de kırılabilir: izleme ve otomatik rollback son güvenlik katmanıdır.</span></li><li><span>Büyük değişikliği tek hamlede değil küçük adımlarla yap ve her adımı doğrula.</span></li><li><span>Her otomasyonun bir kill switch olmalı.</span></li>    </ol>
   </div>
 
   <div class="callouts">
@@ -102,8 +102,8 @@
       <p>Maliyet optimizasyonu, ölçüm ve güvenlikle birleşmeyince bir arıza üreticisine dönüşür. Bu yazı otomasyonun ‘öner, dene, uygula, izle, geri al’ döngüsünü ve kendi hatasından çıkarılan kuralları açıkça gösteriyor; Netflix’in yüzde 50’lik küçültmeden sonra yüzde 15’lik adımlara geçmesi bunun en somut kanıtı.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Ölçek farklı ama düşünce aynı. Docker ya da bir sunucuda bellek sınırı verirken ‘en kötü durum’ tahmin etmek yerine kullanımı bir hafta ölç, p99’a bak ve bir güvenlik payı ekle. Spring Boot için JVM’de <code>-Xmx</code> ve konteyner <code>memory limit</code> değerlerini Actuator/Micrometer metrikleriyle karşılaştır. Küçültmeyi tek adımda değil yüzde 15’lik adımlarla yap ve her adımdan sonra hata oranına bak. Tradebot’taki bir strateji parametresini canlıda değiştirirken de aynı fikir: yeni değeri önce küçük bir sermaye dilimiyle (paper/shadow) eskisiyle yan yana çalıştır, farkı ölç, sonra genişlet; kötüleşirse otomatik olarak eskiye dön.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Ölçek farklı ama düşünce aynı. Docker ya da bir sunucuda bellek sınırı verirken ‘en kötü durum’ tahmin etmek yerine kullanımı bir hafta ölç, p99’a bak ve bir güvenlik payı ekle. Spring Boot için JVM’de <code>-Xmx</code> ve container <code>memory limit</code> değerlerini Actuator/Micrometer metrikleriyle karşılaştır. Küçültmeyi tek adımda değil yüzde 15’lik adımlarla yap ve her adımdan sonra hata oranına bak. Canlıda bir strateji ya da konfigürasyon parametresini değiştirirken de aynı fikir: yeni değeri önce küçük bir trafik dilimiyle eskisiyle yan yana çalıştır (canary), farkı ölç, sonra genişlet; kötüleşirse otomatik olarak eskiye dön.</p>
     </div>
   </div>
 
@@ -111,23 +111,23 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">right-sizing</span> <span class="term-tr">doğru boyutlandırma</span></dt>
+      <dt><span class="term-en">right-sizing</span></dt>
       <dd>Bir kaynağın (CPU, bellek) gerçek kullanıma uygun boyuta ayarlanması.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">p99 / p99.9</span> <span class="term-tr">yüzde 99 / 99,9 yüzdelik dilim</span></dt>
+      <dt><span class="term-en">p99 / p99.9</span></dt>
       <dd>Ölçümlerin yüzde 99 ya da 99,9’unun altında kaldığı değer; ortalamanın göremediği uçları gösterir.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">OOM (out of memory)</span> <span class="term-tr">bellek yetersizliği</span></dt>
+      <dt><span class="term-en">OOM (out of memory)</span></dt>
       <dd>Bir sürecin ayrılan belleği aşıp işletim sistemince sonlandırılması.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">canary / baseline cluster</span> <span class="term-tr">kanarya / temel küme</span></dt>
+      <dt><span class="term-en">canary / baseline cluster</span></dt>
       <dd>Değişikliği küçük bir trafik dilimiyle, değişmemiş eşdeğer bir kümeyle karşılaştırarak deneme düzeni.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">kill switch</span> <span class="term-tr">acil kapatma anahtarı</span></dt>
+      <dt><span class="term-en">kill switch</span></dt>
       <dd>Otomasyonu ya da özelliği anında devre dışı bırakan genel anahtar.</dd>
     </div>
   </dl>
@@ -136,10 +136,10 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/maliyet/">#maliyet</a></li>
-  <li><a href="/etiket/guvenli-dagitim/">#güvenli dağıtım</a></li>
+  <li><a href="/etiket/cost/">#cost</a></li>
+  <li><a href="/etiket/safe-deployment/">#safe deployment</a></li>
   <li><a href="/etiket/netflix/">#Netflix</a></li>
-  <li><a href="/etiket/altyapi/">#altyapı</a></li>
+  <li><a href="/etiket/infrastructure/">#infrastructure</a></li>
 </ul>
 
   <a class="readmore" href="https://netflixtechblog.com/netflix-stratum-media-processing-automated-container-right-sizing-ddf9aa68a801?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">
@@ -161,10 +161,10 @@
 </div>
 
   <h3 class="brief-title">
-    <a href="https://netflixtechblog.com/timeseries-tiered-storage-journey-kafka-flink-streams-to-native-cassandra-cold-reads-e59d597c9d60?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">Soğuk veriyi diskte değil yedekte oku: Netflix TimeSeries’in katmanlı depolama yolculuğu</a>
+    <a href="https://netflixtechblog.com/timeseries-tiered-storage-journey-kafka-flink-streams-to-native-cassandra-cold-reads-e59d597c9d60?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">Soğuk veriyi diskte değil yedekte oku: Netflix TimeSeries’in tiered storage yolculuğu</a>
   </h3>
   <p class="original-title">TimeSeries Tiered Storage Journey: Kafka/Flink Streams to Native Cassandra Cold Reads</p>
-  <div class="prose prose-sm"><p>Netflix’in TimeSeries Abstraction’ı, zamansal olay verisini yüksek hacimde saklayan ve sorgulayan platform; en büyük veri kümeleri artık birden çok petabayt. Düşük milisaniye gecikme için ayarlı sıcak depoda bu kadar veri tutmak pahalı. Oysa sorguların çoğu yakın olaylara gidiyor, eski veri yalnızca ara sıra denetim ve inceleme için gerekiyor. Hedef: yakın veriyi hızlı depoda, eskisini ucuz nesne depolamada tutmak ve API’yi değiştirmemek. Yazı iki çözümü sırayla anlatıyor.</p><p><strong>Çözüm 1: Kafka/Flink ile S3’e akıtma.</strong> Veri Cassandra’ya yazılırken eş zamanlı olarak S3’e de akıyor. Flink, olayları saat içindeki olay zamanına göre Parquet dosyalarına topluyor; günlük bir <strong>sıkıştırma (compaction) işi</strong> küçük dosyaları günlük tek bir optimize dosyada birleştiriyor: 4-8 MB’lık küçük satır grupları (aralık okumayı ucuzlatır), zamana göre sıralama ve Bloom filtreleri (EVCache’te önbellekte, gereksiz S3 okumalarını atlamak için). Bir günlük veriyi okumak en çok üç ardışık S3 okuması gerektiriyor ve sistem küresel olarak saniyede 1.250 soğuk okuma işledi. Ama akış altyapısı pahalı ve ekibin nöbet kapsamını genişletiyor.</p><p><strong>Çözüm 2: Cassandra’yı doğrudan yedeklerinden okutmak.</strong> Netflix zaten felaket kurtarma için Cassandra’yı düzenli olarak S3’e yedekliyor. Fikir: ayrı bir veri aktarımına para ödemek yerine soğuk veriyi bu yedeklerden oku. Bir zaman dilimi soğuk sınırı aştığında yazılmaya kapanıp değişmez oluyor; bu <strong>değişmezlik</strong> her şeyi mümkün kılıyor. Üç parça: <strong>ReadOnlyCompactionStrategy (ROCS)</strong> SSTable’ları bir kez token aralıklarıyla hizalıyor (çakışma azalır, tek bir okuma çok dosyaya dokunmaz); Cassandra 4.1’in <strong>takılabilir Memtable</strong> özelliği soğuk tabloların okumalarını yedek depolamaya yönlendiriyor (Data.db dışındaki küçük bileşenler düğüme indirilip sorgu planlamada kullanılıyor); ve Cassandra sanal tabloları, ROCS’un bittiğini ve yedeğin tam alındığını doğruluyor. Soğuk okumalar CPU’yu daha çok yorduğundan sıcak yolu bozmasın diye isteğe bağlı olarak ayrı, daha küçük ve ucuz bir Cassandra kümesinden sunulabiliyor.</p><p><strong>Sonuç:</strong> 15 PB’tan fazla sıkıştırılmış veri Cassandra soğuk katmanında; bölge başına saniyede binlerce okuma; önceki soğuk depolamaya göre p90 gecikme yaklaşık yüzde 30 iyileşmiş, p99 yaklaşık 500 ms’nin altında.</p></div>
+  <div class="prose prose-sm"><p>Netflix’in TimeSeries Abstraction’ı, zamansal olay verisini yüksek hacimde saklayan ve sorgulayan platform; en büyük veri kümeleri artık birden çok petabayt. Düşük milisaniye gecikme için ayarlı sıcak depoda bu kadar veri tutmak pahalı. Oysa sorguların çoğu yakın olaylara gidiyor, eski veri yalnızca ara sıra denetim ve inceleme için gerekiyor. Hedef: yakın veriyi hızlı depoda, eskisini ucuz nesne depolamada tutmak ve API’yi değiştirmemek. Yazı iki çözümü sırayla anlatıyor.</p><p><strong>Çözüm 1: Kafka/Flink ile S3’e akıtma.</strong> Veri Cassandra’ya yazılırken eş zamanlı olarak S3’e de akıyor. Flink, olayları saat içindeki olay zamanına göre Parquet dosyalarına topluyor; günlük bir <strong>sıkıştırma (compaction) işi</strong> küçük dosyaları günlük tek bir optimize dosyada birleştiriyor: 4-8 MB’lık küçük satır grupları (aralık okumayı ucuzlatır), zamana göre sıralama ve Bloom filtreleri (EVCache’te cache’te, gereksiz S3 okumalarını atlamak için). Bir günlük veriyi okumak en çok üç ardışık S3 okuması gerektiriyor ve sistem küresel olarak saniyede 1.250 soğuk okuma işledi. Ama akış altyapısı pahalı ve ekibin nöbet kapsamını genişletiyor.</p><p><strong>Çözüm 2: Cassandra’yı doğrudan yedeklerinden okutmak.</strong> Netflix zaten felaket kurtarma için Cassandra’yı düzenli olarak S3’e yedekliyor. Fikir: ayrı bir veri aktarımına para ödemek yerine soğuk veriyi bu yedeklerden oku. Bir zaman dilimi soğuk sınırı aştığında yazılmaya kapanıp değişmez oluyor; bu <strong>değişmezlik</strong> her şeyi mümkün kılıyor. Üç parça: <strong>ReadOnlyCompactionStrategy (ROCS)</strong> SSTable’ları bir kez token aralıklarıyla hizalıyor (çakışma azalır, tek bir okuma çok dosyaya dokunmaz); Cassandra 4.1’in <strong>takılabilir Memtable</strong> özelliği soğuk tabloların okumalarını yedek depolamaya yönlendiriyor (Data.db dışındaki küçük bileşenler node’a indirilip sorgu planlamada kullanılıyor); ve Cassandra sanal tabloları, ROCS’un bittiğini ve yedeğin tam alındığını doğruluyor. Soğuk okumalar CPU’yu daha çok yorduğundan sıcak yolu bozmasın diye isteğe bağlı olarak ayrı, daha küçük ve ucuz bir Cassandra kümesinden sunulabiliyor.</p><p><strong>Sonuç:</strong> 15 PB’tan fazla sıkıştırılmış veri Cassandra soğuk katmanında; bölge başına saniyede binlerce okuma; önceki soğuk depolamaya göre p90 gecikme yaklaşık yüzde 30 iyileşmiş, p99 yaklaşık 500 ms’nin altında.</p></div>
 
   <div class="keypoints keypoints-sm">
     <h4 class="label">Öne çıkanlar</h4>
@@ -174,8 +174,8 @@
 
   <div class="callouts">
     <div class="callout callout-you">
-      <h4 class="label">Sende karşılığı</h4>
-      <p>Aynı mantık Tradebot’taki ~1 TB piyasa verisi için geçerli: son birkaç haftanın verisi hızlı SSD’de/Postgres’te kalsın, eskisi sıkıştırılmış Parquet dosyaları olarak ucuz diskte ya da S3’te dursun ve zamana göre bölümlenmiş olsun. Backtest’lerin çoğu zaten eski veriyi tarar; DuckDB ya da pandas Parquet’i doğrudan okur. Veri bir kez yazılıp değişmediği için yedek ve arşiv aynı dosya olabilir.</p>
+      <h4 class="label">Pratikte</h4>
+      <p>Büyük bir geçmiş veri setinde (örneğin 1 TB piyasa verisi) aynı mantık geçerli: son birkaç haftanın verisi hızlı SSD’de ya da Postgres’te kalsın, eskisi sıkıştırılmış Parquet dosyaları olarak ucuz diskte ya da S3’te dursun ve zamana göre partition’lanmış olsun. Backtest’lerin çoğu zaten eski veriyi tarar; DuckDB ya da pandas Parquet’i doğrudan okur. Veri bir kez yazılıp değişmediği için backup ve arşiv aynı dosya olabilir.</p>
     </div>
   </div>
 
@@ -183,19 +183,19 @@
     <summary class="label">Sözlük · 4 terim</summary>
       <dl>
     <div class="term">
-      <dt><span class="term-en">tiered storage</span> <span class="term-tr">katmanlı depolama</span></dt>
+      <dt><span class="term-en">tiered storage</span></dt>
       <dd>Veriyi erişim sıklığına göre hızlı-pahalı ve yavaş-ucuz depolama katmanlarına dağıtma.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">SSTable</span> <span class="term-tr">SSTable</span></dt>
+      <dt><span class="term-en">SSTable</span></dt>
       <dd>Cassandra’nın diskte tuttuğu değişmez, sıralı veri dosyası.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">Parquet</span> <span class="term-tr">Parquet</span></dt>
+      <dt><span class="term-en">Parquet</span></dt>
       <dd>Analitik okuma için tasarlanmış sütunlu dosya biçimi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">Bloom filter</span> <span class="term-tr">Bloom filtresi</span></dt>
+      <dt><span class="term-en">Bloom filter</span></dt>
       <dd>Bir öğenin kesin olarak yok olduğunu ucuz biçimde söyleyen olasılıksal veri yapısı.</dd>
     </div>
   </dl>
@@ -204,9 +204,9 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/depolama/">#depolama</a></li>
+  <li><a href="/etiket/storage/">#storage</a></li>
   <li><a href="/etiket/cassandra/">#Cassandra</a></li>
-  <li><a href="/etiket/maliyet/">#maliyet</a></li>
+  <li><a href="/etiket/cost/">#cost</a></li>
   <li><a href="/etiket/netflix/">#Netflix</a></li>
 </ul>
 
@@ -231,7 +231,7 @@
       </li>
       <li>
         <a href="#a4fedcec0787">
-          <span class="toc-title">Soğuk veriyi diskte değil yedekte oku: Netflix TimeSeries’in katmanlı depolama yolculuğu</span>
+          <span class="toc-title">Soğuk veriyi diskte değil yedekte oku: Netflix TimeSeries’in tiered storage yolculuğu</span>
           <span class="toc-meta">Netflix Tech Blog · 10 dk</span>
         </a>
       </li>
@@ -274,7 +274,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>

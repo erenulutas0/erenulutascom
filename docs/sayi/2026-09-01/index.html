@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>1 Eylül 2026 — Eren&#39;in Mühendislik Gazetesi</title>
-<meta name="description" content="Agent geliştiriyorsan bu yazın en önemli protokol haberi: MCP, çıkışından bu yana en büyük revizyonuyla oturumsuz (stateless) oldu. Yani “sticky session” ve ortak oturum deposu ihtiyacı protokol seviyesinde ortadan kalktı.">
+<meta name="description" content="Agent geliştiriyorsan bu yazın en önemli protokol haberi: MCP, çıkışından bu yana en büyük revizyonuyla stateless (stateless) oldu. Yani “sticky session” ve ortak oturum deposu ihtiyacı protokol seviyesinde ortadan kalktı.">
 <meta name="author" content="Eren Ulutaş">
 <meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#131310" media="(prefers-color-scheme: dark)">
 <meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
 <meta property="og:title" content="1 Eylül 2026 — Eren&#39;in Mühendislik Gazetesi">
-<meta property="og:description" content="Agent geliştiriyorsan bu yazın en önemli protokol haberi: MCP, çıkışından bu yana en büyük revizyonuyla oturumsuz (stateless) oldu. Yani “sticky session” ve ortak oturum deposu ihtiyacı protokol seviyesinde ortadan kalktı.">
+<meta property="og:description" content="Agent geliştiriyorsan bu yazın en önemli protokol haberi: MCP, çıkışından bu yana en büyük revizyonuyla stateless (stateless) oldu. Yani “sticky session” ve ortak oturum deposu ihtiyacı protokol seviyesinde ortadan kalktı.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:url" content="https://erenulutas.com/sayi/2026-09-01/">
@@ -69,7 +69,7 @@
 <a href="/sayi/2026-08-31/" rel="prev"><span aria-hidden="true">←</span> 31 Ağustos 2026</a><a href="/sayi/2026-09-02/" rel="next">2 Eylül 2026 <span aria-hidden="true">→</span></a>
     </nav>
   </div>
-<p class="lede">Agent geliştiriyorsan bu yazın en önemli protokol haberi: MCP, çıkışından bu yana en büyük revizyonuyla oturumsuz (stateless) oldu. Yani “sticky session” ve ortak oturum deposu ihtiyacı protokol seviyesinde ortadan kalktı.</p></header>
+<p class="lede">Agent geliştiriyorsan bu yazın en önemli protokol haberi: MCP, çıkışından bu yana en büyük revizyonuyla stateless (stateless) oldu. Yani “sticky session” ve ortak oturum deposu ihtiyacı protokol seviyesinde ortadan kalktı.</p></header>
 
 
   <div class="layout">
@@ -84,16 +84,16 @@
 </div>
 
   <h2 class="cover-title">
-    <a href="https://aws.amazon.com/blogs/architecture/mcp-went-stateless-is-your-aws-mcp-server-deployment-well-architected/" rel="noopener nofollow" target="_blank">MCP oturumsuz oldu: sticky session, oturum deposu ve yük dengeleyici ayarlarını silebilirsin</a>
+    <a href="https://aws.amazon.com/blogs/architecture/mcp-went-stateless-is-your-aws-mcp-server-deployment-well-architected/" rel="noopener nofollow" target="_blank">MCP stateless oldu: sticky session, oturum deposu ve load balancer ayarlarını silebilirsin</a>
   </h2>
   <p class="original-title">MCP went stateless: Is your AWS MCP server deployment well-architected? · Anand Komandooru</p>
 
-  <div class="prose"><p>28 Temmuz 2026&#x27;da MCP, çıkışından bu yana <strong>en büyük revizyonunu</strong> yayımladı ve protokol çekirdeğini oturumsuz hâle getirdi. <code>initialize</code> el sıkışması ve istemcinin sonraki her istekte geri yollamak zorunda olduğu <code>Mcp-Session-Id</code> başlığı kalktı. Artık her istek kendi protokol sürümünü ve istemci bağlamını taşıyor; istemcinin ilk mesajı doğrudan araç çağrısı olabiliyor ve <strong>herhangi bir sunucu örneği</strong> cevaplayabiliyor. İstemci sunucunun neleri desteklediğini önceden öğrenmek isterse yeni <code>server/discover</code> metodu tek cevapta protokol sürümlerini, yetenekleri ve kimliği dönüyor.</p><p>AWS açısından önemi: eski tasarım yatay ölçeklemeyle çatışıyordu. Oturum, onu başlatan örnekte yaşıyordu; birden fazla örnek çalıştırmak ya istemcileri <strong>sticky routing</strong> ile sabitlemek ya da oturum durumunu ortak bir depoya taşımak demekti. İkisi de o protokol için doğruydu; yeni protokolde ikisi de gereksiz. Yazının analojisi güzel: eski protokolde sunucu yüzünüzü hatırlayan bir vale gibiydi (hep aynı valeyle muhatap olmak zorundaydınız); yeni protokolde <strong>numaralı bilet</strong> alıyorsunuz ve herhangi bir görevli yardım edebiliyor.</p><p>Mimari değişimler: ALB sticky ayarları yerine düz round-robin; DynamoDB ya da ElastiCache oturum deposu yerine sunucunun ürettiği ve araç argümanı olarak taşınan tanımlayıcılar; gövde ayrıştırmadan <code>Mcp-Method</code> ve <code>Mcp-Name</code> başlıklarıyla yönlendirme ve hız sınırlama; Lambda için “istek gelir, cevap gider” doğal uyumu; araç listeleri için <code>ttlMs</code> ve <code>cacheScope</code> ile yerleşik önbellek; W3C Trace Context ile dağıtık izleme; ve akış devam ettirme (<code>Last-Event-ID</code>) yerine <strong>idempotent araçlar</strong>: kopan çağrıyı istemci tekrar gönderiyor.</p><p>Önemli bir uyarı: <strong>eski istemcilere hizmet veriyorsan altyapıyı silme.</strong> Spesifikasyon eski istemciler için geriye uyumlu bir hat taşıyor; sticky kuralları ve oturum deposu, eski sürümdeki trafik sıfıra inene kadar durmalı. Gateway&#x27;de istek başına protokol sürümünü logla, eski hat için bir kapatma tarihi koy.</p></div>
+  <div class="prose"><p>28 Temmuz 2026&#x27;da MCP, çıkışından bu yana <strong>en büyük revizyonunu</strong> yayımladı ve protokol çekirdeğini stateless hâle getirdi. <code>initialize</code> handshake ve istemcinin sonraki her istekte geri yollamak zorunda olduğu <code>Mcp-Session-Id</code> başlığı kalktı. Artık her istek kendi protokol sürümünü ve istemci bağlamını taşıyor; istemcinin ilk mesajı doğrudan araç çağrısı olabiliyor ve <strong>herhangi bir sunucu örneği</strong> cevaplayabiliyor. İstemci sunucunun neleri desteklediğini önceden öğrenmek isterse yeni <code>server/discover</code> metodu tek cevapta protokol sürümlerini, yetenekleri ve kimliği dönüyor.</p><p>AWS açısından önemi: eski tasarım yatay ölçeklemeyle çatışıyordu. Oturum, onu başlatan örnekte yaşıyordu; birden fazla örnek çalıştırmak ya istemcileri <strong>sticky routing</strong> ile sabitlemek ya da session state’i ortak bir depoya taşımak demekti. İkisi de o protokol için doğruydu; yeni protokolde ikisi de gereksiz. Yazının analojisi güzel: eski protokolde sunucu yüzünüzü hatırlayan bir vale gibiydi (hep aynı valeyle muhatap olmak zorundaydınız); yeni protokolde <strong>numaralı bilet</strong> alıyorsunuz ve herhangi bir görevli yardım edebiliyor.</p><p>Mimari değişimler: ALB sticky ayarları yerine düz round-robin; DynamoDB ya da ElastiCache oturum deposu yerine sunucunun ürettiği ve araç argümanı olarak taşınan tanımlayıcılar; gövde ayrıştırmadan <code>Mcp-Method</code> ve <code>Mcp-Name</code> başlıklarıyla yönlendirme ve hız sınırlama; Lambda için “istek gelir, cevap gider” doğal uyumu; araç listeleri için <code>ttlMs</code> ve <code>cacheScope</code> ile yerleşik cache; W3C Trace Context ile distributed tracing; ve akış devam ettirme (<code>Last-Event-ID</code>) yerine <strong>idempotent araçlar</strong>: kopan çağrıyı istemci tekrar gönderiyor.</p><p>Önemli bir uyarı: <strong>eski istemcilere hizmet veriyorsan altyapıyı silme.</strong> Spesifikasyon eski istemciler için geriye uyumlu bir hat taşıyor; sticky kuralları ve oturum deposu, eski sürümdeki trafik sıfıra inene kadar durmalı. Gateway&#x27;de istek başına protokol sürümünü logla, eski hat için bir kapatma tarihi koy.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Oturumsuz protokol yatay ölçeklemeyi bedavaya getirir: durumu istemciye ya da isteğin kendisine taşırsan her örnek her isteğe bakabilir.</span></li><li><span>“Stateless” protokol demektir, uygulamanın durumsuz olduğu anlamına gelmez: durum varsa sunucunun ürettiği tanımlayıcıyla taşınır.</span></li><li><span>Sunucu artık istemciye çağrı ortasında geri istek (onay, örnekleme) atamıyor; bunun yerine <code>input_required</code> sonucu ve <code>requestState</code> belirteciyle çok turlu istek akışı (MRTR) kullanılıyor.</span></li><li><span>Yeniden deneme güvenliği için araçları idempotent yaz: kopan çağrı güvenle tekrarlanabilmeli.</span></li><li><span>Göç sırası: önce protokol sürümünü logla, eski trafik bitince altyapıyı kaldır.</span></li>    </ol>
+<li><span>Stateless protokol yatay ölçeklemeyi bedavaya getirir: durumu istemciye ya da isteğin kendisine taşırsan her örnek her isteğe bakabilir.</span></li><li><span>“Stateless” protokol demektir, uygulamanın durumsuz olduğu anlamına gelmez: durum varsa sunucunun ürettiği tanımlayıcıyla taşınır.</span></li><li><span>Sunucu artık istemciye çağrı ortasında geri istek (onay, örnekleme) atamıyor; bunun yerine <code>input_required</code> sonucu ve <code>requestState</code> belirteciyle çok turlu istek akışı (MRTR) kullanılıyor.</span></li><li><span>Yeniden deneme güvenliği için araçları idempotent yaz: kopan çağrı güvenle tekrarlanabilmeli.</span></li><li><span>Göç sırası: önce protokol sürümünü logla, eski trafik bitince altyapıyı kaldır.</span></li>    </ol>
   </div>
 
   <div class="callouts">
@@ -102,8 +102,8 @@
       <p>Durum, ölçeklemenin en pahalı düşmanıdır. Bir protokol ya da servis durumu istemciye itebiliyorsa, ona ait hiçbir altyapıyı (sticky yönlendirme, ortak depo, oturum temizleme işi) işletmek zorunda kalmazsın. Bu, HTTP&#x27;nin kendisinin neden başarılı olduğunun da özeti.</p>
     </div>
     <div class="callout callout-you">
-      <h3 class="label">Sende karşılığı</h3>
-      <p>Kendi MCP sunucunu yazarsan (KlioAI ya da Mobit için bir araç katmanı düşün) baştan oturumsuz tasarla; Spring Boot&#x27;ta bu, <code>HttpSession</code> kullanmamak ve her isteği bağımsız ele almak demek. Aynı ilke bugünkü tüm servislerin için bir kontrol: <code>HttpSession</code> ya da yerel bellekte tuttuğun her şey, ikinci bir örnek açtığın an sorun olur. İkinci pratik beceri <strong>idempotency</strong>: ödeme, abonelik ya da kayıt oluşturan her endpoint&#x27;e istemcinin ürettiği bir <code>Idempotency-Key</code> kabul ettir; aynı anahtar ikinci kez gelirse işlemi tekrarlama, ilk sonucu dön.</p>
+      <h3 class="label">Pratikte</h3>
+      <p>Kendi MCP server’ını yazarsan baştan stateless tasarla; Spring Boot’ta bu, <code>HttpSession</code> kullanmamak ve her isteği bağımsız ele almak demek. Aynı ilke bugünkü tüm servislerin için bir kontrol: <code>HttpSession</code> ya da yerel bellekte tuttuğun her şey, ikinci bir instance açtığın an sorun olur. İkinci pratik beceri <strong>idempotency</strong>: ödeme, abonelik ya da kayıt oluşturan her endpoint’e istemcinin ürettiği bir <code>Idempotency-Key</code> kabul ettir; aynı key ikinci kez gelirse işlemi tekrarlama, ilk sonucu dön.</p>
     </div>
   </div>
 
@@ -111,19 +111,19 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">stateless protocol</span> <span class="term-tr">oturumsuz protokol</span></dt>
+      <dt><span class="term-en">stateless protocol</span></dt>
       <dd>Her isteğin kendi başına işlenebildiği, sunucunun önceki istekleri hatırlamasına gerek olmayan protokol.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">sticky session</span> <span class="term-tr">yapışkan oturum</span></dt>
-      <dd>Yük dengeleyicinin bir istemciyi hep aynı sunucu örneğine yönlendirmesi.</dd>
+      <dt><span class="term-en">sticky session</span></dt>
+      <dd>Load balancer’ın bir istemciyi hep aynı sunucu örneğine yönlendirmesi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">idempotency</span> <span class="term-tr">tekrar-güvenliği</span></dt>
+      <dt><span class="term-en">idempotency</span></dt>
       <dd>Aynı isteğin birden çok kez işlenmesinin, bir kez işlenmesiyle aynı sonucu vermesi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">W3C Trace Context</span> <span class="term-tr">W3C izleme bağlamı</span></dt>
+      <dt><span class="term-en">W3C Trace Context</span></dt>
       <dd>Dağıtık sistemlerde bir isteğin servisler arasında izlenebilmesi için standart başlık biçimi.</dd>
     </div>
   </dl>
@@ -134,8 +134,8 @@
   <ul class="tags">
   <li><a href="/etiket/mcp/">#MCP</a></li>
   <li><a href="/etiket/agent/">#agent</a></li>
-  <li><a href="/etiket/mimari/">#mimari</a></li>
-  <li><a href="/etiket/olcekleme/">#ölçekleme</a></li>
+  <li><a href="/etiket/architecture/">#architecture</a></li>
+  <li><a href="/etiket/scaling/">#scaling</a></li>
 </ul>
 
   <a class="readmore" href="https://aws.amazon.com/blogs/architecture/mcp-went-stateless-is-your-aws-mcp-server-deployment-well-architected/" rel="noopener nofollow" target="_blank">
@@ -155,7 +155,7 @@
     <ol class="toc" id="toc">
       <li>
         <a href="#7d5b6832fa5f">
-          <span class="toc-title">MCP oturumsuz oldu: sticky session, oturum deposu ve yük dengeleyici ayarlarını silebilirsin</span>
+          <span class="toc-title">MCP stateless oldu: sticky session, oturum deposu ve load balancer ayarlarını silebilirsin</span>
           <span class="toc-meta">AWS Architecture Blog · 14 dk</span>
         </a>
       </li>
@@ -198,7 +198,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        136 özet · 61 sayı ·
+        149 özet · 67 sayı ·
         11 kaynak
       </p>
     </div>
