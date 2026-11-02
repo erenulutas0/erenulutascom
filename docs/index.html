@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Eren&#39;in Mühendislik Gazetesi — 26 Ekim 2026</title>
-<meta name="description" content="Netflix’te pik günlerde yaklaşık 100.000 workload başarısız oluyor ve debugging bir kez daha insanların zamanını yiyor. Çözüm ‘LLM’e logları ver’ değil, LLM’i deterministik bir sistemin etrafına sarmak oldu. Yanında OpenAI mühendislerinin incident’larda hızı nasıl kullandığına dair kısa bir iç örnek.">
+<title>Eren&#39;in Mühendislik Gazetesi — 31 Ekim 2026</title>
+<meta name="description" content="Gerçek veriyle test etmek herkesin istediği şey ama production veritabanının kopyasını her pull request için almak 20 dakika sürüyorsa kimse yapmaz. Haftanın son yazısı, veritabanını Git branch’i gibi dallandırarak bu süreyi nasıl kısalttıklarını anlatıyor.">
 <meta name="author" content="Eren Ulutaş">
 <meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#131310" media="(prefers-color-scheme: dark)">
 <meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
-<meta property="og:title" content="Eren&#39;in Mühendislik Gazetesi — 26 Ekim 2026">
-<meta property="og:description" content="Netflix’te pik günlerde yaklaşık 100.000 workload başarısız oluyor ve debugging bir kez daha insanların zamanını yiyor. Çözüm ‘LLM’e logları ver’ değil, LLM’i deterministik bir sistemin etrafına sarmak oldu. Yanında OpenAI mühendislerinin incident’larda hızı nasıl kullandığına dair kısa bir iç örnek.">
+<meta property="og:title" content="Eren&#39;in Mühendislik Gazetesi — 31 Ekim 2026">
+<meta property="og:description" content="Gerçek veriyle test etmek herkesin istediği şey ama production veritabanının kopyasını her pull request için almak 20 dakika sürüyorsa kimse yapmaz. Haftanın son yazısı, veritabanını Git branch’i gibi dallandırarak bu süreyi nasıl kısalttıklarını anlatıyor.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:url" content="https://erenulutas.com/">
@@ -63,46 +63,46 @@
 
   <header class="edition-head">
   <div class="edition-bar">
-    <span class="edition-no">Sayı 67</span>
-    <h1 class="edition-date"><time datetime="2026-10-26">26 Ekim 2026, Pazartesi</time></h1>
+    <span class="edition-no">Sayı 72</span>
+    <h1 class="edition-date"><time datetime="2026-10-31">31 Ekim 2026, Cumartesi</time></h1>
     <nav class="edition-nav" aria-label="Sayılar arası gezinme">
-<a href="/sayi/2026-10-23/" rel="prev"><span aria-hidden="true">←</span> 23 Ekim 2026</a><span>En güncel sayı</span>    </nav>
+<a href="/sayi/2026-10-30/" rel="prev"><span aria-hidden="true">←</span> 30 Ekim 2026</a><span>En güncel sayı</span>    </nav>
   </div>
-<p class="lede">Netflix’te pik günlerde yaklaşık 100.000 workload başarısız oluyor ve debugging bir kez daha insanların zamanını yiyor. Çözüm ‘LLM’e logları ver’ değil, LLM’i deterministik bir sistemin etrafına sarmak oldu. Yanında OpenAI mühendislerinin incident’larda hızı nasıl kullandığına dair kısa bir iç örnek.</p></header>
+<p class="lede">Gerçek veriyle test etmek herkesin istediği şey ama production veritabanının kopyasını her pull request için almak 20 dakika sürüyorsa kimse yapmaz. Haftanın son yazısı, veritabanını Git branch’i gibi dallandırarak bu süreyi nasıl kısalttıklarını anlatıyor.</p></header>
 
 
   <div class="layout">
     <div class="layout-main">
-          <article class="story cover" id="97a0aa466cd0">
+          <article class="story cover" id="7b70f75132a7">
   <div class="meta">
-<span class="kicker">Günün kapağı</span>    <a class="badge" href="/kaynak/netflix/"
-     style="--brand: #E50914">Netflix Tech Blog</a>
+<span class="kicker">Günün kapağı</span>    <a class="badge" href="/kaynak/databricks/"
+     style="--brand: #FF3621">Databricks Engineering</a>
 
-  <span class="meta-item">26 Ekim 2026</span>
-<span class="meta-item">15 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
+  <span class="meta-item">31 Ekim 2026</span>
+<span class="meta-item">5 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
 </div>
 
   <h2 class="cover-title">
-    <a href="https://netflixtechblog.com/making-failure-diagnosis-reliable-with-pensive-ai-6b0811a1c015?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">Log’u LLM’e vermek yetmez: Netflix Pensive AI’da deterministik sistemin etrafına AI sarmak</a>
+    <a href="https://www.databricks.com/blog/lakebase-branching-cicd-lessons-100-pr-databases" rel="noopener nofollow" target="_blank">Her pull request için production kopyası: Lakebase branching ile CI/CD (Snorkel AI)</a>
   </h2>
-  <p class="original-title">Making Failure Diagnosis Reliable with Pensive AI · Netflix Technology Blog</p>
+  <p class="original-title">Lakebase branching for CI/CD: lessons from 100 PR databases</p>
 
-  <div class="prose"><p>Netflix’te data ve ML kullanıcıları her gün milyonlarca workload çalıştırıyor (Titus, Spark, Trino, Druid gibi motorlarda) ve pik günlerde yaklaşık 100.000 tanesi başarısız oluyor. Başarısızlık yalnızca başlangıç: birinin birkaç log arasında faydalı sinyali bulması, sebebin kendi kodunda mı platformda mı olduğuna karar vermesi ve yeniden deneme, yeniden yapılandırma ya da yükseltme kararı vermesi gerekiyor. İlk çözüm <strong>Pensive</strong> idi: başarısız workload loglarını toplayıp regex ve elle yazılmış Java kurallarıyla hataları çıkaran ve sınıflandıran, yeniden deneme ya da düzeltme önerisini Maestro gibi ürünlere ileten bir auto-diagnosis sistemi. Başarısızlıkların yaklaşık yüzde 50’sini self-service ve bazen otomatik yaptı. Ama kurallar yalnızca bilinen kalıplarda çalışıyor: kapsam, birinin yeni bir hata kalıbını fark edip kural yazması ve engine ile log formatları değiştikçe güncel tutmasıyla büyüyor. Üç aylık bir dönemde Pensive yaklaşık yedi milyon sınıflandırma yaptı ve yarısı ‘unknown’ kovasına düştü.</p><p><strong>Pensive AI</strong>’nın hedefi, modeli logların önüne koymak değil; kapsamı deterministik parçaları bırakmadan genişletmek. Yazının tasarım ilkesi: <strong>AI’ı deterministik süreçlerin etrafına sarmak</strong>, bu da geniş kapsam, düşük gecikme, kontrollü maliyet ve yazılım yaşam döngüsü boyunca kolay bakım sağlıyor. İki yol var ve birbirini tamamlıyor: <strong>error extraction</strong> her başarısızlıkta otomatik çalışıyor (hızlı ilk bakış, düşük maliyet) ve <strong>on-demand debugging</strong> kullanıcı istediğinde loglardaki semptomlara bakıp LLM’in kendi bilgisi ve reasoning’iyle daha derin kök neden analizi yapıyor (biraz daha yüksek gecikme ve maliyet).</p><p><strong>Bölüm 1: faydalı hatayı bulmak.</strong> Eski kurallar kesin ama her biri belirli bir log şeklini yakalıyor (ör. bir Spark container’ın bellek sınırını aşması için bir regex). Pensive AI kuralı olmayan hataları da buluyor ve bir platform yükseltmesinden sonra şekli değişen tanıdık hatalara uyum sağlıyor. Mühendislik açısından öğretici bir karar: çıktı token’ı üretmek girdi token’ı okumaktan çok daha yavaş olduğundan, uzun hata mesajlarını model yeniden yazarsa pahalı ve yavaş olurdu. Bu yüzden her logun <strong>satırları numaralandırılıyor</strong> ve modele <code>{lineNumber, text}</code> kayıtları veriliyor; model metni kopyalamak yerine hangi satırların hata olduğunu döndürüyor. Log kaynağı başına çağrılar paralel çalışıyor ve hepsi Maestro’nun timeout’unun içinde belirlenmiş tek bir deadline’ı paylaşıyor; süreyi kaçıran çağrı sonuçtan çıkarılıyor ve hepsi beklenmiyor. Veri sözleşmesi de yeniden tasarlandı: eski model tek bir düz hata string’iydi, yenisi her log kaynağı için bir hata listesi ve kaynağa derin bağlantılar döndürüyor.</p><p><strong>Bölüm 2: tam teşhis ve ürün deneyimi.</strong> Pensive AI Debugging, başarısız bir step attempt’i analiz edip kök neden ve önerilen düzeltmeleri sunuyor; programatik API’lerden, MCP’den ve ürün arayüzünden (Data Portal) erişiliyor. Üretimi onlarca saniye ile bir dakika arası sürebildiğinden isteğe bağlı çalıştırılıyor. Bu seçim cache için sağlam bir birim yaratıyor: her debugging cevabı <strong>step attempt’e göre cache’leniyor</strong>; ikinci istek yeni bir AI çağrısı değil bir key-value okuması. Cache’lenmiş cevabı oku, yoksa üret ya da var olanı yeniden üretip üzerine yaz şeklinde üç başlatma biçimi var; arayüz ve programatik kullanım için farklı ihtiyaçları karşılıyor.</p><p><strong>Erken sonuçlar.</strong> AI error extraction artık başarısızlıkların yüzde 100’ünü kapsıyor (eski Pensive’in unknown dediği hatalar dahil). Pensive AI’ı kullanmayan başarısız step attempt’lerde, kullananlara göre ortalama yüzde 321 daha fazla manuel debug-log inceleme eylemi görüldü; yazı bunun nedensel bir iddia değil gözlemsel bir karşılaştırma olduğunu özellikle belirtiyor. Göç hâlâ sürüyor: yeni AI hata alanını şimdilik Data Portal’ın başarısız Maestro step arayüzü okuyor, diğer yüzeyler sırada.</p></div>
+  <div class="prose"><p>Snorkel AI kodu Kubernetes üzerine kurulu bir CI pipeline’ıyla yayınlıyor: her açık pull request ve bazı ad-hoc commit’ler kendi geçici Kubernetes namespace’ini (‘PR namespace’) alıyor; geliştirici branch’ini orada deploy edip birleştirmeden önce tüm test paketini çalıştırıyor. Testler en çok gerçek veriyle işe yarıyor. Production veritabanları Amazon Aurora PostgreSQL ve her PR namespace’ine ayrı bir kopya vermek zor kısımdı: bir kopyayı geri yüklemek ortamlar başına yaklaşık <strong>20 dakika</strong> sürüyordu; geliştiriciler gün boyu PR açarken ve merge queue her koşu için taze bir ortam isterken bu çok yavaş. Alternatifler (paylaşımlı staging veritabanı, kısaltılmış fixture ya da sentetik veri) gerçek veriyle test etmenin çözmeye çalıştığı sorunları geri getiriyor: testlerin birbirini bozması, eski şemalar ve yalnızca gerçek veri şekillerinde çıkan bug’lar.</p><p><strong>Lakebase branching.</strong> Lakebase, Databricks’in sunucusuz Postgres veritabanı; depolama ve hesaplama ayrı ve <strong>veritabanını Git branch’i gibi dallandırmayı</strong> destekliyor: herhangi bir zaman noktasından yeni, yalıtılmış, yazılabilir bir branch oluşturabilirsin. Branch’ler <strong>copy-on-write</strong>: oluşturmak bir metadata işlemi, veri kopyalanmıyor; yeni branch ana dalla aynı depolama sayfalarını paylaşıyor ve yalnızca değiştirdiği sayfalar yeni depolama olarak yazılıyor. Pratikte iki özellik deseni mümkün kılıyor: copy-on-write branching ve <strong>branch expiration (TTL)</strong>.</p><p><strong>Akış dört adım.</strong> <strong>(1)</strong> Ana dalda production’ın taze bir kopyasını tut: Lakebase standart Postgres olduğundan AWS DMS için hedef olabiliyor, özel araç gerekmiyor; Snorkel bir DMS görevini production Aurora’ya yöneltip Lakebase projesinin main branch’ine kopyalıyor. <strong>(2)</strong> PR açıldığında CI pipeline’ı Lakebase API’sini çağırıp main’den bir branch oluşturuyor, bir sona erme zamanı koyuyor ve bağlantı bilgilerini PR namespace’ine veriyor. <strong>(3)</strong> PR namespace’indeki uygulama branch’ine standart Postgres olarak bağlanıyor; testler migration çalıştırabilir, veri yazabilir ve şemayı değiştirebilir, production’ı, main’i ya da diğer PR’ları etkilemeden. <strong>(4)</strong> PR kapanınca ya da test geçince branch siliniyor; temizleme adımı çalışmazsa TTL son çare olarak branch’i kendisi düşürüyor.</p><p><strong>İki güvenlik gereksinimi.</strong> *Private connectivity:* production verisi Aurora’dan Lakebase’e ve Lakebase’den CI kümesine halka açık internet yerine özel ağ üzerinden akıyor. *Identity:* Snorkel’in iki tür veritabanı kullanıcısı var, PR ortamında hata ayıklamak için etkileşimli bağlanan geliştiriciler ve hiçbir insan olmadan çalışan CI pipeline’ları. Okta SSO tarayıcı tabanlı etkileşimli girişe göre kurulu olduğundan tasarım kullanıcı türüne göre ikiye bölünmüş.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>LLM’i deterministik sistemin yerine değil, onun kapsamını genişletmek için etrafına koy.</span></li><li><span>Output token’ı pahalıdır: modele metni kopyalatmak yerine satır numarası döndürt.</span></li><li><span>Paralel çağrıları ortak bir deadline’a bağla; geç kalanı sonuçtan çıkar, hepsini bekleme.</span></li><li><span>Pahalı analizi isteğe bağlı yap, sonucunu cache’le; ucuz ilk bakışı her hatada otomatik çalıştır.</span></li><li><span>Kendi sonucunu abartma: gözlemsel karşılaştırmayı nedensel gibi sunma.</span></li>    </ol>
+<li><span>Gerçek veriyle test etmek, paylaşımlı staging’in sorunlarını (testlerin birbirini bozması, eski şema) ortadan kaldırır.</span></li><li><span>Copy-on-write branching, tam kopya almadan veritabanı ortamı oluşturmayı saniyelere indirir.</span></li><li><span>Her geçici kaynağa bir TTL koy: temizleme adımı bir gün çalışmayacak.</span></li><li><span>İnsan ve otomatik kullanıcılar için ayrı kimlik doğrulama yolları tasarla.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-why">
       <h3 class="label">Neden önemli?</h3>
-      <p>‘Logu LLM’e ver, cevap versin’ demo’da çalışır, ölçekte maliyet, gecikme ve tutarsızlıkla patlar. Bu yazı bir LLM özelliğini production’da sürdürülebilir kılan mühendislik kararlarını gösteriyor: sınırlı çıktı, deadline, cache, ve eski sistemle yan yana çalışan bir göç.</p>
+      <p>Test verisi sorunu çoğu ekipte ‘staging bir yerde’ diye çözülmüş görünür ama gerçek bug’lar gerçek veri şeklinde çıkar. Bu yazı, veritabanı ortamını bir pull request kadar ucuz ve geçici yapmanın CI’a ne kazandırdığını anlatıyor.</p>
     </div>
     <div class="callout callout-you">
       <h3 class="label">Pratikte</h3>
-      <p>Bir log analizi ya da debugging asistanı yazarsan üç kuralı baştan uygula. <strong>(1)</strong> Logu satır numarasıyla modele ver ve modelden yalnızca ilgili satır numaralarını ve kısa bir açıklamayı JSON olarak iste; metni modele yeniden yazdırma. <strong>(2)</strong> Hata imzasını (örneğin istisna sınıfı ve ilk stack frame) anahtar yapıp sonucu cache’le: aynı hata ikinci kez gelince LLM çağırma. <strong>(3)</strong> Bilinen sık hataları regex ile çöz, LLM’i yalnızca ‘unknown’ kovasına çağır ve kovanın oranını izle; bu oran düşüyorsa sistem işe yarıyor demektir.</p>
+      <p>Bugün ücretsiz araçlarla basit bir sürümünü kurabilirsin. <strong>(1)</strong> CI’da her PR için Docker ile temiz bir Postgres container’ı aç (Testcontainers bunu tek satırda yapar) ve migration’ları sıfırdan uygula. <strong>(2)</strong> Gerçek şekilli veriye ihtiyaç varsa production’ın küçük, anonimleştirilmiş bir dump’ını bir kez al ve container imajına göm; test başında <code>pg_restore</code> ile yükle. <strong>(3)</strong> Neon gibi branching destekleyen bir Postgres sağlayıcısında her PR için bir database branch açıp PR kapanınca silmeyi dene. Hangi yolu seçersen seç, geçici ortama bir ömür (TTL) ver.</p>
     </div>
   </div>
 
@@ -110,20 +110,20 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">error extraction</span></dt>
-      <dd>Uzun bir log içinden hatayı açıklayan satırları ayıklayıp çıkarma.</dd>
+      <dt><span class="term-en">copy-on-write</span></dt>
+      <dd>Kopyanın veriyi paylaştığı, yalnızca değiştirilen kısmın ayrıca saklandığı yöntem.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">deadline</span></dt>
-      <dd>Bir işlemin tamamlanması gereken, sonrasında sonucun beklenmediği süre sınırı.</dd>
+      <dt><span class="term-en">ephemeral environment</span></dt>
+      <dd>Bir iş için açılıp iş bitince silinen geçici ortam.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">root cause analysis</span></dt>
-      <dd>Bir arızanın görünen belirtisinden değil asıl nedeninden başlayarak çözümleme.</dd>
+      <dt><span class="term-en">TTL (time to live)</span></dt>
+      <dd>Bir kaynağın kendiliğinden silineceği süre.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">self-service</span></dt>
-      <dd>Kullanıcının başka bir ekibe başvurmadan sorunu kendi başına çözebilmesi.</dd>
+      <dt><span class="term-en">merge queue</span></dt>
+      <dd>Birleştirilecek değişiklikleri sırayla, her birini güncel ana dalla test ederek birleştiren kuyruk.</dd>
     </div>
   </dl>
 
@@ -131,13 +131,13 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/llm/">#LLM</a></li>
-  <li><a href="/etiket/observability/">#observability</a></li>
-  <li><a href="/etiket/debugging/">#debugging</a></li>
-  <li><a href="/etiket/data-platform/">#data platform</a></li>
+  <li><a href="/etiket/ci-cd/">#CI/CD</a></li>
+  <li><a href="/etiket/database/">#database</a></li>
+  <li><a href="/etiket/testing/">#testing</a></li>
+  <li><a href="/etiket/postgres/">#Postgres</a></li>
 </ul>
 
-  <a class="readmore" href="https://netflixtechblog.com/making-failure-diagnosis-reliable-with-pensive-ai-6b0811a1c015?source=rss----2615bd06b42e---4" rel="noopener nofollow" target="_blank">
+  <a class="readmore" href="https://www.databricks.com/blog/lakebase-branching-cicd-lessons-100-pr-databases" rel="noopener nofollow" target="_blank">
     Orijinali oku <span aria-hidden="true">↗</span>
   </a>
 </div>
@@ -145,64 +145,6 @@
 </article>
 
 
-    <h2 class="subhead">Kısa kısa</h2>
-<article class="story brief" id="8f2f08b6e197">
-  <div class="meta">
-    <a class="badge" href="/kaynak/openai/"
-     style="--brand: #000000">OpenAI Research</a>
-
-  <span class="meta-item">26 Ekim 2026</span>
-<span class="meta-item">4 dk okuma</span>  <span class="meta-item level level-baslangic">başlangıç</span>
-</div>
-
-  <h3 class="brief-title">
-    <a href="https://openai.com/index/openai-cut-incident-investigation" rel="noopener nofollow" target="_blank">Incident’ta 30 saniye eşiği: OpenAI mühendisleri hızlı bir kodlama agent’ını nasıl kullanıyor</a>
-  </h3>
-  <p class="original-title">How Ultrafast cut incident investigation from hours to minutes at OpenAI</p>
-  <div class="prose prose-sm"><p>OpenAI, Codex’in yüksek hızlı modu Ultrafast’i iç kullanım örneği olarak anlatıyor (kendi ürününü anlatan bir yazı; abartı payı olabilir). Mühendisler için incident response’ta varsayılan olmuş: bir şey bozulduğunda dakikalarca cevap beklemek sorunu büyütüyor. Bir mühendis incident için bir Slack kanalı açıp Codex’i olayı izlemesi, araştırması ve gelen soruları yanıtlaması için görevlendiriyor ve ‘birçok olası nedeni aynı anda arayabildiğini’ söylüyor. Bir güvenlik mimarı, yapılandırılmış ve yapılandırılmamış veriyi toplayıp normalleştirme ve bağlam verme işinin bir iki saatten 10-15 dakikaya, bazen neredeyse gerçek zamana indiğini aktarıyor.</p><p>Yazının asıl gözlemi hız eşiği: bir mühendis bir AI cevabı 30 saniyeden uzun sürerse Slack’e bakıp bir iş arkadaşına sorduğunu, ama işlerinin çoğunun artık bu eşiğin altında kaldığını söylüyor. Başka bir mühendis eskiden Codex’e bir şey sorup aynı anda kendisi de bakmak zorunda kaldığını, artık odağını bölmeden beklediğini anlatıyor. Bu tür testler iç kullanıcı anlatılarına dayanıyor; bağımsız ölçüm değil.</p></div>
-
-  <div class="keypoints keypoints-sm">
-    <h4 class="label">Öne çıkanlar</h4>
-    <ol>
-<li><span>Yanıt süresi bir eşiğin altına inince insanlar aracı beklemek yerine kullanır; eşik yaklaşık 30 saniye olarak anlatılıyor.</span></li><li><span>Incident’ta birden çok hipotezi aynı anda aramak, tek tek denemekten hızlıdır.</span></li><li><span>İç kullanıcı anlatıları değerli ipuçlarıdır ama ölçüm değildir.</span></li>    </ol>
-  </div>
-
-  <div class="callouts">
-    <div class="callout callout-you">
-      <h4 class="label">Pratikte</h4>
-      <p>Incident ya da debugging için bir araç yazarsan ‘ilk anlamlı cevap’ süresini ölç ve 30 saniyenin altını hedefle. Hız için model boyutunu küçültmeden önce bağlamı kısalt ve aramaları paralelleştir: aynı soruyu log, metrik ve son deploy’lar için eşzamanlı sormak çoğu zaman en büyük kazanç.</p>
-    </div>
-  </div>
-
-  <details class="terms">
-    <summary class="label">Sözlük · 2 terim</summary>
-      <dl>
-    <div class="term">
-      <dt><span class="term-en">incident response</span></dt>
-      <dd>Üretimdeki bir arızayı tespit etme, teşhis etme ve giderme süreci.</dd>
-    </div>
-    <div class="term">
-      <dt><span class="term-en">latency</span></dt>
-      <dd>Bir isteğin gönderilmesi ile cevabın gelmesi arasındaki süre.</dd>
-    </div>
-  </dl>
-
-  </details>
-
-  <div class="article-foot">
-  <ul class="tags">
-  <li><a href="/etiket/incident-response/">#incident response</a></li>
-  <li><a href="/etiket/agent/">#agent</a></li>
-  <li><a href="/etiket/developer-experience/">#developer experience</a></li>
-  <li><a href="/etiket/openai/">#OpenAI</a></li>
-</ul>
-
-  <a class="readmore" href="https://openai.com/index/openai-cut-incident-investigation" rel="noopener nofollow" target="_blank">
-    Orijinali oku <span aria-hidden="true">↗</span>
-  </a>
-</div>
-
-</article>
 
 
     </div>
@@ -211,15 +153,9 @@
     <h2 class="label">Bu sayıda</h2>
     <ol class="toc" id="toc">
       <li>
-        <a href="#97a0aa466cd0">
-          <span class="toc-title">Log’u LLM’e vermek yetmez: Netflix Pensive AI’da deterministik sistemin etrafına AI sarmak</span>
-          <span class="toc-meta">Netflix Tech Blog · 15 dk</span>
-        </a>
-      </li>
-      <li>
-        <a href="#8f2f08b6e197">
-          <span class="toc-title">Incident’ta 30 saniye eşiği: OpenAI mühendisleri hızlı bir kodlama agent’ını nasıl kullanıyor</span>
-          <span class="toc-meta">OpenAI Research · 4 dk</span>
+        <a href="#7b70f75132a7">
+          <span class="toc-title">Her pull request için production kopyası: Lakebase branching ile CI/CD (Snorkel AI)</span>
+          <span class="toc-meta">Databricks Engineering · 5 dk</span>
         </a>
       </li>
     </ol>
@@ -227,10 +163,10 @@
   <div class="aside-block aside-facts">
     <h2 class="label">Künye</h2>
     <dl class="facts">
-      <div><dt>yazı</dt><dd>2</dd></div>
-      <div><dt>dk okuma</dt><dd>19</dd></div>
-      <div><dt>kaynak</dt><dd>2</dd></div>
-      <div><dt>terim</dt><dd>6</dd></div>
+      <div><dt>yazı</dt><dd>1</dd></div>
+      <div><dt>dk okuma</dt><dd>5</dd></div>
+      <div><dt>kaynak</dt><dd>1</dd></div>
+      <div><dt>terim</dt><dd>4</dd></div>
     </dl>
   </div>
 </aside>
@@ -240,9 +176,34 @@
   <section class="section">
     <div class="section-head">
       <h2 class="section-title">Önceki sayılar</h2>
-      <a class="section-more" href="/arsiv/">Tüm arşiv (67) →</a>
+      <a class="section-more" href="/arsiv/">Tüm arşiv (72) →</a>
     </div>
     <div class="prev-grid">
+      <a class="prev-card" href="/sayi/2026-10-30/">
+        <span class="prev-date"><b>№ 71</b>30 Ekim 2026</span>
+        <span class="prev-title">Anahtarı ‘4’ olan CA: eMudhra’nın zayıf anahtarlarının istismarı ve yamalanması</span>
+        <span class="prev-count">1 yazı · Cloudflare Blog</span>
+      </a>
+      <a class="prev-card" href="/sayi/2026-10-29/">
+        <span class="prev-date"><b>№ 70</b>29 Ekim 2026</span>
+        <span class="prev-title">Önce ucuz filtre, sonra pahalı soruşturma: OpenAI’ın katmanlı misalignment monitoring sistemi</span>
+        <span class="prev-count">3 yazı · OpenAI Research, Meta Engineering, Cloudflare Blog</span>
+      </a>
+      <a class="prev-card" href="/sayi/2026-10-28/">
+        <span class="prev-date"><b>№ 69</b>28 Ekim 2026</span>
+        <span class="prev-title">Embedding modelini kesintisiz değiştirmek: AlloyDB’de blue/green tarzı yeniden embedding</span>
+        <span class="prev-count">2 yazı · Google Cloud Blog, Meta Engineering</span>
+      </a>
+      <a class="prev-card" href="/sayi/2026-10-27/">
+        <span class="prev-date"><b>№ 68</b>27 Ekim 2026</span>
+        <span class="prev-title">Gizlilik kuralını bir kez entegre et, modül olarak ekle: Meta’nın PrivacyLib’i</span>
+        <span class="prev-count">3 yazı · Meta Engineering, Uber Engineering, AWS Architecture Blog</span>
+      </a>
+      <a class="prev-card" href="/sayi/2026-10-26/">
+        <span class="prev-date"><b>№ 67</b>26 Ekim 2026</span>
+        <span class="prev-title">Log’u LLM’e vermek yetmez: Netflix Pensive AI’da deterministik sistemin etrafına AI sarmak</span>
+        <span class="prev-count">3 yazı · Netflix Tech Blog, OpenAI Research, Cloudflare Blog</span>
+      </a>
       <a class="prev-card" href="/sayi/2026-10-23/">
         <span class="prev-date"><b>№ 66</b>23 Ekim 2026</span>
         <span class="prev-title">Önce her ekibe ayrı container, sonra geri dönüş: OpenAI Habitat’ın Cosmos DB’de multi-tenancy yolculuğu</span>
@@ -258,31 +219,6 @@
         <span class="prev-title">Olay değil konuşma: ChatGPT’nin ad stack’i neden request-response değil, stateful session</span>
         <span class="prev-count">2 yazı · OpenAI Research, Google Cloud Blog</span>
       </a>
-      <a class="prev-card" href="/sayi/2026-10-20/">
-        <span class="prev-date"><b>№ 63</b>20 Ekim 2026</span>
-        <span class="prev-title">Agent’ın hafızası: neyi saklayacağına karar vermek ve ‘dreaming’ pipeline’ı (MemCurrent)</span>
-        <span class="prev-count">2 yazı · Databricks Engineering, Google Cloud Blog</span>
-      </a>
-      <a class="prev-card" href="/sayi/2026-10-19/">
-        <span class="prev-date"><b>№ 62</b>19 Ekim 2026</span>
-        <span class="prev-title">Token’lar nereye gidiyor? Cloudflare AI code reviewer maliyetini yüzde 68 nasıl düşürdü</span>
-        <span class="prev-count">2 yazı · Cloudflare Blog, Meta Engineering</span>
-      </a>
-      <a class="prev-card" href="/sayi/2026-10-16/">
-        <span class="prev-date"><b>№ 61</b>16 Ekim 2026</span>
-        <span class="prev-title">Agent’ı kapanış cümlesine göre notlama: dört eval mühendisliği dersi</span>
-        <span class="prev-count">3 yazı · Google Cloud Blog, Netflix Tech Blog, Databricks Engineering</span>
-      </a>
-      <a class="prev-card" href="/sayi/2026-10-15/">
-        <span class="prev-date"><b>№ 60</b>15 Ekim 2026</span>
-        <span class="prev-title">Trafik topu değil molayı izledi: Meta Dünya Kupası’nda rekor yükü nasıl taşıdı</span>
-        <span class="prev-count">2 yazı · Meta Engineering</span>
-      </a>
-      <a class="prev-card" href="/sayi/2026-10-14/">
-        <span class="prev-date"><b>№ 59</b>14 Ekim 2026</span>
-        <span class="prev-title">Konteyner boyutunu makine ayarlasın: Netflix’in otomatik küçültme sistemi ve kendi hatasından dersi</span>
-        <span class="prev-count">2 yazı · Netflix Tech Blog</span>
-      </a>
     </div>
   </section>
 
@@ -292,22 +228,22 @@
       <a class="section-more" href="/ara/">Ara →</a>
     </div>
     <ul class="tagcloud">
-      <li><a href="/etiket/llm/">LLM <span class="count">41</span></a></li>
-      <li><a href="/etiket/agent/">agent <span class="count">32</span></a></li>
-      <li><a href="/etiket/architecture/">architecture <span class="count">29</span></a></li>
-      <li><a href="/etiket/security/">security <span class="count">25</span></a></li>
+      <li><a href="/etiket/llm/">LLM <span class="count">42</span></a></li>
+      <li><a href="/etiket/agent/">agent <span class="count">34</span></a></li>
+      <li><a href="/etiket/architecture/">architecture <span class="count">32</span></a></li>
+      <li><a href="/etiket/security/">security <span class="count">30</span></a></li>
       <li><a href="/etiket/cost/">cost <span class="count">19</span></a></li>
-      <li><a href="/etiket/networking/">networking <span class="count">15</span></a></li>
+      <li><a href="/etiket/networking/">networking <span class="count">16</span></a></li>
       <li><a href="/etiket/research/">research <span class="count">14</span></a></li>
+      <li><a href="/etiket/database/">database <span class="count">13</span></a></li>
       <li><a href="/etiket/infrastructure/">infrastructure <span class="count">13</span></a></li>
-      <li><a href="/etiket/database/">database <span class="count">11</span></a></li>
-      <li><a href="/etiket/data-engineering/">data engineering <span class="count">11</span></a></li>
-      <li><a href="/etiket/performance/">performance <span class="count">10</span></a></li>
+      <li><a href="/etiket/data-engineering/">data engineering <span class="count">12</span></a></li>
+      <li><a href="/etiket/performance/">performance <span class="count">11</span></a></li>
       <li><a href="/etiket/resilience/">resilience <span class="count">10</span></a></li>
       <li><a href="/etiket/observability/">observability <span class="count">9</span></a></li>
+      <li><a href="/etiket/ml-infrastructure/">ML infrastructure <span class="count">8</span></a></li>
       <li><a href="/etiket/protocol/">protocol <span class="count">8</span></a></li>
-      <li><a href="/etiket/isolation/">isolation <span class="count">7</span></a></li>
-      <li><a href="/etiket/evaluation/">evaluation <span class="count">7</span></a></li>
+      <li><a href="/etiket/testing/">testing <span class="count">7</span></a></li>
     </ul>
   </section>
 
@@ -324,7 +260,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        149 özet · 67 sayı ·
+        160 özet · 72 sayı ·
         11 kaynak
       </p>
     </div>

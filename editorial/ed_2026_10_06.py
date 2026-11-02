@@ -73,7 +73,7 @@ DRAFTS = [
             "Vektör araması anlamı, tam metin araması tam eşleşmeyi yakalar; ikisi birbirinin açığını kapatır.",
             "Birleştirmeyi uygulama belleği yerine tek sorguda yapmak gecikmeyi ve hata yüzeyini azaltır."
         ],
-        "for_you": "Bu, bir doküman aramaya doğrudan uygulanabilir ve AlloyDB gerektirmez. Düz Postgres’te `pgvector` ile ilk 20 sonucu, `tsvector` ile ilk 20 sonucu al; her belgeye `1 / (60 + sıra)` puanını ver ve iki listedeki puanları topla. Birkaç satırlık SQL ya da Python. Ürün kodu ya da ihale numarası gibi tam eşleşme gereken sorgularda vector search’ün kaçırdığını full-text search yakalar.",
+        "for_you": "Bu, bir doküman aramaya doğrudan uygulanabilir ve AlloyDB gerektirmez. Düz Postgres’te `pgvector` ile ilk 20 sonucu, `tsvector` ile ilk 20 sonucu al; her belgeye `1 / (60 + sıra)` puanını ver ve iki listedeki puanları topla. Birkaç satırlık SQL ya da Python. Ürün kodu ya da sözleşme numarası gibi tam eşleşme gereken sorgularda vector search’ün kaçırdığını full-text search yakalar.",
         "terms": [
             {
                 "en": "Reciprocal Rank Fusion (RRF)",

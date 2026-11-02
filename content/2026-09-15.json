@@ -19,7 +19,7 @@
         "Öğretmen (RL ile eğitilmiş LLM) ve öğrenci (küçük diffusion model) ayrımı: kaliteyi öğretmen, hızı öğrenci sağlıyor."
       ],
       "why_it_matters": "Üretimde LLM’i her istekte ‘düşündürmek’ en pahalı yoldur. Bu yazı, tekrar eden bir görev için reasoning’i eğitim zamanına kaydırmanın genel bir desen olduğunu gösteriyor: bir kez pahalı öğren, her seferinde ucuz uygula.",
-      "for_you": "RAG’inde tek bir arama yerine alt sorgulara bölme (query decomposition) kullanıyorsan bu doğrudan senin problemin. ‘Şu ihalenin tüm riskleri’ gibi geniş bir soruyu LLM’e her seferinde alt sorulara bölttürüyorsan, bu çağrıyı ölçüp maliyetini gör. Basit bir ilk adım: sık gelen geniş sorular için alt sorgu şablonlarını bir kez çıkarıp cache’le. Reinforcement learning gerekmeden de ‘inference anındaki işi önceden hesapla’ ilkesinin yarısını elde edersin. Çeşitlilik için de MMR (maximal marginal relevance) gibi basit bir re-ranking, benzer sonuçların sıralamayı doldurmasını engeller.",
+      "for_you": "RAG’inde tek bir arama yerine alt sorgulara bölme (query decomposition) kullanıyorsan bu doğrudan senin problemin. ‘Şu sözleşmenin tüm riskleri’ gibi geniş bir soruyu LLM’e her seferinde alt sorulara bölttürüyorsan, bu çağrıyı ölçüp maliyetini gör. Basit bir ilk adım: sık gelen geniş sorular için alt sorgu şablonlarını bir kez çıkarıp cache’le. Reinforcement learning gerekmeden de ‘inference anındaki işi önceden hesapla’ ilkesinin yarısını elde edersin. Çeşitlilik için de MMR (maximal marginal relevance) gibi basit bir re-ranking, benzer sonuçların sıralamayı doldurmasını engeller.",
       "terms": [
         {
           "en": "query fan-out",

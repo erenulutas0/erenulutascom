@@ -161,7 +161,7 @@ DRAFTS = [
             "Çok adımlı ilişki sorgularını uygulama katmanında değil veritabanında yapmak kod karmaşıklığını ciddi düşürüyor.",
             "GraphRAG: modele düz metin parçaları yerine grafik üzerinde gezinerek toplanmış bağlam vermek."
         ],
-        "for_you": "AI destekli doküman arama mimarisiyle doğrudan ilgili. Klasik RAG belgeleri parçalara bölüp embedding benzerliğiyle getirir ama ‘bu ihale hangi firmaya bağlı, o firmanın hangi belgeleri var?’ gibi ilişkisel sorularda benzerlik yetmez. Bu yazı ilişkinin kendisini modellemenin alternatifini gösteriyor. PostgreSQL kullanıyorsan Spanner’a geçmen gerekmez: recursive CTE ile aynı çok adımlı gezinmeyi yapabilirsin; önemli olan deseni tanımak.",
+        "for_you": "AI destekli doküman arama mimarisiyle doğrudan ilgili. Klasik RAG belgeleri parçalara bölüp embedding benzerliğiyle getirir ama ‘bu sözleşme hangi firmaya bağlı, o firmanın hangi belgeleri var?’ gibi ilişkisel sorularda benzerlik yetmez. Bu yazı ilişkinin kendisini modellemenin alternatifini gösteriyor. PostgreSQL kullanıyorsan Spanner’a geçmen gerekmez: recursive CTE ile aynı çok adımlı gezinmeyi yapabilirsin; önemli olan deseni tanımak.",
         "terms": [
             {
                 "en": "knowledge graph",

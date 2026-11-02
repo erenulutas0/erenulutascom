@@ -74,7 +74,7 @@
         "Birleştirmeyi uygulama belleği yerine tek sorguda yapmak gecikmeyi ve hata yüzeyini azaltır."
       ],
       "why_it_matters": "",
-      "for_you": "Bu, bir doküman aramaya doğrudan uygulanabilir ve AlloyDB gerektirmez. Düz Postgres’te `pgvector` ile ilk 20 sonucu, `tsvector` ile ilk 20 sonucu al; her belgeye `1 / (60 + sıra)` puanını ver ve iki listedeki puanları topla. Birkaç satırlık SQL ya da Python. Ürün kodu ya da ihale numarası gibi tam eşleşme gereken sorgularda vector search’ün kaçırdığını full-text search yakalar.",
+      "for_you": "Bu, bir doküman aramaya doğrudan uygulanabilir ve AlloyDB gerektirmez. Düz Postgres’te `pgvector` ile ilk 20 sonucu, `tsvector` ile ilk 20 sonucu al; her belgeye `1 / (60 + sıra)` puanını ver ve iki listedeki puanları topla. Birkaç satırlık SQL ya da Python. Ürün kodu ya da sözleşme numarası gibi tam eşleşme gereken sorgularda vector search’ün kaçırdığını full-text search yakalar.",
       "terms": [
         {
           "en": "Reciprocal Rank Fusion (RRF)",

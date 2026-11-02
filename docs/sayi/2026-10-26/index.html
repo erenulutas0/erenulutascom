@@ -66,7 +66,8 @@
     <span class="edition-no">Sayı 67</span>
     <h1 class="edition-date"><time datetime="2026-10-26">26 Ekim 2026, Pazartesi</time></h1>
     <nav class="edition-nav" aria-label="Sayılar arası gezinme">
-<a href="/sayi/2026-10-23/" rel="prev"><span aria-hidden="true">←</span> 23 Ekim 2026</a><span>En güncel sayı</span>    </nav>
+<a href="/sayi/2026-10-23/" rel="prev"><span aria-hidden="true">←</span> 23 Ekim 2026</a><a href="/sayi/2026-10-27/" rel="next">27 Ekim 2026 <span aria-hidden="true">→</span></a>
+    </nav>
   </div>
 <p class="lede">Netflix’te pik günlerde yaklaşık 100.000 workload başarısız oluyor ve debugging bir kez daha insanların zamanını yiyor. Çözüm ‘LLM’e logları ver’ değil, LLM’i deterministik bir sistemin etrafına sarmak oldu. Yanında OpenAI mühendislerinin incident’larda hızı nasıl kullandığına dair kısa bir iç örnek.</p></header>
 
@@ -203,6 +204,75 @@
 </div>
 
 </article>
+<article class="story brief" id="bfdba109b967">
+  <div class="meta">
+    <a class="badge" href="/kaynak/cloudflare/"
+     style="--brand: #F6821F">Cloudflare Blog</a>
+
+  <span class="meta-item">26 Ekim 2026</span>
+<span class="meta-item">17 dk okuma</span>  <span class="meta-item level level-ileri">ileri</span>
+</div>
+
+  <h3 class="brief-title">
+    <a href="https://blog.cloudflare.com/kv-cache-exposure-remediation/" rel="noopener nofollow" target="_blank">Context window 1 milyon, KV cache havuzu 681 bin: Workers AI’da cross-request veri sızıntısı</a>
+  </h3>
+  <p class="original-title">Cross-request KV cache exposure in the GLM-5.3 Workers AI model, and our remediation with SGLang</p>
+  <div class="prose prose-sm"><p>8 Eylül 2026’da bir güvenlik araştırmacısı Cloudflare’i, Workers AI’daki GLM-5.3 modelinde 27 Ağustos’tan beri süren bir tenant isolation sorunu konusunda uyardı. 27 Ağustos ile 9 Eylül arasında bu modeli kullanan az sayıda müşteri, kendilerinden az önce aynı modele gönderilmiş başka müşterilerin isteklerinden veri içeren cevaplar aldı. Etkilenen cevap sayısı 155; hepsi 681.280 token’dan uzun prompt’lara verilen cevaplardı. Cloudflare olay ilan ettikten sonra 40 dakika içinde modeli kapattı, düzeltilmiş konfigürasyon ve yamalı inference engine ile aynı gün geri açtı ve başka bir Workers AI modelinin etkilenmediğini doğruladı. Kasıtlı istismar kanıtı bulunmadı.</p><p><strong>Kök neden iki sorunun birleşimi.</strong> Birincisi <strong>yanlış konfigürasyon</strong>: model 1.048.576 token’lık bir context window ile deploy edilmişti ama prefill GPU’larındaki <strong>KV cache havuzu yalnızca 681.280 token</strong> alıyordu. Ekip bu uyumsuzluğu lansmandan önce biliyordu; engine’in sığmayan prompt’lar için hata döndüreceğini varsaydı ve uzun context testleri başarılı cevap verdi. Testlerin açığı: yalnızca HTTP durum kodlarını ve engine performansını doğruladılar, model çıktısının tutarlılığını değil. İkincisi <strong>SGLang’deki bir bug</strong> (disaggregated prefill/decode modunda): havuza sığmayan bir prompt reddedilip tek token’lık bir yer tutucuyla değiştiriliyordu, ama isteği iptal edip istemciye hata döndürmek yerine prefill bu yer tutucu için KV cache üretip decode node’una aktarıyordu. Decode node’u ‘transfer tamamlandı’ mesajını alıp prefill’in önceki isteklerin KV cache’ini bu isteğin tam prompt’uyla ezdiğini varsayıyordu; oysa önceki durumun büyük kısmı yerinde kalmıştı. Decode, önceki isteklerden kalan eski sayfalara attend ederek cevap üretti.</p><p>Arka planda iki ayrıntı var: KV cache GPU belleğinde sabit boyutlu sayfalardan oluşan paylaşımlı bir havuz ve sayfalar istekler arasında sıfırlanmıyor, bir sonraki istek üzerine yazıyor. Ayrıca havuz boyutu bir konfigürasyon değeri değil: SGLang, model ağırlıkları yüklendikten sonra kalan GPU belleğine göre başlangıçta belirliyor; modelin duyurulan context uzunluğu ise ayrı bir değer ve hiçbir şey ikisinin uyuşmasını zorlamıyor.</p><p><strong>Düzeltme iki katmanlı.</strong> Konfigürasyonda havuz tam context’i taşıyacak biçimde büyütüldü (GLM 5.2 konfigürasyonuna uyarlanarak prefill havuzu yaklaşık 2,04 milyon token’a, context uzunluğunun kabaca iki katına çıktı); böylece geçerli bir prompt her zaman havuza sığıyor ve reddetme yoluna hiç girilmiyor. Engine tarafında da reddetme yolu güvenli hâle getirildi, çünkü yalnızca havuz boyutuna güvenmek kırılgan: quantization, tensor parallelism ya da model sürümü değişince havuz boyutu fark edilmeden değişebilir. SGLang v0.5.21 bu bug’ı düzeltti. İki değişiklik de araştırmacının yeniden üretim betiği ve Cloudflare’in kendi canary-marker testleriyle doğrulandı; ayrıca artık çalışan engine’den KV havuz boyutunun context uzunluğuna göre kontrol edilmesi dağıtımdan önce zorunlu.</p></div>
+
+  <div class="keypoints keypoints-sm">
+    <h4 class="label">Öne çıkanlar</h4>
+    <ol>
+<li><span>Bir sistemin kabul ettiği girdi sınırı (context window) ile kaynağının gerçek kapasitesi (KV cache havuzu) ayrı değerlerdir; ikisini yayın öncesi karşılaştır.</span></li><li><span>HTTP 200 dönmek doğru olduğu anlamına gelmez: testler çıktının içeriğini ve tutarlılığını doğrulamalı (canary marker).</span></li><li><span>Paylaşımlı bellek sayfalarının istekler arasında sıfırlanmaması, bir hata durumunda tenant’lar arası sızıntıya dönüşebilir.</span></li><li><span>‘Engine bir hata döndürür’ varsayımını test etmeden güvenme; hata yolunu da bir ürün özelliği gibi doğrula.</span></li><li><span>Çift katmanlı düzeltme (konfigürasyon + engine) tek bir ayara güvenmekten sağlamdır.</span></li>    </ol>
+  </div>
+
+  <div class="callouts">
+    <div class="callout callout-you">
+      <h4 class="label">Pratikte</h4>
+      <p>Kendi sistemlerinde üç şeyi kontrol et. <strong>(1)</strong> Bir kaynağın (bağlantı havuzu, bellek, token bütçesi) boyutu ile kabul ettiğin girdi sınırı birbiriyle uyumlu mu? Başlangıçta bir assertion ile ikisini karşılaştır ve uyumsuzsa servisi başlatma. <strong>(2)</strong> Hata yolunu test et: limiti aşan bir girdi gönderip sistemin gerçekten hata döndürdüğünü ve başka bir isteğin verisini sızdırmadığını doğrula. <strong>(3)</strong> Çok kiracılı bir sistemde bir tenant’a ait ‘canary’ bir string yaz ve başka bir tenant’ın cevaplarında görünmediğini otomatik test et.</p>
+    </div>
+  </div>
+
+  <details class="terms">
+    <summary class="label">Sözlük · 5 terim</summary>
+      <dl>
+    <div class="term">
+      <dt><span class="term-en">KV cache</span></dt>
+      <dd>Transformer’ın daha önce işlediği token’lar için tuttuğu key/value tensörleri; yeniden hesaplamayı önler.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">tenant isolation</span></dt>
+      <dd>Aynı altyapıyı paylaşan müşterilerin verilerinin birbirinden ayrı kalması.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">context window</span></dt>
+      <dd>Bir modelin tek seferde işleyebildiği en büyük token sayısı.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">prefill/decode disaggregation</span></dt>
+      <dd>Prompt’u işleme (prefill) ve token üretme (decode) aşamalarını farklı donanımlarda çalıştırma.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">canary marker</span></dt>
+      <dd>Bir sızıntıyı tespit etmek için bilerek yerleştirilen, kolay tanınan sahte bir veri parçası.</dd>
+    </div>
+  </dl>
+
+  </details>
+
+  <div class="article-foot">
+  <ul class="tags">
+  <li><a href="/etiket/security/">#security</a></li>
+  <li><a href="/etiket/inference/">#inference</a></li>
+  <li><a href="/etiket/incident/">#incident</a></li>
+  <li><a href="/etiket/multi-tenancy/">#multi-tenancy</a></li>
+</ul>
+
+  <a class="readmore" href="https://blog.cloudflare.com/kv-cache-exposure-remediation/" rel="noopener nofollow" target="_blank">
+    Orijinali oku <span aria-hidden="true">↗</span>
+  </a>
+</div>
+
+</article>
 
 
     </div>
@@ -222,15 +292,21 @@
           <span class="toc-meta">OpenAI Research · 4 dk</span>
         </a>
       </li>
+      <li>
+        <a href="#bfdba109b967">
+          <span class="toc-title">Context window 1 milyon, KV cache havuzu 681 bin: Workers AI’da cross-request veri sızıntısı</span>
+          <span class="toc-meta">Cloudflare Blog · 17 dk</span>
+        </a>
+      </li>
     </ol>
   </div>
   <div class="aside-block aside-facts">
     <h2 class="label">Künye</h2>
     <dl class="facts">
-      <div><dt>yazı</dt><dd>2</dd></div>
-      <div><dt>dk okuma</dt><dd>19</dd></div>
-      <div><dt>kaynak</dt><dd>2</dd></div>
-      <div><dt>terim</dt><dd>6</dd></div>
+      <div><dt>yazı</dt><dd>3</dd></div>
+      <div><dt>dk okuma</dt><dd>36</dd></div>
+      <div><dt>kaynak</dt><dd>3</dd></div>
+      <div><dt>terim</dt><dd>11</dd></div>
     </dl>
   </div>
 </aside>
@@ -241,6 +317,10 @@
     <a class="pager-link pager-prev" href="/sayi/2026-10-23/" rel="prev">
       <span class="pager-label">← Önceki sayı · 23 Ekim 2026</span>
       <span class="pager-title">Önce her ekibe ayrı container, sonra geri dönüş: OpenAI Habitat’ın Cosmos DB’de multi-tenancy yolculuğu</span>
+    </a>
+    <a class="pager-link pager-next" href="/sayi/2026-10-27/" rel="next">
+      <span class="pager-label">Sonraki sayı · 27 Ekim 2026 →</span>
+      <span class="pager-title">Gizlilik kuralını bir kez entegre et, modül olarak ekle: Meta’nın PrivacyLib’i</span>
     </a>
   </nav>
 
@@ -257,7 +337,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        149 özet · 67 sayı ·
+        160 özet · 72 sayı ·
         11 kaynak
       </p>
     </div>

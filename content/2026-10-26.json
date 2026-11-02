@@ -93,6 +93,65 @@
       "difficulty": "başlangıç",
       "read_minutes": 4,
       "authors": []
+    },
+    {
+      "id": "bfdba109b967",
+      "slot": "brief",
+      "source_key": "cloudflare",
+      "source_name": "Cloudflare Blog",
+      "title": "Cross-request KV cache exposure in the GLM-5.3 Workers AI model, and our remediation with SGLang",
+      "title_tr": "Context window 1 milyon, KV cache havuzu 681 bin: Workers AI’da cross-request veri sızıntısı",
+      "url": "https://blog.cloudflare.com/kv-cache-exposure-remediation/",
+      "published": "2026-10-26",
+      "summary": "8 Eylül 2026’da bir güvenlik araştırmacısı Cloudflare’i, Workers AI’daki GLM-5.3 modelinde 27 Ağustos’tan beri süren bir tenant isolation sorunu konusunda uyardı. 27 Ağustos ile 9 Eylül arasında bu modeli kullanan az sayıda müşteri, kendilerinden az önce aynı modele gönderilmiş başka müşterilerin isteklerinden veri içeren cevaplar aldı. Etkilenen cevap sayısı 155; hepsi 681.280 token’dan uzun prompt’lara verilen cevaplardı. Cloudflare olay ilan ettikten sonra 40 dakika içinde modeli kapattı, düzeltilmiş konfigürasyon ve yamalı inference engine ile aynı gün geri açtı ve başka bir Workers AI modelinin etkilenmediğini doğruladı. Kasıtlı istismar kanıtı bulunmadı.\n\n**Kök neden iki sorunun birleşimi.** Birincisi **yanlış konfigürasyon**: model 1.048.576 token’lık bir context window ile deploy edilmişti ama prefill GPU’larındaki **KV cache havuzu yalnızca 681.280 token** alıyordu. Ekip bu uyumsuzluğu lansmandan önce biliyordu; engine’in sığmayan prompt’lar için hata döndüreceğini varsaydı ve uzun context testleri başarılı cevap verdi. Testlerin açığı: yalnızca HTTP durum kodlarını ve engine performansını doğruladılar, model çıktısının tutarlılığını değil. İkincisi **SGLang’deki bir bug** (disaggregated prefill/decode modunda): havuza sığmayan bir prompt reddedilip tek token’lık bir yer tutucuyla değiştiriliyordu, ama isteği iptal edip istemciye hata döndürmek yerine prefill bu yer tutucu için KV cache üretip decode node’una aktarıyordu. Decode node’u ‘transfer tamamlandı’ mesajını alıp prefill’in önceki isteklerin KV cache’ini bu isteğin tam prompt’uyla ezdiğini varsayıyordu; oysa önceki durumun büyük kısmı yerinde kalmıştı. Decode, önceki isteklerden kalan eski sayfalara attend ederek cevap üretti.\n\nArka planda iki ayrıntı var: KV cache GPU belleğinde sabit boyutlu sayfalardan oluşan paylaşımlı bir havuz ve sayfalar istekler arasında sıfırlanmıyor, bir sonraki istek üzerine yazıyor. Ayrıca havuz boyutu bir konfigürasyon değeri değil: SGLang, model ağırlıkları yüklendikten sonra kalan GPU belleğine göre başlangıçta belirliyor; modelin duyurulan context uzunluğu ise ayrı bir değer ve hiçbir şey ikisinin uyuşmasını zorlamıyor.\n\n**Düzeltme iki katmanlı.** Konfigürasyonda havuz tam context’i taşıyacak biçimde büyütüldü (GLM 5.2 konfigürasyonuna uyarlanarak prefill havuzu yaklaşık 2,04 milyon token’a, context uzunluğunun kabaca iki katına çıktı); böylece geçerli bir prompt her zaman havuza sığıyor ve reddetme yoluna hiç girilmiyor. Engine tarafında da reddetme yolu güvenli hâle getirildi, çünkü yalnızca havuz boyutuna güvenmek kırılgan: quantization, tensor parallelism ya da model sürümü değişince havuz boyutu fark edilmeden değişebilir. SGLang v0.5.21 bu bug’ı düzeltti. İki değişiklik de araştırmacının yeniden üretim betiği ve Cloudflare’in kendi canary-marker testleriyle doğrulandı; ayrıca artık çalışan engine’den KV havuz boyutunun context uzunluğuna göre kontrol edilmesi dağıtımdan önce zorunlu.",
+      "key_points": [
+        "Bir sistemin kabul ettiği girdi sınırı (context window) ile kaynağının gerçek kapasitesi (KV cache havuzu) ayrı değerlerdir; ikisini yayın öncesi karşılaştır.",
+        "HTTP 200 dönmek doğru olduğu anlamına gelmez: testler çıktının içeriğini ve tutarlılığını doğrulamalı (canary marker).",
+        "Paylaşımlı bellek sayfalarının istekler arasında sıfırlanmaması, bir hata durumunda tenant’lar arası sızıntıya dönüşebilir.",
+        "‘Engine bir hata döndürür’ varsayımını test etmeden güvenme; hata yolunu da bir ürün özelliği gibi doğrula.",
+        "Çift katmanlı düzeltme (konfigürasyon + engine) tek bir ayara güvenmekten sağlamdır."
+      ],
+      "why_it_matters": "Çok kiracılı bir inference servisi, prompt’ları bir tenant’tan diğerine geçirmemek zorunda. Bu olay, böyle bir sızıntının kötü niyetli bir saldırıdan değil, sıradan bir konfigürasyon uyumsuzluğu ve bir hata yolundaki eksik kontrolden doğabildiğini gösteriyor. Cloudflare’in olayı koordineli bir açıklamayla, zaman çizelgesi ve etkilenen sayıyla paylaşması da iyi bir incident communication örneği.",
+      "for_you": "Kendi sistemlerinde üç şeyi kontrol et. **(1)** Bir kaynağın (bağlantı havuzu, bellek, token bütçesi) boyutu ile kabul ettiğin girdi sınırı birbiriyle uyumlu mu? Başlangıçta bir assertion ile ikisini karşılaştır ve uyumsuzsa servisi başlatma. **(2)** Hata yolunu test et: limiti aşan bir girdi gönderip sistemin gerçekten hata döndürdüğünü ve başka bir isteğin verisini sızdırmadığını doğrula. **(3)** Çok kiracılı bir sistemde bir tenant’a ait ‘canary’ bir string yaz ve başka bir tenant’ın cevaplarında görünmediğini otomatik test et.",
+      "terms": [
+        {
+          "en": "KV cache",
+          "tr": "KV cache",
+          "definition": "Transformer’ın daha önce işlediği token’lar için tuttuğu key/value tensörleri; yeniden hesaplamayı önler."
+        },
+        {
+          "en": "tenant isolation",
+          "tr": "tenant isolation",
+          "definition": "Aynı altyapıyı paylaşan müşterilerin verilerinin birbirinden ayrı kalması."
+        },
+        {
+          "en": "context window",
+          "tr": "context window",
+          "definition": "Bir modelin tek seferde işleyebildiği en büyük token sayısı."
+        },
+        {
+          "en": "prefill/decode disaggregation",
+          "tr": "prefill/decode disaggregation",
+          "definition": "Prompt’u işleme (prefill) ve token üretme (decode) aşamalarını farklı donanımlarda çalıştırma."
+        },
+        {
+          "en": "canary marker",
+          "tr": "canary marker",
+          "definition": "Bir sızıntıyı tespit etmek için bilerek yerleştirilen, kolay tanınan sahte bir veri parçası."
+        }
+      ],
+      "tags": [
+        "security",
+        "inference",
+        "incident",
+        "multi-tenancy"
+      ],
+      "difficulty": "ileri",
+      "read_minutes": 17,
+      "authors": [
+        "Kevin Flansburg",
+        "Michelle Chen"
+      ]
     }
   ],
   "schema": 1

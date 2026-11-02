@@ -6,6 +6,86 @@
     <description>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</description>
     <language>tr</language>
     <item>
+      <title>Her pull request için production kopyası: Lakebase branching ile CI/CD (Snorkel AI)</title>
+      <link>https://erenulutas.com/sayi/2026-10-31/#7b70f75132a7</link>
+      <guid isPermaLink="false">7b70f75132a7</guid>
+      <pubDate>Sat, 31 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Databricks Engineering</category>
+      <description>Snorkel AI kodu Kubernetes üzerine kurulu bir CI pipeline’ıyla yayınlıyor: her açık pull request ve bazı ad-hoc commit’ler kendi geçici Kubernetes namespace’ini (‘PR namespace’) alıyor; geliştirici branch’ini orada deploy edip birleştirmeden önce tüm test paketini çalıştırıyor. Testler en çok gerçek veriyle işe yarıyor. Production veritabanları Amazon Aurora PostgreSQL ve her PR namespace’ine ayrı bir kopya vermek zor kısımdı: bir kopyayı geri yüklemek ortamlar başına yaklaşık 20 dakika sürüyordu; geliştiriciler gün boyu PR açarken ve merge queue her koşu için taze bir ortam isterken bu çok ya</description>
+    </item>
+    <item>
+      <title>Anahtarı ‘4’ olan CA: eMudhra’nın zayıf anahtarlarının istismarı ve yamalanması</title>
+      <link>https://erenulutas.com/sayi/2026-10-30/#132cf9739027</link>
+      <guid isPermaLink="false">132cf9739027</guid>
+      <pubDate>Fri, 30 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Cloudflare Blog</category>
+      <description>19 Ekim 2026’da Cloudflare, eMudhra’nın sekiz intermediate anahtarının inanılmaz derecede zayıf olduğunu öğrendi. Yazının benzetmesiyle: internetin korunduğu 115 haneli bir sayıyı seçmeleri gerekirken CA’nın seçtiği sayı 4&#x27;tü. Diğer yedi anahtar da benzer biçimde zayıftı (56, 66, 115, 155, 156, 230 ve 237). Daha önceki CA ihlallerinden (DigiNotar, TÜRKTRUST, Trustwave) farkı şu: o olaylarda anahtarlara erişim bir ölçüde sınırlıydı. Burada ise intermediate private key’ler herkes tarafından, kamuya açık sertifikalardan neredeyse anında geri çıkarılabiliyor. Bu da herkesin bu anahtarları bağımsız</description>
+    </item>
+    <item>
+      <title>Önce ucuz filtre, sonra pahalı soruşturma: OpenAI’ın katmanlı misalignment monitoring sistemi</title>
+      <link>https://erenulutas.com/sayi/2026-10-29/#d28967fce9c6</link>
+      <guid isPermaLink="false">d28967fce9c6</guid>
+      <pubDate>Thu, 29 Oct 2026 08:00:00 +0000</pubDate>
+      <category>OpenAI Research</category>
+      <description>OpenAI, agent’ların eğitim, evaluation ya da deployment sırasında yetkisiz eylemlere girişebileceğini ve ciddi sonuçlar doğurabileceğini söylüyor; bunu yakalamak için agent’ların nasıl akıl yürüttüğünü, hangi eylemleri yaptığını ve bu eylemlerin ortamı nasıl etkilediğini izliyor. Temmuzdaki Hugging Face olayı bir boşluğu açığa çıkarmış: olay, misaligned davranış monitor’larının çalışmadığı iç siber güvenlik evaluation’larında başlamıştı. Sonrasında monitoring sistemi eğitim, evaluation, iç kullanım ve (ürün yüzeyine göre değişiklikle) harici deployment’ı kapsayacak biçimde genişletildi. Etkisi</description>
+    </item>
+    <item>
+      <title>Bug’ı birleşmeden önce yakalayan test: Meta’nın Catching JiTTests sistemi</title>
+      <link>https://erenulutas.com/sayi/2026-10-29/#e532f698962f</link>
+      <guid isPermaLink="false">e532f698962f</guid>
+      <pubDate>Thu, 29 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Meta Engineering</category>
+      <description>Meta’da yüz milyonlarca satır kod sürekli değişiyor ve klasik testler bu hıza yetişemiyor. Çoğu AI tabanlı yaklaşım, LLM’le kodu bir insan reviewer gibi gözden geçirip hata arıyor. Catching JiTTests farklı: bir değişikliğin getirdiği somut davranış farkını gösteren çalıştırılabilir testler üretiyor ve bu testler bilerek fail etmek üzere tasarlanıyor; böylece review’un kaçırabileceği hataları yakalıyor. Sistem gece, boştaki kapasitede çalışıyor ve önceki gün gönderilen, geçmiş değişikliklerden eğitilmiş bir risk skoruyla riskli sayılan diff’leri hedefliyor. İki test üretim akışı var: intent-awa</description>
+    </item>
+    <item>
+      <title>Daha çok sürü, daha az dev: Cloudflare 2026 Q3 DDoS raporu</title>
+      <link>https://erenulutas.com/sayi/2026-10-29/#470f90e2de1e</link>
+      <guid isPermaLink="false">470f90e2de1e</guid>
+      <pubDate>Thu, 29 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Cloudflare Blog</category>
+      <description>Cloudflare, 2026’nın üçüncü çeyreğinde ağında 18,2 milyon network-layer DDoS saldırısını ve 14,4 trilyon HTTP DDoS isteğini otomatik olarak engellediğini söylüyor; bu yaklaşık saatte 8.226 saldırı demek. Raporun ana bulgusu bir kayma: 10 dakikadan kısa süren ve 1 Gbps’in altındaki kısa patlamalı saldırılar yüzde 208 artarken, 1 Tbps’i aşan hyper-volumetric saldırılar ikinci çeyreğe göre yaklaşık yüzde 69 azaldı (805’ten 251’e); Cloudflare bunu yılın başında dört büyük IoT botnet’ine yapılan kolluk operasyonlarına bağlıyor. Kısa patlamalı, orta seviyeli, yüksek adetli saldırılar DDoS-for-hire (</description>
+    </item>
+    <item>
+      <title>Embedding modelini kesintisiz değiştirmek: AlloyDB’de blue/green tarzı yeniden embedding</title>
+      <link>https://erenulutas.com/sayi/2026-10-28/#4973bbd1d527</link>
+      <guid isPermaLink="false">4973bbd1d527</guid>
+      <pubDate>Wed, 28 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Google Cloud Blog</category>
+      <description>Bir ürün yorumları için semantic search özelliği çıkardın ve kullanıcılar sevdi. Ertesi gün daha doğru, daha nüanslı ve çok dilli yeni bir embedding modeli duyuruluyor; dev ortamında denedin ve uyuyor. Şimdi sorun, kullanıcıları etkilemeden modeli nasıl yükselteceğin. Yazı dört engeli sayıyor: (1) Embedding üretimi: tüm mevcut verinin yeni modelle yeniden embedding’lenmesi gerekiyor; bu genelde pipeline’ları güncellemek ve eski ve yeni modeli bir süre yan yana çalıştıran dual write stratejileri anlamına geliyor. (2) Matematiksel uyumsuzluk: farklı modellerin ürettiği embedding’ler farklı vektö</description>
+    </item>
+    <item>
+      <title>Saniyede bir milyar reklam skorlamak: Meta Andromeda’da model, sistem ve donanımın birlikte tasarımı</title>
+      <link>https://erenulutas.com/sayi/2026-10-28/#41bdeeb24da3</link>
+      <guid isPermaLink="false">41bdeeb24da3</guid>
+      <pubDate>Wed, 28 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Meta Engineering</category>
+      <description>Meta Andromeda, reklam öneri hattının ilk aşaması olan retrieval’ı yapıyor: çok büyük bir uygun reklam havuzunu milisaniyeler içinde az sayıda güçlü adaya indiriyor; sonraki daha pahalı ranking aşaması bu adayları ayrıntılı skorluyor. Tarihsel olarak ranking aşamasının derin model kalitesi retrieval ölçeği için fazla pahalıydı. Yazının iddiası: model, sistem ve GPU donanımı birlikte tasarlanınca production’da her uygun reklam ranking’e yakın model performansıyla skorlanıyor ve saniyede bir milyardan fazla reklam işleniyor (2024 sistemine göre 100 kat). Meta, Andromeda’nın 2025’ten beri Faceboo</description>
+    </item>
+    <item>
+      <title>Gizlilik kuralını bir kez entegre et, modül olarak ekle: Meta’nın PrivacyLib’i</title>
+      <link>https://erenulutas.com/sayi/2026-10-27/#e32b804ef046</link>
+      <guid isPermaLink="false">e32b804ef046</guid>
+      <pubDate>Tue, 27 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Meta Engineering</category>
+      <description>Meta’da birçok gizlilik gereksinimi aynı soruya iner: bir verinin yalnızca izin verilen yerlere gittiğini kanıtlayabilir miyiz? Bu ölçekte elle yapılan denetimler, sistemler değiştikçe gerçeğin gerisinde kalıyor. Meta bunu altyapının içinde cevaplayan Privacy Aware Infrastructure (PAI) geliştirmiş; veri anlama, data lineage ve bilgi akışı kontrolü sağlayan Policy Zones daha önceki yazılarda anlatılmıştı. Bu yazı sürecin son aşamasını, veri akışlarını sürekli uygulama ve izleme işini yapan PrivacyLib’i anlatıyor: yüzlerce veri ve işleme sisteminin client’larının içinde, veriye erişilen noktada </description>
+    </item>
+    <item>
+      <title>Onlarca ekip, tek arama index’i: Uber Freight’ın fragment composition yaklaşımı</title>
+      <link>https://erenulutas.com/sayi/2026-10-27/#0ccedd79f631</link>
+      <guid isPermaLink="false">0ccedd79f631</guid>
+      <pubDate>Tue, 27 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Uber Engineering</category>
+      <description>Uber Freight 40’tan fazla microservice işletiyor ve arama, çoğu Uber kullanım senaryosundaki bir avuç kaynağın aksine yaklaşık yüz veri kaynağından ve tablodan veri çekmek zorunda. Üstelik servisler heterojen (işlemsel veritabanları, takip sistemleri, dış API’ler) ve veri farklı biçim ve SLA’larla geliyor. ‘Chicago’da önümüzdeki 24 saatte yüklenecek X gönderici için tüm yükler’ gibi sorular birden çok servisi kapsıyor. Çözümün çekirdeği deklaratif bir fragment composition framework’ü: bir geliştirici iki soyutlamayla çalışıyor, index ve fragment. Her ekip kendi servisinin verisini bağımsız bir</description>
+    </item>
+    <item>
+      <title>‘Bu kod gerçekten çalıştı mı?’ sorusuna kriptografik cevap: Nitro Enclaves ile verifiable infrastructure</title>
+      <link>https://erenulutas.com/sayi/2026-10-27/#95231c1f465d</link>
+      <guid isPermaLink="false">95231c1f465d</guid>
+      <pubDate>Tue, 27 Oct 2026 08:00:00 +0000</pubDate>
+      <category>AWS Architecture Blog</category>
+      <description>Kripto dünyasında bir cüzdan, bir işlemi ayrıştırmak ya da politikayı değerlendirmek için hesaplamayı üçüncü bir tarafa devrediyor ve her seferinde şu soru çıkıyor: bu servisin iddia ettiği kodu gerçekten çalıştırdığını nereden biliyorsun? Sözleşmesel güven, ağ çevresi güvenliği ve itibar kriptografik bir cevap vermiyor. Anchorage Digital ve Turnkey, açık kaynak, Rust ile yazılmış VisualSign adlı bir işlem ayrıştırıcısını AWS Nitro Enclaves içinde çalıştırıp sonuçları attestation tabanlı kanıtla döndürüyor. Çözdükleri problem blind signing: cüzdan bir işlemin tüm etkilerini gösteremediği için </description>
+    </item>
+    <item>
       <title>Log’u LLM’e vermek yetmez: Netflix Pensive AI’da deterministik sistemin etrafına AI sarmak</title>
       <link>https://erenulutas.com/sayi/2026-10-26/#97a0aa466cd0</link>
       <guid isPermaLink="false">97a0aa466cd0</guid>
@@ -20,6 +100,14 @@
       <pubDate>Mon, 26 Oct 2026 08:00:00 +0000</pubDate>
       <category>OpenAI Research</category>
       <description>OpenAI, Codex’in yüksek hızlı modu Ultrafast’i iç kullanım örneği olarak anlatıyor (kendi ürününü anlatan bir yazı; abartı payı olabilir). Mühendisler için incident response’ta varsayılan olmuş: bir şey bozulduğunda dakikalarca cevap beklemek sorunu büyütüyor. Bir mühendis incident için bir Slack kanalı açıp Codex’i olayı izlemesi, araştırması ve gelen soruları yanıtlaması için görevlendiriyor ve ‘birçok olası nedeni aynı anda arayabildiğini’ söylüyor. Bir güvenlik mimarı, yapılandırılmış ve yapılandırılmamış veriyi toplayıp normalleştirme ve bağlam verme işinin bir iki saatten 10-15 dakikaya,</description>
+    </item>
+    <item>
+      <title>Context window 1 milyon, KV cache havuzu 681 bin: Workers AI’da cross-request veri sızıntısı</title>
+      <link>https://erenulutas.com/sayi/2026-10-26/#bfdba109b967</link>
+      <guid isPermaLink="false">bfdba109b967</guid>
+      <pubDate>Mon, 26 Oct 2026 08:00:00 +0000</pubDate>
+      <category>Cloudflare Blog</category>
+      <description>8 Eylül 2026’da bir güvenlik araştırmacısı Cloudflare’i, Workers AI’daki GLM-5.3 modelinde 27 Ağustos’tan beri süren bir tenant isolation sorunu konusunda uyardı. 27 Ağustos ile 9 Eylül arasında bu modeli kullanan az sayıda müşteri, kendilerinden az önce aynı modele gönderilmiş başka müşterilerin isteklerinden veri içeren cevaplar aldı. Etkilenen cevap sayısı 155; hepsi 681.280 token’dan uzun prompt’lara verilen cevaplardı. Cloudflare olay ilan ettikten sonra 40 dakika içinde modeli kapattı, düzeltilmiş konfigürasyon ve yamalı inference engine ile aynı gün geri açtı ve başka bir Workers AI mod</description>
     </item>
     <item>
       <title>Önce her ekibe ayrı container, sonra geri dönüş: OpenAI Habitat’ın Cosmos DB’de multi-tenancy yolculuğu</title>
@@ -284,86 +372,6 @@
       <pubDate>Tue, 06 Oct 2026 08:00:00 +0000</pubDate>
       <category>Cloudflare Blog</category>
       <description>11 Ekim 2026’da DNS kökü, anahtar imzalama anahtarını (KSK) tarihinde yalnızca ikinci kez değiştirecek. Bu anahtar DNSSEC güven zincirinin başlangıcı. Zincir şöyle işliyor: her üst alan, alt alanın açık anahtarının parmak izini bir DS kaydıyla yayımlıyor (kök .com için, .com da cloudflare.com için). Kökün ise üstü yok; bu yüzden doğrulayan çözümleyici kök açık anahtarına baştan güvenmek zorunda. Buna trust anchor (trust anchor) deniyor. Yeni anahtar KSK-2024, eskisi KSK-2017’nin yerini alıyor. Doğrulayan çözümleyiciler değişimden önce yeni anahtara güvenmiyorsa, sağlıklı siteler erişilemez hâl</description>
-    </item>
-    <item>
-      <title>Gizlilik bir izin kutusu değil, bağlama uygun bilgi akışıdır: agent’lar için Contextual Integrity</title>
-      <link>https://erenulutas.com/sayi/2026-10-05/#c3d66983a8dc</link>
-      <guid isPermaLink="false">c3d66983a8dc</guid>
-      <pubDate>Mon, 05 Oct 2026 08:00:00 +0000</pubDate>
-      <category>Google Research</category>
-      <description>LLM tabanlı agent’lar plan üretip dış araçları çağırarak çok adımlı işleri bizim yerimize yapıyor. Faydalı olmaları için kişisel veriye ve sonuç doğuran eylemlere erişmeleri gerekiyor; ama deterministik klasik yazılımdan farklı davrandıkları için alışılmış güvenlik yaklaşımları yetmiyor. Google Research, 2025 sonunda New York’ta düzenlenen CAPS çalıştayının çıktısı olan ve 50’den fazla akademi ve sektör araştırmacısının katkı verdiği bir rapor yayımladı. Raporun temeli Contextual Integrity (CI) kuramı. CI gizliliği ‘sır tutmak’ ya da ‘kontrol’ olarak değil, yerleşik toplumsal normlara göre uyg</description>
-    </item>
-    <item>
-      <title>Mesaj göndermek veritabanı yazmasının parçası olunca: Spanner queues</title>
-      <link>https://erenulutas.com/sayi/2026-10-02/#220bcbde8276</link>
-      <guid isPermaLink="false">220bcbde8276</guid>
-      <pubDate>Fri, 02 Oct 2026 08:00:00 +0000</pubDate>
-      <category>Google Cloud Blog</category>
-      <description>Yapay zekâ agent’ları iade başlatmak, stok yönetmek ya da alt agent’lara iş devretmek gibi eylemler yapıyor. Bunun için durumu bir operasyonel veritabanında tutuyor, eylemleri ise ayrı bir mesajlaşma ya da olay kuyruğuna gönderiyor. İki sistemin ayrı işlem noktaları olduğu için tutarsızlık kaçınılmaz: durum güncellenir ama mesaj gitmez (agent karar verir ama eylem olmaz), ya da mesaj gider ama durum işlemi geri alınır (agent geçersiz duruma göre hareket eder). Çözüm olarak geliştiriciler outbox deseni, idempotency katmanları ve uzlaştırma işçileri yazmak zorunda kalıyor. Google Spanner queues’</description>
-    </item>
-    <item>
-      <title>Günlük, iz ve analiz tek yerde: Cloudflare Observability’de sekiz güncelleme</title>
-      <link>https://erenulutas.com/sayi/2026-10-02/#423bae1fbafd</link>
-      <guid isPermaLink="false">423bae1fbafd</guid>
-      <pubDate>Fri, 02 Oct 2026 08:00:00 +0000</pubDate>
-      <category>Cloudflare Blog</category>
-      <description>Cloudflare, loglarını, izlerini (trace), analizlerini, uyarılarını, panolarını ve dışa aktarmayı tek bir observability platformunda birleştiren sekiz güncelleme duyurdu. Gerekçe şu: 5xx artışı bir Worker’dan, origin server’dan ya da Cloudflare’in kaynağa bağlanamamasından gelebilir ve bugün hangi sinyalin hangi ürüne ait olduğunu bilmek gerekiyor. Öne çıkanlar: Logs artık Workers Observability ile Log Explorer’ı birleştiriyor (HTTP, güvenlik duvarı, Workers, R2, AI Gateway gibi veri kümeleri aynı arayüzde); Cloudflare Traces açık beta’da, isteğin güvenlik kuralları, cache kararları, yönlendirm</description>
-    </item>
-    <item>
-      <title>Karar vermek için sohbet modeli gerekmez: Cloudflare Clef</title>
-      <link>https://erenulutas.com/sayi/2026-10-01/#ebb2d7850d0e</link>
-      <guid isPermaLink="false">ebb2d7850d0e</guid>
-      <pubDate>Thu, 01 Oct 2026 08:00:00 +0000</pubDate>
-      <category>Cloudflare Blog</category>
-      <description>Cloudflare, Clef adlı bir decision model (decision model) ailesini açık kaynak (Apache 2.0) olarak yayımladı. Decision model, serbest metin üretmek yerine önceden tanımlı seçenekler arasından seçim yapan bir model: örneğin bir isteğin etki şiddetini ‘etki yok / küçük / büyük / kritik’ olarak puanlamak ya da bir alan adını sınıflandırmak. Çıktı katı biçimde tiplenmiş (strictly typed) olduğundan sonucu ayrıştırmak için metin işlemek gerekmiyor. Clef’in öne çıkan özellikleri: görselleri sınıflandırabilen bir görü kodlayıcısı, 64k context window (Cloudflare’in önceki modeli Jev’de 32k) ve Jev ile </description>
-    </item>
-    <item>
-      <title>100 TB’lık veritabanını saniyeler içinde geri almak: dal tabanlı restore</title>
-      <link>https://erenulutas.com/sayi/2026-10-01/#e79eb7ef5d76</link>
-      <guid isPermaLink="false">e79eb7ef5d76</guid>
-      <pubDate>Thu, 01 Oct 2026 08:00:00 +0000</pubDate>
-      <category>Databricks Engineering</category>
-      <description>Geleneksel yönetilen Postgres’te point-in-time recovery (PITR) (PITR) üç adımdan oluşur: yeni bir örnek ayağa kaldırmak, snapshot’u (snapshot) nesne depolamadan diske çekmek ve WAL kayıtlarını hedef ana kadar yeniden oynatmak. Veritabanı büyüdükçe bunlar saatler sürer. Bir kopya (replica) donanım arızasında kurtarır, ama kötü bir yazma kopyaya da yansımışsa yalnızca geri yükleme çözer. Lakebase hesaplamayı ve depolamayı ayırıyor; veritabanı geçmişi zaten nesne depolamada referans verilebilir durumda tutuluyor. Bu yüzden geri yükleme veri kopyalamıyor, belirli bir timestamp’ta bir dal (branch) </description>
-    </item>
-    <item>
-      <title>Bir Availability Zone’u günlerce boşaltmak: ARC Zonal Shift ile N-1 tatbikatı</title>
-      <link>https://erenulutas.com/sayi/2026-09-30/#50645052eb72</link>
-      <guid isPermaLink="false">50645052eb72</guid>
-      <pubDate>Wed, 30 Sep 2026 08:00:00 +0000</pubDate>
-      <category>AWS Architecture Blog</category>
-      <description>‘Bir AZ düşerse ayakta kalırız’ cümlesi, bunu gerçekten denemedikçe bir varsayımdır. AWS’nin yazısı, bir Availability Zone’u 48-72 saat boyunca trafikten çıkarıp sistemi N-1 kapasiteyle (bir zone eksik) çalıştıran tatbikatları anlatıyor. Kısa bir tatbikat anlık sorunları yakalar; günlerce süren tatbikat ise zamanla ortaya çıkan sorunları yakalar. Tatbikatların açığa çıkardığı hata türleri öğretici: autoscaling (kapasite kalan zone’larda yeterince hızlı büyüyor mu), eski DNS kayıtları (istemciler boşaltılmış zone’a hâlâ gidiyor mu), nöbet ve rotasyon süreçleri (insanlar ve runbook’lar çok günlü</description>
-    </item>
-    <item>
-      <title>Spanner artık her yerde: Spanner Omni genel kullanıma açıldı</title>
-      <link>https://erenulutas.com/sayi/2026-09-30/#dd21387175d6</link>
-      <guid isPermaLink="false">dd21387175d6</guid>
-      <pubDate>Wed, 30 Sep 2026 08:00:00 +0000</pubDate>
-      <category>Google Cloud Blog</category>
-      <description>Google, Spanner’ın istediğin yere kurulabilen sürümü Spanner Omni’yi genel kullanıma açtı. Yazıya göre ürün yaklaşık 2 milyon kez indirilmiş; mimaride iş yapan worker node’ları var ve denemek için ücretsiz bir geliştirici sürümü sunuluyor. Böylece Spanner’ın dağıtık, güçlü tutarlı veritabanı modelini yalnızca Google Cloud’da değil, kendi ortamında da denemek mümkün.</description>
-    </item>
-    <item>
-      <title>Postgres’te maliyeti düşüren üç ayar: paylaşımlı dallar, autoscaling, sıfıra inme</title>
-      <link>https://erenulutas.com/sayi/2026-09-30/#412a615366dd</link>
-      <guid isPermaLink="false">412a615366dd</guid>
-      <pubDate>Wed, 30 Sep 2026 08:00:00 +0000</pubDate>
-      <category>Databricks Engineering</category>
-      <description>Databricks’in Lakebase rehberi maliyeti üç yerden kısmayı öneriyor. Dallar (branch) depolamayı paylaşıyor, yani bir geliştirme ya da test kopyası verinin tamamını ikinci kez saklamıyor. Autoscaling ve sıfıra inme (scale to zero) boşta kalan hesaplama maliyetini azaltıyor. Veri senkronizasyonunda da üç mod var: snapshot, triggered ve continuous; ne kadar taze veri gerektiğine göre seçilince gereksiz sürekli senkronizasyon maliyeti önleniyor.</description>
-    </item>
-    <item>
-      <title>GPU boşta bekliyor çünkü sandbox geç açılıyor: warm pool ve pod geri dönüşümü</title>
-      <link>https://erenulutas.com/sayi/2026-09-29/#1c5df4cdcf62</link>
-      <guid isPermaLink="false">1c5df4cdcf62</guid>
-      <pubDate>Tue, 29 Sep 2026 08:00:00 +0000</pubDate>
-      <category>Google Cloud Blog</category>
-      <description>Agent&#x27;ları reinforcement learning’le (RL) eğitmek ve değerlendirmek için büyük ölçekli paralel rollout&#x27;lar çalıştırınca öncü laboratuvarlar hep aynı darboğaza çarpıyor: pahalı GPU kümeleri, CPU sandbox&#x27;ların soğuk başlangıcını dakikalarca bekliyor. Üstüne binlerce, her biri çok gigabaytlık SWE-bench tarzı imaj çekimi ve zamanlama birikimleri geliyor. Tipik bir agentic RL döngüsünde GPU&#x27;daki LLM politikası kod parçası gibi eylemler üretiyor ve bunlar yalıtılmış CPU sandbox&#x27;larda çalıştırılıp bir ödül sinyali gözleniyor. On binlerce paralel rollout&#x27;a ölçeklenince üç darboğaz çıkıyor. Consumer la</description>
-    </item>
-    <item>
-      <title>Çıktısı değişken olan yapay zekâya sabit arayüz yetmez: AG-UI protokolü</title>
-      <link>https://erenulutas.com/sayi/2026-09-29/#ff0dbca9f0ed</link>
-      <guid isPermaLink="false">ff0dbca9f0ed</guid>
-      <pubDate>Tue, 29 Sep 2026 08:00:00 +0000</pubDate>
-      <category>AWS Architecture Blog</category>
-      <description>Üretken yapay zekâ uygulamaları her çalıştırmada farklı sonuç üretir: bir röntgen tek bir kırık gösterirken diğeri uzman incelemesi gerektiren yirmi belirsiz bölge çıkarabilir. Sabit yerleşim, önceden belirlenmiş kontroller ve statik veri bağlama, çıktı uzayının bilinen olduğu yerde (ödeme sayfası gibi) iyidir; ama yapay zekâ dinamik keşfettiği yerde bir uçta eksik, diğer uçta boş panellerle karışık kalır. Yazının önerisi üç parça: AG-UI (agent-to-UI) protokolü, agent ile arayüz arasındaki iletişimi standartlaştırılmış akışla çözüyor (öncesinde her çerçeve için özel WebSocket biçimleri ve yokl</description>
     </item>
   </channel>
 </rss>

@@ -4,6 +4,11 @@
   <url><loc>https://erenulutas.com/arsiv/</loc></url>
   <url><loc>https://erenulutas.com/hakkinda/</loc></url>
   <url><loc>https://erenulutas.com/ara/</loc></url>
+  <url><loc>https://erenulutas.com/sayi/2026-10-31/</loc></url>
+  <url><loc>https://erenulutas.com/sayi/2026-10-30/</loc></url>
+  <url><loc>https://erenulutas.com/sayi/2026-10-29/</loc></url>
+  <url><loc>https://erenulutas.com/sayi/2026-10-28/</loc></url>
+  <url><loc>https://erenulutas.com/sayi/2026-10-27/</loc></url>
   <url><loc>https://erenulutas.com/sayi/2026-10-26/</loc></url>
   <url><loc>https://erenulutas.com/sayi/2026-10-23/</loc></url>
   <url><loc>https://erenulutas.com/sayi/2026-10-22/</loc></url>
@@ -82,83 +87,94 @@
   <url><loc>https://erenulutas.com/kaynak/anthropic/</loc></url>
   <url><loc>https://erenulutas.com/kaynak/google-research/</loc></url>
   <url><loc>https://erenulutas.com/kaynak/google-cloud/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/ci-cd/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/database/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/testing/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/postgres/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/security/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/pki/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/tls/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/incident/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/monitoring/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/ai-safety/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/architecture/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/agent/</loc></url>
   <url><loc>https://erenulutas.com/etiket/llm/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/developer-tools/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/meta/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/ddos/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/networking/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/cloudflare/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/rag/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/embeddings/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/migration/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/recommender-systems/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/gpu/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/performance/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/ml-infrastructure/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/privacy/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/search/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/data-engineering/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/microservices/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/attestation/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/confidential-computing/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/aws/</loc></url>
   <url><loc>https://erenulutas.com/etiket/observability/</loc></url>
   <url><loc>https://erenulutas.com/etiket/debugging/</loc></url>
   <url><loc>https://erenulutas.com/etiket/data-platform/</loc></url>
   <url><loc>https://erenulutas.com/etiket/incident-response/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/agent/</loc></url>
   <url><loc>https://erenulutas.com/etiket/developer-experience/</loc></url>
   <url><loc>https://erenulutas.com/etiket/openai/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/database/</loc></url>
+  <url><loc>https://erenulutas.com/etiket/inference/</loc></url>
   <url><loc>https://erenulutas.com/etiket/multi-tenancy/</loc></url>
   <url><loc>https://erenulutas.com/etiket/scaling/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/developer-tools/</loc></url>
   <url><loc>https://erenulutas.com/etiket/java/</loc></url>
   <url><loc>https://erenulutas.com/etiket/dependency-management/</loc></url>
   <url><loc>https://erenulutas.com/etiket/netflix/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/security/</loc></url>
   <url><loc>https://erenulutas.com/etiket/containment/</loc></url>
   <url><loc>https://erenulutas.com/etiket/red-teaming/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/ai-safety/</loc></url>
   <url><loc>https://erenulutas.com/etiket/containers/</loc></url>
   <url><loc>https://erenulutas.com/etiket/isolation/</loc></url>
   <url><loc>https://erenulutas.com/etiket/infrastructure/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/performance/</loc></url>
   <url><loc>https://erenulutas.com/etiket/api/</loc></url>
   <url><loc>https://erenulutas.com/etiket/classification/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/architecture/</loc></url>
   <url><loc>https://erenulutas.com/etiket/system-design/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/data-engineering/</loc></url>
   <url><loc>https://erenulutas.com/etiket/bigquery/</loc></url>
   <url><loc>https://erenulutas.com/etiket/multimodal/</loc></url>
   <url><loc>https://erenulutas.com/etiket/sql/</loc></url>
   <url><loc>https://erenulutas.com/etiket/memory/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/inference/</loc></url>
   <url><loc>https://erenulutas.com/etiket/kubernetes/</loc></url>
   <url><loc>https://erenulutas.com/etiket/cost/</loc></url>
   <url><loc>https://erenulutas.com/etiket/prompt-caching/</loc></url>
   <url><loc>https://erenulutas.com/etiket/reliability/</loc></url>
   <url><loc>https://erenulutas.com/etiket/evaluation/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/testing/</loc></url>
   <url><loc>https://erenulutas.com/etiket/knowledge-graph/</loc></url>
   <url><loc>https://erenulutas.com/etiket/supply-chain/</loc></url>
   <url><loc>https://erenulutas.com/etiket/npm/</loc></url>
   <url><loc>https://erenulutas.com/etiket/resilience/</loc></url>
   <url><loc>https://erenulutas.com/etiket/capacity-planning/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/meta/</loc></url>
   <url><loc>https://erenulutas.com/etiket/ai-assisted-development/</loc></url>
   <url><loc>https://erenulutas.com/etiket/safe-deployment/</loc></url>
   <url><loc>https://erenulutas.com/etiket/storage/</loc></url>
   <url><loc>https://erenulutas.com/etiket/cassandra/</loc></url>
   <url><loc>https://erenulutas.com/etiket/dynamodb/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/aws/</loc></url>
   <url><loc>https://erenulutas.com/etiket/tooling/</loc></url>
   <url><loc>https://erenulutas.com/etiket/multi-tenant/</loc></url>
   <url><loc>https://erenulutas.com/etiket/sqlite/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/networking/</loc></url>
   <url><loc>https://erenulutas.com/etiket/protocol/</loc></url>
   <url><loc>https://erenulutas.com/etiket/video/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/migration/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/ml-infrastructure/</loc></url>
   <url><loc>https://erenulutas.com/etiket/capacity/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/recommender-systems/</loc></url>
   <url><loc>https://erenulutas.com/etiket/loglama/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/privacy/</loc></url>
   <url><loc>https://erenulutas.com/etiket/fine-tuning/</loc></url>
   <url><loc>https://erenulutas.com/etiket/open-source/</loc></url>
   <url><loc>https://erenulutas.com/etiket/platform/</loc></url>
   <url><loc>https://erenulutas.com/etiket/serverless/</loc></url>
   <url><loc>https://erenulutas.com/etiket/industry/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/rag/</loc></url>
   <url><loc>https://erenulutas.com/etiket/product/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/postgres/</loc></url>
   <url><loc>https://erenulutas.com/etiket/lakebase/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/ci-cd/</loc></url>
   <url><loc>https://erenulutas.com/etiket/latency/</loc></url>
   <url><loc>https://erenulutas.com/etiket/finance/</loc></url>
   <url><loc>https://erenulutas.com/etiket/cryptography/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/search/</loc></url>
   <url><loc>https://erenulutas.com/etiket/dns/</loc></url>
   <url><loc>https://erenulutas.com/etiket/research/</loc></url>
   <url><loc>https://erenulutas.com/etiket/messaging/</loc></url>
@@ -170,11 +186,9 @@
   <url><loc>https://erenulutas.com/etiket/distributed-systems/</loc></url>
   <url><loc>https://erenulutas.com/etiket/ui/</loc></url>
   <url><loc>https://erenulutas.com/etiket/process/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/monitoring/</loc></url>
   <url><loc>https://erenulutas.com/etiket/identity/</loc></url>
   <url><loc>https://erenulutas.com/etiket/mtls/</loc></url>
   <url><loc>https://erenulutas.com/etiket/spark/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/confidential-computing/</loc></url>
   <url><loc>https://erenulutas.com/etiket/flink/</loc></url>
   <url><loc>https://erenulutas.com/etiket/training-serving-skew/</loc></url>
   <url><loc>https://erenulutas.com/etiket/optimizasyon/</loc></url>
@@ -213,7 +227,6 @@
   <url><loc>https://erenulutas.com/etiket/real-time-systems/</loc></url>
   <url><loc>https://erenulutas.com/etiket/graph/</loc></url>
   <url><loc>https://erenulutas.com/etiket/grpc/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/gpu/</loc></url>
   <url><loc>https://erenulutas.com/etiket/edge-computing/</loc></url>
   <url><loc>https://erenulutas.com/etiket/rpc/</loc></url>
   <url><loc>https://erenulutas.com/etiket/python/</loc></url>
@@ -226,7 +239,6 @@
   <url><loc>https://erenulutas.com/etiket/veri-modelleme/</loc></url>
   <url><loc>https://erenulutas.com/etiket/analitik/</loc></url>
   <url><loc>https://erenulutas.com/etiket/context-management/</loc></url>
-  <url><loc>https://erenulutas.com/etiket/tls/</loc></url>
   <url><loc>https://erenulutas.com/etiket/data-warehouse/</loc></url>
   <url><loc>https://erenulutas.com/etiket/internet-infrastructure/</loc></url>
   <url><loc>https://erenulutas.com/etiket/software-quality/</loc></url>

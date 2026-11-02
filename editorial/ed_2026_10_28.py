@@ -1,0 +1,144 @@
+"""28 Ekim 2026 sayısı."""
+
+from pipeline.compose import save_edition
+
+DATE = "2026-10-28"
+
+INTRO = (
+    "Daha iyi bir embedding modeli çıktığında production’da ne yaparsın? Eski ve yeni vektörler "
+    "aynı uzayda yaşamaz; bu yüzden ‘modeli değiştir’ kolay bir iş değil. Google’ın AlloyDB "
+    "yazısı, bunu kesinti olmadan yapmanın adımlarını veriyor. Yanında Meta’nın reklam retrieval "
+    "sisteminde saniyede milyar reklam skorlamanın hikâyesi."
+)
+
+DRAFTS = [
+    {
+        "url": "https://cloud.google.com/blog/products/databases/upgrade-embedding-models-in-alloydb-ai-with-zero-downtime/",
+        "slot": "cover",
+        "title_tr": "Embedding modelini kesintisiz değiştirmek: AlloyDB’de blue/green tarzı yeniden embedding",
+        "difficulty": "orta",
+        "tags": ["RAG", "database", "embeddings", "migration"],
+        "summary": (
+            "Bir ürün yorumları için semantic search özelliği çıkardın ve kullanıcılar sevdi. "
+            "Ertesi gün daha doğru, daha nüanslı ve çok dilli yeni bir embedding modeli "
+            "duyuruluyor; dev ortamında denedin ve uyuyor. Şimdi sorun, kullanıcıları "
+            "etkilemeden modeli nasıl yükselteceğin. Yazı dört engeli sayıyor:\n\n"
+            "**(1) Embedding üretimi:** tüm mevcut verinin yeni modelle yeniden embedding’lenmesi "
+            "gerekiyor; bu genelde pipeline’ları güncellemek ve eski ve yeni modeli bir süre "
+            "yan yana çalıştıran dual write stratejileri anlamına geliyor. **(2) Matematiksel "
+            "uyumsuzluk:** farklı modellerin ürettiği embedding’ler farklı vektör uzaylarında "
+            "yaşar ve doğrudan karşılaştırılamaz; uygulamanın sorgu vektörleri ile saklanan "
+            "kolon vektörleri aynı anda aynı modele geçmek zorunda, yoksa arama kalitesi "
+            "ağır biçimde bozulur. **(3) Index rebuild maliyeti:** yeni vektörler üzerinde "
+            "index kurulmadan ölçekte benzerlik araması verimli çalışmaz. **(4) Kullanıcı "
+            "deneyimi:** modeli değiştirmek, exclusive lock alan birden çok DDL işlemi "
+            "gerektirir ve dikkatli yönetilmezse gelen okuma ve yazma transaction’larını "
+            "durdurabilir.\n\n"
+            "AlloyDB AI’nın çözümü birkaç özelliğin birleşimi: **model endpoint management** "
+            "herhangi bir embedding modeline (birinci taraf, üçüncü taraf ya da kendi "
+            "barındırdığın) veritabanı içinden erişim veriyor; **auto embeddings** yeni "
+            "embedding’leri arka planda saniyede 3.000’e kadar üretiyor ve kaynak veri "
+            "değiştikçe güncel tutuyor; **ScaNN index**’i açık kaynak HNSW’ye göre 10 kat daha "
+            "hızlı build ediyor; ve PostgreSQL’in yerel özellikleri (concurrent index "
+            "creation, set-returning function’lar ve atomik kolon yeniden adlandırma) şeffaf "
+            "blue/green ve canary tarzı geçişleri mümkün kılıyor.\n\n"
+            "**Adımlar** (örnek: canlı trafik varken `text-embedding-005` (768 boyut) → "
+            "`gemini-embedding-001` (3072 boyut) geçişi). **Adım 0:** extension sürümünü "
+            "ve model bağlantısını doğrula. **Adım 1:** yeni vektör kolonunu ekle. Default "
+            "değeri olmayan, null olabilen bir kolon eklemek satırların yeni sürümlerini "
+            "oluşturmaz, yalnızca catalog metadata’sını günceller; yani neredeyse anlıktır. "
+            "Kolon boyutu modelin çıktı boyutuyla eşleşmeli ve `lock_timeout` 2 saniyeye "
+            "ayarlanıyor: işlem exclusive lock için uzun beklerse production trafiğini "
+            "bloklamasın, başarısız olursa yeniden denenir. **Adım 2:** yeni kolon üzerinde auto "
+            "embeddings’i başlat ve backfill çalıştır. Güncel tutma için iki mod var: "
+            "**transactional** (embedding veri değişir değişmez, aynı işlemde güncellenir; "
+            "tutarlı ama her INSERT/UPDATE’e inference gecikmesi ekler, değişim düşükse uygun) "
+            "ve **manual** (AlloyDB değişen satırları izler ama hemen güncellemez; "
+            "`ai.refresh_embeddings()` ile kendi belirlediğin takvimde yalnızca değişenleri "
+            "yeniler, değişim yüksekse ve belirli bir embedding gecikmesi tolere edilebiliyorsa "
+            "uygun). Örnekte manual mod seçilmiş. Backfill sırasında eşzamanlı yazıcıların "
+            "bekleme süresini sınırlamak için `max_parallel_requests` düşürülebilir: bu her "
+            "micro batch’in commit süresini iyileştirir ama toplam backfill süresini uzatır; "
+            "ilerleme bir view üzerinden izlenir. **Adım 3:** backfill sırasında değişen satırları "
+            "`ai.refresh_embeddings()` ile yakala ve bunu `pg_cron` gibi bir zamanlayıcıyla "
+            "sürdür. **Adım 4:** vektörlerin eksiksizliğini ve retrieval kalitesini "
+            "doğrula; ardından index’i concurrent biçimde kurup sorguları yeni kolona "
+            "atomik olarak geçirmek mümkün."
+        ),
+        "key_points": [
+            "Farklı embedding modelleri farklı vektör uzaylarındadır: sorgu ve saklanan vektör aynı modelle üretilmelidir.",
+            "Geçişi ‘yerinde güncelleme’ değil, yeni kolon ekleyip eskisiyle paralel çalıştırarak yap (blue/green).",
+            "Null olabilen, default’suz kolon eklemek neredeyse anlıktır; `lock_timeout` ile bu işlem production trafiğini bloklamaz.",
+            "Veri sık değişiyorsa her yazmada embedding üretmek yerine değişenleri periyodik yenile (manual refresh).",
+            "Geçişten önce retrieval kalitesini bir değerlendirme setiyle ölç; kolon dolu olması kalitenin iyi olduğu anlamına gelmez.",
+        ],
+        "why_it_matters": (
+            "Embedding modelleri hızla gelişiyor ve her RAG sistemi eninde sonunda bu geçişi "
+            "yapacak. Yazının yöntemi AlloyDB’ye özgü olsa da (yeni kolon, backfill, doğrulama, "
+            "geçiş) genel bir migration deseni."
+        ),
+        "for_you": (
+            "Düz PostgreSQL ve `pgvector` ile aynı geçişi şöyle yapabilirsin. **(1)** "
+            "`ALTER TABLE ... ADD COLUMN embedding_v2 vector(3072)` ekle (default’suz, null "
+            "olabilir) ve `SET lock_timeout = '2s'` ile çalıştır. **(2)** Bir batch job ile "
+            "satırları küçük gruplar hâlinde yeniden embedding’le; değişen satırlar için bir "
+            "`updated_at` kolonuna bakıp ikinci bir tur çalıştır. **(3)** `CREATE INDEX "
+            "CONCURRENTLY` ile yeni kolona index kur. **(4)** Aynı 30-50 sorguluk bir "
+            "evaluation setini eski ve yeni kolonda çalıştırıp sonuçları karşılaştır. **(5)** "
+            "Uygulamada hangi kolonu kullandığını bir feature flag ile seç; sorunsuzsa eski "
+            "kolonu sonra sil."
+        ),
+        "terms": [
+            {"en": "embedding", "tr": "embedding", "definition": "Bir metni, anlamını yansıtan sayı vektörüne dönüştüren temsil."},
+            {"en": "blue/green deployment", "tr": "blue/green deployment", "definition": "Yeni sürümü eskisiyle paralel kurup trafiği ona geçirme yöntemi."},
+            {"en": "backfill", "tr": "backfill", "definition": "Var olan eski kayıtlar için yeni bir alanı ya da türevi sonradan doldurma."},
+            {"en": "DDL", "tr": "DDL", "definition": "Veritabanı şemasını değiştiren komutlar (CREATE, ALTER, DROP)."},
+            {"en": "exclusive lock", "tr": "exclusive lock", "definition": "Bir kaynağa yalnızca tek bir işlemin erişmesine izin veren, diğerlerini bekleten kilit."},
+        ],
+    },
+    {
+        "url": "https://engineering.fb.com/2026/10/28/ml-applications/meta-andromeda-next-gen-ads-retrieval-gpu-co-design/",
+        "slot": "brief",
+        "title_tr": "Saniyede bir milyar reklam skorlamak: Meta Andromeda’da model, sistem ve donanımın birlikte tasarımı",
+        "difficulty": "ileri",
+        "tags": ["recommender systems", "GPU", "performance", "ML infrastructure"],
+        "summary": (
+            "Meta Andromeda, reklam öneri hattının ilk aşaması olan **retrieval**’ı yapıyor: "
+            "çok büyük bir uygun reklam havuzunu milisaniyeler içinde az sayıda güçlü adaya "
+            "indiriyor; sonraki daha pahalı ranking aşaması bu adayları ayrıntılı skorluyor. "
+            "Tarihsel olarak ranking aşamasının derin model kalitesi retrieval ölçeği için "
+            "fazla pahalıydı. Yazının iddiası: model, sistem ve GPU donanımı birlikte "
+            "tasarlanınca production’da her uygun reklam ranking’e yakın model "
+            "performansıyla skorlanıyor ve saniyede bir milyardan fazla reklam işleniyor "
+            "(2024 sistemine göre 100 kat). Meta, Andromeda’nın 2025’ten beri Facebook’ta "
+            "dönüşümlerde yüzde 2,4 artış sağladığını söylüyor.\n\n"
+            "Bu iş için üç problem çözülmüş. Generative AI creative araçları reklamverenlerin "
+            "yüz milyonlarca yeni reklam üretmesini sağladığı için aday havuzu eşi görülmemiş "
+            "büyüklüğe çıktı. 2024 sistemi kart başına saniyede on milyonlarca reklam "
+            "değerlendiriyordu; yeni talep kart başına saniyede milyarlarca reklam "
+            "gerektiriyor ve bu hızda sistem darboğazları değişiyor. Cevap: yeni bir "
+            "**Retrieval Mixture-of-Experts** model mimarisi ve her bileşeni donanım "
+            "sınırına yaklaştırmaya yönelik optimizasyonlar. Mimari ve optimizasyon "
+            "ayrıntıları için orijinal yazıya bak."
+        ),
+        "key_points": [
+            "Retrieval aşamasında küçük model kalitesi artışları büyük iş değeri taşır; o yüzden ranking kalitesini retrieval’e getirmek hedeflenir.",
+            "Bir sistemin hızı 100 kat artınca darboğaz farklı bir yere kayar; ölçmeden optimizasyon yapılmaz.",
+            "Model, sistem ve donanımı ayrı ayrı değil birlikte tasarlamak, her birinde tek başına ulaşılamayan verimi açar.",
+        ],
+        "for_you": (
+            "Küçük ölçekte aynı kalıp, ‘ucuz aday bulucu + pahalı yeniden sıralayıcı’ iki aşamalı "
+            "arama: önce vector search ile 100 aday al, sonra yalnızca bu 100 adayı daha "
+            "pahalı bir modelle (cross-encoder ya da bir LLM) yeniden sırala. Doğruluğu "
+            "korurken maliyeti büyük ölçüde düşürür."
+        ),
+        "terms": [
+            {"en": "retrieval", "tr": "retrieval", "definition": "Öneri ya da aramada büyük bir havuzdan ilk aday kümesini hızla seçen aşama."},
+            {"en": "ranking", "tr": "ranking", "definition": "Seçilen adayları daha pahalı bir modelle ayrıntılı skorlayıp sıralayan aşama."},
+            {"en": "mixture of experts (MoE)", "tr": "mixture of experts (MoE)", "definition": "Her girdi için yalnızca bir kısmı çalışan alt ağlardan oluşan model mimarisi."},
+        ],
+    },
+]
+
+if __name__ == "__main__":
+    save_edition(DATE, INTRO, DRAFTS)
