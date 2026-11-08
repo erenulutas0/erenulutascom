@@ -6,6 +6,54 @@
     <description>Dünyanın en iyi mühendislik ekipleri bugün ne yazdı?</description>
     <language>tr</language>
     <item>
+      <title>Yetkili ama yanlış: Uber’in agent güvenliği çerçevesinde provisioning, runtime enforcement ve sürekli doğrulama</title>
+      <link>https://erenulutas.com/sayi/2026-11-06/#1f0f98aa2aeb</link>
+      <guid isPermaLink="false">1f0f98aa2aeb</guid>
+      <pubDate>Fri, 06 Nov 2026 08:00:00 +0000</pubDate>
+      <category>Uber Engineering</category>
+      <description>Agentic AI, klasik yazılımdan temelden farklı bir güvenlik modeli getiriyor. Önceden tanımlı mantık çalıştıran servislerin aksine agent’lar kullanıcılardan, web sayfalarından, dokümanlardan, tool’lardan ve diğer agent’lardan gelen içerik üzerinde dinamik akıl yürütüp bunu gerçek eylemlere çevirebiliyor. Bu, saldırı yüzeyinin bir kısmını klasik kimlik ve API kontrollerinden semantik katmana taşıyor: prompt injection, tool ve memory poisoning, goal hijacking, davranış kayması ve hallucination kaynaklı eylemler. Klasik authorization kimin eylem yapabileceğini belirler; agent sistemlerini korumak </description>
+    </item>
+    <item>
+      <title>Her çekirdek işe yarasın: Uber’de Spark’ı Gluten/Velox ve storage-aware engine ile hızlandırmak</title>
+      <link>https://erenulutas.com/sayi/2026-11-05/#6bbf4a58f763</link>
+      <guid isPermaLink="false">6bbf4a58f763</guid>
+      <pubDate>Thu, 05 Nov 2026 08:00:00 +0000</pubDate>
+      <category>Uber Engineering</category>
+      <description>Uber dünyanın en büyük Apache Spark filolarından birini işletiyor: yalnızca data lake ingestion 200.000’den fazla CPU çekirdeği tüketiyor, üzerindeki ETL daha da fazlasını. Spark altyapısı günde 100 PB’tan fazla veri okuyup yazıyor, 80 PB’tan fazla shuffle verisi taşıyor, günde 500.000’den fazla uygulama ve bir milyondan fazla çekirdek çalıştırıyor. Bu ölçekte yüzde birkaçlık verim bile gerçek etki; bu yüzden Spark’ı ucuzlatmak tek seferlik bir proje değil sürekli bir program. İşin büyük kısmı, her Spark uygulamasının nasıl gönderildiğini, yapılandırıldığını ve yayınlandığını kontrol eden Spar</description>
+    </item>
+    <item>
+      <title>Kapıdaki kişi kimin adına geldi? Agent’lar insan değil ama insan gibi davranıyor</title>
+      <link>https://erenulutas.com/sayi/2026-11-05/#f64889a7b3b6</link>
+      <guid isPermaLink="false">f64889a7b3b6</guid>
+      <pubDate>Thu, 05 Nov 2026 08:00:00 +0000</pubDate>
+      <category>Cloudflare Blog</category>
+      <description>Agent’lar artık milyonlarca insan adına web’de eylem yapıyor. Bir siteye göre bir agent çoğu zaman bir insan kullanıcıdan ayırt edilemez ya da tek bir ziyaretçi gibi görünüp birçok kullanıcıyı temsil edebilir. Bu, sitenin arkadaki kullanıcıyı tanıma, ona hizmet verme ve sorumlu tutma yeteneğini ortadan kaldırıyor ve bir şey ters gidince maliyeti site üstleniyor. Cloudflare’in tezi: siteler agent’lara erişimi artırmak istiyorsa, site ile kullanıcı arasındaki ilişkiyi koruyan yeni mekanizmalar gerekiyor. Güvenlik ve dolandırıcılık önlemede bu üç şey demek: kimlik (eylemi yapan kişi kim olduğu ko</description>
+    </item>
+    <item>
+      <title>Paylaşımlı grafiği bölmeden ayrı release: Meta F3 Lightning ile feature’ları 3,6 kat hızlı yayınlamak</title>
+      <link>https://erenulutas.com/sayi/2026-11-03/#072a27666339</link>
+      <guid isPermaLink="false">072a27666339</guid>
+      <pubDate>Tue, 03 Nov 2026 08:00:00 +0000</pubDate>
+      <category>Meta Engineering</category>
+      <description>F3 (Facebook Feature Framework), Meta’nın reklam ranking modellerinin altındaki ML feature’larını yazma, derleme ve sunma çerçevesi; tek bir istek 20.000’den fazla feature gerektirebiliyor. ML sistemleri ham veriyi doğrudan tüketmez: bir modelin tahmin yapmadan önce depolanmış sinyalleri okuması, olayları bir zaman penceresine göre filtrelemesi, sayması ya da toplaması, normalleştirmesi ve ara sonuçları birleştirmesi gerekir. En basit tasarım her feature’ı bağımsız bir fonksiyon sayar ama ölçekte bu israftır, çünkü feature’lar hesaplama açısından bağımsız değil: yedi günlük tıklama sayısı ile </description>
+    </item>
+    <item>
+      <title>Skill’in token’a değdiğini nasıl kanıtlarsın: agent skill’leri için beş kurallık eval rehberi</title>
+      <link>https://erenulutas.com/sayi/2026-11-03/#ef3d5fd31c70</link>
+      <guid isPermaLink="false">ef3d5fd31c70</guid>
+      <pubDate>Tue, 03 Nov 2026 08:00:00 +0000</pubDate>
+      <category>Google Cloud Blog</category>
+      <description>SKILL.md dosyalarının yaygınlaştığı bir dönemde çoğu kişi onları aynı biçimde test ediyor: bir prompt’u sohbete yapıştır, bir kez geçtiğini gör ve merge et. Google’ın yazısı, değerlendirme döngüsü olmadan üç sayfalık CLI dokümanını bir markdown dosyasına yapıştırmanın bir frontier modeli de yardım etmek kadar kolay şaşırtabileceğini söylüyor ve kendi Developer Plugin’lerini ölçerken kullandıkları beş kurallık rehberi paylaşıyor. Yazının ilk üç kuralı: 1. Container açmadan önce tetikleme çakışmalarını ve güvenlik risklerini ele. Plugin kolu ile baseline kolu arasında hiç fark yoksa (Δ = 0) ilk </description>
+    </item>
+    <item>
+      <title>En küçük güvenli build’i kanıtlamak: Cloudflare DNS’te bellek kullanımını yüzde 85 düşüren targeted build planner</title>
+      <link>https://erenulutas.com/sayi/2026-11-02/#eb6ff7302710</link>
+      <guid isPermaLink="false">eb6ff7302710</guid>
+      <pubDate>Mon, 02 Nov 2026 08:00:00 +0000</pubDate>
+      <category>Cloudflare Blog</category>
+      <description>Cloudflare’in DNS propagation pipeline’ındaki Zone Builder, 2022’de saniyede yaklaşık 250 DNS kayıt değişikliği alıyordu; bugün yaklaşık 700 (ayrıca yaklaşık 100 zone ayarı gibi başka olay). Yazının tespiti: sorun olay sayısı değil, bazı olayların gerektirdiği işin türü ve bu işin zone büyüklüğüyle büyümesi. Bazı zone’lar artık 20 milyondan fazla kayıt tutuyor ve yüzlerce milyona doğru büyümesi bekleniyor. Her olay bir saat başlatıyor: değişikliğin authoritative DNS sunucularının kullanabileceği veriye dönüşme süresi. Bu işe build deniyor: build, veritabanındaki mevcut durumu okuyor, edge’de k</description>
+    </item>
+    <item>
       <title>Her pull request için production kopyası: Lakebase branching ile CI/CD (Snorkel AI)</title>
       <link>https://erenulutas.com/sayi/2026-10-31/#7b70f75132a7</link>
       <guid isPermaLink="false">7b70f75132a7</guid>
@@ -292,86 +340,6 @@
       <pubDate>Mon, 12 Oct 2026 08:00:00 +0000</pubDate>
       <category>Cloudflare Blog</category>
       <description>Ekipler Cloudflare loglarını SIEM’lere, analitik platformlarına ve nesne depolamaya aktarıyor. Loglar hedefe varmadan önce çoğu zaman sağlık kontrollerini çıkarmak, hassas alanları atmak ya da kayıtları yeniden biçimlendirmek gerekiyor ve bu, kurulup ölçeklenip izlenmesi gereken ayrı bir işleme servisi demek. Üstelik ekipler varır varmaz atacakları kayıtların aktarımı, alımı ve saklanması için de para ödüyor. Transformers bu işlemi aktarım hattının içine alıyor. Bir Transformer, belirli bir veri kümesi için yazılmış bir SQL sorgusu: kayıtları filtreliyor, hassas veriyi karartıyor ve alan ekley</description>
-    </item>
-    <item>
-      <title>Ses ve video için ayrı model zinciri kurma: Clef-omni ve arkasındaki eğitim tarifi</title>
-      <link>https://erenulutas.com/sayi/2026-10-09/#6229f18e6ef4</link>
-      <guid isPermaLink="false">6229f18e6ef4</guid>
-      <pubDate>Fri, 09 Oct 2026 08:00:00 +0000</pubDate>
-      <category>Cloudflare Blog</category>
-      <description>Cloudflare, geçen hafta yayımladığı açık ağırlıklı karar modelleri Clef ve Clef-flash’ın ardından Clef-omni’yi duyurdu: metin ve görselin yanında ses (wav, mp3) ve video (mp4, webm) girdisi alan bir decision model. Aynı yazıda Clef-flash’ın fiyatı düşürüldü ve Clef hızlandırıldı. Ağırlıklar Hugging Face’te açık. Pratik fark şu: konuşmayı önce metne çeviren, videoyu ses ve görüntü kanallarına ayıran ardışık model zincirleri kurmak yerine tek bir modele soruyorsun. Yazıdaki örnek bir kurulum denetimi: cihazın bir fotoğrafı, çalışırken alınmış bir ses kaydı ve fanın bir videosu tek istekte gönder</description>
-    </item>
-    <item>
-      <title>Deno Cloudflare’e katılıyor: ‘platform kilidi’ tartışmasına bir cevap</title>
-      <link>https://erenulutas.com/sayi/2026-10-09/#f7c4a724ff80</link>
-      <guid isPermaLink="false">f7c4a724ff80</guid>
-      <pubDate>Fri, 09 Oct 2026 08:00:00 +0000</pubDate>
-      <category>Cloudflare Blog</category>
-      <description>Cloudflare, Deno ekibinin kendisine katıldığını duyurdu ve yazıyı yaygın bir eleştiriye cevap olarak kurdu. Eleştiri şu: Workers diğer bulut platformlarından farklı çalışıyor, özellikle Durable Objects kullanan uygulamalar yalnızca farklı yazılmıyor, farklı tasarlanıyor; dolayısıyla başka yere taşımak zor ve bu bilinçli bir tuzak. Bu bakışa göre Deno’nun ağustosta yayımladığı, Workers ve Durable Objects’in açık kaynak bir uygulaması olan celld bir tehditti. Cloudflare’in savunması: Workers farklı çünkü daha iyi bir programlama modeli (yüzlerce konumda çalışan uygulamayı yönetmek, ‘binding’ ile</description>
-    </item>
-    <item>
-      <title>RAG yetmedi, geri bildirim işe yaradı: Uber’in sözleşme agent’ı dört yinelemede nasıl olgunlaştı</title>
-      <link>https://erenulutas.com/sayi/2026-10-08/#a81dbc1a369f</link>
-      <guid isPermaLink="false">a81dbc1a369f</guid>
-      <pubDate>Thu, 08 Oct 2026 08:00:00 +0000</pubDate>
-      <category>Uber Engineering</category>
-      <description>Uber’de her yıl binlerce sözleşme müzakere ediliyor. İş yüksek riskli ve ayrıntıcı, ama içinde şaşırtıcı ölçüde yapı var: benzer maddeler, müşteriler arasında tekrar eden düzeltmeler (redline) ve yerleşik reasoning kalıpları. Legal Redlining Agent (LRA), avukatların zaten çalıştığı yere, Microsoft Word’e eklenti olarak yerleşiyor: karşı tarafın düzeltmelerini buluyor, niyeti yorumluyor, politikaya uygun kabul/ret/değiştir önerisi veriyor, gerekçeli yorum yazıyor ve riskli maddeleri işaretliyor. Uber’in bildirdiği sonuç: ortalama inceleme süresinde %20’den fazla azalma ve yapay zekâ kararlarınd</description>
-    </item>
-    <item>
-      <title>Postgres’e bulk load’da darboğaz okuma değil, tek yazıcı</title>
-      <link>https://erenulutas.com/sayi/2026-10-08/#4ef67c426724</link>
-      <guid isPermaLink="false">4ef67c426724</guid>
-      <pubDate>Thu, 08 Oct 2026 08:00:00 +0000</pubDate>
-      <category>Databricks Engineering</category>
-      <description>Postgres gibi operasyonel veritabanları, verinin küçük alt kümeleri üzerinde çok sayıda eşzamanlı, düşük gecikmeli sorgu için tasarlandı. Terabaytlarca veri yüklemek ya da tabloyu baştan sona tarayan analitik sorgular aynı kaynaklar için uygulama trafiğiyle yarışıyor. Databricks’in anlattığı müşteri günde yaklaşık 1 milyar satır yüklüyordu: yükleme 8 saatten uzun sürüyor, CPU ve belleği tümüyle dolduruyordu. Yazının net tespiti: yüklemeyi dağıtık bir Spark işi olarak başlatsan bile her satır yine tek bir Postgres yazıcısından (COPY) geçmek zorunda. Kaynak tarafı yatay ölçeklenir, hedef tarafı </description>
-    </item>
-    <item>
-      <title>Her kodlama agent’ına kendi veritabanı dalı</title>
-      <link>https://erenulutas.com/sayi/2026-10-08/#d953dbc7e61c</link>
-      <guid isPermaLink="false">d953dbc7e61c</guid>
-      <pubDate>Thu, 08 Oct 2026 08:00:00 +0000</pubDate>
-      <category>Databricks Engineering</category>
-      <description>Kodlama agent’larını paralel çalıştırmak olağan hâle geliyor ve araçlar buna göre gelişti. Geliştirme akışının gözden kaçan parçası ise veritabanı. Her agent’ın kod yazması, şema değişikliği uygulaması ve test çalıştırması gerekiyor; paylaşılan tek bir geliştirme veritabanında agent’lar şema değişikliklerinde çakışıyor, birbirinin verisini bozuyor ya da gerçeği yansıtmayan mock’lara dönüyor. Kod tarafında çözüm git worktree: her agent’a kendi dizini ve dalı. Lakebase aynı yalıtımı veritabanına getiriyor: copy-on-write ile bütün veritabanı, boyutundan bağımsız olarak bir saniyenin altında dalla</description>
-    </item>
-    <item>
-      <title>Önce kanıtı kod toplasın, sonra model yorumlasın: Cloudflare’in multi-agent güvenlik hattı</title>
-      <link>https://erenulutas.com/sayi/2026-10-07/#efc47ac2f82e</link>
-      <guid isPermaLink="false">efc47ac2f82e</guid>
-      <pubDate>Wed, 07 Oct 2026 08:00:00 +0000</pubDate>
-      <category>Cloudflare Blog</category>
-      <description>Güvenlik uyarıları nadiren tek tek gelir. Bir uyarı ortamda bir dalga yaratır ve bir analistin hangilerinin ilişkili olduğuna, ne anlama geldiklerine karar vermesi gerekir. Cloudflare, Managed Defense ekibi için bu işin büyük kısmını üstlenen multi-agent bir düzenek kurdu ve ilk denemenin neden başarısız olduğunu açıkça anlatıyor. Tek agent neden başarısız oldu? İlk prototipte tüm soruşturma tek bir genel amaçlı agent’a verildi. Faydalı analiz üretti ama kanıtın desteklemediği iddialar da uydurdu. Telemetri, dedektör açıklamaları, politikalar ve tehdit istihbaratı tek bir prompta ezilince roll</description>
-    </item>
-    <item>
-      <title>Bulutta yüksek frekanslı alım-satım: gecikme değil, gecikmenin tutarlılığı</title>
-      <link>https://erenulutas.com/sayi/2026-10-07/#57075208c36b</link>
-      <guid isPermaLink="false">57075208c36b</guid>
-      <pubDate>Wed, 07 Oct 2026 08:00:00 +0000</pubDate>
-      <category>Google Cloud Blog</category>
-      <description>Sermaye piyasalarında paket zamanlamasındaki küçük oynamalar bile kuyruk önceliğini ve emrin gerçekleşmesini değiştirir. Google Cloud, Ultra Low Latency (ULL) çözümünü ve yeni U4 makine ailesini genel kullanıma açtı. Hedef yalnızca düşük gecikme değil, determinizm: kritik işlemin her seferinde aynı sürede bitmesi. Teknik parçalar öğretici: sanallaştırma kaynaklı titremeyi (jitter) azaltan bare metal makineler; yedekli A/B multicast piyasa veri akışlarının iki bağımsız ağ bağdaştırıcısından alınması, telemetri ve yönetimin üçüncü bir bağdaştırıcıya ayrılması; çekirdeği atlayan kullanıcı alanı a</description>
-    </item>
-    <item>
-      <title>Saate güvenmeden hiçbir şeye güvenemezsin: Meta’da kimliği doğrulanmış zaman (NTS)</title>
-      <link>https://erenulutas.com/sayi/2026-10-06/#a6a0dd44a94f</link>
-      <guid isPermaLink="false">a6a0dd44a94f</guid>
-      <pubDate>Tue, 06 Oct 2026 08:00:00 +0000</pubDate>
-      <category>Meta Engineering</category>
-      <description>Meta’nın herkese açık zaman servisi artık nts.meta.com üzerinden NTS (Network Time Security, RFC 8915) konuşuyor. Paketler kimlik doğrulamalı: cihaz, zamanın gerçekten Meta’dan geldiğini ve yolda değiştirilmediğini doğrulayabiliyor. Protokol, sunucu ve istemci açık kaynak. Neden önemli? NTP 1985’ten beri doğrulamasız: istemci 48 bayt gönderir, bir şey 48 bayt geri gönderir ve istemci buna inanır. İmza yok, kimlik yok. Oysa zaman, diğer bütün güvenlik kararlarının ölçüldüğü girdi: sertifika doğrulama (notBefore ve notAfter yerel saatle karşılaştırılır), token süresi (‘15 dakika geçerli’ bir saa</description>
-    </item>
-    <item>
-      <title>Hybrid search’ta puanları değil sıraları birleştir: Reciprocal Rank Fusion</title>
-      <link>https://erenulutas.com/sayi/2026-10-06/#50e1a96cc3ea</link>
-      <guid isPermaLink="false">50e1a96cc3ea</guid>
-      <pubDate>Tue, 06 Oct 2026 08:00:00 +0000</pubDate>
-      <category>Google Cloud Blog</category>
-      <description>RAG uygulamalarında iyi sonuç için en az iki teknik gerekiyor: anlam için vektör araması, anahtar kelime kesinliği için tam metin araması (FTS). Zor olan aramaları çalıştırmak değil, iki sonuç kümesini birleştirmek. Vektör sorgusu mesafe puanı, FTS alaka puanı üretiyor; ikisini ortak bir ölçeğe taşımak için yazılan normalizasyon mantığı, veri dağılımı değişince bozulan kırılgan adım. Google’ın AlloyDB’de sunduğu çözüm Reciprocal Rank Fusion (RRF): puanlara değil sıralara baktığı için normalizasyonu tümüyle atlıyor. Tek bir hybrid_search() SQL fonksiyonu her bileşen için bir CTE üretip sonuçlar</description>
-    </item>
-    <item>
-      <title>İnternetin anahtarı tarihte ikinci kez değişiyor: DNS kök KSK değişimi</title>
-      <link>https://erenulutas.com/sayi/2026-10-06/#1424f8a74fdc</link>
-      <guid isPermaLink="false">1424f8a74fdc</guid>
-      <pubDate>Tue, 06 Oct 2026 08:00:00 +0000</pubDate>
-      <category>Cloudflare Blog</category>
-      <description>11 Ekim 2026’da DNS kökü, anahtar imzalama anahtarını (KSK) tarihinde yalnızca ikinci kez değiştirecek. Bu anahtar DNSSEC güven zincirinin başlangıcı. Zincir şöyle işliyor: her üst alan, alt alanın açık anahtarının parmak izini bir DS kaydıyla yayımlıyor (kök .com için, .com da cloudflare.com için). Kökün ise üstü yok; bu yüzden doğrulayan çözümleyici kök açık anahtarına baştan güvenmek zorunda. Buna trust anchor (trust anchor) deniyor. Yeni anahtar KSK-2024, eskisi KSK-2017’nin yerini alıyor. Doğrulayan çözümleyiciler değişimden önce yeni anahtara güvenmiyorsa, sağlıklı siteler erişilemez hâl</description>
     </item>
   </channel>
 </rss>

@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Eren&#39;in Mühendislik Gazetesi — 31 Ekim 2026</title>
-<meta name="description" content="Gerçek veriyle test etmek herkesin istediği şey ama production veritabanının kopyasını her pull request için almak 20 dakika sürüyorsa kimse yapmaz. Haftanın son yazısı, veritabanını Git branch’i gibi dallandırarak bu süreyi nasıl kısalttıklarını anlatıyor.">
+<title>Eren&#39;in Mühendislik Gazetesi — 6 Kasım 2026</title>
+<meta name="description" content="Agent’ın tüm API çağrıları meşru olduğu hâlde yanlış bir şey yapması mümkün: kullanıcı, agent, tool ve her çağrı yetkili ama eylem isteneni yansıtmıyor. Uber’in agent güvenliği çerçevesi tam bu boşluğu, yetkilendirmenin ötesinde davranışı yönetmeyi anlatıyor.">
 <meta name="author" content="Eren Ulutaş">
 <meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#131310" media="(prefers-color-scheme: dark)">
 <meta property="og:site_name" content="Eren&#39;in Mühendislik Gazetesi">
-<meta property="og:title" content="Eren&#39;in Mühendislik Gazetesi — 31 Ekim 2026">
-<meta property="og:description" content="Gerçek veriyle test etmek herkesin istediği şey ama production veritabanının kopyasını her pull request için almak 20 dakika sürüyorsa kimse yapmaz. Haftanın son yazısı, veritabanını Git branch’i gibi dallandırarak bu süreyi nasıl kısalttıklarını anlatıyor.">
+<meta property="og:title" content="Eren&#39;in Mühendislik Gazetesi — 6 Kasım 2026">
+<meta property="og:description" content="Agent’ın tüm API çağrıları meşru olduğu hâlde yanlış bir şey yapması mümkün: kullanıcı, agent, tool ve her çağrı yetkili ama eylem isteneni yansıtmıyor. Uber’in agent güvenliği çerçevesi tam bu boşluğu, yetkilendirmenin ötesinde davranışı yönetmeyi anlatıyor.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:url" content="https://erenulutas.com/">
@@ -63,46 +63,46 @@
 
   <header class="edition-head">
   <div class="edition-bar">
-    <span class="edition-no">Sayı 72</span>
-    <h1 class="edition-date"><time datetime="2026-10-31">31 Ekim 2026, Cumartesi</time></h1>
+    <span class="edition-no">Sayı 76</span>
+    <h1 class="edition-date"><time datetime="2026-11-06">6 Kasım 2026, Cuma</time></h1>
     <nav class="edition-nav" aria-label="Sayılar arası gezinme">
-<a href="/sayi/2026-10-30/" rel="prev"><span aria-hidden="true">←</span> 30 Ekim 2026</a><span>En güncel sayı</span>    </nav>
+<a href="/sayi/2026-11-05/" rel="prev"><span aria-hidden="true">←</span> 5 Kasım 2026</a><span>En güncel sayı</span>    </nav>
   </div>
-<p class="lede">Gerçek veriyle test etmek herkesin istediği şey ama production veritabanının kopyasını her pull request için almak 20 dakika sürüyorsa kimse yapmaz. Haftanın son yazısı, veritabanını Git branch’i gibi dallandırarak bu süreyi nasıl kısalttıklarını anlatıyor.</p></header>
+<p class="lede">Agent’ın tüm API çağrıları meşru olduğu hâlde yanlış bir şey yapması mümkün: kullanıcı, agent, tool ve her çağrı yetkili ama eylem isteneni yansıtmıyor. Uber’in agent güvenliği çerçevesi tam bu boşluğu, yetkilendirmenin ötesinde davranışı yönetmeyi anlatıyor.</p></header>
 
 
   <div class="layout">
     <div class="layout-main">
-          <article class="story cover" id="7b70f75132a7">
+          <article class="story cover" id="1f0f98aa2aeb">
   <div class="meta">
-<span class="kicker">Günün kapağı</span>    <a class="badge" href="/kaynak/databricks/"
-     style="--brand: #FF3621">Databricks Engineering</a>
+<span class="kicker">Günün kapağı</span>    <a class="badge" href="/kaynak/uber/"
+     style="--brand: #000000">Uber Engineering</a>
 
-  <span class="meta-item">31 Ekim 2026</span>
-<span class="meta-item">5 dk okuma</span>  <span class="meta-item level level-orta">orta</span>
+  <span class="meta-item">6 Kasım 2026</span>
+<span class="meta-item">11 dk okuma</span>  <span class="meta-item level level-ileri">ileri</span>
 </div>
 
   <h2 class="cover-title">
-    <a href="https://www.databricks.com/blog/lakebase-branching-cicd-lessons-100-pr-databases" rel="noopener nofollow" target="_blank">Her pull request için production kopyası: Lakebase branching ile CI/CD (Snorkel AI)</a>
+    <a href="https://www.uber.com/blog/securing-ai-agents/" rel="noopener nofollow" target="_blank">Yetkili ama yanlış: Uber’in agent güvenliği çerçevesinde provisioning, runtime enforcement ve sürekli doğrulama</a>
   </h2>
-  <p class="original-title">Lakebase branching for CI/CD: lessons from 100 PR databases</p>
+  <p class="original-title">Securing AI Agents: Lessons From Real-World Deployment</p>
 
-  <div class="prose"><p>Snorkel AI kodu Kubernetes üzerine kurulu bir CI pipeline’ıyla yayınlıyor: her açık pull request ve bazı ad-hoc commit’ler kendi geçici Kubernetes namespace’ini (‘PR namespace’) alıyor; geliştirici branch’ini orada deploy edip birleştirmeden önce tüm test paketini çalıştırıyor. Testler en çok gerçek veriyle işe yarıyor. Production veritabanları Amazon Aurora PostgreSQL ve her PR namespace’ine ayrı bir kopya vermek zor kısımdı: bir kopyayı geri yüklemek ortamlar başına yaklaşık <strong>20 dakika</strong> sürüyordu; geliştiriciler gün boyu PR açarken ve merge queue her koşu için taze bir ortam isterken bu çok yavaş. Alternatifler (paylaşımlı staging veritabanı, kısaltılmış fixture ya da sentetik veri) gerçek veriyle test etmenin çözmeye çalıştığı sorunları geri getiriyor: testlerin birbirini bozması, eski şemalar ve yalnızca gerçek veri şekillerinde çıkan bug’lar.</p><p><strong>Lakebase branching.</strong> Lakebase, Databricks’in sunucusuz Postgres veritabanı; depolama ve hesaplama ayrı ve <strong>veritabanını Git branch’i gibi dallandırmayı</strong> destekliyor: herhangi bir zaman noktasından yeni, yalıtılmış, yazılabilir bir branch oluşturabilirsin. Branch’ler <strong>copy-on-write</strong>: oluşturmak bir metadata işlemi, veri kopyalanmıyor; yeni branch ana dalla aynı depolama sayfalarını paylaşıyor ve yalnızca değiştirdiği sayfalar yeni depolama olarak yazılıyor. Pratikte iki özellik deseni mümkün kılıyor: copy-on-write branching ve <strong>branch expiration (TTL)</strong>.</p><p><strong>Akış dört adım.</strong> <strong>(1)</strong> Ana dalda production’ın taze bir kopyasını tut: Lakebase standart Postgres olduğundan AWS DMS için hedef olabiliyor, özel araç gerekmiyor; Snorkel bir DMS görevini production Aurora’ya yöneltip Lakebase projesinin main branch’ine kopyalıyor. <strong>(2)</strong> PR açıldığında CI pipeline’ı Lakebase API’sini çağırıp main’den bir branch oluşturuyor, bir sona erme zamanı koyuyor ve bağlantı bilgilerini PR namespace’ine veriyor. <strong>(3)</strong> PR namespace’indeki uygulama branch’ine standart Postgres olarak bağlanıyor; testler migration çalıştırabilir, veri yazabilir ve şemayı değiştirebilir, production’ı, main’i ya da diğer PR’ları etkilemeden. <strong>(4)</strong> PR kapanınca ya da test geçince branch siliniyor; temizleme adımı çalışmazsa TTL son çare olarak branch’i kendisi düşürüyor.</p><p><strong>İki güvenlik gereksinimi.</strong> *Private connectivity:* production verisi Aurora’dan Lakebase’e ve Lakebase’den CI kümesine halka açık internet yerine özel ağ üzerinden akıyor. *Identity:* Snorkel’in iki tür veritabanı kullanıcısı var, PR ortamında hata ayıklamak için etkileşimli bağlanan geliştiriciler ve hiçbir insan olmadan çalışan CI pipeline’ları. Okta SSO tarayıcı tabanlı etkileşimli girişe göre kurulu olduğundan tasarım kullanıcı türüne göre ikiye bölünmüş.</p></div>
+  <div class="prose"><p>Agentic AI, klasik yazılımdan temelden farklı bir güvenlik modeli getiriyor. Önceden tanımlı mantık çalıştıran servislerin aksine agent’lar kullanıcılardan, web sayfalarından, dokümanlardan, tool’lardan ve diğer agent’lardan gelen içerik üzerinde dinamik akıl yürütüp bunu gerçek eylemlere çevirebiliyor. Bu, saldırı yüzeyinin bir kısmını klasik kimlik ve API kontrollerinden <strong>semantik katmana</strong> taşıyor: prompt injection, tool ve memory poisoning, goal hijacking, davranış kayması ve hallucination kaynaklı eylemler. Klasik authorization kimin eylem yapabileceğini belirler; agent sistemlerini korumak ise daha geniş bir soruyu cevaplamayı gerektirir: önerilen eylem kullanıcının istediğiyle tutarlı mı, agent’ın tanımlı persona ve niyetleri içinde mi, kullanıcının rolüne uygun mu ve öncesindeki eylem ve kararlar dahil tüm session bağlamında geçerli mi?</p><p>Uber’in değerlendirdiği alternatifler klasik kimlik, authorization ve policy enforcement kontrolleri ile doğrudan prompt injection, jailbreak ve hassas veri sızıntısını tespit eden ticari AI güvenlik ve guardrail platformlarıydı. Bunlar defense in depth mimarisinin önemli parçası olarak kalıyor ama hiçbiri asıl tehdit modelini tam kapsamıyordu: <strong>kullanıcı, agent, tool ve her API çağrısı meşru yetkiliyken bile istenmeyen bir eyleme yönlendirilmiş agent.</strong></p><p><strong>Uber Secure AI: üç katman.</strong> Agent’ın yaşam döngüsü boyunca provisioning-time validation, runtime enforcement ve continuous assurance. <strong>Provisioning:</strong> Uber AI Registry, agent’ın kimliği, sahipliği, persona’sı, izin verilen niyetleri (intent), kısıtları, bağımlılıkları ve risk katmanı için yetkili kayıt tutuyor; bunlar birlikte agent’ın bir <strong>behavioral contract</strong>’ını oluşturuyor. Geliştiricilerin bu sözleşmeyi elle bildirmesine tamamen güvenmek yerine, otomatik agent güvenlik analiz platformu <strong>Argus</strong> agent’ın kaynak kodunu, prompt’larını, konfigürasyonlarını, bağımlılıklarını, açık endpoint’lerini ve tool çağrı yollarını analiz ediyor. Tedarik zinciri de aynı ilkeyle ele alınıyor: üçüncü taraf MCP server’ları ve tool’lar statik ve dinamik analiz, software composition analysis, itibar sinyalleri ve tool açıklamaları ile metadata’nın semantik incelemesiyle değerlendiriliyor.</p><p><strong>Runtime:</strong> mimari, policy administration, policy decision ve policy enforcement ayrımını (tanıdık bir güvenlik modeli) koruyor ama politikaları kaynak yetkilendirmeden <strong>semantik davranışa</strong> genişletiyor. Çerçeve ayrıca <strong>prompt provenance</strong> ve <strong>evidence chaining</strong> getiriyor: ayrıcalıklı eylemleri kullanıcının gerçekte istediği şeye geri bağlıyor; bu da dolaylı prompt injection, goal hijacking ve istenmeyen agent davranışına karşı ek bir savunma. Continuous assurance tarafında sürekli red teaming, uçtan uca observability ve replay var.</p><p><strong>Takaslar.</strong> Üretim kontrollerini tasarlamak ikinci bir zorluk kümesi getirdi: güvenlik etkinliği; doğruluk, gecikme, maliyet, geliştirici deneyimi ve agent özerkliğiyle dengelenmek zorunda. Daha sıkı enforcement güvensiz eylemleri azaltır ama yanlış pozitifleri ve gecikmeyi artırabilir. Geliştirici benimsemesi eşit derecede önemli: onboarding karmaşıklığı ya da yanlış alarmlar ekipleri kontrolü atlamaya itiyorsa teknik olarak güçlü bir kontrolün değeri sınırlı kalıyor; bu yüzden otomatik onboarding ve guardrail ataması ile ‘güvenli yol’ kolay yol yapılmış. Yazının ana dersi: güvenlik, doğruluk, gecikme, maliyet, özerklik ve geliştirici deneyimi birbirinden bağımsız optimize edilemez.</p></div>
 
   <div class="keypoints">
     <h3 class="label">Öne çıkanlar</h3>
     <ol>
-<li><span>Gerçek veriyle test etmek, paylaşımlı staging’in sorunlarını (testlerin birbirini bozması, eski şema) ortadan kaldırır.</span></li><li><span>Copy-on-write branching, tam kopya almadan veritabanı ortamı oluşturmayı saniyelere indirir.</span></li><li><span>Her geçici kaynağa bir TTL koy: temizleme adımı bir gün çalışmayacak.</span></li><li><span>İnsan ve otomatik kullanıcılar için ayrı kimlik doğrulama yolları tasarla.</span></li>    </ol>
+<li><span>Authorization ‘kim yapabilir’i söyler; agent güvenliği ‘bu eylem, istenenle tutarlı mı’ sorusunu da cevaplamak zorundadır.</span></li><li><span>Agent’a yazılı bir behavioral contract ver: persona, izinli niyetler, kısıtlar, bağımlılıklar, risk katmanı.</span></li><li><span>Ayrıcalıklı bir eylemi, kullanıcının gerçekte istediği şeye bağlayan kanıt zinciri (evidence chain), dolaylı prompt injection’a karşı savunmadır.</span></li><li><span>Üçüncü taraf tool ve MCP server’lar tedarik zinciri riskidir; açıklamaları da dahil incelenmelidir.</span></li><li><span>Güvenli yolu kolay yol yap: otomatik onboarding yoksa ekipler kontrolü atlar.</span></li>    </ol>
   </div>
 
   <div class="callouts">
     <div class="callout callout-why">
       <h3 class="label">Neden önemli?</h3>
-      <p>Test verisi sorunu çoğu ekipte ‘staging bir yerde’ diye çözülmüş görünür ama gerçek bug’lar gerçek veri şeklinde çıkar. Bu yazı, veritabanı ortamını bir pull request kadar ucuz ve geçici yapmanın CI’a ne kazandırdığını anlatıyor.</p>
+      <p>Çoğu agent güvenliği anlatımı ‘guardrail ekle’ ile biter. Bu yazı, gerçek bir kurumda yaşam döngüsünün her aşamasına (kayıt, analiz, runtime, red teaming) yayılan bir sistemi ve takaslarını gösteriyor.</p>
     </div>
     <div class="callout callout-you">
       <h3 class="label">Pratikte</h3>
-      <p>Bugün ücretsiz araçlarla basit bir sürümünü kurabilirsin. <strong>(1)</strong> CI’da her PR için Docker ile temiz bir Postgres container’ı aç (Testcontainers bunu tek satırda yapar) ve migration’ları sıfırdan uygula. <strong>(2)</strong> Gerçek şekilli veriye ihtiyaç varsa production’ın küçük, anonimleştirilmiş bir dump’ını bir kez al ve container imajına göm; test başında <code>pg_restore</code> ile yükle. <strong>(3)</strong> Neon gibi branching destekleyen bir Postgres sağlayıcısında her PR için bir database branch açıp PR kapanınca silmeyi dene. Hangi yolu seçersen seç, geçici ortama bir ömür (TTL) ver.</p>
+      <p>Küçük bir agent’ta bugün uygulayabileceğin dört adım. <strong>(1)</strong> Agent için bir ‘sözleşme’ yaz: hangi tool’ları çağırabilir, hangi niyetlerle (<code>allowed_intents</code>), hangi kısıtlarla; bunu kodda zorla, prompt’a bırakma. <strong>(2)</strong> Her ayrıcalıklı eylemden (silme, ödeme, e-posta gönderme) önce kullanıcının orijinal isteğini ve eylemi bir kontrol fonksiyonuna ver: ‘bu eylem bu isteği karşılıyor mu?’. <strong>(3)</strong> Dış kaynaktan gelen içeriği (web sayfası, doküman) bir ‘veri’ bloğu olarak işaretle ve bu içerikten gelen tool çağrılarını ek onaya bağla. <strong>(4)</strong> Üçüncü taraf bir MCP server eklemeden önce tool açıklamalarını elle oku; açıklamaya gizlenmiş talimat olabilir.</p>
     </div>
   </div>
 
@@ -110,20 +110,28 @@
     <h3 class="label">Sözlük</h3>
       <dl>
     <div class="term">
-      <dt><span class="term-en">copy-on-write</span></dt>
-      <dd>Kopyanın veriyi paylaştığı, yalnızca değiştirilen kısmın ayrıca saklandığı yöntem.</dd>
+      <dt><span class="term-en">prompt injection</span></dt>
+      <dd>Modelin işlediği içeriğe gizlenmiş talimatlarla davranışının yönlendirilmesi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">ephemeral environment</span></dt>
-      <dd>Bir iş için açılıp iş bitince silinen geçici ortam.</dd>
+      <dt><span class="term-en">goal hijacking</span></dt>
+      <dd>Bir agent’ın asıl hedefinin saldırgan tarafından değiştirilmesi.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">TTL (time to live)</span></dt>
-      <dd>Bir kaynağın kendiliğinden silineceği süre.</dd>
+      <dt><span class="term-en">guardrail</span></dt>
+      <dd>Bir modelin ya da agent’ın davranışını güvenli sınırlar içinde tutan kontrol.</dd>
     </div>
     <div class="term">
-      <dt><span class="term-en">merge queue</span></dt>
-      <dd>Birleştirilecek değişiklikleri sırayla, her birini güncel ana dalla test ederek birleştiren kuyruk.</dd>
+      <dt><span class="term-en">prompt provenance</span></dt>
+      <dd>Bir eylemi tetikleyen girdinin kaynağını ve geçtiği yolu izleme.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">red teaming</span></dt>
+      <dd>Bir sistemi saldırgan gözüyle, zayıflıklarını bulmak için kasıtlı olarak denemek.</dd>
+    </div>
+    <div class="term">
+      <dt><span class="term-en">behavioral contract</span></dt>
+      <dd>Bir agent’ın ne yapabileceğini, hangi sınırlar içinde yapacağını tanımlayan yazılı sözleşme.</dd>
     </div>
   </dl>
 
@@ -131,13 +139,13 @@
 
   <div class="article-foot">
   <ul class="tags">
-  <li><a href="/etiket/ci-cd/">#CI/CD</a></li>
-  <li><a href="/etiket/database/">#database</a></li>
-  <li><a href="/etiket/testing/">#testing</a></li>
-  <li><a href="/etiket/postgres/">#Postgres</a></li>
+  <li><a href="/etiket/security/">#security</a></li>
+  <li><a href="/etiket/agent/">#agent</a></li>
+  <li><a href="/etiket/guardrails/">#guardrails</a></li>
+  <li><a href="/etiket/architecture/">#architecture</a></li>
 </ul>
 
-  <a class="readmore" href="https://www.databricks.com/blog/lakebase-branching-cicd-lessons-100-pr-databases" rel="noopener nofollow" target="_blank">
+  <a class="readmore" href="https://www.uber.com/blog/securing-ai-agents/" rel="noopener nofollow" target="_blank">
     Orijinali oku <span aria-hidden="true">↗</span>
   </a>
 </div>
@@ -153,9 +161,9 @@
     <h2 class="label">Bu sayıda</h2>
     <ol class="toc" id="toc">
       <li>
-        <a href="#7b70f75132a7">
-          <span class="toc-title">Her pull request için production kopyası: Lakebase branching ile CI/CD (Snorkel AI)</span>
-          <span class="toc-meta">Databricks Engineering · 5 dk</span>
+        <a href="#1f0f98aa2aeb">
+          <span class="toc-title">Yetkili ama yanlış: Uber’in agent güvenliği çerçevesinde provisioning, runtime enforcement ve sürekli doğrulama</span>
+          <span class="toc-meta">Uber Engineering · 11 dk</span>
         </a>
       </li>
     </ol>
@@ -164,9 +172,9 @@
     <h2 class="label">Künye</h2>
     <dl class="facts">
       <div><dt>yazı</dt><dd>1</dd></div>
-      <div><dt>dk okuma</dt><dd>5</dd></div>
+      <div><dt>dk okuma</dt><dd>11</dd></div>
       <div><dt>kaynak</dt><dd>1</dd></div>
-      <div><dt>terim</dt><dd>4</dd></div>
+      <div><dt>terim</dt><dd>6</dd></div>
     </dl>
   </div>
 </aside>
@@ -176,9 +184,29 @@
   <section class="section">
     <div class="section-head">
       <h2 class="section-title">Önceki sayılar</h2>
-      <a class="section-more" href="/arsiv/">Tüm arşiv (72) →</a>
+      <a class="section-more" href="/arsiv/">Tüm arşiv (76) →</a>
     </div>
     <div class="prev-grid">
+      <a class="prev-card" href="/sayi/2026-11-05/">
+        <span class="prev-date"><b>№ 75</b>5 Kasım 2026</span>
+        <span class="prev-title">Her çekirdek işe yarasın: Uber’de Spark’ı Gluten/Velox ve storage-aware engine ile hızlandırmak</span>
+        <span class="prev-count">2 yazı · Uber Engineering, Cloudflare Blog</span>
+      </a>
+      <a class="prev-card" href="/sayi/2026-11-03/">
+        <span class="prev-date"><b>№ 74</b>3 Kasım 2026</span>
+        <span class="prev-title">Paylaşımlı grafiği bölmeden ayrı release: Meta F3 Lightning ile feature’ları 3,6 kat hızlı yayınlamak</span>
+        <span class="prev-count">2 yazı · Meta Engineering, Google Cloud Blog</span>
+      </a>
+      <a class="prev-card" href="/sayi/2026-11-02/">
+        <span class="prev-date"><b>№ 73</b>2 Kasım 2026</span>
+        <span class="prev-title">En küçük güvenli build’i kanıtlamak: Cloudflare DNS’te bellek kullanımını yüzde 85 düşüren targeted build planner</span>
+        <span class="prev-count">1 yazı · Cloudflare Blog</span>
+      </a>
+      <a class="prev-card" href="/sayi/2026-10-31/">
+        <span class="prev-date"><b>№ 72</b>31 Ekim 2026</span>
+        <span class="prev-title">Her pull request için production kopyası: Lakebase branching ile CI/CD (Snorkel AI)</span>
+        <span class="prev-count">1 yazı · Databricks Engineering</span>
+      </a>
       <a class="prev-card" href="/sayi/2026-10-30/">
         <span class="prev-date"><b>№ 71</b>30 Ekim 2026</span>
         <span class="prev-title">Anahtarı ‘4’ olan CA: eMudhra’nın zayıf anahtarlarının istismarı ve yamalanması</span>
@@ -199,26 +227,6 @@
         <span class="prev-title">Gizlilik kuralını bir kez entegre et, modül olarak ekle: Meta’nın PrivacyLib’i</span>
         <span class="prev-count">3 yazı · Meta Engineering, Uber Engineering, AWS Architecture Blog</span>
       </a>
-      <a class="prev-card" href="/sayi/2026-10-26/">
-        <span class="prev-date"><b>№ 67</b>26 Ekim 2026</span>
-        <span class="prev-title">Log’u LLM’e vermek yetmez: Netflix Pensive AI’da deterministik sistemin etrafına AI sarmak</span>
-        <span class="prev-count">3 yazı · Netflix Tech Blog, OpenAI Research, Cloudflare Blog</span>
-      </a>
-      <a class="prev-card" href="/sayi/2026-10-23/">
-        <span class="prev-date"><b>№ 66</b>23 Ekim 2026</span>
-        <span class="prev-title">Önce her ekibe ayrı container, sonra geri dönüş: OpenAI Habitat’ın Cosmos DB’de multi-tenancy yolculuğu</span>
-        <span class="prev-count">3 yazı · OpenAI Research, Netflix Tech Blog</span>
-      </a>
-      <a class="prev-card" href="/sayi/2026-10-22/">
-        <span class="prev-date"><b>№ 65</b>22 Ekim 2026</span>
-        <span class="prev-title">Noisy neighbor’ın cgroup’u yok: Netflix Titus’ta single-tenant VM isolation</span>
-        <span class="prev-count">2 yazı · Netflix Tech Blog, OpenAI Research</span>
-      </a>
-      <a class="prev-card" href="/sayi/2026-10-21/">
-        <span class="prev-date"><b>№ 64</b>21 Ekim 2026</span>
-        <span class="prev-title">Olay değil konuşma: ChatGPT’nin ad stack’i neden request-response değil, stateful session</span>
-        <span class="prev-count">2 yazı · OpenAI Research, Google Cloud Blog</span>
-      </a>
     </div>
   </section>
 
@@ -228,22 +236,22 @@
       <a class="section-more" href="/ara/">Ara →</a>
     </div>
     <ul class="tagcloud">
-      <li><a href="/etiket/llm/">LLM <span class="count">42</span></a></li>
-      <li><a href="/etiket/agent/">agent <span class="count">34</span></a></li>
-      <li><a href="/etiket/architecture/">architecture <span class="count">32</span></a></li>
-      <li><a href="/etiket/security/">security <span class="count">30</span></a></li>
-      <li><a href="/etiket/cost/">cost <span class="count">19</span></a></li>
+      <li><a href="/etiket/llm/">LLM <span class="count">43</span></a></li>
+      <li><a href="/etiket/agent/">agent <span class="count">37</span></a></li>
+      <li><a href="/etiket/architecture/">architecture <span class="count">34</span></a></li>
+      <li><a href="/etiket/security/">security <span class="count">32</span></a></li>
+      <li><a href="/etiket/cost/">cost <span class="count">20</span></a></li>
       <li><a href="/etiket/networking/">networking <span class="count">16</span></a></li>
+      <li><a href="/etiket/performance/">performance <span class="count">14</span></a></li>
       <li><a href="/etiket/research/">research <span class="count">14</span></a></li>
+      <li><a href="/etiket/data-engineering/">data engineering <span class="count">13</span></a></li>
       <li><a href="/etiket/database/">database <span class="count">13</span></a></li>
       <li><a href="/etiket/infrastructure/">infrastructure <span class="count">13</span></a></li>
-      <li><a href="/etiket/data-engineering/">data engineering <span class="count">12</span></a></li>
-      <li><a href="/etiket/performance/">performance <span class="count">11</span></a></li>
       <li><a href="/etiket/resilience/">resilience <span class="count">10</span></a></li>
+      <li><a href="/etiket/ml-infrastructure/">ML infrastructure <span class="count">9</span></a></li>
       <li><a href="/etiket/observability/">observability <span class="count">9</span></a></li>
-      <li><a href="/etiket/ml-infrastructure/">ML infrastructure <span class="count">8</span></a></li>
-      <li><a href="/etiket/protocol/">protocol <span class="count">8</span></a></li>
-      <li><a href="/etiket/testing/">testing <span class="count">7</span></a></li>
+      <li><a href="/etiket/evaluation/">evaluation <span class="count">8</span></a></li>
+      <li><a href="/etiket/testing/">testing <span class="count">8</span></a></li>
     </ul>
   </section>
 
@@ -260,7 +268,7 @@
         anlayacağı dilde yazılır; teknik terimlerin İngilizcesi korunur.
       </p>
       <p class="muted small num">
-        160 özet · 72 sayı ·
+        166 özet · 76 sayı ·
         11 kaynak
       </p>
     </div>

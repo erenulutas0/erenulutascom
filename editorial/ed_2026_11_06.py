@@ -1,0 +1,101 @@
+"""6 Kasım 2026 sayısı."""
+
+from pipeline.compose import save_edition
+
+DATE = "2026-11-06"
+
+INTRO = (
+    "Agent’ın tüm API çağrıları meşru olduğu hâlde yanlış bir şey yapması mümkün: kullanıcı, "
+    "agent, tool ve her çağrı yetkili ama eylem isteneni yansıtmıyor. Uber’in agent güvenliği "
+    "çerçevesi tam bu boşluğu, yetkilendirmenin ötesinde davranışı yönetmeyi anlatıyor."
+)
+
+DRAFTS = [
+    {
+        "url": "https://www.uber.com/blog/securing-ai-agents/",
+        "slot": "cover",
+        "title_tr": "Yetkili ama yanlış: Uber’in agent güvenliği çerçevesinde provisioning, runtime enforcement ve sürekli doğrulama",
+        "difficulty": "ileri",
+        "tags": ["security", "agent", "guardrails", "architecture"],
+        "summary": (
+            "Agentic AI, klasik yazılımdan temelden farklı bir güvenlik modeli getiriyor. Önceden "
+            "tanımlı mantık çalıştıran servislerin aksine agent’lar kullanıcılardan, web "
+            "sayfalarından, dokümanlardan, tool’lardan ve diğer agent’lardan gelen içerik "
+            "üzerinde dinamik akıl yürütüp bunu gerçek eylemlere çevirebiliyor. Bu, saldırı "
+            "yüzeyinin bir kısmını klasik kimlik ve API kontrollerinden **semantik katmana** "
+            "taşıyor: prompt injection, tool ve memory poisoning, goal hijacking, davranış "
+            "kayması ve hallucination kaynaklı eylemler. Klasik authorization kimin eylem "
+            "yapabileceğini belirler; agent sistemlerini korumak ise daha geniş bir soruyu "
+            "cevaplamayı gerektirir: önerilen eylem kullanıcının istediğiyle tutarlı mı, "
+            "agent’ın tanımlı persona ve niyetleri içinde mi, kullanıcının rolüne uygun mu ve "
+            "öncesindeki eylem ve kararlar dahil tüm session bağlamında geçerli mi?\n\n"
+            "Uber’in değerlendirdiği alternatifler klasik kimlik, authorization ve policy "
+            "enforcement kontrolleri ile doğrudan prompt injection, jailbreak ve hassas veri "
+            "sızıntısını tespit eden ticari AI güvenlik ve guardrail platformlarıydı. Bunlar "
+            "defense in depth mimarisinin önemli parçası olarak kalıyor ama hiçbiri asıl tehdit "
+            "modelini tam kapsamıyordu: **kullanıcı, agent, tool ve her API çağrısı meşru "
+            "yetkiliyken bile istenmeyen bir eyleme yönlendirilmiş agent.**\n\n"
+            "**Uber Secure AI: üç katman.** Agent’ın yaşam döngüsü boyunca provisioning-time "
+            "validation, runtime enforcement ve continuous assurance. **Provisioning:** Uber "
+            "AI Registry, agent’ın kimliği, sahipliği, persona’sı, izin verilen niyetleri "
+            "(intent), kısıtları, bağımlılıkları ve risk katmanı için yetkili kayıt tutuyor; "
+            "bunlar birlikte agent’ın bir **behavioral contract**’ını oluşturuyor. Geliştiricilerin "
+            "bu sözleşmeyi elle bildirmesine tamamen güvenmek yerine, otomatik agent güvenlik "
+            "analiz platformu **Argus** agent’ın kaynak kodunu, prompt’larını, "
+            "konfigürasyonlarını, bağımlılıklarını, açık endpoint’lerini ve tool çağrı yollarını "
+            "analiz ediyor. Tedarik zinciri de aynı ilkeyle ele alınıyor: üçüncü taraf MCP "
+            "server’ları ve tool’lar statik ve dinamik analiz, software composition analysis, "
+            "itibar sinyalleri ve tool açıklamaları ile metadata’nın semantik incelemesiyle "
+            "değerlendiriliyor.\n\n"
+            "**Runtime:** mimari, policy administration, policy decision ve policy enforcement "
+            "ayrımını (tanıdık bir güvenlik modeli) koruyor ama politikaları kaynak yetkilendirmeden "
+            "**semantik davranışa** genişletiyor. Çerçeve ayrıca **prompt provenance** ve "
+            "**evidence chaining** getiriyor: ayrıcalıklı eylemleri kullanıcının gerçekte "
+            "istediği şeye geri bağlıyor; bu da dolaylı prompt injection, goal hijacking ve "
+            "istenmeyen agent davranışına karşı ek bir savunma. Continuous assurance tarafında "
+            "sürekli red teaming, uçtan uca observability ve replay var.\n\n"
+            "**Takaslar.** Üretim kontrollerini tasarlamak ikinci bir zorluk kümesi getirdi: "
+            "güvenlik etkinliği; doğruluk, gecikme, maliyet, geliştirici deneyimi ve agent "
+            "özerkliğiyle dengelenmek zorunda. Daha sıkı enforcement güvensiz eylemleri azaltır ama "
+            "yanlış pozitifleri ve gecikmeyi artırabilir. Geliştirici benimsemesi eşit derecede "
+            "önemli: onboarding karmaşıklığı ya da yanlış alarmlar ekipleri kontrolü atlamaya "
+            "itiyorsa teknik olarak güçlü bir kontrolün değeri sınırlı kalıyor; bu yüzden "
+            "otomatik onboarding ve guardrail ataması ile ‘güvenli yol’ kolay yol yapılmış. "
+            "Yazının ana dersi: güvenlik, doğruluk, gecikme, maliyet, özerklik ve geliştirici "
+            "deneyimi birbirinden bağımsız optimize edilemez."
+        ),
+        "key_points": [
+            "Authorization ‘kim yapabilir’i söyler; agent güvenliği ‘bu eylem, istenenle tutarlı mı’ sorusunu da cevaplamak zorundadır.",
+            "Agent’a yazılı bir behavioral contract ver: persona, izinli niyetler, kısıtlar, bağımlılıklar, risk katmanı.",
+            "Ayrıcalıklı bir eylemi, kullanıcının gerçekte istediği şeye bağlayan kanıt zinciri (evidence chain), dolaylı prompt injection’a karşı savunmadır.",
+            "Üçüncü taraf tool ve MCP server’lar tedarik zinciri riskidir; açıklamaları da dahil incelenmelidir.",
+            "Güvenli yolu kolay yol yap: otomatik onboarding yoksa ekipler kontrolü atlar.",
+        ],
+        "why_it_matters": (
+            "Çoğu agent güvenliği anlatımı ‘guardrail ekle’ ile biter. Bu yazı, gerçek bir "
+            "kurumda yaşam döngüsünün her aşamasına (kayıt, analiz, runtime, red teaming) "
+            "yayılan bir sistemi ve takaslarını gösteriyor."
+        ),
+        "for_you": (
+            "Küçük bir agent’ta bugün uygulayabileceğin dört adım. **(1)** Agent için bir "
+            "‘sözleşme’ yaz: hangi tool’ları çağırabilir, hangi niyetlerle (`allowed_intents`), "
+            "hangi kısıtlarla; bunu kodda zorla, prompt’a bırakma. **(2)** Her ayrıcalıklı "
+            "eylemden (silme, ödeme, e-posta gönderme) önce kullanıcının orijinal isteğini ve eylemi "
+            "bir kontrol fonksiyonuna ver: ‘bu eylem bu isteği karşılıyor mu?’. **(3)** Dış kaynaktan "
+            "gelen içeriği (web sayfası, doküman) bir ‘veri’ bloğu olarak işaretle ve bu içerikten "
+            "gelen tool çağrılarını ek onaya bağla. **(4)** Üçüncü taraf bir MCP server eklemeden "
+            "önce tool açıklamalarını elle oku; açıklamaya gizlenmiş talimat olabilir."
+        ),
+        "terms": [
+            {"en": "prompt injection", "tr": "prompt injection", "definition": "Modelin işlediği içeriğe gizlenmiş talimatlarla davranışının yönlendirilmesi."},
+            {"en": "goal hijacking", "tr": "goal hijacking", "definition": "Bir agent’ın asıl hedefinin saldırgan tarafından değiştirilmesi."},
+            {"en": "guardrail", "tr": "guardrail", "definition": "Bir modelin ya da agent’ın davranışını güvenli sınırlar içinde tutan kontrol."},
+            {"en": "prompt provenance", "tr": "prompt provenance", "definition": "Bir eylemi tetikleyen girdinin kaynağını ve geçtiği yolu izleme."},
+            {"en": "red teaming", "tr": "red teaming", "definition": "Bir sistemi saldırgan gözüyle, zayıflıklarını bulmak için kasıtlı olarak denemek."},
+            {"en": "behavioral contract", "tr": "behavioral contract", "definition": "Bir agent’ın ne yapabileceğini, hangi sınırlar içinde yapacağını tanımlayan yazılı sözleşme."},
+        ],
+    },
+]
+
+if __name__ == "__main__":
+    save_edition(DATE, INTRO, DRAFTS)

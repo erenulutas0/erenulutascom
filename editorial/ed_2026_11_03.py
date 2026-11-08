@@ -1,0 +1,156 @@
+"""3 Kasım 2026 sayısı."""
+
+from pipeline.compose import save_edition
+
+DATE = "2026-11-03"
+
+INTRO = (
+    "Paylaşılan hesaplama verimlilik getirir ama aynı zamanda herkesin aynı release’e "
+    "bağımlı olması demektir. Meta’nın feature framework’ü bu ikilemi nasıl çözdü? Yanında, "
+    "agent skill’lerini yayınlamadan önce nasıl değerlendireceğine dair beş kurallık bir rehber."
+)
+
+DRAFTS = [
+    {
+        "url": "https://engineering.fb.com/2026/11/03/ml-applications/f3-lightning-how-meta-accelerates-ads-ml-features-to-production/",
+        "slot": "cover",
+        "title_tr": "Paylaşımlı grafiği bölmeden ayrı release: Meta F3 Lightning ile feature’ları 3,6 kat hızlı yayınlamak",
+        "difficulty": "ileri",
+        "tags": ["ML infrastructure", "feature store", "deployment", "performance"],
+        "summary": (
+            "**F3 (Facebook Feature Framework)**, Meta’nın reklam ranking modellerinin altındaki ML "
+            "feature’larını yazma, derleme ve sunma çerçevesi; tek bir istek 20.000’den fazla "
+            "feature gerektirebiliyor. ML sistemleri ham veriyi doğrudan tüketmez: bir "
+            "modelin tahmin yapmadan önce depolanmış sinyalleri okuması, olayları bir zaman "
+            "penceresine göre filtrelemesi, sayması ya da toplaması, normalleştirmesi ve ara "
+            "sonuçları birleştirmesi gerekir. En basit tasarım her feature’ı bağımsız bir "
+            "fonksiyon sayar ama ölçekte bu israftır, çünkü feature’lar hesaplama açısından "
+            "bağımsız değil: yedi günlük tıklama sayısı ile yedi günlük gösterim sayısı aynı "
+            "olay kaynağını okuyup aynı zaman filtresini uygulayabilir ve bir tıklama oranı "
+            "feature’ı ikisini yeniden kullanabilir.\n\n"
+            "**F3’ün çözümü bir DAG.** Feature çıkarımı, her düğümün bir işi (girdi okuma, filtre, "
+            "toplama) yaptığı ve kenarın bir hesaplamanın başka bir hesaplamanın sonucuna "
+            "bağlı olduğunu gösterdiği bir yönlü döngüsüz graf (directed acyclic graph). Mühendisler "
+            "her feature’ı bağımsız yazıyor; F3 derleyicisi her tanımı küçük bir grafa çevirip bir "
+            "servisin kullandığı tüm feature’ların graflarını tek bir **merged graph**’ta "
+            "birleştiriyor. İki feature’ın paylaştığı işlem (yedi günlük filtre gibi) tek "
+            "düğüme indirgeniyor ve istek başına bir kez çalışıyor.\n\n"
+            "**Bedeli: her release hep-ya-da-hiç.** Merged graph hesaplamayı verimli paylaştırdı "
+            "ama aynı zamanda release birimi oldu: bozuk tek bir tanım diğer tüm feature’ların "
+            "çıkışını engelleyebiliyordu. Yazının örneği: A’dan G’ye yedi feature var, beşi "
+            "geçerli, D ve G ilgisiz hatalar içeriyor. İlk deneme D’de fail ediyor, yedisi de "
+            "çıkmıyor; D düzeltilince ikinci deneme G’de fail ediyor; ancak üçüncü denemede "
+            "tüm graf production’a ulaşıyor. F3 birkaç yüz feature’ı sunarken merge’ler çoğunlukla "
+            "başarılıydı; bugün 20.000’den fazla feature var ve farklı feature türleri kendi "
+            "kontrollerini gerektiriyor. Merged graph üzerinde yapılan her iyileştirme release "
+            "hızını bir süre geri getirdi ama feature’lar eklendikçe kazanç eridi, çünkü hepsi "
+            "hâlâ birlikte çıkıyordu.\n\n"
+            "**F3 Lightning iki değişiklik getiriyor.** *Deployment granularity:* her feature, "
+            "doğrulanabilen, yayınlanabilen ve geri alınabilen bağımsız bir konfigürasyon. "
+            "Derleyici her feature’ı kendi başına, komşusundan hiçbir şey ödünç almadan, "
+            "gerekli tüm düğümleri sırasıyla taşıyan tek bir konfigürasyona çeviriyor. Release "
+            "yolu ‘ya hepsi ya hiçbiri’ yığını yerine sıralı bir kuyruk; değişiklikler neyi "
+            "engellediklerine göre önceliklendiriliyor. *Efficiency parity:* F3’ün verimi "
+            "merged graph’tan geliyordu, her feature’a ayrı release vermek bu kaynağı "
+            "kaldırıyor. İlk prototipler yalnızca deployment’ı ayırdı ve feature’lar "
+            "bağımsız çıksa da yürütme paylaşılmadığından CPU kullanımı belirgin biçimde "
+            "arttı. Çözüm, merge’ü geri getirmeden paylaşımlı yürütmeyi geri getirmek: "
+            "başlangıçta F3 Lightning yeniden bir merged graph kurmuyor, aktif feature "
+            "konfigürasyonlarını alıp ortak işi birleştiriyor ve tek bir yürütme sırasına "
+            "diziyor. Verimi korumak için dört optimizasyon: **stable computation identifier**’lar "
+            "(aynı hesaplamanın feature’lar arasında tutarlı kimliği), tek bir paylaşımlı "
+            "**execution plan**, tüm feature’lar için tek bir **paylaşımlı bellek buffer’ı** ve "
+            "doğrudan dizi erişimi için **dense index mapping**.\n\n"
+            "**Sonuç:** karşılaştırılabilir extraction feature’ları production’a önceki F3’ten "
+            "yaklaşık **3,6 kat hızlı** ulaşıyor ve altyapı hesaplama maliyeti artmıyor. Daha "
+            "kısa release döngüsü aynı sürede daha fazla model iterasyonu demek."
+        ),
+        "key_points": [
+            "Paylaşımlı hesaplama verim getirir ama paylaşım birimi release birimiyse tek bir hata hepsini bloklar.",
+            "Dağıtım granülaritesi ile yürütme paylaşımı ayrı ayrı çözülebilir: bağımsız release, başlangıçta birleştirilen çalışma planı.",
+            "İlk prototip yalnızca bir şeyi çözdüyse (bağımsız release) diğerini (verimlilik) ölçmek gerekir; Meta CPU artışını fark edip dört optimizasyon ekledi.",
+            "Her birimi kendi başına derleyip doğrulamak, bir hatayı kendi biriminde tutar.",
+            "Release kuyruğunu ‘neyi engelliyor’a göre önceliklendirmek ortalama bekleme süresini düşürür.",
+        ],
+        "why_it_matters": (
+            "‘Hepsini birlikte derle, hepsini birlikte yayınla’ düzeni küçükken basit ve ucuzdur, "
+            "ama birimler çoğaldıkça en yavaş ya da en kırık parça herkesin hızını belirler. "
+            "Bu yazı, bağımsız yayınlamanın bedelini (kaybolan paylaşım) ölçüp geri kazanmanın "
+            "somut bir örneği."
+        ),
+        "for_you": (
+            "Aynı sorunu bir monorepo ya da çok modüllü bir projede de yaşarsın: bir modül "
+            "bozulunca hepsinin CI’ı kırmızı oluyorsa release birimi çok büyüktür. Küçük bir "
+            "başlangıç: CI’da modülleri ayrı job’lara böl ve yalnızca değişen modülleri "
+            "(path filter) derle ve test et. Paylaşılan ortak işi (bağımlılık indirme, derleme "
+            "cache’i) kaybetmemek için cache’i ortak tut. Böylece bağımsız ilerleme ile "
+            "paylaşılan verimi birlikte alırsın."
+        ),
+        "terms": [
+            {"en": "feature store", "tr": "feature store", "definition": "ML modellerinin kullandığı özelliklerin (feature) tutarlı biçimde hesaplandığı ve sunulduğu katman."},
+            {"en": "DAG", "tr": "DAG", "definition": "Directed acyclic graph: kenarların yönlü olduğu ve döngü içermeyen graf; hesaplama bağımlılıklarını göstermek için kullanılır."},
+            {"en": "merged graph", "tr": "merged graph", "definition": "Birçok bağımsız grafın ortak düğümleri birleştirilerek tek grafa dönüştürülmüş hâli."},
+            {"en": "release unit", "tr": "release unit", "definition": "Birlikte yayınlanan ve birlikte geri alınan en küçük değişiklik birimi."},
+        ],
+    },
+    {
+        "url": "https://cloud.google.com/blog/topics/developers-practitioners/evaluate-agent-skills-before-they-bloat-your-context-window/",
+        "slot": "brief",
+        "title_tr": "Skill’in token’a değdiğini nasıl kanıtlarsın: agent skill’leri için beş kurallık eval rehberi",
+        "difficulty": "orta",
+        "tags": ["agent", "evaluation", "testing", "LLM"],
+        "summary": (
+            "`SKILL.md` dosyalarının yaygınlaştığı bir dönemde çoğu kişi onları aynı biçimde "
+            "test ediyor: bir prompt’u sohbete yapıştır, bir kez geçtiğini gör ve merge et. "
+            "Google’ın yazısı, değerlendirme döngüsü olmadan üç sayfalık CLI dokümanını bir "
+            "markdown dosyasına yapıştırmanın bir frontier modeli de yardım etmek kadar kolay "
+            "şaşırtabileceğini söylüyor ve kendi Developer Plugin’lerini ölçerken kullandıkları "
+            "beş kurallık rehberi paylaşıyor. Yazının ilk üç kuralı:\n\n"
+            "**1. Container açmadan önce tetikleme çakışmalarını ve güvenlik risklerini ele.** Plugin "
+            "kolu ile baseline kolu arasında hiç fark yoksa (Δ = 0) ilk refleks SKILL.md "
+            "gövdesini yeniden yazmak olur; ama çoğu zaman agent skill’i hiç yüklememiştir. "
+            "Coding agent’lar tam SKILL.md gövdesini sıfırıncı turda okumaz; router yalnızca "
+            "YAML frontmatter’daki kısa ad ve açıklamaya bakar. Workspace’te bir düzineden fazla "
+            "skill olunca iki hata türü çıkar: açıklamanın geliştirici niyetini değil "
+            "uygulama ayrıntısını anlatması yüzünden **under-triggering** ve komşu bir skill’in "
+            "‘bulut dağıtımlarına yardım eder’ gibi geniş bir ifadesinin prompt’u önce "
+            "yakalaması (**sibling hijacking**). Yazarlar frontmatter çakışmalarını yakalayan "
+            "açık kaynak `skill-reach` aracını yayınladı.\n\n"
+            "**2. Geliştirici laptop’unda koşan bir eval’e güvenme.** Laptop; önbellekteki bulut "
+            "kimlik bilgileri, dışa aktarılmış proje değişkenleri ve global ortam kuralları "
+            "gibi ortam durumuyla dolu ve bu, baseline kolunu kirletiyor: yardımsız bir "
+            "agent, shell profilinde duran varsayılan bir proje kimliğini devralıp bir bulut "
+            "dağıtım testini geçebilir ve skill’in çözmek için yazıldığı hatayı maskeler. "
+            "Kaynak çekişmesi de agent yörüngelerini bozuyor: aynı benchmark iş istasyonu CPU "
+            "yükü altındayken daha düşük skor verdi.\n\n"
+            "**3. Hissiyatla değil, eşleştirilmiş WITH ve WITHOUT ablation’ı (Pass@3) ölç.** Bir "
+            "prompt’u bir kez çalıştırıp yeşil işaretleri göstermek gerçek bir evaluation "
+            "değil: çok turlu ve tool kullanan agent’lar her shell exit code’unda ve stdout "
+            "parçasında dallanıyor; yazarların retrieval çalışmasında benchmark görevlerinin "
+            "üçte birinden fazlası farklı koşularda farklı skor verdi. Dolayısıyla skill’li ve "
+            "skill’siz kolu aynı görevlerde birden çok kez karşılaştırmak gerekiyor."
+        ),
+        "key_points": [
+            "Skill’in sonucu değiştirmemesinin (Δ = 0) ilk nedeni genelde skill’in hiç yüklenmemesidir; gövdeyi değiştirmeden önce tetiklenmesini kontrol et.",
+            "Skill açıklaması uygulama ayrıntısını değil, kullanıcının niyetini anlatmalı.",
+            "Eval’i temiz, izole bir ortamda koştur; laptop’taki ambient state baseline’ı kirletir.",
+            "Tek koşu bir kanıt değildir; agent’lar deterministik değildir. Aynı görevleri birden çok kez, skill’li ve skill’siz koştur.",
+        ],
+        "for_you": (
+            "Bir agent için kendi skill ya da talimat dosyanı yazıyorsan: önce açıklama "
+            "satırının tek başına ne zaman çağrılacağını test et (10 örnek prompt ver, hangisinde "
+            "yüklendiğine bak). Sonra aynı 10-20 göreve skill’li ve skill’siz üçer kez koş ve "
+            "geçme oranını karşılaştır. Fark yoksa skill token’a değmiyor demektir; dosyayı "
+            "kısalt ya da sil."
+        ),
+        "terms": [
+            {"en": "ablation", "tr": "ablation", "definition": "Bir bileşeni çıkarıp ya da ekleyip sonucun nasıl değiştiğini ölçen karşılaştırma."},
+            {"en": "Pass@k", "tr": "Pass@k", "definition": "Bir görevin k denemeden en az birinde başarıyla geçilme oranı."},
+            {"en": "baseline", "tr": "baseline", "definition": "Yeni bir yaklaşımın karşılaştırıldığı referans durum (örneğin skill’siz agent)."},
+            {"en": "frontmatter", "tr": "frontmatter", "definition": "Bir markdown dosyasının başındaki YAML ile yazılmış meta veri bloğu."},
+        ],
+    },
+]
+
+if __name__ == "__main__":
+    save_edition(DATE, INTRO, DRAFTS)
